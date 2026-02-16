@@ -268,7 +268,7 @@ function drawChart(player) {
   const cMin = hist[0].c;
   const cMax = hist[hist.length - 1].c;
 
-  function x(cup) { return pad.l + (cup - cMin) / (cMax - cMin || 1) * (W - pad.l - pad.r); }
+  function x(idx) { return pad.l + idx / (hist.length - 1 || 1) * (W - pad.l - pad.r); }
   function y(rating) { return pad.t + (1 - (rating - rMin) / (rMax - rMin || 1)) * (H - pad.t - pad.b); }
 
   // Grid
@@ -297,7 +297,7 @@ function drawChart(player) {
   for (let i = 0; i < xTicks; i++) {
     const idx = Math.round(i * (hist.length - 1) / (xTicks - 1));
     const h = hist[idx];
-    ctx.fillText("#" + h.c, x(h.c), H - 6);
+    ctx.fillText("#" + h.c, x(idx), H - 6);
   }
 
   // Line
@@ -305,7 +305,7 @@ function drawChart(player) {
   ctx.lineWidth = 2;
   ctx.lineJoin = "round";
   ctx.beginPath();
-  hist.forEach((h, i) => { i === 0 ? ctx.moveTo(x(h.c), y(h.r)) : ctx.lineTo(x(h.c), y(h.r)); });
+  hist.forEach((h, i) => { i === 0 ? ctx.moveTo(x(i), y(h.r)) : ctx.lineTo(x(i), y(h.r)); });
   ctx.stroke();
 
   // Glow
@@ -314,13 +314,13 @@ function drawChart(player) {
   ctx.strokeStyle = c;
   ctx.lineWidth = 6;
   ctx.beginPath();
-  hist.forEach((h, i) => { i === 0 ? ctx.moveTo(x(h.c), y(h.r)) : ctx.lineTo(x(h.c), y(h.r)); });
+  hist.forEach((h, i) => { i === 0 ? ctx.moveTo(x(i), y(h.r)) : ctx.lineTo(x(i), y(h.r)); });
   ctx.stroke();
   ctx.restore();
 
   // Dots
-  hist.forEach(h => {
-    ctx.beginPath(); ctx.arc(x(h.c), y(h.r), 2.5, 0, Math.PI * 2);
+  hist.forEach((h, i) => {
+    ctx.beginPath(); ctx.arc(x(i), y(h.r), 2.5, 0, Math.PI * 2);
     ctx.fillStyle = c; ctx.fill();
   });
 
@@ -328,16 +328,16 @@ function drawChart(player) {
   canvas.onmousemove = (e) => {
     const br = canvas.getBoundingClientRect();
     const mx = e.clientX - br.left;
-    let closest = null, minDist = Infinity;
-    hist.forEach(h => {
-      const d = Math.abs(x(h.c) - mx);
-      if (d < minDist) { minDist = d; closest = h; }
+    let closest = null, closestIdx = 0, minDist = Infinity;
+    hist.forEach((h, i) => {
+      const d = Math.abs(x(i) - mx);
+      if (d < minDist) { minDist = d; closest = h; closestIdx = i; }
     });
     if (closest && minDist < 30) {
       tip.style.display = "block";
       tip.innerHTML = `<div class="t-cup">Cup #${closest.c}</div><div class="t-pos">Pos: <span>#${closest.p}</span></div><div class="t-elo">Elo: <span>${closest.r.toFixed(1)}</span></div>`;
-      let tx = x(closest.c) + 12;
-      if (tx + 120 > W) tx = x(closest.c) - 130;
+      let tx = x(closestIdx) + 12;
+      if (tx + 120 > W) tx = x(closestIdx) - 130;
       tip.style.left = tx + "px";
       tip.style.top = (y(closest.r) - 40) + "px";
 
@@ -377,22 +377,22 @@ function drawChartContent(ctx, W, H, pad, hist, rMin, rMax, cMin, cMax, c, x, y,
   ctx.fillStyle = "#6b7280"; ctx.font = "9px 'JetBrains Mono',monospace"; ctx.textAlign = "center";
   for (let i = 0; i < xTicks; i++) {
     const idx = Math.round(i * (hist.length - 1) / (xTicks - 1));
-    ctx.fillText("#" + hist[idx].c, x(hist[idx].c), H - 6);
+    ctx.fillText("#" + hist[idx].c, x(idx), H - 6);
   }
   // Line
   ctx.strokeStyle = c; ctx.lineWidth = 2; ctx.lineJoin = "round";
   ctx.beginPath();
-  hist.forEach((h, i) => { i === 0 ? ctx.moveTo(x(h.c), y(h.r)) : ctx.lineTo(x(h.c), y(h.r)); });
+  hist.forEach((h, i) => { i === 0 ? ctx.moveTo(x(i), y(h.r)) : ctx.lineTo(x(i), y(h.r)); });
   ctx.stroke();
   // Glow
   ctx.save(); ctx.globalAlpha = 0.15; ctx.strokeStyle = c; ctx.lineWidth = 6;
   ctx.beginPath();
-  hist.forEach((h, i) => { i === 0 ? ctx.moveTo(x(h.c), y(h.r)) : ctx.lineTo(x(h.c), y(h.r)); });
+  hist.forEach((h, i) => { i === 0 ? ctx.moveTo(x(i), y(h.r)) : ctx.lineTo(x(i), y(h.r)); });
   ctx.stroke(); ctx.restore();
   // Dots
-  hist.forEach(h => {
+  hist.forEach((h, i) => {
     const isHl = highlight && h.c === highlight.c && h.r === highlight.r;
-    ctx.beginPath(); ctx.arc(x(h.c), y(h.r), isHl ? 5 : 2.5, 0, Math.PI * 2);
+    ctx.beginPath(); ctx.arc(x(i), y(h.r), isHl ? 5 : 2.5, 0, Math.PI * 2);
     if (isHl) { ctx.fillStyle = "#fff"; ctx.fill(); ctx.strokeStyle = c; ctx.lineWidth = 2; ctx.stroke(); }
     else { ctx.fillStyle = c; ctx.fill(); }
   });
