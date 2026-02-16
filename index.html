@@ -265,10 +265,10 @@ function drawChart(player) {
   const ratings = hist.map(h => h.r);
   const rMin = Math.min(...ratings) - 30;
   const rMax = Math.max(...ratings) + 20;
-  const cMin = hist[0].c;
-  const cMax = hist[hist.length - 1].c;
 
-  function x(idx) { return pad.l + idx / (hist.length - 1 || 1) * (W - pad.l - pad.r); }
+
+  const cMin = 1, cMax = 131;
+  function x(cupNum) { return pad.l + (cupNum - cMin) / (cMax - cMin) * (W - pad.l - pad.r); }
   function y(rating) { return pad.t + (1 - (rating - rMin) / (rMax - rMin || 1)) * (H - pad.t - pad.b); }
 
   // Grid
@@ -291,21 +291,19 @@ function drawChart(player) {
     ctx.setLineDash([]);
   }
 
-  // X axis labels
+  // X axis labels - fixed scale 1-131
   ctx.fillStyle = "#6b7280"; ctx.font = "9px 'JetBrains Mono',monospace"; ctx.textAlign = "center";
-  const xTicks = Math.min(hist.length, 8);
-  for (let i = 0; i < xTicks; i++) {
-    const idx = Math.round(i * (hist.length - 1) / (xTicks - 1));
-    const h = hist[idx];
-    ctx.fillText((h.l || "#"+Math.round(h.c)), x(idx), H - 6);
-  }
+  const xLabels = [1, 20, 40, 60, 80, 100, 120, 131];
+  xLabels.forEach(cn => {
+    ctx.fillText("#" + cn, x(cn), H - 6);
+  });
 
   // Line
   ctx.strokeStyle = c;
   ctx.lineWidth = 2;
   ctx.lineJoin = "round";
   ctx.beginPath();
-  hist.forEach((h, i) => { i === 0 ? ctx.moveTo(x(i), y(h.r)) : ctx.lineTo(x(i), y(h.r)); });
+  hist.forEach((h, i) => { i === 0 ? ctx.moveTo(x(h.c), y(h.r)) : ctx.lineTo(x(h.c), y(h.r)); });
   ctx.stroke();
 
   // Glow
@@ -314,13 +312,13 @@ function drawChart(player) {
   ctx.strokeStyle = c;
   ctx.lineWidth = 6;
   ctx.beginPath();
-  hist.forEach((h, i) => { i === 0 ? ctx.moveTo(x(i), y(h.r)) : ctx.lineTo(x(i), y(h.r)); });
+  hist.forEach((h, i) => { i === 0 ? ctx.moveTo(x(h.c), y(h.r)) : ctx.lineTo(x(h.c), y(h.r)); });
   ctx.stroke();
   ctx.restore();
 
   // Dots
   hist.forEach((h, i) => {
-    ctx.beginPath(); ctx.arc(x(i), y(h.r), 2.5, 0, Math.PI * 2);
+    ctx.beginPath(); ctx.arc(x(h.c), y(h.r), 2.5, 0, Math.PI * 2);
     ctx.fillStyle = c; ctx.fill();
   });
 
@@ -328,16 +326,16 @@ function drawChart(player) {
   canvas.onmousemove = (e) => {
     const br = canvas.getBoundingClientRect();
     const mx = e.clientX - br.left;
-    let closest = null, closestIdx = 0, minDist = Infinity;
+    let closest = null, minDist = Infinity;
     hist.forEach((h, i) => {
-      const d = Math.abs(x(i) - mx);
-      if (d < minDist) { minDist = d; closest = h; closestIdx = i; }
+      const d = Math.abs(x(h.c) - mx);
+      if (d < minDist) { minDist = d; closest = h; }
     });
     if (closest && minDist < 30) {
       tip.style.display = "block";
       tip.innerHTML = `<div class="t-cup">${closest.l ? closest.l : "Cup #" + Math.round(closest.c)}</div><div class="t-pos">Pos: <span>#${closest.p}</span></div><div class="t-elo">Elo: <span>${closest.r.toFixed(1)}</span></div>`;
-      let tx = x(closestIdx) + 12;
-      if (tx + 120 > W) tx = x(closestIdx) - 130;
+      let tx = x(closest.c) + 12;
+      if (tx + 120 > W) tx = x(closest.c) - 130;
       tip.style.left = tx + "px";
       tip.style.top = (y(closest.r) - 40) + "px";
 
@@ -375,24 +373,23 @@ function drawChartContent(ctx, W, H, pad, hist, rMin, rMax, cMin, cMax, c, x, y,
     ctx.setLineDash([]);
   }
   ctx.fillStyle = "#6b7280"; ctx.font = "9px 'JetBrains Mono',monospace"; ctx.textAlign = "center";
-  for (let i = 0; i < xTicks; i++) {
-    const idx = Math.round(i * (hist.length - 1) / (xTicks - 1));
-    ctx.fillText((hist[idx].l || "#"+Math.round(hist[idx].c)), x(idx), H - 6);
-  }
+  [1, 20, 40, 60, 80, 100, 120, 131].forEach(cn => {
+    ctx.fillText("#" + cn, x(cn), H - 6);
+  });
   // Line
   ctx.strokeStyle = c; ctx.lineWidth = 2; ctx.lineJoin = "round";
   ctx.beginPath();
-  hist.forEach((h, i) => { i === 0 ? ctx.moveTo(x(i), y(h.r)) : ctx.lineTo(x(i), y(h.r)); });
+  hist.forEach((h, i) => { i === 0 ? ctx.moveTo(x(h.c), y(h.r)) : ctx.lineTo(x(h.c), y(h.r)); });
   ctx.stroke();
   // Glow
   ctx.save(); ctx.globalAlpha = 0.15; ctx.strokeStyle = c; ctx.lineWidth = 6;
   ctx.beginPath();
-  hist.forEach((h, i) => { i === 0 ? ctx.moveTo(x(i), y(h.r)) : ctx.lineTo(x(i), y(h.r)); });
+  hist.forEach((h, i) => { i === 0 ? ctx.moveTo(x(h.c), y(h.r)) : ctx.lineTo(x(h.c), y(h.r)); });
   ctx.stroke(); ctx.restore();
   // Dots
   hist.forEach((h, i) => {
     const isHl = highlight && h.c === highlight.c && h.r === highlight.r;
-    ctx.beginPath(); ctx.arc(x(i), y(h.r), isHl ? 5 : 2.5, 0, Math.PI * 2);
+    ctx.beginPath(); ctx.arc(x(h.c), y(h.r), isHl ? 5 : 2.5, 0, Math.PI * 2);
     if (isHl) { ctx.fillStyle = "#fff"; ctx.fill(); ctx.strokeStyle = c; ctx.lineWidth = 2; ctx.stroke(); }
     else { ctx.fillStyle = c; ctx.fill(); }
   });
