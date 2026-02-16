@@ -342,21 +342,21 @@ function drawChart(player) {
       // Highlight dot
       ctx.clearRect(0, 0, W, H);
       // Redraw everything (simple approach)
-      drawChartContent(ctx, W, H, pad, hist, rMin, rMax, cMin, cMax, c, x, y, xTicks, closest);
+      drawChartContent(ctx, W, H, pad, hist, rMin, rMax, cMin, cMax, c, x, y, closest);
     } else {
       tip.style.display = "none";
       ctx.clearRect(0, 0, W, H);
-      drawChartContent(ctx, W, H, pad, hist, rMin, rMax, cMin, cMax, c, x, y, xTicks, null);
+      drawChartContent(ctx, W, H, pad, hist, rMin, rMax, cMin, cMax, c, x, y, null);
     }
   };
   canvas.onmouseleave = () => {
     tip.style.display = "none";
     ctx.clearRect(0, 0, W, H);
-    drawChartContent(ctx, W, H, pad, hist, rMin, rMax, cMin, cMax, c, x, y, xTicks, null);
+    drawChartContent(ctx, W, H, pad, hist, rMin, rMax, cMin, cMax, c, x, y, null);
   };
 }
 
-function drawChartContent(ctx, W, H, pad, hist, rMin, rMax, cMin, cMax, c, x, y, xTicks, highlight) {
+function drawChartContent(ctx, W, H, pad, hist, rMin, rMax, cMin, cMax, c, x, y, highlight) {
   // Grid
   ctx.strokeStyle = "rgba(255,255,255,0.06)"; ctx.lineWidth = 1;
   const steps = 5;
