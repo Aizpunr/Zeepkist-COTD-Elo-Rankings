@@ -388,7 +388,7 @@ function drawChart(player, panel) {
     vMax = Math.max(...rankHist.map(d => d.rank));
     // Inverted: rank 1 at top
     yFn = (rank) => pad.t + (rank - vMin) / (vMax - vMin || 1) * (H - pad.t - pad.b);
-    points = rankHist.map(d => ({ c: d.c, v: d.rank, label: d.c }));
+    points = rankHist.map(d => ({ c: d.c, v: d.rank, p: d.p }));
   } else {
     const ratings = hist.map(h => h.r);
     vMin = Math.min(...ratings) - 30;
@@ -411,7 +411,7 @@ function drawChart(player, panel) {
     if (closest && minDist < 30) {
       tip.style.display = "block";
       if (chartMode === "rank") {
-        tip.innerHTML = `<div class="t-cup">Cup #${closest.c}</div><div class="t-pos">Pos: <span>#${closest.p}</span></div><div class="t-elo">Rank: <span>#${closest.v}</span></div>`;
+        tip.innerHTML = `<div class="t-cup">Cup #${closest.c}</div><div class="t-pos">Cup position: <span>#${closest.p}</span></div><div class="t-elo">Leaderboard rank: <span>#${closest.v}</span></div>`;
       } else {
         tip.innerHTML = `<div class="t-cup">${closest.l ? closest.l : "Cup #" + Math.round(closest.c)}</div><div class="t-pos">Pos: <span>#${closest.p}</span></div><div class="t-elo">Elo: <span>${closest.r.toFixed(1)}</span></div>`;
       }
