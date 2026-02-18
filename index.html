@@ -117,6 +117,15 @@
   .tooltip .t-elo { color: var(--text-dim); }
   .tooltip .t-elo span { color: var(--plat); }
 
+  .chart-tabs { display: flex; gap: 3px; margin-bottom: 10px; }
+  .chart-tab {
+    padding: 3px 10px; border-radius: 5px; border: none; font-size: 10px;
+    font-family: var(--mono); font-weight: 600; cursor: pointer;
+    background: transparent; color: var(--text-muted); transition: all 0.15s;
+  }
+  .chart-tab.active { background: rgba(245,158,11,0.2); color: var(--accent); }
+  .chart-tab:hover:not(.active) { color: var(--text-dim); }
+
   .info-btn {
     background: none; border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted);
     border-radius: 4px; padding: 2px 7px; cursor: pointer; font-size: 11px;
@@ -247,6 +256,7 @@ const customColors = {
 let sortKey = "active";
 let eloMode = "standard";
 let selected = null;
+let chartMode = "elo";
 
 // ── SORT TABS ──
 const sortOpts = [["active","Current"],["peak","Peak"],["wins","Wins"],["avg","Avg"],["cups","Cups"]];
@@ -311,6 +321,24 @@ function getFiltered() {
   return d;
 }
 
+// ── RANK HISTORY ──
+function buildRankHistory(player) {
+  const allPlayers = eloMode === "weighted" ? weightedData : eloData;
+  const cups = [...new Set(player.history.map(h => h.c))].sort((a, b) => a - b);
+  return cups.map(cup => {
+    // Each player's rating as of this cup (last entry with h.c <= cup)
+    const ratings = allPlayers.map(p => {
+      const entries = p.history.filter(h => h.c <= cup);
+      if (!entries.length) return null;
+      return entries[entries.length - 1].r;
+    }).filter(r => r !== null);
+    ratings.sort((a, b) => b - a);
+    const playerEntry = player.history.filter(h => h.c <= cup).pop();
+    const rank = ratings.indexOf(playerEntry.r) + 1;
+    return { c: cup, rank };
+  });
+}
+
 // ── CHART ──
 function drawChart(player, panel) {
   if (!player || !player.history || player.history.length === 0) return;
@@ -326,9 +354,15 @@ function drawChart(player, panel) {
       </div>
       <button class="close-btn" id="closeChart">✕</button>
     </div>
+    <div class="chart-tabs">
+      <button class="chart-tab${chartMode === 'elo' ? ' active' : ''}" id="chartTabElo">ELO</button>
+      <button class="chart-tab${chartMode === 'rank' ? ' active' : ''}" id="chartTabRank">Rank</button>
+    </div>
     <div class="chart-canvas"><canvas id="eloCanvas"></canvas><div class="tooltip" id="chartTip"></div></div>
   `;
   document.getElementById("closeChart").onclick = () => { selected = null; render(); };
+  document.getElementById("chartTabElo").onclick = () => { chartMode = "elo"; drawChart(player, panel); };
+  document.getElementById("chartTabRank").onclick = () => { chartMode = "rank"; drawChart(player, panel); };
 
   const canvas = document.getElementById("eloCanvas");
   const tip = document.getElementById("chartTip");
@@ -344,116 +378,80 @@ function drawChart(player, panel) {
   const W = rect.width, H = 180;
   const pad = { l: 46, r: 12, t: 12, b: 28 };
   const hist = player.history;
-  const ratings = hist.map(h => h.r);
-  const rMin = Math.min(...ratings) - 30;
-  const rMax = Math.max(...ratings) + 20;
-
-
   const cMin = 1, cMax = 131;
   function x(cupNum) { return pad.l + (cupNum - cMin) / (cMax - cMin) * (W - pad.l - pad.r); }
-  function y(rating) { return pad.t + (1 - (rating - rMin) / (rMax - rMin || 1)) * (H - pad.t - pad.b); }
 
-  // Grid
-  ctx.strokeStyle = "rgba(255,255,255,0.06)";
-  ctx.lineWidth = 1;
-  const steps = 5;
-  for (let i = 0; i <= steps; i++) {
-    const rv = rMin + (rMax - rMin) * i / steps;
-    const yv = y(rv);
-    ctx.beginPath(); ctx.moveTo(pad.l, yv); ctx.lineTo(W - pad.r, yv); ctx.stroke();
-    ctx.fillStyle = "#6b7280"; ctx.font = "9px 'JetBrains Mono',monospace"; ctx.textAlign = "right";
-    ctx.fillText(Math.round(rv).toString(), pad.l - 6, yv + 3);
+  let points, yFn, vMin, vMax;
+  if (chartMode === "rank") {
+    const rankHist = buildRankHistory(player);
+    vMin = 1;
+    vMax = Math.max(...rankHist.map(d => d.rank));
+    // Inverted: rank 1 at top
+    yFn = (rank) => pad.t + (rank - vMin) / (vMax - vMin || 1) * (H - pad.t - pad.b);
+    points = rankHist.map(d => ({ c: d.c, v: d.rank, label: d.c }));
+  } else {
+    const ratings = hist.map(h => h.r);
+    vMin = Math.min(...ratings) - 30;
+    vMax = Math.max(...ratings) + 20;
+    yFn = (rating) => pad.t + (1 - (rating - vMin) / (vMax - vMin || 1)) * (H - pad.t - pad.b);
+    points = hist.map(h => ({ c: h.c, v: h.r, p: h.p, r: h.r, l: h.l }));
   }
 
-  // 1500 reference
-  if (rMin < 1500 && rMax > 1500) {
-    ctx.strokeStyle = "rgba(255,255,255,0.12)";
-    ctx.setLineDash([4, 4]);
-    ctx.beginPath(); ctx.moveTo(pad.l, y(1500)); ctx.lineTo(W - pad.r, y(1500)); ctx.stroke();
-    ctx.setLineDash([]);
-  }
-
-  // X axis labels - fixed scale 1-131
-  ctx.fillStyle = "#6b7280"; ctx.font = "9px 'JetBrains Mono',monospace"; ctx.textAlign = "center";
-  const xLabels = [1, 20, 40, 60, 80, 100, 120, 131];
-  xLabels.forEach(cn => {
-    ctx.fillText("#" + cn, x(cn), H - 6);
-  });
-
-  // Line
-  ctx.strokeStyle = c;
-  ctx.lineWidth = 2;
-  ctx.lineJoin = "round";
-  ctx.beginPath();
-  hist.forEach((h, i) => { i === 0 ? ctx.moveTo(x(h.c), y(h.r)) : ctx.lineTo(x(h.c), y(h.r)); });
-  ctx.stroke();
-
-  // Glow
-  ctx.save();
-  ctx.globalAlpha = 0.15;
-  ctx.strokeStyle = c;
-  ctx.lineWidth = 6;
-  ctx.beginPath();
-  hist.forEach((h, i) => { i === 0 ? ctx.moveTo(x(h.c), y(h.r)) : ctx.lineTo(x(h.c), y(h.r)); });
-  ctx.stroke();
-  ctx.restore();
-
-  // Dots
-  hist.forEach((h, i) => {
-    ctx.beginPath(); ctx.arc(x(h.c), y(h.r), 2.5, 0, Math.PI * 2);
-    ctx.fillStyle = c; ctx.fill();
-  });
+  drawChartContent(ctx, W, H, pad, points, vMin, vMax, cMin, cMax, c, x, yFn, null, chartMode);
 
   // Tooltip on hover
   canvas.onmousemove = (e) => {
     const br = canvas.getBoundingClientRect();
     const mx = e.clientX - br.left;
     let closest = null, minDist = Infinity;
-    hist.forEach((h, i) => {
-      const d = Math.abs(x(h.c) - mx);
-      if (d < minDist) { minDist = d; closest = h; }
+    points.forEach(pt => {
+      const d = Math.abs(x(pt.c) - mx);
+      if (d < minDist) { minDist = d; closest = pt; }
     });
     if (closest && minDist < 30) {
       tip.style.display = "block";
-      tip.innerHTML = `<div class="t-cup">${closest.l ? closest.l : "Cup #" + Math.round(closest.c)}</div><div class="t-pos">Pos: <span>#${closest.p}</span></div><div class="t-elo">Elo: <span>${closest.r.toFixed(1)}</span></div>`;
+      if (chartMode === "rank") {
+        tip.innerHTML = `<div class="t-cup">Cup #${closest.c}</div><div class="t-elo">Rank: <span>#${closest.v}</span></div>`;
+      } else {
+        tip.innerHTML = `<div class="t-cup">${closest.l ? closest.l : "Cup #" + Math.round(closest.c)}</div><div class="t-pos">Pos: <span>#${closest.p}</span></div><div class="t-elo">Elo: <span>${closest.r.toFixed(1)}</span></div>`;
+      }
       let tx = x(closest.c) + 12;
       if (tx + 120 > W) tx = x(closest.c) - 130;
       tip.style.left = tx + "px";
-      tip.style.top = (y(closest.r) - 40) + "px";
-
-      // Highlight dot
+      tip.style.top = (yFn(closest.v) - 40) + "px";
       ctx.clearRect(0, 0, W, H);
-      // Redraw everything (simple approach)
-      drawChartContent(ctx, W, H, pad, hist, rMin, rMax, cMin, cMax, c, x, y, closest);
+      drawChartContent(ctx, W, H, pad, points, vMin, vMax, cMin, cMax, c, x, yFn, closest, chartMode);
     } else {
       tip.style.display = "none";
       ctx.clearRect(0, 0, W, H);
-      drawChartContent(ctx, W, H, pad, hist, rMin, rMax, cMin, cMax, c, x, y, null);
+      drawChartContent(ctx, W, H, pad, points, vMin, vMax, cMin, cMax, c, x, yFn, null, chartMode);
     }
   };
   canvas.onmouseleave = () => {
     tip.style.display = "none";
     ctx.clearRect(0, 0, W, H);
-    drawChartContent(ctx, W, H, pad, hist, rMin, rMax, cMin, cMax, c, x, y, null);
+    drawChartContent(ctx, W, H, pad, points, vMin, vMax, cMin, cMax, c, x, yFn, null, chartMode);
   };
 }
 
-function drawChartContent(ctx, W, H, pad, hist, rMin, rMax, cMin, cMax, c, x, y, highlight) {
+function drawChartContent(ctx, W, H, pad, points, vMin, vMax, cMin, cMax, c, x, y, highlight, mode) {
   // Grid
   ctx.strokeStyle = "rgba(255,255,255,0.06)"; ctx.lineWidth = 1;
   const steps = 5;
   for (let i = 0; i <= steps; i++) {
-    const rv = rMin + (rMax - rMin) * i / steps;
+    const rv = vMin + (vMax - vMin) * i / steps;
     const yv = y(rv);
     ctx.beginPath(); ctx.moveTo(pad.l, yv); ctx.lineTo(W - pad.r, yv); ctx.stroke();
     ctx.fillStyle = "#6b7280"; ctx.font = "9px 'JetBrains Mono',monospace"; ctx.textAlign = "right";
     ctx.fillText(Math.round(rv).toString(), pad.l - 6, yv + 3);
   }
-  if (rMin < 1500 && rMax > 1500) {
+  // 1500 reference line (ELO mode only)
+  if (mode !== "rank" && vMin < 1500 && vMax > 1500) {
     ctx.strokeStyle = "rgba(255,255,255,0.12)"; ctx.setLineDash([4, 4]);
     ctx.beginPath(); ctx.moveTo(pad.l, y(1500)); ctx.lineTo(W - pad.r, y(1500)); ctx.stroke();
     ctx.setLineDash([]);
   }
+  // X axis labels
   ctx.fillStyle = "#6b7280"; ctx.font = "9px 'JetBrains Mono',monospace"; ctx.textAlign = "center";
   [1, 20, 40, 60, 80, 100, 120, 131].forEach(cn => {
     ctx.fillText("#" + cn, x(cn), H - 6);
@@ -461,17 +459,17 @@ function drawChartContent(ctx, W, H, pad, hist, rMin, rMax, cMin, cMax, c, x, y,
   // Line
   ctx.strokeStyle = c; ctx.lineWidth = 2; ctx.lineJoin = "round";
   ctx.beginPath();
-  hist.forEach((h, i) => { i === 0 ? ctx.moveTo(x(h.c), y(h.r)) : ctx.lineTo(x(h.c), y(h.r)); });
+  points.forEach((pt, i) => { i === 0 ? ctx.moveTo(x(pt.c), y(pt.v)) : ctx.lineTo(x(pt.c), y(pt.v)); });
   ctx.stroke();
   // Glow
   ctx.save(); ctx.globalAlpha = 0.15; ctx.strokeStyle = c; ctx.lineWidth = 6;
   ctx.beginPath();
-  hist.forEach((h, i) => { i === 0 ? ctx.moveTo(x(h.c), y(h.r)) : ctx.lineTo(x(h.c), y(h.r)); });
+  points.forEach((pt, i) => { i === 0 ? ctx.moveTo(x(pt.c), y(pt.v)) : ctx.lineTo(x(pt.c), y(pt.v)); });
   ctx.stroke(); ctx.restore();
   // Dots
-  hist.forEach((h, i) => {
-    const isHl = highlight && h.c === highlight.c && h.r === highlight.r;
-    ctx.beginPath(); ctx.arc(x(h.c), y(h.r), isHl ? 5 : 2.5, 0, Math.PI * 2);
+  points.forEach(pt => {
+    const isHl = highlight && pt.c === highlight.c;
+    ctx.beginPath(); ctx.arc(x(pt.c), y(pt.v), isHl ? 5 : 2.5, 0, Math.PI * 2);
     if (isHl) { ctx.fillStyle = "#fff"; ctx.fill(); ctx.strokeStyle = c; ctx.lineWidth = 2; ctx.stroke(); }
     else { ctx.fillStyle = c; ctx.fill(); }
   });
@@ -530,6 +528,7 @@ function render() {
   body.querySelectorAll(".row").forEach(row => {
     row.onclick = () => {
       const name = row.dataset.name;
+      if (selected !== name) chartMode = "elo";
       selected = selected === name ? null : name;
       render();
     };
