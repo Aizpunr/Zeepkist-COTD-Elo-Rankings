@@ -356,7 +356,7 @@ function drawChart(player, panel) {
     </div>
     <div class="chart-tabs">
       <button class="chart-tab${chartMode === 'elo' ? ' active' : ''}" id="chartTabElo">ELO</button>
-      <button class="chart-tab${chartMode === 'rank' ? ' active' : ''}" id="chartTabRank">Rank</button>
+      <button class="chart-tab${chartMode === 'rank' ? ' active' : ''}" id="chartTabRank">Rank<sup style="color:#10b981;font-size:8px;margin-left:2px">[new]</sup></button>
     </div>
     <div class="chart-canvas"><canvas id="eloCanvas"></canvas><div class="tooltip" id="chartTip"></div></div>
   `;
