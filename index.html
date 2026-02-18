@@ -151,7 +151,7 @@
 
 <script>
 // ── DATA ──
-let eloData, weightedData, deltas;
+let eloData, weightedData, snap = null;
 
 // ── HELPERS ──
 function rColor(r) {
@@ -430,20 +430,23 @@ function render() {
     const faded = Math.abs(p.active - p.rating) > 5;
     const c = rColor(p.active);
     const nameColor = customColors[p.name] || "#f3f4f6";
-    const d = deltas[p.name];
+    const mode = eloMode === "weighted" ? "w" : "std";
+    const prev = snap && snap[mode] && snap[mode][p.name];
 
     let rankDelta = "";
-    if (d && d[0] !== 0) {
-      rankDelta = d[0] > 0
-        ? `<span class="delta-up">▲${d[0]}</span>`
-        : `<span class="delta-down">▼${Math.abs(d[0])}</span>`;
+    if (prev) {
+      const rd = prev[0] - (i + 1);
+      if (rd !== 0) rankDelta = rd > 0
+        ? `<span class="delta-up">▲${rd}</span>`
+        : `<span class="delta-down">▼${Math.abs(rd)}</span>`;
     }
 
     let eloDelta = "";
-    if (d && Math.abs(d[1]) >= 0.5) {
-      eloDelta = d[1] > 0
-        ? `<span class="elo-delta-up">+${Math.round(d[1])}</span>`
-        : `<span class="elo-delta-down">${Math.round(d[1])}</span>`;
+    if (prev) {
+      const ed = Math.round(p.active - prev[1]);
+      if (Math.abs(ed) >= 1) eloDelta = ed > 0
+        ? `<span class="elo-delta-up">+${ed}</span>`
+        : `<span class="elo-delta-down">${ed}</span>`;
     }
 
     const winsColor = p.wins > 0 ? "var(--accent)" : "var(--text-dark)";
@@ -489,10 +492,13 @@ function render() {
 }
 
 // ── INIT ──
-fetch('data.json').then(r => r.json()).then(data => {
+Promise.all([
+  fetch('data.json').then(r => r.json()),
+  fetch('snapshot.json').then(r => r.json()).catch(() => null)
+]).then(([data, s]) => {
   eloData = data.standard.l;
   weightedData = data.weighted.l;
-  deltas = data.deltas;
+  snap = s;
   render();
 });
 </script>
