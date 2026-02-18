@@ -117,6 +117,35 @@
   .tooltip .t-elo { color: var(--text-dim); }
   .tooltip .t-elo span { color: var(--plat); }
 
+  .info-btn {
+    background: none; border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted);
+    border-radius: 4px; padding: 2px 7px; cursor: pointer; font-size: 11px;
+    font-family: var(--mono); margin-left: 2px; transition: all 0.15s; line-height: 1;
+  }
+  .info-btn:hover { border-color: rgba(255,255,255,0.3); color: var(--accent); }
+
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.65);
+    z-index: 100; align-items: center; justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: #0d0d14; border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 12px; padding: 24px 28px; max-width: 520px; width: 90%;
+    font-family: var(--mono); font-size: 12px; line-height: 1.75; color: var(--text-dim);
+    max-height: 80vh; overflow-y: auto;
+  }
+  .modal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+  .modal-head h3 { color: var(--text); font-size: 13px; font-weight: 700; margin: 0; }
+  .modal-close {
+    background: none; border: 1px solid rgba(255,255,255,0.15); color: var(--text-dim);
+    border-radius: 6px; padding: 3px 8px; cursor: pointer; font-size: 11px; font-family: var(--mono);
+  }
+  .modal-close:hover { border-color: rgba(255,255,255,0.3); color: var(--text); }
+  .entry-date { color: var(--accent); font-weight: 700; margin-bottom: 8px; }
+  .modal ul { padding-left: 18px; margin: 0; }
+  .modal li { margin-bottom: 5px; }
+
   @media (max-width: 700px) {
     .table-header, .row { grid-template-columns: 30px 1fr 50px 50px 30px 44px; font-size: 10px; }
     .table-header > :nth-child(7), .table-header > :nth-child(8), .table-header > :nth-child(9),
@@ -146,6 +175,23 @@
 
   <div class="footer">
     Click player for history · Faded = inactive decay · <span id="tierLegend"></span>
+  </div>
+</div>
+
+<div class="modal-overlay" id="changelogModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>Weighted ELO — Changelog</h3>
+      <button class="modal-close" id="modalCloseBtn">✕ close</button>
+    </div>
+    <div class="entry-date">18.02.26</div>
+    <ul>
+      <li><b>Position-based K multiplier</b> — top 8% of finishers earn 3× the baseline points, top 15% earn 2×, top 25% earn 1.3×, bottom 50% earn 0.5×. Rewards strong finishes more than just participating.</li>
+      <li><b>Lobby quality weighting</b> — wins against high-rated opponents in competitive lobbies are worth proportionally more. Addresses the Big 3 effect (justMaki / Kernkob / ZOMAN winning ~64% of cups).</li>
+      <li><b>Zero-sum</b> — ELO gained by winners exactly equals ELO lost by losers each cup.</li>
+      <li><b>Decay improved</b> — players keep their full rating for up to 3 missed cups (grace period), then decay at 0.5% per missed cup. Replaces old 1%/cup with no grace, which was too harsh for returning high-rated players.</li>
+      <li><b>Weekly arrows</b> — now show raw ELO earned/lost, not the decayed active rating change.</li>
+    </ul>
   </div>
 </div>
 
@@ -228,7 +274,19 @@ modeOpts.forEach(([k,l]) => {
   btn.dataset.key = k;
   btn.onclick = () => { eloMode = k; updateModeTabs(); selected = null; render(); };
   modeTabsEl.appendChild(btn);
+  if (k === "weighted") {
+    const info = document.createElement("button");
+    info.className = "info-btn";
+    info.textContent = "ℹ";
+    info.title = "Weighted ELO changelog";
+    info.onclick = () => document.getElementById("changelogModal").classList.add("open");
+    modeTabsEl.appendChild(info);
+  }
 });
+
+const modal = document.getElementById("changelogModal");
+document.getElementById("modalCloseBtn").onclick = () => modal.classList.remove("open");
+modal.addEventListener("click", e => { if (e.target === modal) modal.classList.remove("open"); });
 function updateModeTabs() {
   modeTabsEl.querySelectorAll(".tab").forEach(b => b.classList.toggle("active", b.dataset.key === eloMode));
 }
