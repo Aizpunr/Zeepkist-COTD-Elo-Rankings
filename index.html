@@ -335,7 +335,7 @@ function buildRankHistory(player) {
     ratings.sort((a, b) => b - a);
     const playerEntry = player.history.filter(h => h.c <= cup).pop();
     const rank = ratings.indexOf(playerEntry.r) + 1;
-    return { c: cup, rank };
+    return { c: cup, rank, p: playerEntry.p };
   });
 }
 
@@ -411,7 +411,7 @@ function drawChart(player, panel) {
     if (closest && minDist < 30) {
       tip.style.display = "block";
       if (chartMode === "rank") {
-        tip.innerHTML = `<div class="t-cup">Cup #${closest.c}</div><div class="t-elo">Rank: <span>#${closest.v}</span></div>`;
+        tip.innerHTML = `<div class="t-cup">Cup #${closest.c}</div><div class="t-pos">Pos: <span>#${closest.p}</span></div><div class="t-elo">Rank: <span>#${closest.v}</span></div>`;
       } else {
         tip.innerHTML = `<div class="t-cup">${closest.l ? closest.l : "Cup #" + Math.round(closest.c)}</div><div class="t-pos">Pos: <span>#${closest.p}</span></div><div class="t-elo">Elo: <span>${closest.r.toFixed(1)}</span></div>`;
       }
