@@ -173,6 +173,7 @@
   <div class="controls">
     <div class="tabs" id="sortTabs"></div>
     <div class="tabs" id="eloModeTabs"></div>
+    <div class="tabs" id="viewTabs"></div>
   </div>
 
   <div class="table">
@@ -206,7 +207,7 @@
 
 <script>
 // ── DATA ──
-let eloData, weightedData, snap = null;
+let eloData, weightedData, snap = null, risingData = null;
 
 // ── HELPERS ──
 function rColor(r) {
@@ -255,6 +256,7 @@ const customColors = {
 // ── STATE ──
 let sortKey = "active";
 let eloMode = "standard";
+let viewMode = "leaderboard";
 let selected = null;
 let chartMode = "elo";
 
@@ -299,6 +301,20 @@ document.getElementById("modalCloseBtn").onclick = () => modal.classList.remove(
 modal.addEventListener("click", e => { if (e.target === modal) modal.classList.remove("open"); });
 function updateModeTabs() {
   modeTabsEl.querySelectorAll(".tab").forEach(b => b.classList.toggle("active", b.dataset.key === eloMode));
+}
+
+// ── VIEW TABS ──
+const viewTabsEl = document.getElementById("viewTabs");
+[["leaderboard", "Leaderboard"], ["rising", "⬆ On the Rise"]].forEach(([k, l]) => {
+  const btn = document.createElement("button");
+  btn.className = "tab" + (k === viewMode ? " active" : "");
+  btn.textContent = l;
+  btn.dataset.key = k;
+  btn.onclick = () => { viewMode = k; selected = null; updateViewTabs(); render(); };
+  viewTabsEl.appendChild(btn);
+});
+function updateViewTabs() {
+  viewTabsEl.querySelectorAll(".tab").forEach(b => b.classList.toggle("active", b.dataset.key === viewMode));
 }
 
 // ── FILTERING & SORTING ──
@@ -475,8 +491,46 @@ function drawChartContent(ctx, W, H, pad, points, vMin, vMax, cMin, cMax, c, x, 
   });
 }
 
+const RISING_COLS = "36px 1fr 72px 72px 62px";
+
+// ── RISING VIEW ──
+function renderRising() {
+  const body = document.getElementById("tableBody");
+  const header = document.querySelector(".table-header");
+  if (!risingData) { body.innerHTML = `<div style="padding:24px;color:var(--text-muted);font-family:var(--mono);font-size:12px">Loading...</div>`; header.style.display = "none"; return; }
+  const list = eloMode === "weighted" ? risingData.weighted : risingData.standard;
+  const from = risingData.lookback_cup, to = risingData.current_cup;
+
+  // Reuse .table-header with rising columns
+  header.style.display = "grid";
+  header.style.gridTemplateColumns = RISING_COLS;
+  header.innerHTML = `<div>#</div><div>Player</div><div style="text-align:right">Cup ${from}</div><div style="text-align:right">Now</div><div style="text-align:right">Change</div>`;
+
+  let html = "";
+  list.forEach((p, i) => {
+    const c = rColor(p.rating_now);
+    const nameColor = customColors[p.name] || "#f3f4f6";
+    const sign = p.pct >= 0 ? "+" : "";
+    const pctColor = p.pct >= 8 ? "#10b981" : p.pct >= 5 ? "#f59e0b" : "var(--text-dim)";
+    html += `<div class="row" style="grid-template-columns:${RISING_COLS}">
+      <div class="rank">${i + 1}</div>
+      <div class="player"><span class="dot" style="background:${c}"></span><span class="pname" style="color:${nameColor}">${esc(p.name)}</span></div>
+      <div class="raw">${p.rating_then}</div>
+      <div class="elo-cell" style="color:${c}">${p.rating_now}</div>
+      <div class="avg-cell" style="color:${pctColor};font-weight:700">${sign}${p.pct}%</div>
+    </div>`;
+  });
+  body.innerHTML = html;
+}
+
 // ── TABLE RENDERING ──
+const LEADERBOARD_HEADER_HTML = `<div>#</div><div>Player</div><div style="text-align:right">Elo</div><div style="text-align:right">Active</div><div style="text-align:center">W</div><div style="text-align:center">S/B</div><div style="text-align:right">Avg</div><div style="text-align:center">Best</div><div style="text-align:right">Peak</div>`;
 function render() {
+  if (viewMode === "rising") { renderRising(); return; }
+  const header = document.querySelector(".table-header");
+  header.style.display = "";
+  header.style.gridTemplateColumns = "";
+  header.innerHTML = LEADERBOARD_HEADER_HTML;
   const filtered = getFiltered();
   const body = document.getElementById("tableBody");
   let html = "";
@@ -551,11 +605,13 @@ function render() {
 // ── INIT ──
 Promise.all([
   fetch('data.json').then(r => r.json()),
-  fetch('snapshot.json').then(r => r.json()).catch(() => null)
-]).then(([data, s]) => {
+  fetch('snapshot.json').then(r => r.json()).catch(() => null),
+  fetch('rising.json').then(r => r.json()).catch(() => null),
+]).then(([data, s, rising]) => {
   eloData = data.standard.l;
   weightedData = data.weighted.l;
   snap = s;
+  risingData = rising;
   render();
 });
 </script>
