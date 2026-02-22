@@ -7,7 +7,7 @@
 <meta name="description" content="Elo rankings for Zeepkist Cup of the Day - 144 cups, 1043 players, pairwise K=32/N system">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏆</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;600;700;800&family=Luckiest+Guy&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
@@ -45,6 +45,17 @@
   }
   .tab.active { background: rgba(245,158,11,0.2); color: var(--accent); }
   .tab:hover:not(.active) { color: var(--text-dim); }
+
+  .cup-toggle {
+    display: flex; align-items: center; gap: 5px; cursor: pointer;
+    font-family: var(--mono); font-size: 11px; color: var(--text-muted);
+    user-select: none; padding: 3px 0;
+  }
+  .cup-toggle input[type="checkbox"] {
+    accent-color: var(--accent); width: 13px; height: 13px; cursor: pointer;
+  }
+  .cup-toggle-label { transition: color 0.15s; }
+  .cup-toggle:hover .cup-toggle-label { color: var(--text-dim); }
 
   .min-cups { display: flex; align-items: center; gap: 6px; }
   .min-cups span { font-size: 11px; font-family: var(--mono); color: var(--text-muted); }
@@ -155,15 +166,28 @@
   .modal ul { padding-left: 18px; margin: 0; }
   .modal li { margin-bottom: 5px; }
 
+  .quote {
+    position: fixed; font-family: 'Luckiest Guy', cursive; pointer-events: none;
+    opacity: 0.11; z-index: 0; white-space: nowrap;
+  }
+  .quote .q-name { color: var(--accent); }
+  .quote .q-text { color: #fff; }
+
   @media (max-width: 700px) {
     .table-header, .row { grid-template-columns: 30px 1fr 50px 50px 30px 44px; font-size: 10px; }
     .table-header > :nth-child(7), .table-header > :nth-child(8), .table-header > :nth-child(9),
     .row > :nth-child(7), .row > :nth-child(8), .row > :nth-child(9) { display: none; }
     .header h1 { font-size: 22px; }
+    .quote { display: none; }
   }
 </style>
 </head>
 <body>
+<div class="quote" style="top:6%;left:5%;font-size:21px;transform:rotate(-5deg)"><span class="q-name" style="color:#aa55ff">sandals:</span> <span class="q-text">"what am i doing, ok lets get a good run"</span></div>
+<div class="quote" style="top:35%;right:4%;font-size:20px;transform:rotate(3deg)"><span class="q-name" style="color:#ff3333">Northwind:</span> <span class="q-text">"i hate this map"</span></div>
+<div class="quote" style="top:65%;left:3%;font-size:23px;transform:rotate(-4deg)"><span class="q-name" style="color:#10b981">quickracer10:</span> <span class="q-text">"this the map?"</span></div>
+<div class="quote" style="top:75%;right:5%;font-size:21px;transform:rotate(2deg)"><span class="q-name" style="color:#10b981">Hi Im Yolo:</span> <span class="q-text">"this risky is evil"</span></div>
+<div class="quote" style="top:48%;left:4.5%;font-size:20px;transform:rotate(-3deg)"><span class="q-name" style="color:#10b981">Lexer:</span> <span class="q-text">"oh no, outer tube!"</span></div>
 <div class="container" id="app">
   <div class="header">
     <h1>Zeepkist COTD Elo Rankings</h1>
@@ -173,7 +197,8 @@
   <div class="controls">
     <div class="tabs" id="sortTabs"></div>
     <div class="tabs" id="eloModeTabs"></div>
-    <div class="tabs" id="viewTabs"></div>
+    <label class="cup-toggle" id="cupToggle"><input type="checkbox" id="trollCheck" checked><span class="cup-toggle-label">Include troll cups</span></label>
+    <label class="cup-toggle" id="risingToggle"><input type="checkbox" id="risingCheck"><span class="cup-toggle-label">On the Rise</span></label>
   </div>
 
   <div class="table">
@@ -207,7 +232,7 @@
 
 <script>
 // ── DATA ──
-let eloData, weightedData, snap = null, risingData = null;
+let eloData, weightedData, eloDataPure, weightedDataPure, snap = null, risingData = null;
 
 // ── HELPERS ──
 function rColor(r) {
@@ -220,8 +245,6 @@ function rColor(r) {
     return "#78716c";
   }
   if (r >= 1850) return "#dc2626";
-  if (r >= 1800) return "#ef4444";
-  if (r >= 1750) return "#f59e0b";
   if (r >= 1700) return "#a855f7";
   if (r >= 1650) return "#3b82f6";
   if (r >= 1600) return "#10b981";
@@ -251,14 +274,21 @@ function esc(s) { const d = document.createElement("div"); d.textContent = s; re
 // ── CUSTOM NAME COLORS (request yours!) ──
 const customColors = {
   "Lexer": "#10b981",
+  "Sandals": "#aa55ff",
 };
 
 // ── STATE ──
 let sortKey = "active";
 let eloMode = "standard";
 let viewMode = "leaderboard";
+let includeTroll = true;
 let selected = null;
 let chartMode = "elo";
+
+function getActiveData() {
+  if (eloMode === "weighted") return includeTroll ? weightedData : weightedDataPure;
+  return includeTroll ? eloData : eloDataPure;
+}
 
 // ── SORT TABS ──
 const sortOpts = [["active","Current"],["peak","Peak"],["wins","Wins"],["avg","Avg"],["cups","Cups"]];
@@ -277,7 +307,7 @@ function updateTabs() {
 
 // ── MIN CUPS SLIDER ──
 // ── ELO MODE TABS ──
-const modeOpts = [["standard","Standard"],["weighted","Weighted"]];
+const modeOpts = [["standard","Standard Elo"],["weighted","Weighted Elo"]];
 const modeTabsEl = document.getElementById("eloModeTabs");
 modeOpts.forEach(([k,l]) => {
   const btn = document.createElement("button");
@@ -303,29 +333,29 @@ function updateModeTabs() {
   modeTabsEl.querySelectorAll(".tab").forEach(b => b.classList.toggle("active", b.dataset.key === eloMode));
 }
 
-// ── VIEW TABS ──
-const viewTabsEl = document.getElementById("viewTabs");
-[["leaderboard", "Leaderboard"], ["rising", "⬆ On the Rise"]].forEach(([k, l]) => {
-  const btn = document.createElement("button");
-  btn.className = "tab" + (k === viewMode ? " active" : "");
-  btn.textContent = l;
-  btn.dataset.key = k;
-  btn.onclick = () => { viewMode = k; selected = null; updateViewTabs(); render(); };
-  viewTabsEl.appendChild(btn);
-});
-function updateViewTabs() {
-  viewTabsEl.querySelectorAll(".tab").forEach(b => b.classList.toggle("active", b.dataset.key === viewMode));
-}
+// ── CUP FILTER TOGGLE ──
+document.getElementById("trollCheck").onchange = (e) => {
+  includeTroll = e.target.checked;
+  selected = null;
+  render();
+};
+
+// ── RISING TOGGLE ──
+document.getElementById("risingCheck").onchange = (e) => {
+  viewMode = e.target.checked ? "rising" : "leaderboard";
+  selected = null;
+  render();
+};
 
 // ── FILTERING & SORTING ──
 function getFiltered() {
-  const src = eloMode === "weighted" ? weightedData : eloData;
+  const src = getActiveData();
   // Update tier legend
   const tl = document.getElementById("tierLegend");
   if (eloMode === "weighted") {
     tl.innerHTML = '<span style="color:#dc2626">Legend 2000+</span> \u00b7 <span style="color:#a855f7">Pro 1800+</span> \u00b7 <span style="color:#3b82f6">Master 1700+</span> \u00b7 <span style="color:#10b981">Gold 1600+</span>';
   } else {
-    tl.innerHTML = '<span style="color:#dc2626">Legend 1850+</span> \u00b7 <span style="color:#ef4444">GM 1800+</span> \u00b7 <span style="color:#f59e0b">Master 1750+</span> \u00b7 <span style="color:#a855f7">Dia 1700+</span> \u00b7 <span style="color:#3b82f6">Plat 1650+</span> \u00b7 <span style="color:#10b981">Gold 1600+</span>';
+    tl.innerHTML = '<span style="color:#dc2626">Legend 1850+</span> \u00b7 <span style="color:#a855f7">Pro 1700+</span> \u00b7 <span style="color:#3b82f6">Master 1650+</span> \u00b7 <span style="color:#10b981">Gold 1600+</span>';
   }
   let d = src.filter(p => p.cups >= 3);
   if (sortKey === "rating") d.sort((a,b) => b.rating - a.rating);
@@ -339,7 +369,7 @@ function getFiltered() {
 
 // ── RANK HISTORY ──
 function buildRankHistory(player) {
-  const allPlayers = eloMode === "weighted" ? weightedData : eloData;
+  const allPlayers = getActiveData();
   const cups = [...new Set(player.history.map(h => h.c))].sort((a, b) => a - b);
   return cups.map(cup => {
     // Each player's rating as of this cup (last entry with h.c <= cup)
@@ -498,7 +528,10 @@ function renderRising() {
   const body = document.getElementById("tableBody");
   const header = document.querySelector(".table-header");
   if (!risingData) { body.innerHTML = `<div style="padding:24px;color:var(--text-muted);font-family:var(--mono);font-size:12px">Loading...</div>`; header.style.display = "none"; return; }
-  const list = eloMode === "weighted" ? risingData.weighted : risingData.standard;
+  const risingKey = eloMode === "weighted"
+    ? (includeTroll ? "weighted" : "weighted_pure")
+    : (includeTroll ? "standard" : "standard_pure");
+  const list = risingData[risingKey] || [];
   const from = risingData.lookback_cup, to = risingData.current_cup;
 
   // Reuse .table-header with rising columns
@@ -512,7 +545,7 @@ function renderRising() {
     const nameColor = customColors[p.name] || "#f3f4f6";
     const sign = p.pct >= 0 ? "+" : "";
     const pctColor = p.pct >= 8 ? "#10b981" : p.pct >= 5 ? "#f59e0b" : "var(--text-dim)";
-    html += `<div class="row" style="grid-template-columns:${RISING_COLS}">
+    html += `<div class="row${selected === p.name ? " selected" : ""}" data-name="${esc(p.name)}" style="grid-template-columns:${RISING_COLS}">
       <div class="rank">${i + 1}</div>
       <div class="player"><span class="dot" style="background:${c}"></span><span class="pname" style="color:${nameColor}">${esc(p.name)}</span></div>
       <div class="raw">${p.rating_then}</div>
@@ -521,6 +554,30 @@ function renderRising() {
     </div>`;
   });
   body.innerHTML = html;
+  attachRowHandlers(body);
+}
+
+// ── SHARED: click handlers + chart panel ──
+function attachRowHandlers(body) {
+  body.querySelectorAll(".row").forEach(row => {
+    row.onclick = () => {
+      const name = row.dataset.name;
+      if (selected !== name) chartMode = "elo";
+      selected = selected === name ? null : name;
+      render();
+    };
+  });
+  if (selected) {
+    const row = body.querySelector(`.row[data-name="${CSS.escape(selected)}"]`);
+    const player = getActiveData().find(p => p.name === selected);
+    if (row && player) {
+      const panel = document.createElement("div");
+      panel.className = "chart-panel";
+      row.after(panel);
+      drawChart(player, panel);
+      panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+  }
 }
 
 // ── TABLE RENDERING ──
@@ -540,7 +597,9 @@ function render() {
     const faded = Math.abs(p.active - p.rating) > 5;
     const c = rColor(p.active);
     const nameColor = customColors[p.name] || "#f3f4f6";
-    const mode = eloMode === "weighted" ? "w" : "std";
+    const mode = eloMode === "weighted"
+      ? (includeTroll ? "w" : "w_pure")
+      : (includeTroll ? "std" : "std_pure");
     const prev = snap && snap[mode] && snap[mode][p.name];
 
     let rankDelta = "";
@@ -577,29 +636,7 @@ function render() {
   });
 
   body.innerHTML = html;
-
-  // Attach click handlers
-  body.querySelectorAll(".row").forEach(row => {
-    row.onclick = () => {
-      const name = row.dataset.name;
-      if (selected !== name) chartMode = "elo";
-      selected = selected === name ? null : name;
-      render();
-    };
-  });
-
-  // Insert chart panel below selected row
-  if (selected) {
-    const row = body.querySelector(`.row[data-name="${CSS.escape(selected)}"]`);
-    const player = (eloMode === "weighted" ? weightedData : eloData).find(p => p.name === selected);
-    if (row && player) {
-      const panel = document.createElement("div");
-      panel.className = "chart-panel";
-      row.after(panel);
-      drawChart(player, panel);
-      panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
-    }
-  }
+  attachRowHandlers(body);
 }
 
 // ── INIT ──
@@ -610,6 +647,8 @@ Promise.all([
 ]).then(([data, s, rising]) => {
   eloData = data.standard.l;
   weightedData = data.weighted.l;
+  eloDataPure = data.standard_pure ? data.standard_pure.l : data.standard.l;
+  weightedDataPure = data.weighted_pure ? data.weighted_pure.l : data.weighted.l;
   snap = s;
   risingData = rising;
   render();
