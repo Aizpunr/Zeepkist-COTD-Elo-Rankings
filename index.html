@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Zeepkist COTD Elo Rankings</title>
-<meta name="description" content="Elo rankings for Zeepkist Cup of the Day - 144 cups, 1043 players, pairwise K=32/N system">
+<meta name="description" content="Elo rankings for Zeepkist Cup of the Day - 145 cups, 1038 players, pairwise K=32/N system">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏆</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;600;700;800&family=Luckiest+Guy&display=swap" rel="stylesheet">
@@ -86,13 +86,16 @@
 
   .table { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
   .table-header {
-    display: grid; grid-template-columns: 36px 1fr 58px 58px 40px 58px 46px 38px 52px;
+    display: grid; grid-template-columns: 36px 1fr 56px 66px 36px 118px 46px 40px 38px 54px;
     padding: 10px 14px; border-bottom: 1px solid var(--border-bright);
     font-family: var(--mono); font-size: 9px; color: var(--text-muted);
     text-transform: uppercase; letter-spacing: 0.5px;
   }
+  .table-header .sortable { cursor: pointer; transition: color 0.15s; }
+  .table-header .sortable:hover { color: var(--accent); }
+  .table-header .sortable.sort-active { color: var(--accent); }
   .row {
-    display: grid; grid-template-columns: 36px 1fr 58px 58px 40px 58px 46px 38px 52px;
+    display: grid; grid-template-columns: 36px 1fr 56px 66px 36px 118px 46px 40px 38px 54px;
     padding: 8px 14px; border-bottom: 1px solid rgba(255,255,255,0.03);
     cursor: pointer; align-items: center; transition: background 0.1s;
   }
@@ -108,6 +111,7 @@
   .row .wins-cell { text-align: center; font-family: var(--mono); font-size: 11px; }
   .row .podium-cell { text-align: center; font-family: var(--mono); font-size: 10px; color: var(--text-dim); }
   .row .avg-cell { text-align: right; font-family: var(--mono); font-size: 11px; }
+  .row .cups-cell { text-align: center; font-family: var(--mono); font-size: 11px; color: var(--text-muted); }
   .row .best-cell { text-align: center; font-family: var(--mono); font-size: 11px; }
   .row .peak-cell { text-align: right; font-family: var(--mono); font-size: 11px; color: var(--text-muted); }
   .delta-up { color: var(--green); font-size: 9px; font-weight: 700; }
@@ -173,10 +177,19 @@
   .quote .q-name { color: var(--accent); }
   .quote .q-text { color: #fff; }
 
+  .search-input {
+    background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+    border-radius: 6px; padding: 5px 10px; font-size: 11px;
+    font-family: var(--mono); color: var(--text); outline: none;
+    width: 150px; transition: border-color 0.15s; margin-left: auto;
+  }
+  .search-input::placeholder { color: var(--text-dark); }
+  .search-input:focus { border-color: rgba(245,158,11,0.4); }
+
   @media (max-width: 700px) {
-    .table-header, .row { grid-template-columns: 30px 1fr 50px 50px 30px 44px; font-size: 10px; }
-    .table-header > :nth-child(7), .table-header > :nth-child(8), .table-header > :nth-child(9),
-    .row > :nth-child(7), .row > :nth-child(8), .row > :nth-child(9) { display: none; }
+    .table-header, .row { grid-template-columns: 30px 1fr 50px 50px 24px 70px; font-size: 10px; }
+    .table-header > :nth-child(7), .table-header > :nth-child(8), .table-header > :nth-child(9), .table-header > :nth-child(10),
+    .row > :nth-child(7), .row > :nth-child(8), .row > :nth-child(9), .row > :nth-child(10) { display: none; }
     .header h1 { font-size: 22px; }
     .quote { display: none; }
   }
@@ -195,15 +208,16 @@
   </div>
 
   <div class="controls">
-    <div class="tabs" id="sortTabs"></div>
     <div class="tabs" id="eloModeTabs"></div>
     <label class="cup-toggle" id="cupToggle"><input type="checkbox" id="trollCheck" checked><span class="cup-toggle-label">Include troll cups</span></label>
     <label class="cup-toggle" id="risingToggle"><input type="checkbox" id="risingCheck"><span class="cup-toggle-label">On the Rise</span></label>
+    <label class="cup-toggle" id="curseToggle"><input type="checkbox" id="curseCheck"><span class="cup-toggle-label">Lexer Curse</span></label>
+    <input type="text" class="search-input" id="searchInput" placeholder="Search player...">
   </div>
 
   <div class="table">
-    <div class="table-header">
-      <div>#</div><div>Player</div><div style="text-align:right">Elo</div><div style="text-align:right">Active</div><div style="text-align:center">W</div><div style="text-align:center">S/B</div><div style="text-align:right">Avg</div><div style="text-align:center">Best</div><div style="text-align:right">Peak</div>
+    <div class="table-header" id="tableHeader">
+      <div>#</div><div>Player</div><div class="sortable" data-sort="rating" style="text-align:right">Elo</div><div class="sortable sort-active" data-sort="active" style="text-align:right">Active</div><div class="sortable" data-sort="wins" style="text-align:center">Wins</div><div class="sortable" data-sort="podium" style="text-align:center">Podium</div><div class="sortable" data-sort="avg" style="text-align:right">Avg</div><div class="sortable" data-sort="cups" style="text-align:center">App</div><div style="text-align:center">Best</div><div class="sortable" data-sort="peak" style="text-align:right">Peak</div>
     </div>
     <div id="tableBody"></div>
   </div>
@@ -232,7 +246,7 @@
 
 <script>
 // ── DATA ──
-let eloData, weightedData, eloDataPure, weightedDataPure, snap = null, risingData = null;
+let eloData, weightedData, eloDataPure, weightedDataPure, snap = null, risingData = null, curseData = null, allData = null;
 
 // ── HELPERS ──
 function rColor(r) {
@@ -290,20 +304,7 @@ function getActiveData() {
   return includeTroll ? eloData : eloDataPure;
 }
 
-// ── SORT TABS ──
-const sortOpts = [["active","Current"],["peak","Peak"],["wins","Wins"],["avg","Avg"],["cups","Cups"]];
-const tabsEl = document.getElementById("sortTabs");
-sortOpts.forEach(([k,l]) => {
-  const btn = document.createElement("button");
-  btn.className = "tab" + (k === sortKey ? " active" : "");
-  btn.textContent = l;
-  btn.dataset.key = k;
-  btn.onclick = () => { sortKey = k; updateTabs(); render(); };
-  tabsEl.appendChild(btn);
-});
-function updateTabs() {
-  tabsEl.querySelectorAll(".tab").forEach(b => b.classList.toggle("active", b.dataset.key === sortKey));
-}
+// ── SORT (via clickable table headers) ──
 
 // ── MIN CUPS SLIDER ──
 // ── ELO MODE TABS ──
@@ -343,9 +344,21 @@ document.getElementById("trollCheck").onchange = (e) => {
 // ── RISING TOGGLE ──
 document.getElementById("risingCheck").onchange = (e) => {
   viewMode = e.target.checked ? "rising" : "leaderboard";
+  document.getElementById("curseCheck").checked = false;
   selected = null;
   render();
 };
+
+// ── LEXER CURSE TOGGLE ──
+document.getElementById("curseCheck").onchange = (e) => {
+  viewMode = e.target.checked ? "curse" : "leaderboard";
+  document.getElementById("risingCheck").checked = false;
+  selected = null;
+  render();
+};
+
+// ── SEARCH ──
+document.getElementById("searchInput").oninput = () => render();
 
 // ── FILTERING & SORTING ──
 function getFiltered() {
@@ -357,10 +370,11 @@ function getFiltered() {
   } else {
     tl.innerHTML = '<span style="color:#dc2626">Legend 1850+</span> \u00b7 <span style="color:#a855f7">Pro 1700+</span> \u00b7 <span style="color:#3b82f6">Master 1650+</span> \u00b7 <span style="color:#10b981">Gold 1600+</span>';
   }
-  let d = src.filter(p => p.cups >= 3);
+  let d = src.filter(p => p.cups >= 5 || (p.podiums.gold + p.podiums.silver + p.podiums.bronze) > 0);
   if (sortKey === "rating") d.sort((a,b) => b.rating - a.rating);
   else if (sortKey === "active") d.sort((a,b) => b.active - a.active);
   else if (sortKey === "wins") d.sort((a,b) => b.wins - a.wins || b.active - a.active);
+  else if (sortKey === "podium") d.sort((a,b) => (b.podiums.gold+b.podiums.silver+b.podiums.bronze) - (a.podiums.gold+a.podiums.silver+a.podiums.bronze) || b.active - a.active);
   else if (sortKey === "cups") d.sort((a,b) => b.cups - a.cups || b.active - a.active);
   else if (sortKey === "avg") d.sort((a,b) => a.avg_position - b.avg_position);
   else if (sortKey === "peak") d.sort((a,b) => b.peak_rating - a.peak_rating);
@@ -369,12 +383,16 @@ function getFiltered() {
 
 // ── RANK HISTORY ──
 function buildRankHistory(player) {
-  const allPlayers = getActiveData();
+  const key = eloMode === "weighted"
+    ? (includeTroll ? "weighted" : "weighted_pure")
+    : (includeTroll ? "standard" : "standard_pure");
+  const useAll = allData && allData[key];
+  const dataset = useAll ? allData[key] : getActiveData();
   const cups = [...new Set(player.history.map(h => h.c))].sort((a, b) => a - b);
   return cups.map(cup => {
-    // Each player's rating as of this cup (last entry with h.c <= cup)
-    const ratings = allPlayers.map(p => {
-      const entries = p.history.filter(h => h.c <= cup);
+    const ratings = dataset.map(p => {
+      const hist = useAll ? p.h : p.history;
+      const entries = hist.filter(h => h.c <= cup);
       if (!entries.length) return null;
       return entries[entries.length - 1].r;
     }).filter(r => r !== null);
@@ -396,19 +414,26 @@ function drawChart(player, panel) {
       <div style="min-width:0;overflow:hidden">
         <span class="name" style="color:${c}">${esc(player.name)}</span>
         <span class="tier" style="color:${c};background:${c}15">${t}</span><br>
-        <span class="stats">Active ${Math.round(player.active)} · ${player.cups} cups · ${player.wins}W · ${player.podiums.silver}S/${player.podiums.bronze}B · avg ${player.avg_position} · peak ${Math.round(player.peak_rating)}</span>
+        <span class="stats">${viewMode === "curse"
+          ? `Curse ${Math.round(player.active)} · ${player.cups} cups · 4ths: ${player.fourths} · peak ${Math.round(player.peak_rating)}`
+          : `Active ${Math.round(player.active)} · ${player.cups} cups · Podium ${player.podiums.gold}/${player.podiums.silver}/${player.podiums.bronze} · avg ${player.avg_position} · peak ${Math.round(player.peak_rating)}`}</span>
+        ${player.cups < 5 && (player.podiums.gold + player.podiums.silver + player.podiums.bronze) === 0
+          ? `<br><span style="font-size:10px;color:var(--accent);font-family:var(--mono)">Play ${5 - player.cups} more cup${5 - player.cups !== 1 ? 's' : ''} to get ranked, or get a podium</span>` : ''}
       </div>
       <button class="close-btn" id="closeChart">✕</button>
     </div>
     <div class="chart-tabs">
-      <button class="chart-tab${chartMode === 'elo' ? ' active' : ''}" id="chartTabElo">ELO</button>
-      <button class="chart-tab${chartMode === 'rank' ? ' active' : ''}" id="chartTabRank">Rank<sup style="color:#10b981;font-size:8px;margin-left:2px">[new]</sup></button>
+      ${viewMode === "curse"
+        ? `<button class="chart-tab active" id="chartTabElo">CURSE ELO</button>`
+        : `<button class="chart-tab${chartMode === 'elo' ? ' active' : ''}" id="chartTabElo">ELO</button>
+      <button class="chart-tab${chartMode === 'rank' ? ' active' : ''}" id="chartTabRank">Rank<sup style="color:#10b981;font-size:8px;margin-left:2px">[new]</sup></button>`}
     </div>
     <div class="chart-canvas"><canvas id="eloCanvas"></canvas><div class="tooltip" id="chartTip"></div></div>
   `;
   document.getElementById("closeChart").onclick = () => { selected = null; render(); };
   document.getElementById("chartTabElo").onclick = () => { chartMode = "elo"; drawChart(player, panel); };
-  document.getElementById("chartTabRank").onclick = () => { chartMode = "rank"; drawChart(player, panel); };
+  const rankTab = document.getElementById("chartTabRank");
+  if (rankTab) rankTab.onclick = () => { chartMode = "rank"; drawChart(player, panel); };
 
   const canvas = document.getElementById("eloCanvas");
   const tip = document.getElementById("chartTip");
@@ -557,8 +582,58 @@ function renderRising() {
   attachRowHandlers(body);
 }
 
+// ── LEXER CURSE VIEW ──
+const CURSE_COLS = "36px 1fr 66px 52px 40px";
+function renderCurse() {
+  const body = document.getElementById("tableBody");
+  const header = document.querySelector(".table-header");
+  if (!curseData || !curseData.length) {
+    header.style.display = "none";
+    body.innerHTML = `<div style="padding:24px;color:var(--text-muted);font-family:var(--mono);font-size:12px">No curse data</div>`;
+    return;
+  }
+  const tl = document.getElementById("tierLegend");
+  tl.innerHTML = '<span style="color:#a855f7">Lexer Curse</span> · 4th is the new 1st · <span style="color:var(--text-dark)">4\u21921, 3\u21922, 5\u21923, 2\u21924, 6\u21925, 1\u21926</span>';
+
+  header.style.display = "grid";
+  header.style.gridTemplateColumns = CURSE_COLS;
+  header.innerHTML = `<div>#</div><div>Player</div><div style="text-align:right">Curse Elo</div><div style="text-align:right">4ths</div><div style="text-align:right">Cups</div>`;
+
+  let html = "";
+  curseData.forEach((p, i) => {
+    const c = rColor(p.active);
+    const nameColor = customColors[p.name] || "#f3f4f6";
+    const faded = Math.abs(p.active - p.rating) > 5;
+    const pct = p.cups > 0 ? ((p.fourths / p.cups) * 100).toFixed(0) : "0";
+    const prev = snap && snap.curse && snap.curse[p.name];
+    let rankDelta = "";
+    if (prev) {
+      const rd = prev[0] - (i + 1);
+      if (rd !== 0) rankDelta = rd > 0
+        ? `<span class="delta-up">\u25B2${rd}</span>`
+        : `<span class="delta-down">\u25BC${Math.abs(rd)}</span>`;
+    }
+    let eloDelta = "";
+    if (prev) {
+      const ed = Math.round(p.rating - prev[1]);
+      if (Math.abs(ed) >= 1) eloDelta = ed > 0
+        ? `<span class="elo-delta-up">+${ed}</span>`
+        : `<span class="elo-delta-down">${ed}</span>`;
+    }
+    html += `<div class="row${selected === p.name ? " selected" : ""}${faded ? " faded" : ""}" data-name="${esc(p.name)}" style="grid-template-columns:${CURSE_COLS}">
+      <div class="rank">${i + 1}${rankDelta}</div>
+      <div class="player"><span class="dot" style="background:${c}"></span><span class="pname" style="color:${nameColor}">${esc(p.name)}</span></div>
+      <div class="elo-cell" style="color:${c}">${Math.round(p.active)}${eloDelta}</div>
+      <div style="text-align:right;font-family:var(--mono);font-size:13px;font-weight:700;color:#a855f7">${p.fourths} <span style="font-size:10px;color:var(--text-muted)">(${pct}%)</span></div>
+      <div style="text-align:right;font-family:var(--mono);font-size:11px;color:var(--text-muted)">${p.cups}</div>
+    </div>`;
+  });
+  body.innerHTML = html;
+  attachRowHandlers(body, curseData);
+}
+
 // ── SHARED: click handlers + chart panel ──
-function attachRowHandlers(body) {
+function attachRowHandlers(body, dataSource) {
   body.querySelectorAll(".row").forEach(row => {
     row.onclick = () => {
       const name = row.dataset.name;
@@ -569,7 +644,7 @@ function attachRowHandlers(body) {
   });
   if (selected) {
     const row = body.querySelector(`.row[data-name="${CSS.escape(selected)}"]`);
-    const player = getActiveData().find(p => p.name === selected);
+    const player = (dataSource || getActiveData()).find(p => p.name === selected);
     if (row && player) {
       const panel = document.createElement("div");
       panel.className = "chart-panel";
@@ -580,14 +655,87 @@ function attachRowHandlers(body) {
   }
 }
 
+// ── SEARCH VIEW ──
+const SEARCH_COLS = "36px 1fr 66px 40px 36px 44px";
+function searchPlayerObj(p) {
+  return {
+    name: p.n, active: p.a, rating: p.r, cups: p.c,
+    best_finish: p.b, avg_position: p.v, wins: p.w,
+    podiums: { gold: p.g, silver: p.s, bronze: p.z },
+    peak_rating: p.p, history: p.h
+  };
+}
+function renderSearch(query) {
+  const header = document.querySelector(".table-header");
+  const body = document.getElementById("tableBody");
+  const key = eloMode === "weighted"
+    ? (includeTroll ? "weighted" : "weighted_pure")
+    : (includeTroll ? "standard" : "standard_pure");
+  const list = allData[key] || [];
+  const matches = list.filter(p => p.n.toLowerCase().includes(query));
+
+  const tl = document.getElementById("tierLegend");
+  tl.innerHTML = `<span style="color:var(--text-muted)">${matches.length} result${matches.length !== 1 ? 's' : ''}</span>`;
+
+  header.style.display = "grid";
+  header.style.gridTemplateColumns = SEARCH_COLS;
+  header.innerHTML = `<div>#</div><div>Player</div><div style="text-align:right">Active</div><div style="text-align:right">App</div><div style="text-align:center">Best</div><div style="text-align:right">Avg</div>`;
+
+  let html = "";
+  matches.slice(0, 50).forEach(p => {
+    const rank = list.indexOf(p) + 1;
+    const c = rColor(p.a);
+    const nameColor = customColors[p.n] || "#f3f4f6";
+    const avgColor = p.v <= 5 ? "var(--green)" : p.v <= 10 ? "var(--text-dim)" : "var(--text-muted)";
+    const bestColor = p.b === 1 ? "var(--accent)" : p.b <= 3 ? "var(--text-dim)" : "var(--text-muted)";
+    const ranked = p.c >= 5 || (p.g + p.s + p.z) > 0;
+    html += `<div class="row${selected === p.n ? " selected" : ""}" data-name="${esc(p.n)}" style="grid-template-columns:${SEARCH_COLS}">
+      <div class="rank" style="${ranked ? '' : 'color:var(--text-dark)'}">${ranked ? rank : '—'}</div>
+      <div class="player"><span class="dot" style="background:${c}"></span><span class="pname" style="color:${nameColor}">${esc(p.n)}</span></div>
+      <div class="elo-cell" style="color:${c}">${Math.round(p.a)}</div>
+      <div style="text-align:right;font-family:var(--mono);font-size:11px;color:var(--text-muted)">${p.c}</div>
+      <div style="text-align:center;font-family:var(--mono);font-size:11px;color:${bestColor}">${p.b}</div>
+      <div style="text-align:right;font-family:var(--mono);font-size:11px;color:${avgColor}">${p.v}</div>
+    </div>`;
+  });
+  if (!matches.length) {
+    html = `<div style="padding:24px;color:var(--text-muted);font-family:var(--mono);font-size:12px">No players found</div>`;
+  }
+  body.innerHTML = html;
+  // Click handlers + chart for search results
+  const searchData = matches.slice(0, 50).map(searchPlayerObj);
+  attachRowHandlers(body, searchData);
+}
+
 // ── TABLE RENDERING ──
-const LEADERBOARD_HEADER_HTML = `<div>#</div><div>Player</div><div style="text-align:right">Elo</div><div style="text-align:right">Active</div><div style="text-align:center">W</div><div style="text-align:center">S/B</div><div style="text-align:right">Avg</div><div style="text-align:center">Best</div><div style="text-align:right">Peak</div>`;
+function leaderboardHeaderHTML() {
+  const cols = [
+    ['#',''],['Player',''],['Elo','rating'],['Active','active'],['Wins','wins'],
+    ['Podium','podium'],['Avg','avg'],['App','cups'],['Best',''],['Peak','peak']
+  ];
+  const aligns = ['','','right','right','center','center','right','center','center','right'];
+  return cols.map(([label,key],i) => {
+    const al = aligns[i] ? `style="text-align:${aligns[i]}"` : '';
+    if (!key) return `<div ${al}>${label}</div>`;
+    const cls = key === sortKey ? 'sortable sort-active' : 'sortable';
+    return `<div class="${cls}" data-sort="${key}" ${al}>${label}</div>`;
+  }).join('');
+}
+function bindHeaderSort() {
+  document.querySelectorAll(".table-header .sortable").forEach(el => {
+    el.onclick = () => { sortKey = el.dataset.sort; render(); };
+  });
+}
 function render() {
+  const sq = document.getElementById("searchInput").value.trim().toLowerCase();
+  if (sq.length >= 2 && allData) { renderSearch(sq); return; }
   if (viewMode === "rising") { renderRising(); return; }
+  if (viewMode === "curse") { renderCurse(); return; }
   const header = document.querySelector(".table-header");
   header.style.display = "";
   header.style.gridTemplateColumns = "";
-  header.innerHTML = LEADERBOARD_HEADER_HTML;
+  header.innerHTML = leaderboardHeaderHTML();
+  bindHeaderSort();
   const filtered = getFiltered();
   const body = document.getElementById("tableBody");
   let html = "";
@@ -618,18 +766,22 @@ function render() {
         : `<span class="elo-delta-down">${ed}</span>`;
     }
 
-    const winsColor = p.wins > 0 ? "var(--accent)" : "var(--text-dark)";
     const avgColor = p.avg_position <= 5 ? "var(--green)" : p.avg_position <= 10 ? "var(--text-dim)" : "var(--text-muted)";
     const bestColor = p.best_finish === 1 ? "var(--accent)" : p.best_finish <= 3 ? "var(--text-dim)" : "var(--text-muted)";
+    const totalPod = p.podiums.gold + p.podiums.silver + p.podiums.bronze;
+    const podStr = totalPod > 0
+      ? `<span style="color:var(--accent)">${p.podiums.gold}</span>/<span style="color:var(--silver)">${p.podiums.silver}</span>/<span style="color:var(--bronze)">${p.podiums.bronze}</span> <span style="color:var(--text-muted)">(${totalPod})</span>`
+      : `<span style="color:var(--text-dark)">0</span>`;
 
     html += `<div class="row${isSel ? " selected" : ""}${faded ? " faded" : ""}" data-name="${esc(p.name)}">
       <div class="rank">${i+1}${rankDelta}</div>
       <div class="player"><span class="dot" style="background:${c};box-shadow:0 0 5px ${c}40"></span><span class="pname" style="color:${nameColor}">${esc(p.name)}</span></div>
       <div class="raw">${Math.round(p.rating)}</div>
       <div class="elo-cell" style="color:${c}">${Math.round(p.active)}${eloDelta}</div>
-      <div class="wins-cell" style="color:${winsColor}">${p.wins}</div>
-      <div class="podium-cell">${p.podiums.silver}/${p.podiums.bronze}</div>
+      <div class="wins-cell" style="color:${p.wins > 0 ? "var(--accent)" : "var(--text-dark)"}">${p.wins}</div>
+      <div class="podium-cell">${podStr}</div>
       <div class="avg-cell" style="color:${avgColor}">${p.avg_position.toFixed(1)}</div>
+      <div class="cups-cell">${p.cups}</div>
       <div class="best-cell" style="color:${bestColor}">${p.best_finish}</div>
       <div class="peak-cell">${Math.round(p.peak_rating)}</div>
     </div>`;
@@ -644,13 +796,17 @@ Promise.all([
   fetch('data.json').then(r => r.json()),
   fetch('snapshot.json').then(r => r.json()).catch(() => null),
   fetch('rising.json').then(r => r.json()).catch(() => null),
-]).then(([data, s, rising]) => {
+  fetch('lexercurse.json').then(r => r.json()).catch(() => null),
+  fetch('alldata.json').then(r => r.json()).catch(() => null),
+]).then(([data, s, rising, curse, all]) => {
   eloData = data.standard.l;
   weightedData = data.weighted.l;
   eloDataPure = data.standard_pure ? data.standard_pure.l : data.standard.l;
   weightedDataPure = data.weighted_pure ? data.weighted_pure.l : data.weighted.l;
   snap = s;
   risingData = rising;
+  curseData = curse ? curse.l : null;
+  allData = all;
   render();
 });
 </script>
