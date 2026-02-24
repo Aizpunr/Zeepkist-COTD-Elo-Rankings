@@ -186,6 +186,23 @@
   .search-input::placeholder { color: var(--text-dark); }
   .search-input:focus { border-color: rgba(245,158,11,0.4); }
 
+  .compare-panel {
+    background: rgba(255,255,255,0.03); border: 1px solid var(--border-bright);
+    border-radius: 12px; padding: 16px; margin-bottom: 16px;
+    animation: slideDown 0.2s ease-out;
+  }
+  #comparePanel.sticky-panel {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--bg);
+    padding-top: 6px;
+  }
+  .row.comp-p1 { background: rgba(6,182,212,0.08); }
+  .row.comp-p2 { background: rgba(249,115,22,0.08); }
+  .row.comp-p1:hover { background: rgba(6,182,212,0.12) !important; }
+  .row.comp-p2:hover { background: rgba(249,115,22,0.12) !important; }
+
   @media (max-width: 700px) {
     .table-header, .row { grid-template-columns: 30px 1fr 50px 50px 24px 70px; font-size: 10px; }
     .table-header > :nth-child(7), .table-header > :nth-child(8), .table-header > :nth-child(9), .table-header > :nth-child(10),
@@ -212,8 +229,11 @@
     <label class="cup-toggle" id="cupToggle"><input type="checkbox" id="trollCheck" checked><span class="cup-toggle-label">Include troll cups</span></label>
     <label class="cup-toggle" id="risingToggle"><input type="checkbox" id="risingCheck"><span class="cup-toggle-label">On the Rise</span></label>
     <label class="cup-toggle" id="curseToggle"><input type="checkbox" id="curseCheck"><span class="cup-toggle-label">Lexer Curse</span></label>
+    <label class="cup-toggle" id="compareToggle"><input type="checkbox" id="compareCheck"><span class="cup-toggle-label">Compare</span></label>
     <input type="text" class="search-input" id="searchInput" placeholder="Search player...">
   </div>
+
+  <div id="comparePanel"></div>
 
   <div class="table">
     <div class="table-header" id="tableHeader">
@@ -275,10 +295,8 @@ function tier(r) {
     return "BRONZE";
   }
   if (r >= 1850) return "LEGEND";
-  if (r >= 1800) return "GRANDMASTER";
-  if (r >= 1750) return "MASTER";
-  if (r >= 1700) return "DIAMOND";
-  if (r >= 1650) return "PLATINUM";
+  if (r >= 1700) return "PRO";
+  if (r >= 1650) return "MASTER";
   if (r >= 1600) return "GOLD";
   if (r >= 1500) return "SILVER";
   return "BRONZE";
@@ -298,6 +316,9 @@ let viewMode = "leaderboard";
 let includeTroll = true;
 let selected = null;
 let chartMode = "elo";
+let compareMode = false;
+let compareList = []; // up to 2 player names
+const COMP_COLORS = ['#06b6d4', '#f97316'];
 
 function getActiveData() {
   if (eloMode === "weighted") return includeTroll ? weightedData : weightedDataPure;
@@ -354,6 +375,14 @@ document.getElementById("curseCheck").onchange = (e) => {
   viewMode = e.target.checked ? "curse" : "leaderboard";
   document.getElementById("risingCheck").checked = false;
   selected = null;
+  render();
+};
+
+// ── COMPARE TOGGLE ──
+document.getElementById("compareCheck").onchange = (e) => {
+  compareMode = e.target.checked;
+  if (compareMode) { selected = null; }
+  else { compareList = []; }
   render();
 };
 
@@ -637,12 +666,26 @@ function attachRowHandlers(body, dataSource) {
   body.querySelectorAll(".row").forEach(row => {
     row.onclick = () => {
       const name = row.dataset.name;
+      if (compareMode) {
+        const idx = compareList.indexOf(name);
+        if (idx >= 0) compareList.splice(idx, 1);
+        else if (compareList.length < 2) compareList.push(name);
+        else compareList = [compareList[1], name];
+        // Update row highlights without full re-render
+        body.querySelectorAll(".row").forEach(r => {
+          r.classList.remove("comp-p1", "comp-p2");
+          if (r.dataset.name === compareList[0]) r.classList.add("comp-p1");
+          else if (compareList[1] && r.dataset.name === compareList[1]) r.classList.add("comp-p2");
+        });
+        renderComparePanel();
+        return;
+      }
       if (selected !== name) chartMode = "elo";
       selected = selected === name ? null : name;
       render();
     };
   });
-  if (selected) {
+  if (selected && !compareMode) {
     const row = body.querySelector(`.row[data-name="${CSS.escape(selected)}"]`);
     const player = (dataSource || getActiveData()).find(p => p.name === selected);
     if (row && player) {
@@ -689,7 +732,8 @@ function renderSearch(query) {
     const avgColor = p.v <= 5 ? "var(--green)" : p.v <= 10 ? "var(--text-dim)" : "var(--text-muted)";
     const bestColor = p.b === 1 ? "var(--accent)" : p.b <= 3 ? "var(--text-dim)" : "var(--text-muted)";
     const ranked = p.c >= 5 || (p.g + p.s + p.z) > 0;
-    html += `<div class="row${selected === p.n ? " selected" : ""}" data-name="${esc(p.n)}" style="grid-template-columns:${SEARCH_COLS}">
+    const srCompClass = compareMode && compareList[0] === p.n ? " comp-p1" : compareMode && compareList[1] === p.n ? " comp-p2" : "";
+    html += `<div class="row${selected === p.n ? " selected" : ""}${srCompClass}" data-name="${esc(p.n)}" style="grid-template-columns:${SEARCH_COLS}">
       <div class="rank" style="${ranked ? '' : 'color:var(--text-dark)'}">${ranked ? rank : '—'}</div>
       <div class="player"><span class="dot" style="background:${c}"></span><span class="pname" style="color:${nameColor}">${esc(p.n)}</span></div>
       <div class="elo-cell" style="color:${c}">${Math.round(p.a)}</div>
@@ -705,6 +749,178 @@ function renderSearch(query) {
   // Click handlers + chart for search results
   const searchData = matches.slice(0, 50).map(searchPlayerObj);
   attachRowHandlers(body, searchData);
+}
+
+// ── COMPARE ──
+function computeH2H(p1, p2) {
+  const h1 = p1.history || [], h2 = p2.history || [];
+  const map2 = new Map(h2.map(h => [h.c, h.p]));
+  let p1w = 0, p2w = 0, ties = 0, total = 0;
+  h1.forEach(h => {
+    if (map2.has(h.c)) {
+      const p2pos = map2.get(h.c);
+      total++;
+      if (h.p < p2pos) p1w++;
+      else if (p2pos < h.p) p2w++;
+      else ties++;
+    }
+  });
+  return { p1w, p2w, ties, total };
+}
+
+function drawCompareChart(p1, p2, container) {
+  const [c1, c2] = COMP_COLORS;
+  const h1 = p1.history || [], h2 = p2.history || [];
+  const allR = [...h1.map(h => h.r), ...h2.map(h => h.r)];
+  if (!allR.length) return;
+  const vMin = Math.min(...allR) - 30, vMax = Math.max(...allR) + 20;
+  const cMin = 1, cMax = 132;
+  container.innerHTML = `<div style="position:relative"><canvas id="cmpCanvas"></canvas><div class="tooltip" id="cmpTip"></div></div>`;
+  const canvas = document.getElementById("cmpCanvas");
+  const tip = document.getElementById("cmpTip");
+  const ctx = canvas.getContext("2d");
+  const dpr = window.devicePixelRatio || 1;
+  const W = container.getBoundingClientRect().width, H = 180;
+  canvas.width = W * dpr; canvas.height = H * dpr;
+  canvas.style.width = W + "px"; canvas.style.height = H + "px";
+  ctx.scale(dpr, dpr);
+  const pad = {l:46, r:12, t:12, b:28};
+  const xf = n => pad.l + (n - cMin) / (cMax - cMin) * (W - pad.l - pad.r);
+  const yf = v => pad.t + (1 - (v - vMin) / (vMax - vMin || 1)) * (H - pad.t - pad.b);
+  function draw(hl) {
+    ctx.clearRect(0, 0, W, H);
+    ctx.strokeStyle = "rgba(255,255,255,0.06)"; ctx.lineWidth = 1;
+    for (let i = 0; i <= 5; i++) {
+      const v = vMin + (vMax - vMin) * i / 5;
+      ctx.beginPath(); ctx.moveTo(pad.l, yf(v)); ctx.lineTo(W - pad.r, yf(v)); ctx.stroke();
+      ctx.fillStyle = "#6b7280"; ctx.font = "9px 'JetBrains Mono',monospace"; ctx.textAlign = "right";
+      ctx.fillText(Math.round(v), pad.l - 6, yf(v) + 3);
+    }
+    if (vMin < 1500 && vMax > 1500) {
+      ctx.strokeStyle = "rgba(255,255,255,0.12)"; ctx.setLineDash([4,4]);
+      ctx.beginPath(); ctx.moveTo(pad.l, yf(1500)); ctx.lineTo(W - pad.r, yf(1500)); ctx.stroke();
+      ctx.setLineDash([]);
+    }
+    ctx.fillStyle = "#6b7280"; ctx.font = "9px 'JetBrains Mono',monospace"; ctx.textAlign = "center";
+    [1,20,40,60,80,100,120,132].forEach(n => ctx.fillText("#"+n, xf(n), H-6));
+    [[h1,c1],[h2,c2]].forEach(([pts,col]) => {
+      if (!pts.length) return;
+      ctx.strokeStyle = col; ctx.lineWidth = 2; ctx.lineJoin = "round";
+      ctx.beginPath();
+      pts.forEach((pt,i) => i===0 ? ctx.moveTo(xf(pt.c),yf(pt.r)) : ctx.lineTo(xf(pt.c),yf(pt.r)));
+      ctx.stroke();
+      ctx.save(); ctx.globalAlpha = 0.12; ctx.strokeStyle = col; ctx.lineWidth = 6;
+      ctx.beginPath();
+      pts.forEach((pt,i) => i===0 ? ctx.moveTo(xf(pt.c),yf(pt.r)) : ctx.lineTo(xf(pt.c),yf(pt.r)));
+      ctx.stroke(); ctx.restore();
+      pts.forEach(pt => {
+        const isHl = hl !== null && pt.c === hl;
+        ctx.beginPath(); ctx.arc(xf(pt.c), yf(pt.r), isHl ? 5 : 2.5, 0, Math.PI*2);
+        if (isHl) { ctx.fillStyle="#fff"; ctx.fill(); ctx.strokeStyle=col; ctx.lineWidth=2; ctx.stroke(); }
+        else { ctx.fillStyle=col; ctx.fill(); }
+      });
+    });
+  }
+  draw(null);
+  canvas.onmousemove = e => {
+    const br = canvas.getBoundingClientRect(), mx = e.clientX - br.left;
+    const allCups = new Set([...h1.map(h=>h.c), ...h2.map(h=>h.c)]);
+    let best = null, minD = Infinity;
+    allCups.forEach(c => { const d = Math.abs(xf(c)-mx); if (d<minD){minD=d;best=c;} });
+    if (best !== null && minD < 30) {
+      const pt1 = h1.find(h=>h.c===best), pt2 = h2.find(h=>h.c===best);
+      let html = `<div class="t-cup">Cup #${best}</div>`;
+      if (pt1) html += `<div style="color:${c1}">${esc(p1.name)}: ${pt1.r.toFixed(1)} <span style="color:var(--text-muted)">#${pt1.p}</span></div>`;
+      if (pt2) html += `<div style="color:${c2}">${esc(p2.name)}: ${pt2.r.toFixed(1)} <span style="color:var(--text-muted)">#${pt2.p}</span></div>`;
+      tip.innerHTML = html; tip.style.display = "block";
+      const ref = pt1 || pt2;
+      let tx = xf(best) + 12; if (tx + 170 > W) tx = xf(best) - 175;
+      tip.style.left = tx + "px"; tip.style.top = Math.max(0, yf(ref.r) - 50) + "px";
+      draw(best);
+    } else { tip.style.display = "none"; draw(null); }
+  };
+  canvas.onmouseleave = () => { tip.style.display = "none"; draw(null); };
+}
+
+function renderComparePanel() {
+  const panel = document.getElementById("comparePanel");
+  if (!panel) return;
+  if (!compareMode) { panel.innerHTML = ""; panel.classList.remove("sticky-panel"); return; }
+  panel.classList.add("sticky-panel");
+  const key = eloMode==="weighted" ? (includeTroll?"weighted":"weighted_pure") : (includeTroll?"standard":"standard_pure");
+  const pool = allData && allData[key] ? allData[key].map(searchPlayerObj) : getActiveData();
+  const [c1,c2] = COMP_COLORS;
+  const p1 = compareList[0] ? pool.find(p=>p.name===compareList[0]) : null;
+  const p2 = compareList[1] ? pool.find(p=>p.name===compareList[1]) : null;
+  const hint = `<div style="font-family:var(--mono);font-size:10px;color:var(--text-muted);margin-bottom:${p1?'8px':'0'}">Compare mode — click two players on the leaderboard</div>`;
+  if (!p1) {
+    panel.innerHTML = `<div class="compare-panel">${hint}</div>`;
+    return;
+  }
+  const t1 = tier(p1.active);
+  if (!p2) {
+    panel.innerHTML = `<div class="compare-panel">
+      ${hint}
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="width:7px;height:7px;border-radius:50%;background:${c1};display:inline-block;flex-shrink:0"></span>
+          <span style="font-size:14px;font-weight:700;color:${c1}">${esc(p1.name)}</span>
+          <span style="font-family:var(--mono);font-size:10px;color:${c1};opacity:0.8">${t1}</span>
+          <span style="font-family:var(--mono);font-size:11px;color:var(--text-muted)">· select a 2nd player</span>
+        </div>
+        <button class="close-btn" onclick="clearCompare()">✕ clear</button>
+      </div>
+    </div>`;
+    return;
+  }
+  const t2 = tier(p2.active);
+  const h2h = computeH2H(p1, p2);
+  const lc = h2h.p1w > h2h.p2w ? c1 : c2;
+  const leader = h2h.p1w > h2h.p2w ? p1.name : h2h.p2w > h2h.p1w ? p2.name : null;
+  const h2hHTML = h2h.total === 0
+    ? `<span style="color:var(--text-muted)">No shared cups</span>`
+    : leader
+      ? `<span style="color:${lc};font-weight:700">${esc(leader)}</span> leads H2H <span style="color:${c1}">${h2h.p1w}</span>–<span style="color:${c2}">${h2h.p2w}</span>${h2h.ties?` (${h2h.ties} ties)`:""} in ${h2h.total} shared cups`
+      : `Even H2H <span style="color:var(--text-dim)">${h2h.p1w}–${h2h.p2w}</span>${h2h.ties?` (${h2h.ties} ties)`:""} in ${h2h.total} shared cups`;
+  function statRow(label, v1, v2, fmt, better) {
+    const w1 = better==="higher" ? v1 > v2 : v1 < v2;
+    const w2 = better==="higher" ? v2 > v1 : v2 < v1;
+    return `<div style="text-align:right;font-family:var(--mono);font-size:12px;color:${w1?c1:"var(--text-dim)"};font-weight:${w1?700:400}">${fmt(v1)}</div>
+      <div style="text-align:center;font-family:var(--mono);font-size:10px;color:var(--text-muted);padding:2px 10px">${label}</div>
+      <div style="text-align:left;font-family:var(--mono);font-size:12px;color:${w2?c2:"var(--text-dim)"};font-weight:${w2?700:400}">${fmt(v2)}</div>`;
+  }
+  const p1pods = p1.podiums.gold+p1.podiums.silver+p1.podiums.bronze;
+  const p2pods = p2.podiums.gold+p2.podiums.silver+p2.podiums.bronze;
+  const statsRows = [
+    statRow("Active ELO", p1.active, p2.active, v=>Math.round(v), "higher"),
+    statRow("Peak ELO",   p1.peak_rating, p2.peak_rating, v=>Math.round(v), "higher"),
+    statRow("Cups",       p1.cups, p2.cups, v=>v, "higher"),
+    statRow("Wins",       p1.wins, p2.wins, v=>v, "higher"),
+    statRow("Podiums",    p1pods, p2pods, v=>v, "higher"),
+    statRow("Avg Pos",    p1.avg_position||999, p2.avg_position||999, v=>v<999?v.toFixed(1):"—", "lower"),
+    statRow("Best Finish",p1.best_finish||999, p2.best_finish||999, v=>v<999?v:"—", "lower"),
+  ].join("");
+  panel.innerHTML = `<div class="compare-panel">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+        <div><span style="font-size:16px;font-weight:700;color:${c1}">${esc(p1.name)}</span> <span style="font-family:var(--mono);font-size:10px;color:${c1};opacity:0.8">${t1}</span></div>
+        <span style="font-family:var(--mono);font-size:12px;color:var(--text-muted)">vs</span>
+        <div><span style="font-size:16px;font-weight:700;color:${c2}">${esc(p2.name)}</span> <span style="font-family:var(--mono);font-size:10px;color:${c2};opacity:0.8">${t2}</span></div>
+      </div>
+      <button class="close-btn" onclick="clearCompare()">✕ clear</button>
+    </div>
+    <div id="cmpChartWrap" style="position:relative;margin-bottom:10px"></div>
+    <div style="font-family:var(--mono);font-size:11px;color:var(--text-dim);text-align:center;margin-bottom:12px">${h2hHTML}</div>
+    <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:4px 0;max-width:320px;margin:0 auto">${statsRows}</div>
+  </div>`;
+  const wrap = document.getElementById("cmpChartWrap");
+  if (wrap) requestAnimationFrame(() => drawCompareChart(p1, p2, wrap));
+}
+
+function clearCompare() {
+  compareList = [];
+  renderComparePanel();
+  render();
 }
 
 // ── TABLE RENDERING ──
@@ -727,6 +943,7 @@ function bindHeaderSort() {
   });
 }
 function render() {
+  renderComparePanel();
   const sq = document.getElementById("searchInput").value.trim().toLowerCase();
   if (sq.length >= 2 && allData) { renderSearch(sq); return; }
   if (viewMode === "rising") { renderRising(); return; }
@@ -745,6 +962,8 @@ function render() {
     const faded = Math.abs(p.active - p.rating) > 5;
     const c = rColor(p.active);
     const nameColor = customColors[p.name] || "#f3f4f6";
+    const compClass = compareMode && compareList[0] === p.name ? " comp-p1"
+      : compareMode && compareList[1] === p.name ? " comp-p2" : "";
     const mode = eloMode === "weighted"
       ? (includeTroll ? "w" : "w_pure")
       : (includeTroll ? "std" : "std_pure");
@@ -773,7 +992,7 @@ function render() {
       ? `<span style="color:var(--accent)">${p.podiums.gold}</span>/<span style="color:var(--silver)">${p.podiums.silver}</span>/<span style="color:var(--bronze)">${p.podiums.bronze}</span> <span style="color:var(--text-muted)">(${totalPod})</span>`
       : `<span style="color:var(--text-dark)">0</span>`;
 
-    html += `<div class="row${isSel ? " selected" : ""}${faded ? " faded" : ""}" data-name="${esc(p.name)}">
+    html += `<div class="row${isSel ? " selected" : ""}${faded ? " faded" : ""}${compClass}" data-name="${esc(p.name)}">
       <div class="rank">${i+1}${rankDelta}</div>
       <div class="player"><span class="dot" style="background:${c};box-shadow:0 0 5px ${c}40"></span><span class="pname" style="color:${nameColor}">${esc(p.name)}</span></div>
       <div class="raw">${Math.round(p.rating)}</div>
