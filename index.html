@@ -36,7 +36,7 @@
   }
   .header .sub { font-family: var(--mono); font-size: 12px; color: var(--text-muted); margin-top: 4px; }
 
-  .controls { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; align-items: center; }
+  .controls { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; align-items: center; position: sticky; top: 0; z-index: 20; background: var(--bg); padding: 8px 0; }
   .tabs { display: flex; gap: 3px; background: rgba(255,255,255,0.05); border-radius: 8px; padding: 3px; }
   .tab {
     padding: 5px 12px; border-radius: 6px; border: none; font-size: 11px;
@@ -244,6 +244,21 @@
 
   <div class="footer">
     Click player for history · Faded = inactive decay · <span id="tierLegend"></span>
+    <div style="margin-top:10px;display:flex;align-items:center;justify-content:center;gap:18px">
+      <span style="color:var(--text-dim)">Watch COTD:</span>
+      <a href="https://www.youtube.com/@The_Lexer" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:5px;color:#ccc;text-decoration:none;transition:color 0.15s" onmouseover="this.style.color='#ff0000'" onmouseout="this.style.color='#ccc'">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        Lexer
+      </a>
+      <a href="https://www.youtube.com/@Hi_Im_Sandals" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:5px;color:#ccc;text-decoration:none;transition:color 0.15s" onmouseover="this.style.color='#ff0000'" onmouseout="this.style.color='#ccc'">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        Sandals
+      </a>
+      <a href="https://www.twitch.tv/gualexitar" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:5px;color:#ccc;text-decoration:none;transition:color 0.15s" onmouseover="this.style.color='#9146ff'" onmouseout="this.style.color='#ccc'">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg>
+        GuAlexItar
+      </a>
+    </div>
   </div>
 </div>
 
@@ -307,6 +322,7 @@ function esc(s) { const d = document.createElement("div"); d.textContent = s; re
 const customColors = {
   "Lexer": "#10b981",
   "Sandals": "#aa55ff",
+  "GuAlexItar": "#f5c842",
 };
 
 // ── STATE ──
