@@ -221,7 +221,6 @@
 <div class="container" id="app">
   <div class="header">
     <h1>Zeepkist COTD Elo Rankings</h1>
-    <p class="sub">144 Cups · 1038 Players</p>
   </div>
 
   <div class="controls">
@@ -397,8 +396,13 @@ document.getElementById("curseCheck").onchange = (e) => {
 // ── COMPARE TOGGLE ──
 document.getElementById("compareCheck").onchange = (e) => {
   compareMode = e.target.checked;
-  if (compareMode) { selected = null; }
-  else { compareList = []; }
+  if (compareMode) {
+    selected = null;
+    if (viewMode === "curse") {
+      document.getElementById("curseCheck").checked = false;
+      viewMode = "leaderboard";
+    }
+  } else { compareList = []; }
   render();
 };
 
