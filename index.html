@@ -12,23 +12,45 @@
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --bg: #08080d; --surface: rgba(255,255,255,0.02); --border: rgba(255,255,255,0.06);
-    --border-bright: rgba(255,255,255,0.08); --text: #e5e7eb; --text-dim: #9ca3af;
-    --text-muted: #6b7280; --text-dark: #4b5563; --accent: #f59e0b;
+    --accent: #f59e0b;
     --legend: #dc2626; --gm: #ef4444; --master: #f59e0b; --diamond: #a855f7;
     --plat: #3b82f6; --gold: #10b981; --silver: #6b7280; --bronze: #78716c;
     --green: #10b981; --red: #ef4444; --mono: 'JetBrains Mono', monospace;
+  }
+  [data-theme="dark"] {
+    --bg: #08080d; --surface: rgba(255,255,255,0.02); --border: rgba(255,255,255,0.06);
+    --border-bright: rgba(255,255,255,0.08); --text: #e5e7eb; --text-dim: #9ca3af;
+    --text-muted: #6b7280; --text-dark: #4b5563;
+    --surface-hover: rgba(255,255,255,0.05); --row-hover: rgba(255,255,255,0.03);
+    --btn-border: rgba(255,255,255,0.15); --btn-border-hover: rgba(255,255,255,0.3);
+    --modal-bg: #0d0d14; --modal-overlay: rgba(0,0,0,0.65);
+    --tooltip-bg: rgba(10,10,15,0.95); --scrollbar: rgba(255,255,255,0.1);
+    --chart-grid: rgba(255,255,255,0.06); --chart-guide: rgba(255,255,255,0.12);
+    --row-border: rgba(255,255,255,0.03); --modal-border: rgba(255,255,255,0.12);
+    --pname: #f3f4f6; --link: #ccc;
+  }
+  [data-theme="light"] {
+    --bg: #f5f5f7; --surface: rgba(0,0,0,0.02); --border: rgba(0,0,0,0.08);
+    --border-bright: rgba(0,0,0,0.12); --text: #1f2937; --text-dim: #4b5563;
+    --text-muted: #6b7280; --text-dark: #9ca3af;
+    --surface-hover: rgba(0,0,0,0.05); --row-hover: rgba(0,0,0,0.03);
+    --btn-border: rgba(0,0,0,0.15); --btn-border-hover: rgba(0,0,0,0.3);
+    --modal-bg: #ffffff; --modal-overlay: rgba(0,0,0,0.35);
+    --tooltip-bg: rgba(255,255,255,0.95); --scrollbar: rgba(0,0,0,0.15);
+    --chart-grid: rgba(0,0,0,0.06); --chart-guide: rgba(0,0,0,0.15);
+    --row-border: rgba(0,0,0,0.05); --modal-border: rgba(0,0,0,0.12);
+    --pname: #111827; --link: #4b5563;
   }
   html { background: var(--bg); color: var(--text); }
   body { font-family: 'Space Grotesk', system-ui, sans-serif; min-height: 100vh; padding: 20px 12px; }
   ::selection { background: rgba(245,158,11,0.3); }
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb { background: var(--scrollbar); border-radius: 3px; }
 
   .container { max-width: 980px; margin: 0 auto; }
 
-  .header { text-align: center; margin-bottom: 28px; }
+  .header { text-align: center; margin-bottom: 28px; position: relative; }
   .header h1 {
     font-size: 28px; font-weight: 800; margin: 0;
     background: linear-gradient(135deg, #f59e0b, #ef4444, #8b5cf6);
@@ -38,7 +60,7 @@
   .header .sub { font-family: var(--mono); font-size: 12px; color: var(--text-muted); margin-top: 4px; }
 
   .controls { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; align-items: center; position: sticky; top: 0; z-index: 20; background: var(--bg); padding: 8px 0; }
-  .tabs { display: flex; gap: 3px; background: rgba(255,255,255,0.05); border-radius: 8px; padding: 3px; }
+  .tabs { display: flex; gap: 3px; background: var(--surface-hover); border-radius: 8px; padding: 3px; }
   .tab {
     padding: 5px 12px; border-radius: 6px; border: none; font-size: 11px;
     font-family: var(--mono); font-weight: 600; cursor: pointer;
@@ -64,7 +86,7 @@
   input[type="range"] { width: 70px; accent-color: var(--accent); }
 
   .chart-panel {
-    background: rgba(255,255,255,0.03); border: 1px solid var(--border-bright);
+    background: var(--row-hover); border: 1px solid var(--border-bright);
     border-radius: 12px; padding: 16px 12px; margin-bottom: 16px;
     animation: slideDown 0.2s ease-out;
   }
@@ -78,10 +100,10 @@
   }
   .chart-header .stats { font-size: 12px; color: var(--text-dim); font-family: var(--mono); }
   .close-btn {
-    background: none; border: 1px solid rgba(255,255,255,0.15); color: var(--text-dim);
+    background: none; border: 1px solid var(--btn-border); color: var(--text-dim);
     border-radius: 6px; padding: 3px 8px; cursor: pointer; font-size: 11px; flex-shrink: 0;
   }
-  .close-btn:hover { border-color: rgba(255,255,255,0.3); color: var(--text); }
+  .close-btn:hover { border-color: var(--btn-border-hover); color: var(--text); }
 
   .chart-canvas { width: 100%; height: 180px; position: relative; }
 
@@ -97,16 +119,16 @@
   .table-header .sortable.sort-active { color: var(--accent); }
   .row {
     display: grid; grid-template-columns: 36px 1fr 56px 66px 36px 118px 46px 40px 38px 54px;
-    padding: 8px 14px; border-bottom: 1px solid rgba(255,255,255,0.03);
+    padding: 8px 14px; border-bottom: 1px solid var(--row-border);
     cursor: pointer; align-items: center; transition: background 0.1s;
   }
-  .row:hover { background: rgba(255,255,255,0.03); }
+  .row:hover { background: var(--row-hover); }
   .row.selected { background: rgba(245,158,11,0.08); }
   .row.faded { opacity: 0.65; }
   .row .rank { font-family: var(--mono); font-size: 11px; color: var(--text-muted); display: flex; align-items: center; gap: 2px; }
   .row .player { display: flex; align-items: center; gap: 6px; min-width: 0; }
   .row .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-  .row .pname { font-size: 13px; font-weight: 600; color: #f3f4f6; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .row .pname { font-size: 13px; font-weight: 600; color: var(--pname); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .row .raw { text-align: right; font-family: var(--mono); font-size: 12px; color: var(--text-muted); }
   .row .elo-cell { text-align: right; font-family: var(--mono); font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: flex-end; gap: 3px; }
   .row .wins-cell { text-align: center; font-family: var(--mono); font-size: 11px; }
@@ -121,13 +143,16 @@
   .elo-delta-down { color: var(--red); font-size: 8px; font-weight: 600; }
 
   .footer { margin-top: 12px; font-family: var(--mono); font-size: 10px; color: var(--text-dark); text-align: center; line-height: 1.6; }
+  .footer-link { display: inline-flex; align-items: center; gap: 5px; color: var(--text-dim); text-decoration: none; transition: color 0.15s; }
+  .footer-link.yt:hover { color: #ff0000; }
+  .footer-link.tw:hover { color: #9146ff; }
 
   .tooltip {
-    background: rgba(10,10,15,0.95); border: 1px solid rgba(255,255,255,0.15);
+    background: var(--tooltip-bg); border: 1px solid var(--btn-border);
     border-radius: 8px; padding: 8px 12px; font-family: var(--mono); font-size: 12px;
     pointer-events: none; position: absolute; z-index: 10; display: none;
   }
-  .tooltip .t-cup { color: #fff; font-weight: 700; }
+  .tooltip .t-cup { color: var(--pname); font-weight: 700; }
   .tooltip .t-pos { color: var(--text-dim); }
   .tooltip .t-pos span { color: var(--accent); }
   .tooltip .t-elo { color: var(--text-dim); }
@@ -143,19 +168,31 @@
   .chart-tab:hover:not(.active) { color: var(--text-dim); }
 
   .info-btn {
-    background: none; border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted);
+    background: none; border: 1px solid var(--border-bright); color: var(--text-muted);
     border-radius: 4px; padding: 2px 7px; cursor: pointer; font-size: 11px;
     font-family: var(--mono); margin-left: 2px; transition: all 0.15s; line-height: 1;
   }
-  .info-btn:hover { border-color: rgba(255,255,255,0.3); color: var(--accent); }
+  .info-btn:hover { border-color: var(--btn-border-hover); color: var(--accent); }
+
+  .strength-info { position: relative; display: inline-flex; align-items: center; }
+  .strength-tip {
+    display: none; position: absolute; top: 100%; right: -10px; margin-top: 8px;
+    background: var(--tooltip-bg); border: 1px solid var(--btn-border);
+    border-radius: 8px; padding: 10px 14px; font-family: var(--mono); font-size: 10px;
+    color: var(--text-dim); width: 300px; z-index: 20; line-height: 1.7;
+    white-space: normal; text-align: left;
+  }
+  .strength-tip code { color: var(--accent); font-size: 10px; }
+  .strength-tip .st-head { color: var(--text); font-weight: 700; margin-bottom: 4px; }
+  .strength-info:hover .strength-tip { display: block; }
 
   .modal-overlay {
-    display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.65);
+    display: none; position: fixed; inset: 0; background: var(--modal-overlay);
     z-index: 100; align-items: center; justify-content: center;
   }
   .modal-overlay.open { display: flex; }
   .modal {
-    background: #0d0d14; border: 1px solid rgba(255,255,255,0.12);
+    background: var(--modal-bg); border: 1px solid var(--modal-border);
     border-radius: 12px; padding: 24px 28px; max-width: 520px; width: 90%;
     font-family: var(--mono); font-size: 12px; line-height: 1.75; color: var(--text-dim);
     max-height: 80vh; overflow-y: auto;
@@ -163,10 +200,10 @@
   .modal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
   .modal-head h3 { color: var(--text); font-size: 13px; font-weight: 700; margin: 0; }
   .modal-close {
-    background: none; border: 1px solid rgba(255,255,255,0.15); color: var(--text-dim);
+    background: none; border: 1px solid var(--btn-border); color: var(--text-dim);
     border-radius: 6px; padding: 3px 8px; cursor: pointer; font-size: 11px; font-family: var(--mono);
   }
-  .modal-close:hover { border-color: rgba(255,255,255,0.3); color: var(--text); }
+  .modal-close:hover { border-color: var(--btn-border-hover); color: var(--text); }
   .entry-date { color: var(--accent); font-weight: 700; margin-bottom: 8px; }
   .modal ul { padding-left: 18px; margin: 0; }
   .modal li { margin-bottom: 5px; }
@@ -176,10 +213,10 @@
     opacity: 0.11; z-index: 0; white-space: nowrap;
   }
   .quote .q-name { color: var(--accent); }
-  .quote .q-text { color: #fff; }
+  .quote .q-text { color: var(--pname); }
 
   .search-input {
-    background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+    background: var(--surface-hover); border: 1px solid var(--border);
     border-radius: 6px; padding: 5px 10px; font-size: 11px;
     font-family: var(--mono); color: var(--text); outline: none;
     width: 150px; transition: border-color 0.15s; margin-left: auto;
@@ -188,7 +225,7 @@
   .search-input:focus { border-color: rgba(245,158,11,0.4); }
 
   .compare-panel {
-    background: rgba(255,255,255,0.03); border: 1px solid var(--border-bright);
+    background: var(--row-hover); border: 1px solid var(--border-bright);
     border-radius: 12px; padding: 16px; margin-bottom: 16px;
     animation: slideDown 0.2s ease-out;
   }
@@ -204,6 +241,34 @@
   .row.comp-p1:hover { background: rgba(6,182,212,0.12) !important; }
   .row.comp-p2:hover { background: rgba(249,115,22,0.12) !important; }
 
+  .mascot-sprite {
+    position: fixed; bottom: 60px; width: 160px;
+    mix-blend-mode: lighten; opacity: 0.75; z-index: 1;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  [data-theme="light"] .mascot-sprite { mix-blend-mode: multiply; }
+  #sandalsSprite { left: 10px; pointer-events: none; }
+  #lexerSprite { right: 10px; cursor: pointer; }
+  #lexerSprite:hover { opacity: 1; transform: scale(1.04); }
+  #lexerSprite.curse-active { filter: drop-shadow(0 0 12px #ef4444); opacity: 1; }
+
+  #lexerCrashSprite {
+    position: fixed; top: 10px; right: 10px; width: 320px;
+    mix-blend-mode: lighten; opacity: 0; z-index: 1;
+    pointer-events: none; transition: opacity 0.3s;
+  }
+  [data-theme="light"] #lexerCrashSprite { mix-blend-mode: multiply; }
+  #lexerCrashSprite.curse-active { opacity: 0.85; }
+
+  .theme-toggle {
+    position: absolute; top: 8px; right: 0;
+    background: var(--surface-hover); border: 1px solid var(--border);
+    border-radius: 8px; padding: 5px 10px; cursor: pointer;
+    font-size: 16px; line-height: 1; transition: border-color 0.15s;
+  }
+  .theme-toggle:hover { border-color: var(--btn-border-hover); }
+
+  @media (max-width: 1280px) { .mascot-sprite { display: none; } #lexerCrashSprite { display: none; } }
   @media (max-width: 700px) {
     .table-header, .row { grid-template-columns: 30px 1fr 50px 50px 24px 70px; font-size: 10px; }
     .table-header > :nth-child(7), .table-header > :nth-child(8), .table-header > :nth-child(9), .table-header > :nth-child(10),
@@ -212,23 +277,31 @@
     .quote { display: none; }
   }
 </style>
+<script>
+(function(){
+  var t = localStorage.getItem('theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', t);
+})();
+</script>
 </head>
 <body>
 <div class="quote" style="top:6%;left:5%;font-size:21px;transform:rotate(-5deg)"><span class="q-name" style="color:#aa55ff">sandals:</span> <span class="q-text">"what am i doing, ok lets get a good run"</span></div>
 <div class="quote" style="top:35%;right:4%;font-size:20px;transform:rotate(3deg)"><span class="q-name" style="color:#ff3333">Northwind:</span> <span class="q-text">"i hate this map"</span></div>
 <div class="quote" style="top:65%;left:3%;font-size:23px;transform:rotate(-4deg)"><span class="q-name" style="color:#10b981">quickracer10:</span> <span class="q-text">"this the map?"</span></div>
-<div class="quote" style="top:75%;right:5%;font-size:21px;transform:rotate(2deg)"><span class="q-name" style="color:#10b981">Hi Im Yolo:</span> <span class="q-text">"this risky is evil"</span></div>
+<div class="quote" style="top:62%;right:5%;font-size:21px;transform:rotate(2deg)"><span class="q-name" style="color:#10b981">Hi Im Yolo:</span> <span class="q-text">"this risky is evil"</span></div>
 <div class="quote" style="top:48%;left:4.5%;font-size:20px;transform:rotate(-3deg)"><span class="q-name" style="color:#10b981">Lexer:</span> <span class="q-text">"oh no, outer tube!"</span></div>
 <div class="container" id="app">
   <div class="header">
     <h1>Zeepkist COTD Elo Rankings</h1>
+    <button class="theme-toggle" id="themeToggle" title="Toggle light/dark mode"></button>
   </div>
 
   <div class="controls">
     <div class="tabs" id="eloModeTabs"></div>
+    <div class="tabs"><button class="tab" id="cupsTabBtn" data-key="cups">Cups</button></div>
     <label class="cup-toggle" id="cupToggle"><input type="checkbox" id="trollCheck" checked><span class="cup-toggle-label">Include troll cups</span></label>
     <label class="cup-toggle" id="risingToggle"><input type="checkbox" id="risingCheck"><span class="cup-toggle-label">On the Rise</span></label>
-    <label class="cup-toggle" id="curseToggle"><input type="checkbox" id="curseCheck"><span class="cup-toggle-label">Lexer Curse</span></label>
+    <input type="checkbox" id="curseCheck" style="display:none">
     <label class="cup-toggle" id="compareToggle"><input type="checkbox" id="compareCheck"><span class="cup-toggle-label">Compare</span></label>
     <input type="text" class="search-input" id="searchInput" placeholder="Search player...">
   </div>
@@ -246,15 +319,15 @@
     Click player for history · Faded = inactive decay · <span id="tierLegend"></span>
     <div style="margin-top:10px;display:flex;align-items:center;justify-content:center;gap:18px">
       <span style="color:var(--text-dim)">Watch COTD:</span>
-      <a href="https://www.youtube.com/@The_Lexer" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:5px;color:#ccc;text-decoration:none;transition:color 0.15s" onmouseover="this.style.color='#ff0000'" onmouseout="this.style.color='#ccc'">
+      <a href="https://www.youtube.com/@The_Lexer" target="_blank" rel="noopener" class="footer-link yt">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
         Lexer
       </a>
-      <a href="https://www.youtube.com/@Hi_Im_Sandals" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:5px;color:#ccc;text-decoration:none;transition:color 0.15s" onmouseover="this.style.color='#ff0000'" onmouseout="this.style.color='#ccc'">
+      <a href="https://www.youtube.com/@Hi_Im_Sandals" target="_blank" rel="noopener" class="footer-link yt">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
         Sandals
       </a>
-      <a href="https://www.twitch.tv/gualexitar" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:5px;color:#ccc;text-decoration:none;transition:color 0.15s" onmouseover="this.style.color='#9146ff'" onmouseout="this.style.color='#ccc'">
+      <a href="https://www.twitch.tv/gualexitar" target="_blank" rel="noopener" class="footer-link tw">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg>
         GuAlexItar
       </a>
@@ -279,9 +352,30 @@
   </div>
 </div>
 
+<img id="sandalsSprite" src="sandals.png" class="mascot-sprite">
+<img id="lexerSprite" src="lexer.png" class="mascot-sprite" title="...">
+<img id="lexerCrashSprite" src="lexercrash.png">
+
 <script>
 // ── DATA ──
-let eloData, weightedData, eloDataPure, weightedDataPure, snap = null, risingData = null, curseData = null, allData = null;
+let eloData, weightedData, eloDataPure, weightedDataPure, snap = null, risingData = null, curseData = null, allData = null, cupsData = null;
+let cupRankMaps = [];
+
+// ── THEME ──
+function setTheme(t) {
+  document.documentElement.setAttribute('data-theme', t);
+  localStorage.setItem('theme', t);
+  const btn = document.getElementById('themeToggle');
+  if (btn) btn.textContent = t === 'dark' ? '\u2600\uFE0F' : '\uD83C\uDF19';
+}
+document.addEventListener('DOMContentLoaded', function() {
+  var cur = document.documentElement.getAttribute('data-theme') || 'dark';
+  var btn = document.getElementById('themeToggle');
+  btn.textContent = cur === 'dark' ? '\u2600\uFE0F' : '\uD83C\uDF19';
+  btn.addEventListener('click', function() {
+    setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+});
 
 // ── HELPERS ──
 function rColor(r) {
@@ -317,6 +411,7 @@ function tier(r) {
   return "BRONZE";
 }
 function esc(s) { const d = document.createElement("div"); d.textContent = s; return d.innerHTML; }
+function cssVar(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
 
 // ── CUSTOM NAME COLORS (request yours!) ──
 const customColors = {
@@ -352,7 +447,7 @@ modeOpts.forEach(([k,l]) => {
   btn.className = "tab" + (k === eloMode ? " active" : "");
   btn.textContent = l;
   btn.dataset.key = k;
-  btn.onclick = () => { eloMode = k; updateModeTabs(); selected = null; render(); };
+  btn.onclick = () => { eloMode = k; updateModeTabs(); selected = null; if (viewMode === "cups") viewMode = "leaderboard"; document.getElementById("cupsTabBtn").classList.remove("active"); render(); };
   modeTabsEl.appendChild(btn);
   if (k === "weighted") {
     const info = document.createElement("button");
@@ -371,6 +466,20 @@ function updateModeTabs() {
   modeTabsEl.querySelectorAll(".tab").forEach(b => b.classList.toggle("active", b.dataset.key === eloMode));
 }
 
+// ── CUPS TAB ──
+document.getElementById("cupsTabBtn").onclick = () => {
+  viewMode = viewMode === "cups" ? "leaderboard" : "cups";
+  document.getElementById("cupsTabBtn").classList.toggle("active", viewMode === "cups");
+  if (viewMode !== "cups") { selected = null; }
+  else {
+    document.getElementById("risingCheck").checked = false;
+    setCurseActive(false);
+    compareMode = false; document.getElementById("compareCheck").checked = false; compareList = [];
+    selected = null;
+  }
+  render();
+};
+
 // ── CUP FILTER TOGGLE ──
 document.getElementById("trollCheck").onchange = (e) => {
   includeTroll = e.target.checked;
@@ -381,7 +490,8 @@ document.getElementById("trollCheck").onchange = (e) => {
 // ── RISING TOGGLE ──
 document.getElementById("risingCheck").onchange = (e) => {
   viewMode = e.target.checked ? "rising" : "leaderboard";
-  document.getElementById("curseCheck").checked = false;
+  setCurseActive(false);
+  document.getElementById("cupsTabBtn").classList.remove("active");
   selected = null;
   render();
 };
@@ -391,8 +501,19 @@ document.getElementById("curseCheck").onchange = (e) => {
   viewMode = e.target.checked ? "curse" : "leaderboard";
   document.getElementById("risingCheck").checked = false;
   selected = null;
+  setCurseActive(e.target.checked);
   render();
 };
+function setCurseActive(on) {
+  document.getElementById("curseCheck").checked = on;
+  document.getElementById("lexerSprite").classList.toggle("curse-active", on);
+  document.getElementById("lexerCrashSprite").classList.toggle("curse-active", on);
+}
+document.getElementById("lexerSprite").addEventListener("click", () => {
+  const cb = document.getElementById("curseCheck");
+  cb.checked = !cb.checked;
+  cb.dispatchEvent(new Event("change"));
+});
 
 // ── COMPARE TOGGLE ──
 document.getElementById("compareCheck").onchange = (e) => {
@@ -400,7 +521,7 @@ document.getElementById("compareCheck").onchange = (e) => {
   if (compareMode) {
     selected = null;
     if (viewMode === "curse") {
-      document.getElementById("curseCheck").checked = false;
+      setCurseActive(false);
       viewMode = "leaderboard";
     }
   } else { compareList = []; }
@@ -557,23 +678,23 @@ function drawChart(player, panel) {
 
 function drawChartContent(ctx, W, H, pad, points, vMin, vMax, cMin, cMax, c, x, y, highlight, mode) {
   // Grid
-  ctx.strokeStyle = "rgba(255,255,255,0.06)"; ctx.lineWidth = 1;
+  ctx.strokeStyle = cssVar('--chart-grid'); ctx.lineWidth = 1;
   const steps = 5;
   for (let i = 0; i <= steps; i++) {
     const rv = vMin + (vMax - vMin) * i / steps;
     const yv = y(rv);
     ctx.beginPath(); ctx.moveTo(pad.l, yv); ctx.lineTo(W - pad.r, yv); ctx.stroke();
-    ctx.fillStyle = "#6b7280"; ctx.font = "9px 'JetBrains Mono',monospace"; ctx.textAlign = "right";
+    ctx.fillStyle = cssVar('--text-muted'); ctx.font = "9px 'JetBrains Mono',monospace"; ctx.textAlign = "right";
     ctx.fillText(Math.round(rv).toString(), pad.l - 6, yv + 3);
   }
   // 1500 reference line (ELO mode only)
   if (mode !== "rank" && vMin < 1500 && vMax > 1500) {
-    ctx.strokeStyle = "rgba(255,255,255,0.12)"; ctx.setLineDash([4, 4]);
+    ctx.strokeStyle = cssVar('--chart-guide'); ctx.setLineDash([4, 4]);
     ctx.beginPath(); ctx.moveTo(pad.l, y(1500)); ctx.lineTo(W - pad.r, y(1500)); ctx.stroke();
     ctx.setLineDash([]);
   }
   // X axis labels
-  ctx.fillStyle = "#6b7280"; ctx.font = "9px 'JetBrains Mono',monospace"; ctx.textAlign = "center";
+  ctx.fillStyle = cssVar('--text-muted'); ctx.font = "9px 'JetBrains Mono',monospace"; ctx.textAlign = "center";
   [1, 20, 40, 60, 80, 100, 120, 131].forEach(cn => {
     ctx.fillText("#" + cn, x(cn), H - 6);
   });
@@ -617,7 +738,7 @@ function renderRising() {
   let html = "";
   list.forEach((p, i) => {
     const c = rColor(p.rating_now);
-    const nameColor = customColors[p.name] || "#f3f4f6";
+    const nameColor = customColors[p.name] || cssVar('--pname');
     const sign = p.pct >= 0 ? "+" : "";
     const pctColor = p.pct >= 8 ? "#10b981" : p.pct >= 5 ? "#f59e0b" : "var(--text-dim)";
     html += `<div class="row${selected === p.name ? " selected" : ""}" data-name="${esc(p.name)}" style="grid-template-columns:${RISING_COLS}">
@@ -649,10 +770,12 @@ function renderCurse() {
   header.style.gridTemplateColumns = CURSE_COLS;
   header.innerHTML = `<div>#</div><div>Player</div><div style="text-align:right">Curse Elo</div><div style="text-align:right">4ths</div><div style="text-align:right">Cups</div>`;
 
-  let html = "";
+  let html = `<div style="padding:12px 16px;border-bottom:1px solid rgba(168,85,247,0.15);background:rgba(168,85,247,0.05);font-family:var(--mono);font-size:11px;color:var(--text-dim);line-height:1.8">
+    <span style="color:#a855f7;font-weight:700">☠ Lexer Curse</span> &nbsp;·&nbsp; In Zeepkist COTD, finishing 4th is the cursed position — immortalised by Lexer. This leaderboard scores it as the best: <span style="color:#a855f7">4th→1st · 3rd→2nd · 5th→3rd · 2nd→4th · 6th→5th · 1st→6th</span>
+  </div>`;
   curseData.forEach((p, i) => {
     const c = rColor(p.active);
-    const nameColor = customColors[p.name] || "#f3f4f6";
+    const nameColor = customColors[p.name] || cssVar('--pname');
     const faded = Math.abs(p.active - p.rating) > 5;
     const pct = p.cups > 0 ? ((p.fourths / p.cups) * 100).toFixed(0) : "0";
     const prev = snap && snap.curse && snap.curse[p.name];
@@ -749,7 +872,7 @@ function renderSearch(query) {
   matches.slice(0, 50).forEach(p => {
     const rank = list.indexOf(p) + 1;
     const c = rColor(p.a);
-    const nameColor = customColors[p.n] || "#f3f4f6";
+    const nameColor = customColors[p.n] || cssVar('--pname');
     const avgColor = p.v <= 5 ? "var(--green)" : p.v <= 10 ? "var(--text-dim)" : "var(--text-muted)";
     const bestColor = p.b === 1 ? "var(--accent)" : p.b <= 3 ? "var(--text-dim)" : "var(--text-muted)";
     const ranked = p.c >= 5 || (p.g + p.s + p.z) > 0;
@@ -810,19 +933,19 @@ function drawCompareChart(p1, p2, container) {
   const yf = v => pad.t + (1 - (v - vMin) / (vMax - vMin || 1)) * (H - pad.t - pad.b);
   function draw(hl) {
     ctx.clearRect(0, 0, W, H);
-    ctx.strokeStyle = "rgba(255,255,255,0.06)"; ctx.lineWidth = 1;
+    ctx.strokeStyle = cssVar('--chart-grid'); ctx.lineWidth = 1;
     for (let i = 0; i <= 5; i++) {
       const v = vMin + (vMax - vMin) * i / 5;
       ctx.beginPath(); ctx.moveTo(pad.l, yf(v)); ctx.lineTo(W - pad.r, yf(v)); ctx.stroke();
-      ctx.fillStyle = "#6b7280"; ctx.font = "9px 'JetBrains Mono',monospace"; ctx.textAlign = "right";
+      ctx.fillStyle = cssVar('--text-muted'); ctx.font = "9px 'JetBrains Mono',monospace"; ctx.textAlign = "right";
       ctx.fillText(Math.round(v), pad.l - 6, yf(v) + 3);
     }
     if (vMin < 1500 && vMax > 1500) {
-      ctx.strokeStyle = "rgba(255,255,255,0.12)"; ctx.setLineDash([4,4]);
+      ctx.strokeStyle = cssVar('--chart-guide'); ctx.setLineDash([4,4]);
       ctx.beginPath(); ctx.moveTo(pad.l, yf(1500)); ctx.lineTo(W - pad.r, yf(1500)); ctx.stroke();
       ctx.setLineDash([]);
     }
-    ctx.fillStyle = "#6b7280"; ctx.font = "9px 'JetBrains Mono',monospace"; ctx.textAlign = "center";
+    ctx.fillStyle = cssVar('--text-muted'); ctx.font = "9px 'JetBrains Mono',monospace"; ctx.textAlign = "center";
     [1,20,40,60,80,100,120,132].forEach(n => ctx.fillText("#"+n, xf(n), H-6));
     [[h1,c1],[h2,c2]].forEach(([pts,col]) => {
       if (!pts.length) return;
@@ -963,12 +1086,166 @@ function bindHeaderSort() {
     el.onclick = () => { sortKey = el.dataset.sort; render(); };
   });
 }
+// ── CUPS VIEW ──
+function cupDisplayName(id) {
+  return id
+    .replace(/^Troll COTD (\d+)$/, 'Troll $1')
+    .replace(/^Troll COTW (\d+)$/, 'Troll W$1')
+    .replace(/^COTD Roulette (\d+)$/, 'Roulette $1');
+}
+let cupSort = { col: 'index', dir: -1 };
+function ratingMapToRanks(ratingMap) {
+  const ranks = {};
+  Object.entries(ratingMap).sort((a, b) => b[1] - a[1]).forEach(([name], i) => { ranks[name] = i + 1; });
+  return ranks;
+}
+function buildCupRankMaps() {
+  const running = {};
+  const preNorm = [];
+  const POOL_CAP = 196;
+  for (let i = 0; i < cupsData.length; i++) {
+    const entries = Object.entries(running);
+    entries.sort((a, b) => b[1] - a[1]);
+    const pool = entries.slice(0, POOL_CAP);
+    // Normalize: rank 1 = 2000, proportional scaling
+    const norm = {};
+    if (pool.length > 0) {
+      const maxR = pool[0][1];
+      const scale = 2000 / maxR;
+      pool.forEach(([name, rating]) => { norm[name] = rating * scale; });
+    }
+    preNorm.push(norm);
+    cupsData[i].players.forEach(p => { running[p.name] = p.rating_after; });
+  }
+  // cups 0-9 (COTD 1-10) all use the leaderboard as it stood after cup 10
+  const earlySnapshot = preNorm.length > 10 ? preNorm[10] : preNorm[preNorm.length - 1];
+  cupRankMaps = cupsData.map((_, i) => i < 10 ? earlySnapshot : preNorm[i]);
+}
+function cupStrength(cup, normMap) {
+  const pool = Object.keys(normMap);
+  if (pool.length < 2) return 0;
+  const elos = cup.players.map(p => normMap[p.name]).filter(r => r !== undefined).sort((a, b) => b - a).slice(0, 10);
+  if (!elos.length) return 0;
+  const minPool = Math.min(...Object.values(normMap));
+  while (elos.length < 10) elos.push(minPool);
+  const avg = elos.reduce((s, r) => s + r, 0) / elos.length;
+  return parseFloat((avg / 1850 * 100).toFixed(1));
+}
+function strengthColor(val) {
+  if (val >= 100) return '#10b981';
+  if (val >= 97) return '#84cc16';
+  if (val >= 94) return '#eab308';
+  if (val >= 90) return '#f97316';
+  return '#ef4444';
+}
+const CUPS_COLS = "36px 100px 1fr 130px 140px 48px 80px";
+function renderCups() {
+  const header = document.querySelector(".table-header");
+  const body = document.getElementById("tableBody");
+  if (!cupsData) { body.innerHTML = `<div style="padding:24px;color:var(--text-muted);font-family:var(--mono);font-size:12px">Loading cups...</div>`; return; }
+
+  header.style.display = "grid";
+  header.style.gridTemplateColumns = CUPS_COLS;
+  const sh = (col, label, align = 'left') => {
+    const active = cupSort.col === col;
+    const arrow = active ? (cupSort.dir === 1 ? ' ▲' : ' ▼') : '';
+    return `<div data-sort="${col}" style="cursor:pointer;user-select:none;text-align:${align};color:${active ? 'var(--text)' : 'inherit'}">${label}${arrow}</div>`;
+  };
+  const strengthLabel = 'Cup Strength <span class="strength-info"><button class="info-btn" onclick="event.stopPropagation()" style="pointer-events:auto;margin-left:4px">ℹ</button>'
+    + '<div class="strength-tip"><div class="st-head">Cup Strength (SOF)</div>'
+    + '1. Normalize ratings:<br><code>norm = elo × (2000 / max_elo)</code><br>'
+    + '2. Take top 10 players in the cup<br>'
+    + '3. <code>strength = avg(top10) / 1850 × 100</code>'
+    + '</div></span>';
+  header.innerHTML = sh('index','#') + sh('cup','Cup') + sh('map','Map') + sh('mapper','Mapper') + sh('winner','Winner') + sh('size','Size','center') + sh('strength',strengthLabel,'center');
+  header.querySelectorAll('[data-sort]').forEach(el => {
+    el.onclick = () => {
+      const col = el.dataset.sort;
+      if (cupSort.col === col) { cupSort.dir *= -1; }
+      else { cupSort.col = col; cupSort.dir = ['index','size','strength'].includes(col) ? -1 : 1; }
+      renderCups();
+    };
+  });
+
+  const annotated = cupsData.map((cup, i) => ({ cup, idx: i, strength: cupStrength(cup, cupRankMaps[i]) }));
+  annotated.sort((a, b) => {
+    let av, bv;
+    switch (cupSort.col) {
+      case 'index':    av = a.idx; bv = b.idx; break;
+      case 'cup':      av = cupDisplayName(a.cup.id); bv = cupDisplayName(b.cup.id); break;
+      case 'map':      av = a.cup.map || ''; bv = b.cup.map || ''; break;
+      case 'mapper':   av = a.cup.mapper || ''; bv = b.cup.mapper || ''; break;
+      case 'winner':   av = a.cup.players[0]?.name || ''; bv = b.cup.players[0]?.name || ''; break;
+      case 'size':     av = a.cup.lobby_size; bv = b.cup.lobby_size; break;
+      case 'strength': av = a.strength; bv = b.strength; break;
+      default:         av = a.idx; bv = b.idx;
+    }
+    if (typeof av === 'string') return av.localeCompare(bv) * cupSort.dir;
+    return (av - bv) * cupSort.dir;
+  });
+
+  let html = "";
+  annotated.forEach(({ cup, idx, strength }, pos) => {
+    const winner = cup.players[0];
+    const wc = winner ? (rColor(winner.rating_after)) : "#6b7280";
+    const wnc = winner ? (customColors[winner.name] || cssVar('--pname')) : "#6b7280";
+    const sc = strengthColor(strength);
+    html += `<div class="row cup-row" data-cup-id="${esc(cup.id)}" style="grid-template-columns:${CUPS_COLS}">
+      <div class="rank">${pos + 1}</div>
+      <div style="font-family:var(--mono);font-size:11px;color:var(--text-muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0">${esc(cupDisplayName(cup.id))}</div>
+      <div style="font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text);min-width:0">${esc(cup.map) || '<span style="color:var(--text-dark)">—</span>'}</div>
+      <div style="font-family:var(--mono);font-size:11px;color:var(--text-dim);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0">${esc(cup.mapper)}</div>
+      <div style="display:flex;align-items:center;gap:5px;min-width:0">
+        <div class="dot" style="background:${wc};flex-shrink:0"></div>
+        <span style="font-size:12px;font-weight:600;color:${wnc};overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(winner?.name || '—')}</span>
+      </div>
+      <div style="text-align:center;font-family:var(--mono);font-size:11px;color:var(--text-muted)">${cup.lobby_size}</div>
+      <div style="text-align:center;font-family:var(--mono);font-size:11px;font-weight:600;color:${sc}">${strength.toFixed(1)}</div>
+    </div>`;
+  });
+  body.innerHTML = html;
+
+  body.querySelectorAll(".cup-row").forEach(row => {
+    row.onclick = () => {
+      body.querySelectorAll(".cup-detail-panel").forEach(p => p.remove());
+      if (row.classList.contains("selected")) { row.classList.remove("selected"); return; }
+      body.querySelectorAll(".cup-row.selected").forEach(r => r.classList.remove("selected"));
+      row.classList.add("selected");
+
+      const cup = cupsData.find(c => c.id === row.dataset.cupId);
+      if (!cup) return;
+      const panel = document.createElement("div");
+      panel.className = "cup-detail-panel";
+      panel.style.cssText = "background:var(--surface);border-bottom:1px solid var(--border);padding:10px 14px 14px;";
+
+      let d = `<div style="display:grid;grid-template-columns:36px 1fr 90px;font-family:var(--mono);font-size:9px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;padding:0 0 6px;margin-bottom:4px;border-bottom:1px solid var(--row-border)">
+        <div>Pos</div><div>Player</div><div style="text-align:right">ELO after</div></div>`;
+      cup.players.forEach(p => {
+        const c = rColor(p.rating_after);
+        const nc = customColors[p.name] || cssVar('--pname');
+        d += `<div style="display:grid;grid-template-columns:36px 1fr 90px;padding:3px 0;align-items:center">
+          <div style="font-family:var(--mono);font-size:11px;color:var(--text-muted)">${p.pos}</div>
+          <div style="display:flex;align-items:center;gap:5px">
+            <div class="dot" style="background:${c}"></div>
+            <span style="font-size:12px;font-weight:600;color:${nc}">${esc(p.name)}</span>
+          </div>
+          <div style="text-align:right;font-family:var(--mono);font-size:12px;font-weight:700;color:${c}">${p.rating_after}</div>
+        </div>`;
+      });
+      panel.innerHTML = d;
+      row.after(panel);
+      panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    };
+  });
+}
+
 function render() {
   renderComparePanel();
   const sq = document.getElementById("searchInput").value.trim().toLowerCase();
   if (sq.length >= 2 && allData) { renderSearch(sq); return; }
   if (viewMode === "rising") { renderRising(); return; }
   if (viewMode === "curse") { renderCurse(); return; }
+  if (viewMode === "cups") { renderCups(); return; }
   const header = document.querySelector(".table-header");
   header.style.display = "";
   header.style.gridTemplateColumns = "";
@@ -982,7 +1259,7 @@ function render() {
     const isSel = selected === p.name;
     const faded = Math.abs(p.active - p.rating) > 5;
     const c = rColor(p.active);
-    const nameColor = customColors[p.name] || "#f3f4f6";
+    const nameColor = customColors[p.name] || cssVar('--pname');
     const compClass = compareMode && compareList[0] === p.name ? " comp-p1"
       : compareMode && compareList[1] === p.name ? " comp-p2" : "";
     const mode = eloMode === "weighted"
@@ -1038,7 +1315,8 @@ Promise.all([
   fetch('rising.json').then(r => r.json()).catch(() => null),
   fetch('lexercurse.json').then(r => r.json()).catch(() => null),
   fetch('alldata.json').then(r => r.json()).catch(() => null),
-]).then(([data, s, rising, curse, all]) => {
+  fetch('cups.json').then(r => r.json()).catch(() => null),
+]).then(([data, s, rising, curse, all, cups]) => {
   eloData = data.standard.l;
   weightedData = data.weighted.l;
   eloDataPure = data.standard_pure ? data.standard_pure.l : data.standard.l;
@@ -1047,6 +1325,8 @@ Promise.all([
   risingData = rising;
   curseData = curse ? curse.l : null;
   allData = all;
+  cupsData = cups;
+  if (cups) buildCupRankMaps();
   render();
 });
 </script>
