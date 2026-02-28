@@ -110,6 +110,7 @@
   .table { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
   .table-header {
     display: grid; grid-template-columns: 36px 1fr 56px 66px 36px 118px 46px 40px 38px 54px;
+    align-items: center;
     padding: 10px 14px; border-bottom: 1px solid var(--border-bright);
     font-family: var(--mono); font-size: 9px; color: var(--text-muted);
     text-transform: uppercase; letter-spacing: 0.5px;
@@ -174,17 +175,17 @@
   }
   .info-btn:hover { border-color: var(--btn-border-hover); color: var(--accent); }
 
-  .strength-info { position: relative; display: inline-flex; align-items: center; }
-  .strength-tip {
-    display: none; position: absolute; top: 100%; right: -10px; margin-top: 8px;
+  .info-tip-wrap { position: relative; display: inline-flex; align-items: center; }
+  .info-tip {
+    display: none; position: absolute; top: 100%; left: 0; margin-top: 8px;
     background: var(--tooltip-bg); border: 1px solid var(--btn-border);
     border-radius: 8px; padding: 10px 14px; font-family: var(--mono); font-size: 10px;
     color: var(--text-dim); width: 300px; z-index: 20; line-height: 1.7;
     white-space: normal; text-align: left;
   }
-  .strength-tip code { color: var(--accent); font-size: 10px; }
-  .strength-tip .st-head { color: var(--text); font-weight: 700; margin-bottom: 4px; }
-  .strength-info:hover .strength-tip { display: block; }
+  .info-tip code { color: var(--accent); font-size: 10px; }
+  .info-tip .st-head { color: var(--text); font-weight: 700; margin-bottom: 4px; }
+  .info-tip-wrap:hover .info-tip { display: block; }
 
   .modal-overlay {
     display: none; position: fixed; inset: 0; background: var(--modal-overlay);
@@ -331,6 +332,11 @@
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg>
         GuAlexItar
       </a>
+      <span style="color:var(--border-bright)">|</span>
+      <a href="lexertools.html" class="footer-link" style="color:var(--text-dark)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg>
+        lexertools
+      </a>
     </div>
   </div>
 </div>
@@ -422,7 +428,7 @@ const customColors = {
 
 // ── STATE ──
 let sortKey = "active";
-let eloMode = "standard";
+let eloMode = "weighted";
 let viewMode = "leaderboard";
 let includeTroll = true;
 let selected = null;
@@ -717,7 +723,8 @@ function drawChartContent(ctx, W, H, pad, points, vMin, vMax, cMin, cMax, c, x, 
   });
 }
 
-const RISING_COLS = "36px 1fr 72px 72px 62px";
+const RISING_COLS = "36px 1fr 72px 72px 62px 62px";
+let risingSort = { col: 'pct6', dir: -1 };
 
 // ── RISING VIEW ──
 function renderRising() {
@@ -730,23 +737,61 @@ function renderRising() {
   const list = risingData[risingKey] || [];
   const from = risingData.lookback_cup, to = risingData.current_cup;
 
-  // Reuse .table-header with rising columns
   header.style.display = "grid";
   header.style.gridTemplateColumns = RISING_COLS;
-  header.innerHTML = `<div>#</div><div>Player</div><div style="text-align:right">Cup ${from}</div><div style="text-align:right">Now</div><div style="text-align:right">Change</div>`;
+  const rsh = (col, label, align = 'left') => {
+    const active = risingSort.col === col;
+    const arrow = active ? (risingSort.dir === 1 ? ' ▲' : ' ▼') : '';
+    return `<div data-rsort="${col}" style="cursor:pointer;user-select:none;text-align:${align};color:${active ? 'var(--text)' : 'inherit'}">${label}${arrow}</div>`;
+  };
+  const risingInfoBtn = `<span class="info-tip-wrap"><button class="info-btn" onclick="event.stopPropagation()" style="pointer-events:auto;margin-left:4px">ℹ</button>`
+    + `<div class="info-tip"><div class="st-head">On the Rise</div>`
+    + `Percentage increase in ELO over the last <code>6 months</code> (26 cups) and <code>3 months</code> (13 cups).<br><br>`
+    + `Qualifying if:<br>`
+    + `· ELO ≥ <code>1600</code> OR in <code>top 50</code> by active rating<br>`
+    + `· At least <code>+1%</code> growth in either period</div></span>`;
+  header.innerHTML = rsh('index','#' + risingInfoBtn) + rsh('name','Player') + rsh('then','Cup ' + from,'right') + rsh('now','Now','right') + rsh('pct6','6 Month','right') + rsh('pct3','3 Month','right');
+  header.querySelectorAll('[data-rsort]').forEach(el => {
+    el.onclick = () => {
+      const col = el.dataset.rsort;
+      if (risingSort.col === col) { risingSort.dir *= -1; }
+      else { risingSort.col = col; risingSort.dir = col === 'name' ? 1 : -1; }
+      renderRising();
+    };
+  });
+
+  const sorted = list.map((p, i) => ({ ...p, _i: i }));
+  sorted.sort((a, b) => {
+    let av, bv;
+    switch (risingSort.col) {
+      case 'index': av = a._i; bv = b._i; break;
+      case 'name':  av = a.name; bv = b.name; break;
+      case 'then':  av = a.rating_then; bv = b.rating_then; break;
+      case 'now':   av = a.rating_now; bv = b.rating_now; break;
+      case 'pct6':  av = a.pct; bv = b.pct; break;
+      case 'pct3':  av = a.pct_3m || 0; bv = b.pct_3m || 0; break;
+      default:      av = a._i; bv = b._i;
+    }
+    if (typeof av === 'string') return av.localeCompare(bv) * risingSort.dir;
+    return (av - bv) * risingSort.dir;
+  });
 
   let html = "";
-  list.forEach((p, i) => {
+  sorted.forEach((p, i) => {
     const c = rColor(p.rating_now);
     const nameColor = customColors[p.name] || cssVar('--pname');
-    const sign = p.pct >= 0 ? "+" : "";
-    const pctColor = p.pct >= 8 ? "#10b981" : p.pct >= 5 ? "#f59e0b" : "var(--text-dim)";
+    const sign6 = p.pct >= 0 ? "+" : "";
+    const pctColor6 = p.pct >= 8 ? "#10b981" : p.pct >= 5 ? "#f59e0b" : "var(--text-dim)";
+    const pct3 = p.pct_3m || 0;
+    const sign3 = pct3 >= 0 ? "+" : "";
+    const pctColor3 = pct3 >= 8 ? "#10b981" : pct3 >= 5 ? "#f59e0b" : "var(--text-dim)";
     html += `<div class="row${selected === p.name ? " selected" : ""}" data-name="${esc(p.name)}" style="grid-template-columns:${RISING_COLS}">
       <div class="rank">${i + 1}</div>
       <div class="player"><span class="dot" style="background:${c}"></span><span class="pname" style="color:${nameColor}">${esc(p.name)}</span></div>
       <div class="raw">${p.rating_then}</div>
       <div class="elo-cell" style="color:${c}">${p.rating_now}</div>
-      <div class="avg-cell" style="color:${pctColor};font-weight:700">${sign}${p.pct}%</div>
+      <div class="avg-cell" style="color:${pctColor6};font-weight:700">${sign6}${p.pct}%</div>
+      <div class="avg-cell" style="color:${pctColor3};font-weight:700">${sign3}${pct3}%</div>
     </div>`;
   });
   body.innerHTML = html;
@@ -1068,6 +1113,21 @@ function clearCompare() {
 }
 
 // ── TABLE RENDERING ──
+function leaderboardInfoBtn() {
+  if (eloMode === "weighted") {
+    return `<span class="info-tip-wrap"><button class="info-btn" onclick="event.stopPropagation()" style="pointer-events:auto;margin-left:4px">ℹ</button>`
+      + `<div class="info-tip"><div class="st-head">Weighted ELO</div>`
+      + `Pairwise ELO (<code>K=32/N</code>) with position-based multiplier:<br>`
+      + `Top 8%: <code>3×</code>, 15%: <code>2×</code>, 25%: <code>1.3×</code>, 50%: <code>0.8×</code>, rest: <code>0.5×</code><br><br>`
+      + `Lobby quality weighting. Provisional <code>1.5×</code> for &lt;12 cups.<br>`
+      + `Decay: <code>0.995</code>/cup missed after 3 grace cups.</div></span>`;
+  }
+  return `<span class="info-tip-wrap"><button class="info-btn" onclick="event.stopPropagation()" style="pointer-events:auto;margin-left:4px">ℹ</button>`
+    + `<div class="info-tip"><div class="st-head">Standard ELO</div>`
+    + `Pairwise ELO (<code>K=32/N</code>). Every matchup weighted equally regardless of finishing position.<br><br>`
+    + `Provisional <code>1.5×</code> for &lt;12 cups.<br>`
+    + `Decay: <code>0.995</code>/cup missed after 3 grace cups.</div></span>`;
+}
 function leaderboardHeaderHTML() {
   const cols = [
     ['#',''],['Player',''],['Elo','rating'],['Active','active'],['Wins','wins'],
@@ -1076,6 +1136,7 @@ function leaderboardHeaderHTML() {
   const aligns = ['','','right','right','center','center','right','center','center','right'];
   return cols.map(([label,key],i) => {
     const al = aligns[i] ? `style="text-align:${aligns[i]}"` : '';
+    if (i === 0) return `<div ${al}>${label}${leaderboardInfoBtn()}</div>`;
     if (!key) return `<div ${al}>${label}</div>`;
     const cls = key === sortKey ? 'sortable sort-active' : 'sortable';
     return `<div class="${cls}" data-sort="${key}" ${al}>${label}</div>`;
@@ -1151,13 +1212,13 @@ function renderCups() {
     const arrow = active ? (cupSort.dir === 1 ? ' ▲' : ' ▼') : '';
     return `<div data-sort="${col}" style="cursor:pointer;user-select:none;text-align:${align};color:${active ? 'var(--text)' : 'inherit'}">${label}${arrow}</div>`;
   };
-  const strengthLabel = 'Cup Strength <span class="strength-info"><button class="info-btn" onclick="event.stopPropagation()" style="pointer-events:auto;margin-left:4px">ℹ</button>'
-    + '<div class="strength-tip"><div class="st-head">Cup Strength (SOF)</div>'
+  const cupsInfoBtn = '<span class="info-tip-wrap"><button class="info-btn" onclick="event.stopPropagation()" style="pointer-events:auto;margin-left:4px">ℹ</button>'
+    + '<div class="info-tip"><div class="st-head">Cup Strength (SOF)</div>'
     + '1. Normalize ratings:<br><code>norm = elo × (2000 / max_elo)</code><br>'
     + '2. Take top 10 players in the cup<br>'
     + '3. <code>strength = avg(top10) / 1850 × 100</code>'
     + '</div></span>';
-  header.innerHTML = sh('index','#') + sh('cup','Cup') + sh('map','Map') + sh('mapper','Mapper') + sh('winner','Winner') + sh('size','Size','center') + sh('strength',strengthLabel,'center');
+  header.innerHTML = sh('index','#' + cupsInfoBtn) + sh('cup','Cup') + sh('map','Map') + sh('mapper','Mapper') + sh('winner','Winner') + sh('size','Size','center') + sh('strength','Cup Strength','center');
   header.querySelectorAll('[data-sort]').forEach(el => {
     el.onclick = () => {
       const col = el.dataset.sort;
@@ -1309,13 +1370,14 @@ function render() {
 }
 
 // ── INIT ──
+const _v = '?v=' + Date.now();
 Promise.all([
-  fetch('data.json').then(r => r.json()),
-  fetch('snapshot.json').then(r => r.json()).catch(() => null),
-  fetch('rising.json').then(r => r.json()).catch(() => null),
-  fetch('lexercurse.json').then(r => r.json()).catch(() => null),
-  fetch('alldata.json').then(r => r.json()).catch(() => null),
-  fetch('cups.json').then(r => r.json()).catch(() => null),
+  fetch('data.json' + _v).then(r => r.json()),
+  fetch('snapshot.json' + _v).then(r => r.json()).catch(() => null),
+  fetch('rising.json' + _v).then(r => r.json()).catch(() => null),
+  fetch('lexercurse.json' + _v).then(r => r.json()).catch(() => null),
+  fetch('alldata.json' + _v).then(r => r.json()).catch(() => null),
+  fetch('cups.json' + _v).then(r => r.json()).catch(() => null),
 ]).then(([data, s, rising, curse, all, cups]) => {
   eloData = data.standard.l;
   weightedData = data.weighted.l;

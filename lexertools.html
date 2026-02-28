@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lexer Tools — Zeepkist COTD</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛠</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script>(function(){ var t = localStorage.getItem('theme') || 'dark'; document.documentElement.setAttribute('data-theme', t); })();</script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --accent: #f59e0b;
+    --legend: #dc2626; --gm: #ef4444; --master: #f59e0b; --diamond: #a855f7;
+    --plat: #3b82f6; --gold: #10b981; --silver: #6b7280; --bronze: #78716c;
+    --green: #10b981; --red: #ef4444; --mono: 'JetBrains Mono', monospace;
+  }
+  [data-theme="dark"] {
+    --bg: #08080d; --surface: rgba(255,255,255,0.02); --border: rgba(255,255,255,0.06);
+    --border-bright: rgba(255,255,255,0.08); --text: #e5e7eb; --text-dim: #9ca3af;
+    --text-muted: #6b7280; --text-dark: #4b5563;
+    --surface-hover: rgba(255,255,255,0.05); --row-hover: rgba(255,255,255,0.03);
+    --btn-border: rgba(255,255,255,0.15); --btn-border-hover: rgba(255,255,255,0.3);
+    --row-border: rgba(255,255,255,0.03); --pname: #f3f4f6; --link: #ccc;
+    --scrollbar: rgba(255,255,255,0.1);
+  }
+  [data-theme="light"] {
+    --bg: #f5f5f7; --surface: rgba(0,0,0,0.02); --border: rgba(0,0,0,0.08);
+    --border-bright: rgba(0,0,0,0.12); --text: #1f2937; --text-dim: #4b5563;
+    --text-muted: #6b7280; --text-dark: #9ca3af;
+    --surface-hover: rgba(0,0,0,0.05); --row-hover: rgba(0,0,0,0.03);
+    --btn-border: rgba(0,0,0,0.15); --btn-border-hover: rgba(0,0,0,0.3);
+    --row-border: rgba(0,0,0,0.05); --pname: #111827; --link: #4b5563;
+    --scrollbar: rgba(0,0,0,0.15);
+  }
+  html { background: var(--bg); color: var(--text); }
+  body { font-family: 'Space Grotesk', system-ui, sans-serif; min-height: 100vh; padding: 20px 12px; }
+  ::selection { background: rgba(245,158,11,0.3); }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--scrollbar); border-radius: 3px; }
+
+  .container { max-width: 900px; margin: 0 auto; }
+
+  .header { text-align: center; margin-bottom: 24px; position: relative; }
+  .header h1 { font-size: 20px; font-weight: 800; letter-spacing: -0.5px; }
+  .header h1 span { color: var(--accent); }
+  .header .sub { font-family: var(--mono); font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+  .back-link { font-family: var(--mono); font-size: 11px; color: var(--text-muted); text-decoration: none; transition: color 0.15s; }
+  .back-link:hover { color: var(--accent); }
+
+  .theme-toggle {
+    position: absolute; top: 0; right: 0;
+    background: var(--surface-hover); border: 1px solid var(--border);
+    border-radius: 8px; padding: 5px 10px; cursor: pointer;
+    font-size: 16px; line-height: 1; transition: border-color 0.15s;
+  }
+  .theme-toggle:hover { border-color: var(--btn-border-hover); }
+
+  .section { margin-bottom: 28px; }
+  .section-title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 12px; font-family: var(--mono); }
+
+  /* Search */
+  .search-area { display: flex; gap: 8px; align-items: center; margin-bottom: 12px; flex-wrap: wrap; }
+  .search-input {
+    background: var(--surface-hover); border: 1px solid var(--border); border-radius: 8px;
+    padding: 6px 12px; color: var(--text); font-family: var(--mono); font-size: 12px;
+    outline: none; width: 220px; transition: border-color 0.15s;
+  }
+  .search-input:focus { border-color: var(--accent); }
+  .search-input::placeholder { color: var(--text-dark); }
+  .search-results {
+    position: absolute; top: 100%; left: 0; right: 0; z-index: 10;
+    background: var(--bg); border: 1px solid var(--border-bright); border-radius: 8px;
+    max-height: 200px; overflow-y: auto; margin-top: 4px;
+  }
+  .search-results .sr-item {
+    padding: 5px 12px; font-family: var(--mono); font-size: 11px; cursor: pointer;
+    color: var(--text-dim); display: flex; align-items: center; gap: 8px;
+  }
+  .search-results .sr-item:hover { background: var(--row-hover); color: var(--text); }
+  .search-wrap { position: relative; }
+  .player-count { font-family: var(--mono); font-size: 11px; color: var(--text-dark); }
+
+  /* Chips */
+  .chips { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; min-height: 28px; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: var(--surface-hover); border: 1px solid var(--border-bright);
+    border-radius: 6px; padding: 3px 8px 3px 10px; font-family: var(--mono); font-size: 11px;
+  }
+  .chip .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+  .chip .chip-x {
+    background: none; border: none; color: var(--text-dark); cursor: pointer;
+    font-size: 13px; line-height: 1; padding: 0 2px; transition: color 0.15s;
+  }
+  .chip .chip-x:hover { color: var(--red); }
+
+  /* Stat toggles */
+  .stat-toggles { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 16px; }
+  .stat-tog {
+    padding: 3px 10px; border-radius: 5px; border: 1px solid var(--border);
+    font-size: 10px; font-family: var(--mono); font-weight: 600; cursor: pointer;
+    background: transparent; color: var(--text-muted); transition: all 0.15s;
+  }
+  .stat-tog.active { background: rgba(245,158,11,0.15); color: var(--accent); border-color: rgba(245,158,11,0.3); }
+  .stat-tog:hover:not(.active) { color: var(--text-dim); border-color: var(--btn-border); }
+
+  /* Action buttons */
+  .actions { display: flex; gap: 6px; margin-bottom: 14px; }
+  .action-btn {
+    padding: 4px 12px; border-radius: 6px; border: 1px solid var(--border);
+    font-size: 10px; font-family: var(--mono); font-weight: 600; cursor: pointer;
+    background: transparent; color: var(--text-muted); transition: all 0.15s;
+  }
+  .action-btn:hover { color: var(--text-dim); border-color: var(--btn-border); }
+  .action-btn.copied { color: var(--green); border-color: var(--green); }
+
+  /* Table */
+  .table-wrap { min-width: 100%; }
+  .slim .table-wrap { min-width: 0; display: inline-block; }
+  .slim .section { text-align: right; }
+  .slim .search-area, .slim .chips, .slim .stat-toggles { display: none !important; }
+  .slim .actions { justify-content: flex-end; }
+  .slim .table-header, .slim .row { width: auto; }
+  .slim .player-cell { flex-shrink: 0; }
+  .table-header {
+    display: grid; padding: 6px 10px; font-family: var(--mono); font-size: 10px;
+    font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border-bright);
+  }
+  .row {
+    display: grid; padding: 7px 10px; border-bottom: 1px solid var(--row-border);
+    align-items: center; font-family: var(--mono); font-size: 12px; transition: background 0.1s;
+  }
+  .row:hover { background: var(--row-hover); }
+  .dot { width: 8px; height: 8px; border-radius: 50%; }
+  .player-cell { display: flex; align-items: center; gap: 5px; min-width: 0; }
+  .player-cell span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .stat-val { text-align: right; color: var(--text-dim); }
+  .stat-val.wins { color: var(--accent); font-weight: 600; }
+  .empty-msg { padding: 40px; text-align: center; font-family: var(--mono); font-size: 12px; color: var(--text-dark); }
+
+  .footer { margin-top: 24px; text-align: center; font-family: var(--mono); font-size: 10px; color: var(--text-dark); }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>Lexer <span>Tools</span></h1>
+    <div class="sub">Remaining in Cup</div>
+    <button class="theme-toggle" id="themeToggle" title="Toggle light/dark mode"></button>
+  </div>
+
+  <div class="section">
+    <div class="search-area">
+      <div class="search-wrap">
+        <input class="search-input" id="searchInput" placeholder="Add player..." autocomplete="off">
+        <div class="search-results" id="searchResults" style="display:none"></div>
+      </div>
+      <span class="player-count" id="playerCount">0 / 10</span>
+    </div>
+    <div class="chips" id="chips"></div>
+
+    <div class="stat-toggles" id="statToggles"></div>
+
+    <div class="actions" id="actions" style="display:none">
+      <button class="action-btn" id="slimBtn">Slim</button>
+      <button class="action-btn" id="copyBtn" title="Copy as tab-separated (for Excel)">Copy for Excel</button>
+      <button class="action-btn" id="clearBtn">Clear all</button>
+    </div>
+
+    <div class="table-wrap">
+      <div class="table-header" id="tableHeader"></div>
+      <div id="tableBody">
+        <div class="empty-msg">Search and add players to compare</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <a class="back-link" href="index.html">&larr; Back to Rankings</a>
+  </div>
+</div>
+
+<script>
+const customColors = { "Lexer": "#10b981", "Sandals": "#aa55ff", "GuAlexItar": "#f5c842" };
+
+function rColor(r) {
+  if (r >= 2000) return "#dc2626";
+  if (r >= 1800) return "#a855f7";
+  if (r >= 1700) return "#3b82f6";
+  if (r >= 1600) return "#10b981";
+  if (r >= 1500) return "#6b7280";
+  return "#78716c";
+}
+function esc(s) { const d = document.createElement("div"); d.textContent = s; return d.innerHTML; }
+
+// Theme
+function setTheme(t) {
+  document.documentElement.setAttribute('data-theme', t);
+  localStorage.setItem('theme', t);
+  const btn = document.getElementById('themeToggle');
+  if (btn) btn.textContent = t === 'dark' ? '\u2600\uFE0F' : '\uD83C\uDF19';
+}
+document.addEventListener('DOMContentLoaded', function() {
+  var cur = document.documentElement.getAttribute('data-theme') || 'dark';
+  var btn = document.getElementById('themeToggle');
+  btn.textContent = cur === 'dark' ? '\u2600\uFE0F' : '\uD83C\uDF19';
+  btn.addEventListener('click', function() {
+    setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+});
+
+// Stats definition
+const STATS = [
+  { key: 'elo',     label: 'ELO',     get: p => p.a,                              fmt: v => Math.round(v) },
+  { key: 'peak',    label: 'Peak',    get: p => p.p,                              fmt: v => Math.round(v) },
+  { key: 'cups',    label: 'Cups',    get: p => p.c,                              fmt: v => v },
+  { key: 'wins',    label: 'Wins',    get: p => p.w,                              fmt: v => v },
+  { key: 'podiums', label: 'Podiums', get: p => (p.g || 0) + (p.s || 0) + (p.z || 0), fmt: v => v },
+  { key: 'gold',    label: 'Gold',    get: p => p.g || 0,                         fmt: v => v },
+  { key: 'silver',  label: 'Silver',  get: p => p.s || 0,                         fmt: v => v },
+  { key: 'bronze',  label: 'Bronze',  get: p => p.z || 0,                         fmt: v => v },
+  { key: 'best',    label: 'Best',    get: p => p.b,                              fmt: v => v },
+  { key: 'avg',     label: 'Avg Pos', get: p => p.v,                              fmt: v => v.toFixed(1) },
+];
+
+let allPlayers = [];
+let pool = [];         // selected player objects
+let activeStats = ['elo', 'wins'];
+
+// Load data
+fetch('alldata.json').then(r => r.json()).then(data => {
+  allPlayers = data.weighted || [];
+  initToggles();
+  render();
+});
+
+// Stat toggles
+function initToggles() {
+  const container = document.getElementById('statToggles');
+  STATS.forEach(s => {
+    const btn = document.createElement('button');
+    btn.className = 'stat-tog' + (activeStats.includes(s.key) ? ' active' : '');
+    btn.textContent = s.label;
+    btn.onclick = () => {
+      if (activeStats.includes(s.key)) {
+        activeStats = activeStats.filter(k => k !== s.key);
+        btn.classList.remove('active');
+      } else {
+        activeStats.push(s.key);
+        btn.classList.add('active');
+      }
+      render();
+    };
+    container.appendChild(btn);
+  });
+}
+
+// Search
+const searchInput = document.getElementById('searchInput');
+const searchResults = document.getElementById('searchResults');
+
+searchInput.addEventListener('input', () => {
+  const q = searchInput.value.trim().toLowerCase();
+  if (q.length < 1) { searchResults.style.display = 'none'; return; }
+  const poolNames = new Set(pool.map(p => p.n));
+  const matches = allPlayers.filter(p => p.n.toLowerCase().includes(q) && !poolNames.has(p.n)).slice(0, 8);
+  if (!matches.length) { searchResults.style.display = 'none'; return; }
+  searchResults.innerHTML = matches.map(p =>
+    `<div class="sr-item" data-name="${esc(p.n)}"><span class="dot" style="background:${rColor(p.a)}"></span> ${esc(p.n)} <span style="color:var(--text-dark);margin-left:auto">${Math.round(p.a)}</span></div>`
+  ).join('');
+  searchResults.style.display = 'block';
+  searchResults.querySelectorAll('.sr-item').forEach(el => {
+    el.onclick = () => addPlayer(el.dataset.name);
+  });
+});
+
+searchInput.addEventListener('keydown', e => {
+  if (e.key === 'Enter') {
+    const first = searchResults.querySelector('.sr-item');
+    if (first) addPlayer(first.dataset.name);
+  }
+});
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.search-wrap')) searchResults.style.display = 'none';
+});
+
+function addPlayer(name) {
+  if (pool.length >= 10) return;
+  const p = allPlayers.find(x => x.n === name);
+  if (!p || pool.find(x => x.n === name)) return;
+  pool.push(p);
+  searchInput.value = '';
+  searchResults.style.display = 'none';
+  render();
+  searchInput.focus();
+}
+
+function removePlayer(name) {
+  pool = pool.filter(p => p.n !== name);
+  render();
+}
+
+// Slim toggle
+document.getElementById('slimBtn').onclick = () => {
+  document.querySelector('.container').classList.toggle('slim');
+  const on = document.querySelector('.container').classList.contains('slim');
+  document.getElementById('slimBtn').style.color = on ? 'var(--accent)' : '';
+  document.getElementById('slimBtn').style.borderColor = on ? 'rgba(245,158,11,0.3)' : '';
+};
+
+// Copy to clipboard (tab-separated for Excel)
+document.getElementById('copyBtn').onclick = () => {
+  const visibleStats = STATS.filter(s => activeStats.includes(s.key));
+  const header = ['Player', ...visibleStats.map(s => s.label)].join('\t');
+  const rows = pool.map(p => [p.n, ...visibleStats.map(s => s.fmt(s.get(p)))].join('\t'));
+  navigator.clipboard.writeText(header + '\n' + rows.join('\n')).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.classList.add('copied');
+    btn.textContent = 'Copied!';
+    setTimeout(() => { btn.classList.remove('copied'); btn.textContent = 'Copy for Excel'; }, 1500);
+  });
+};
+
+// Clear all
+document.getElementById('clearBtn').onclick = () => { pool = []; render(); };
+
+// Render
+function render() {
+  // Chips
+  const chipsEl = document.getElementById('chips');
+  chipsEl.innerHTML = pool.map(p =>
+    `<div class="chip"><span class="dot" style="background:${rColor(p.a)}"></span><span style="color:${customColors[p.n] || 'var(--pname)'}">${esc(p.n)}</span><button class="chip-x" data-name="${esc(p.n)}">&times;</button></div>`
+  ).join('');
+  chipsEl.querySelectorAll('.chip-x').forEach(btn => {
+    btn.onclick = () => removePlayer(btn.dataset.name);
+  });
+  document.getElementById('playerCount').textContent = pool.length + ' / 10';
+  document.getElementById('actions').style.display = pool.length ? 'flex' : 'none';
+
+  // Columns
+  const visibleStats = STATS.filter(s => activeStats.includes(s.key));
+  const cols = '1fr ' + visibleStats.map(() => '70px').join(' ');
+
+  // Header
+  const headerEl = document.getElementById('tableHeader');
+  headerEl.style.gridTemplateColumns = cols;
+  headerEl.innerHTML = '<div>Player</div>' + visibleStats.map(s => `<div style="text-align:right">${s.label}</div>`).join('');
+
+  // Body
+  const bodyEl = document.getElementById('tableBody');
+  if (!pool.length) {
+    bodyEl.innerHTML = '<div class="empty-msg">Search and add players to compare</div>';
+    return;
+  }
+
+  bodyEl.innerHTML = pool.map(p => {
+    const nc = customColors[p.n] || 'var(--pname)';
+    const statCells = visibleStats.map(s => {
+      const val = s.get(p);
+      const cls = s.key === 'wins' && val > 0 ? 'stat-val wins' : 'stat-val';
+      return `<div class="${cls}">${s.fmt(val)}</div>`;
+    }).join('');
+    return `<div class="row" style="grid-template-columns:${cols}">
+      <div class="player-cell"><span class="dot" style="background:${rColor(p.a)}"></span><span style="color:${nc};font-weight:600">${esc(p.n)}</span></div>
+      ${statCells}
+    </div>`;
+  }).join('');
+}
+</script>
+</body>
+</html>
