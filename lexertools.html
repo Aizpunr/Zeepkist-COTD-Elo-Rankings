@@ -230,6 +230,7 @@ const STATS = [
 let allPlayers = [];
 let pool = [];         // selected player objects
 let activeStats = ['elo', 'wins'];
+let tblSort = { col: null, dir: -1 }; // null = selection order
 
 // Load data
 fetch('alldata.json').then(r => r.json()).then(data => {
@@ -349,7 +350,22 @@ function render() {
   // Header
   const headerEl = document.getElementById('tableHeader');
   headerEl.style.gridTemplateColumns = cols;
-  headerEl.innerHTML = '<div>Player</div>' + visibleStats.map(s => `<div style="text-align:right">${s.label}</div>`).join('');
+  const pActive = tblSort.col === 'name';
+  const pArrow = pActive ? (tblSort.dir === 1 ? ' ▲' : ' ▼') : '';
+  headerEl.innerHTML = `<div data-tsort="name" style="cursor:pointer;user-select:none;color:${pActive ? 'var(--text)' : 'inherit'}">Player${pArrow}</div>`
+    + visibleStats.map(s => {
+      const active = tblSort.col === s.key;
+      const arrow = active ? (tblSort.dir === 1 ? ' ▲' : ' ▼') : '';
+      return `<div data-tsort="${s.key}" style="text-align:right;cursor:pointer;user-select:none;color:${active ? 'var(--text)' : 'inherit'}">${s.label}${arrow}</div>`;
+    }).join('');
+  headerEl.querySelectorAll('[data-tsort]').forEach(el => {
+    el.onclick = () => {
+      const col = el.dataset.tsort;
+      if (tblSort.col === col) { tblSort.dir *= -1; }
+      else { tblSort.col = col; tblSort.dir = col === 'name' ? 1 : -1; }
+      render();
+    };
+  });
 
   // Body
   const bodyEl = document.getElementById('tableBody');
@@ -358,7 +374,18 @@ function render() {
     return;
   }
 
-  bodyEl.innerHTML = pool.map(p => {
+  // Sort
+  const sorted = [...pool];
+  if (tblSort.col) {
+    if (tblSort.col === 'name') {
+      sorted.sort((a, b) => a.n.localeCompare(b.n) * tblSort.dir);
+    } else {
+      const stat = STATS.find(s => s.key === tblSort.col);
+      if (stat) sorted.sort((a, b) => (stat.get(a) - stat.get(b)) * tblSort.dir);
+    }
+  }
+
+  bodyEl.innerHTML = sorted.map(p => {
     const nc = customColors[p.n] || 'var(--pname)';
     const statCells = visibleStats.map(s => {
       const val = s.get(p);
