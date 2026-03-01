@@ -1,0 +1,11 @@
+# Spreadsheets (large, not needed for website)
+*.xlsx
+
+# Python
+__pycache__/
+*.pyc
+
+# Backups & temp
+backups/
+old snapshots/
+*.txt

@@ -48,7 +48,7 @@
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: var(--scrollbar); border-radius: 3px; }
 
-  .container { max-width: 980px; margin: 0 auto; }
+  .container { max-width: 1080px; margin: 0 auto; }
 
   .header { text-align: center; margin-bottom: 28px; position: relative; }
   .header h1 {
@@ -68,6 +68,10 @@
   }
   .tab.active { background: rgba(245,158,11,0.2); color: var(--accent); }
   .tab:hover:not(.active) { color: var(--text-dim); }
+  .tab.race-tab { background: linear-gradient(135deg, rgba(239,68,68,0.15), rgba(245,158,11,0.15)); color: #ef4444; font-weight: 700; }
+  .tab.race-tab:not(.active) { animation: racePulse 2s ease-in-out infinite; }
+  .tab.race-tab.active { background: linear-gradient(135deg, rgba(239,68,68,0.25), rgba(245,158,11,0.25)); color: #f59e0b; }
+  @keyframes racePulse { 0%,100% { opacity: 0.85; } 50% { opacity: 1; box-shadow: 0 0 8px rgba(239,68,68,0.3); } }
 
   .cup-toggle {
     display: flex; align-items: center; gap: 5px; cursor: pointer;
@@ -364,8 +368,9 @@
 
 <script>
 // ── DATA ──
-let eloData, weightedData, eloDataPure, weightedDataPure, snap = null, risingData = null, curseData = null, allData = null, cupsData = null;
+let eloData, weightedData, eloDataPure, weightedDataPure, seasonData = null, snap = null, risingData = null, curseData = null, allData = null, cupsData = null;
 let cupRankMaps = [];
+let globalCupMax = 133;
 
 // ── THEME ──
 function setTheme(t) {
@@ -373,6 +378,7 @@ function setTheme(t) {
   localStorage.setItem('theme', t);
   const btn = document.getElementById('themeToggle');
   if (btn) btn.textContent = t === 'dark' ? '\u2600\uFE0F' : '\uD83C\uDF19';
+  if (typeof render === 'function') render();
 }
 document.addEventListener('DOMContentLoaded', function() {
   var cur = document.documentElement.getAttribute('data-theme') || 'dark';
@@ -385,7 +391,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // ── HELPERS ──
 function rColor(r) {
-  if (eloMode === "weighted") {
+  if (eloMode === "weighted" || eloMode === "season") {
     if (r >= 2000) return "#dc2626";
     if (r >= 1800) return "#a855f7";
     if (r >= 1700) return "#3b82f6";
@@ -438,6 +444,7 @@ let compareList = []; // up to 2 player names
 const COMP_COLORS = ['#06b6d4', '#f97316'];
 
 function getActiveData() {
+  if (eloMode === "season") return seasonData || [];
   if (eloMode === "weighted") return includeTroll ? weightedData : weightedDataPure;
   return includeTroll ? eloData : eloDataPure;
 }
@@ -446,23 +453,15 @@ function getActiveData() {
 
 // ── MIN CUPS SLIDER ──
 // ── ELO MODE TABS ──
-const modeOpts = [["standard","Standard Elo"],["weighted","Weighted Elo"]];
+const modeOpts = [["standard","Standard Elo"],["weighted","Weighted Elo"],["season","2026 Race"]];
 const modeTabsEl = document.getElementById("eloModeTabs");
 modeOpts.forEach(([k,l]) => {
   const btn = document.createElement("button");
-  btn.className = "tab" + (k === eloMode ? " active" : "");
+  btn.className = "tab" + (k === eloMode ? " active" : "") + (k === "season" ? " race-tab" : "");
   btn.textContent = l;
   btn.dataset.key = k;
-  btn.onclick = () => { eloMode = k; updateModeTabs(); selected = null; if (viewMode === "cups") viewMode = "leaderboard"; document.getElementById("cupsTabBtn").classList.remove("active"); render(); };
+  btn.onclick = () => { eloMode = k; updateModeTabs(); selected = null; if (viewMode === "cups") viewMode = "leaderboard"; document.getElementById("cupsTabBtn").classList.remove("active"); document.getElementById("cupToggle").style.display = k === "season" ? "none" : ""; render(); };
   modeTabsEl.appendChild(btn);
-  if (k === "weighted") {
-    const info = document.createElement("button");
-    info.className = "info-btn";
-    info.textContent = "ℹ";
-    info.title = "Weighted ELO changelog";
-    info.onclick = () => document.getElementById("changelogModal").classList.add("open");
-    modeTabsEl.appendChild(info);
-  }
 });
 
 const modal = document.getElementById("changelogModal");
@@ -542,12 +541,13 @@ function getFiltered() {
   const src = getActiveData();
   // Update tier legend
   const tl = document.getElementById("tierLegend");
-  if (eloMode === "weighted") {
+  if (eloMode === "weighted" || eloMode === "season") {
     tl.innerHTML = '<span style="color:#dc2626">Legend 2000+</span> \u00b7 <span style="color:#a855f7">Pro 1800+</span> \u00b7 <span style="color:#3b82f6">Master 1700+</span> \u00b7 <span style="color:#10b981">Gold 1600+</span>';
   } else {
     tl.innerHTML = '<span style="color:#dc2626">Legend 1850+</span> \u00b7 <span style="color:#a855f7">Pro 1700+</span> \u00b7 <span style="color:#3b82f6">Master 1650+</span> \u00b7 <span style="color:#10b981">Gold 1600+</span>';
   }
-  let d = src.filter(p => p.cups >= 5 || (p.podiums.gold + p.podiums.silver + p.podiums.bronze) > 0);
+  const minCups = eloMode === "season" ? 1 : 5;
+  let d = src.filter(p => p.cups >= minCups || (p.podiums.gold + p.podiums.silver + p.podiums.bronze) > 0);
   if (sortKey === "rating") d.sort((a,b) => b.rating - a.rating);
   else if (sortKey === "active") d.sort((a,b) => b.active - a.active);
   else if (sortKey === "wins") d.sort((a,b) => b.wins - a.wins || b.active - a.active);
@@ -560,8 +560,8 @@ function getFiltered() {
 
 // ── RANK HISTORY ──
 function buildRankHistory(player) {
-  const key = eloMode === "weighted"
-    ? (includeTroll ? "weighted" : "weighted_pure")
+  const key = eloMode === "season" ? "season_2026"
+    : eloMode === "weighted" ? (includeTroll ? "weighted" : "weighted_pure")
     : (includeTroll ? "standard" : "standard_pure");
   const useAll = allData && allData[key];
   const dataset = useAll ? allData[key] : getActiveData();
@@ -626,8 +626,10 @@ function drawChart(player, panel) {
   const W = rect.width, H = 180;
   const pad = { l: 46, r: 12, t: 12, b: 28 };
   const hist = player.history;
-  const cMin = 1, cMax = 131;
-  function x(cupNum) { return pad.l + (cupNum - cMin) / (cMax - cMin) * (W - pad.l - pad.r); }
+  const cupNums = hist.map(h => h.c);
+  const cMin = eloMode === "season" ? Math.min(...cupNums) : 1;
+  const cMax = eloMode === "season" ? Math.max(...cupNums) : globalCupMax;
+  function x(cupNum) { return pad.l + (cupNum - cMin) / (cMax - cMin || 1) * (W - pad.l - pad.r); }
 
   let points, yFn, vMin, vMax;
   if (chartMode === "rank") {
@@ -701,7 +703,18 @@ function drawChartContent(ctx, W, H, pad, points, vMin, vMax, cMin, cMax, c, x, 
   }
   // X axis labels
   ctx.fillStyle = cssVar('--text-muted'); ctx.font = "9px 'JetBrains Mono',monospace"; ctx.textAlign = "center";
-  [1, 20, 40, 60, 80, 100, 120, 131].forEach(cn => {
+  let xTicks;
+  if (cMax - cMin <= 20) {
+    xTicks = [];
+    for (let t = cMin; t <= cMax; t++) xTicks.push(t);
+  } else {
+    xTicks = [cMin];
+    const step = cMin === 1 ? 20 : 10;
+    const start = Math.ceil(cMin / step) * step;
+    for (let t = start; t < cMax; t += step) { if (t > cMin) xTicks.push(t); }
+    xTicks.push(cMax);
+  }
+  xTicks.forEach(cn => {
     ctx.fillText("#" + cn, x(cn), H - 6);
   });
   // Line
@@ -731,7 +744,7 @@ function renderRising() {
   const body = document.getElementById("tableBody");
   const header = document.querySelector(".table-header");
   if (!risingData) { body.innerHTML = `<div style="padding:24px;color:var(--text-muted);font-family:var(--mono);font-size:12px">Loading...</div>`; header.style.display = "none"; return; }
-  const risingKey = eloMode === "weighted"
+  const risingKey = (eloMode === "weighted" || eloMode === "season")
     ? (includeTroll ? "weighted" : "weighted_pure")
     : (includeTroll ? "standard" : "standard_pure");
   const list = risingData[risingKey] || [];
@@ -900,8 +913,8 @@ function searchPlayerObj(p) {
 function renderSearch(query) {
   const header = document.querySelector(".table-header");
   const body = document.getElementById("tableBody");
-  const key = eloMode === "weighted"
-    ? (includeTroll ? "weighted" : "weighted_pure")
+  const key = eloMode === "season" ? "season_2026"
+    : eloMode === "weighted" ? (includeTroll ? "weighted" : "weighted_pure")
     : (includeTroll ? "standard" : "standard_pure");
   const list = allData[key] || [];
   const matches = list.filter(p => p.n.toLowerCase().includes(query));
@@ -963,7 +976,9 @@ function drawCompareChart(p1, p2, container) {
   const allR = [...h1.map(h => h.r), ...h2.map(h => h.r)];
   if (!allR.length) return;
   const vMin = Math.min(...allR) - 30, vMax = Math.max(...allR) + 20;
-  const cMin = 1, cMax = 132;
+  const allCups = [...h1.map(h => h.c), ...h2.map(h => h.c)];
+  const cMin = eloMode === "season" ? Math.min(...allCups) : 1;
+  const cMax = eloMode === "season" ? Math.max(...allCups) : globalCupMax;
   container.innerHTML = `<div style="position:relative"><canvas id="cmpCanvas"></canvas><div class="tooltip" id="cmpTip"></div></div>`;
   const canvas = document.getElementById("cmpCanvas");
   const tip = document.getElementById("cmpTip");
@@ -991,7 +1006,10 @@ function drawCompareChart(p1, p2, container) {
       ctx.setLineDash([]);
     }
     ctx.fillStyle = cssVar('--text-muted'); ctx.font = "9px 'JetBrains Mono',monospace"; ctx.textAlign = "center";
-    [1,20,40,60,80,100,120,132].forEach(n => ctx.fillText("#"+n, xf(n), H-6));
+    let xT;
+    if (cMax - cMin <= 20) { xT = []; for (let t = cMin; t <= cMax; t++) xT.push(t); }
+    else { xT = [cMin]; const step = cMin === 1 ? 20 : 10; const st = Math.ceil(cMin/step)*step; for (let t = st; t < cMax; t += step) { if (t > cMin) xT.push(t); } xT.push(cMax); }
+    xT.forEach(n => ctx.fillText("#"+n, xf(n), H-6));
     [[h1,c1],[h2,c2]].forEach(([pts,col]) => {
       if (!pts.length) return;
       ctx.strokeStyle = col; ctx.lineWidth = 2; ctx.lineJoin = "round";
@@ -1036,7 +1054,7 @@ function renderComparePanel() {
   if (!panel) return;
   if (!compareMode) { panel.innerHTML = ""; panel.classList.remove("sticky-panel"); return; }
   panel.classList.add("sticky-panel");
-  const key = eloMode==="weighted" ? (includeTroll?"weighted":"weighted_pure") : (includeTroll?"standard":"standard_pure");
+  const key = eloMode==="season" ? "season_2026" : eloMode==="weighted" ? (includeTroll?"weighted":"weighted_pure") : (includeTroll?"standard":"standard_pure");
   const pool = allData && allData[key] ? allData[key].map(searchPlayerObj) : getActiveData();
   const [c1,c2] = COMP_COLORS;
   const p1 = compareList[0] ? pool.find(p=>p.name===compareList[0]) : null;
@@ -1114,6 +1132,12 @@ function clearCompare() {
 
 // ── TABLE RENDERING ──
 function leaderboardInfoBtn() {
+  if (eloMode === "season") {
+    return `<span class="info-tip-wrap"><button class="info-btn" onclick="event.stopPropagation()" style="pointer-events:auto;margin-left:4px">ℹ</button>`
+      + `<div class="info-tip"><div class="st-head">2026 Race</div>`
+      + `Fresh weighted ELO from <code>1500</code> starting COTD 126 (Jan 3, 2026).<br><br>`
+      + `Same system as Weighted ELO but only 2026 cups count. Everyone starts equal.</div></span>`;
+  }
   if (eloMode === "weighted") {
     return `<span class="info-tip-wrap"><button class="info-btn" onclick="event.stopPropagation()" style="pointer-events:auto;margin-left:4px">ℹ</button>`
       + `<div class="info-tip"><div class="st-head">Weighted ELO</div>`
@@ -1128,12 +1152,19 @@ function leaderboardInfoBtn() {
     + `Provisional <code>1.5×</code> for &lt;12 cups.<br>`
     + `Decay: <code>0.995</code>/cup missed after 3 grace cups.</div></span>`;
 }
+function leaderboardCols() {
+  return eloMode === "season"
+    ? "36px 1fr 66px 36px 118px 46px 40px 38px 54px"
+    : "36px 1fr 56px 66px 36px 118px 46px 40px 38px 54px";
+}
 function leaderboardHeaderHTML() {
-  const cols = [
-    ['#',''],['Player',''],['Elo','rating'],['Active','active'],['Wins','wins'],
-    ['Podium','podium'],['Avg','avg'],['App','cups'],['Best',''],['Peak','peak']
-  ];
-  const aligns = ['','','right','right','center','center','right','center','center','right'];
+  const isSeason = eloMode === "season";
+  const cols = isSeason
+    ? [['#',''],['Player',''],['Elo','active'],['Wins','wins'],['Podium','podium'],['Avg','avg'],['App','cups'],['Best',''],['Peak','peak']]
+    : [['#',''],['Player',''],['Elo','rating'],['Active','active'],['Wins','wins'],['Podium','podium'],['Avg','avg'],['App','cups'],['Best',''],['Peak','peak']];
+  const aligns = isSeason
+    ? ['','','right','center','center','right','center','center','right']
+    : ['','','right','right','center','center','right','center','center','right'];
   return cols.map(([label,key],i) => {
     const al = aligns[i] ? `style="text-align:${aligns[i]}"` : '';
     if (i === 0) return `<div ${al}>${label}${leaderboardInfoBtn()}</div>`;
@@ -1308,8 +1339,8 @@ function render() {
   if (viewMode === "curse") { renderCurse(); return; }
   if (viewMode === "cups") { renderCups(); return; }
   const header = document.querySelector(".table-header");
-  header.style.display = "";
-  header.style.gridTemplateColumns = "";
+  header.style.display = "grid";
+  header.style.gridTemplateColumns = leaderboardCols();
   header.innerHTML = leaderboardHeaderHTML();
   bindHeaderSort();
   const filtered = getFiltered();
@@ -1323,8 +1354,8 @@ function render() {
     const nameColor = customColors[p.name] || cssVar('--pname');
     const compClass = compareMode && compareList[0] === p.name ? " comp-p1"
       : compareMode && compareList[1] === p.name ? " comp-p2" : "";
-    const mode = eloMode === "weighted"
-      ? (includeTroll ? "w" : "w_pure")
+    const mode = eloMode === "season" ? "season"
+      : eloMode === "weighted" ? (includeTroll ? "w" : "w_pure")
       : (includeTroll ? "std" : "std_pure");
     const prev = snap && snap[mode] && snap[mode][p.name];
 
@@ -1344,6 +1375,19 @@ function render() {
         : `<span class="elo-delta-down">${ed}</span>`;
     }
 
+    let winsDelta = "";
+    if (prev && prev.length > 2) {
+      const wd = p.wins - prev[2];
+      if (wd > 0) winsDelta = `<span class="elo-delta-up">+${wd}</span>`;
+    }
+
+    let podsDelta = "";
+    if (prev && prev.length > 3) {
+      const totalPodNow = p.podiums.gold + p.podiums.silver + p.podiums.bronze;
+      const pd = totalPodNow - prev[3];
+      if (pd > 0) podsDelta = `<span class="elo-delta-up">+${pd}</span>`;
+    }
+
     const avgColor = p.avg_position <= 5 ? "var(--green)" : p.avg_position <= 10 ? "var(--text-dim)" : "var(--text-muted)";
     const bestColor = p.best_finish === 1 ? "var(--accent)" : p.best_finish <= 3 ? "var(--text-dim)" : "var(--text-muted)";
     const totalPod = p.podiums.gold + p.podiums.silver + p.podiums.bronze;
@@ -1351,13 +1395,14 @@ function render() {
       ? `<span style="color:var(--accent)">${p.podiums.gold}</span>/<span style="color:var(--silver)">${p.podiums.silver}</span>/<span style="color:var(--bronze)">${p.podiums.bronze}</span> <span style="color:var(--text-muted)">(${totalPod})</span>`
       : `<span style="color:var(--text-dark)">0</span>`;
 
-    html += `<div class="row${isSel ? " selected" : ""}${faded ? " faded" : ""}${compClass}" data-name="${esc(p.name)}">
+    const isSeason = eloMode === "season";
+    html += `<div class="row${isSel ? " selected" : ""}${faded ? " faded" : ""}${compClass}" data-name="${esc(p.name)}" style="grid-template-columns:${leaderboardCols()}">
       <div class="rank">${i+1}${rankDelta}</div>
       <div class="player"><span class="dot" style="background:${c};box-shadow:0 0 5px ${c}40"></span><span class="pname" style="color:${nameColor}">${esc(p.name)}</span></div>
-      <div class="raw">${Math.round(p.rating)}</div>
+      ${isSeason ? '' : `<div class="raw">${Math.round(p.rating)}</div>`}
       <div class="elo-cell" style="color:${c}">${Math.round(p.active)}${eloDelta}</div>
-      <div class="wins-cell" style="color:${p.wins > 0 ? "var(--accent)" : "var(--text-dark)"}">${p.wins}</div>
-      <div class="podium-cell">${podStr}</div>
+      <div class="wins-cell" style="color:${p.wins > 0 ? "var(--accent)" : "var(--text-dark)"}">${p.wins}${winsDelta}</div>
+      <div class="podium-cell">${podStr}${podsDelta}</div>
       <div class="avg-cell" style="color:${avgColor}">${p.avg_position.toFixed(1)}</div>
       <div class="cups-cell">${p.cups}</div>
       <div class="best-cell" style="color:${bestColor}">${p.best_finish}</div>
@@ -1383,11 +1428,15 @@ Promise.all([
   weightedData = data.weighted.l;
   eloDataPure = data.standard_pure ? data.standard_pure.l : data.standard.l;
   weightedDataPure = data.weighted_pure ? data.weighted_pure.l : data.weighted.l;
+  seasonData = data.season_2026 ? data.season_2026.l : null;
   snap = s;
   risingData = rising;
   curseData = curse ? curse.l : null;
   allData = all;
   cupsData = cups;
+  // Derive max cup number from data
+  const allHists = [...eloData, ...weightedData];
+  globalCupMax = Math.max(...allHists.flatMap(p => p.history.map(h => h.c)), globalCupMax);
   if (cups) buildCupRankMaps();
   render();
 });

@@ -97,6 +97,20 @@
   }
   .chip .chip-x:hover { color: var(--red); }
 
+  /* Mode toggles (inline with stat toggles) */
+  .mode-tog {
+    padding: 3px 10px; border-radius: 5px; border: 1px solid var(--border);
+    font-size: 10px; font-family: var(--mono); font-weight: 600; cursor: pointer;
+    background: transparent; color: var(--text-muted); transition: all 0.15s;
+  }
+  .mode-tog.active { background: rgba(245,158,11,0.15); color: var(--accent); border-color: rgba(245,158,11,0.3); }
+  .mode-tog:hover:not(.active) { color: var(--text-dim); border-color: var(--btn-border); }
+  .mode-tog.race-tog { background: linear-gradient(135deg, rgba(239,68,68,0.15), rgba(245,158,11,0.15)); color: #ef4444; font-weight: 700; }
+  .mode-tog.race-tog:not(.active) { animation: racePulse 2s ease-in-out infinite; }
+  .mode-tog.race-tog.active { background: linear-gradient(135deg, rgba(239,68,68,0.25), rgba(245,158,11,0.25)); color: #f59e0b; border-color: rgba(239,68,68,0.3); }
+  @keyframes racePulse { 0%,100% { opacity: 0.85; } 50% { opacity: 1; box-shadow: 0 0 8px rgba(239,68,68,0.3); } }
+  .stat-sep { width: 1px; height: 18px; background: var(--border-bright); align-self: center; margin: 0 4px; }
+
   /* Stat toggles */
   .stat-toggles { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 16px; }
   .stat-tog {
@@ -227,17 +241,44 @@ const STATS = [
   { key: 'avg',     label: 'Avg Pos', get: p => p.v,                              fmt: v => v.toFixed(1) },
 ];
 
+let allData = {};
 let allPlayers = [];
 let pool = [];         // selected player objects
 let activeStats = ['elo', 'wins'];
 let tblSort = { col: null, dir: -1 }; // null = selection order
+let currentMode = 'season_2026';
 
 // Load data
 fetch('alldata.json').then(r => r.json()).then(data => {
-  allPlayers = data.weighted || [];
+  allData = data;
+  allPlayers = data[currentMode] || data.weighted || [];
+  initModeTabs();
   initToggles();
   render();
 });
+
+function initModeTabs() {
+  const container = document.getElementById('statToggles');
+  const modes = [['weighted','ELO'],['season_2026','2026 Race']];
+  modes.forEach(([key, label]) => {
+    const btn = document.createElement('button');
+    btn.className = 'mode-tog' + (key === currentMode ? ' active' : '') + (key === 'season_2026' ? ' race-tog' : '');
+    btn.textContent = label;
+    btn.dataset.mode = key;
+    btn.onclick = () => {
+      currentMode = key;
+      allPlayers = allData[currentMode] || [];
+      const names = pool.map(p => p.n);
+      pool = names.map(n => allPlayers.find(p => p.n === n)).filter(Boolean);
+      container.querySelectorAll('.mode-tog').forEach(b => b.classList.toggle('active', b.dataset.mode === currentMode));
+      render();
+    };
+    container.appendChild(btn);
+  });
+  const sep = document.createElement('div');
+  sep.className = 'stat-sep';
+  container.appendChild(sep);
+}
 
 // Stat toggles
 function initToggles() {
