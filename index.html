@@ -550,8 +550,8 @@ function getFiltered() {
   let d = src.filter(p => p.cups >= minCups || (p.podiums.gold + p.podiums.silver + p.podiums.bronze) > 0);
   if (sortKey === "rating") d.sort((a,b) => b.rating - a.rating);
   else if (sortKey === "active") d.sort((a,b) => b.active - a.active);
-  else if (sortKey === "wins") d.sort((a,b) => b.wins - a.wins || b.active - a.active);
-  else if (sortKey === "podium") d.sort((a,b) => (b.podiums.gold+b.podiums.silver+b.podiums.bronze) - (a.podiums.gold+a.podiums.silver+a.podiums.bronze) || b.active - a.active);
+  else if (sortKey === "wins") d.sort((a,b) => b.wins - a.wins || b.podiums.silver - a.podiums.silver || b.podiums.bronze - a.podiums.bronze || b.active - a.active);
+  else if (sortKey === "podium") d.sort((a,b) => (b.podiums.gold+b.podiums.silver+b.podiums.bronze) - (a.podiums.gold+a.podiums.silver+a.podiums.bronze) || b.podiums.gold - a.podiums.gold || b.podiums.silver - a.podiums.silver || b.podiums.bronze - a.podiums.bronze || b.active - a.active);
   else if (sortKey === "cups") d.sort((a,b) => b.cups - a.cups || b.active - a.active);
   else if (sortKey === "avg") d.sort((a,b) => a.avg_position - b.avg_position);
   else if (sortKey === "peak") d.sort((a,b) => b.peak_rating - a.peak_rating);

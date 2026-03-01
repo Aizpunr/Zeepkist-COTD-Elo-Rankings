@@ -329,6 +329,26 @@ def normalize(name):
 for cup in all_cups:
     cup['players'] = [(pos, normalize(name)) for pos, name in cup['players']]
 
+# Handle shared-account entries: "account_name (elo=RealPlayer)"
+# Spreadsheet tag format: rtm_lover2007 (elo=Kernkob)
+# RealPlayer gets ELO credit; account_name becomes a ghost (history only, no ELO effect)
+import re as _re
+for cup in all_cups:
+    new_players = []
+    ghosts = []
+    for pos, name in cup['players']:
+        m = _re.match(r'^(.+?)\s*\(elo=(.+?)\)$', name)
+        if m:
+            ghost_name = m.group(1).strip()
+            real_name = normalize(m.group(2).strip())
+            new_players.append((pos, real_name))
+            ghosts.append((pos, ghost_name))
+            print(f"  Ghost split in {cup['name']}: {ghost_name} → ELO:{real_name}, ghost:{ghost_name}")
+        else:
+            new_players.append((pos, name))
+    cup['players'] = new_players
+    cup['ghosts'] = ghosts  # stored separately for history-only processing
+
 # Check remaining duplicates
 by_stripped = defaultdict(set)
 for cup in all_cups:
@@ -363,7 +383,7 @@ def pct_mult(pos, n):
     if pct <= 0.50: return 0.8
     return 0.5
 
-def compute_standard_elo(cups):
+def compute_standard_elo(cups, no_ghosts=False):
     ratings = defaultdict(lambda: STARTING)
     gp = defaultdict(int); history = defaultdict(list)
     wins = defaultdict(int); pods = defaultdict(lambda:[0,0,0])
@@ -393,10 +413,20 @@ def compute_standard_elo(cups):
             if pos==1: wins[name]+=1; pods[name][0]+=1
             elif pos==2: pods[name][1]+=1
             elif pos==3 and not is_troll4_dnf: pods[name][2]+=1
+        # Ghost players: history only, no ELO effect (skipped in race/season)
+        if not no_ghosts:
+            for pos, name in cup.get('ghosts', []):
+                gp[name] += 1
+                history[name].append({'cup':cup['name'],'position':pos,'rating':round(ratings[name],1),'lobby_size':n})
+                if pos < best[name]: best[name] = pos
+                total_pos[name] += pos; avg_cups[name] += 1
+                if pos==1: wins[name]+=1; pods[name][0]+=1
+                elif pos==2: pods[name][1]+=1
+                elif pos==3: pods[name][2]+=1
     return {'ratings': ratings, 'gp': gp, 'history': history, 'wins': wins,
             'pods': pods, 'best': best, 'total_pos': total_pos, 'avg_cups': avg_cups}
 
-def compute_weighted_elo(cups, pct_fn=None):
+def compute_weighted_elo(cups, pct_fn=None, no_ghosts=False):
     if pct_fn is None: pct_fn = pct_mult
     w_ratings = defaultdict(lambda: STARTING)
     w_gp = defaultdict(int); w_history = defaultdict(list)
@@ -422,6 +452,11 @@ def compute_weighted_elo(cups, pct_fn=None):
             w_ratings[name] += w_cup_deltas[name]
             w_gp[name] += 1
             w_history[name].append({'cup': cup['name'], 'position': pos, 'rating': round(w_ratings[name], 1), 'lobby_size': n})
+        # Ghost players: history only, no ELO effect (skipped in race/season)
+        if not no_ghosts:
+            for pos, name in cup.get('ghosts', []):
+                w_gp[name] += 1
+                w_history[name].append({'cup': cup['name'], 'position': pos, 'rating': round(w_ratings[name], 1), 'lobby_size': n})
     return {'ratings': w_ratings, 'gp': w_gp, 'history': w_history}
 
 def build_site_list(elo_data, stat_data, cups_list, min_cups=5, no_decay=False):
@@ -473,8 +508,8 @@ std_pure = compute_standard_elo(pure_cups)
 print("Computing weighted ELO (pure cups)...")
 w_pure = compute_weighted_elo(pure_cups)
 print("Computing 2026 season ELO...")
-season_std = compute_standard_elo(season_cups)
-season_w = compute_weighted_elo(season_cups)
+season_std = compute_standard_elo(season_cups, no_ghosts=True)
+season_w = compute_weighted_elo(season_cups, no_ghosts=True)
 
 # --- Console output (from full standard) ---
 ratings = w_full['ratings']; gp = std_full['gp']; history = w_full['history']

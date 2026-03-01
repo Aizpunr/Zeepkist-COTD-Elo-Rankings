@@ -173,6 +173,7 @@
         <input class="search-input" id="searchInput" placeholder="Add player..." autocomplete="off">
         <div class="search-results" id="searchResults" style="display:none"></div>
       </div>
+      <button class="action-btn" id="topBtn" style="display:none;font-size:11px;padding:4px 8px"></button>
       <span class="player-count" id="playerCount">0 / 10</span>
     </div>
     <div class="chips" id="chips"></div>
@@ -247,6 +248,56 @@ let pool = [];         // selected player objects
 let activeStats = ['elo', 'wins'];
 let tblSort = { col: null, dir: -1 }; // null = selection order
 let currentMode = 'season_2026';
+let weekBack = false; // -1 week mode
+
+function computePrevWeek(p) {
+  const h = p.h;
+  if (!h || h.length < 2) return p;
+  const prev = h.slice(0, -1);
+  const wins = prev.filter(e => e.p === 1).length;
+  const gold = wins;
+  const silver = prev.filter(e => e.p === 2).length;
+  const bronze = prev.filter(e => e.p === 3).length;
+  const cups = prev.length;
+  const avg = prev.reduce((s, e) => s + e.p, 0) / cups;
+  return {
+    ...p,
+    a: prev[prev.length - 1].r,
+    r: prev[prev.length - 1].r,
+    w: wins,
+    g: gold,
+    s: silver,
+    z: bronze,
+    c: cups,
+    b: Math.min(...prev.map(e => e.p)),
+    v: Math.round(avg * 10) / 10,
+    p: Math.max(...prev.map(e => e.r)),
+    h: prev
+  };
+}
+
+function getPool() {
+  return weekBack ? pool.map(computePrevWeek) : pool;
+}
+
+function getSnapshotCup() {
+  const maxCup = allPlayers.reduce((m, p) => {
+    if (!p.h || !p.h.length) return m;
+    return Math.max(m, p.h[p.h.length - 1].c);
+  }, 0);
+  return maxCup - 1;
+}
+
+function selectTop10() {
+  const prev = allPlayers
+    .filter(p => p.h && p.h.length >= 2)
+    .map(computePrevWeek)
+    .sort((a, b) => b.a - a.a)
+    .slice(0, 10);
+  const names = prev.map(p => p.n);
+  pool = names.map(n => allPlayers.find(p => p.n === n)).filter(Boolean);
+  render();
+}
 
 // Load data
 fetch('alldata.json').then(r => r.json()).then(data => {
@@ -260,7 +311,7 @@ fetch('alldata.json').then(r => r.json()).then(data => {
 function initModeTabs() {
   const container = document.getElementById('statToggles');
   const modes = [['weighted','ELO'],['season_2026','2026 Race']];
-  modes.forEach(([key, label]) => {
+  modes.forEach(([key, label], i) => {
     const btn = document.createElement('button');
     btn.className = 'mode-tog' + (key === currentMode ? ' active' : '') + (key === 'season_2026' ? ' race-tog' : '');
     btn.textContent = label;
@@ -270,10 +321,27 @@ function initModeTabs() {
       allPlayers = allData[currentMode] || [];
       const names = pool.map(p => p.n);
       pool = names.map(n => allPlayers.find(p => p.n === n)).filter(Boolean);
+      weekBack = false;
+      const wb = document.getElementById('weekBtn');
+      wb.style.color = ''; wb.style.borderColor = '';
       container.querySelectorAll('.mode-tog').forEach(b => b.classList.toggle('active', b.dataset.mode === currentMode));
       render();
     };
     container.appendChild(btn);
+    // Insert -1 Week button after first mode button
+    if (i === 0) {
+      const wb = document.createElement('button');
+      wb.className = 'mode-tog';
+      wb.id = 'weekBtn';
+      wb.textContent = '-1 Week';
+      wb.onclick = () => {
+        weekBack = !weekBack;
+        wb.style.color = weekBack ? 'var(--accent)' : '';
+        wb.style.borderColor = weekBack ? 'rgba(245,158,11,0.3)' : '';
+        render();
+      };
+      container.appendChild(wb);
+    }
   });
   const sep = document.createElement('div');
   sep.className = 'stat-sep';
@@ -359,7 +427,7 @@ document.getElementById('slimBtn').onclick = () => {
 document.getElementById('copyBtn').onclick = () => {
   const visibleStats = STATS.filter(s => activeStats.includes(s.key));
   const header = ['Player', ...visibleStats.map(s => s.label)].join('\t');
-  const rows = pool.map(p => [p.n, ...visibleStats.map(s => s.fmt(s.get(p)))].join('\t'));
+  const rows = getSorted().map(p => [p.n, ...visibleStats.map(s => s.fmt(s.get(p)))].join('\t'));
   navigator.clipboard.writeText(header + '\n' + rows.join('\n')).then(() => {
     const btn = document.getElementById('copyBtn');
     btn.classList.add('copied');
@@ -371,8 +439,39 @@ document.getElementById('copyBtn').onclick = () => {
 // Clear all
 document.getElementById('clearBtn').onclick = () => { pool = []; render(); };
 
+// Sort pool according to current tblSort state
+function getSorted() {
+  const sorted = [...getPool()];
+  if (tblSort.col) {
+    if (tblSort.col === 'name') {
+      sorted.sort((a, b) => a.n.localeCompare(b.n) * tblSort.dir);
+    } else if (tblSort.col === 'wins') {
+      sorted.sort((a, b) => ((b.w - a.w) || ((b.s||0) - (a.s||0)) || ((b.z||0) - (a.z||0)) || (b.a - a.a)) * tblSort.dir);
+    } else if (tblSort.col === 'podiums') {
+      sorted.sort((a, b) => {
+        const ta = (a.g||0)+(a.s||0)+(a.z||0), tb = (b.g||0)+(b.s||0)+(b.z||0);
+        return ((tb - ta) || ((b.g||0) - (a.g||0)) || ((b.s||0) - (a.s||0)) || ((b.z||0) - (a.z||0)) || (b.a - a.a)) * tblSort.dir;
+      });
+    } else {
+      const stat = STATS.find(s => s.key === tblSort.col);
+      if (stat) sorted.sort((a, b) => (stat.get(a) - stat.get(b)) * tblSort.dir);
+    }
+  }
+  return sorted;
+}
+
 // Render
 function render() {
+  // Top 10 button visibility
+  const topBtn = document.getElementById('topBtn');
+  if (weekBack) {
+    topBtn.style.display = '';
+    topBtn.textContent = 'Cup ' + getSnapshotCup() + ' Top 10';
+    topBtn.onclick = selectTop10;
+  } else {
+    topBtn.style.display = 'none';
+  }
+
   // Chips
   const chipsEl = document.getElementById('chips');
   chipsEl.innerHTML = pool.map(p =>
@@ -415,16 +514,7 @@ function render() {
     return;
   }
 
-  // Sort
-  const sorted = [...pool];
-  if (tblSort.col) {
-    if (tblSort.col === 'name') {
-      sorted.sort((a, b) => a.n.localeCompare(b.n) * tblSort.dir);
-    } else {
-      const stat = STATS.find(s => s.key === tblSort.col);
-      if (stat) sorted.sort((a, b) => (stat.get(a) - stat.get(b)) * tblSort.dir);
-    }
-  }
+  const sorted = getSorted();
 
   bodyEl.innerHTML = sorted.map(p => {
     const nc = customColors[p.n] || 'var(--pname)';
