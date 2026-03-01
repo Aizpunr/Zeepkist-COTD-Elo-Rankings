@@ -54,6 +54,36 @@ def build_snap_at(players, target, no_decay=False):
 with open(_p('lexercurse.json')) as f:
     curse_players = json.load(f).get('l', [])
 
+# Backup existing snapshot before overwriting
+snap_path = _p('snapshot.json')
+backup_dir = _p('old snapshots')
+if os.path.exists(snap_path):
+    import shutil
+    # Detect what cup the old snapshot was built at by checking ranked players vs history
+    with open(snap_path) as f:
+        old_snap = json.load(f)
+    old_cup = None
+    w_snap = old_snap.get('w', {})
+    if w_snap and w_players:
+        # Find the cup where the #1 ranked player's rating matches the snapshot
+        top_name = next((n for n, v in w_snap.items() if v[0] == 1), None)
+        if top_name:
+            tp = next((p for p in w_players if p['name'] == top_name), None)
+            if tp:
+                for h in reversed(tp['history']):
+                    if round(h['r'], 1) == round(w_snap[top_name][1], 1):
+                        old_cup = h['c']; break
+    os.makedirs(backup_dir, exist_ok=True)
+    label = f'snapshot {old_cup}.json' if old_cup else f'snapshot backup.json'
+    backup_path = os.path.join(backup_dir, label)
+    i = 0
+    while os.path.exists(backup_path):
+        i += 1
+        stem = f'snapshot {old_cup}' if old_cup else 'snapshot backup'
+        backup_path = os.path.join(backup_dir, f'{stem}_{i}.json')
+    shutil.copy2(snap_path, backup_path)
+    print(f"Backed up old snapshot -> old snapshots/{os.path.basename(backup_path)}")
+
 snap = {
     'std':      build_snap_at(std_players, target_cup),
     'w':        build_snap_at(w_players,   target_cup),

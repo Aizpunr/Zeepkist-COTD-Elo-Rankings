@@ -3841,7 +3841,7 @@
         {
           "cup": "COTD 131",
           "position": 14,
-          "rating": 1927.5,
+          "rating": 1927.4,
           "lobby_size": 58
         },
         {
@@ -11324,7 +11324,7 @@
     {
       "rank": 45,
       "name": "agix",
-      "rating": 1615.5,
+      "rating": 1615.4,
       "cups": 81,
       "wins": 1,
       "podiums": {
@@ -11813,13 +11813,13 @@
         {
           "cup": "COTD 132",
           "position": 20,
-          "rating": 1616.1,
+          "rating": 1616.0,
           "lobby_size": 59
         },
         {
           "cup": "COTD 133",
           "position": 22,
-          "rating": 1615.5,
+          "rating": 1615.4,
           "lobby_size": 54
         }
       ]
@@ -13675,7 +13675,7 @@
         {
           "cup": "COTD 131",
           "position": 10,
-          "rating": 1578.7,
+          "rating": 1578.6,
           "lobby_size": 58
         },
         {
@@ -23707,29 +23707,6 @@
     },
     {
       "rank": 219,
-      "name": "PlustMicron",
-      "rating": 1497.3,
-      "cups": 1,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 35.0,
-      "best_finish": 35,
-      "peak_rating": 1497.3,
-      "history": [
-        {
-          "cup": "COTD 131",
-          "position": 35,
-          "rating": 1497.3,
-          "lobby_size": 58
-        }
-      ]
-    },
-    {
-      "rank": 220,
       "name": "3rdseyeview",
       "rating": 1497.2,
       "cups": 12,
@@ -23818,7 +23795,7 @@
       ]
     },
     {
-      "rank": 221,
+      "rank": 220,
       "name": "W1LHM7",
       "rating": 1497.2,
       "cups": 1,
@@ -23841,7 +23818,7 @@
       ]
     },
     {
-      "rank": 222,
+      "rank": 221,
       "name": "Timo silakka",
       "rating": 1497.2,
       "cups": 1,
@@ -23864,7 +23841,7 @@
       ]
     },
     {
-      "rank": 223,
+      "rank": 222,
       "name": "Lazy_Ecidna",
       "rating": 1497.0,
       "cups": 1,
@@ -23887,7 +23864,7 @@
       ]
     },
     {
-      "rank": 224,
+      "rank": 223,
       "name": "[Bunn]Spuzzle",
       "rating": 1496.9,
       "cups": 1,
@@ -23910,7 +23887,7 @@
       ]
     },
     {
-      "rank": 225,
+      "rank": 224,
       "name": "[T-T] DgGames",
       "rating": 1496.9,
       "cups": 1,
@@ -23933,7 +23910,7 @@
       ]
     },
     {
-      "rank": 226,
+      "rank": 225,
       "name": "[QRI] Stony  Baboon",
       "rating": 1496.8,
       "cups": 1,
@@ -23956,7 +23933,7 @@
       ]
     },
     {
-      "rank": 227,
+      "rank": 226,
       "name": "oc",
       "rating": 1496.6,
       "cups": 1,
@@ -23979,7 +23956,7 @@
       ]
     },
     {
-      "rank": 228,
+      "rank": 227,
       "name": "pants2008",
       "rating": 1496.5,
       "cups": 1,
@@ -24002,7 +23979,7 @@
       ]
     },
     {
-      "rank": 229,
+      "rank": 228,
       "name": "[              ]",
       "rating": 1496.5,
       "cups": 1,
@@ -24025,7 +24002,7 @@
       ]
     },
     {
-      "rank": 230,
+      "rank": 229,
       "name": "Redstonecraft99",
       "rating": 1496.4,
       "cups": 3,
@@ -24060,7 +24037,7 @@
       ]
     },
     {
-      "rank": 231,
+      "rank": 230,
       "name": "Andrei",
       "rating": 1496.3,
       "cups": 2,
@@ -24089,7 +24066,7 @@
       ]
     },
     {
-      "rank": 232,
+      "rank": 231,
       "name": "zaenith",
       "rating": 1496.3,
       "cups": 1,
@@ -24112,7 +24089,7 @@
       ]
     },
     {
-      "rank": 233,
+      "rank": 232,
       "name": "[ZET}LILWOOLEY",
       "rating": 1496.3,
       "cups": 1,
@@ -24135,7 +24112,7 @@
       ]
     },
     {
-      "rank": 234,
+      "rank": 233,
       "name": "TudBungusTTV",
       "rating": 1496.3,
       "cups": 1,
@@ -24158,7 +24135,7 @@
       ]
     },
     {
-      "rank": 235,
+      "rank": 234,
       "name": "Bridaggs",
       "rating": 1496.2,
       "cups": 5,
@@ -24205,7 +24182,7 @@
       ]
     },
     {
-      "rank": 236,
+      "rank": 235,
       "name": "Catch",
       "rating": 1496.1,
       "cups": 1,
@@ -24228,7 +24205,7 @@
       ]
     },
     {
-      "rank": 237,
+      "rank": 236,
       "name": "Neon_King2",
       "rating": 1496.0,
       "cups": 1,
@@ -24251,7 +24228,7 @@
       ]
     },
     {
-      "rank": 238,
+      "rank": 237,
       "name": "BWuuzi",
       "rating": 1496.0,
       "cups": 1,
@@ -24274,7 +24251,7 @@
       ]
     },
     {
-      "rank": 239,
+      "rank": 238,
       "name": "thelolrus",
       "rating": 1496.0,
       "cups": 1,
@@ -24297,7 +24274,7 @@
       ]
     },
     {
-      "rank": 240,
+      "rank": 239,
       "name": "Vananda Games",
       "rating": 1495.9,
       "cups": 1,
@@ -24320,7 +24297,7 @@
       ]
     },
     {
-      "rank": 241,
+      "rank": 240,
       "name": "FlamingSquid",
       "rating": 1495.9,
       "cups": 2,
@@ -24349,7 +24326,7 @@
       ]
     },
     {
-      "rank": 242,
+      "rank": 241,
       "name": "Ionjig",
       "rating": 1495.8,
       "cups": 5,
@@ -24396,7 +24373,7 @@
       ]
     },
     {
-      "rank": 243,
+      "rank": 242,
       "name": "Bram2323",
       "rating": 1495.8,
       "cups": 8,
@@ -24461,7 +24438,7 @@
       ]
     },
     {
-      "rank": 244,
+      "rank": 243,
       "name": "Zwerggo",
       "rating": 1495.8,
       "cups": 1,
@@ -24484,7 +24461,7 @@
       ]
     },
     {
-      "rank": 245,
+      "rank": 244,
       "name": "Bank Waffles",
       "rating": 1495.6,
       "cups": 3,
@@ -24519,7 +24496,7 @@
       ]
     },
     {
-      "rank": 246,
+      "rank": 245,
       "name": "[ARL]Aurum",
       "rating": 1495.6,
       "cups": 1,
@@ -24542,7 +24519,7 @@
       ]
     },
     {
-      "rank": 247,
+      "rank": 246,
       "name": "steffiano",
       "rating": 1495.5,
       "cups": 1,
@@ -24565,7 +24542,7 @@
       ]
     },
     {
-      "rank": 248,
+      "rank": 247,
       "name": "Kabs666",
       "rating": 1495.5,
       "cups": 1,
@@ -24588,7 +24565,7 @@
       ]
     },
     {
-      "rank": 249,
+      "rank": 248,
       "name": "jjwoznia",
       "rating": 1495.5,
       "cups": 1,
@@ -24611,7 +24588,7 @@
       ]
     },
     {
-      "rank": 250,
+      "rank": 249,
       "name": "TheBestMaidens",
       "rating": 1495.4,
       "cups": 3,
@@ -24646,7 +24623,7 @@
       ]
     },
     {
-      "rank": 251,
+      "rank": 250,
       "name": "Darkspace",
       "rating": 1495.3,
       "cups": 1,
@@ -24669,7 +24646,7 @@
       ]
     },
     {
-      "rank": 252,
+      "rank": 251,
       "name": "Zachafinackus",
       "rating": 1495.3,
       "cups": 3,
@@ -24704,7 +24681,7 @@
       ]
     },
     {
-      "rank": 253,
+      "rank": 252,
       "name": "BuddhaBladez",
       "rating": 1495.2,
       "cups": 6,
@@ -24757,7 +24734,7 @@
       ]
     },
     {
-      "rank": 254,
+      "rank": 253,
       "name": "YTButItRuns",
       "rating": 1495.2,
       "cups": 1,
@@ -24780,7 +24757,7 @@
       ]
     },
     {
-      "rank": 255,
+      "rank": 254,
       "name": "kK-Nox",
       "rating": 1495.2,
       "cups": 1,
@@ -24803,7 +24780,7 @@
       ]
     },
     {
-      "rank": 256,
+      "rank": 255,
       "name": "Phoenjx",
       "rating": 1495.1,
       "cups": 4,
@@ -24844,7 +24821,7 @@
       ]
     },
     {
-      "rank": 257,
+      "rank": 256,
       "name": "franearthsea",
       "rating": 1495.0,
       "cups": 1,
@@ -24867,7 +24844,7 @@
       ]
     },
     {
-      "rank": 258,
+      "rank": 257,
       "name": "Potato Princess",
       "rating": 1495.0,
       "cups": 1,
@@ -24890,7 +24867,7 @@
       ]
     },
     {
-      "rank": 259,
+      "rank": 258,
       "name": "/<",
       "rating": 1494.9,
       "cups": 2,
@@ -24919,7 +24896,7 @@
       ]
     },
     {
-      "rank": 260,
+      "rank": 259,
       "name": "Ballenkrabber",
       "rating": 1494.8,
       "cups": 1,
@@ -24942,7 +24919,7 @@
       ]
     },
     {
-      "rank": 261,
+      "rank": 260,
       "name": "MatrixAware2",
       "rating": 1494.8,
       "cups": 1,
@@ -24965,7 +24942,7 @@
       ]
     },
     {
-      "rank": 262,
+      "rank": 261,
       "name": "Andy",
       "rating": 1494.8,
       "cups": 1,
@@ -24988,7 +24965,7 @@
       ]
     },
     {
-      "rank": 263,
+      "rank": 262,
       "name": "//////void",
       "rating": 1494.7,
       "cups": 5,
@@ -25035,7 +25012,7 @@
       ]
     },
     {
-      "rank": 264,
+      "rank": 263,
       "name": "TrubP02",
       "rating": 1494.7,
       "cups": 3,
@@ -25070,7 +25047,7 @@
       ]
     },
     {
-      "rank": 265,
+      "rank": 264,
       "name": "Morishade",
       "rating": 1494.7,
       "cups": 1,
@@ -25093,7 +25070,7 @@
       ]
     },
     {
-      "rank": 266,
+      "rank": 265,
       "name": "zostawilmniemaz",
       "rating": 1494.7,
       "cups": 1,
@@ -25116,7 +25093,7 @@
       ]
     },
     {
-      "rank": 267,
+      "rank": 266,
       "name": "[FOOL} Ruckooe",
       "rating": 1494.7,
       "cups": 1,
@@ -25139,7 +25116,7 @@
       ]
     },
     {
-      "rank": 268,
+      "rank": 267,
       "name": "[ZET]maskeddog",
       "rating": 1494.6,
       "cups": 1,
@@ -25162,7 +25139,7 @@
       ]
     },
     {
-      "rank": 269,
+      "rank": 268,
       "name": "b0baphettyWAP",
       "rating": 1494.5,
       "cups": 1,
@@ -25185,7 +25162,7 @@
       ]
     },
     {
-      "rank": 270,
+      "rank": 269,
       "name": "Drrcp",
       "rating": 1494.5,
       "cups": 4,
@@ -25226,7 +25203,7 @@
       ]
     },
     {
-      "rank": 271,
+      "rank": 270,
       "name": "Savage Package",
       "rating": 1494.5,
       "cups": 4,
@@ -25267,7 +25244,7 @@
       ]
     },
     {
-      "rank": 272,
+      "rank": 271,
       "name": "snailspace",
       "rating": 1494.4,
       "cups": 1,
@@ -25290,7 +25267,7 @@
       ]
     },
     {
-      "rank": 273,
+      "rank": 272,
       "name": "[CHZB] PizzaCat1732",
       "rating": 1494.4,
       "cups": 1,
@@ -25313,7 +25290,7 @@
       ]
     },
     {
-      "rank": 274,
+      "rank": 273,
       "name": "Keno_O",
       "rating": 1494.4,
       "cups": 1,
@@ -25336,7 +25313,7 @@
       ]
     },
     {
-      "rank": 275,
+      "rank": 274,
       "name": "Wiwiknight",
       "rating": 1494.3,
       "cups": 1,
@@ -25359,7 +25336,7 @@
       ]
     },
     {
-      "rank": 276,
+      "rank": 275,
       "name": "Clayne0",
       "rating": 1494.3,
       "cups": 1,
@@ -25382,7 +25359,7 @@
       ]
     },
     {
-      "rank": 277,
+      "rank": 276,
       "name": "Temporal Wolf",
       "rating": 1494.2,
       "cups": 1,
@@ -25405,7 +25382,7 @@
       ]
     },
     {
-      "rank": 278,
+      "rank": 277,
       "name": "Mount Everest -Karl E SS",
       "rating": 1494.1,
       "cups": 1,
@@ -25428,7 +25405,7 @@
       ]
     },
     {
-      "rank": 279,
+      "rank": 278,
       "name": "ArcticMammoth",
       "rating": 1494.1,
       "cups": 1,
@@ -25451,7 +25428,7 @@
       ]
     },
     {
-      "rank": 280,
+      "rank": 279,
       "name": "MildewSpud",
       "rating": 1494.1,
       "cups": 1,
@@ -25474,7 +25451,7 @@
       ]
     },
     {
-      "rank": 281,
+      "rank": 280,
       "name": "DarthJohansen",
       "rating": 1494.1,
       "cups": 1,
@@ -25497,7 +25474,7 @@
       ]
     },
     {
-      "rank": 282,
+      "rank": 281,
       "name": "BABALOO",
       "rating": 1494.0,
       "cups": 1,
@@ -25520,7 +25497,7 @@
       ]
     },
     {
-      "rank": 283,
+      "rank": 282,
       "name": "NightFury443",
       "rating": 1494.0,
       "cups": 1,
@@ -25543,7 +25520,7 @@
       ]
     },
     {
-      "rank": 284,
+      "rank": 283,
       "name": "taigtasche",
       "rating": 1494.0,
       "cups": 1,
@@ -25566,7 +25543,7 @@
       ]
     },
     {
-      "rank": 285,
+      "rank": 284,
       "name": "Tuscan Bandit",
       "rating": 1493.9,
       "cups": 1,
@@ -25589,7 +25566,7 @@
       ]
     },
     {
-      "rank": 286,
+      "rank": 285,
       "name": "xzombie",
       "rating": 1493.9,
       "cups": 1,
@@ -25612,7 +25589,7 @@
       ]
     },
     {
-      "rank": 287,
+      "rank": 286,
       "name": "thefirstcoolone",
       "rating": 1493.9,
       "cups": 1,
@@ -25635,7 +25612,7 @@
       ]
     },
     {
-      "rank": 288,
+      "rank": 287,
       "name": "Durmus",
       "rating": 1493.9,
       "cups": 1,
@@ -25658,7 +25635,7 @@
       ]
     },
     {
-      "rank": 289,
+      "rank": 288,
       "name": "FDB",
       "rating": 1493.7,
       "cups": 1,
@@ -25681,7 +25658,7 @@
       ]
     },
     {
-      "rank": 290,
+      "rank": 289,
       "name": "Kosacade",
       "rating": 1493.7,
       "cups": 1,
@@ -25704,7 +25681,7 @@
       ]
     },
     {
-      "rank": 291,
+      "rank": 290,
       "name": "Fauix",
       "rating": 1493.6,
       "cups": 1,
@@ -25727,7 +25704,7 @@
       ]
     },
     {
-      "rank": 292,
+      "rank": 291,
       "name": "Amxzed",
       "rating": 1493.6,
       "cups": 1,
@@ -25750,7 +25727,7 @@
       ]
     },
     {
-      "rank": 293,
+      "rank": 292,
       "name": "Flexicon",
       "rating": 1493.6,
       "cups": 1,
@@ -25773,7 +25750,7 @@
       ]
     },
     {
-      "rank": 294,
+      "rank": 293,
       "name": "Arepuz",
       "rating": 1493.6,
       "cups": 2,
@@ -25802,7 +25779,7 @@
       ]
     },
     {
-      "rank": 295,
+      "rank": 294,
       "name": "coppertop34",
       "rating": 1493.6,
       "cups": 1,
@@ -25825,7 +25802,7 @@
       ]
     },
     {
-      "rank": 296,
+      "rank": 295,
       "name": "VaporPalms",
       "rating": 1493.6,
       "cups": 1,
@@ -25848,7 +25825,7 @@
       ]
     },
     {
-      "rank": 297,
+      "rank": 296,
       "name": "[KBR] Panda",
       "rating": 1493.6,
       "cups": 1,
@@ -25871,7 +25848,7 @@
       ]
     },
     {
-      "rank": 298,
+      "rank": 297,
       "name": "[CTR]Rourie13",
       "rating": 1493.5,
       "cups": 1,
@@ -25894,7 +25871,7 @@
       ]
     },
     {
-      "rank": 299,
+      "rank": 298,
       "name": "Skooter_luke",
       "rating": 1493.4,
       "cups": 1,
@@ -25917,7 +25894,7 @@
       ]
     },
     {
-      "rank": 300,
+      "rank": 299,
       "name": "thatguyscottie",
       "rating": 1493.4,
       "cups": 2,
@@ -25946,7 +25923,7 @@
       ]
     },
     {
-      "rank": 301,
+      "rank": 300,
       "name": "[NB] Ykario",
       "rating": 1493.3,
       "cups": 1,
@@ -25969,7 +25946,7 @@
       ]
     },
     {
-      "rank": 302,
+      "rank": 301,
       "name": "Broodboter",
       "rating": 1493.3,
       "cups": 1,
@@ -25992,7 +25969,7 @@
       ]
     },
     {
-      "rank": 303,
+      "rank": 302,
       "name": "inT_Sheriff",
       "rating": 1493.3,
       "cups": 1,
@@ -26015,7 +25992,7 @@
       ]
     },
     {
-      "rank": 304,
+      "rank": 303,
       "name": "[JON]aardvarkjon",
       "rating": 1493.3,
       "cups": 1,
@@ -26038,7 +26015,7 @@
       ]
     },
     {
-      "rank": 305,
+      "rank": 304,
       "name": "ScruffyG",
       "rating": 1493.2,
       "cups": 1,
@@ -26061,7 +26038,7 @@
       ]
     },
     {
-      "rank": 306,
+      "rank": 305,
       "name": "luiscrespojunior",
       "rating": 1493.2,
       "cups": 1,
@@ -26084,7 +26061,7 @@
       ]
     },
     {
-      "rank": 307,
+      "rank": 306,
       "name": "IronDwarf",
       "rating": 1493.2,
       "cups": 1,
@@ -26107,7 +26084,7 @@
       ]
     },
     {
-      "rank": 308,
+      "rank": 307,
       "name": "Shatter",
       "rating": 1493.1,
       "cups": 2,
@@ -26136,7 +26113,7 @@
       ]
     },
     {
-      "rank": 309,
+      "rank": 308,
       "name": "Edwin",
       "rating": 1493.1,
       "cups": 1,
@@ -26159,7 +26136,7 @@
       ]
     },
     {
-      "rank": 310,
+      "rank": 309,
       "name": "lcanakin",
       "rating": 1493.1,
       "cups": 1,
@@ -26182,7 +26159,7 @@
       ]
     },
     {
-      "rank": 311,
+      "rank": 310,
       "name": "Eclipse135",
       "rating": 1493.1,
       "cups": 1,
@@ -26205,7 +26182,7 @@
       ]
     },
     {
-      "rank": 312,
+      "rank": 311,
       "name": "Scroller",
       "rating": 1493.1,
       "cups": 2,
@@ -26234,7 +26211,7 @@
       ]
     },
     {
-      "rank": 313,
+      "rank": 312,
       "name": "Ocanna",
       "rating": 1493.1,
       "cups": 1,
@@ -26257,7 +26234,7 @@
       ]
     },
     {
-      "rank": 314,
+      "rank": 313,
       "name": "BSoD | BigTechs",
       "rating": 1493.0,
       "cups": 1,
@@ -26280,7 +26257,7 @@
       ]
     },
     {
-      "rank": 315,
+      "rank": 314,
       "name": "Pot4t",
       "rating": 1493.0,
       "cups": 1,
@@ -26303,7 +26280,7 @@
       ]
     },
     {
-      "rank": 316,
+      "rank": 315,
       "name": "wokonmike",
       "rating": 1493.0,
       "cups": 1,
@@ -26326,7 +26303,7 @@
       ]
     },
     {
-      "rank": 317,
+      "rank": 316,
       "name": "[BAD]Tazule",
       "rating": 1492.9,
       "cups": 1,
@@ -26349,7 +26326,7 @@
       ]
     },
     {
-      "rank": 318,
+      "rank": 317,
       "name": "Baul Plart",
       "rating": 1492.8,
       "cups": 1,
@@ -26372,7 +26349,7 @@
       ]
     },
     {
-      "rank": 319,
+      "rank": 318,
       "name": "aistafanous",
       "rating": 1492.8,
       "cups": 1,
@@ -26395,7 +26372,7 @@
       ]
     },
     {
-      "rank": 320,
+      "rank": 319,
       "name": "Sputz",
       "rating": 1492.8,
       "cups": 1,
@@ -26418,7 +26395,7 @@
       ]
     },
     {
-      "rank": 321,
+      "rank": 320,
       "name": "MisterPeepers",
       "rating": 1492.7,
       "cups": 1,
@@ -26441,7 +26418,7 @@
       ]
     },
     {
-      "rank": 322,
+      "rank": 321,
       "name": "D3hawk",
       "rating": 1492.7,
       "cups": 1,
@@ -26464,7 +26441,7 @@
       ]
     },
     {
-      "rank": 323,
+      "rank": 322,
       "name": "Chezboog",
       "rating": 1492.7,
       "cups": 1,
@@ -26487,7 +26464,7 @@
       ]
     },
     {
-      "rank": 324,
+      "rank": 323,
       "name": "MAGS3",
       "rating": 1492.7,
       "cups": 1,
@@ -26510,7 +26487,7 @@
       ]
     },
     {
-      "rank": 325,
+      "rank": 324,
       "name": "RufusDraco",
       "rating": 1492.7,
       "cups": 1,
@@ -26533,7 +26510,7 @@
       ]
     },
     {
-      "rank": 326,
+      "rank": 325,
       "name": "The Law",
       "rating": 1492.6,
       "cups": 1,
@@ -26556,7 +26533,7 @@
       ]
     },
     {
-      "rank": 327,
+      "rank": 326,
       "name": "n1emand",
       "rating": 1492.6,
       "cups": 1,
@@ -26579,7 +26556,7 @@
       ]
     },
     {
-      "rank": 328,
+      "rank": 327,
       "name": "[MRBL]dave.ahlersmeyer",
       "rating": 1492.6,
       "cups": 1,
@@ -26602,7 +26579,7 @@
       ]
     },
     {
-      "rank": 329,
+      "rank": 328,
       "name": "Timsen07",
       "rating": 1492.6,
       "cups": 1,
@@ -26625,7 +26602,7 @@
       ]
     },
     {
-      "rank": 330,
+      "rank": 329,
       "name": "*awarded joint 2nd place due to disconnection in Round 11",
       "rating": 1492.6,
       "cups": 1,
@@ -26648,7 +26625,7 @@
       ]
     },
     {
-      "rank": 331,
+      "rank": 330,
       "name": "which prevented Kernkob from making Finals",
       "rating": 1492.6,
       "cups": 1,
@@ -26671,7 +26648,7 @@
       ]
     },
     {
-      "rank": 332,
+      "rank": 331,
       "name": "[Frik] DinoDeano",
       "rating": 1492.6,
       "cups": 1,
@@ -26694,7 +26671,7 @@
       ]
     },
     {
-      "rank": 333,
+      "rank": 332,
       "name": "That Weird Guy",
       "rating": 1492.6,
       "cups": 1,
@@ -26717,7 +26694,7 @@
       ]
     },
     {
-      "rank": 334,
+      "rank": 333,
       "name": "Ulv_RaVn",
       "rating": 1492.6,
       "cups": 3,
@@ -26752,7 +26729,7 @@
       ]
     },
     {
-      "rank": 335,
+      "rank": 334,
       "name": "Dot",
       "rating": 1492.5,
       "cups": 1,
@@ -26775,7 +26752,7 @@
       ]
     },
     {
-      "rank": 336,
+      "rank": 335,
       "name": "quint097",
       "rating": 1492.5,
       "cups": 1,
@@ -26798,7 +26775,7 @@
       ]
     },
     {
-      "rank": 337,
+      "rank": 336,
       "name": "Icey",
       "rating": 1492.5,
       "cups": 1,
@@ -26821,7 +26798,7 @@
       ]
     },
     {
-      "rank": 338,
+      "rank": 337,
       "name": "robertrdemare",
       "rating": 1492.4,
       "cups": 1,
@@ -26844,7 +26821,7 @@
       ]
     },
     {
-      "rank": 339,
+      "rank": 338,
       "name": "[TOG[Lazy_Echidna",
       "rating": 1492.4,
       "cups": 1,
@@ -26867,7 +26844,7 @@
       ]
     },
     {
-      "rank": 340,
+      "rank": 339,
       "name": "Piru",
       "rating": 1492.4,
       "cups": 2,
@@ -26896,7 +26873,7 @@
       ]
     },
     {
-      "rank": 341,
+      "rank": 340,
       "name": "Fis.Babup",
       "rating": 1492.4,
       "cups": 1,
@@ -26919,7 +26896,7 @@
       ]
     },
     {
-      "rank": 342,
+      "rank": 341,
       "name": "1337ops",
       "rating": 1492.4,
       "cups": 1,
@@ -26942,7 +26919,7 @@
       ]
     },
     {
-      "rank": 343,
+      "rank": 342,
       "name": "Gh0stChicken",
       "rating": 1492.4,
       "cups": 1,
@@ -26965,7 +26942,7 @@
       ]
     },
     {
-      "rank": 344,
+      "rank": 343,
       "name": "Rayzor6310",
       "rating": 1492.2,
       "cups": 1,
@@ -26988,7 +26965,7 @@
       ]
     },
     {
-      "rank": 345,
+      "rank": 344,
       "name": "[BORK] Valco",
       "rating": 1492.2,
       "cups": 1,
@@ -27011,7 +26988,7 @@
       ]
     },
     {
-      "rank": 346,
+      "rank": 345,
       "name": "HolzkoppFischkopp",
       "rating": 1492.2,
       "cups": 1,
@@ -27034,7 +27011,7 @@
       ]
     },
     {
-      "rank": 347,
+      "rank": 346,
       "name": "Arch",
       "rating": 1492.1,
       "cups": 1,
@@ -27057,7 +27034,7 @@
       ]
     },
     {
-      "rank": 348,
+      "rank": 347,
       "name": "GuillaumePM",
       "rating": 1492.1,
       "cups": 1,
@@ -27080,7 +27057,7 @@
       ]
     },
     {
-      "rank": 349,
+      "rank": 348,
       "name": "CCrider",
       "rating": 1492.0,
       "cups": 2,
@@ -27109,7 +27086,7 @@
       ]
     },
     {
-      "rank": 350,
+      "rank": 349,
       "name": "RigatoniShip",
       "rating": 1492.0,
       "cups": 2,
@@ -27138,7 +27115,7 @@
       ]
     },
     {
-      "rank": 351,
+      "rank": 350,
       "name": "MegaEpic11",
       "rating": 1492.0,
       "cups": 1,
@@ -27161,7 +27138,7 @@
       ]
     },
     {
-      "rank": 352,
+      "rank": 351,
       "name": "lokja",
       "rating": 1492.0,
       "cups": 1,
@@ -27184,7 +27161,7 @@
       ]
     },
     {
-      "rank": 353,
+      "rank": 352,
       "name": "Mazzy",
       "rating": 1492.0,
       "cups": 1,
@@ -27207,7 +27184,7 @@
       ]
     },
     {
-      "rank": 354,
+      "rank": 353,
       "name": "somesortofjakie",
       "rating": 1492.0,
       "cups": 1,
@@ -27230,7 +27207,7 @@
       ]
     },
     {
-      "rank": 355,
+      "rank": 354,
       "name": "Gakuraa",
       "rating": 1491.9,
       "cups": 1,
@@ -27253,7 +27230,7 @@
       ]
     },
     {
-      "rank": 356,
+      "rank": 355,
       "name": "Kratts",
       "rating": 1491.9,
       "cups": 1,
@@ -27276,7 +27253,7 @@
       ]
     },
     {
-      "rank": 357,
+      "rank": 356,
       "name": "Banana",
       "rating": 1491.9,
       "cups": 1,
@@ -27299,7 +27276,7 @@
       ]
     },
     {
-      "rank": 358,
+      "rank": 357,
       "name": "Feasibility",
       "rating": 1491.8,
       "cups": 1,
@@ -27322,7 +27299,7 @@
       ]
     },
     {
-      "rank": 359,
+      "rank": 358,
       "name": "masterofpi11436",
       "rating": 1491.8,
       "cups": 5,
@@ -27369,7 +27346,7 @@
       ]
     },
     {
-      "rank": 360,
+      "rank": 359,
       "name": "Roger256",
       "rating": 1491.8,
       "cups": 1,
@@ -27392,7 +27369,7 @@
       ]
     },
     {
-      "rank": 361,
+      "rank": 360,
       "name": "Hex_Proto",
       "rating": 1491.8,
       "cups": 1,
@@ -27415,7 +27392,7 @@
       ]
     },
     {
-      "rank": 362,
+      "rank": 361,
       "name": "CentimeterPeter",
       "rating": 1491.8,
       "cups": 1,
@@ -27438,7 +27415,7 @@
       ]
     },
     {
-      "rank": 363,
+      "rank": 362,
       "name": "Ninjakurl7",
       "rating": 1491.7,
       "cups": 1,
@@ -27461,7 +27438,7 @@
       ]
     },
     {
-      "rank": 364,
+      "rank": 363,
       "name": "[R0nC] cham824",
       "rating": 1491.7,
       "cups": 1,
@@ -27484,7 +27461,7 @@
       ]
     },
     {
-      "rank": 365,
+      "rank": 364,
       "name": "SurxiousTheBranded",
       "rating": 1491.7,
       "cups": 1,
@@ -27507,7 +27484,7 @@
       ]
     },
     {
-      "rank": 366,
+      "rank": 365,
       "name": "jhf0601",
       "rating": 1491.7,
       "cups": 1,
@@ -27530,7 +27507,7 @@
       ]
     },
     {
-      "rank": 367,
+      "rank": 366,
       "name": "Kick Jerreinemy",
       "rating": 1491.7,
       "cups": 1,
@@ -27553,7 +27530,7 @@
       ]
     },
     {
-      "rank": 368,
+      "rank": 367,
       "name": ">LLF< Lord Zekrom",
       "rating": 1491.7,
       "cups": 1,
@@ -27576,7 +27553,7 @@
       ]
     },
     {
-      "rank": 369,
+      "rank": 368,
       "name": "Adam",
       "rating": 1491.7,
       "cups": 4,
@@ -27617,7 +27594,7 @@
       ]
     },
     {
-      "rank": 370,
+      "rank": 369,
       "name": "Phasmanian",
       "rating": 1491.7,
       "cups": 1,
@@ -27640,7 +27617,7 @@
       ]
     },
     {
-      "rank": 371,
+      "rank": 370,
       "name": "AAredstone",
       "rating": 1491.7,
       "cups": 1,
@@ -27663,7 +27640,7 @@
       ]
     },
     {
-      "rank": 372,
+      "rank": 371,
       "name": "stindt",
       "rating": 1491.6,
       "cups": 7,
@@ -27722,7 +27699,7 @@
       ]
     },
     {
-      "rank": 373,
+      "rank": 372,
       "name": "jgorsc5200",
       "rating": 1491.6,
       "cups": 1,
@@ -27745,7 +27722,7 @@
       ]
     },
     {
-      "rank": 374,
+      "rank": 373,
       "name": "70reos",
       "rating": 1491.5,
       "cups": 1,
@@ -27768,7 +27745,7 @@
       ]
     },
     {
-      "rank": 375,
+      "rank": 374,
       "name": "[OwO] Fynn",
       "rating": 1491.5,
       "cups": 1,
@@ -27791,7 +27768,7 @@
       ]
     },
     {
-      "rank": 376,
+      "rank": 375,
       "name": "Andrew8Kavanagh",
       "rating": 1491.5,
       "cups": 1,
@@ -27814,7 +27791,7 @@
       ]
     },
     {
-      "rank": 377,
+      "rank": 376,
       "name": "Sensfan90",
       "rating": 1491.5,
       "cups": 1,
@@ -27837,7 +27814,7 @@
       ]
     },
     {
-      "rank": 378,
+      "rank": 377,
       "name": "Gurgies",
       "rating": 1491.5,
       "cups": 1,
@@ -27860,7 +27837,7 @@
       ]
     },
     {
-      "rank": 379,
+      "rank": 378,
       "name": "Brachaldis",
       "rating": 1491.5,
       "cups": 1,
@@ -27883,7 +27860,7 @@
       ]
     },
     {
-      "rank": 380,
+      "rank": 379,
       "name": "Shiftypowers83",
       "rating": 1491.5,
       "cups": 1,
@@ -27906,7 +27883,7 @@
       ]
     },
     {
-      "rank": 381,
+      "rank": 380,
       "name": "nicsaphire",
       "rating": 1491.5,
       "cups": 1,
@@ -27929,7 +27906,7 @@
       ]
     },
     {
-      "rank": 382,
+      "rank": 381,
       "name": "Shadymonkey",
       "rating": 1491.4,
       "cups": 1,
@@ -27952,7 +27929,7 @@
       ]
     },
     {
-      "rank": 383,
+      "rank": 382,
       "name": "Jozen",
       "rating": 1491.4,
       "cups": 1,
@@ -27975,7 +27952,7 @@
       ]
     },
     {
-      "rank": 384,
+      "rank": 383,
       "name": "Orange",
       "rating": 1491.4,
       "cups": 1,
@@ -27998,7 +27975,7 @@
       ]
     },
     {
-      "rank": 385,
+      "rank": 384,
       "name": "Jaydark",
       "rating": 1491.4,
       "cups": 1,
@@ -28021,7 +27998,7 @@
       ]
     },
     {
-      "rank": 386,
+      "rank": 385,
       "name": "Arturxxx",
       "rating": 1491.3,
       "cups": 2,
@@ -28050,7 +28027,7 @@
       ]
     },
     {
-      "rank": 387,
+      "rank": 386,
       "name": "[WASD] Dentalon",
       "rating": 1491.3,
       "cups": 2,
@@ -28079,7 +28056,7 @@
       ]
     },
     {
-      "rank": 388,
+      "rank": 387,
       "name": "Spyder_0324",
       "rating": 1491.3,
       "cups": 3,
@@ -28114,7 +28091,7 @@
       ]
     },
     {
-      "rank": 389,
+      "rank": 388,
       "name": "Croissant",
       "rating": 1491.3,
       "cups": 1,
@@ -28137,7 +28114,7 @@
       ]
     },
     {
-      "rank": 390,
+      "rank": 389,
       "name": "amylou1132",
       "rating": 1491.3,
       "cups": 1,
@@ -28160,7 +28137,7 @@
       ]
     },
     {
-      "rank": 391,
+      "rank": 390,
       "name": "Sir Cogwheel",
       "rating": 1491.3,
       "cups": 1,
@@ -28183,7 +28160,7 @@
       ]
     },
     {
-      "rank": 392,
+      "rank": 391,
       "name": "Geb1n",
       "rating": 1491.3,
       "cups": 1,
@@ -28206,7 +28183,7 @@
       ]
     },
     {
-      "rank": 393,
+      "rank": 392,
       "name": "Flamez",
       "rating": 1491.3,
       "cups": 1,
@@ -28229,7 +28206,7 @@
       ]
     },
     {
-      "rank": 394,
+      "rank": 393,
       "name": "CrackerBarrel Gaming",
       "rating": 1491.3,
       "cups": 1,
@@ -28252,7 +28229,7 @@
       ]
     },
     {
-      "rank": 395,
+      "rank": 394,
       "name": "gatlinggun511",
       "rating": 1491.3,
       "cups": 1,
@@ -28275,7 +28252,7 @@
       ]
     },
     {
-      "rank": 396,
+      "rank": 395,
       "name": "hiimfish",
       "rating": 1491.2,
       "cups": 1,
@@ -28298,7 +28275,7 @@
       ]
     },
     {
-      "rank": 397,
+      "rank": 396,
       "name": "Ezral",
       "rating": 1491.2,
       "cups": 1,
@@ -28321,7 +28298,7 @@
       ]
     },
     {
-      "rank": 398,
+      "rank": 397,
       "name": "zachwalt",
       "rating": 1491.2,
       "cups": 1,
@@ -28344,7 +28321,7 @@
       ]
     },
     {
-      "rank": 399,
+      "rank": 398,
       "name": "Absolute0CA",
       "rating": 1491.2,
       "cups": 1,
@@ -28367,7 +28344,7 @@
       ]
     },
     {
-      "rank": 400,
+      "rank": 399,
       "name": "Keeper",
       "rating": 1491.2,
       "cups": 1,
@@ -28390,7 +28367,7 @@
       ]
     },
     {
-      "rank": 401,
+      "rank": 400,
       "name": "aether34",
       "rating": 1491.2,
       "cups": 1,
@@ -28413,7 +28390,7 @@
       ]
     },
     {
-      "rank": 402,
+      "rank": 401,
       "name": "theo_f",
       "rating": 1491.2,
       "cups": 1,
@@ -28436,7 +28413,7 @@
       ]
     },
     {
-      "rank": 403,
+      "rank": 402,
       "name": "[Fart]KingKerf",
       "rating": 1491.1,
       "cups": 1,
@@ -28459,7 +28436,7 @@
       ]
     },
     {
-      "rank": 404,
+      "rank": 403,
       "name": "ZTR177",
       "rating": 1491.0,
       "cups": 2,
@@ -28488,7 +28465,7 @@
       ]
     },
     {
-      "rank": 405,
+      "rank": 404,
       "name": "Fire_Mutt",
       "rating": 1491.0,
       "cups": 1,
@@ -28511,7 +28488,7 @@
       ]
     },
     {
-      "rank": 406,
+      "rank": 405,
       "name": "TusBro",
       "rating": 1490.9,
       "cups": 1,
@@ -28534,7 +28511,7 @@
       ]
     },
     {
-      "rank": 407,
+      "rank": 406,
       "name": "Warrel",
       "rating": 1490.9,
       "cups": 1,
@@ -28557,7 +28534,7 @@
       ]
     },
     {
-      "rank": 408,
+      "rank": 407,
       "name": "DoctorDaVnci",
       "rating": 1490.9,
       "cups": 1,
@@ -28580,7 +28557,7 @@
       ]
     },
     {
-      "rank": 409,
+      "rank": 408,
       "name": "qaau",
       "rating": 1490.8,
       "cups": 1,
@@ -28603,7 +28580,7 @@
       ]
     },
     {
-      "rank": 410,
+      "rank": 409,
       "name": "ChociCinna94",
       "rating": 1490.8,
       "cups": 1,
@@ -28626,7 +28603,7 @@
       ]
     },
     {
-      "rank": 411,
+      "rank": 410,
       "name": "Meowbee",
       "rating": 1490.8,
       "cups": 2,
@@ -28655,7 +28632,7 @@
       ]
     },
     {
-      "rank": 412,
+      "rank": 411,
       "name": "Drunkshinobi",
       "rating": 1490.8,
       "cups": 3,
@@ -28690,7 +28667,7 @@
       ]
     },
     {
-      "rank": 413,
+      "rank": 412,
       "name": "SnkyDerg",
       "rating": 1490.8,
       "cups": 1,
@@ -28713,7 +28690,7 @@
       ]
     },
     {
-      "rank": 414,
+      "rank": 413,
       "name": "Shaaz",
       "rating": 1490.8,
       "cups": 1,
@@ -28736,7 +28713,7 @@
       ]
     },
     {
-      "rank": 415,
+      "rank": 414,
       "name": "wunderBarr",
       "rating": 1490.8,
       "cups": 1,
@@ -28759,7 +28736,7 @@
       ]
     },
     {
-      "rank": 416,
+      "rank": 415,
       "name": "Edi",
       "rating": 1490.8,
       "cups": 1,
@@ -28782,7 +28759,7 @@
       ]
     },
     {
-      "rank": 417,
+      "rank": 416,
       "name": "kAN",
       "rating": 1490.7,
       "cups": 2,
@@ -28811,7 +28788,7 @@
       ]
     },
     {
-      "rank": 418,
+      "rank": 417,
       "name": "JeramySS",
       "rating": 1490.7,
       "cups": 1,
@@ -28834,7 +28811,7 @@
       ]
     },
     {
-      "rank": 419,
+      "rank": 418,
       "name": "frabrokar6",
       "rating": 1490.7,
       "cups": 1,
@@ -28857,7 +28834,7 @@
       ]
     },
     {
-      "rank": 420,
+      "rank": 419,
       "name": "sirjdog21",
       "rating": 1490.6,
       "cups": 1,
@@ -28880,7 +28857,7 @@
       ]
     },
     {
-      "rank": 421,
+      "rank": 420,
       "name": "Berry",
       "rating": 1490.6,
       "cups": 1,
@@ -28903,7 +28880,7 @@
       ]
     },
     {
-      "rank": 422,
+      "rank": 421,
       "name": "[AAA] AmusedApple",
       "rating": 1490.6,
       "cups": 2,
@@ -28932,7 +28909,7 @@
       ]
     },
     {
-      "rank": 423,
+      "rank": 422,
       "name": "DOCTOR BIOHAZARD",
       "rating": 1490.6,
       "cups": 1,
@@ -28955,7 +28932,7 @@
       ]
     },
     {
-      "rank": 424,
+      "rank": 423,
       "name": "Skyes",
       "rating": 1490.6,
       "cups": 1,
@@ -28978,7 +28955,7 @@
       ]
     },
     {
-      "rank": 425,
+      "rank": 424,
       "name": "timesprout",
       "rating": 1490.6,
       "cups": 1,
@@ -29001,7 +28978,7 @@
       ]
     },
     {
-      "rank": 426,
+      "rank": 425,
       "name": "[GGG]Blacknight75_YT",
       "rating": 1490.6,
       "cups": 1,
@@ -29024,7 +29001,7 @@
       ]
     },
     {
-      "rank": 427,
+      "rank": 426,
       "name": "emdoki22",
       "rating": 1490.6,
       "cups": 1,
@@ -29047,7 +29024,7 @@
       ]
     },
     {
-      "rank": 428,
+      "rank": 427,
       "name": "pheonixiosi",
       "rating": 1490.5,
       "cups": 1,
@@ -29070,7 +29047,7 @@
       ]
     },
     {
-      "rank": 429,
+      "rank": 428,
       "name": "Ender",
       "rating": 1490.5,
       "cups": 5,
@@ -29117,7 +29094,7 @@
       ]
     },
     {
-      "rank": 430,
+      "rank": 429,
       "name": "JP_pne96",
       "rating": 1490.5,
       "cups": 2,
@@ -29146,7 +29123,7 @@
       ]
     },
     {
-      "rank": 431,
+      "rank": 430,
       "name": "ehki",
       "rating": 1490.5,
       "cups": 1,
@@ -29169,7 +29146,7 @@
       ]
     },
     {
-      "rank": 432,
+      "rank": 431,
       "name": "LL10884",
       "rating": 1490.5,
       "cups": 1,
@@ -29192,7 +29169,7 @@
       ]
     },
     {
-      "rank": 433,
+      "rank": 432,
       "name": "TrdMrk",
       "rating": 1490.4,
       "cups": 1,
@@ -29215,7 +29192,7 @@
       ]
     },
     {
-      "rank": 434,
+      "rank": 433,
       "name": "pald22",
       "rating": 1490.3,
       "cups": 1,
@@ -29238,7 +29215,7 @@
       ]
     },
     {
-      "rank": 435,
+      "rank": 434,
       "name": "UlverHausu",
       "rating": 1490.3,
       "cups": 1,
@@ -29261,7 +29238,7 @@
       ]
     },
     {
-      "rank": 436,
+      "rank": 435,
       "name": "DAAV",
       "rating": 1490.3,
       "cups": 1,
@@ -29284,7 +29261,7 @@
       ]
     },
     {
-      "rank": 437,
+      "rank": 436,
       "name": "Cheesy Cheeses",
       "rating": 1490.3,
       "cups": 1,
@@ -29307,7 +29284,7 @@
       ]
     },
     {
-      "rank": 438,
+      "rank": 437,
       "name": "Encarnado",
       "rating": 1490.3,
       "cups": 1,
@@ -29330,7 +29307,7 @@
       ]
     },
     {
-      "rank": 439,
+      "rank": 438,
       "name": "ZWIBM",
       "rating": 1490.3,
       "cups": 1,
@@ -29353,7 +29330,7 @@
       ]
     },
     {
-      "rank": 440,
+      "rank": 439,
       "name": "Hagavi",
       "rating": 1490.3,
       "cups": 1,
@@ -29376,7 +29353,7 @@
       ]
     },
     {
-      "rank": 441,
+      "rank": 440,
       "name": "Suits",
       "rating": 1490.2,
       "cups": 1,
@@ -29399,7 +29376,7 @@
       ]
     },
     {
-      "rank": 442,
+      "rank": 441,
       "name": "Moiso",
       "rating": 1490.2,
       "cups": 1,
@@ -29422,7 +29399,7 @@
       ]
     },
     {
-      "rank": 443,
+      "rank": 442,
       "name": "CasualReux",
       "rating": 1490.2,
       "cups": 1,
@@ -29445,7 +29422,7 @@
       ]
     },
     {
-      "rank": 444,
+      "rank": 443,
       "name": "MickeyM",
       "rating": 1490.2,
       "cups": 1,
@@ -29468,7 +29445,7 @@
       ]
     },
     {
-      "rank": 445,
+      "rank": 444,
       "name": "Baked Shark",
       "rating": 1490.2,
       "cups": 1,
@@ -29491,7 +29468,7 @@
       ]
     },
     {
-      "rank": 446,
+      "rank": 445,
       "name": "Tanaka",
       "rating": 1490.1,
       "cups": 1,
@@ -29514,7 +29491,7 @@
       ]
     },
     {
-      "rank": 447,
+      "rank": 446,
       "name": "King Of Wyoming",
       "rating": 1490.1,
       "cups": 1,
@@ -29537,7 +29514,7 @@
       ]
     },
     {
-      "rank": 448,
+      "rank": 447,
       "name": "bocs93",
       "rating": 1490.1,
       "cups": 1,
@@ -29560,7 +29537,7 @@
       ]
     },
     {
-      "rank": 449,
+      "rank": 448,
       "name": "giovannie4378",
       "rating": 1490.1,
       "cups": 1,
@@ -29583,7 +29560,7 @@
       ]
     },
     {
-      "rank": 450,
+      "rank": 449,
       "name": "jtc3161",
       "rating": 1490.1,
       "cups": 2,
@@ -29612,7 +29589,7 @@
       ]
     },
     {
-      "rank": 451,
+      "rank": 450,
       "name": "Mulkhsaio",
       "rating": 1490.1,
       "cups": 1,
@@ -29635,7 +29612,7 @@
       ]
     },
     {
-      "rank": 452,
+      "rank": 451,
       "name": "rose",
       "rating": 1490.1,
       "cups": 1,
@@ -29658,7 +29635,7 @@
       ]
     },
     {
-      "rank": 453,
+      "rank": 452,
       "name": "brak2mel",
       "rating": 1490.1,
       "cups": 1,
@@ -29681,7 +29658,7 @@
       ]
     },
     {
-      "rank": 454,
+      "rank": 453,
       "name": "Losdayver",
       "rating": 1490.1,
       "cups": 1,
@@ -29704,7 +29681,7 @@
       ]
     },
     {
-      "rank": 455,
+      "rank": 454,
       "name": "aaronred345",
       "rating": 1490.0,
       "cups": 1,
@@ -29727,7 +29704,7 @@
       ]
     },
     {
-      "rank": 456,
+      "rank": 455,
       "name": "Rigenix",
       "rating": 1490.0,
       "cups": 2,
@@ -29756,7 +29733,7 @@
       ]
     },
     {
-      "rank": 457,
+      "rank": 456,
       "name": "coldtwilightbeta",
       "rating": 1490.0,
       "cups": 1,
@@ -29779,7 +29756,7 @@
       ]
     },
     {
-      "rank": 458,
+      "rank": 457,
       "name": "[Anub]1618chris",
       "rating": 1490.0,
       "cups": 1,
@@ -29802,7 +29779,7 @@
       ]
     },
     {
-      "rank": 459,
+      "rank": 458,
       "name": "[FOOL] Ruckooe",
       "rating": 1490.0,
       "cups": 2,
@@ -29831,7 +29808,7 @@
       ]
     },
     {
-      "rank": 460,
+      "rank": 459,
       "name": "JunkJen",
       "rating": 1489.9,
       "cups": 1,
@@ -29854,7 +29831,7 @@
       ]
     },
     {
-      "rank": 461,
+      "rank": 460,
       "name": "RealPro",
       "rating": 1489.9,
       "cups": 1,
@@ -29877,7 +29854,7 @@
       ]
     },
     {
-      "rank": 462,
+      "rank": 461,
       "name": "electroshock777",
       "rating": 1489.9,
       "cups": 1,
@@ -29900,7 +29877,7 @@
       ]
     },
     {
-      "rank": 463,
+      "rank": 462,
       "name": "Luca Fiorini",
       "rating": 1489.9,
       "cups": 1,
@@ -29923,7 +29900,7 @@
       ]
     },
     {
-      "rank": 464,
+      "rank": 463,
       "name": "Mara",
       "rating": 1489.9,
       "cups": 1,
@@ -29946,7 +29923,7 @@
       ]
     },
     {
-      "rank": 465,
+      "rank": 464,
       "name": "Mr.Axolotl",
       "rating": 1489.9,
       "cups": 1,
@@ -29969,7 +29946,7 @@
       ]
     },
     {
-      "rank": 466,
+      "rank": 465,
       "name": "TheChemist",
       "rating": 1489.9,
       "cups": 1,
@@ -29992,7 +29969,7 @@
       ]
     },
     {
-      "rank": 467,
+      "rank": 466,
       "name": "[Zzz] PajamsAreFormalWear",
       "rating": 1489.9,
       "cups": 1,
@@ -30015,7 +29992,7 @@
       ]
     },
     {
-      "rank": 468,
+      "rank": 467,
       "name": "piandinfinite",
       "rating": 1489.9,
       "cups": 1,
@@ -30038,7 +30015,7 @@
       ]
     },
     {
-      "rank": 469,
+      "rank": 468,
       "name": "SwagTomaton",
       "rating": 1489.8,
       "cups": 1,
@@ -30061,7 +30038,7 @@
       ]
     },
     {
-      "rank": 470,
+      "rank": 469,
       "name": "Garbage Gaming",
       "rating": 1489.8,
       "cups": 1,
@@ -30084,7 +30061,7 @@
       ]
     },
     {
-      "rank": 471,
+      "rank": 470,
       "name": "[TOAB] JustinW",
       "rating": 1489.8,
       "cups": 1,
@@ -30107,7 +30084,7 @@
       ]
     },
     {
-      "rank": 472,
+      "rank": 471,
       "name": "[SOT]Loberless",
       "rating": 1489.8,
       "cups": 1,
@@ -30130,7 +30107,7 @@
       ]
     },
     {
-      "rank": 473,
+      "rank": 472,
       "name": "OutOfDucks",
       "rating": 1489.8,
       "cups": 1,
@@ -30153,7 +30130,7 @@
       ]
     },
     {
-      "rank": 474,
+      "rank": 473,
       "name": "Drypted",
       "rating": 1489.8,
       "cups": 1,
@@ -30176,7 +30153,7 @@
       ]
     },
     {
-      "rank": 475,
+      "rank": 474,
       "name": "HighPing_Enjoyer",
       "rating": 1489.8,
       "cups": 2,
@@ -30205,7 +30182,7 @@
       ]
     },
     {
-      "rank": 476,
+      "rank": 475,
       "name": "*disconnected",
       "rating": 1489.8,
       "cups": 1,
@@ -30228,7 +30205,7 @@
       ]
     },
     {
-      "rank": 477,
+      "rank": 476,
       "name": "Chupa Cu de Goianinha",
       "rating": 1489.7,
       "cups": 1,
@@ -30251,7 +30228,7 @@
       ]
     },
     {
-      "rank": 478,
+      "rank": 477,
       "name": "jfojk2415",
       "rating": 1489.7,
       "cups": 1,
@@ -30274,7 +30251,7 @@
       ]
     },
     {
-      "rank": 479,
+      "rank": 478,
       "name": "Rusty_Cavalier",
       "rating": 1489.7,
       "cups": 1,
@@ -30297,7 +30274,7 @@
       ]
     },
     {
-      "rank": 480,
+      "rank": 479,
       "name": "Jango",
       "rating": 1489.7,
       "cups": 1,
@@ -30320,7 +30297,7 @@
       ]
     },
     {
-      "rank": 481,
+      "rank": 480,
       "name": "NoramiKagenori",
       "rating": 1489.7,
       "cups": 1,
@@ -30343,7 +30320,7 @@
       ]
     },
     {
-      "rank": 482,
+      "rank": 481,
       "name": "[ZET] zeriv",
       "rating": 1489.7,
       "cups": 1,
@@ -30366,7 +30343,7 @@
       ]
     },
     {
-      "rank": 483,
+      "rank": 482,
       "name": "Swan",
       "rating": 1489.6,
       "cups": 1,
@@ -30389,7 +30366,7 @@
       ]
     },
     {
-      "rank": 484,
+      "rank": 483,
       "name": "LB_happy-face",
       "rating": 1489.6,
       "cups": 1,
@@ -30412,7 +30389,7 @@
       ]
     },
     {
-      "rank": 485,
+      "rank": 484,
       "name": "Victor",
       "rating": 1489.6,
       "cups": 3,
@@ -30447,7 +30424,7 @@
       ]
     },
     {
-      "rank": 486,
+      "rank": 485,
       "name": "Constable Bunu",
       "rating": 1489.6,
       "cups": 1,
@@ -30470,7 +30447,7 @@
       ]
     },
     {
-      "rank": 487,
+      "rank": 486,
       "name": "maikelvg",
       "rating": 1489.6,
       "cups": 1,
@@ -30493,7 +30470,7 @@
       ]
     },
     {
-      "rank": 488,
+      "rank": 487,
       "name": "vip",
       "rating": 1489.6,
       "cups": 1,
@@ -30516,7 +30493,7 @@
       ]
     },
     {
-      "rank": 489,
+      "rank": 488,
       "name": "AhFu",
       "rating": 1489.6,
       "cups": 1,
@@ -30539,7 +30516,7 @@
       ]
     },
     {
-      "rank": 490,
+      "rank": 489,
       "name": "crant0202",
       "rating": 1489.6,
       "cups": 1,
@@ -30562,7 +30539,7 @@
       ]
     },
     {
-      "rank": 491,
+      "rank": 490,
       "name": "Hero_Master67",
       "rating": 1489.5,
       "cups": 1,
@@ -30585,7 +30562,7 @@
       ]
     },
     {
-      "rank": 492,
+      "rank": 491,
       "name": "Boonanas",
       "rating": 1489.5,
       "cups": 1,
@@ -30608,7 +30585,7 @@
       ]
     },
     {
-      "rank": 493,
+      "rank": 492,
       "name": "ThomasIJs",
       "rating": 1489.5,
       "cups": 1,
@@ -30631,7 +30608,7 @@
       ]
     },
     {
-      "rank": 494,
+      "rank": 493,
       "name": "burnsidequest",
       "rating": 1489.5,
       "cups": 1,
@@ -30654,7 +30631,7 @@
       ]
     },
     {
-      "rank": 495,
+      "rank": 494,
       "name": "[T-T] DgGamez",
       "rating": 1489.5,
       "cups": 1,
@@ -30677,7 +30654,7 @@
       ]
     },
     {
-      "rank": 496,
+      "rank": 495,
       "name": "Moebius",
       "rating": 1489.5,
       "cups": 1,
@@ -30700,7 +30677,7 @@
       ]
     },
     {
-      "rank": 497,
+      "rank": 496,
       "name": "Roader",
       "rating": 1489.4,
       "cups": 10,
@@ -30777,7 +30754,7 @@
       ]
     },
     {
-      "rank": 498,
+      "rank": 497,
       "name": "idk man",
       "rating": 1489.4,
       "cups": 1,
@@ -30800,7 +30777,7 @@
       ]
     },
     {
-      "rank": 499,
+      "rank": 498,
       "name": "gdmonty",
       "rating": 1489.4,
       "cups": 1,
@@ -30823,7 +30800,7 @@
       ]
     },
     {
-      "rank": 500,
+      "rank": 499,
       "name": "MILKMAN",
       "rating": 1489.4,
       "cups": 1,
@@ -30846,7 +30823,7 @@
       ]
     },
     {
-      "rank": 501,
+      "rank": 500,
       "name": "Urbster",
       "rating": 1489.4,
       "cups": 1,
@@ -30869,7 +30846,7 @@
       ]
     },
     {
-      "rank": 502,
+      "rank": 501,
       "name": "[Zzz]ZAMON",
       "rating": 1489.4,
       "cups": 1,
@@ -30892,7 +30869,7 @@
       ]
     },
     {
-      "rank": 503,
+      "rank": 502,
       "name": "[QKD] ptptcenz",
       "rating": 1489.4,
       "cups": 1,
@@ -30915,7 +30892,7 @@
       ]
     },
     {
-      "rank": 504,
+      "rank": 503,
       "name": "Michael",
       "rating": 1489.3,
       "cups": 2,
@@ -30944,7 +30921,7 @@
       ]
     },
     {
-      "rank": 505,
+      "rank": 504,
       "name": "w32s",
       "rating": 1489.3,
       "cups": 1,
@@ -30967,7 +30944,7 @@
       ]
     },
     {
-      "rank": 506,
+      "rank": 505,
       "name": "gijidiji",
       "rating": 1489.3,
       "cups": 1,
@@ -30990,7 +30967,7 @@
       ]
     },
     {
-      "rank": 507,
+      "rank": 506,
       "name": "Mad Bull",
       "rating": 1489.3,
       "cups": 1,
@@ -31013,7 +30990,7 @@
       ]
     },
     {
-      "rank": 508,
+      "rank": 507,
       "name": "Sir Terter",
       "rating": 1489.3,
       "cups": 1,
@@ -31036,7 +31013,7 @@
       ]
     },
     {
-      "rank": 509,
+      "rank": 508,
       "name": "Squirrel",
       "rating": 1489.3,
       "cups": 1,
@@ -31059,7 +31036,7 @@
       ]
     },
     {
-      "rank": 510,
+      "rank": 509,
       "name": "azebramoomoo",
       "rating": 1489.3,
       "cups": 1,
@@ -31082,7 +31059,7 @@
       ]
     },
     {
-      "rank": 511,
+      "rank": 510,
       "name": "[MVT]Moving Target",
       "rating": 1489.3,
       "cups": 1,
@@ -31105,7 +31082,7 @@
       ]
     },
     {
-      "rank": 512,
+      "rank": 511,
       "name": "Maniac",
       "rating": 1489.3,
       "cups": 1,
@@ -31128,7 +31105,7 @@
       ]
     },
     {
-      "rank": 513,
+      "rank": 512,
       "name": "\u03bb SwiftEvolta",
       "rating": 1489.3,
       "cups": 1,
@@ -31151,7 +31128,7 @@
       ]
     },
     {
-      "rank": 514,
+      "rank": 513,
       "name": "Agnostos",
       "rating": 1489.2,
       "cups": 1,
@@ -31174,7 +31151,7 @@
       ]
     },
     {
-      "rank": 515,
+      "rank": 514,
       "name": "elsaendi",
       "rating": 1489.2,
       "cups": 1,
@@ -31197,7 +31174,7 @@
       ]
     },
     {
-      "rank": 516,
+      "rank": 515,
       "name": "Cat_karma19",
       "rating": 1489.2,
       "cups": 1,
@@ -31220,7 +31197,7 @@
       ]
     },
     {
-      "rank": 517,
+      "rank": 516,
       "name": "Mr. X",
       "rating": 1489.2,
       "cups": 1,
@@ -31243,7 +31220,7 @@
       ]
     },
     {
-      "rank": 518,
+      "rank": 517,
       "name": "Jeffrey",
       "rating": 1489.2,
       "cups": 2,
@@ -31272,7 +31249,7 @@
       ]
     },
     {
-      "rank": 519,
+      "rank": 518,
       "name": "J0uuun3s",
       "rating": 1489.2,
       "cups": 1,
@@ -31295,7 +31272,7 @@
       ]
     },
     {
-      "rank": 520,
+      "rank": 519,
       "name": "Celery (Hcart)",
       "rating": 1489.1,
       "cups": 1,
@@ -31318,7 +31295,7 @@
       ]
     },
     {
-      "rank": 521,
+      "rank": 520,
       "name": "Invisible",
       "rating": 1489.1,
       "cups": 1,
@@ -31341,7 +31318,7 @@
       ]
     },
     {
-      "rank": 522,
+      "rank": 521,
       "name": "Kroete",
       "rating": 1489.1,
       "cups": 1,
@@ -31364,7 +31341,7 @@
       ]
     },
     {
-      "rank": 523,
+      "rank": 522,
       "name": "BootyMcShooty888",
       "rating": 1489.1,
       "cups": 1,
@@ -31387,7 +31364,7 @@
       ]
     },
     {
-      "rank": 524,
+      "rank": 523,
       "name": "S\u00e4\u00e4ron",
       "rating": 1489.1,
       "cups": 1,
@@ -31410,7 +31387,7 @@
       ]
     },
     {
-      "rank": 525,
+      "rank": 524,
       "name": "GorillaGames",
       "rating": 1489.0,
       "cups": 1,
@@ -31433,7 +31410,7 @@
       ]
     },
     {
-      "rank": 526,
+      "rank": 525,
       "name": "[heyo]potatotron",
       "rating": 1489.0,
       "cups": 3,
@@ -31468,7 +31445,7 @@
       ]
     },
     {
-      "rank": 527,
+      "rank": 526,
       "name": "ScoobidyWoobidy",
       "rating": 1489.0,
       "cups": 1,
@@ -31491,7 +31468,7 @@
       ]
     },
     {
-      "rank": 528,
+      "rank": 527,
       "name": "Bugslvt",
       "rating": 1489.0,
       "cups": 1,
@@ -31514,7 +31491,7 @@
       ]
     },
     {
-      "rank": 529,
+      "rank": 528,
       "name": "Edhiluengo",
       "rating": 1489.0,
       "cups": 1,
@@ -31537,7 +31514,7 @@
       ]
     },
     {
-      "rank": 530,
+      "rank": 529,
       "name": "[BROT] Vrikka",
       "rating": 1489.0,
       "cups": 2,
@@ -31566,7 +31543,7 @@
       ]
     },
     {
-      "rank": 531,
+      "rank": 530,
       "name": "Lemo",
       "rating": 1489.0,
       "cups": 1,
@@ -31589,7 +31566,7 @@
       ]
     },
     {
-      "rank": 532,
+      "rank": 531,
       "name": "ArraTheFox (birchman26)",
       "rating": 1489.0,
       "cups": 1,
@@ -31612,7 +31589,7 @@
       ]
     },
     {
-      "rank": 533,
+      "rank": 532,
       "name": "[wozk]8Oreos",
       "rating": 1489.0,
       "cups": 1,
@@ -31635,7 +31612,7 @@
       ]
     },
     {
-      "rank": 534,
+      "rank": 533,
       "name": "gustavandren10",
       "rating": 1489.0,
       "cups": 1,
@@ -31658,7 +31635,7 @@
       ]
     },
     {
-      "rank": 535,
+      "rank": 534,
       "name": "Idontcare",
       "rating": 1489.0,
       "cups": 1,
@@ -31681,7 +31658,7 @@
       ]
     },
     {
-      "rank": 536,
+      "rank": 535,
       "name": "keithmorgan2012",
       "rating": 1489.0,
       "cups": 1,
@@ -31704,7 +31681,7 @@
       ]
     },
     {
-      "rank": 537,
+      "rank": 536,
       "name": "Prism",
       "rating": 1489.0,
       "cups": 1,
@@ -31727,7 +31704,7 @@
       ]
     },
     {
-      "rank": 538,
+      "rank": 537,
       "name": "Mokster",
       "rating": 1488.9,
       "cups": 3,
@@ -31762,7 +31739,7 @@
       ]
     },
     {
-      "rank": 539,
+      "rank": 538,
       "name": "Sly",
       "rating": 1488.9,
       "cups": 1,
@@ -31785,7 +31762,7 @@
       ]
     },
     {
-      "rank": 540,
+      "rank": 539,
       "name": "ProtioN",
       "rating": 1488.9,
       "cups": 2,
@@ -31814,7 +31791,7 @@
       ]
     },
     {
-      "rank": 541,
+      "rank": 540,
       "name": "gobbs92",
       "rating": 1488.9,
       "cups": 1,
@@ -31837,7 +31814,7 @@
       ]
     },
     {
-      "rank": 542,
+      "rank": 541,
       "name": "[mour]jason.piette",
       "rating": 1488.9,
       "cups": 1,
@@ -31860,7 +31837,7 @@
       ]
     },
     {
-      "rank": 543,
+      "rank": 542,
       "name": "Flames1099",
       "rating": 1488.9,
       "cups": 1,
@@ -31883,7 +31860,7 @@
       ]
     },
     {
-      "rank": 544,
+      "rank": 543,
       "name": "evan.m.messerschmidt",
       "rating": 1488.9,
       "cups": 1,
@@ -31906,7 +31883,7 @@
       ]
     },
     {
-      "rank": 545,
+      "rank": 544,
       "name": "Onsra",
       "rating": 1488.9,
       "cups": 1,
@@ -31929,7 +31906,7 @@
       ]
     },
     {
-      "rank": 546,
+      "rank": 545,
       "name": "V1p3r",
       "rating": 1488.9,
       "cups": 1,
@@ -31952,7 +31929,7 @@
       ]
     },
     {
-      "rank": 547,
+      "rank": 546,
       "name": "[jfsf] jake from state farm frying eggs",
       "rating": 1488.9,
       "cups": 1,
@@ -31975,7 +31952,7 @@
       ]
     },
     {
-      "rank": 548,
+      "rank": 547,
       "name": "Miner_vdv",
       "rating": 1488.9,
       "cups": 1,
@@ -31998,7 +31975,7 @@
       ]
     },
     {
-      "rank": 549,
+      "rank": 548,
       "name": "Hype Flexington",
       "rating": 1488.9,
       "cups": 1,
@@ -32021,7 +31998,7 @@
       ]
     },
     {
-      "rank": 550,
+      "rank": 549,
       "name": "KingKongBigDong",
       "rating": 1488.9,
       "cups": 1,
@@ -32044,7 +32021,7 @@
       ]
     },
     {
-      "rank": 551,
+      "rank": 550,
       "name": "MaxRex",
       "rating": 1488.9,
       "cups": 1,
@@ -32067,7 +32044,7 @@
       ]
     },
     {
-      "rank": 552,
+      "rank": 551,
       "name": "joriz911",
       "rating": 1488.9,
       "cups": 1,
@@ -32090,7 +32067,7 @@
       ]
     },
     {
-      "rank": 553,
+      "rank": 552,
       "name": "SWSpecter",
       "rating": 1488.9,
       "cups": 1,
@@ -32113,7 +32090,7 @@
       ]
     },
     {
-      "rank": 554,
+      "rank": 553,
       "name": "Hexacosichoron",
       "rating": 1488.9,
       "cups": 1,
@@ -32136,7 +32113,7 @@
       ]
     },
     {
-      "rank": 555,
+      "rank": 554,
       "name": "Brian",
       "rating": 1488.8,
       "cups": 1,
@@ -32159,7 +32136,7 @@
       ]
     },
     {
-      "rank": 556,
+      "rank": 555,
       "name": "DonutDawg07",
       "rating": 1488.8,
       "cups": 1,
@@ -32182,7 +32159,7 @@
       ]
     },
     {
-      "rank": 557,
+      "rank": 556,
       "name": "Aceiys",
       "rating": 1488.8,
       "cups": 1,
@@ -32205,7 +32182,7 @@
       ]
     },
     {
-      "rank": 558,
+      "rank": 557,
       "name": "SPEXWISE",
       "rating": 1488.8,
       "cups": 1,
@@ -32228,7 +32205,7 @@
       ]
     },
     {
-      "rank": 559,
+      "rank": 558,
       "name": "*Yahtzee, again",
       "rating": 1488.8,
       "cups": 1,
@@ -32251,7 +32228,7 @@
       ]
     },
     {
-      "rank": 560,
+      "rank": 559,
       "name": "[ZET] Mangooo",
       "rating": 1488.8,
       "cups": 1,
@@ -32274,7 +32251,7 @@
       ]
     },
     {
-      "rank": 561,
+      "rank": 560,
       "name": "mofn",
       "rating": 1488.7,
       "cups": 1,
@@ -32297,7 +32274,7 @@
       ]
     },
     {
-      "rank": 562,
+      "rank": 561,
       "name": "Sprinty",
       "rating": 1488.7,
       "cups": 1,
@@ -32320,7 +32297,7 @@
       ]
     },
     {
-      "rank": 563,
+      "rank": 562,
       "name": "Ludi Becher",
       "rating": 1488.7,
       "cups": 1,
@@ -32343,7 +32320,7 @@
       ]
     },
     {
-      "rank": 564,
+      "rank": 563,
       "name": "[LBFT] IHaveNoIdeaDanny",
       "rating": 1488.6,
       "cups": 1,
@@ -32366,7 +32343,7 @@
       ]
     },
     {
-      "rank": 565,
+      "rank": 564,
       "name": "Gaspacio",
       "rating": 1488.6,
       "cups": 1,
@@ -32389,7 +32366,7 @@
       ]
     },
     {
-      "rank": 566,
+      "rank": 565,
       "name": "cattelan03",
       "rating": 1488.6,
       "cups": 1,
@@ -32412,7 +32389,7 @@
       ]
     },
     {
-      "rank": 567,
+      "rank": 566,
       "name": "shipbopskidop",
       "rating": 1488.6,
       "cups": 1,
@@ -32435,7 +32412,7 @@
       ]
     },
     {
-      "rank": 568,
+      "rank": 567,
       "name": "jdeshone",
       "rating": 1488.5,
       "cups": 1,
@@ -32458,7 +32435,7 @@
       ]
     },
     {
-      "rank": 569,
+      "rank": 568,
       "name": "Frey_Finley",
       "rating": 1488.4,
       "cups": 1,
@@ -32481,7 +32458,7 @@
       ]
     },
     {
-      "rank": 570,
+      "rank": 569,
       "name": "Domhnall",
       "rating": 1488.4,
       "cups": 1,
@@ -32504,7 +32481,7 @@
       ]
     },
     {
-      "rank": 571,
+      "rank": 570,
       "name": "Chuckyesduro",
       "rating": 1488.4,
       "cups": 1,
@@ -32527,7 +32504,7 @@
       ]
     },
     {
-      "rank": 572,
+      "rank": 571,
       "name": "Sunraku",
       "rating": 1488.4,
       "cups": 1,
@@ -32550,7 +32527,7 @@
       ]
     },
     {
-      "rank": 573,
+      "rank": 572,
       "name": "Orblets",
       "rating": 1488.4,
       "cups": 1,
@@ -32573,7 +32550,7 @@
       ]
     },
     {
-      "rank": 574,
+      "rank": 573,
       "name": "[GGG] Kreeeeee",
       "rating": 1488.4,
       "cups": 1,
@@ -32596,7 +32573,7 @@
       ]
     },
     {
-      "rank": 575,
+      "rank": 574,
       "name": "CodeingerCat",
       "rating": 1488.4,
       "cups": 1,
@@ -32619,7 +32596,7 @@
       ]
     },
     {
-      "rank": 576,
+      "rank": 575,
       "name": "Wagzzz.",
       "rating": 1488.4,
       "cups": 1,
@@ -32642,7 +32619,7 @@
       ]
     },
     {
-      "rank": 577,
+      "rank": 576,
       "name": "[Ramn] MasterTrainieT",
       "rating": 1488.4,
       "cups": 1,
@@ -32665,7 +32642,7 @@
       ]
     },
     {
-      "rank": 578,
+      "rank": 577,
       "name": "Arnok0306",
       "rating": 1488.4,
       "cups": 1,
@@ -32688,7 +32665,7 @@
       ]
     },
     {
-      "rank": 579,
+      "rank": 578,
       "name": "[MIB]TheRockingSheep",
       "rating": 1488.4,
       "cups": 1,
@@ -32711,7 +32688,7 @@
       ]
     },
     {
-      "rank": 580,
+      "rank": 579,
       "name": "[CHZB]Willow!",
       "rating": 1488.4,
       "cups": 1,
@@ -32734,7 +32711,7 @@
       ]
     },
     {
-      "rank": 581,
+      "rank": 580,
       "name": "CodeZz",
       "rating": 1488.4,
       "cups": 1,
@@ -32757,7 +32734,7 @@
       ]
     },
     {
-      "rank": 582,
+      "rank": 581,
       "name": "just_cody",
       "rating": 1488.4,
       "cups": 2,
@@ -32786,7 +32763,7 @@
       ]
     },
     {
-      "rank": 583,
+      "rank": 582,
       "name": "MikeReddy",
       "rating": 1488.3,
       "cups": 1,
@@ -32809,7 +32786,7 @@
       ]
     },
     {
-      "rank": 584,
+      "rank": 583,
       "name": "Simon4411",
       "rating": 1488.3,
       "cups": 1,
@@ -32832,7 +32809,7 @@
       ]
     },
     {
-      "rank": 585,
+      "rank": 584,
       "name": "Steve Irwin",
       "rating": 1488.3,
       "cups": 1,
@@ -32855,7 +32832,7 @@
       ]
     },
     {
-      "rank": 586,
+      "rank": 585,
       "name": "Namira",
       "rating": 1488.3,
       "cups": 1,
@@ -32878,7 +32855,7 @@
       ]
     },
     {
-      "rank": 587,
+      "rank": 586,
       "name": "Kostynha",
       "rating": 1488.3,
       "cups": 1,
@@ -32901,7 +32878,7 @@
       ]
     },
     {
-      "rank": 588,
+      "rank": 587,
       "name": "Mr. Cranky",
       "rating": 1488.3,
       "cups": 1,
@@ -32924,7 +32901,7 @@
       ]
     },
     {
-      "rank": 589,
+      "rank": 588,
       "name": "[duck] dapper_duck",
       "rating": 1488.3,
       "cups": 1,
@@ -32947,7 +32924,7 @@
       ]
     },
     {
-      "rank": 590,
+      "rank": 589,
       "name": "Wolfman",
       "rating": 1488.3,
       "cups": 1,
@@ -32970,7 +32947,7 @@
       ]
     },
     {
-      "rank": 591,
+      "rank": 590,
       "name": "[Tech] Veneficus",
       "rating": 1488.3,
       "cups": 1,
@@ -32993,7 +32970,7 @@
       ]
     },
     {
-      "rank": 592,
+      "rank": 591,
       "name": "mezalsgreat",
       "rating": 1488.3,
       "cups": 1,
@@ -33016,7 +32993,7 @@
       ]
     },
     {
-      "rank": 593,
+      "rank": 592,
       "name": "fer1099",
       "rating": 1488.2,
       "cups": 4,
@@ -33057,7 +33034,7 @@
       ]
     },
     {
-      "rank": 594,
+      "rank": 593,
       "name": "*Time would not have been eliminated, but Hydro had to leave",
       "rating": 1488.2,
       "cups": 1,
@@ -33080,7 +33057,7 @@
       ]
     },
     {
-      "rank": 595,
+      "rank": 594,
       "name": "HBRD",
       "rating": 1488.2,
       "cups": 1,
@@ -33103,7 +33080,7 @@
       ]
     },
     {
-      "rank": 596,
+      "rank": 595,
       "name": "EdVilone",
       "rating": 1488.2,
       "cups": 1,
@@ -33126,7 +33103,7 @@
       ]
     },
     {
-      "rank": 597,
+      "rank": 596,
       "name": "[125] gcerul2",
       "rating": 1488.2,
       "cups": 1,
@@ -33149,7 +33126,7 @@
       ]
     },
     {
-      "rank": 598,
+      "rank": 597,
       "name": "TRIPLe HeLeX",
       "rating": 1488.2,
       "cups": 1,
@@ -33172,7 +33149,7 @@
       ]
     },
     {
-      "rank": 599,
+      "rank": 598,
       "name": "Zylcel",
       "rating": 1488.1,
       "cups": 1,
@@ -33195,7 +33172,7 @@
       ]
     },
     {
-      "rank": 600,
+      "rank": 599,
       "name": "DMILKS",
       "rating": 1488.1,
       "cups": 1,
@@ -33218,7 +33195,7 @@
       ]
     },
     {
-      "rank": 601,
+      "rank": 600,
       "name": "Cubmid",
       "rating": 1488.1,
       "cups": 1,
@@ -33241,7 +33218,7 @@
       ]
     },
     {
-      "rank": 602,
+      "rank": 601,
       "name": "Lightning_Jude",
       "rating": 1488.1,
       "cups": 1,
@@ -33264,7 +33241,7 @@
       ]
     },
     {
-      "rank": 603,
+      "rank": 602,
       "name": "Im_Coled",
       "rating": 1488.1,
       "cups": 1,
@@ -33287,7 +33264,7 @@
       ]
     },
     {
-      "rank": 604,
+      "rank": 603,
       "name": "SKULL",
       "rating": 1488.1,
       "cups": 2,
@@ -33316,7 +33293,7 @@
       ]
     },
     {
-      "rank": 605,
+      "rank": 604,
       "name": "[KURK[ lil_zwimpie",
       "rating": 1488.1,
       "cups": 1,
@@ -33339,7 +33316,7 @@
       ]
     },
     {
-      "rank": 606,
+      "rank": 605,
       "name": "Waterlemon147",
       "rating": 1488.1,
       "cups": 1,
@@ -33362,7 +33339,7 @@
       ]
     },
     {
-      "rank": 607,
+      "rank": 606,
       "name": "Chowder219",
       "rating": 1488.1,
       "cups": 1,
@@ -33385,7 +33362,7 @@
       ]
     },
     {
-      "rank": 608,
+      "rank": 607,
       "name": "[Dino] Rex",
       "rating": 1488.1,
       "cups": 2,
@@ -33414,7 +33391,7 @@
       ]
     },
     {
-      "rank": 609,
+      "rank": 608,
       "name": "Pig_Lad",
       "rating": 1488.0,
       "cups": 2,
@@ -33443,7 +33420,7 @@
       ]
     },
     {
-      "rank": 610,
+      "rank": 609,
       "name": "Glump",
       "rating": 1488.0,
       "cups": 1,
@@ -33466,7 +33443,7 @@
       ]
     },
     {
-      "rank": 611,
+      "rank": 610,
       "name": "pigbenis",
       "rating": 1488.0,
       "cups": 1,
@@ -33489,7 +33466,7 @@
       ]
     },
     {
-      "rank": 612,
+      "rank": 611,
       "name": "damianjanur",
       "rating": 1488.0,
       "cups": 1,
@@ -33512,7 +33489,7 @@
       ]
     },
     {
-      "rank": 613,
+      "rank": 612,
       "name": "Midnight",
       "rating": 1488.0,
       "cups": 1,
@@ -33535,7 +33512,7 @@
       ]
     },
     {
-      "rank": 614,
+      "rank": 613,
       "name": "Raf",
       "rating": 1488.0,
       "cups": 1,
@@ -33558,7 +33535,7 @@
       ]
     },
     {
-      "rank": 615,
+      "rank": 614,
       "name": "Some hats!!",
       "rating": 1488.0,
       "cups": 1,
@@ -33581,7 +33558,7 @@
       ]
     },
     {
-      "rank": 616,
+      "rank": 615,
       "name": "Sheepish999",
       "rating": 1488.0,
       "cups": 1,
@@ -33604,7 +33581,7 @@
       ]
     },
     {
-      "rank": 617,
+      "rank": 616,
       "name": "Tusdav",
       "rating": 1488.0,
       "cups": 1,
@@ -33627,7 +33604,7 @@
       ]
     },
     {
-      "rank": 618,
+      "rank": 617,
       "name": "Streaky",
       "rating": 1488.0,
       "cups": 1,
@@ -33650,7 +33627,7 @@
       ]
     },
     {
-      "rank": 619,
+      "rank": 618,
       "name": "markdtodie",
       "rating": 1488.0,
       "cups": 1,
@@ -33673,7 +33650,7 @@
       ]
     },
     {
-      "rank": 620,
+      "rank": 619,
       "name": "Joe-bgaming",
       "rating": 1488.0,
       "cups": 7,
@@ -33732,7 +33709,7 @@
       ]
     },
     {
-      "rank": 621,
+      "rank": 620,
       "name": "timeless void",
       "rating": 1487.9,
       "cups": 1,
@@ -33755,7 +33732,7 @@
       ]
     },
     {
-      "rank": 622,
+      "rank": 621,
       "name": "CYBRON7",
       "rating": 1487.9,
       "cups": 1,
@@ -33778,7 +33755,7 @@
       ]
     },
     {
-      "rank": 623,
+      "rank": 622,
       "name": "Patty",
       "rating": 1487.9,
       "cups": 1,
@@ -33801,7 +33778,7 @@
       ]
     },
     {
-      "rank": 624,
+      "rank": 623,
       "name": "propulsion_man",
       "rating": 1487.9,
       "cups": 1,
@@ -33824,7 +33801,7 @@
       ]
     },
     {
-      "rank": 625,
+      "rank": 624,
       "name": "miese_Katheter",
       "rating": 1487.9,
       "cups": 1,
@@ -33847,7 +33824,7 @@
       ]
     },
     {
-      "rank": 626,
+      "rank": 625,
       "name": "*justMaki left the game after setting a time as a noble sacrifice",
       "rating": 1487.9,
       "cups": 1,
@@ -33870,7 +33847,7 @@
       ]
     },
     {
-      "rank": 627,
+      "rank": 626,
       "name": "Lou Lou",
       "rating": 1487.9,
       "cups": 1,
@@ -33893,7 +33870,7 @@
       ]
     },
     {
-      "rank": 628,
+      "rank": 627,
       "name": "Movin'n'Groovin",
       "rating": 1487.9,
       "cups": 1,
@@ -33916,7 +33893,7 @@
       ]
     },
     {
-      "rank": 629,
+      "rank": 628,
       "name": "Lenin Brega",
       "rating": 1487.9,
       "cups": 1,
@@ -33939,7 +33916,7 @@
       ]
     },
     {
-      "rank": 630,
+      "rank": 629,
       "name": "\u03bblex | QuiZzeL",
       "rating": 1487.9,
       "cups": 1,
@@ -33962,7 +33939,7 @@
       ]
     },
     {
-      "rank": 631,
+      "rank": 630,
       "name": "Carp",
       "rating": 1487.8,
       "cups": 1,
@@ -33985,7 +33962,7 @@
       ]
     },
     {
-      "rank": 632,
+      "rank": 631,
       "name": "Chili",
       "rating": 1487.8,
       "cups": 1,
@@ -34008,7 +33985,7 @@
       ]
     },
     {
-      "rank": 633,
+      "rank": 632,
       "name": "The Fizix Lord",
       "rating": 1487.8,
       "cups": 1,
@@ -34031,7 +34008,7 @@
       ]
     },
     {
-      "rank": 634,
+      "rank": 633,
       "name": "BluePizza",
       "rating": 1487.8,
       "cups": 1,
@@ -34054,7 +34031,7 @@
       ]
     },
     {
-      "rank": 635,
+      "rank": 634,
       "name": "Dragonrage",
       "rating": 1487.8,
       "cups": 1,
@@ -34077,7 +34054,7 @@
       ]
     },
     {
-      "rank": 636,
+      "rank": 635,
       "name": "Darkstar1592",
       "rating": 1487.8,
       "cups": 1,
@@ -34100,7 +34077,7 @@
       ]
     },
     {
-      "rank": 637,
+      "rank": 636,
       "name": "CraftyDoug",
       "rating": 1487.8,
       "cups": 1,
@@ -34123,7 +34100,7 @@
       ]
     },
     {
-      "rank": 638,
+      "rank": 637,
       "name": "JayTheGamer",
       "rating": 1487.8,
       "cups": 1,
@@ -34146,7 +34123,7 @@
       ]
     },
     {
-      "rank": 639,
+      "rank": 638,
       "name": "wilkinsong1024",
       "rating": 1487.8,
       "cups": 1,
@@ -34169,7 +34146,7 @@
       ]
     },
     {
-      "rank": 640,
+      "rank": 639,
       "name": "Shark_boi",
       "rating": 1487.8,
       "cups": 1,
@@ -34192,7 +34169,7 @@
       ]
     },
     {
-      "rank": 641,
+      "rank": 640,
       "name": "taylope",
       "rating": 1487.8,
       "cups": 1,
@@ -34215,7 +34192,7 @@
       ]
     },
     {
-      "rank": 642,
+      "rank": 641,
       "name": "zattack765",
       "rating": 1487.8,
       "cups": 1,
@@ -34238,7 +34215,7 @@
       ]
     },
     {
-      "rank": 643,
+      "rank": 642,
       "name": "CheesyWizard",
       "rating": 1487.7,
       "cups": 1,
@@ -34261,7 +34238,7 @@
       ]
     },
     {
-      "rank": 644,
+      "rank": 643,
       "name": "Griffcula",
       "rating": 1487.7,
       "cups": 2,
@@ -34290,7 +34267,7 @@
       ]
     },
     {
-      "rank": 645,
+      "rank": 644,
       "name": "[BEAR] An actual Bear",
       "rating": 1487.7,
       "cups": 1,
@@ -34313,7 +34290,7 @@
       ]
     },
     {
-      "rank": 646,
+      "rank": 645,
       "name": "Dobi_72",
       "rating": 1487.7,
       "cups": 1,
@@ -34336,7 +34313,7 @@
       ]
     },
     {
-      "rank": 647,
+      "rank": 646,
       "name": "johnthesloth360",
       "rating": 1487.7,
       "cups": 1,
@@ -34359,7 +34336,7 @@
       ]
     },
     {
-      "rank": 648,
+      "rank": 647,
       "name": "ajohansen79",
       "rating": 1487.7,
       "cups": 1,
@@ -34382,7 +34359,7 @@
       ]
     },
     {
-      "rank": 649,
+      "rank": 648,
       "name": "Green Squirrel",
       "rating": 1487.7,
       "cups": 1,
@@ -34405,7 +34382,7 @@
       ]
     },
     {
-      "rank": 650,
+      "rank": 649,
       "name": "beatrice.serban0610",
       "rating": 1487.7,
       "cups": 1,
@@ -34428,7 +34405,7 @@
       ]
     },
     {
-      "rank": 651,
+      "rank": 650,
       "name": "Zarro",
       "rating": 1487.6,
       "cups": 2,
@@ -34457,7 +34434,7 @@
       ]
     },
     {
-      "rank": 652,
+      "rank": 651,
       "name": "apfelbaum",
       "rating": 1487.6,
       "cups": 1,
@@ -34480,7 +34457,7 @@
       ]
     },
     {
-      "rank": 653,
+      "rank": 652,
       "name": "Piggo89",
       "rating": 1487.6,
       "cups": 1,
@@ -34503,7 +34480,7 @@
       ]
     },
     {
-      "rank": 654,
+      "rank": 653,
       "name": "Hidden atlantis",
       "rating": 1487.5,
       "cups": 1,
@@ -34526,7 +34503,7 @@
       ]
     },
     {
-      "rank": 655,
+      "rank": 654,
       "name": "Edsheeran",
       "rating": 1487.5,
       "cups": 1,
@@ -34549,7 +34526,7 @@
       ]
     },
     {
-      "rank": 656,
+      "rank": 655,
       "name": "Andbusy",
       "rating": 1487.5,
       "cups": 1,
@@ -34572,7 +34549,7 @@
       ]
     },
     {
-      "rank": 657,
+      "rank": 656,
       "name": "dumy",
       "rating": 1487.5,
       "cups": 1,
@@ -34595,7 +34572,7 @@
       ]
     },
     {
-      "rank": 658,
+      "rank": 657,
       "name": "tws20so",
       "rating": 1487.4,
       "cups": 3,
@@ -34630,7 +34607,7 @@
       ]
     },
     {
-      "rank": 659,
+      "rank": 658,
       "name": "Codewalt",
       "rating": 1487.4,
       "cups": 7,
@@ -34689,7 +34666,7 @@
       ]
     },
     {
-      "rank": 660,
+      "rank": 659,
       "name": "Marcotik",
       "rating": 1487.4,
       "cups": 1,
@@ -34712,7 +34689,7 @@
       ]
     },
     {
-      "rank": 661,
+      "rank": 660,
       "name": "Orbitix",
       "rating": 1487.4,
       "cups": 1,
@@ -34735,7 +34712,7 @@
       ]
     },
     {
-      "rank": 662,
+      "rank": 661,
       "name": "Beyer_Garratt",
       "rating": 1487.4,
       "cups": 1,
@@ -34758,48 +34735,7 @@
       ]
     },
     {
-      "rank": 663,
-      "name": "PlusMicron",
-      "rating": 1487.4,
-      "cups": 4,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 36.2,
-      "best_finish": 30,
-      "peak_rating": 1496.9,
-      "history": [
-        {
-          "cup": "COTD 128",
-          "position": 35,
-          "rating": 1496.9,
-          "lobby_size": 52
-        },
-        {
-          "cup": "COTD 130",
-          "position": 44,
-          "rating": 1489.2,
-          "lobby_size": 58
-        },
-        {
-          "cup": "COTD 132",
-          "position": 36,
-          "rating": 1487.3,
-          "lobby_size": 59
-        },
-        {
-          "cup": "COTD 133",
-          "position": 30,
-          "rating": 1487.4,
-          "lobby_size": 54
-        }
-      ]
-    },
-    {
-      "rank": 664,
+      "rank": 662,
       "name": "Gzusmon",
       "rating": 1487.3,
       "cups": 1,
@@ -34822,7 +34758,7 @@
       ]
     },
     {
-      "rank": 665,
+      "rank": 663,
       "name": "octopusprime",
       "rating": 1487.3,
       "cups": 1,
@@ -34845,7 +34781,7 @@
       ]
     },
     {
-      "rank": 666,
+      "rank": 664,
       "name": "Garfath",
       "rating": 1487.2,
       "cups": 1,
@@ -34868,7 +34804,7 @@
       ]
     },
     {
-      "rank": 667,
+      "rank": 665,
       "name": "Vampiric",
       "rating": 1487.2,
       "cups": 1,
@@ -34891,7 +34827,7 @@
       ]
     },
     {
-      "rank": 668,
+      "rank": 666,
       "name": "Ichor",
       "rating": 1487.2,
       "cups": 1,
@@ -34914,7 +34850,7 @@
       ]
     },
     {
-      "rank": 669,
+      "rank": 667,
       "name": "zunbrikr",
       "rating": 1487.2,
       "cups": 1,
@@ -34937,7 +34873,7 @@
       ]
     },
     {
-      "rank": 670,
+      "rank": 668,
       "name": "[bldr]reholmes92",
       "rating": 1487.2,
       "cups": 1,
@@ -34960,7 +34896,7 @@
       ]
     },
     {
-      "rank": 671,
+      "rank": 669,
       "name": "imagineclevernamehere",
       "rating": 1487.2,
       "cups": 1,
@@ -34983,7 +34919,7 @@
       ]
     },
     {
-      "rank": 672,
+      "rank": 670,
       "name": "[TRG]Tamir",
       "rating": 1487.2,
       "cups": 1,
@@ -35006,7 +34942,7 @@
       ]
     },
     {
-      "rank": 673,
+      "rank": 671,
       "name": "Lax-Caveman",
       "rating": 1487.2,
       "cups": 3,
@@ -35041,7 +34977,7 @@
       ]
     },
     {
-      "rank": 674,
+      "rank": 672,
       "name": "onlyPhoenixx",
       "rating": 1487.2,
       "cups": 1,
@@ -35064,7 +35000,7 @@
       ]
     },
     {
-      "rank": 675,
+      "rank": 673,
       "name": "EnviousFly*",
       "rating": 1487.1,
       "cups": 1,
@@ -35087,7 +35023,7 @@
       ]
     },
     {
-      "rank": 676,
+      "rank": 674,
       "name": "Mejolarsson",
       "rating": 1487.1,
       "cups": 1,
@@ -35110,7 +35046,7 @@
       ]
     },
     {
-      "rank": 677,
+      "rank": 675,
       "name": "ElectroSalamander",
       "rating": 1487.1,
       "cups": 1,
@@ -35133,7 +35069,7 @@
       ]
     },
     {
-      "rank": 678,
+      "rank": 676,
       "name": "Snowick_",
       "rating": 1487.1,
       "cups": 1,
@@ -35156,7 +35092,7 @@
       ]
     },
     {
-      "rank": 679,
+      "rank": 677,
       "name": "jjofk2415",
       "rating": 1487.1,
       "cups": 1,
@@ -35179,7 +35115,7 @@
       ]
     },
     {
-      "rank": 680,
+      "rank": 678,
       "name": "TheNetworkDoctor",
       "rating": 1487.1,
       "cups": 1,
@@ -35202,7 +35138,7 @@
       ]
     },
     {
-      "rank": 681,
+      "rank": 679,
       "name": "[BAD] JavaPlayz",
       "rating": 1487.1,
       "cups": 1,
@@ -35225,7 +35161,7 @@
       ]
     },
     {
-      "rank": 682,
+      "rank": 680,
       "name": "zrenica",
       "rating": 1487.1,
       "cups": 1,
@@ -35248,7 +35184,7 @@
       ]
     },
     {
-      "rank": 683,
+      "rank": 681,
       "name": "Space_cat9999",
       "rating": 1487.1,
       "cups": 1,
@@ -35271,7 +35207,7 @@
       ]
     },
     {
-      "rank": 684,
+      "rank": 682,
       "name": "Squeech",
       "rating": 1487.0,
       "cups": 3,
@@ -35306,7 +35242,7 @@
       ]
     },
     {
-      "rank": 685,
+      "rank": 683,
       "name": "hga71",
       "rating": 1487.0,
       "cups": 1,
@@ -35329,7 +35265,7 @@
       ]
     },
     {
-      "rank": 686,
+      "rank": 684,
       "name": "SPIFF",
       "rating": 1487.0,
       "cups": 1,
@@ -35352,7 +35288,7 @@
       ]
     },
     {
-      "rank": 687,
+      "rank": 685,
       "name": "Jackmerius Tacktheritrix",
       "rating": 1487.0,
       "cups": 1,
@@ -35375,7 +35311,7 @@
       ]
     },
     {
-      "rank": 688,
+      "rank": 686,
       "name": "FlyBoy",
       "rating": 1487.0,
       "cups": 2,
@@ -35404,7 +35340,7 @@
       ]
     },
     {
-      "rank": 689,
+      "rank": 687,
       "name": "Shoe",
       "rating": 1486.9,
       "cups": 1,
@@ -35427,7 +35363,7 @@
       ]
     },
     {
-      "rank": 690,
+      "rank": 688,
       "name": "Past",
       "rating": 1486.9,
       "cups": 2,
@@ -35456,7 +35392,7 @@
       ]
     },
     {
-      "rank": 691,
+      "rank": 689,
       "name": "EP2xT2x",
       "rating": 1486.8,
       "cups": 1,
@@ -35479,7 +35415,7 @@
       ]
     },
     {
-      "rank": 692,
+      "rank": 690,
       "name": "Mulac25",
       "rating": 1486.8,
       "cups": 1,
@@ -35502,7 +35438,7 @@
       ]
     },
     {
-      "rank": 693,
+      "rank": 691,
       "name": "oliver_the_boss",
       "rating": 1486.8,
       "cups": 1,
@@ -35525,7 +35461,7 @@
       ]
     },
     {
-      "rank": 694,
+      "rank": 692,
       "name": "Razboy20",
       "rating": 1486.7,
       "cups": 1,
@@ -35548,7 +35484,7 @@
       ]
     },
     {
-      "rank": 695,
+      "rank": 693,
       "name": "embalmer",
       "rating": 1486.7,
       "cups": 3,
@@ -35583,7 +35519,7 @@
       ]
     },
     {
-      "rank": 696,
+      "rank": 694,
       "name": "Zekru",
       "rating": 1486.6,
       "cups": 1,
@@ -35606,7 +35542,7 @@
       ]
     },
     {
-      "rank": 697,
+      "rank": 695,
       "name": "md_PL",
       "rating": 1486.6,
       "cups": 1,
@@ -35629,7 +35565,7 @@
       ]
     },
     {
-      "rank": 698,
+      "rank": 696,
       "name": "DocTheBot",
       "rating": 1486.5,
       "cups": 1,
@@ -35652,7 +35588,7 @@
       ]
     },
     {
-      "rank": 699,
+      "rank": 697,
       "name": "Dambuster",
       "rating": 1486.5,
       "cups": 1,
@@ -35675,7 +35611,7 @@
       ]
     },
     {
-      "rank": 700,
+      "rank": 698,
       "name": "Termite",
       "rating": 1486.5,
       "cups": 1,
@@ -35698,7 +35634,7 @@
       ]
     },
     {
-      "rank": 701,
+      "rank": 699,
       "name": "Riverius Phoenix",
       "rating": 1486.4,
       "cups": 1,
@@ -35721,7 +35657,7 @@
       ]
     },
     {
-      "rank": 702,
+      "rank": 700,
       "name": "ttv/FloshaHD",
       "rating": 1486.4,
       "cups": 2,
@@ -35750,7 +35686,7 @@
       ]
     },
     {
-      "rank": 703,
+      "rank": 701,
       "name": "XiLZeNoX",
       "rating": 1486.4,
       "cups": 1,
@@ -35773,7 +35709,7 @@
       ]
     },
     {
-      "rank": 704,
+      "rank": 702,
       "name": "alxti",
       "rating": 1486.3,
       "cups": 1,
@@ -35796,7 +35732,7 @@
       ]
     },
     {
-      "rank": 705,
+      "rank": 703,
       "name": "Tsunder",
       "rating": 1486.3,
       "cups": 2,
@@ -35825,7 +35761,7 @@
       ]
     },
     {
-      "rank": 706,
+      "rank": 704,
       "name": "Llama_Lordie",
       "rating": 1486.2,
       "cups": 2,
@@ -35854,7 +35790,7 @@
       ]
     },
     {
-      "rank": 707,
+      "rank": 705,
       "name": "[CTR]Jellyfish",
       "rating": 1486.2,
       "cups": 1,
@@ -35877,7 +35813,7 @@
       ]
     },
     {
-      "rank": 708,
+      "rank": 706,
       "name": "soldtwilightbeta",
       "rating": 1486.2,
       "cups": 1,
@@ -35900,7 +35836,7 @@
       ]
     },
     {
-      "rank": 709,
+      "rank": 707,
       "name": "Rallari",
       "rating": 1486.2,
       "cups": 2,
@@ -35929,7 +35865,7 @@
       ]
     },
     {
-      "rank": 710,
+      "rank": 708,
       "name": "Half-Qilin",
       "rating": 1486.1,
       "cups": 2,
@@ -35958,7 +35894,7 @@
       ]
     },
     {
-      "rank": 711,
+      "rank": 709,
       "name": "laurin",
       "rating": 1486.1,
       "cups": 2,
@@ -35987,7 +35923,7 @@
       ]
     },
     {
-      "rank": 712,
+      "rank": 710,
       "name": "BB_Benji",
       "rating": 1486.1,
       "cups": 3,
@@ -36022,7 +35958,7 @@
       ]
     },
     {
-      "rank": 713,
+      "rank": 711,
       "name": "Carequinha",
       "rating": 1486.1,
       "cups": 2,
@@ -36051,7 +35987,7 @@
       ]
     },
     {
-      "rank": 714,
+      "rank": 712,
       "name": "incredulouspotato",
       "rating": 1486.0,
       "cups": 2,
@@ -36080,7 +36016,7 @@
       ]
     },
     {
-      "rank": 715,
+      "rank": 713,
       "name": "Nobody",
       "rating": 1485.9,
       "cups": 1,
@@ -36103,7 +36039,7 @@
       ]
     },
     {
-      "rank": 716,
+      "rank": 714,
       "name": "Hikek78TTV",
       "rating": 1485.9,
       "cups": 1,
@@ -36126,7 +36062,7 @@
       ]
     },
     {
-      "rank": 717,
+      "rank": 715,
       "name": "mythorchid",
       "rating": 1485.9,
       "cups": 1,
@@ -36149,7 +36085,7 @@
       ]
     },
     {
-      "rank": 718,
+      "rank": 716,
       "name": "Yami",
       "rating": 1485.9,
       "cups": 1,
@@ -36172,7 +36108,7 @@
       ]
     },
     {
-      "rank": 719,
+      "rank": 717,
       "name": "Ens4181",
       "rating": 1485.9,
       "cups": 1,
@@ -36195,7 +36131,7 @@
       ]
     },
     {
-      "rank": 720,
+      "rank": 718,
       "name": "Roddhill",
       "rating": 1485.9,
       "cups": 1,
@@ -36218,7 +36154,7 @@
       ]
     },
     {
-      "rank": 721,
+      "rank": 719,
       "name": "Superhaj",
       "rating": 1485.9,
       "cups": 1,
@@ -36241,7 +36177,7 @@
       ]
     },
     {
-      "rank": 722,
+      "rank": 720,
       "name": "buppo",
       "rating": 1485.9,
       "cups": 1,
@@ -36264,7 +36200,7 @@
       ]
     },
     {
-      "rank": 723,
+      "rank": 721,
       "name": "Saturnb",
       "rating": 1485.9,
       "cups": 1,
@@ -36287,7 +36223,7 @@
       ]
     },
     {
-      "rank": 724,
+      "rank": 722,
       "name": "d_vizero",
       "rating": 1485.7,
       "cups": 1,
@@ -36310,7 +36246,7 @@
       ]
     },
     {
-      "rank": 725,
+      "rank": 723,
       "name": "ButItRuns",
       "rating": 1485.7,
       "cups": 3,
@@ -36345,7 +36281,7 @@
       ]
     },
     {
-      "rank": 726,
+      "rank": 724,
       "name": "Ozone",
       "rating": 1485.7,
       "cups": 5,
@@ -36392,7 +36328,7 @@
       ]
     },
     {
-      "rank": 727,
+      "rank": 725,
       "name": "SjorsTea",
       "rating": 1485.7,
       "cups": 2,
@@ -36421,7 +36357,7 @@
       ]
     },
     {
-      "rank": 728,
+      "rank": 726,
       "name": "Tom-ST",
       "rating": 1485.6,
       "cups": 1,
@@ -36444,7 +36380,7 @@
       ]
     },
     {
-      "rank": 729,
+      "rank": 727,
       "name": "Vae",
       "rating": 1485.5,
       "cups": 1,
@@ -36467,7 +36403,7 @@
       ]
     },
     {
-      "rank": 730,
+      "rank": 728,
       "name": "mandodestiny",
       "rating": 1485.5,
       "cups": 2,
@@ -36496,7 +36432,7 @@
       ]
     },
     {
-      "rank": 731,
+      "rank": 729,
       "name": "Doos Legend",
       "rating": 1485.4,
       "cups": 1,
@@ -36519,7 +36455,7 @@
       ]
     },
     {
-      "rank": 732,
+      "rank": 730,
       "name": "The_Waddler",
       "rating": 1485.4,
       "cups": 2,
@@ -36548,7 +36484,7 @@
       ]
     },
     {
-      "rank": 733,
+      "rank": 731,
       "name": "Kurtis",
       "rating": 1485.4,
       "cups": 2,
@@ -36560,12 +36496,12 @@
       },
       "avg_position": 49.5,
       "best_finish": 42,
-      "peak_rating": 1494.9,
+      "peak_rating": 1494.8,
       "history": [
         {
           "cup": "COTD 131",
           "position": 42,
-          "rating": 1494.9,
+          "rating": 1494.8,
           "lobby_size": 58
         },
         {
@@ -36577,7 +36513,7 @@
       ]
     },
     {
-      "rank": 734,
+      "rank": 732,
       "name": "Artdeath",
       "rating": 1485.3,
       "cups": 1,
@@ -36600,7 +36536,7 @@
       ]
     },
     {
-      "rank": 735,
+      "rank": 733,
       "name": "Qwert26",
       "rating": 1485.3,
       "cups": 1,
@@ -36623,7 +36559,7 @@
       ]
     },
     {
-      "rank": 736,
+      "rank": 734,
       "name": "TRG Pants",
       "rating": 1485.3,
       "cups": 1,
@@ -36646,7 +36582,54 @@
       ]
     },
     {
-      "rank": 737,
+      "rank": 735,
+      "name": "PlusMicron",
+      "rating": 1485.2,
+      "cups": 5,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 36.0,
+      "best_finish": 30,
+      "peak_rating": 1496.9,
+      "history": [
+        {
+          "cup": "COTD 128",
+          "position": 35,
+          "rating": 1496.9,
+          "lobby_size": 52
+        },
+        {
+          "cup": "COTD 130",
+          "position": 44,
+          "rating": 1489.2,
+          "lobby_size": 58
+        },
+        {
+          "cup": "COTD 131",
+          "position": 35,
+          "rating": 1486.8,
+          "lobby_size": 58
+        },
+        {
+          "cup": "COTD 132",
+          "position": 36,
+          "rating": 1485.0,
+          "lobby_size": 59
+        },
+        {
+          "cup": "COTD 133",
+          "position": 30,
+          "rating": 1485.2,
+          "lobby_size": 54
+        }
+      ]
+    },
+    {
+      "rank": 736,
       "name": "Scheepsjongen",
       "rating": 1485.1,
       "cups": 1,
@@ -36669,7 +36652,7 @@
       ]
     },
     {
-      "rank": 738,
+      "rank": 737,
       "name": "nusuntpenguin",
       "rating": 1485.1,
       "cups": 1,
@@ -36692,7 +36675,7 @@
       ]
     },
     {
-      "rank": 739,
+      "rank": 738,
       "name": "Zaza_Lord",
       "rating": 1485.0,
       "cups": 1,
@@ -36715,7 +36698,7 @@
       ]
     },
     {
-      "rank": 740,
+      "rank": 739,
       "name": "milokittykat",
       "rating": 1485.0,
       "cups": 1,
@@ -36738,7 +36721,7 @@
       ]
     },
     {
-      "rank": 741,
+      "rank": 740,
       "name": "BramvdN",
       "rating": 1485.0,
       "cups": 1,
@@ -36761,7 +36744,7 @@
       ]
     },
     {
-      "rank": 742,
+      "rank": 741,
       "name": "Zeth",
       "rating": 1485.0,
       "cups": 1,
@@ -36784,7 +36767,7 @@
       ]
     },
     {
-      "rank": 743,
+      "rank": 742,
       "name": "DiamondInsanity",
       "rating": 1485.0,
       "cups": 1,
@@ -36807,7 +36790,7 @@
       ]
     },
     {
-      "rank": 744,
+      "rank": 743,
       "name": "ZeDeliveryGuy",
       "rating": 1485.0,
       "cups": 1,
@@ -36830,7 +36813,7 @@
       ]
     },
     {
-      "rank": 745,
+      "rank": 744,
       "name": "GoBigGoHotWheels",
       "rating": 1485.0,
       "cups": 5,
@@ -36877,7 +36860,7 @@
       ]
     },
     {
-      "rank": 746,
+      "rank": 745,
       "name": "zoeShep",
       "rating": 1485.0,
       "cups": 2,
@@ -36906,7 +36889,7 @@
       ]
     },
     {
-      "rank": 747,
+      "rank": 746,
       "name": "Stolovitskyinc",
       "rating": 1484.9,
       "cups": 1,
@@ -36929,7 +36912,7 @@
       ]
     },
     {
-      "rank": 748,
+      "rank": 747,
       "name": "lewis",
       "rating": 1484.9,
       "cups": 3,
@@ -36964,7 +36947,7 @@
       ]
     },
     {
-      "rank": 749,
+      "rank": 748,
       "name": "Muttz05",
       "rating": 1484.9,
       "cups": 1,
@@ -36987,7 +36970,7 @@
       ]
     },
     {
-      "rank": 750,
+      "rank": 749,
       "name": "Vishi_An",
       "rating": 1484.9,
       "cups": 1,
@@ -37010,7 +36993,7 @@
       ]
     },
     {
-      "rank": 751,
+      "rank": 750,
       "name": "bobbarleh",
       "rating": 1484.9,
       "cups": 1,
@@ -37033,7 +37016,7 @@
       ]
     },
     {
-      "rank": 752,
+      "rank": 751,
       "name": "leatsyke",
       "rating": 1484.9,
       "cups": 1,
@@ -37056,7 +37039,7 @@
       ]
     },
     {
-      "rank": 753,
+      "rank": 752,
       "name": "Ronan_The_Denominator",
       "rating": 1484.9,
       "cups": 1,
@@ -37079,7 +37062,7 @@
       ]
     },
     {
-      "rank": 754,
+      "rank": 753,
       "name": "OwlsAreVeryCool",
       "rating": 1484.9,
       "cups": 1,
@@ -37102,7 +37085,7 @@
       ]
     },
     {
-      "rank": 755,
+      "rank": 754,
       "name": "groovy",
       "rating": 1484.8,
       "cups": 1,
@@ -37125,7 +37108,7 @@
       ]
     },
     {
-      "rank": 756,
+      "rank": 755,
       "name": "Simple jack",
       "rating": 1484.8,
       "cups": 1,
@@ -37148,7 +37131,7 @@
       ]
     },
     {
-      "rank": 757,
+      "rank": 756,
       "name": "Llama",
       "rating": 1484.8,
       "cups": 3,
@@ -37183,7 +37166,7 @@
       ]
     },
     {
-      "rank": 758,
+      "rank": 757,
       "name": "Gorgleflungus",
       "rating": 1484.7,
       "cups": 1,
@@ -37206,7 +37189,7 @@
       ]
     },
     {
-      "rank": 759,
+      "rank": 758,
       "name": "DRWright38",
       "rating": 1484.7,
       "cups": 2,
@@ -37235,7 +37218,7 @@
       ]
     },
     {
-      "rank": 760,
+      "rank": 759,
       "name": "LKat",
       "rating": 1484.6,
       "cups": 3,
@@ -37270,7 +37253,7 @@
       ]
     },
     {
-      "rank": 761,
+      "rank": 760,
       "name": "Es3en",
       "rating": 1484.5,
       "cups": 3,
@@ -37305,7 +37288,7 @@
       ]
     },
     {
-      "rank": 762,
+      "rank": 761,
       "name": "Max Scaffold",
       "rating": 1484.5,
       "cups": 1,
@@ -37328,7 +37311,7 @@
       ]
     },
     {
-      "rank": 763,
+      "rank": 762,
       "name": "sander",
       "rating": 1484.5,
       "cups": 1,
@@ -37351,7 +37334,7 @@
       ]
     },
     {
-      "rank": 764,
+      "rank": 763,
       "name": "(F.T.C)Quad",
       "rating": 1484.4,
       "cups": 1,
@@ -37374,7 +37357,7 @@
       ]
     },
     {
-      "rank": 765,
+      "rank": 764,
       "name": "TimPanZee",
       "rating": 1484.4,
       "cups": 4,
@@ -37415,7 +37398,7 @@
       ]
     },
     {
-      "rank": 766,
+      "rank": 765,
       "name": "Vikjor",
       "rating": 1484.4,
       "cups": 2,
@@ -37444,7 +37427,7 @@
       ]
     },
     {
-      "rank": 767,
+      "rank": 766,
       "name": "HLK#13PRO",
       "rating": 1484.2,
       "cups": 1,
@@ -37467,7 +37450,7 @@
       ]
     },
     {
-      "rank": 768,
+      "rank": 767,
       "name": "kreig",
       "rating": 1484.2,
       "cups": 1,
@@ -37490,7 +37473,7 @@
       ]
     },
     {
-      "rank": 769,
+      "rank": 768,
       "name": "Nusszucker",
       "rating": 1484.1,
       "cups": 1,
@@ -37513,7 +37496,7 @@
       ]
     },
     {
-      "rank": 770,
+      "rank": 769,
       "name": "Flamedglitch",
       "rating": 1484.1,
       "cups": 1,
@@ -37536,7 +37519,7 @@
       ]
     },
     {
-      "rank": 771,
+      "rank": 770,
       "name": "Giganten",
       "rating": 1484.0,
       "cups": 4,
@@ -37577,7 +37560,7 @@
       ]
     },
     {
-      "rank": 772,
+      "rank": 771,
       "name": "OfMany",
       "rating": 1484.0,
       "cups": 3,
@@ -37612,7 +37595,7 @@
       ]
     },
     {
-      "rank": 773,
+      "rank": 772,
       "name": "MasterGamer64",
       "rating": 1483.9,
       "cups": 3,
@@ -37647,7 +37630,7 @@
       ]
     },
     {
-      "rank": 774,
+      "rank": 773,
       "name": "Trash Salad",
       "rating": 1483.9,
       "cups": 1,
@@ -37670,7 +37653,7 @@
       ]
     },
     {
-      "rank": 775,
+      "rank": 774,
       "name": "General",
       "rating": 1483.9,
       "cups": 1,
@@ -37693,7 +37676,7 @@
       ]
     },
     {
-      "rank": 776,
+      "rank": 775,
       "name": "daniel",
       "rating": 1483.9,
       "cups": 2,
@@ -37722,7 +37705,7 @@
       ]
     },
     {
-      "rank": 777,
+      "rank": 776,
       "name": "lordarnoud",
       "rating": 1483.8,
       "cups": 1,
@@ -37745,7 +37728,7 @@
       ]
     },
     {
-      "rank": 778,
+      "rank": 777,
       "name": "VaiOnko",
       "rating": 1483.8,
       "cups": 1,
@@ -37768,7 +37751,7 @@
       ]
     },
     {
-      "rank": 779,
+      "rank": 778,
       "name": "maxie12",
       "rating": 1483.8,
       "cups": 12,
@@ -37857,7 +37840,7 @@
       ]
     },
     {
-      "rank": 780,
+      "rank": 779,
       "name": "Zeke Ryu'kai",
       "rating": 1483.8,
       "cups": 2,
@@ -37886,7 +37869,7 @@
       ]
     },
     {
-      "rank": 781,
+      "rank": 780,
       "name": "sawyervitek27",
       "rating": 1483.8,
       "cups": 2,
@@ -37915,7 +37898,7 @@
       ]
     },
     {
-      "rank": 782,
+      "rank": 781,
       "name": "Sleeky",
       "rating": 1483.7,
       "cups": 1,
@@ -37938,7 +37921,7 @@
       ]
     },
     {
-      "rank": 783,
+      "rank": 782,
       "name": "FArd_gamin",
       "rating": 1483.7,
       "cups": 1,
@@ -37961,7 +37944,7 @@
       ]
     },
     {
-      "rank": 784,
+      "rank": 783,
       "name": "Dark Guard2712",
       "rating": 1483.6,
       "cups": 1,
@@ -37984,7 +37967,7 @@
       ]
     },
     {
-      "rank": 785,
+      "rank": 784,
       "name": "DocRee",
       "rating": 1483.6,
       "cups": 2,
@@ -38013,7 +37996,7 @@
       ]
     },
     {
-      "rank": 786,
+      "rank": 785,
       "name": "WhataClown",
       "rating": 1483.5,
       "cups": 1,
@@ -38036,7 +38019,7 @@
       ]
     },
     {
-      "rank": 787,
+      "rank": 786,
       "name": "*AndMe14 and ZOMAN had to leave mid tournament.",
       "rating": 1483.5,
       "cups": 1,
@@ -38059,7 +38042,7 @@
       ]
     },
     {
-      "rank": 788,
+      "rank": 787,
       "name": "AndMe14 had a 44.514 at the time of leaving (Round 7)",
       "rating": 1483.5,
       "cups": 1,
@@ -38082,7 +38065,7 @@
       ]
     },
     {
-      "rank": 789,
+      "rank": 788,
       "name": "ZOMAN had a 44.666 at time of leaving (Round 4)",
       "rating": 1483.5,
       "cups": 1,
@@ -38105,7 +38088,7 @@
       ]
     },
     {
-      "rank": 790,
+      "rank": 789,
       "name": "SwiftyMarcus",
       "rating": 1483.3,
       "cups": 1,
@@ -38128,7 +38111,7 @@
       ]
     },
     {
-      "rank": 791,
+      "rank": 790,
       "name": "Draug",
       "rating": 1483.3,
       "cups": 2,
@@ -38157,7 +38140,7 @@
       ]
     },
     {
-      "rank": 792,
+      "rank": 791,
       "name": "Luma",
       "rating": 1483.2,
       "cups": 2,
@@ -38186,7 +38169,7 @@
       ]
     },
     {
-      "rank": 793,
+      "rank": 792,
       "name": "Hate Hater",
       "rating": 1483.1,
       "cups": 2,
@@ -38215,7 +38198,7 @@
       ]
     },
     {
-      "rank": 794,
+      "rank": 793,
       "name": "sharkoftheday",
       "rating": 1483.0,
       "cups": 1,
@@ -38238,7 +38221,7 @@
       ]
     },
     {
-      "rank": 795,
+      "rank": 794,
       "name": "Jrax144",
       "rating": 1482.9,
       "cups": 2,
@@ -38267,7 +38250,7 @@
       ]
     },
     {
-      "rank": 796,
+      "rank": 795,
       "name": "JayEph",
       "rating": 1482.6,
       "cups": 1,
@@ -38290,7 +38273,7 @@
       ]
     },
     {
-      "rank": 797,
+      "rank": 796,
       "name": "SHARKa",
       "rating": 1482.5,
       "cups": 1,
@@ -38313,7 +38296,7 @@
       ]
     },
     {
-      "rank": 798,
+      "rank": 797,
       "name": "Hoyuu4",
       "rating": 1482.5,
       "cups": 1,
@@ -38336,7 +38319,7 @@
       ]
     },
     {
-      "rank": 799,
+      "rank": 798,
       "name": "XydesReaper",
       "rating": 1482.5,
       "cups": 1,
@@ -38359,7 +38342,7 @@
       ]
     },
     {
-      "rank": 800,
+      "rank": 799,
       "name": "Cactushead",
       "rating": 1482.5,
       "cups": 9,
@@ -38430,7 +38413,7 @@
       ]
     },
     {
-      "rank": 801,
+      "rank": 800,
       "name": "snugglykitty",
       "rating": 1482.5,
       "cups": 2,
@@ -38459,7 +38442,7 @@
       ]
     },
     {
-      "rank": 802,
+      "rank": 801,
       "name": "LumpinLoaf",
       "rating": 1482.4,
       "cups": 1,
@@ -38482,7 +38465,7 @@
       ]
     },
     {
-      "rank": 803,
+      "rank": 802,
       "name": "thefaststloth31",
       "rating": 1482.2,
       "cups": 1,
@@ -38505,7 +38488,7 @@
       ]
     },
     {
-      "rank": 804,
+      "rank": 803,
       "name": "BeeHoles",
       "rating": 1482.2,
       "cups": 1,
@@ -38528,7 +38511,7 @@
       ]
     },
     {
-      "rank": 805,
+      "rank": 804,
       "name": "Jinx",
       "rating": 1482.2,
       "cups": 3,
@@ -38563,7 +38546,7 @@
       ]
     },
     {
-      "rank": 806,
+      "rank": 805,
       "name": "Bigge",
       "rating": 1482.2,
       "cups": 2,
@@ -38592,7 +38575,7 @@
       ]
     },
     {
-      "rank": 807,
+      "rank": 806,
       "name": "theubergeek",
       "rating": 1482.1,
       "cups": 1,
@@ -38615,7 +38598,7 @@
       ]
     },
     {
-      "rank": 808,
+      "rank": 807,
       "name": "Skaall",
       "rating": 1482.0,
       "cups": 1,
@@ -38638,7 +38621,7 @@
       ]
     },
     {
-      "rank": 809,
+      "rank": 808,
       "name": "tristian.aaric.porter",
       "rating": 1481.8,
       "cups": 1,
@@ -38661,7 +38644,7 @@
       ]
     },
     {
-      "rank": 810,
+      "rank": 809,
       "name": "byte_sized",
       "rating": 1481.8,
       "cups": 1,
@@ -38684,7 +38667,7 @@
       ]
     },
     {
-      "rank": 811,
+      "rank": 810,
       "name": "sf.is.a.bbt",
       "rating": 1481.6,
       "cups": 2,
@@ -38713,7 +38696,7 @@
       ]
     },
     {
-      "rank": 812,
+      "rank": 811,
       "name": "adventurecat",
       "rating": 1481.5,
       "cups": 1,
@@ -38736,7 +38719,7 @@
       ]
     },
     {
-      "rank": 813,
+      "rank": 812,
       "name": "DosasNMimiosas",
       "rating": 1481.5,
       "cups": 1,
@@ -38759,7 +38742,7 @@
       ]
     },
     {
-      "rank": 814,
+      "rank": 813,
       "name": ":3pocalypse :TheD",
       "rating": 1481.5,
       "cups": 1,
@@ -38782,7 +38765,7 @@
       ]
     },
     {
-      "rank": 815,
+      "rank": 814,
       "name": "FabulousHair49",
       "rating": 1481.5,
       "cups": 1,
@@ -38805,7 +38788,7 @@
       ]
     },
     {
-      "rank": 816,
+      "rank": 815,
       "name": "RedTailedMink",
       "rating": 1481.5,
       "cups": 1,
@@ -38828,7 +38811,7 @@
       ]
     },
     {
-      "rank": 817,
+      "rank": 816,
       "name": "FreckledBard23",
       "rating": 1481.4,
       "cups": 2,
@@ -38857,7 +38840,7 @@
       ]
     },
     {
-      "rank": 818,
+      "rank": 817,
       "name": "GearworkDragon",
       "rating": 1481.4,
       "cups": 4,
@@ -38898,7 +38881,7 @@
       ]
     },
     {
-      "rank": 819,
+      "rank": 818,
       "name": "[EEN] Nick",
       "rating": 1481.4,
       "cups": 2,
@@ -38927,7 +38910,7 @@
       ]
     },
     {
-      "rank": 820,
+      "rank": 819,
       "name": "TheGerm",
       "rating": 1481.2,
       "cups": 2,
@@ -38956,7 +38939,7 @@
       ]
     },
     {
-      "rank": 821,
+      "rank": 820,
       "name": "slainsco",
       "rating": 1481.2,
       "cups": 2,
@@ -38985,7 +38968,7 @@
       ]
     },
     {
-      "rank": 822,
+      "rank": 821,
       "name": "variableferret",
       "rating": 1481.2,
       "cups": 16,
@@ -39098,7 +39081,7 @@
       ]
     },
     {
-      "rank": 823,
+      "rank": 822,
       "name": "Telumehtar",
       "rating": 1481.2,
       "cups": 2,
@@ -39127,7 +39110,7 @@
       ]
     },
     {
-      "rank": 824,
+      "rank": 823,
       "name": "Rubbish",
       "rating": 1481.1,
       "cups": 1,
@@ -39150,7 +39133,7 @@
       ]
     },
     {
-      "rank": 825,
+      "rank": 824,
       "name": "Inno",
       "rating": 1481.1,
       "cups": 1,
@@ -39173,7 +39156,7 @@
       ]
     },
     {
-      "rank": 826,
+      "rank": 825,
       "name": "Cozmotic Gamer",
       "rating": 1481.1,
       "cups": 1,
@@ -39196,7 +39179,7 @@
       ]
     },
     {
-      "rank": 827,
+      "rank": 826,
       "name": "Sblob197",
       "rating": 1481.1,
       "cups": 1,
@@ -39219,7 +39202,7 @@
       ]
     },
     {
-      "rank": 828,
+      "rank": 827,
       "name": "KeaVa",
       "rating": 1481.1,
       "cups": 2,
@@ -39248,7 +39231,7 @@
       ]
     },
     {
-      "rank": 829,
+      "rank": 828,
       "name": "Werun",
       "rating": 1481.1,
       "cups": 2,
@@ -39277,7 +39260,7 @@
       ]
     },
     {
-      "rank": 830,
+      "rank": 829,
       "name": "Fang",
       "rating": 1481.1,
       "cups": 2,
@@ -39306,7 +39289,7 @@
       ]
     },
     {
-      "rank": 831,
+      "rank": 830,
       "name": "ElectricCaveman",
       "rating": 1481.1,
       "cups": 2,
@@ -39335,7 +39318,7 @@
       ]
     },
     {
-      "rank": 832,
+      "rank": 831,
       "name": "SirMagicEarlobeTheFirst",
       "rating": 1481.0,
       "cups": 1,
@@ -39358,7 +39341,7 @@
       ]
     },
     {
-      "rank": 833,
+      "rank": 832,
       "name": "DRDOOM",
       "rating": 1481.0,
       "cups": 1,
@@ -39381,7 +39364,7 @@
       ]
     },
     {
-      "rank": 834,
+      "rank": 833,
       "name": "Tie208",
       "rating": 1481.0,
       "cups": 1,
@@ -39404,7 +39387,7 @@
       ]
     },
     {
-      "rank": 835,
+      "rank": 834,
       "name": "ColdTwilight",
       "rating": 1480.8,
       "cups": 2,
@@ -39433,7 +39416,7 @@
       ]
     },
     {
-      "rank": 836,
+      "rank": 835,
       "name": "Sheriff",
       "rating": 1480.8,
       "cups": 3,
@@ -39468,7 +39451,7 @@
       ]
     },
     {
-      "rank": 837,
+      "rank": 836,
       "name": "DBNULL",
       "rating": 1480.7,
       "cups": 4,
@@ -39509,7 +39492,7 @@
       ]
     },
     {
-      "rank": 838,
+      "rank": 837,
       "name": "MacroMelon",
       "rating": 1480.3,
       "cups": 3,
@@ -39544,7 +39527,7 @@
       ]
     },
     {
-      "rank": 839,
+      "rank": 838,
       "name": "Noot Noot 42.0",
       "rating": 1480.2,
       "cups": 5,
@@ -39591,7 +39574,7 @@
       ]
     },
     {
-      "rank": 840,
+      "rank": 839,
       "name": "J",
       "rating": 1480.2,
       "cups": 2,
@@ -39620,7 +39603,7 @@
       ]
     },
     {
-      "rank": 841,
+      "rank": 840,
       "name": "Teazer",
       "rating": 1480.1,
       "cups": 1,
@@ -39643,7 +39626,7 @@
       ]
     },
     {
-      "rank": 842,
+      "rank": 841,
       "name": "Br1dg3rVT",
       "rating": 1480.1,
       "cups": 1,
@@ -39666,7 +39649,7 @@
       ]
     },
     {
-      "rank": 843,
+      "rank": 842,
       "name": "Rik",
       "rating": 1480.1,
       "cups": 1,
@@ -39689,7 +39672,7 @@
       ]
     },
     {
-      "rank": 844,
+      "rank": 843,
       "name": "Cozmo_DaCat",
       "rating": 1480.1,
       "cups": 1,
@@ -39712,7 +39695,7 @@
       ]
     },
     {
-      "rank": 845,
+      "rank": 844,
       "name": "Snad",
       "rating": 1480.1,
       "cups": 1,
@@ -39735,7 +39718,7 @@
       ]
     },
     {
-      "rank": 846,
+      "rank": 845,
       "name": "Diamond_Chomper",
       "rating": 1480.1,
       "cups": 1,
@@ -39758,7 +39741,7 @@
       ]
     },
     {
-      "rank": 847,
+      "rank": 846,
       "name": "vinraymi",
       "rating": 1480.1,
       "cups": 1,
@@ -39781,7 +39764,7 @@
       ]
     },
     {
-      "rank": 848,
+      "rank": 847,
       "name": "everettseal3",
       "rating": 1479.9,
       "cups": 1,
@@ -39804,7 +39787,7 @@
       ]
     },
     {
-      "rank": 849,
+      "rank": 848,
       "name": "ExtraHollows",
       "rating": 1479.9,
       "cups": 1,
@@ -39827,7 +39810,7 @@
       ]
     },
     {
-      "rank": 850,
+      "rank": 849,
       "name": "Enix",
       "rating": 1479.9,
       "cups": 2,
@@ -39856,7 +39839,7 @@
       ]
     },
     {
-      "rank": 851,
+      "rank": 850,
       "name": "WotterBytes",
       "rating": 1479.9,
       "cups": 4,
@@ -39897,7 +39880,7 @@
       ]
     },
     {
-      "rank": 852,
+      "rank": 851,
       "name": "littlepuppy814",
       "rating": 1479.8,
       "cups": 4,
@@ -39938,7 +39921,7 @@
       ]
     },
     {
-      "rank": 853,
+      "rank": 852,
       "name": "[ZET] Goat Cheez",
       "rating": 1479.8,
       "cups": 2,
@@ -39967,7 +39950,7 @@
       ]
     },
     {
-      "rank": 854,
+      "rank": 853,
       "name": "[FATE]TamerSteak65167",
       "rating": 1479.7,
       "cups": 3,
@@ -40002,7 +39985,7 @@
       ]
     },
     {
-      "rank": 855,
+      "rank": 854,
       "name": "G3RM",
       "rating": 1479.6,
       "cups": 2,
@@ -40031,7 +40014,7 @@
       ]
     },
     {
-      "rank": 856,
+      "rank": 855,
       "name": "Helmet_Guy",
       "rating": 1479.5,
       "cups": 1,
@@ -40054,7 +40037,7 @@
       ]
     },
     {
-      "rank": 857,
+      "rank": 856,
       "name": "Sairast",
       "rating": 1479.5,
       "cups": 1,
@@ -40077,7 +40060,7 @@
       ]
     },
     {
-      "rank": 858,
+      "rank": 857,
       "name": "Richhyyyy",
       "rating": 1479.5,
       "cups": 1,
@@ -40100,7 +40083,7 @@
       ]
     },
     {
-      "rank": 859,
+      "rank": 858,
       "name": "MissMomo<3",
       "rating": 1479.5,
       "cups": 1,
@@ -40123,7 +40106,7 @@
       ]
     },
     {
-      "rank": 860,
+      "rank": 859,
       "name": "Thug Gary",
       "rating": 1479.5,
       "cups": 1,
@@ -40146,7 +40129,7 @@
       ]
     },
     {
-      "rank": 861,
+      "rank": 860,
       "name": "[RTR] I stay sideway",
       "rating": 1479.5,
       "cups": 1,
@@ -40169,7 +40152,7 @@
       ]
     },
     {
-      "rank": 862,
+      "rank": 861,
       "name": "mr.alyxandyr",
       "rating": 1479.5,
       "cups": 1,
@@ -40192,7 +40175,7 @@
       ]
     },
     {
-      "rank": 863,
+      "rank": 862,
       "name": "Eeggg",
       "rating": 1479.5,
       "cups": 2,
@@ -40221,7 +40204,7 @@
       ]
     },
     {
-      "rank": 864,
+      "rank": 863,
       "name": "Mountacats",
       "rating": 1479.5,
       "cups": 2,
@@ -40250,7 +40233,7 @@
       ]
     },
     {
-      "rank": 865,
+      "rank": 864,
       "name": "Yin Yang Huo",
       "rating": 1479.3,
       "cups": 2,
@@ -40279,7 +40262,7 @@
       ]
     },
     {
-      "rank": 866,
+      "rank": 865,
       "name": "b17bobby",
       "rating": 1479.2,
       "cups": 2,
@@ -40308,7 +40291,7 @@
       ]
     },
     {
-      "rank": 867,
+      "rank": 866,
       "name": "Zahlharrass",
       "rating": 1479.1,
       "cups": 2,
@@ -40337,7 +40320,7 @@
       ]
     },
     {
-      "rank": 868,
+      "rank": 867,
       "name": "jedidog121",
       "rating": 1479.1,
       "cups": 2,
@@ -40366,7 +40349,7 @@
       ]
     },
     {
-      "rank": 869,
+      "rank": 868,
       "name": "dudeeitsraymond",
       "rating": 1479.1,
       "cups": 3,
@@ -40401,7 +40384,7 @@
       ]
     },
     {
-      "rank": 870,
+      "rank": 869,
       "name": "MMXD18",
       "rating": 1479.0,
       "cups": 21,
@@ -40544,7 +40527,7 @@
       ]
     },
     {
-      "rank": 871,
+      "rank": 870,
       "name": "OkiDoki",
       "rating": 1478.9,
       "cups": 1,
@@ -40567,7 +40550,7 @@
       ]
     },
     {
-      "rank": 872,
+      "rank": 871,
       "name": "it_is_nic",
       "rating": 1478.8,
       "cups": 2,
@@ -40596,7 +40579,7 @@
       ]
     },
     {
-      "rank": 873,
+      "rank": 872,
       "name": "Sir Not Nub",
       "rating": 1478.5,
       "cups": 2,
@@ -40625,7 +40608,7 @@
       ]
     },
     {
-      "rank": 874,
+      "rank": 873,
       "name": "Forewander",
       "rating": 1478.4,
       "cups": 2,
@@ -40654,7 +40637,7 @@
       ]
     },
     {
-      "rank": 875,
+      "rank": 874,
       "name": "yacobus73",
       "rating": 1478.4,
       "cups": 2,
@@ -40683,7 +40666,7 @@
       ]
     },
     {
-      "rank": 876,
+      "rank": 875,
       "name": "dencar85",
       "rating": 1478.3,
       "cups": 4,
@@ -40724,7 +40707,7 @@
       ]
     },
     {
-      "rank": 877,
+      "rank": 876,
       "name": "JaBabbit",
       "rating": 1478.3,
       "cups": 5,
@@ -40771,7 +40754,7 @@
       ]
     },
     {
-      "rank": 878,
+      "rank": 877,
       "name": "Lazy_Echidna",
       "rating": 1478.2,
       "cups": 76,
@@ -41244,7 +41227,7 @@
       ]
     },
     {
-      "rank": 879,
+      "rank": 878,
       "name": "SneezyPilar",
       "rating": 1478.2,
       "cups": 2,
@@ -41273,7 +41256,7 @@
       ]
     },
     {
-      "rank": 880,
+      "rank": 879,
       "name": "Bynzyldyhydeditoximonothaixatide",
       "rating": 1478.1,
       "cups": 2,
@@ -41302,7 +41285,7 @@
       ]
     },
     {
-      "rank": 881,
+      "rank": 880,
       "name": "MaxVerstappen9768",
       "rating": 1478.0,
       "cups": 2,
@@ -41331,7 +41314,7 @@
       ]
     },
     {
-      "rank": 882,
+      "rank": 881,
       "name": "smaier29",
       "rating": 1478.0,
       "cups": 2,
@@ -41360,7 +41343,7 @@
       ]
     },
     {
-      "rank": 883,
+      "rank": 882,
       "name": "CDAW",
       "rating": 1477.5,
       "cups": 2,
@@ -41389,7 +41372,7 @@
       ]
     },
     {
-      "rank": 884,
+      "rank": 883,
       "name": "ITz_WillleeMan",
       "rating": 1477.3,
       "cups": 4,
@@ -41430,7 +41413,7 @@
       ]
     },
     {
-      "rank": 885,
+      "rank": 884,
       "name": "gabinepotu",
       "rating": 1477.3,
       "cups": 2,
@@ -41459,7 +41442,7 @@
       ]
     },
     {
-      "rank": 886,
+      "rank": 885,
       "name": "Babup",
       "rating": 1477.2,
       "cups": 3,
@@ -41494,7 +41477,7 @@
       ]
     },
     {
-      "rank": 887,
+      "rank": 886,
       "name": "Im_that_bamaboy",
       "rating": 1477.0,
       "cups": 2,
@@ -41523,7 +41506,7 @@
       ]
     },
     {
-      "rank": 888,
+      "rank": 887,
       "name": "Chicken",
       "rating": 1477.0,
       "cups": 3,
@@ -41558,7 +41541,7 @@
       ]
     },
     {
-      "rank": 889,
+      "rank": 888,
       "name": "Trapdoor",
       "rating": 1476.5,
       "cups": 6,
@@ -41611,7 +41594,7 @@
       ]
     },
     {
-      "rank": 890,
+      "rank": 889,
       "name": "K410K3N",
       "rating": 1476.5,
       "cups": 17,
@@ -41730,7 +41713,7 @@
       ]
     },
     {
-      "rank": 891,
+      "rank": 890,
       "name": "gtub",
       "rating": 1476.4,
       "cups": 2,
@@ -41759,7 +41742,7 @@
       ]
     },
     {
-      "rank": 892,
+      "rank": 891,
       "name": "NinjaTurtle010",
       "rating": 1476.4,
       "cups": 2,
@@ -41788,7 +41771,7 @@
       ]
     },
     {
-      "rank": 893,
+      "rank": 892,
       "name": "Not That Guy",
       "rating": 1476.3,
       "cups": 6,
@@ -41841,7 +41824,7 @@
       ]
     },
     {
-      "rank": 894,
+      "rank": 893,
       "name": "Waaksaam",
       "rating": 1476.2,
       "cups": 7,
@@ -41900,7 +41883,7 @@
       ]
     },
     {
-      "rank": 895,
+      "rank": 894,
       "name": "Orange Sheets",
       "rating": 1475.7,
       "cups": 3,
@@ -41935,7 +41918,7 @@
       ]
     },
     {
-      "rank": 896,
+      "rank": 895,
       "name": "GrahamPlayz8",
       "rating": 1475.7,
       "cups": 4,
@@ -41976,7 +41959,7 @@
       ]
     },
     {
-      "rank": 897,
+      "rank": 896,
       "name": "MetalCJ",
       "rating": 1475.6,
       "cups": 18,
@@ -42101,7 +42084,7 @@
       ]
     },
     {
-      "rank": 898,
+      "rank": 897,
       "name": "jjryt",
       "rating": 1475.5,
       "cups": 3,
@@ -42136,7 +42119,7 @@
       ]
     },
     {
-      "rank": 899,
+      "rank": 898,
       "name": "Amazon Alexa",
       "rating": 1475.4,
       "cups": 2,
@@ -42165,7 +42148,7 @@
       ]
     },
     {
-      "rank": 900,
+      "rank": 899,
       "name": "Renowneddragoon",
       "rating": 1475.3,
       "cups": 2,
@@ -42194,7 +42177,7 @@
       ]
     },
     {
-      "rank": 901,
+      "rank": 900,
       "name": "Galactichero623",
       "rating": 1475.0,
       "cups": 2,
@@ -42223,7 +42206,7 @@
       ]
     },
     {
-      "rank": 902,
+      "rank": 901,
       "name": "GO07",
       "rating": 1475.0,
       "cups": 2,
@@ -42252,7 +42235,7 @@
       ]
     },
     {
-      "rank": 903,
+      "rank": 902,
       "name": "florisdewael",
       "rating": 1475.0,
       "cups": 5,
@@ -42299,7 +42282,7 @@
       ]
     },
     {
-      "rank": 904,
+      "rank": 903,
       "name": "Salty Shark",
       "rating": 1475.0,
       "cups": 2,
@@ -42328,7 +42311,7 @@
       ]
     },
     {
-      "rank": 905,
+      "rank": 904,
       "name": "GKZimm",
       "rating": 1475.0,
       "cups": 2,
@@ -42357,7 +42340,7 @@
       ]
     },
     {
-      "rank": 906,
+      "rank": 905,
       "name": "Moody",
       "rating": 1475.0,
       "cups": 5,
@@ -42404,7 +42387,7 @@
       ]
     },
     {
-      "rank": 907,
+      "rank": 906,
       "name": "Voidsix",
       "rating": 1474.8,
       "cups": 2,
@@ -42433,7 +42416,7 @@
       ]
     },
     {
-      "rank": 908,
+      "rank": 907,
       "name": "Jumpandbuild",
       "rating": 1474.7,
       "cups": 3,
@@ -42468,7 +42451,7 @@
       ]
     },
     {
-      "rank": 909,
+      "rank": 908,
       "name": "Romans138",
       "rating": 1474.6,
       "cups": 16,
@@ -42581,7 +42564,7 @@
       ]
     },
     {
-      "rank": 910,
+      "rank": 909,
       "name": "Ollie_May13",
       "rating": 1474.5,
       "cups": 2,
@@ -42610,7 +42593,7 @@
       ]
     },
     {
-      "rank": 911,
+      "rank": 910,
       "name": "dichotomystreams",
       "rating": 1474.1,
       "cups": 4,
@@ -42651,7 +42634,7 @@
       ]
     },
     {
-      "rank": 912,
+      "rank": 911,
       "name": "crips.fourie",
       "rating": 1473.7,
       "cups": 3,
@@ -42686,7 +42669,7 @@
       ]
     },
     {
-      "rank": 913,
+      "rank": 912,
       "name": "The Stig",
       "rating": 1473.6,
       "cups": 2,
@@ -42715,7 +42698,7 @@
       ]
     },
     {
-      "rank": 914,
+      "rank": 913,
       "name": "13Silvers",
       "rating": 1473.5,
       "cups": 2,
@@ -42744,7 +42727,7 @@
       ]
     },
     {
-      "rank": 915,
+      "rank": 914,
       "name": "julienwalker18",
       "rating": 1473.5,
       "cups": 2,
@@ -42773,7 +42756,7 @@
       ]
     },
     {
-      "rank": 916,
+      "rank": 915,
       "name": "Despacito",
       "rating": 1473.4,
       "cups": 3,
@@ -42808,7 +42791,7 @@
       ]
     },
     {
-      "rank": 917,
+      "rank": 916,
       "name": "Ax1ss",
       "rating": 1473.4,
       "cups": 3,
@@ -42843,7 +42826,7 @@
       ]
     },
     {
-      "rank": 918,
+      "rank": 917,
       "name": "Squarefish",
       "rating": 1473.2,
       "cups": 3,
@@ -42878,7 +42861,7 @@
       ]
     },
     {
-      "rank": 919,
+      "rank": 918,
       "name": "[NewB]Zeus",
       "rating": 1473.2,
       "cups": 3,
@@ -42913,7 +42896,7 @@
       ]
     },
     {
-      "rank": 920,
+      "rank": 919,
       "name": "SixSixSevenSeven",
       "rating": 1473.0,
       "cups": 17,
@@ -43032,7 +43015,7 @@
       ]
     },
     {
-      "rank": 921,
+      "rank": 920,
       "name": "GavvyBoi",
       "rating": 1472.7,
       "cups": 2,
@@ -43061,7 +43044,7 @@
       ]
     },
     {
-      "rank": 922,
+      "rank": 921,
       "name": "=XDC=WOLF",
       "rating": 1472.5,
       "cups": 3,
@@ -43096,7 +43079,7 @@
       ]
     },
     {
-      "rank": 923,
+      "rank": 922,
       "name": "MarcSubstitute",
       "rating": 1472.5,
       "cups": 7,
@@ -43155,7 +43138,7 @@
       ]
     },
     {
-      "rank": 924,
+      "rank": 923,
       "name": "goldendon",
       "rating": 1472.4,
       "cups": 2,
@@ -43184,7 +43167,7 @@
       ]
     },
     {
-      "rank": 925,
+      "rank": 924,
       "name": "Pilaf",
       "rating": 1472.4,
       "cups": 3,
@@ -43219,7 +43202,7 @@
       ]
     },
     {
-      "rank": 926,
+      "rank": 925,
       "name": "koprol In de kringloop",
       "rating": 1472.4,
       "cups": 4,
@@ -43260,7 +43243,7 @@
       ]
     },
     {
-      "rank": 927,
+      "rank": 926,
       "name": "BaasBallas",
       "rating": 1472.1,
       "cups": 2,
@@ -43289,7 +43272,7 @@
       ]
     },
     {
-      "rank": 928,
+      "rank": 927,
       "name": "Henke",
       "rating": 1472.0,
       "cups": 3,
@@ -43324,7 +43307,7 @@
       ]
     },
     {
-      "rank": 929,
+      "rank": 928,
       "name": "Dark Ace",
       "rating": 1471.9,
       "cups": 2,
@@ -43353,7 +43336,7 @@
       ]
     },
     {
-      "rank": 930,
+      "rank": 929,
       "name": "bernhard",
       "rating": 1471.9,
       "cups": 5,
@@ -43400,7 +43383,7 @@
       ]
     },
     {
-      "rank": 931,
+      "rank": 930,
       "name": "BootyMcShooty88",
       "rating": 1471.7,
       "cups": 2,
@@ -43429,7 +43412,7 @@
       ]
     },
     {
-      "rank": 932,
+      "rank": 931,
       "name": "Geoloco",
       "rating": 1471.6,
       "cups": 3,
@@ -43464,7 +43447,7 @@
       ]
     },
     {
-      "rank": 933,
+      "rank": 932,
       "name": "ChopStiR",
       "rating": 1471.2,
       "cups": 3,
@@ -43499,7 +43482,7 @@
       ]
     },
     {
-      "rank": 934,
+      "rank": 933,
       "name": "invisiblecat8",
       "rating": 1470.6,
       "cups": 6,
@@ -43552,7 +43535,7 @@
       ]
     },
     {
-      "rank": 935,
+      "rank": 934,
       "name": "nate69cam",
       "rating": 1470.6,
       "cups": 4,
@@ -43593,7 +43576,7 @@
       ]
     },
     {
-      "rank": 936,
+      "rank": 935,
       "name": "oko_cha09",
       "rating": 1470.4,
       "cups": 2,
@@ -43622,7 +43605,7 @@
       ]
     },
     {
-      "rank": 937,
+      "rank": 936,
       "name": "Orb Bee Bob",
       "rating": 1470.4,
       "cups": 3,
@@ -43657,7 +43640,7 @@
       ]
     },
     {
-      "rank": 938,
+      "rank": 937,
       "name": "dejman",
       "rating": 1470.2,
       "cups": 3,
@@ -43692,7 +43675,7 @@
       ]
     },
     {
-      "rank": 939,
+      "rank": 938,
       "name": "BOB THE GAMER",
       "rating": 1470.2,
       "cups": 9,
@@ -43763,7 +43746,7 @@
       ]
     },
     {
-      "rank": 940,
+      "rank": 939,
       "name": "Kid_Falcon",
       "rating": 1470.1,
       "cups": 2,
@@ -43792,7 +43775,7 @@
       ]
     },
     {
-      "rank": 941,
+      "rank": 940,
       "name": "Bobsen Duggnut",
       "rating": 1469.5,
       "cups": 2,
@@ -43821,7 +43804,7 @@
       ]
     },
     {
-      "rank": 942,
+      "rank": 941,
       "name": "ioi8",
       "rating": 1469.3,
       "cups": 4,
@@ -43862,7 +43845,7 @@
       ]
     },
     {
-      "rank": 943,
+      "rank": 942,
       "name": "Alaskaman79",
       "rating": 1469.1,
       "cups": 3,
@@ -43897,7 +43880,7 @@
       ]
     },
     {
-      "rank": 944,
+      "rank": 943,
       "name": "alpa",
       "rating": 1469.0,
       "cups": 19,
@@ -44028,7 +44011,7 @@
       ]
     },
     {
-      "rank": 945,
+      "rank": 944,
       "name": "BrickEdwards",
       "rating": 1468.9,
       "cups": 4,
@@ -44051,7 +44034,7 @@
         {
           "cup": "COTD 131",
           "position": 47,
-          "rating": 1481.8,
+          "rating": 1481.7,
           "lobby_size": 58
         },
         {
@@ -44069,7 +44052,7 @@
       ]
     },
     {
-      "rank": 946,
+      "rank": 945,
       "name": "[XTR]Hawk",
       "rating": 1468.7,
       "cups": 15,
@@ -44176,7 +44159,7 @@
       ]
     },
     {
-      "rank": 947,
+      "rank": 946,
       "name": "md_PL_",
       "rating": 1468.6,
       "cups": 3,
@@ -44211,7 +44194,7 @@
       ]
     },
     {
-      "rank": 948,
+      "rank": 947,
       "name": "I Have No Fork",
       "rating": 1468.3,
       "cups": 3,
@@ -44246,7 +44229,7 @@
       ]
     },
     {
-      "rank": 949,
+      "rank": 948,
       "name": "DragonShadow84290",
       "rating": 1468.0,
       "cups": 3,
@@ -44281,7 +44264,7 @@
       ]
     },
     {
-      "rank": 950,
+      "rank": 949,
       "name": "Amystique",
       "rating": 1467.7,
       "cups": 2,
@@ -44310,7 +44293,7 @@
       ]
     },
     {
-      "rank": 951,
+      "rank": 950,
       "name": "Ebruis",
       "rating": 1466.7,
       "cups": 2,
@@ -44339,7 +44322,7 @@
       ]
     },
     {
-      "rank": 952,
+      "rank": 951,
       "name": "JJSP",
       "rating": 1466.4,
       "cups": 3,
@@ -44374,7 +44357,7 @@
       ]
     },
     {
-      "rank": 953,
+      "rank": 952,
       "name": "Neb",
       "rating": 1465.7,
       "cups": 8,
@@ -44439,7 +44422,7 @@
       ]
     },
     {
-      "rank": 954,
+      "rank": 953,
       "name": "CopperFeather",
       "rating": 1465.6,
       "cups": 3,
@@ -44474,7 +44457,7 @@
       ]
     },
     {
-      "rank": 955,
+      "rank": 954,
       "name": "A Broken Forklift",
       "rating": 1465.4,
       "cups": 17,
@@ -44593,7 +44576,7 @@
       ]
     },
     {
-      "rank": 956,
+      "rank": 955,
       "name": "TtocsNeb",
       "rating": 1465.1,
       "cups": 5,
@@ -44640,7 +44623,7 @@
       ]
     },
     {
-      "rank": 957,
+      "rank": 956,
       "name": "een",
       "rating": 1465.1,
       "cups": 5,
@@ -44687,7 +44670,7 @@
       ]
     },
     {
-      "rank": 958,
+      "rank": 957,
       "name": "cgwheeler96",
       "rating": 1465.0,
       "cups": 5,
@@ -44734,7 +44717,7 @@
       ]
     },
     {
-      "rank": 959,
+      "rank": 958,
       "name": "shadeely",
       "rating": 1464.4,
       "cups": 8,
@@ -44799,7 +44782,7 @@
       ]
     },
     {
-      "rank": 960,
+      "rank": 959,
       "name": "RandomDutchman",
       "rating": 1464.1,
       "cups": 3,
@@ -44834,7 +44817,7 @@
       ]
     },
     {
-      "rank": 961,
+      "rank": 960,
       "name": "IronDragon111000",
       "rating": 1464.1,
       "cups": 7,
@@ -44893,7 +44876,7 @@
       ]
     },
     {
-      "rank": 962,
+      "rank": 961,
       "name": "K-Nox",
       "rating": 1464.0,
       "cups": 9,
@@ -44964,7 +44947,7 @@
       ]
     },
     {
-      "rank": 963,
+      "rank": 962,
       "name": "Sann93",
       "rating": 1464.0,
       "cups": 6,
@@ -45017,7 +45000,7 @@
       ]
     },
     {
-      "rank": 964,
+      "rank": 963,
       "name": "Pheonjx",
       "rating": 1463.7,
       "cups": 3,
@@ -45052,7 +45035,7 @@
       ]
     },
     {
-      "rank": 965,
+      "rank": 964,
       "name": "NatePW",
       "rating": 1462.8,
       "cups": 3,
@@ -45087,7 +45070,7 @@
       ]
     },
     {
-      "rank": 966,
+      "rank": 965,
       "name": "SnowWolfyx2",
       "rating": 1462.7,
       "cups": 4,
@@ -45128,7 +45111,7 @@
       ]
     },
     {
-      "rank": 967,
+      "rank": 966,
       "name": "Form",
       "rating": 1462.5,
       "cups": 30,
@@ -45325,7 +45308,7 @@
       ]
     },
     {
-      "rank": 968,
+      "rank": 967,
       "name": "SQU4DDL3R",
       "rating": 1462.4,
       "cups": 4,
@@ -45366,7 +45349,7 @@
       ]
     },
     {
-      "rank": 969,
+      "rank": 968,
       "name": "MrMackCheeseBalls",
       "rating": 1462.0,
       "cups": 3,
@@ -45401,7 +45384,7 @@
       ]
     },
     {
-      "rank": 970,
+      "rank": 969,
       "name": "snorReplay",
       "rating": 1461.6,
       "cups": 5,
@@ -45448,7 +45431,7 @@
       ]
     },
     {
-      "rank": 971,
+      "rank": 970,
       "name": "Tritonas1237",
       "rating": 1461.5,
       "cups": 11,
@@ -45531,7 +45514,7 @@
       ]
     },
     {
-      "rank": 972,
+      "rank": 971,
       "name": "magostinho20",
       "rating": 1461.4,
       "cups": 4,
@@ -45572,7 +45555,7 @@
       ]
     },
     {
-      "rank": 973,
+      "rank": 972,
       "name": "lost in trees",
       "rating": 1461.4,
       "cups": 5,
@@ -45619,7 +45602,7 @@
       ]
     },
     {
-      "rank": 974,
+      "rank": 973,
       "name": "Microknigh7",
       "rating": 1460.9,
       "cups": 6,
@@ -45672,7 +45655,7 @@
       ]
     },
     {
-      "rank": 975,
+      "rank": 974,
       "name": "JoeRobot",
       "rating": 1460.8,
       "cups": 5,
@@ -45719,7 +45702,7 @@
       ]
     },
     {
-      "rank": 976,
+      "rank": 975,
       "name": "deadlleg",
       "rating": 1460.5,
       "cups": 8,
@@ -45784,7 +45767,7 @@
       ]
     },
     {
-      "rank": 977,
+      "rank": 976,
       "name": "ttv/Lilly the Bun",
       "rating": 1459.8,
       "cups": 4,
@@ -45825,7 +45808,7 @@
       ]
     },
     {
-      "rank": 978,
+      "rank": 977,
       "name": "alpa\\",
       "rating": 1459.4,
       "cups": 6,
@@ -45878,7 +45861,7 @@
       ]
     },
     {
-      "rank": 979,
+      "rank": 978,
       "name": "Akane",
       "rating": 1459.3,
       "cups": 18,
@@ -46003,7 +45986,7 @@
       ]
     },
     {
-      "rank": 980,
+      "rank": 979,
       "name": "kotosy",
       "rating": 1459.0,
       "cups": 5,
@@ -46050,7 +46033,7 @@
       ]
     },
     {
-      "rank": 981,
+      "rank": 980,
       "name": "Apokus",
       "rating": 1458.2,
       "cups": 6,
@@ -46103,7 +46086,7 @@
       ]
     },
     {
-      "rank": 982,
+      "rank": 981,
       "name": "Exterminate",
       "rating": 1458.0,
       "cups": 3,
@@ -46138,7 +46121,7 @@
       ]
     },
     {
-      "rank": 983,
+      "rank": 982,
       "name": "volker0815",
       "rating": 1457.9,
       "cups": 6,
@@ -46191,7 +46174,7 @@
       ]
     },
     {
-      "rank": 984,
+      "rank": 983,
       "name": "SkarMatrix",
       "rating": 1457.8,
       "cups": 8,
@@ -46256,7 +46239,7 @@
       ]
     },
     {
-      "rank": 985,
+      "rank": 984,
       "name": "frenchteost",
       "rating": 1457.8,
       "cups": 10,
@@ -46333,7 +46316,7 @@
       ]
     },
     {
-      "rank": 986,
+      "rank": 985,
       "name": "Weside",
       "rating": 1457.5,
       "cups": 6,
@@ -46386,7 +46369,7 @@
       ]
     },
     {
-      "rank": 987,
+      "rank": 986,
       "name": "S1mpl1c1ty",
       "rating": 1457.3,
       "cups": 3,
@@ -46421,7 +46404,7 @@
       ]
     },
     {
-      "rank": 988,
+      "rank": 987,
       "name": "sobeisgood",
       "rating": 1457.1,
       "cups": 9,
@@ -46492,7 +46475,7 @@
       ]
     },
     {
-      "rank": 989,
+      "rank": 988,
       "name": "Wheelie",
       "rating": 1456.7,
       "cups": 61,
@@ -46863,7 +46846,7 @@
         {
           "cup": "COTD 132",
           "position": 39,
-          "rating": 1458.4,
+          "rating": 1458.3,
           "lobby_size": 59
         },
         {
@@ -46875,7 +46858,7 @@
       ]
     },
     {
-      "rank": 990,
+      "rank": 989,
       "name": "Achmetha0626",
       "rating": 1456.6,
       "cups": 5,
@@ -46922,7 +46905,7 @@
       ]
     },
     {
-      "rank": 991,
+      "rank": 990,
       "name": "F1Y1NGDUTCHM8N",
       "rating": 1456.4,
       "cups": 4,
@@ -46963,7 +46946,7 @@
       ]
     },
     {
-      "rank": 992,
+      "rank": 991,
       "name": "Movvgli",
       "rating": 1456.4,
       "cups": 5,
@@ -47010,7 +46993,7 @@
       ]
     },
     {
-      "rank": 993,
+      "rank": 992,
       "name": "Chapin",
       "rating": 1456.3,
       "cups": 5,
@@ -47057,7 +47040,7 @@
       ]
     },
     {
-      "rank": 994,
+      "rank": 993,
       "name": "Unoriginal_Zero",
       "rating": 1455.9,
       "cups": 7,
@@ -47116,7 +47099,7 @@
       ]
     },
     {
-      "rank": 995,
+      "rank": 994,
       "name": "Tudge Boat",
       "rating": 1455.9,
       "cups": 13,
@@ -47199,7 +47182,7 @@
         {
           "cup": "COTD 131",
           "position": 33,
-          "rating": 1460.4,
+          "rating": 1460.3,
           "lobby_size": 58
         },
         {
@@ -47211,7 +47194,7 @@
       ]
     },
     {
-      "rank": 996,
+      "rank": 995,
       "name": "Fatboy",
       "rating": 1455.5,
       "cups": 18,
@@ -47336,7 +47319,7 @@
       ]
     },
     {
-      "rank": 997,
+      "rank": 996,
       "name": "OLR94",
       "rating": 1455.4,
       "cups": 8,
@@ -47401,7 +47384,7 @@
       ]
     },
     {
-      "rank": 998,
+      "rank": 997,
       "name": "gatenby_neil",
       "rating": 1454.9,
       "cups": 4,
@@ -47442,7 +47425,7 @@
       ]
     },
     {
-      "rank": 999,
+      "rank": 998,
       "name": "[KURK] lil_zwimpie",
       "rating": 1454.8,
       "cups": 8,
@@ -47507,7 +47490,7 @@
       ]
     },
     {
-      "rank": 1000,
+      "rank": 999,
       "name": "icRS",
       "rating": 1454.2,
       "cups": 40,
@@ -47764,7 +47747,7 @@
       ]
     },
     {
-      "rank": 1001,
+      "rank": 1000,
       "name": "Ploddip",
       "rating": 1454.0,
       "cups": 14,
@@ -47865,7 +47848,7 @@
       ]
     },
     {
-      "rank": 1002,
+      "rank": 1001,
       "name": "[ZET]toast",
       "rating": 1453.9,
       "cups": 9,
@@ -47936,7 +47919,7 @@
       ]
     },
     {
-      "rank": 1003,
+      "rank": 1002,
       "name": "GuillaumePN",
       "rating": 1450.9,
       "cups": 4,
@@ -47977,7 +47960,7 @@
       ]
     },
     {
-      "rank": 1004,
+      "rank": 1003,
       "name": "Hellmet",
       "rating": 1450.9,
       "cups": 10,
@@ -48054,7 +48037,7 @@
       ]
     },
     {
-      "rank": 1005,
+      "rank": 1004,
       "name": "Prepe",
       "rating": 1449.6,
       "cups": 7,
@@ -48113,7 +48096,7 @@
       ]
     },
     {
-      "rank": 1006,
+      "rank": 1005,
       "name": "broscolotos",
       "rating": 1449.4,
       "cups": 4,
@@ -48154,7 +48137,7 @@
       ]
     },
     {
-      "rank": 1007,
+      "rank": 1006,
       "name": "Arder",
       "rating": 1448.0,
       "cups": 6,
@@ -48207,7 +48190,7 @@
       ]
     },
     {
-      "rank": 1008,
+      "rank": 1007,
       "name": "aizpun",
       "rating": 1447.9,
       "cups": 7,
@@ -48266,7 +48249,7 @@
       ]
     },
     {
-      "rank": 1009,
+      "rank": 1008,
       "name": "Reamerad",
       "rating": 1447.8,
       "cups": 14,
@@ -48367,7 +48350,7 @@
       ]
     },
     {
-      "rank": 1010,
+      "rank": 1009,
       "name": "Frog Mime",
       "rating": 1445.5,
       "cups": 5,
@@ -48414,7 +48397,7 @@
       ]
     },
     {
-      "rank": 1011,
+      "rank": 1010,
       "name": "[XTR] NATHAN",
       "rating": 1445.3,
       "cups": 9,
@@ -48485,7 +48468,7 @@
       ]
     },
     {
-      "rank": 1012,
+      "rank": 1011,
       "name": "lucanakin",
       "rating": 1445.0,
       "cups": 9,
@@ -48544,7 +48527,7 @@
         {
           "cup": "COTD 131",
           "position": 42,
-          "rating": 1449.2,
+          "rating": 1449.1,
           "lobby_size": 58
         },
         {
@@ -48556,7 +48539,7 @@
       ]
     },
     {
-      "rank": 1013,
+      "rank": 1012,
       "name": "FINSTER83",
       "rating": 1443.6,
       "cups": 38,
@@ -48801,7 +48784,7 @@
       ]
     },
     {
-      "rank": 1014,
+      "rank": 1013,
       "name": "Smullie",
       "rating": 1442.7,
       "cups": 6,
@@ -48854,7 +48837,7 @@
       ]
     },
     {
-      "rank": 1015,
+      "rank": 1014,
       "name": "Kiprosa",
       "rating": 1442.1,
       "cups": 32,
@@ -49063,7 +49046,7 @@
       ]
     },
     {
-      "rank": 1016,
+      "rank": 1015,
       "name": "Axo",
       "rating": 1441.9,
       "cups": 12,
@@ -49152,7 +49135,7 @@
       ]
     },
     {
-      "rank": 1017,
+      "rank": 1016,
       "name": "SkyVirus",
       "rating": 1438.8,
       "cups": 8,
@@ -49217,7 +49200,7 @@
       ]
     },
     {
-      "rank": 1018,
+      "rank": 1017,
       "name": "ferinine",
       "rating": 1438.3,
       "cups": 31,
@@ -49420,7 +49403,7 @@
       ]
     },
     {
-      "rank": 1019,
+      "rank": 1018,
       "name": "Kilandor",
       "rating": 1437.9,
       "cups": 8,
@@ -49485,7 +49468,7 @@
       ]
     },
     {
-      "rank": 1020,
+      "rank": 1019,
       "name": "vortex",
       "rating": 1437.8,
       "cups": 12,
@@ -49574,7 +49557,7 @@
       ]
     },
     {
-      "rank": 1021,
+      "rank": 1020,
       "name": "Matic_D",
       "rating": 1433.3,
       "cups": 42,
@@ -49843,7 +49826,7 @@
       ]
     },
     {
-      "rank": 1022,
+      "rank": 1021,
       "name": "wokonbike",
       "rating": 1415.4,
       "cups": 16,
@@ -49956,7 +49939,7 @@
       ]
     },
     {
-      "rank": 1023,
+      "rank": 1022,
       "name": "koz",
       "rating": 1413.4,
       "cups": 20,
@@ -50093,7 +50076,7 @@
       ]
     },
     {
-      "rank": 1024,
+      "rank": 1023,
       "name": "[OR] TNTArrow",
       "rating": 1409.4,
       "cups": 6,
@@ -50146,7 +50129,7 @@
       ]
     },
     {
-      "rank": 1025,
+      "rank": 1024,
       "name": "gordeiegorov",
       "rating": 1407.3,
       "cups": 10,
@@ -50223,7 +50206,7 @@
       ]
     },
     {
-      "rank": 1026,
+      "rank": 1025,
       "name": "Lamp",
       "rating": 1404.9,
       "cups": 39,
@@ -50474,7 +50457,7 @@
       ]
     },
     {
-      "rank": 1027,
+      "rank": 1026,
       "name": "Noxitu",
       "rating": 1399.5,
       "cups": 52,
@@ -50803,7 +50786,7 @@
       ]
     },
     {
-      "rank": 1028,
+      "rank": 1027,
       "name": "jofk2415",
       "rating": 1396.5,
       "cups": 15,
@@ -50910,7 +50893,7 @@
       ]
     },
     {
-      "rank": 1029,
+      "rank": 1028,
       "name": "Heart-TGV",
       "rating": 1396.1,
       "cups": 24,
@@ -51071,7 +51054,7 @@
       ]
     },
     {
-      "rank": 1030,
+      "rank": 1029,
       "name": "Gerfboy",
       "rating": 1384.9,
       "cups": 22,
@@ -51220,7 +51203,7 @@
       ]
     },
     {
-      "rank": 1031,
+      "rank": 1030,
       "name": "bunzen",
       "rating": 1380.9,
       "cups": 22,
@@ -51369,7 +51352,7 @@
       ]
     },
     {
-      "rank": 1032,
+      "rank": 1031,
       "name": "Dartho Mas",
       "rating": 1372.1,
       "cups": 22,
@@ -51518,7 +51501,7 @@
       ]
     },
     {
-      "rank": 1033,
+      "rank": 1032,
       "name": "[ZET]Sword125",
       "rating": 1344.1,
       "cups": 33,
@@ -51733,7 +51716,7 @@
       ]
     },
     {
-      "rank": 1034,
+      "rank": 1033,
       "name": "Chinpokomon",
       "rating": 1340.6,
       "cups": 52,
@@ -52062,7 +52045,7 @@
       ]
     },
     {
-      "rank": 1035,
+      "rank": 1034,
       "name": "cookie",
       "rating": 1336.7,
       "cups": 42,
@@ -52331,7 +52314,7 @@
       ]
     },
     {
-      "rank": 1036,
+      "rank": 1035,
       "name": "LILWOOLEY",
       "rating": 1322.5,
       "cups": 58,
@@ -52696,7 +52679,7 @@
       ]
     },
     {
-      "rank": 1037,
+      "rank": 1036,
       "name": "imagineaclevernamehere",
       "rating": 1306.5,
       "cups": 37,
@@ -52935,7 +52918,7 @@
       ]
     },
     {
-      "rank": 1038,
+      "rank": 1037,
       "name": "vectortrajector",
       "rating": 1296.8,
       "cups": 32,
