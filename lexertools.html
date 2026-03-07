@@ -280,21 +280,21 @@ function getPool() {
   return weekBack ? pool.map(computePrevWeek) : pool;
 }
 
-function getSnapshotCup() {
-  const maxCup = allPlayers.reduce((m, p) => {
+function getCurrentCup() {
+  return allPlayers.reduce((m, p) => {
     if (!p.h || !p.h.length) return m;
     return Math.max(m, p.h[p.h.length - 1].c);
   }, 0);
-  return maxCup - 1;
 }
 
 function selectTop10() {
-  const prev = allPlayers
-    .filter(p => p.h && p.h.length >= 2)
-    .map(computePrevWeek)
-    .sort((a, b) => b.a - a.a)
+  const cup = getCurrentCup();
+  // Select players who participated in the latest cup, sorted by position
+  const participants = allPlayers
+    .filter(p => p.h && p.h.length && p.h[p.h.length - 1].c === cup)
+    .sort((a, b) => a.n.localeCompare(b.n))
     .slice(0, 10);
-  const names = prev.map(p => p.n);
+  const names = participants.map(p => p.n);
   pool = names.map(n => allPlayers.find(p => p.n === n)).filter(Boolean);
   render();
 }
@@ -466,7 +466,7 @@ function render() {
   const topBtn = document.getElementById('topBtn');
   if (weekBack) {
     topBtn.style.display = '';
-    topBtn.textContent = 'Cup ' + getSnapshotCup() + ' Top 10';
+    topBtn.textContent = 'Cup ' + getCurrentCup() + ' Top 10';
     topBtn.onclick = selectTop10;
   } else {
     topBtn.style.display = 'none';

@@ -27,14 +27,17 @@ def parse_file(filepath):
                 if pos_col >= len(row) or pos_col + 1 >= len(row): continue
                 pos, name = row[pos_col], row[pos_col + 1]
                 if name is None: continue
+                name_str = str(name).strip()
+                if name_str.startswith('*'):  # Skip Lexer's spreadsheet notes
+                    continue
                 if pos is not None:
                     try:
                         last_pos = int(float(pos))
-                        players.append((last_pos, str(name).strip()))
+                        players.append((last_pos, name_str))
                     except: continue
                 elif last_pos is not None:
                     # No position number = tied with previous position
-                    players.append((last_pos, str(name).strip()))
+                    players.append((last_pos, name_str))
             if players:
                 cups.append({'name': cup_name, 'players': sorted(players, key=lambda x: x[0])})
     return cups
