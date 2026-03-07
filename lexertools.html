@@ -281,7 +281,9 @@ function getPool() {
 }
 
 function getCurrentCup() {
-  return allPlayers.reduce((m, p) => {
+  // Always use weighted (all-time) dataset to find latest cup
+  const wp = allData && allData.weighted || allPlayers;
+  return wp.reduce((m, p) => {
     if (!p.h || !p.h.length) return m;
     return Math.max(m, p.h[p.h.length - 1].c);
   }, 0);
@@ -289,12 +291,14 @@ function getCurrentCup() {
 
 function selectTop10() {
   const cup = getCurrentCup();
-  // Select players who participated in the latest cup, sorted by position
-  const participants = allPlayers
+  // Find participants from weighted (all-time) dataset, then map to current mode
+  const wp = allData && allData.weighted || allPlayers;
+  const names = wp
     .filter(p => p.h && p.h.length && p.h[p.h.length - 1].c === cup)
+    .sort((a, b) => a.h[a.h.length - 1].p - b.h[b.h.length - 1].p)
+    .slice(0, 10)
     .sort((a, b) => a.n.localeCompare(b.n))
-    .slice(0, 10);
-  const names = participants.map(p => p.n);
+    .map(p => p.n);
   pool = names.map(n => allPlayers.find(p => p.n === n)).filter(Boolean);
   render();
 }
