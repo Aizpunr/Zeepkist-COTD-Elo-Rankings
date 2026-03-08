@@ -104,7 +104,7 @@
       "pct_3m": 0.9
     },
     {
-      "name": "quickracer10",
+      "name": "Quickracer10",
       "rating_now": 1904.7,
       "rating_then": 1854.1,
       "pct": 2.7,
@@ -289,7 +289,7 @@
     },
     {
       "name": "Lexer",
-      "rating_now": 1951.1,
+      "rating_now": 1951.0,
       "rating_then": 1905.8,
       "pct": 2.4,
       "pct_3m": 0.5
@@ -309,7 +309,7 @@
       "pct_3m": 0.6
     },
     {
-      "name": "quickracer10",
+      "name": "Quickracer10",
       "rating_now": 2047.1,
       "rating_then": 2007.9,
       "pct": 2.0,
@@ -345,7 +345,7 @@
     },
     {
       "name": "Beans",
-      "rating_now": 1622.6,
+      "rating_now": 1622.5,
       "rating_then": 1598.6,
       "pct": 1.5,
       "pct_3m": 0.7
@@ -451,8 +451,8 @@
       "pct_3m": 0.3
     },
     {
-      "name": "quickracer10",
-      "rating_now": 1896.6,
+      "name": "Quickracer10",
+      "rating_now": 1896.5,
       "rating_then": 1841.4,
       "pct": 3.0,
       "pct_3m": 1.0
@@ -670,7 +670,7 @@
       "pct_3m": 0.5
     },
     {
-      "name": "quickracer10",
+      "name": "Quickracer10",
       "rating_now": 2040.7,
       "rating_then": 1998.4,
       "pct": 2.1,

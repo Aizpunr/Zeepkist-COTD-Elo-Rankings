@@ -1190,8 +1190,8 @@ function leaderboardHeaderHTML() {
     ? [['#',''],['Player',''],['Elo','active'],['Wins','wins'],['Podium','podium'],['Avg','avg'],['App','cups'],['Best',''],['Peak','peak']]
     : [['#',''],['Player',''],['Elo','rating'],['Active','active'],['Wins','wins'],['Podium','podium'],['Avg','avg'],['App','cups'],['Best',''],['Peak','peak']];
   const aligns = isSeason
-    ? ['','','right','center','center','right','center','center','right']
-    : ['','','right','right','center','center','right','center','center','right'];
+    ? ['','','center','center','center','right','center','center','right']
+    : ['','','center','right','center','center','right','center','center','right'];
   return cols.map(([label,key],i) => {
     const al = aligns[i] ? `style="text-align:${aligns[i]}"` : '';
     if (i === 0) return `<div ${al}>${label}${leaderboardInfoBtn()}</div>`;
