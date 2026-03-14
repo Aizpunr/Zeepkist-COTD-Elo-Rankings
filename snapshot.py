@@ -32,6 +32,11 @@ current_cup = max(max_cup(std_players), max_cup(w_players))
 target_cup = int(sys.argv[1]) if len(sys.argv) > 1 else current_cup
 print(f"Current cup: {current_cup}  |  Snapshot at cup: {target_cup}")
 
+# Ghost players: real player is hidden from snapshot when they played
+# under a ghost account in the NEXT cup (target+1), so arrows don't reveal them
+# Format: cup_number → real_player_name
+GHOST_HIDE = {133: 'Kernkob', 135: 'Sterben'}
+
 def build_snap_at(players, target, no_decay=False):
     entries = []
     for p in players:
@@ -84,6 +89,9 @@ if os.path.exists(snap_path):
     shutil.copy2(snap_path, backup_path)
     print(f"Backed up old snapshot -> old snapshots/{os.path.basename(backup_path)}")
 
+# Check if next cup has a ghost player whose real identity should be hidden
+ghost_hide_name = GHOST_HIDE.get(target_cup + 1)
+
 snap = {
     'std':      build_snap_at(std_players, target_cup),
     'w':        build_snap_at(w_players,   target_cup),
@@ -92,6 +100,11 @@ snap = {
     'curse':    build_snap_at(curse_players, target_cup),
     'season':   build_snap_at(season,      target_cup, no_decay=True),
 }
+
+if ghost_hide_name:
+    for key in snap:
+        snap[key].pop(ghost_hide_name, None)
+    print(f"Hidden from snapshot: {ghost_hide_name} (ghost in cup {target_cup + 1})")
 
 with open(_p('snapshot.json'), 'w') as f:
     json.dump(snap, f, separators=(',', ':'))

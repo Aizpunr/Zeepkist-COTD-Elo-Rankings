@@ -1345,7 +1345,7 @@ function renderCups() {
         <div>Pos</div><div>Player</div><div style="text-align:right">ELO</div>${hasSeason ? '<div style="text-align:right">Race ELO</div>' : ''}</div>`;
       cup.players.forEach((p, pi) => {
         const rowBg = pi % 2 === 0 ? 'transparent' : 'var(--row-alt, rgba(255,255,255,0.03))';
-        const c = rColor(p.rating_after);
+        const c = rColor(Math.abs(p.rating_after));
         const nc = customColors[p.name] || cssVar('--pname');
         // Weighted ELO delta from allData history
         let eloDelta = '';
@@ -1389,7 +1389,7 @@ function renderCups() {
             <div class="dot" style="background:${c}"></div>
             <span style="font-size:12px;font-weight:600;color:${nc}">${esc(p.name)}</span>
           </div>
-          <div style="text-align:right;font-family:var(--mono);font-size:12px;font-weight:700;color:${c}">${p.rating_after}${eloDelta}</div>
+          <div style="text-align:right;font-family:var(--mono);font-size:12px;font-weight:700;color:${c}">${p.rating_after < 0 ? '<i>(hidden)</i>' : p.rating_after}${p.rating_after < 0 ? '' : eloDelta}</div>
           ${seasonCell}
         </div>`;
       });

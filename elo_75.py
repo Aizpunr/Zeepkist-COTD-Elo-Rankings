@@ -92,7 +92,7 @@ all_cups = (parse_file(_p('Zeepkist COTDs 1-25.xlsx')) +
             parse_file(_p('COTDs 76-100.xlsx')) +
             parse_file(_p('COTDs 101-125.xlsx')) +
             parse_file(_p('COTD 126-130.xlsx')) +
-            parse_file(_p('COTD 131-134.xlsx')) +
+            parse_file(_p('COTD 131-135.xlsx')) +
             parse_file(_p('cup roulette.xlsx')) +
             parse_troll_cups(_p('Troll cup.xlsx')))
 
@@ -280,7 +280,7 @@ CANONICAL = {
     'RadAbsRad': ['[Meow]RadAbsRad'],
     'Redstony': ['[Stc3]Redstony', '[TILT]Redstony'],
     'Six': ['SixSixSevenSeven', '[BAP]SixSixSevenSeven', '[BAP]Six'],
-    'Sterben': ['[BAP]Sterben','[PNCK]Mini P.E.K.K.A','λ','Lλmbda','[FPV]Lλmbda','[PCDJ]Sterben'],
+    'Sterben': ['[BAP]Sterben','[PNCK]Mini P.E.K.K.A','λ','Lλmbda','[FPV]Lλmbda','[PCDJ]Sterben','del gaming'],
     'stindt': ['[KAAS]stindt', '[Lame]stindt', '[Slow]stindt', '[Tame]stindt'],
     'Tommygaming': ['[CSC]Tommygaming', '[OOPS]Tommygaming', '[jofk]Tommygaming', 'TommyGaming5132', 'Tommygaming5132', '[TG]Tommygaming5132', '[CSC]Tommygaming5132', '[CSC]Tommygaming6132', '[C3PO]Tommygaming5132'],
     'WotterBytes': ['Wotterbytes'],
