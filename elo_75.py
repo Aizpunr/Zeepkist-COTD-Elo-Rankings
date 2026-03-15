@@ -346,7 +346,7 @@ for cup in all_cups:
             ghost_name = m.group(1).strip()
             real_name = normalize(m.group(2).strip())
             new_players.append((pos, real_name))
-            ghosts.append((pos, ghost_name))
+            ghosts.append((pos, ghost_name, real_name))
             print(f"  Ghost split in {cup['name']}: {ghost_name} → ELO:{real_name}, ghost:{ghost_name}")
         else:
             new_players.append((pos, name))
@@ -417,9 +417,18 @@ def compute_standard_elo(cups, no_ghosts=False):
             if pos==1: wins[name]+=1; pods[name][0]+=1
             elif pos==2: pods[name][1]+=1
             elif pos==3 and not is_troll4_dnf: pods[name][2]+=1
-        # Ghost players: history only, no ELO effect (skipped in race/season)
+        # Ghost players: shadow ELO calc (pairwise vs lobby, no effect on others)
         if not no_ghosts:
-            for pos, name in cup.get('ghosts', []):
+            for pos, name, real in cup.get('ghosts', []):
+                ra = ratings[name]
+                k = K_BASE/(n-1)
+                if gp[name] < PROV_CUPS: k *= PROV_MULT
+                ghost_delta = 0.0
+                for pj, nj in players:
+                    e = E(ra, ratings[nj])
+                    s = 1.0 if pos<pj else (0.0 if pos>pj else 0.5)
+                    ghost_delta += k*(s-e)
+                ratings[name] += ghost_delta
                 gp[name] += 1
                 history[name].append({'cup':cup['name'],'position':pos,'rating':round(ratings[name],1),'lobby_size':n})
                 if pos < best[name]: best[name] = pos
@@ -456,9 +465,20 @@ def compute_weighted_elo(cups, pct_fn=None, no_ghosts=False):
             w_ratings[name] += w_cup_deltas[name]
             w_gp[name] += 1
             w_history[name].append({'cup': cup['name'], 'position': pos, 'rating': round(w_ratings[name], 1), 'lobby_size': n})
-        # Ghost players: history only, no ELO effect (skipped in race/season)
+        # Ghost players: shadow weighted ELO calc (pairwise vs lobby, no effect on others)
         if not no_ghosts:
-            for pos, name in cup.get('ghosts', []):
+            for pos, name, real in cup.get('ghosts', []):
+                ra = w_ratings[name]
+                ghost_delta = 0.0
+                for pj, nj in players:
+                    e = E(ra, w_ratings[nj])
+                    s = 1.0 if pos<pj else (0.0 if pos>pj else 0.5)
+                    win_pos = pos if pos <= pj else pj
+                    pair_quality = (ra + w_ratings[nj]) / (2 * avg_field)
+                    k = K_BASE / (n-1) * pct_fn(win_pos, n) * pair_quality
+                    if w_gp[name] < PROV_CUPS: k *= PROV_MULT
+                    ghost_delta += k*(s-e)
+                w_ratings[name] += ghost_delta
                 w_gp[name] += 1
                 w_history[name].append({'cup': cup['name'], 'position': pos, 'rating': round(w_ratings[name], 1), 'lobby_size': n})
     return {'ratings': w_ratings, 'gp': w_gp, 'history': w_history}
@@ -473,6 +493,8 @@ def build_site_list(elo_data, stat_data, cups_list, min_cups=5, no_decay=False):
     for idx, cup in enumerate(cups_list):
         for _, name in cup['players']:
             last_idx[name] = idx
+        for entry in cup.get('ghosts', []):
+            last_idx[entry[1]] = idx
     def dec(rating, name):
         if no_decay: return round(rating, 1)
         missed = total_n - 1 - last_idx.get(name, 0)
@@ -579,6 +601,8 @@ def build_all_list(elo_data, stat_data, cups_list, min_cups=3, no_decay=False):
     for idx, cup in enumerate(cups_list):
         for _, name in cup['players']:
             last_idx[name] = idx
+        for entry in cup.get('ghosts', []):
+            last_idx[entry[1]] = idx
     def dec(rating, name):
         if no_decay: return round(rating, 1)
         missed = total_n - 1 - last_idx.get(name, 0)
@@ -586,7 +610,8 @@ def build_all_list(elo_data, stat_data, cups_list, min_cups=3, no_decay=False):
         return round(1500 + (rating - 1500) * (DECAY ** (missed - GRACE)), 1)
     out = []
     for name in rat:
-        if gp_d[name] < min_cups: continue
+        has_pod = sum(pods_d[name]) > 0
+        if gp_d[name] < min_cups and not has_pod: continue
         raw = round(rat[name], 1)
         act = dec(rat[name], name)
         avg = round(total_pos_d[name] / avg_cups_d[name], 1) if avg_cups_d[name] > 0 else 0
