@@ -133,14 +133,14 @@
     },
     {
       "name": "Jakie",
-      "rating_now": 1591.0,
+      "rating_now": 1591.1,
       "rating_then": 1556.5,
       "pct": 2.2,
       "pct_3m": 0.8
     },
     {
       "name": "Lexer",
-      "rating_now": 1882.8,
+      "rating_now": 1882.9,
       "rating_then": 1848.7,
       "pct": 1.8,
       "pct_3m": 0.5
@@ -153,18 +153,18 @@
       "pct_3m": 1.4
     },
     {
+      "name": "Hydro",
+      "rating_now": 1845.6,
+      "rating_then": 1821.0,
+      "pct": 1.4,
+      "pct_3m": 0.9
+    },
+    {
       "name": "Hi Im Yolo",
       "rating_now": 1623.9,
       "rating_then": 1600.9,
       "pct": 1.4,
       "pct_3m": 1.8
-    },
-    {
-      "name": "Hydro",
-      "rating_now": 1845.5,
-      "rating_then": 1821.0,
-      "pct": 1.3,
-      "pct_3m": 0.9
     },
     {
       "name": "Beans",
@@ -189,14 +189,14 @@
     },
     {
       "name": "Murrl",
-      "rating_now": 1669.1,
+      "rating_now": 1669.2,
       "rating_then": 1653.1,
       "pct": 1.0,
       "pct_3m": 0.7
     },
     {
       "name": "RoundNzt",
-      "rating_now": 1823.0,
+      "rating_now": 1823.1,
       "rating_then": 1808.7,
       "pct": 0.8,
       "pct_3m": 1.1
@@ -233,7 +233,7 @@
     },
     {
       "name": "microways",
-      "rating_now": 1618.3,
+      "rating_now": 1618.4,
       "rating_then": 1500.0,
       "pct": 7.9,
       "pct_3m": 8.8
@@ -254,7 +254,7 @@
     },
     {
       "name": "PandaMane",
-      "rating_now": 1807.2,
+      "rating_now": 1807.4,
       "rating_then": 1734.0,
       "pct": 4.2,
       "pct_3m": 3.1
@@ -466,28 +466,28 @@
     },
     {
       "name": "Quickracer10",
-      "rating_now": 1896.5,
+      "rating_now": 1896.6,
       "rating_then": 1845.7,
       "pct": 2.8,
       "pct_3m": 1.0
     },
     {
       "name": "Sandals",
-      "rating_now": 1882.7,
+      "rating_now": 1882.8,
       "rating_then": 1831.0,
       "pct": 2.8,
       "pct_3m": 1.1
     },
     {
       "name": "agix",
-      "rating_now": 1633.7,
+      "rating_now": 1633.8,
       "rating_then": 1592.8,
       "pct": 2.6,
       "pct_3m": 1.8
     },
     {
       "name": "Kernkob",
-      "rating_now": 1932.7,
+      "rating_now": 1932.8,
       "rating_then": 1885.4,
       "pct": 2.5,
       "pct_3m": 1.8
@@ -615,7 +615,7 @@
     },
     {
       "name": "PandaMane",
-      "rating_now": 1804.8,
+      "rating_now": 1805.0,
       "rating_then": 1731.5,
       "pct": 4.2,
       "pct_3m": 3.1
@@ -671,7 +671,7 @@
     },
     {
       "name": "JobW",
-      "rating_now": 1746.4,
+      "rating_now": 1746.3,
       "rating_then": 1713.5,
       "pct": 1.9,
       "pct_3m": 0.8

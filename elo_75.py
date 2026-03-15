@@ -241,6 +241,7 @@ CANONICAL = {
     'dudeeitsraymond': ['[iDad] dudeeitsraymond','[iDad]dudeeitsraymond'],
     'Exterminate': ['[XTR] Exterminate','[XTR]Exterminate'],
     'FlyBoy': ['Fly8oy'],
+    'Gimpel': ['Leviathan (Gimpel)'],
     'GuillaumePN': ['[Qc] GuillaumePN'],
     'incredulouspotato': ['[PINK]incredulouspotato','[TTV]incredulouspotato'],
     'ioi8': ['[TOG][KBR] ioi8','[TOG]ioi8'],
