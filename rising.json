@@ -27,6 +27,13 @@
       "pct_3m": 2.5
     },
     {
+      "name": "MALIYO",
+      "rating_now": 1605.0,
+      "rating_then": 1500.0,
+      "pct": 7.0,
+      "pct_3m": 7.0
+    },
+    {
       "name": "ZOMAN",
       "rating_now": 1892.1,
       "rating_then": 1771.4,
@@ -239,6 +246,13 @@
       "pct_3m": 8.8
     },
     {
+      "name": "MALIYO",
+      "rating_now": 1608.7,
+      "rating_then": 1500.0,
+      "pct": 7.2,
+      "pct_3m": 7.2
+    },
+    {
       "name": "ping",
       "rating_now": 1646.3,
       "rating_then": 1572.8,
@@ -393,6 +407,13 @@
       "rating_then": 1575.4,
       "pct": 7.4,
       "pct_3m": 2.5
+    },
+    {
+      "name": "MALIYO",
+      "rating_now": 1604.8,
+      "rating_then": 1500.0,
+      "pct": 7.0,
+      "pct_3m": 7.0
     },
     {
       "name": "ZOMAN",
@@ -598,6 +619,13 @@
       "rating_then": 1500.0,
       "pct": 7.8,
       "pct_3m": 8.8
+    },
+    {
+      "name": "MALIYO",
+      "rating_now": 1608.3,
+      "rating_then": 1500.0,
+      "pct": 7.2,
+      "pct_3m": 7.2
     },
     {
       "name": "ping",

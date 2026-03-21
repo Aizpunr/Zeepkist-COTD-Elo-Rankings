@@ -35,7 +35,7 @@ print(f"Current cup: {current_cup}  |  Snapshot at cup: {target_cup}")
 # Ghost players: real player is hidden from snapshot when they played
 # under a ghost account in the NEXT cup (target+1), so arrows don't reveal them
 # Format: cup_number → real_player_name
-GHOST_HIDE = {133: 'Kernkob', 135: 'Sterben'}
+GHOST_HIDE = {133: 'Kernkob'}
 
 def build_snap_at(players, target, no_decay=False):
     entries = []

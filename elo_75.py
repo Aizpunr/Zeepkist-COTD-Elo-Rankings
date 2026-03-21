@@ -680,14 +680,13 @@ def build_rising_combined(player_list):
         past3 = [h for h in p['history'] if h['c'] <= lookback_3m]
         if past6:
             r_then6 = past6[-1]['r']
-        elif past3:
-            # No 6M history but has 3M data — use 1500 starting ELO
-            r_then6 = 1500.0
         else:
-            r_then6 = None
-        pct6 = round((p['rating'] - r_then6) / r_then6 * 100, 1) if r_then6 is not None else 0.0
-        r_then = round(r_then6, 1) if r_then6 is not None else 0
-        pct3 = round((p['rating'] - past3[-1]['r']) / past3[-1]['r'] * 100, 1) if past3 else 0.0
+            # No 6M history — use 1500 starting ELO
+            r_then6 = 1500.0
+        pct6 = round((p['rating'] - r_then6) / r_then6 * 100, 1)
+        r_then = round(r_then6, 1)
+        r_then3 = past3[-1]['r'] if past3 else 1500.0
+        pct3 = round((p['rating'] - r_then3) / r_then3 * 100, 1)
         if pct6 >= 1.0 or pct3 >= 1.0:
             entries[p['name']] = {
                 'name': p['name'], 'rating_now': p['rating'],

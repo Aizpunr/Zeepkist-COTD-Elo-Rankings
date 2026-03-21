@@ -47,7 +47,6 @@ DISPLAY_ALIASES = {
 # Ghost uses real player's rating_after for tier color (so it doesn't look like a smurf)
 HIDDEN_FROM_CUP = {
     ('COTD 133', 'Kernkob'):  'rtm_lover2007',
-    ('COTD 135', 'Sterben'):  'del gaming',
 }
 
 # ── 3. Invert player history into cup-centric data ──
@@ -112,6 +111,48 @@ for cid in sorted(cups.keys(), key=cup_sort_key):
         'lobby_size': cups[cid]['lobby_size'],
         'players': players
     })
+
+# ── 5. Compute cup strength (SOF%) ──
+POOL_CAP = 196
+running = {}   # name -> latest known rating (from prior cups)
+pre_norm = []  # pre_norm[i] = normalized pool BEFORE cup i
+
+for i, cup in enumerate(result):
+    # Build normalized pool from ratings known so far (pre-cup state)
+    entries = sorted(running.items(), key=lambda x: x[1], reverse=True)
+    pool = entries[:POOL_CAP]
+    norm = {}
+    if pool:
+        max_r = pool[0][1]
+        scale = 2000 / max_r
+        for name, rating in pool:
+            norm[name] = rating * scale
+    pre_norm.append(norm)
+    # Update running pool with this cup's results
+    for p in cup['players']:
+        running[p['name']] = abs(p['rating_after'])
+
+# Cups 0-9 use the cup 10 snapshot for stability (too few data points early on)
+early = pre_norm[10] if len(pre_norm) > 10 else pre_norm[-1]
+rank_maps = [early if i < 10 else pre_norm[i] for i in range(len(result))]
+
+for i, cup in enumerate(result):
+    norm_map = rank_maps[i]
+    if len(norm_map) < 2:
+        cup['strength'] = 0
+        continue
+    elos = sorted(
+        [norm_map[p['name']] for p in cup['players'] if p['name'] in norm_map],
+        reverse=True
+    )[:10]
+    if not elos:
+        cup['strength'] = 0
+        continue
+    min_pool = min(norm_map.values())
+    while len(elos) < 10:
+        elos.append(min_pool)
+    avg = sum(elos) / len(elos)
+    cup['strength'] = round(avg / 1850 * 100, 1)
 
 with open('cups.json', 'w', encoding='utf-8') as f:
     json.dump(result, f, ensure_ascii=False, separators=(',', ':'))
