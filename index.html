@@ -564,17 +564,27 @@ function buildRankHistory(player) {
     : (includeTroll ? "standard" : "standard_pure");
   const useAll = allData && allData[key];
   const dataset = useAll ? allData[key] : getActiveData();
+  const noDecay = eloMode === "season";
+  const DECAY = 0.995, GRACE = 3;
   const cups = [...new Set(player.history.map(h => h.c))].sort((a, b) => a - b);
   return cups.map(cup => {
-    const ratings = dataset.map(p => {
+    const actives = dataset.map(p => {
       const hist = useAll ? p.h : p.history;
       const entries = hist.filter(h => h.c <= cup);
       if (!entries.length) return null;
-      return entries[entries.length - 1].r;
+      const last = entries[entries.length - 1];
+      const raw = last.r;
+      if (noDecay) return raw;
+      const missed = cup - last.c;
+      return missed > GRACE ? 1500 + (raw - 1500) * Math.pow(DECAY, missed - GRACE) : raw;
     }).filter(r => r !== null);
-    ratings.sort((a, b) => b - a);
+    actives.sort((a, b) => b - a);
     const playerEntry = player.history.filter(h => h.c <= cup).pop();
-    const rank = ratings.indexOf(playerEntry.r) + 1;
+    const playerRaw = playerEntry.r;
+    const playerMissed = cup - playerEntry.c;
+    const playerActive = noDecay ? playerRaw :
+      playerMissed > GRACE ? 1500 + (playerRaw - 1500) * Math.pow(DECAY, playerMissed - GRACE) : playerRaw;
+    const rank = actives.filter(a => a > playerActive).length + 1;
     return { c: cup, rank, p: playerEntry.p };
   });
 }

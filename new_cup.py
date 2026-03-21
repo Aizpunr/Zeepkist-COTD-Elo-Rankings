@@ -29,7 +29,7 @@ print(f"Processing {cup_id}, mapper: {mapper}")
 print()
 
 # ── 1. Parse mod logs ──
-with open(LOG_PATH) as f:
+with open(LOG_PATH, encoding='utf-8', errors='replace') as f:
     lines = [l for l in f.readlines() if 'COTDTracker' in l]
 
 if not lines:
