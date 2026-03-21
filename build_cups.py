@@ -34,6 +34,7 @@ map_index['Troll COTW 9']    = {'map': 'Cheese of the Week!', 'mapper': 'Lexer'}
 map_index['COTD 133']        = {'map': "Serpent's Lair", 'mapper': '[CTR]Rourie13'}
 map_index['COTD 134']        = {'map': 'Urbs Noctu', 'mapper': '[20x]K410K3N'}
 map_index['COTD 135']        = {'map': 'Hypnerotomachia', 'mapper': '[CSC] Sahne mit Bohnen'}
+map_index['COTD 136']        = {'map': 'Volcanic', 'mapper': '[TTR] Tigerplaysonpc'}
 
 # ── Display aliases: shared accounts where ELO goes to real player ──
 # Format: (cup_id, real_player) → display_name

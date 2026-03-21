@@ -185,7 +185,7 @@ if m:
         new_src = elo_src.replace(f"'{current_xlsx}'", f"'{new_xlsx}'")
         with open(elo_py_path, 'w') as f:
             f.write(new_src)
-        print(f"Updated elo_75.py: {current_xlsx} → {new_xlsx}")
+        print(f"Updated elo_75.py: {current_xlsx} -> {new_xlsx}")
     else:
         wb.save(xlsx_path)
         print(f"Saved to {current_xlsx}")
