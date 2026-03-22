@@ -11,10 +11,10 @@ def _p(f): return os.path.join(base, f)
 LOOKBACK   = 26
 MIN_RATING = 1600
 
-with open(_p('data.json')) as f:
+with open(_p('alldata.json')) as f:
     data = json.load(f)
 
-current_cup = max(h['c'] for p in data['weighted']['l'] for h in p['history'])
+current_cup = max(h['c'] for p in data['weighted'] for h in p['h'])
 lookback_cup = current_cup - LOOKBACK
 
 print(f"Current cup: {current_cup}  |  Comparing against cup {lookback_cup}")
@@ -27,10 +27,10 @@ output = {
 }
 
 for mode in ['standard', 'weighted']:
-    players = data[mode]['l']
+    players = data[mode]
     results = []
     for p in players:
-        hist = sorted(p['history'], key=lambda h: h['c'])
+        hist = sorted(p['h'], key=lambda h: h['c'])
         current_r = hist[-1]['r']
         if current_r < MIN_RATING:
             continue
@@ -42,7 +42,7 @@ for mode in ['standard', 'weighted']:
         if pct < 1.0:
             continue
         results.append({
-            'name':       p['name'],
+            'name':       p['n'],
             'rating_now': round(current_r, 1),
             'rating_then': round(past_r, 1),
             'pct':        pct,

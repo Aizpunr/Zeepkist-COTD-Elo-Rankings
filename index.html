@@ -559,31 +559,26 @@ function getFiltered() {
 
 // ── RANK HISTORY ──
 function buildRankHistory(player) {
-  const key = eloMode === "season" ? "season_2026"
-    : eloMode === "weighted" ? (includeTroll ? "weighted" : "weighted_pure")
-    : (includeTroll ? "standard" : "standard_pure");
-  const useAll = allData && allData[key];
-  const dataset = useAll ? allData[key] : getActiveData();
+  const dataset = getActiveData();
   const noDecay = eloMode === "season";
   const DECAY = 0.995, GRACE = 3;
   const cups = [...new Set(player.history.map(h => h.c))].sort((a, b) => a - b);
   return cups.map(cup => {
     const actives = dataset.map(p => {
-      const hist = useAll ? p.h : p.history;
-      const entries = hist.filter(h => h.c <= cup);
+      const entries = p.history.filter(h => h.c <= cup);
       if (!entries.length) return null;
       const last = entries[entries.length - 1];
       const raw = last.r;
-      if (noDecay) return raw;
+      if (noDecay) return Math.round(raw * 10) / 10;
       const missed = cup - last.c;
-      return missed > GRACE ? 1500 + (raw - 1500) * Math.pow(DECAY, missed - GRACE) : raw;
+      return missed > GRACE ? Math.round((1500 + (raw - 1500) * Math.pow(DECAY, missed - GRACE)) * 10) / 10 : Math.round(raw * 10) / 10;
     }).filter(r => r !== null);
     actives.sort((a, b) => b - a);
     const playerEntry = player.history.filter(h => h.c <= cup).pop();
     const playerRaw = playerEntry.r;
     const playerMissed = cup - playerEntry.c;
-    const playerActive = noDecay ? playerRaw :
-      playerMissed > GRACE ? 1500 + (playerRaw - 1500) * Math.pow(DECAY, playerMissed - GRACE) : playerRaw;
+    const playerActive = noDecay ? Math.round(playerRaw * 10) / 10 :
+      playerMissed > GRACE ? Math.round((1500 + (playerRaw - 1500) * Math.pow(DECAY, playerMissed - GRACE)) * 10) / 10 : Math.round(playerRaw * 10) / 10;
     const rank = actives.filter(a => a > playerActive).length + 1;
     return { c: cup, rank, p: playerEntry.p };
   });
@@ -953,11 +948,8 @@ function searchPlayerObj(p) {
 function renderSearch(query) {
   const header = document.querySelector(".table-header");
   const body = document.getElementById("tableBody");
-  const key = eloMode === "season" ? "season_2026"
-    : eloMode === "weighted" ? (includeTroll ? "weighted" : "weighted_pure")
-    : (includeTroll ? "standard" : "standard_pure");
-  const list = allData[key] || [];
-  const matches = list.filter(p => p.n.toLowerCase().includes(query));
+  const list = getActiveData();
+  const matches = list.filter(p => p.name.toLowerCase().includes(query));
 
   const tl = document.getElementById("tierLegend");
   tl.innerHTML = `<span style="color:var(--text-muted)">${matches.length} result${matches.length !== 1 ? 's' : ''}</span>`;
@@ -969,28 +961,26 @@ function renderSearch(query) {
   let html = "";
   matches.slice(0, 50).forEach(p => {
     const rank = list.indexOf(p) + 1;
-    const c = rColor(p.a);
-    const nameColor = customColors[p.n] || cssVar('--pname');
-    const avgColor = p.v <= 5 ? "var(--green)" : p.v <= 10 ? "var(--text-dim)" : "var(--text-muted)";
-    const bestColor = p.b === 1 ? "var(--accent)" : p.b <= 3 ? "var(--text-dim)" : "var(--text-muted)";
-    const ranked = p.c >= 5 || (p.g + p.s + p.z) > 0;
-    const srCompClass = compareMode && compareList[0] === p.n ? " comp-p1" : compareMode && compareList[1] === p.n ? " comp-p2" : "";
-    html += `<div class="row${selected === p.n ? " selected" : ""}${srCompClass}" data-name="${esc(p.n)}" style="grid-template-columns:${SEARCH_COLS}">
+    const c = rColor(p.active);
+    const nameColor = customColors[p.name] || cssVar('--pname');
+    const avgColor = p.avg_position <= 5 ? "var(--green)" : p.avg_position <= 10 ? "var(--text-dim)" : "var(--text-muted)";
+    const bestColor = p.best_finish === 1 ? "var(--accent)" : p.best_finish <= 3 ? "var(--text-dim)" : "var(--text-muted)";
+    const ranked = p.cups >= 5 || (p.podiums.gold + p.podiums.silver + p.podiums.bronze) > 0;
+    const srCompClass = compareMode && compareList[0] === p.name ? " comp-p1" : compareMode && compareList[1] === p.name ? " comp-p2" : "";
+    html += `<div class="row${selected === p.name ? " selected" : ""}${srCompClass}" data-name="${esc(p.name)}" style="grid-template-columns:${SEARCH_COLS}">
       <div class="rank" style="${ranked ? '' : 'color:var(--text-dark)'}">${ranked ? rank : '—'}</div>
-      <div class="player"><span class="dot" style="background:${c}"></span><span class="pname" style="color:${nameColor}">${esc(p.n)}</span></div>
-      <div class="elo-cell" style="color:${c}">${Math.round(p.a)}</div>
-      <div style="text-align:right;font-family:var(--mono);font-size:11px;color:var(--text-muted)">${p.c}</div>
-      <div style="text-align:center;font-family:var(--mono);font-size:11px;color:${bestColor}">${p.b}</div>
-      <div style="text-align:right;font-family:var(--mono);font-size:11px;color:${avgColor}">${p.v}</div>
+      <div class="player"><span class="dot" style="background:${c}"></span><span class="pname" style="color:${nameColor}">${esc(p.name)}</span></div>
+      <div class="elo-cell" style="color:${c}">${Math.round(p.active)}</div>
+      <div style="text-align:right;font-family:var(--mono);font-size:11px;color:var(--text-muted)">${p.cups}</div>
+      <div style="text-align:center;font-family:var(--mono);font-size:11px;color:${bestColor}">${p.best_finish}</div>
+      <div style="text-align:right;font-family:var(--mono);font-size:11px;color:${avgColor}">${p.avg_position}</div>
     </div>`;
   });
   if (!matches.length) {
     html = `<div style="padding:24px;color:var(--text-muted);font-family:var(--mono);font-size:12px">No players found</div>`;
   }
   body.innerHTML = html;
-  // Click handlers + chart for search results
-  const searchData = matches.slice(0, 50).map(searchPlayerObj);
-  attachRowHandlers(body, searchData);
+  attachRowHandlers(body, matches.slice(0, 50));
 }
 
 // ── COMPARE ──
@@ -1110,8 +1100,7 @@ function renderComparePanel() {
   if (!panel) return;
   if (!compareMode) { panel.innerHTML = ""; panel.classList.remove("sticky-panel"); return; }
   panel.classList.add("sticky-panel");
-  const key = eloMode==="season" ? "season_2026" : eloMode==="weighted" ? (includeTroll?"weighted":"weighted_pure") : (includeTroll?"standard":"standard_pure");
-  const pool = allData && allData[key] ? allData[key].map(searchPlayerObj) : getActiveData();
+  const pool = getActiveData();
   const [c1,c2] = COMP_COLORS;
   const p1 = compareList[0] ? pool.find(p=>p.name===compareList[0]) : null;
   const p2 = compareList[1] ? pool.find(p=>p.name===compareList[1]) : null;
@@ -1362,8 +1351,9 @@ function renderCups() {
         <div>Pos</div><div>Player</div><div style="text-align:right">ELO</div>${hasSeason ? '<div style="text-align:right">Race ELO</div>' : ''}</div>`;
       cup.players.forEach((p, pi) => {
         const rowBg = pi % 2 === 0 ? 'transparent' : 'var(--row-alt, rgba(255,255,255,0.03))';
-        const c = rColor(Math.abs(p.rating_after));
-        const nc = customColors[p.name] || cssVar('--pname');
+        const c = rColor(p.rating_after);
+        const displayName = p.ghost || p.name;
+        const nc = customColors[p.name] || customColors[displayName] || cssVar('--pname');
         // Weighted ELO delta from allData history
         let eloDelta = '';
         if (allData && allData.weighted) {
@@ -1404,9 +1394,9 @@ function renderCups() {
           <div style="font-family:var(--mono);font-size:11px;color:var(--text-muted)">${p.pos}</div>
           <div style="display:flex;align-items:center;gap:5px">
             <div class="dot" style="background:${c}"></div>
-            <span class="cup-player-link" data-player="${esc(p.name)}" style="font-size:12px;font-weight:600;color:${nc};cursor:pointer">${esc(p.name)}</span>
+            <span class="cup-player-link" data-player="${esc(displayName)}" style="font-size:12px;font-weight:600;color:${nc};cursor:pointer">${esc(displayName)}</span>
           </div>
-          <div style="text-align:right;font-family:var(--mono);font-size:12px;font-weight:700;color:${c}">${p.rating_after < 0 ? '<i>(hidden)</i>' : p.rating_after}${p.rating_after < 0 ? '' : eloDelta}</div>
+          <div style="text-align:right;font-family:var(--mono);font-size:12px;font-weight:700;color:${c}">${Math.round(p.rating_after)}${eloDelta}</div>
           ${seasonCell}
         </div>`;
       });
@@ -1421,19 +1411,18 @@ function renderCups() {
           const pRow = el.closest('div[style*="display:grid"]');
           // Close any existing inline chart in this panel
           panel.querySelectorAll('.cup-inline-chart').forEach(c => c.remove());
-          // Find player data from allData
-          const key = eloMode === "season" ? "season_2026"
-            : eloMode === "weighted" ? (includeTroll ? "weighted" : "weighted_pure")
-            : (includeTroll ? "standard" : "standard_pure");
-          const list = allData && allData[key] ? allData[key] : [];
-          const ap = list.find(x => x.n === name);
-          if (!ap) return;
-          const player = searchPlayerObj(ap);
+          // Find player data — try current mode, fall back to weighted (most complete)
+          let player = getActiveData().find(x => x.name === name);
+          if (!player) player = weightedData.find(x => x.name === name);
           const chartEl = document.createElement("div");
           chartEl.className = "cup-inline-chart chart-panel";
           chartEl.style.cssText = "margin:4px 0;border-radius:8px;";
           pRow.after(chartEl);
-          drawChart(player, chartEl);
+          if (player) {
+            drawChart(player, chartEl);
+          } else {
+            chartEl.innerHTML = `<div style="padding:12px 14px;font-family:var(--mono);font-size:11px;color:var(--text-muted)">No data available for ${esc(name)}</div>`;
+          }
           chartEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
         };
       });
@@ -1549,19 +1538,26 @@ function render() {
 
 // ── INIT ──
 const _v = '?v=' + Date.now();
+function expandPlayer(p) {
+  return {
+    name: p.n, rating: p.r, active: p.a, cups: p.c, wins: p.w,
+    podiums: { gold: p.g, silver: p.s, bronze: p.z },
+    avg_position: p.v, best_finish: p.b, peak_rating: p.p,
+    history: p.h
+  };
+}
 Promise.all([
-  fetch('data.json' + _v).then(r => r.json()),
+  fetch('alldata.json' + _v).then(r => r.json()),
   fetch('snapshot.json' + _v).then(r => r.json()).catch(() => null),
   fetch('rising.json' + _v).then(r => r.json()).catch(() => null),
   fetch('lexercurse.json' + _v).then(r => r.json()).catch(() => null),
-  fetch('alldata.json' + _v).then(r => r.json()).catch(() => null),
   fetch('cups.json' + _v).then(r => r.json()).catch(() => null),
-]).then(([data, s, rising, curse, all, cups]) => {
-  eloData = data.standard.l;
-  weightedData = data.weighted.l;
-  eloDataPure = data.standard_pure ? data.standard_pure.l : data.standard.l;
-  weightedDataPure = data.weighted_pure ? data.weighted_pure.l : data.weighted.l;
-  seasonData = data.season_2026 ? data.season_2026.l : null;
+]).then(([all, s, rising, curse, cups]) => {
+  eloData = all.standard.map(expandPlayer);
+  weightedData = all.weighted.map(expandPlayer);
+  eloDataPure = all.standard_pure ? all.standard_pure.map(expandPlayer) : eloData;
+  weightedDataPure = all.weighted_pure ? all.weighted_pure.map(expandPlayer) : weightedData;
+  seasonData = all.season_2026 ? all.season_2026.map(expandPlayer) : null;
   snap = s;
   risingData = rising;
   curseData = curse ? curse.l : null;

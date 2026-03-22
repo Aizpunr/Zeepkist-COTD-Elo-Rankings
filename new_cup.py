@@ -53,23 +53,37 @@ if not rounds:
     sys.exit(1)
 
 # Build elimination order
+# Track last known time per player across rounds (for DNF elim display)
+last_known_time = {}
 elim_order = []
-for round_num, rnd in enumerate(rounds, 1):
+actual_round = 0
+for rnd in rounds:
     player_times = {}
     eliminated_names = []
     for line in rnd:
         m = re.search(r'Player (.+?): Time: (.+)', line)
         if m:
-            player_times[m.group(1).strip()] = m.group(2).strip()
+            name = m.group(1).strip()
+            time_str = m.group(2).strip()
+            player_times[name] = time_str
+            if time_str != 'DNF':
+                last_known_time[name] = time_str
         m2 = re.search(r'Eliminating (?:DNF|on time): (.+)', line)
         if m2:
             name = m2.group(1).strip()
             if name not in eliminated_names:
                 eliminated_names.append(name)
+    # Only count rounds with eliminations (skip discovery)
+    if not eliminated_names:
+        continue
+    actual_round += 1
     for name in eliminated_names:
         if name != mapper:
+            # Use current round time, fall back to last known time
             time = player_times.get(name, 'DNF')
-            elim_order.append((name, time, round_num))
+            if time == 'DNF':
+                time = last_known_time.get(name, 'DNF')
+            elim_order.append((name, time, actual_round))
 
 # Find winner
 all_named = set()

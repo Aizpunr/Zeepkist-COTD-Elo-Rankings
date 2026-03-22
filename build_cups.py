@@ -36,18 +36,12 @@ map_index['COTD 134']        = {'map': 'Urbs Noctu', 'mapper': '[20x]K410K3N'}
 map_index['COTD 135']        = {'map': 'Hypnerotomachia', 'mapper': '[CSC] Sahne mit Bohnen'}
 map_index['COTD 136']        = {'map': 'Volcanic', 'mapper': '[TTR] Tigerplaysonpc'}
 
-# ── Display aliases: shared accounts where ELO goes to real player ──
-# Format: (cup_id, real_player) → display_name
-# The account name shows in cups view; ELO is calculated under real_player
-DISPLAY_ALIASES = {
+# ── Ghost display: real player played under a ghost account ──
+# cups.json keeps real player name + adds "ghost" field for frontend display
+# Format: (cup_id, real_player) → ghost_display_name
+GHOST_DISPLAY = {
     ('COTD 133', 'Kernkob'): 'rtm_lover2007',
-}
-
-# ── Hidden from cup view: real players whose ELO is credited via ghost ──
-# Ghost player already appears naturally from their own history entry
-# Ghost uses real player's rating_after for tier color (so it doesn't look like a smurf)
-HIDDEN_FROM_CUP = {
-    ('COTD 133', 'Kernkob'):  'rtm_lover2007',
+    ('COTD 135', 'Sterben'): 'del gaming',
 }
 
 # ── 3. Invert player history into cup-centric data ──
@@ -88,23 +82,17 @@ result = []
 for cid in sorted(cups.keys(), key=cup_sort_key):
     meta = map_index.get(cid, {'map': '', 'mapper': ''})
     players = cups[cid]['players']
-    # Hide real players whose ELO is credited via ghost system
-    # Give the ghost the real player's rating for tier color
-    for hidden_key, ghost_name in HIDDEN_FROM_CUP.items():
-        if hidden_key[0] != cid:
+    # Ghost handling: keep real player, add ghost field, remove ghost's shadow entry
+    ghost_names_to_remove = set()
+    for ghost_key, ghost_name in GHOST_DISPLAY.items():
+        if ghost_key[0] != cid:
             continue
-        real_name = hidden_key[1]
-        real_rating = next((p['rating_after'] for p in players if p['name'] == real_name), None)
-        if real_rating is not None:
-            for p in players:
-                if p['name'] == ghost_name:
-                    p['rating_after'] = -real_rating  # negative = hidden, abs for color
-    players = [p for p in players if (cid, p['name']) not in HIDDEN_FROM_CUP]
-    # Apply display aliases (shared accounts)
-    for p in players:
-        alias_key = (cid, p['name'])
-        if alias_key in DISPLAY_ALIASES:
-            p['name'] = DISPLAY_ALIASES[alias_key]
+        real_name = ghost_key[1]
+        for p in players:
+            if p['name'] == real_name:
+                p['ghost'] = ghost_name
+        ghost_names_to_remove.add(ghost_name)
+    players = [p for p in players if p['name'] not in ghost_names_to_remove]
     result.append({
         'id': cid,
         'map': meta['map'],
@@ -131,7 +119,7 @@ for i, cup in enumerate(result):
     pre_norm.append(norm)
     # Update running pool with this cup's results
     for p in cup['players']:
-        running[p['name']] = abs(p['rating_after'])
+        running[p['name']] = p['rating_after']
 
 # Cups 0-9 use the cup 10 snapshot for stability (too few data points early on)
 early = pre_norm[10] if len(pre_norm) > 10 else pre_norm[-1]

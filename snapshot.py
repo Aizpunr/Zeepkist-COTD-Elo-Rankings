@@ -1,5 +1,5 @@
 """
-snapshot.py — write snapshot.json from data.json
+snapshot.py — write snapshot.json from alldata.json
 
 Usage:
   python snapshot.py          → snapshot = current standings (no arrows until new cup)
@@ -13,19 +13,19 @@ def _p(f): return os.path.join(base, f)
 DECAY = 0.995
 GRACE = 3
 
-with open(_p('data.json')) as f:
+with open(_p('alldata.json')) as f:
     data = json.load(f)
 
-std_players  = data['standard']['l']
-w_players    = data['weighted']['l']
-std_pure     = data.get('standard_pure', {}).get('l', [])
-w_pure       = data.get('weighted_pure', {}).get('l', [])
-season       = data.get('season_2026', {}).get('l', [])
+std_players  = data['standard']
+w_players    = data['weighted']
+std_pure     = data.get('standard_pure', [])
+w_pure       = data.get('weighted_pure', [])
+season       = data.get('season_2026', [])
 
 # Find highest cup number across all history entries
 def max_cup(players):
     if not players: return 0
-    return max(h['c'] for p in players for h in p['history'])
+    return max(h['c'] for p in players for h in p['h'])
 
 current_cup = max(max_cup(std_players), max_cup(w_players))
 
@@ -40,7 +40,10 @@ GHOST_HIDE = {133: 'Kernkob'}
 def build_snap_at(players, target, no_decay=False):
     entries = []
     for p in players:
-        hist_before = [h for h in p['history'] if h['c'] <= target]
+        # Support both compact keys (alldata) and verbose keys (lexercurse)
+        name = p.get('n') or p.get('name')
+        hist = p.get('h') or p.get('history', [])
+        hist_before = [h for h in hist if h['c'] <= target]
         if not hist_before:
             continue
         last = max(hist_before, key=lambda h: h['c'])
@@ -52,7 +55,7 @@ def build_snap_at(players, target, no_decay=False):
             active = round(1500 + (raw - 1500) * (DECAY ** (missed - GRACE)), 1) if missed > GRACE else round(raw, 1)
         wins = sum(1 for h in hist_before if h['p'] == 1)
         pods = sum(1 for h in hist_before if h['p'] <= 3)
-        entries.append((p['name'], raw, active, wins, pods))
+        entries.append((name, raw, active, wins, pods))
     entries.sort(key=lambda x: x[2], reverse=True)  # rank by active
     return {name: [i + 1, raw, wins, pods] for i, (name, raw, _, wins, pods) in enumerate(entries[:150])}
 
@@ -73,9 +76,9 @@ if os.path.exists(snap_path):
         # Find the cup where the #1 ranked player's rating matches the snapshot
         top_name = next((n for n, v in w_snap.items() if v[0] == 1), None)
         if top_name:
-            tp = next((p for p in w_players if p['name'] == top_name), None)
+            tp = next((p for p in w_players if p['n'] == top_name), None)
             if tp:
-                for h in reversed(tp['history']):
+                for h in reversed(tp['h']):
                     if round(h['r'], 1) == round(w_snap[top_name][1], 1):
                         old_cup = h['c']; break
     os.makedirs(backup_dir, exist_ok=True)

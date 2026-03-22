@@ -579,16 +579,7 @@ std_pure_list = build_site_list(std_pure, std_pure, pure_cups)
 w_pure_list   = build_site_list(w_pure,   std_pure, pure_cups)
 season_list   = build_site_list(season_w, season_std, season_cups, min_cups=1, no_decay=True)
 
-# --- Write data.json ---
-with open(_p('data.json'), 'w') as f:
-    json.dump({
-        'standard': {'l': std_list}, 'weighted': {'l': w_list},
-        'standard_pure': {'l': std_pure_list}, 'weighted_pure': {'l': w_pure_list},
-        'season_2026': {'l': season_list},
-    }, f, separators=(',', ':'))
-print("data.json written")
-
-# --- alldata.json (all players, compact, no history) ---
+# --- alldata.json (all players, compact keys, with history) ---
 def build_all_list(elo_data, stat_data, cups_list, min_cups=3, no_decay=False):
     rat = elo_data['ratings']; hist = elo_data['history']
     gp_d = stat_data['gp']
@@ -628,10 +619,10 @@ def build_all_list(elo_data, stat_data, cups_list, min_cups=3, no_decay=False):
     return out
 
 alldata = {
-    'standard':      build_all_list(std_full, std_full, all_cups),
-    'weighted':      build_all_list(w_full,   std_full, all_cups),
-    'standard_pure': build_all_list(std_pure, std_pure, pure_cups),
-    'weighted_pure': build_all_list(w_pure,   std_pure, pure_cups),
+    'standard':      build_all_list(std_full, std_full, all_cups, min_cups=1),
+    'weighted':      build_all_list(w_full,   std_full, all_cups, min_cups=1),
+    'standard_pure': build_all_list(std_pure, std_pure, pure_cups, min_cups=1),
+    'weighted_pure': build_all_list(w_pure,   std_pure, pure_cups, min_cups=1),
     'season_2026':   build_all_list(season_w, season_std, season_cups, min_cups=1, no_decay=True),
 }
 with open(_p('alldata.json'), 'w') as f:
