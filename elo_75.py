@@ -282,7 +282,7 @@ CANONICAL = {
     'Redstony': ['[Stc3]Redstony', '[TILT]Redstony'],
     'Six': ['SixSixSevenSeven', '[BAP]SixSixSevenSeven', '[BAP]Six'],
     'Sterben': ['[BAP]Sterben','[PNCK]Mini P.E.K.K.A','λ','Lλmbda','[FPV]Lλmbda','[PCDJ]Sterben'],
-    'stindt': ['[KAAS]stindt', '[Lame]stindt', '[Slow]stindt', '[Tame]stindt'],
+    'stindt': ['[KAAS]stindt', '[Lame]stindt', '[Lame}stindt', '[Slow]stindt', '[Tame]stindt'],
     'Tommygaming': ['[CSC]Tommygaming', '[OOPS]Tommygaming', '[jofk]Tommygaming', 'TommyGaming5132', 'Tommygaming5132', '[TG]Tommygaming5132', '[CSC]Tommygaming5132', '[CSC]Tommygaming6132', '[C3PO]Tommygaming5132'],
     'WotterBytes': ['Wotterbytes'],
     'ping': ['[bad] ping', '[boom] ping', '[no] ping', '[pong]ping'],
