@@ -1,7 +1,7 @@
 {
-  "current_cup": 136,
-  "lookback_cup": 110,
-  "lookback_3m": 123,
+  "current_cup": 137,
+  "lookback_cup": 111,
+  "lookback_3m": 124,
   "lookback_cups": 26,
   "min_rating": 1600,
   "standard": [
@@ -10,63 +10,56 @@
       "rating_now": 1653.0,
       "rating_then": 1510.3,
       "pct": 9.4,
-      "pct_3m": 7.8
-    },
-    {
-      "name": "Tommygaming",
-      "rating_now": 1698.7,
-      "rating_then": 1575.7,
-      "pct": 7.8,
-      "pct_3m": 2.4
+      "pct_3m": 5.9
     },
     {
       "name": "JakeAdjacent",
-      "rating_now": 1742.0,
+      "rating_now": 1749.1,
       "rating_then": 1617.2,
-      "pct": 7.7,
-      "pct_3m": 3.6
+      "pct": 8.2,
+      "pct_3m": 3.4
     },
     {
-      "name": "ZOMAN",
-      "rating_now": 1895.5,
-      "rating_then": 1771.1,
-      "pct": 7.0,
-      "pct_3m": 3.3
+      "name": "Tommygaming",
+      "rating_now": 1699.4,
+      "rating_then": 1575.7,
+      "pct": 7.9,
+      "pct_3m": 2.0
     },
     {
       "name": "MALIYO",
-      "rating_now": 1605.0,
+      "rating_now": 1607.2,
       "rating_then": 1500.0,
-      "pct": 7.0,
-      "pct_3m": 7.0
+      "pct": 7.1,
+      "pct_3m": 5.7
     },
     {
       "name": "microways",
-      "rating_now": 1601.1,
+      "rating_now": 1606.3,
       "rating_then": 1500.0,
-      "pct": 6.7,
-      "pct_3m": 6.1
+      "pct": 7.1,
+      "pct_3m": 5.6
+    },
+    {
+      "name": "ZOMAN",
+      "rating_now": 1900.4,
+      "rating_then": 1778.1,
+      "pct": 6.9,
+      "pct_3m": 3.3
     },
     {
       "name": "Mortishade",
       "rating_now": 1606.3,
-      "rating_then": 1507.6,
-      "pct": 6.5,
-      "pct_3m": 1.7
-    },
-    {
-      "name": "ping",
-      "rating_now": 1674.3,
-      "rating_then": 1602.0,
-      "pct": 4.5,
-      "pct_3m": 2.1
+      "rating_then": 1516.6,
+      "pct": 5.9,
+      "pct_3m": 1.2
     },
     {
       "name": "redal",
       "rating_now": 1606.1,
-      "rating_then": 1541.6,
-      "pct": 4.2,
-      "pct_3m": 1.6
+      "rating_then": 1544.2,
+      "pct": 4.0,
+      "pct_3m": 1.1
     },
     {
       "name": "DeeDeeNaNaNa",
@@ -76,67 +69,60 @@
       "pct_3m": 1.1
     },
     {
-      "name": "MackCheesy",
-      "rating_now": 1742.9,
-      "rating_then": 1692.7,
-      "pct": 3.0,
-      "pct_3m": 1.0
+      "name": "ping",
+      "rating_now": 1671.0,
+      "rating_then": 1609.8,
+      "pct": 3.8,
+      "pct_3m": 1.8
     },
     {
       "name": "agix",
-      "rating_now": 1640.7,
+      "rating_now": 1641.5,
       "rating_then": 1592.2,
-      "pct": 3.0,
-      "pct_3m": 2.3
+      "pct": 3.1,
+      "pct_3m": 2.4
     },
     {
       "name": "JobW",
       "rating_now": 1718.7,
       "rating_then": 1670.4,
       "pct": 2.9,
-      "pct_3m": 2.0
-    },
-    {
-      "name": "Kernkob",
-      "rating_now": 1944.4,
-      "rating_then": 1891.8,
-      "pct": 2.8,
-      "pct_3m": 1.7
+      "pct_3m": 1.8
     },
     {
       "name": "Sandals",
-      "rating_now": 1882.3,
-      "rating_then": 1831.3,
-      "pct": 2.8,
+      "rating_now": 1882.6,
+      "rating_then": 1832.7,
+      "pct": 2.7,
       "pct_3m": 0.9
+    },
+    {
+      "name": "MackCheesy",
+      "rating_now": 1738.6,
+      "rating_then": 1692.7,
+      "pct": 2.7,
+      "pct_3m": 0.7
+    },
+    {
+      "name": "Kernkob",
+      "rating_now": 1945.6,
+      "rating_then": 1896.4,
+      "pct": 2.6,
+      "pct_3m": 1.5
     },
     {
       "name": "justMaki",
       "rating_now": 1948.0,
-      "rating_then": 1897.6,
-      "pct": 2.7,
+      "rating_then": 1900.1,
+      "pct": 2.5,
       "pct_3m": 1.3
     },
     {
-      "name": "Quickracer10",
-      "rating_now": 1905.3,
-      "rating_then": 1863.8,
-      "pct": 2.2,
-      "pct_3m": 1.6
-    },
-    {
       "name": "Hydro",
-      "rating_now": 1851.6,
+      "rating_now": 1851.2,
       "rating_then": 1811.5,
       "pct": 2.2,
       "pct_3m": 1.2
-    },
-    {
-      "name": "An Actual g00se",
-      "rating_now": 1652.8,
-      "rating_then": 1617.1,
-      "pct": 2.2,
-      "pct_3m": 1.5
     },
     {
       "name": "Redstony",
@@ -150,14 +136,35 @@
       "rating_now": 1591.1,
       "rating_then": 1556.5,
       "pct": 2.2,
-      "pct_3m": -0.3
+      "pct_3m": -1.4
+    },
+    {
+      "name": "Quickracer10",
+      "rating_now": 1905.3,
+      "rating_then": 1867.7,
+      "pct": 2.0,
+      "pct_3m": 1.4
+    },
+    {
+      "name": "PandaMane",
+      "rating_now": 1724.5,
+      "rating_then": 1690.8,
+      "pct": 2.0,
+      "pct_3m": 2.4
     },
     {
       "name": "Lexer",
-      "rating_now": 1885.7,
-      "rating_then": 1852.9,
+      "rating_now": 1890.2,
+      "rating_then": 1855.7,
+      "pct": 1.9,
+      "pct_3m": 1.5
+    },
+    {
+      "name": "An Actual g00se",
+      "rating_now": 1652.8,
+      "rating_then": 1623.6,
       "pct": 1.8,
-      "pct_3m": 0.5
+      "pct_3m": 1.5
     },
     {
       "name": "Pants",
@@ -165,13 +172,6 @@
       "rating_then": 1598.0,
       "pct": 1.6,
       "pct_3m": 1.3
-    },
-    {
-      "name": "PandaMane",
-      "rating_now": 1715.8,
-      "rating_then": 1690.8,
-      "pct": 1.5,
-      "pct_3m": 0.9
     },
     {
       "name": "Beans",
@@ -188,18 +188,25 @@
       "pct_3m": 1.3
     },
     {
+      "name": "M\u03bc",
+      "rating_now": 1640.3,
+      "rating_then": 1621.3,
+      "pct": 1.2,
+      "pct_3m": 0.6
+    },
+    {
       "name": "Murrl",
       "rating_now": 1669.1,
       "rating_then": 1653.1,
       "pct": 1.0,
-      "pct_3m": 0.7
+      "pct_3m": 0.3
     },
     {
       "name": "Hi Im Yolo",
       "rating_now": 1623.9,
-      "rating_then": 1610.3,
-      "pct": 0.8,
-      "pct_3m": 1.3
+      "rating_then": 1618.4,
+      "pct": 0.3,
+      "pct_3m": 1.2
     }
   ],
   "weighted": [
@@ -208,112 +215,119 @@
       "rating_now": 1835.6,
       "rating_then": 1529.3,
       "pct": 20.0,
-      "pct_3m": 15.0
-    },
-    {
-      "name": "ZOMAN",
-      "rating_now": 2100.0,
-      "rating_then": 1923.6,
-      "pct": 9.2,
-      "pct_3m": 3.7
+      "pct_3m": 10.0
     },
     {
       "name": "JakeAdjacent",
-      "rating_now": 1850.8,
+      "rating_now": 1860.1,
       "rating_then": 1696.7,
-      "pct": 9.1,
-      "pct_3m": 3.9
+      "pct": 9.6,
+      "pct_3m": 3.7
+    },
+    {
+      "name": "ZOMAN",
+      "rating_now": 2108.9,
+      "rating_then": 1937.6,
+      "pct": 8.8,
+      "pct_3m": 3.8
     },
     {
       "name": "Tommygaming",
-      "rating_now": 1696.9,
+      "rating_now": 1693.9,
       "rating_then": 1557.3,
-      "pct": 9.0,
-      "pct_3m": 1.3
+      "pct": 8.8,
+      "pct_3m": 0.7
     },
     {
       "name": "microways",
-      "rating_now": 1625.7,
+      "rating_now": 1626.1,
       "rating_then": 1500.0,
       "pct": 8.4,
-      "pct_3m": 5.9
+      "pct_3m": 5.4
     },
     {
       "name": "MALIYO",
-      "rating_now": 1608.7,
+      "rating_now": 1609.4,
       "rating_then": 1500.0,
-      "pct": 7.2,
-      "pct_3m": 7.2
+      "pct": 7.3,
+      "pct_3m": 5.5
     },
     {
       "name": "PandaMane",
-      "rating_now": 1807.3,
+      "rating_now": 1828.6,
       "rating_then": 1733.7,
-      "pct": 4.2,
-      "pct_3m": 2.5
+      "pct": 5.5,
+      "pct_3m": 4.8
     },
     {
       "name": "Jakie",
       "rating_now": 1682.4,
       "rating_then": 1618.1,
       "pct": 4.0,
-      "pct_3m": 0.7
+      "pct_3m": -0.9
     },
     {
-      "name": "ping",
-      "rating_now": 1642.5,
-      "rating_then": 1583.0,
-      "pct": 3.8,
-      "pct_3m": 1.4
+      "name": "Lexer",
+      "rating_now": 1979.3,
+      "rating_then": 1917.9,
+      "pct": 3.2,
+      "pct_3m": 2.9
     },
     {
       "name": "MackCheesy",
-      "rating_now": 1797.8,
+      "rating_now": 1787.7,
       "rating_then": 1735.8,
-      "pct": 3.6,
-      "pct_3m": 0.9
-    },
-    {
-      "name": "Kernkob",
-      "rating_now": 2156.0,
-      "rating_then": 2093.5,
       "pct": 3.0,
-      "pct_3m": 1.8
-    },
-    {
-      "name": "An Actual g00se",
-      "rating_now": 1704.3,
-      "rating_then": 1655.2,
-      "pct": 3.0,
-      "pct_3m": 2.0
-    },
-    {
-      "name": "agix",
-      "rating_now": 1628.8,
-      "rating_then": 1584.4,
-      "pct": 2.8,
-      "pct_3m": 2.2
+      "pct_3m": 0.6
     },
     {
       "name": "justMaki",
       "rating_now": 2164.3,
-      "rating_then": 2106.6,
-      "pct": 2.7,
-      "pct_3m": 1.6
+      "rating_then": 2104.9,
+      "pct": 2.8,
+      "pct_3m": 1.9
     },
     {
-      "name": "Lexer",
-      "rating_now": 1966.5,
-      "rating_then": 1914.1,
+      "name": "ping",
+      "rating_now": 1637.4,
+      "rating_then": 1592.9,
+      "pct": 2.8,
+      "pct_3m": 1.2
+    },
+    {
+      "name": "agix",
+      "rating_now": 1626.8,
+      "rating_then": 1584.4,
       "pct": 2.7,
-      "pct_3m": 1.1
+      "pct_3m": 2.0
+    },
+    {
+      "name": "An Actual g00se",
+      "rating_now": 1704.3,
+      "rating_then": 1660.4,
+      "pct": 2.6,
+      "pct_3m": 2.0
+    },
+    {
+      "name": "Kernkob",
+      "rating_now": 2151.1,
+      "rating_then": 2101.8,
+      "pct": 2.3,
+      "pct_3m": 1.2
+    },
+    {
+      "name": "M\u03bc",
+      "rating_now": 1629.0,
+      "rating_then": 1596.6,
+      "pct": 2.0,
+      "pct_3m": 2.0
     },
     {
       "name": "Sandals",
-      "rating_now": 1945.3,
-      "rating_then": 1906.9,
-      "pct": 2.0,
-      "pct_3m": -0.6
+      "rating_now": 1940.9,
+      "rating_then": 1903.8,
+      "pct": 1.9,
+      "pct_3m": -0.4
     },
     {
       "name": "clycl",
@@ -327,7 +341,7 @@
       "rating_now": 1750.9,
       "rating_then": 1719.2,
       "pct": 1.8,
-      "pct_3m": 0.7
+      "pct_3m": 0.9
     },
     {
       "name": "Redstony",
@@ -344,20 +358,6 @@
       "pct_3m": 0.7
     },
     {
-      "name": "M\u03bc",
-      "rating_now": 1619.8,
-      "rating_then": 1596.6,
-      "pct": 1.5,
-      "pct_3m": 1.3
-    },
-    {
-      "name": "Hydro",
-      "rating_now": 1962.6,
-      "rating_then": 1935.6,
-      "pct": 1.4,
-      "pct_3m": 0.6
-    },
-    {
       "name": "Pants",
       "rating_now": 1715.1,
       "rating_then": 1692.7,
@@ -369,20 +369,20 @@
       "rating_now": 1712.8,
       "rating_then": 1692.8,
       "pct": 1.2,
-      "pct_3m": 0.4
+      "pct_3m": 0.2
     },
     {
-      "name": "Quickracer10",
-      "rating_now": 2041.8,
-      "rating_then": 2025.2,
-      "pct": 0.8,
-      "pct_3m": 1.2
+      "name": "Hydro",
+      "rating_now": 1955.4,
+      "rating_then": 1935.6,
+      "pct": 1.0,
+      "pct_3m": 0.2
     },
     {
       "name": "Hi Im Yolo",
       "rating_now": 1588.7,
-      "rating_then": 1580.4,
-      "pct": 0.5,
+      "rating_then": 1591.2,
+      "pct": -0.2,
       "pct_3m": 1.1
     }
   ],
@@ -392,63 +392,56 @@
       "rating_now": 1655.8,
       "rating_then": 1505.5,
       "pct": 10.0,
-      "pct_3m": 8.3
+      "pct_3m": 6.3
     },
     {
       "name": "Tommygaming",
-      "rating_now": 1698.2,
+      "rating_now": 1699.0,
       "rating_then": 1575.4,
       "pct": 7.8,
-      "pct_3m": 2.4
+      "pct_3m": 2.0
     },
     {
       "name": "JakeAdjacent",
-      "rating_now": 1748.4,
+      "rating_now": 1755.3,
       "rating_then": 1630.5,
-      "pct": 7.2,
-      "pct_3m": 3.4
+      "pct": 7.7,
+      "pct_3m": 3.2
     },
     {
       "name": "MALIYO",
-      "rating_now": 1604.8,
+      "rating_now": 1607.0,
       "rating_then": 1500.0,
-      "pct": 7.0,
-      "pct_3m": 7.0
-    },
-    {
-      "name": "ZOMAN",
-      "rating_now": 1896.2,
-      "rating_then": 1773.6,
-      "pct": 6.9,
-      "pct_3m": 3.3
+      "pct": 7.1,
+      "pct_3m": 5.7
     },
     {
       "name": "microways",
-      "rating_now": 1600.9,
+      "rating_now": 1606.1,
       "rating_then": 1500.0,
-      "pct": 6.7,
-      "pct_3m": 6.1
+      "pct": 7.1,
+      "pct_3m": 5.6
+    },
+    {
+      "name": "ZOMAN",
+      "rating_now": 1901.2,
+      "rating_then": 1780.5,
+      "pct": 6.8,
+      "pct_3m": 3.2
     },
     {
       "name": "Mortishade",
       "rating_now": 1606.0,
-      "rating_then": 1507.5,
-      "pct": 6.5,
-      "pct_3m": 1.7
-    },
-    {
-      "name": "ping",
-      "rating_now": 1673.9,
-      "rating_then": 1601.8,
-      "pct": 4.5,
-      "pct_3m": 2.1
+      "rating_then": 1516.6,
+      "pct": 5.9,
+      "pct_3m": 1.1
     },
     {
       "name": "redal",
       "rating_now": 1605.9,
-      "rating_then": 1541.5,
-      "pct": 4.2,
-      "pct_3m": 1.6
+      "rating_then": 1544.1,
+      "pct": 4.0,
+      "pct_3m": 1.1
     },
     {
       "name": "DeeDeeNaNaNa",
@@ -458,53 +451,53 @@
       "pct_3m": 1.1
     },
     {
-      "name": "justMaki",
-      "rating_now": 1922.7,
-      "rating_then": 1863.8,
-      "pct": 3.2,
-      "pct_3m": 1.6
+      "name": "ping",
+      "rating_now": 1670.5,
+      "rating_then": 1609.5,
+      "pct": 3.8,
+      "pct_3m": 1.8
     },
     {
-      "name": "MackCheesy",
-      "rating_now": 1741.2,
-      "rating_then": 1690.1,
+      "name": "agix",
+      "rating_now": 1641.4,
+      "rating_then": 1592.6,
+      "pct": 3.1,
+      "pct_3m": 2.4
+    },
+    {
+      "name": "justMaki",
+      "rating_now": 1922.7,
+      "rating_then": 1867.0,
       "pct": 3.0,
-      "pct_3m": 1.0
+      "pct_3m": 1.4
     },
     {
       "name": "JobW",
       "rating_now": 1714.3,
       "rating_then": 1664.3,
       "pct": 3.0,
-      "pct_3m": 2.1
-    },
-    {
-      "name": "agix",
-      "rating_now": 1640.7,
-      "rating_then": 1592.6,
-      "pct": 3.0,
-      "pct_3m": 2.3
-    },
-    {
-      "name": "Kernkob",
-      "rating_now": 1935.3,
-      "rating_then": 1879.9,
-      "pct": 2.9,
       "pct_3m": 1.8
     },
     {
-      "name": "Sandals",
-      "rating_now": 1882.8,
-      "rating_then": 1833.1,
-      "pct": 2.7,
-      "pct_3m": 0.9
+      "name": "MackCheesy",
+      "rating_now": 1736.9,
+      "rating_then": 1690.1,
+      "pct": 2.8,
+      "pct_3m": 0.7
     },
     {
-      "name": "Quickracer10",
-      "rating_now": 1897.2,
-      "rating_then": 1851.6,
-      "pct": 2.5,
-      "pct_3m": 1.7
+      "name": "Kernkob",
+      "rating_now": 1936.5,
+      "rating_then": 1884.7,
+      "pct": 2.7,
+      "pct_3m": 1.6
+    },
+    {
+      "name": "Sandals",
+      "rating_now": 1883.1,
+      "rating_then": 1834.4,
+      "pct": 2.7,
+      "pct_3m": 0.9
     },
     {
       "name": "Redstony",
@@ -514,39 +507,46 @@
       "pct_3m": 0.7
     },
     {
-      "name": "Hydro",
-      "rating_now": 1848.9,
-      "rating_then": 1808.2,
-      "pct": 2.3,
-      "pct_3m": 1.2
-    },
-    {
-      "name": "An Actual g00se",
-      "rating_now": 1652.5,
-      "rating_then": 1616.9,
+      "name": "Quickracer10",
+      "rating_now": 1897.2,
+      "rating_then": 1855.8,
       "pct": 2.2,
       "pct_3m": 1.5
+    },
+    {
+      "name": "Hydro",
+      "rating_now": 1848.5,
+      "rating_then": 1808.2,
+      "pct": 2.2,
+      "pct_3m": 1.2
     },
     {
       "name": "Jakie",
       "rating_now": 1590.9,
       "rating_then": 1556.4,
       "pct": 2.2,
-      "pct_3m": -0.3
-    },
-    {
-      "name": "Lexer",
-      "rating_now": 1882.4,
-      "rating_then": 1847.8,
-      "pct": 1.9,
-      "pct_3m": 0.5
+      "pct_3m": -1.4
     },
     {
       "name": "PandaMane",
-      "rating_now": 1713.9,
+      "rating_now": 1722.6,
       "rating_then": 1687.6,
-      "pct": 1.6,
-      "pct_3m": 1.0
+      "pct": 2.1,
+      "pct_3m": 2.4
+    },
+    {
+      "name": "Lexer",
+      "rating_now": 1887.0,
+      "rating_then": 1850.7,
+      "pct": 2.0,
+      "pct_3m": 1.6
+    },
+    {
+      "name": "An Actual g00se",
+      "rating_now": 1652.5,
+      "rating_then": 1623.3,
+      "pct": 1.8,
+      "pct_3m": 1.5
     },
     {
       "name": "Pants",
@@ -563,18 +563,25 @@
       "pct_3m": 0.4
     },
     {
+      "name": "M\u03bc",
+      "rating_now": 1641.2,
+      "rating_then": 1624.0,
+      "pct": 1.1,
+      "pct_3m": 0.5
+    },
+    {
       "name": "Murrl",
       "rating_now": 1668.5,
       "rating_then": 1652.5,
       "pct": 1.0,
-      "pct_3m": 0.7
+      "pct_3m": 0.4
     },
     {
       "name": "Hi Im Yolo",
       "rating_now": 1624.3,
-      "rating_then": 1611.9,
-      "pct": 0.8,
-      "pct_3m": 1.3
+      "rating_then": 1619.9,
+      "pct": 0.3,
+      "pct_3m": 1.1
     }
   ],
   "weighted_pure": [
@@ -583,119 +590,119 @@
       "rating_now": 1845.1,
       "rating_then": 1525.5,
       "pct": 21.0,
-      "pct_3m": 15.9
-    },
-    {
-      "name": "ZOMAN",
-      "rating_now": 2097.0,
-      "rating_then": 1921.1,
-      "pct": 9.2,
-      "pct_3m": 3.7
-    },
-    {
-      "name": "Tommygaming",
-      "rating_now": 1695.7,
-      "rating_then": 1556.4,
-      "pct": 9.0,
-      "pct_3m": 1.3
+      "pct_3m": 10.8
     },
     {
       "name": "JakeAdjacent",
-      "rating_now": 1852.5,
+      "rating_now": 1861.6,
       "rating_then": 1706.8,
-      "pct": 8.5,
-      "pct_3m": 3.7
+      "pct": 9.1,
+      "pct_3m": 3.5
+    },
+    {
+      "name": "ZOMAN",
+      "rating_now": 2105.9,
+      "rating_then": 1935.0,
+      "pct": 8.8,
+      "pct_3m": 3.8
+    },
+    {
+      "name": "Tommygaming",
+      "rating_now": 1692.7,
+      "rating_then": 1556.4,
+      "pct": 8.8,
+      "pct_3m": 0.7
     },
     {
       "name": "microways",
-      "rating_now": 1624.9,
+      "rating_now": 1625.3,
       "rating_then": 1500.0,
-      "pct": 8.3,
-      "pct_3m": 5.8
+      "pct": 8.4,
+      "pct_3m": 5.4
     },
     {
       "name": "MALIYO",
-      "rating_now": 1608.3,
+      "rating_now": 1609.0,
       "rating_then": 1500.0,
-      "pct": 7.2,
-      "pct_3m": 7.2
+      "pct": 7.3,
+      "pct_3m": 5.5
     },
     {
       "name": "PandaMane",
-      "rating_now": 1804.9,
+      "rating_now": 1826.3,
       "rating_then": 1731.3,
-      "pct": 4.3,
-      "pct_3m": 2.5
+      "pct": 5.5,
+      "pct_3m": 4.7
     },
     {
       "name": "Jakie",
       "rating_now": 1682.0,
       "rating_then": 1618.0,
       "pct": 4.0,
-      "pct_3m": 0.7
-    },
-    {
-      "name": "ping",
-      "rating_now": 1641.1,
-      "rating_then": 1582.3,
-      "pct": 3.7,
-      "pct_3m": 1.3
-    },
-    {
-      "name": "MackCheesy",
-      "rating_now": 1795.6,
-      "rating_then": 1733.7,
-      "pct": 3.6,
-      "pct_3m": 0.8
+      "pct_3m": -0.9
     },
     {
       "name": "justMaki",
       "rating_now": 2140.1,
-      "rating_then": 2068.3,
+      "rating_then": 2067.6,
       "pct": 3.5,
-      "pct_3m": 1.9
-    },
-    {
-      "name": "Kernkob",
-      "rating_now": 2148.3,
-      "rating_then": 2083.5,
-      "pct": 3.1,
-      "pct_3m": 1.8
-    },
-    {
-      "name": "An Actual g00se",
-      "rating_now": 1702.6,
-      "rating_then": 1654.0,
-      "pct": 2.9,
-      "pct_3m": 1.9
+      "pct_3m": 2.1
     },
     {
       "name": "Lexer",
-      "rating_now": 1963.2,
-      "rating_then": 1910.6,
+      "rating_now": 1976.0,
+      "rating_then": 1914.4,
+      "pct": 3.2,
+      "pct_3m": 2.9
+    },
+    {
+      "name": "MackCheesy",
+      "rating_now": 1785.5,
+      "rating_then": 1733.7,
+      "pct": 3.0,
+      "pct_3m": 0.6
+    },
+    {
+      "name": "ping",
+      "rating_now": 1636.0,
+      "rating_then": 1592.1,
       "pct": 2.8,
       "pct_3m": 1.1
     },
     {
+      "name": "An Actual g00se",
+      "rating_now": 1702.6,
+      "rating_then": 1659.2,
+      "pct": 2.6,
+      "pct_3m": 1.9
+    },
+    {
       "name": "agix",
-      "rating_now": 1628.0,
+      "rating_now": 1626.0,
       "rating_then": 1584.2,
-      "pct": 2.8,
-      "pct_3m": 2.1
+      "pct": 2.6,
+      "pct_3m": 2.0
+    },
+    {
+      "name": "Kernkob",
+      "rating_now": 2143.5,
+      "rating_then": 2091.9,
+      "pct": 2.5,
+      "pct_3m": 1.3
     },
     {
       "name": "Sandals",
-      "rating_now": 1942.1,
-      "rating_then": 1904.8,
-      "pct": 2.0,
-      "pct_3m": -0.6
+      "rating_now": 1937.8,
+      "rating_then": 1901.6,
+      "pct": 1.9,
+      "pct_3m": -0.5
     },
     {
       "name": "JobW",
       "rating_now": 1746.4,
       "rating_then": 1713.5,
       "pct": 1.9,
-      "pct_3m": 0.8
+      "pct_3m": 1.0
     },
     {
       "name": "clycl",
@@ -712,18 +719,18 @@
       "pct_3m": -0.3
     },
     {
+      "name": "M\u03bc",
+      "rating_now": 1628.8,
+      "rating_then": 1598.6,
+      "pct": 1.9,
+      "pct_3m": 1.9
+    },
+    {
       "name": "Beans",
       "rating_now": 1621.7,
       "rating_then": 1597.8,
       "pct": 1.5,
       "pct_3m": 0.7
-    },
-    {
-      "name": "Hydro",
-      "rating_now": 1958.7,
-      "rating_then": 1932.0,
-      "pct": 1.4,
-      "pct_3m": 0.5
     },
     {
       "name": "Pants",
@@ -733,25 +740,25 @@
       "pct_3m": 1.0
     },
     {
-      "name": "M\u03bc",
-      "rating_now": 1619.6,
-      "rating_then": 1598.6,
-      "pct": 1.3,
-      "pct_3m": 1.2
-    },
-    {
       "name": "Murrl",
       "rating_now": 1711.7,
       "rating_then": 1691.7,
       "pct": 1.2,
-      "pct_3m": 0.4
+      "pct_3m": 0.2
+    },
+    {
+      "name": "Hydro",
+      "rating_now": 1951.5,
+      "rating_then": 1932.0,
+      "pct": 1.0,
+      "pct_3m": 0.2
     },
     {
       "name": "Quickracer10",
       "rating_now": 2035.4,
-      "rating_then": 2016.1,
-      "pct": 1.0,
-      "pct_3m": 1.3
+      "rating_then": 2022.3,
+      "pct": 0.6,
+      "pct_3m": 1.0
     }
   ]
 }
