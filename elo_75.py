@@ -32,7 +32,8 @@ def parse_file(filepath):
                     continue
                 if pos is not None:
                     try:
-                        last_pos = int(float(pos))
+                        pos_clean = str(pos).rstrip('*').strip()
+                        last_pos = int(float(pos_clean))
                         players.append((last_pos, name_str))
                     except: continue
                 elif last_pos is not None:

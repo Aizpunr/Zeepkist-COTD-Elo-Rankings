@@ -10,7 +10,7 @@
     {
       "rank": 1,
       "name": "justMaki",
-      "rating": 2164.2,
+      "rating": 2164.3,
       "cups": 71,
       "wins": 33,
       "podiums": {
@@ -20,7 +20,7 @@
       },
       "avg_position": 3.1,
       "best_finish": 1,
-      "peak_rating": 2164.2,
+      "peak_rating": 2164.3,
       "history": [
         {
           "cup": "COTD 1",
@@ -344,30 +344,30 @@
           "cup": "COTD 100",
           "position": 2,
           "rating": 2081.5,
-          "lobby_size": 50
+          "lobby_size": 51
         },
         {
           "cup": "COTD 102",
           "position": 1,
-          "rating": 2090.3,
+          "rating": 2090.2,
           "lobby_size": 50
         },
         {
           "cup": "COTD 109",
           "position": 1,
-          "rating": 2097.3,
+          "rating": 2097.2,
           "lobby_size": 49
         },
         {
           "cup": "COTD 110",
           "position": 1,
-          "rating": 2106.7,
+          "rating": 2106.6,
           "lobby_size": 48
         },
         {
           "cup": "COTD 111",
           "position": 4,
-          "rating": 2105.0,
+          "rating": 2104.9,
           "lobby_size": 49
         },
         {
@@ -385,7 +385,7 @@
         {
           "cup": "COTD 115",
           "position": 3,
-          "rating": 2116.4,
+          "rating": 2116.3,
           "lobby_size": 51
         },
         {
@@ -445,7 +445,7 @@
         {
           "cup": "COTD 136",
           "position": 2,
-          "rating": 2164.2,
+          "rating": 2164.3,
           "lobby_size": 46
         }
       ]
@@ -453,17 +453,17 @@
     {
       "rank": 2,
       "name": "Kernkob",
-      "rating": 2154.0,
-      "cups": 80,
+      "rating": 2156.0,
+      "cups": 81,
       "wins": 35,
       "podiums": {
         "gold": 35,
-        "silver": 15,
+        "silver": 16,
         "bronze": 9
       },
       "avg_position": 4.2,
       "best_finish": 1,
-      "peak_rating": 2154.0,
+      "peak_rating": 2156.0,
       "history": [
         {
           "cup": "COTD 6",
@@ -820,129 +820,135 @@
           "lobby_size": 45
         },
         {
+          "cup": "COTD 100",
+          "position": 2,
+          "rating": 2091.3,
+          "lobby_size": 51
+        },
+        {
           "cup": "COTD 101",
           "position": 1,
-          "rating": 2094.2,
+          "rating": 2098.0,
           "lobby_size": 45
         },
         {
           "cup": "COTD 102",
           "position": 2,
-          "rating": 2099.8,
+          "rating": 2103.5,
           "lobby_size": 50
         },
         {
           "cup": "COTD 103",
           "position": 1,
-          "rating": 2106.4,
+          "rating": 2110.0,
           "lobby_size": 48
         },
         {
           "cup": "COTD 104",
           "position": 5,
-          "rating": 2100.6,
+          "rating": 2104.1,
           "lobby_size": 43
         },
         {
           "cup": "COTD 105",
           "position": 1,
-          "rating": 2107.4,
+          "rating": 2110.8,
           "lobby_size": 50
         },
         {
           "cup": "COTD 107",
           "position": 2,
-          "rating": 2111.8,
+          "rating": 2115.0,
           "lobby_size": 47
         },
         {
           "cup": "COTD 110",
           "position": 22,
-          "rating": 2090.3,
+          "rating": 2093.5,
           "lobby_size": 48
         },
         {
           "cup": "COTD 111",
           "position": 1,
-          "rating": 2098.7,
+          "rating": 2101.8,
           "lobby_size": 49
         },
         {
           "cup": "COTD 115",
           "position": 1,
-          "rating": 2107.2,
+          "rating": 2110.1,
           "lobby_size": 51
         },
         {
           "cup": "COTD 117",
           "position": 2,
-          "rating": 2112.3,
+          "rating": 2115.2,
           "lobby_size": 50
         },
         {
           "cup": "COTD 119",
           "position": 1,
-          "rating": 2120.8,
+          "rating": 2123.5,
           "lobby_size": 51
         },
         {
           "cup": "COTD 120",
           "position": 6,
-          "rating": 2116.2,
+          "rating": 2118.9,
           "lobby_size": 51
         },
         {
           "cup": "COTD 124",
           "position": 2,
-          "rating": 2122.0,
+          "rating": 2124.6,
           "lobby_size": 51
         },
         {
           "cup": "COTD 125",
           "position": 3,
-          "rating": 2124.6,
+          "rating": 2127.1,
           "lobby_size": 45
         },
         {
           "cup": "COTD 126",
           "position": 1,
-          "rating": 2132.7,
+          "rating": 2135.1,
           "lobby_size": 44
         },
         {
           "cup": "COTD 127",
           "position": 3,
-          "rating": 2135.6,
+          "rating": 2137.9,
           "lobby_size": 50
         },
         {
           "cup": "COTD 128",
           "position": 1,
-          "rating": 2143.5,
+          "rating": 2145.7,
           "lobby_size": 52
         },
         {
           "cup": "COTD 131",
           "position": 1,
-          "rating": 2151.4,
+          "rating": 2153.6,
           "lobby_size": 58
         },
         {
           "cup": "COTD 132",
           "position": 6,
-          "rating": 2146.5,
+          "rating": 2148.6,
           "lobby_size": 59
         },
         {
           "cup": "COTD 133",
           "position": 4,
-          "rating": 2148.1,
+          "rating": 2150.1,
           "lobby_size": 54
         },
         {
           "cup": "COTD 135",
           "position": 2,
-          "rating": 2154.0,
+          "rating": 2156.0,
           "lobby_size": 51
         }
       ]
@@ -950,7 +956,7 @@
     {
       "rank": 3,
       "name": "ZOMAN",
-      "rating": 2100.2,
+      "rating": 2100.0,
       "cups": 93,
       "wins": 28,
       "podiums": {
@@ -960,7 +966,7 @@
       },
       "avg_position": 6.4,
       "best_finish": 1,
-      "peak_rating": 2105.9,
+      "peak_rating": 2105.7,
       "history": [
         {
           "cup": "COTD 1",
@@ -1349,175 +1355,175 @@
         {
           "cup": "COTD 100",
           "position": 4,
-          "rating": 1903.8,
-          "lobby_size": 50
+          "rating": 1902.9,
+          "lobby_size": 51
         },
         {
           "cup": "COTD 102",
           "position": 3,
-          "rating": 1916.8,
+          "rating": 1916.0,
           "lobby_size": 50
         },
         {
           "cup": "COTD 104",
           "position": 2,
-          "rating": 1929.5,
+          "rating": 1928.8,
           "lobby_size": 43
         },
         {
           "cup": "COTD 107",
           "position": 1,
-          "rating": 1945.3,
+          "rating": 1944.6,
           "lobby_size": 47
         },
         {
           "cup": "COTD 108",
           "position": 47,
-          "rating": 1911.0,
+          "rating": 1910.3,
           "lobby_size": 50
         },
         {
           "cup": "COTD 109",
           "position": 2,
-          "rating": 1924.2,
+          "rating": 1923.6,
           "lobby_size": 49
         },
         {
           "cup": "COTD 111",
           "position": 2,
-          "rating": 1938.2,
+          "rating": 1937.6,
           "lobby_size": 49
         },
         {
           "cup": "COTD 112",
           "position": 2,
-          "rating": 1950.7,
+          "rating": 1950.1,
           "lobby_size": 52
         },
         {
           "cup": "COTD 113",
           "position": 2,
-          "rating": 1962.5,
+          "rating": 1962.0,
           "lobby_size": 47
         },
         {
           "cup": "COTD 114",
           "position": 1,
-          "rating": 1974.8,
+          "rating": 1974.3,
           "lobby_size": 38
         },
         {
           "cup": "COTD 116",
           "position": 1,
-          "rating": 1987.8,
+          "rating": 1987.3,
           "lobby_size": 55
         },
         {
           "cup": "COTD 117",
           "position": 1,
-          "rating": 2000.8,
+          "rating": 2000.4,
           "lobby_size": 50
         },
         {
           "cup": "COTD 118",
           "position": 1,
-          "rating": 2010.7,
+          "rating": 2010.2,
           "lobby_size": 49
         },
         {
           "cup": "COTD 120",
           "position": 4,
-          "rating": 2017.3,
+          "rating": 2016.9,
           "lobby_size": 51
         },
         {
           "cup": "COTD 121",
           "position": 5,
-          "rating": 2013.7,
+          "rating": 2013.3,
           "lobby_size": 49
         },
         {
           "cup": "COTD 123",
           "position": 1,
-          "rating": 2025.0,
+          "rating": 2024.6,
           "lobby_size": 49
         },
         {
           "cup": "COTD 124",
           "position": 3,
-          "rating": 2032.8,
+          "rating": 2032.4,
           "lobby_size": 51
         },
         {
           "cup": "COTD 125",
           "position": 1,
-          "rating": 2045.1,
+          "rating": 2044.8,
           "lobby_size": 45
         },
         {
           "cup": "COTD 126",
           "position": 2,
-          "rating": 2054.0,
+          "rating": 2053.6,
           "lobby_size": 44
         },
         {
           "cup": "COTD 127",
           "position": 1,
-          "rating": 2065.4,
+          "rating": 2065.1,
           "lobby_size": 50
         },
         {
           "cup": "COTD 128",
           "position": 2,
-          "rating": 2073.9,
+          "rating": 2073.7,
           "lobby_size": 52
         },
         {
           "cup": "COTD 129",
           "position": 1,
-          "rating": 2082.0,
+          "rating": 2081.8,
           "lobby_size": 52
         },
         {
           "cup": "COTD 130",
           "position": 2,
-          "rating": 2089.0,
+          "rating": 2088.7,
           "lobby_size": 58
         },
         {
           "cup": "COTD 131",
           "position": 3,
-          "rating": 2094.6,
+          "rating": 2094.4,
           "lobby_size": 58
         },
         {
           "cup": "COTD 132",
           "position": 1,
-          "rating": 2103.2,
+          "rating": 2102.9,
           "lobby_size": 59
         },
         {
           "cup": "COTD 133",
           "position": 7,
-          "rating": 2098.9,
+          "rating": 2098.7,
           "lobby_size": 54
         },
         {
           "cup": "COTD 134",
           "position": 1,
-          "rating": 2105.9,
+          "rating": 2105.7,
           "lobby_size": 49
         },
         {
           "cup": "COTD 135",
           "position": 9,
-          "rating": 2096.6,
+          "rating": 2096.5,
           "lobby_size": 51
         },
         {
           "cup": "COTD 136",
           "position": 3,
-          "rating": 2100.2,
+          "rating": 2100.0,
           "lobby_size": 46
         }
       ]
@@ -1525,7 +1531,7 @@
     {
       "rank": 4,
       "name": "Quickracer10",
-      "rating": 2041.3,
+      "rating": 2041.8,
       "cups": 86,
       "wins": 5,
       "podiums": {
@@ -1535,7 +1541,7 @@
       },
       "avg_position": 6.3,
       "best_finish": 1,
-      "peak_rating": 2048.4,
+      "peak_rating": 2049.1,
       "history": [
         {
           "cup": "COTD 10",
@@ -1882,175 +1888,175 @@
         {
           "cup": "COTD 100",
           "position": 1,
-          "rating": 1988.7,
-          "lobby_size": 50
+          "rating": 1990.0,
+          "lobby_size": 51
         },
         {
           "cup": "COTD 101",
           "position": 2,
-          "rating": 1996.9,
+          "rating": 1998.2,
           "lobby_size": 45
         },
         {
           "cup": "COTD 102",
           "position": 5,
-          "rating": 1997.0,
+          "rating": 1998.2,
           "lobby_size": 50
         },
         {
           "cup": "COTD 103",
           "position": 7,
-          "rating": 1990.7,
+          "rating": 1991.9,
           "lobby_size": 48
         },
         {
           "cup": "COTD 105",
           "position": 2,
-          "rating": 1999.8,
+          "rating": 2000.9,
           "lobby_size": 50
         },
         {
           "cup": "COTD 107",
           "position": 5,
-          "rating": 1999.2,
+          "rating": 2000.3,
           "lobby_size": 47
         },
         {
           "cup": "COTD 108",
           "position": 1,
-          "rating": 2007.9,
+          "rating": 2009.0,
           "lobby_size": 50
         },
         {
           "cup": "COTD 109",
           "position": 3,
-          "rating": 2013.3,
+          "rating": 2014.3,
           "lobby_size": 49
         },
         {
           "cup": "COTD 110",
           "position": 2,
-          "rating": 2024.2,
+          "rating": 2025.2,
           "lobby_size": 48
         },
         {
           "cup": "COTD 111",
           "position": 3,
-          "rating": 2030.3,
+          "rating": 2031.2,
           "lobby_size": 49
         },
         {
           "cup": "COTD 112",
           "position": 4,
-          "rating": 2033.1,
+          "rating": 2034.0,
           "lobby_size": 52
         },
         {
           "cup": "COTD 115",
           "position": 5,
-          "rating": 2032.4,
+          "rating": 2033.3,
           "lobby_size": 51
         },
         {
           "cup": "COTD 116",
           "position": 2,
-          "rating": 2040.2,
+          "rating": 2041.0,
           "lobby_size": 55
         },
         {
           "cup": "COTD 119",
           "position": 3,
-          "rating": 2046.8,
+          "rating": 2047.6,
           "lobby_size": 51
         },
         {
           "cup": "COTD 120",
           "position": 7,
-          "rating": 2043.3,
+          "rating": 2044.0,
           "lobby_size": 51
         },
         {
           "cup": "COTD 121",
           "position": 2,
-          "rating": 2048.4,
+          "rating": 2049.1,
           "lobby_size": 49
         },
         {
           "cup": "COTD 122",
           "position": 7,
-          "rating": 2039.9,
+          "rating": 2040.6,
           "lobby_size": 45
         },
         {
           "cup": "COTD 123",
           "position": 28,
-          "rating": 2016.2,
+          "rating": 2016.9,
           "lobby_size": 49
         },
         {
           "cup": "COTD 124",
           "position": 4,
-          "rating": 2022.1,
+          "rating": 2022.7,
           "lobby_size": 51
         },
         {
           "cup": "COTD 126",
           "position": 3,
-          "rating": 2029.3,
+          "rating": 2029.9,
           "lobby_size": 44
         },
         {
           "cup": "COTD 127",
           "position": 2,
-          "rating": 2039.6,
+          "rating": 2040.2,
           "lobby_size": 50
         },
         {
           "cup": "COTD 128",
           "position": 12,
-          "rating": 2029.4,
+          "rating": 2030.0,
           "lobby_size": 52
         },
         {
           "cup": "COTD 129",
           "position": 3,
-          "rating": 2034.7,
+          "rating": 2035.2,
           "lobby_size": 52
         },
         {
           "cup": "COTD 130",
           "position": 9,
-          "rating": 2028.2,
+          "rating": 2028.8,
           "lobby_size": 58
         },
         {
           "cup": "COTD 131",
           "position": 4,
-          "rating": 2034.6,
+          "rating": 2035.1,
           "lobby_size": 58
         },
         {
           "cup": "COTD 132",
           "position": 2,
-          "rating": 2043.5,
+          "rating": 2044.0,
           "lobby_size": 59
         },
         {
           "cup": "COTD 133",
           "position": 6,
-          "rating": 2043.1,
+          "rating": 2043.5,
           "lobby_size": 54
         },
         {
           "cup": "COTD 134",
           "position": 3,
-          "rating": 2047.1,
+          "rating": 2047.5,
           "lobby_size": 49
         },
         {
           "cup": "COTD 136",
           "position": 7,
-          "rating": 2041.3,
+          "rating": 2041.8,
           "lobby_size": 46
         }
       ]
@@ -2058,7 +2064,7 @@
     {
       "rank": 5,
       "name": "Lexer",
-      "rating": 1966.6,
+      "rating": 1966.5,
       "cups": 142,
       "wins": 3,
       "podiums": {
@@ -2068,7 +2074,7 @@
       },
       "avg_position": 8.7,
       "best_finish": 1,
-      "peak_rating": 1966.6,
+      "peak_rating": 1966.5,
       "history": [
         {
           "cup": "COTD 2",
@@ -2703,223 +2709,223 @@
         {
           "cup": "COTD 100",
           "position": 5,
-          "rating": 1883.1,
-          "lobby_size": 50
+          "rating": 1882.4,
+          "lobby_size": 51
         },
         {
           "cup": "COTD 101",
           "position": 5,
-          "rating": 1886.6,
+          "rating": 1885.9,
           "lobby_size": 45
         },
         {
           "cup": "COTD 102",
           "position": 11,
-          "rating": 1880.9,
+          "rating": 1880.3,
           "lobby_size": 50
         },
         {
           "cup": "COTD 103",
           "position": 4,
-          "rating": 1885.5,
+          "rating": 1884.9,
           "lobby_size": 48
         },
         {
           "cup": "COTD 104",
           "position": 4,
-          "rating": 1890.0,
+          "rating": 1889.4,
           "lobby_size": 43
         },
         {
           "cup": "COTD 105",
           "position": 3,
-          "rating": 1902.7,
+          "rating": 1902.2,
           "lobby_size": 50
         },
         {
           "cup": "COTD 106",
           "position": 13,
-          "rating": 1887.8,
+          "rating": 1887.3,
           "lobby_size": 48
         },
         {
           "cup": "COTD 107",
           "position": 4,
-          "rating": 1894.0,
+          "rating": 1893.5,
           "lobby_size": 47
         },
         {
           "cup": "COTD 108",
           "position": 2,
-          "rating": 1905.8,
+          "rating": 1905.4,
           "lobby_size": 50
         },
         {
           "cup": "COTD 109",
           "position": 6,
-          "rating": 1907.1,
+          "rating": 1906.6,
           "lobby_size": 49
         },
         {
           "cup": "COTD 110",
           "position": 4,
-          "rating": 1914.5,
+          "rating": 1914.1,
           "lobby_size": 48
         },
         {
           "cup": "COTD 111",
           "position": 5,
-          "rating": 1918.3,
+          "rating": 1917.9,
           "lobby_size": 49
         },
         {
           "cup": "COTD 112",
           "position": 8,
-          "rating": 1915.1,
+          "rating": 1914.7,
           "lobby_size": 52
         },
         {
           "cup": "COTD 113",
           "position": 7,
-          "rating": 1914.3,
+          "rating": 1913.9,
           "lobby_size": 47
         },
         {
           "cup": "COTD 114",
           "position": 4,
-          "rating": 1916.5,
+          "rating": 1916.2,
           "lobby_size": 38
         },
         {
           "cup": "COTD 115",
           "position": 2,
-          "rating": 1932.0,
+          "rating": 1931.7,
           "lobby_size": 51
         },
         {
           "cup": "COTD 116",
           "position": 4,
-          "rating": 1941.0,
+          "rating": 1940.7,
           "lobby_size": 55
         },
         {
           "cup": "COTD 117",
           "position": 5,
-          "rating": 1943.5,
+          "rating": 1943.2,
           "lobby_size": 50
         },
         {
           "cup": "COTD 118",
           "position": 4,
-          "rating": 1945.8,
+          "rating": 1945.5,
           "lobby_size": 49
         },
         {
           "cup": "COTD 119",
           "position": 12,
-          "rating": 1939.2,
+          "rating": 1938.9,
           "lobby_size": 51
         },
         {
           "cup": "COTD 120",
           "position": 1,
-          "rating": 1957.2,
+          "rating": 1957.0,
           "lobby_size": 51
         },
         {
           "cup": "COTD 121",
           "position": 16,
-          "rating": 1940.8,
+          "rating": 1940.5,
           "lobby_size": 49
         },
         {
           "cup": "COTD 122",
           "position": 10,
-          "rating": 1932.6,
+          "rating": 1932.4,
           "lobby_size": 45
         },
         {
           "cup": "COTD 123",
           "position": 2,
-          "rating": 1946.1,
+          "rating": 1945.9,
           "lobby_size": 49
         },
         {
           "cup": "COTD 124",
           "position": 33,
-          "rating": 1923.9,
+          "rating": 1923.7,
           "lobby_size": 51
         },
         {
           "cup": "COTD 125",
           "position": 4,
-          "rating": 1930.1,
+          "rating": 1929.9,
           "lobby_size": 45
         },
         {
           "cup": "COTD 126",
           "position": 11,
-          "rating": 1923.0,
+          "rating": 1922.8,
           "lobby_size": 44
         },
         {
           "cup": "COTD 127",
           "position": 9,
-          "rating": 1919.1,
+          "rating": 1918.9,
           "lobby_size": 50
         },
         {
           "cup": "COTD 128",
           "position": 4,
-          "rating": 1931.7,
+          "rating": 1931.5,
           "lobby_size": 52
         },
         {
           "cup": "COTD 129",
           "position": 15,
-          "rating": 1920.5,
+          "rating": 1920.3,
           "lobby_size": 52
         },
         {
           "cup": "COTD 130",
           "position": 3,
-          "rating": 1933.8,
+          "rating": 1933.7,
           "lobby_size": 58
         },
         {
           "cup": "COTD 131",
           "position": 14,
-          "rating": 1927.3,
+          "rating": 1927.2,
           "lobby_size": 58
         },
         {
           "cup": "COTD 132",
           "position": 4,
-          "rating": 1938.1,
+          "rating": 1938.0,
           "lobby_size": 59
         },
         {
           "cup": "COTD 133",
           "position": 8,
-          "rating": 1939.3,
+          "rating": 1939.2,
           "lobby_size": 54
         },
         {
           "cup": "COTD 134",
           "position": 2,
-          "rating": 1951.0,
+          "rating": 1950.9,
           "lobby_size": 49
         },
         {
           "cup": "COTD 135",
           "position": 4,
-          "rating": 1962.6,
+          "rating": 1962.5,
           "lobby_size": 51
         },
         {
           "cup": "COTD 136",
           "position": 4,
-          "rating": 1966.6,
+          "rating": 1966.5,
           "lobby_size": 46
         }
       ]
@@ -2927,7 +2933,7 @@
     {
       "rank": 6,
       "name": "Hydro",
-      "rating": 1962.5,
+      "rating": 1962.6,
       "cups": 72,
       "wins": 9,
       "podiums": {
@@ -2937,7 +2943,7 @@
       },
       "avg_position": 6.7,
       "best_finish": 1,
-      "peak_rating": 1962.5,
+      "peak_rating": 1962.6,
       "history": [
         {
           "cup": "COTD 3",
@@ -3356,7 +3362,7 @@
         {
           "cup": "COTD 133",
           "position": 5,
-          "rating": 1948.5,
+          "rating": 1948.6,
           "lobby_size": 54
         },
         {
@@ -3368,7 +3374,7 @@
         {
           "cup": "COTD 136",
           "position": 1,
-          "rating": 1962.5,
+          "rating": 1962.6,
           "lobby_size": 46
         }
       ]
@@ -3376,7 +3382,7 @@
     {
       "rank": 7,
       "name": "Sandals",
-      "rating": 1945.2,
+      "rating": 1945.3,
       "cups": 93,
       "wins": 3,
       "podiums": {
@@ -3823,19 +3829,19 @@
         {
           "cup": "COTD 111",
           "position": 8,
-          "rating": 1903.7,
+          "rating": 1903.8,
           "lobby_size": 49
         },
         {
           "cup": "COTD 112",
           "position": 3,
-          "rating": 1916.0,
+          "rating": 1916.1,
           "lobby_size": 52
         },
         {
           "cup": "COTD 115",
           "position": 6,
-          "rating": 1918.8,
+          "rating": 1918.9,
           "lobby_size": 51
         },
         {
@@ -3889,13 +3895,13 @@
         {
           "cup": "COTD 125",
           "position": 7,
-          "rating": 1946.8,
+          "rating": 1946.9,
           "lobby_size": 45
         },
         {
           "cup": "COTD 126",
           "position": 4,
-          "rating": 1951.9,
+          "rating": 1952.0,
           "lobby_size": 44
         },
         {
@@ -3907,7 +3913,7 @@
         {
           "cup": "COTD 128",
           "position": 5,
-          "rating": 1950.0,
+          "rating": 1950.1,
           "lobby_size": 52
         },
         {
@@ -3919,7 +3925,7 @@
         {
           "cup": "COTD 131",
           "position": 12,
-          "rating": 1947.0,
+          "rating": 1947.1,
           "lobby_size": 58
         },
         {
@@ -3943,7 +3949,7 @@
         {
           "cup": "COTD 135",
           "position": 11,
-          "rating": 1945.2,
+          "rating": 1945.3,
           "lobby_size": 51
         }
       ]
@@ -4327,7 +4333,7 @@
     {
       "rank": 10,
       "name": "RoundNzt",
-      "rating": 1843.8,
+      "rating": 1843.7,
       "cups": 119,
       "wins": 11,
       "podiums": {
@@ -4876,181 +4882,181 @@
         {
           "cup": "COTD 100",
           "position": 8,
-          "rating": 1886.1,
-          "lobby_size": 50
+          "rating": 1885.6,
+          "lobby_size": 51
         },
         {
           "cup": "COTD 102",
           "position": 18,
-          "rating": 1873.9,
+          "rating": 1873.4,
           "lobby_size": 50
         },
         {
           "cup": "COTD 104",
           "position": 17,
-          "rating": 1859.9,
+          "rating": 1859.4,
           "lobby_size": 43
         },
         {
           "cup": "COTD 105",
           "position": 8,
-          "rating": 1857.6,
+          "rating": 1857.1,
           "lobby_size": 50
         },
         {
           "cup": "COTD 106",
           "position": 1,
-          "rating": 1872.5,
+          "rating": 1872.1,
           "lobby_size": 48
         },
         {
           "cup": "COTD 107",
           "position": 13,
-          "rating": 1864.1,
+          "rating": 1863.6,
           "lobby_size": 47
         },
         {
           "cup": "COTD 109",
           "position": 8,
-          "rating": 1861.7,
+          "rating": 1861.3,
           "lobby_size": 49
         },
         {
           "cup": "COTD 110",
           "position": 18,
-          "rating": 1850.9,
+          "rating": 1850.5,
           "lobby_size": 48
         },
         {
           "cup": "COTD 111",
           "position": 6,
-          "rating": 1856.2,
+          "rating": 1855.8,
           "lobby_size": 49
         },
         {
           "cup": "COTD 112",
           "position": 13,
-          "rating": 1850.1,
+          "rating": 1849.7,
           "lobby_size": 52
         },
         {
           "cup": "COTD 113",
           "position": 31,
-          "rating": 1830.0,
+          "rating": 1829.6,
           "lobby_size": 47
         },
         {
           "cup": "COTD 116",
           "position": 15,
-          "rating": 1823.2,
+          "rating": 1822.9,
           "lobby_size": 55
         },
         {
           "cup": "COTD 117",
           "position": 15,
-          "rating": 1815.5,
+          "rating": 1815.2,
           "lobby_size": 50
         },
         {
           "cup": "COTD 119",
           "position": 8,
-          "rating": 1818.0,
+          "rating": 1817.7,
           "lobby_size": 51
         },
         {
           "cup": "COTD 120",
           "position": 3,
-          "rating": 1840.3,
+          "rating": 1840.0,
           "lobby_size": 51
         },
         {
           "cup": "COTD 122",
           "position": 6,
-          "rating": 1845.4,
+          "rating": 1845.2,
           "lobby_size": 45
         },
         {
           "cup": "COTD 123",
           "position": 3,
-          "rating": 1862.8,
+          "rating": 1862.6,
           "lobby_size": 49
         },
         {
           "cup": "COTD 124",
           "position": 8,
-          "rating": 1862.2,
+          "rating": 1862.0,
           "lobby_size": 51
         },
         {
           "cup": "COTD 125",
           "position": 5,
-          "rating": 1869.9,
+          "rating": 1869.7,
           "lobby_size": 45
         },
         {
           "cup": "COTD 126",
           "position": 31,
-          "rating": 1850.2,
+          "rating": 1850.0,
           "lobby_size": 44
         },
         {
           "cup": "COTD 127",
           "position": 7,
-          "rating": 1855.6,
+          "rating": 1855.4,
           "lobby_size": 50
         },
         {
           "cup": "COTD 128",
           "position": 19,
-          "rating": 1846.2,
+          "rating": 1846.1,
           "lobby_size": 52
         },
         {
           "cup": "COTD 129",
           "position": 10,
-          "rating": 1844.0,
+          "rating": 1843.8,
           "lobby_size": 52
         },
         {
           "cup": "COTD 130",
           "position": 7,
-          "rating": 1850.4,
+          "rating": 1850.2,
           "lobby_size": 58
         },
         {
           "cup": "COTD 131",
           "position": 9,
-          "rating": 1851.7,
+          "rating": 1851.5,
           "lobby_size": 58
         },
         {
           "cup": "COTD 132",
           "position": 10,
-          "rating": 1851.2,
+          "rating": 1851.0,
           "lobby_size": 59
         },
         {
           "cup": "COTD 133",
           "position": 10,
-          "rating": 1851.4,
+          "rating": 1851.2,
           "lobby_size": 54
         },
         {
           "cup": "COTD 134",
           "position": 6,
-          "rating": 1855.9,
+          "rating": 1855.8,
           "lobby_size": 49
         },
         {
           "cup": "COTD 135",
           "position": 5,
-          "rating": 1865.8,
+          "rating": 1865.7,
           "lobby_size": 51
         },
         {
           "cup": "COTD 136",
           "position": 41,
-          "rating": 1843.8,
+          "rating": 1843.7,
           "lobby_size": 46
         }
       ]
@@ -5452,7 +5458,7 @@
     {
       "rank": 13,
       "name": "PandaMane",
-      "rating": 1807.4,
+      "rating": 1807.3,
       "cups": 56,
       "wins": 2,
       "podiums": {
@@ -5462,7 +5468,7 @@
       },
       "avg_position": 13.6,
       "best_finish": 1,
-      "peak_rating": 1827.6,
+      "peak_rating": 1827.5,
       "history": [
         {
           "cup": "COTD 58",
@@ -5665,139 +5671,139 @@
         {
           "cup": "COTD 100",
           "position": 12,
-          "rating": 1756.8,
-          "lobby_size": 50
+          "rating": 1756.5,
+          "lobby_size": 51
         },
         {
           "cup": "COTD 101",
           "position": 12,
-          "rating": 1752.0,
+          "rating": 1751.7,
           "lobby_size": 45
         },
         {
           "cup": "COTD 102",
           "position": 23,
-          "rating": 1741.5,
+          "rating": 1741.3,
           "lobby_size": 50
         },
         {
           "cup": "COTD 104",
           "position": 15,
-          "rating": 1734.0,
+          "rating": 1733.7,
           "lobby_size": 43
         },
         {
           "cup": "COTD 113",
           "position": 1,
-          "rating": 1765.3,
+          "rating": 1765.1,
           "lobby_size": 47
         },
         {
           "cup": "COTD 116",
           "position": 10,
-          "rating": 1767.4,
+          "rating": 1767.2,
           "lobby_size": 55
         },
         {
           "cup": "COTD 117",
           "position": 39,
-          "rating": 1749.6,
+          "rating": 1749.3,
           "lobby_size": 50
         },
         {
           "cup": "COTD 118",
           "position": 31,
-          "rating": 1733.1,
+          "rating": 1732.9,
           "lobby_size": 49
         },
         {
           "cup": "COTD 119",
           "position": 30,
-          "rating": 1722.0,
+          "rating": 1721.8,
           "lobby_size": 51
         },
         {
           "cup": "COTD 120",
           "position": 5,
-          "rating": 1739.1,
+          "rating": 1738.9,
           "lobby_size": 51
         },
         {
           "cup": "COTD 122",
           "position": 5,
-          "rating": 1752.7,
+          "rating": 1752.5,
           "lobby_size": 45
         },
         {
           "cup": "COTD 123",
           "position": 6,
-          "rating": 1764.0,
+          "rating": 1763.9,
           "lobby_size": 49
         },
         {
           "cup": "COTD 124",
           "position": 41,
-          "rating": 1745.8,
+          "rating": 1745.6,
           "lobby_size": 51
         },
         {
           "cup": "COTD 126",
           "position": 14,
-          "rating": 1741.7,
+          "rating": 1741.6,
           "lobby_size": 44
         },
         {
           "cup": "COTD 127",
           "position": 6,
-          "rating": 1755.6,
+          "rating": 1755.5,
           "lobby_size": 50
         },
         {
           "cup": "COTD 128",
           "position": 7,
-          "rating": 1768.0,
+          "rating": 1767.9,
           "lobby_size": 52
         },
         {
           "cup": "COTD 129",
           "position": 4,
-          "rating": 1789.1,
+          "rating": 1789.0,
           "lobby_size": 52
         },
         {
           "cup": "COTD 130",
           "position": 8,
-          "rating": 1797.4,
+          "rating": 1797.2,
           "lobby_size": 58
         },
         {
           "cup": "COTD 131",
           "position": 27,
-          "rating": 1787.4,
+          "rating": 1787.3,
           "lobby_size": 58
         },
         {
           "cup": "COTD 132",
           "position": 8,
-          "rating": 1795.6,
+          "rating": 1795.5,
           "lobby_size": 59
         },
         {
           "cup": "COTD 133",
           "position": 2,
-          "rating": 1823.1,
+          "rating": 1823.0,
           "lobby_size": 54
         },
         {
           "cup": "COTD 134",
           "position": 7,
-          "rating": 1827.6,
+          "rating": 1827.5,
           "lobby_size": 49
         },
         {
           "cup": "COTD 135",
           "position": 42,
-          "rating": 1807.4,
+          "rating": 1807.3,
           "lobby_size": 51
         }
       ]
@@ -5959,7 +5965,7 @@
           "cup": "COTD 100",
           "position": 21,
           "rating": 1694.5,
-          "lobby_size": 50
+          "lobby_size": 51
         },
         {
           "cup": "COTD 101",
@@ -6036,7 +6042,7 @@
         {
           "cup": "COTD 115",
           "position": 12,
-          "rating": 1736.7,
+          "rating": 1736.6,
           "lobby_size": 51
         },
         {
@@ -6054,7 +6060,7 @@
         {
           "cup": "COTD 121",
           "position": 6,
-          "rating": 1747.6,
+          "rating": 1747.5,
           "lobby_size": 49
         },
         {
@@ -6084,19 +6090,19 @@
         {
           "cup": "COTD 128",
           "position": 8,
-          "rating": 1763.5,
+          "rating": 1763.4,
           "lobby_size": 52
         },
         {
           "cup": "COTD 130",
           "position": 5,
-          "rating": 1777.2,
+          "rating": 1777.1,
           "lobby_size": 58
         },
         {
           "cup": "COTD 131",
           "position": 7,
-          "rating": 1788.6,
+          "rating": 1788.5,
           "lobby_size": 58
         },
         {
@@ -6128,7 +6134,7 @@
     {
       "rank": 15,
       "name": "Cbad Cruiser",
-      "rating": 1790.4,
+      "rating": 1790.3,
       "cups": 26,
       "wins": 1,
       "podiums": {
@@ -6293,7 +6299,7 @@
         {
           "cup": "COTD 123",
           "position": 11,
-          "rating": 1790.4,
+          "rating": 1790.3,
           "lobby_size": 49
         }
       ]
@@ -6916,7 +6922,7 @@
     {
       "rank": 19,
       "name": "rtyyyyb",
-      "rating": 1735.6,
+      "rating": 1735.3,
       "cups": 47,
       "wins": 1,
       "podiums": {
@@ -6926,7 +6932,7 @@
       },
       "avg_position": 12.7,
       "best_finish": 1,
-      "peak_rating": 1789.9,
+      "peak_rating": 1789.4,
       "history": [
         {
           "cup": "COTD 30",
@@ -7141,73 +7147,73 @@
         {
           "cup": "COTD 100",
           "position": 7,
-          "rating": 1782.5,
-          "lobby_size": 50
+          "rating": 1781.9,
+          "lobby_size": 51
         },
         {
           "cup": "COTD 101",
           "position": 6,
-          "rating": 1789.9,
+          "rating": 1789.4,
           "lobby_size": 45
         },
         {
           "cup": "COTD 105",
           "position": 25,
-          "rating": 1776.0,
+          "rating": 1775.5,
           "lobby_size": 50
         },
         {
           "cup": "COTD 107",
           "position": 40,
-          "rating": 1756.4,
+          "rating": 1755.9,
           "lobby_size": 47
         },
         {
           "cup": "COTD 108",
           "position": 7,
-          "rating": 1762.0,
+          "rating": 1761.5,
           "lobby_size": 50
         },
         {
           "cup": "COTD 110",
           "position": 5,
-          "rating": 1776.3,
+          "rating": 1775.9,
           "lobby_size": 48
         },
         {
           "cup": "COTD 113",
           "position": 12,
-          "rating": 1771.7,
+          "rating": 1771.3,
           "lobby_size": 47
         },
         {
           "cup": "COTD 114",
           "position": 34,
-          "rating": 1749.3,
+          "rating": 1748.9,
           "lobby_size": 38
         },
         {
           "cup": "COTD 118",
           "position": 9,
-          "rating": 1750.1,
+          "rating": 1749.8,
           "lobby_size": 49
         },
         {
           "cup": "COTD 127",
           "position": 11,
-          "rating": 1752.4,
+          "rating": 1752.0,
           "lobby_size": 50
         },
         {
           "cup": "COTD 128",
           "position": 32,
-          "rating": 1740.0,
+          "rating": 1739.6,
           "lobby_size": 52
         },
         {
           "cup": "COTD 133",
           "position": 20,
-          "rating": 1735.6,
+          "rating": 1735.3,
           "lobby_size": 54
         }
       ]
@@ -7633,7 +7639,7 @@
     {
       "rank": 22,
       "name": "Pants",
-      "rating": 1715.2,
+      "rating": 1715.1,
       "cups": 35,
       "wins": 0,
       "podiums": {
@@ -7643,7 +7649,7 @@
       },
       "avg_position": 16.5,
       "best_finish": 3,
-      "peak_rating": 1721.4,
+      "peak_rating": 1721.3,
       "history": [
         {
           "cup": "COTD 35",
@@ -7798,49 +7804,49 @@
         {
           "cup": "COTD 100",
           "position": 16,
-          "rating": 1695.8,
-          "lobby_size": 50
+          "rating": 1695.7,
+          "lobby_size": 51
         },
         {
           "cup": "COTD 103",
           "position": 34,
-          "rating": 1679.9,
+          "rating": 1679.8,
           "lobby_size": 48
         },
         {
           "cup": "COTD 105",
           "position": 39,
-          "rating": 1663.9,
+          "rating": 1663.8,
           "lobby_size": 50
         },
         {
           "cup": "COTD 106",
           "position": 3,
-          "rating": 1692.8,
+          "rating": 1692.7,
           "lobby_size": 48
         },
         {
           "cup": "COTD 114",
           "position": 3,
-          "rating": 1721.4,
+          "rating": 1721.3,
           "lobby_size": 38
         },
         {
           "cup": "COTD 117",
           "position": 35,
-          "rating": 1706.7,
+          "rating": 1706.6,
           "lobby_size": 50
         },
         {
           "cup": "COTD 118",
           "position": 21,
-          "rating": 1698.5,
+          "rating": 1698.4,
           "lobby_size": 49
         },
         {
           "cup": "COTD 131",
           "position": 6,
-          "rating": 1716.0,
+          "rating": 1715.9,
           "lobby_size": 58
         },
         {
@@ -7852,7 +7858,7 @@
         {
           "cup": "COTD 136",
           "position": 10,
-          "rating": 1715.2,
+          "rating": 1715.1,
           "lobby_size": 46
         }
       ]
@@ -7860,7 +7866,7 @@
     {
       "rank": 23,
       "name": "Murrl",
-      "rating": 1712.9,
+      "rating": 1712.8,
       "cups": 28,
       "wins": 0,
       "podiums": {
@@ -8037,7 +8043,7 @@
         {
           "cup": "COTD 129",
           "position": 11,
-          "rating": 1712.9,
+          "rating": 1712.8,
           "lobby_size": 52
         }
       ]
@@ -8228,7 +8234,7 @@
         {
           "cup": "COTD 129",
           "position": 26,
-          "rating": 1683.1,
+          "rating": 1683.0,
           "lobby_size": 52
         },
         {
@@ -8407,13 +8413,13 @@
         {
           "cup": "COTD 114",
           "position": 8,
-          "rating": 1605.4,
+          "rating": 1605.3,
           "lobby_size": 38
         },
         {
           "cup": "COTD 115",
           "position": 10,
-          "rating": 1616.0,
+          "rating": 1615.9,
           "lobby_size": 51
         },
         {
@@ -8425,13 +8431,13 @@
         {
           "cup": "COTD 119",
           "position": 5,
-          "rating": 1649.7,
+          "rating": 1649.6,
           "lobby_size": 51
         },
         {
           "cup": "COTD 120",
           "position": 14,
-          "rating": 1651.7,
+          "rating": 1651.6,
           "lobby_size": 51
         },
         {
@@ -8509,7 +8515,7 @@
         {
           "cup": "COTD 135",
           "position": 16,
-          "rating": 1690.1,
+          "rating": 1690.0,
           "lobby_size": 51
         },
         {
@@ -8963,7 +8969,7 @@
     {
       "rank": 30,
       "name": "Redstony",
-      "rating": 1670.8,
+      "rating": 1670.4,
       "cups": 16,
       "wins": 0,
       "podiums": {
@@ -8973,7 +8979,7 @@
       },
       "avg_position": 15.4,
       "best_finish": 4,
-      "peak_rating": 1675.2,
+      "peak_rating": 1674.7,
       "history": [
         {
           "cup": "Troll COTD 10",
@@ -9032,43 +9038,43 @@
         {
           "cup": "COTD 100",
           "position": 9,
-          "rating": 1612.0,
-          "lobby_size": 50
+          "rating": 1611.4,
+          "lobby_size": 51
         },
         {
           "cup": "COTD 104",
           "position": 6,
-          "rating": 1641.6,
+          "rating": 1641.1,
           "lobby_size": 43
         },
         {
           "cup": "COTD 113",
           "position": 4,
-          "rating": 1675.2,
+          "rating": 1674.7,
           "lobby_size": 47
         },
         {
           "cup": "COTD 115",
           "position": 15,
-          "rating": 1674.8,
+          "rating": 1674.3,
           "lobby_size": 51
         },
         {
           "cup": "COTD 125",
           "position": 19,
-          "rating": 1671.2,
+          "rating": 1670.8,
           "lobby_size": 45
         },
         {
           "cup": "COTD 128",
           "position": 14,
-          "rating": 1671.9,
+          "rating": 1671.4,
           "lobby_size": 52
         },
         {
           "cup": "COTD 135",
           "position": 18,
-          "rating": 1670.8,
+          "rating": 1670.4,
           "lobby_size": 51
         }
       ]
@@ -9700,18 +9706,18 @@
           "cup": "COTD 100",
           "position": 21,
           "rating": 1510.5,
-          "lobby_size": 50
+          "lobby_size": 51
         },
         {
           "cup": "COTD 102",
           "position": 9,
-          "rating": 1525.3,
+          "rating": 1525.2,
           "lobby_size": 50
         },
         {
           "cup": "COTD 103",
           "position": 9,
-          "rating": 1538.1,
+          "rating": 1538.0,
           "lobby_size": 48
         },
         {
@@ -9723,7 +9729,7 @@
         {
           "cup": "COTD 105",
           "position": 17,
-          "rating": 1552.2,
+          "rating": 1552.1,
           "lobby_size": 50
         },
         {
@@ -9741,13 +9747,13 @@
         {
           "cup": "COTD 109",
           "position": 17,
-          "rating": 1572.8,
+          "rating": 1572.7,
           "lobby_size": 49
         },
         {
           "cup": "COTD 110",
           "position": 12,
-          "rating": 1583.1,
+          "rating": 1583.0,
           "lobby_size": 48
         },
         {
@@ -9783,7 +9789,7 @@
         {
           "cup": "COTD 116",
           "position": 11,
-          "rating": 1614.3,
+          "rating": 1614.2,
           "lobby_size": 55
         },
         {
@@ -9801,19 +9807,19 @@
         {
           "cup": "COTD 119",
           "position": 18,
-          "rating": 1634.0,
+          "rating": 1633.9,
           "lobby_size": 51
         },
         {
           "cup": "COTD 120",
           "position": 18,
-          "rating": 1634.5,
+          "rating": 1634.4,
           "lobby_size": 51
         },
         {
           "cup": "COTD 122",
           "position": 42,
-          "rating": 1619.5,
+          "rating": 1619.4,
           "lobby_size": 45
         },
         {
@@ -9825,37 +9831,37 @@
         {
           "cup": "COTD 124",
           "position": 20,
-          "rating": 1618.8,
+          "rating": 1618.7,
           "lobby_size": 51
         },
         {
           "cup": "COTD 125",
           "position": 15,
-          "rating": 1619.8,
+          "rating": 1619.7,
           "lobby_size": 45
         },
         {
           "cup": "COTD 126",
           "position": 22,
-          "rating": 1615.7,
+          "rating": 1615.6,
           "lobby_size": 44
         },
         {
           "cup": "COTD 127",
           "position": 14,
-          "rating": 1618.4,
+          "rating": 1618.3,
           "lobby_size": 50
         },
         {
           "cup": "COTD 128",
           "position": 26,
-          "rating": 1614.7,
+          "rating": 1614.6,
           "lobby_size": 52
         },
         {
           "cup": "COTD 129",
           "position": 9,
-          "rating": 1625.0,
+          "rating": 1624.9,
           "lobby_size": 52
         },
         {
@@ -9867,13 +9873,13 @@
         {
           "cup": "COTD 131",
           "position": 17,
-          "rating": 1627.8,
+          "rating": 1627.7,
           "lobby_size": 58
         },
         {
           "cup": "COTD 132",
           "position": 12,
-          "rating": 1636.4,
+          "rating": 1636.3,
           "lobby_size": 59
         },
         {
@@ -9885,7 +9891,7 @@
         {
           "cup": "COTD 134",
           "position": 8,
-          "rating": 1643.6,
+          "rating": 1643.5,
           "lobby_size": 49
         },
         {
@@ -10190,7 +10196,7 @@
         {
           "cup": "COTD 129",
           "position": 45,
-          "rating": 1650.3,
+          "rating": 1650.2,
           "lobby_size": 52
         },
         {
@@ -10204,7 +10210,7 @@
     {
       "rank": 37,
       "name": "GuAlexItar",
-      "rating": 1635.4,
+      "rating": 1635.2,
       "cups": 98,
       "wins": 0,
       "podiums": {
@@ -10214,7 +10220,7 @@
       },
       "avg_position": 15.6,
       "best_finish": 3,
-      "peak_rating": 1687.5,
+      "peak_rating": 1687.1,
       "history": [
         {
           "cup": "COTD 5",
@@ -10615,193 +10621,193 @@
         {
           "cup": "COTD 100",
           "position": 6,
-          "rating": 1646.8,
-          "lobby_size": 50
+          "rating": 1646.2,
+          "lobby_size": 51
         },
         {
           "cup": "COTD 101",
           "position": 14,
-          "rating": 1645.5,
+          "rating": 1644.8,
           "lobby_size": 45
         },
         {
           "cup": "COTD 103",
           "position": 38,
-          "rating": 1630.1,
+          "rating": 1629.5,
           "lobby_size": 48
         },
         {
           "cup": "COTD 104",
           "position": 16,
-          "rating": 1626.8,
+          "rating": 1626.2,
           "lobby_size": 43
         },
         {
           "cup": "COTD 105",
           "position": 20,
-          "rating": 1623.2,
+          "rating": 1622.7,
           "lobby_size": 50
         },
         {
           "cup": "COTD 108",
           "position": 4,
-          "rating": 1655.2,
+          "rating": 1654.7,
           "lobby_size": 50
         },
         {
           "cup": "COTD 109",
           "position": 12,
-          "rating": 1659.1,
+          "rating": 1658.6,
           "lobby_size": 49
         },
         {
           "cup": "COTD 110",
           "position": 7,
-          "rating": 1677.5,
+          "rating": 1677.1,
           "lobby_size": 48
         },
         {
           "cup": "COTD 111",
           "position": 21,
-          "rating": 1671.5,
+          "rating": 1671.1,
           "lobby_size": 49
         },
         {
           "cup": "COTD 112",
           "position": 6,
-          "rating": 1687.5,
+          "rating": 1687.1,
           "lobby_size": 52
         },
         {
           "cup": "COTD 113",
           "position": 18,
-          "rating": 1683.1,
+          "rating": 1682.7,
           "lobby_size": 47
         },
         {
           "cup": "COTD 114",
           "position": 10,
-          "rating": 1682.2,
+          "rating": 1681.8,
           "lobby_size": 38
         },
         {
           "cup": "COTD 115",
           "position": 18,
-          "rating": 1679.9,
+          "rating": 1679.6,
           "lobby_size": 51
         },
         {
           "cup": "COTD 116",
           "position": 20,
-          "rating": 1676.4,
+          "rating": 1676.1,
           "lobby_size": 55
         },
         {
           "cup": "COTD 117",
           "position": 26,
-          "rating": 1667.3,
+          "rating": 1667.0,
           "lobby_size": 50
         },
         {
           "cup": "COTD 119",
           "position": 14,
-          "rating": 1668.3,
+          "rating": 1668.0,
           "lobby_size": 51
         },
         {
           "cup": "COTD 120",
           "position": 13,
-          "rating": 1670.1,
+          "rating": 1669.8,
           "lobby_size": 51
         },
         {
           "cup": "COTD 121",
           "position": 13,
-          "rating": 1666.3,
+          "rating": 1666.0,
           "lobby_size": 49
         },
         {
           "cup": "COTD 122",
           "position": 43,
-          "rating": 1649.0,
+          "rating": 1648.8,
           "lobby_size": 45
         },
         {
           "cup": "COTD 123",
           "position": 13,
-          "rating": 1649.2,
+          "rating": 1649.0,
           "lobby_size": 49
         },
         {
           "cup": "COTD 124",
           "position": 17,
-          "rating": 1648.2,
+          "rating": 1647.9,
           "lobby_size": 51
         },
         {
           "cup": "COTD 125",
           "position": 12,
-          "rating": 1649.8,
+          "rating": 1649.6,
           "lobby_size": 45
         },
         {
           "cup": "COTD 126",
           "position": 36,
-          "rating": 1636.3,
+          "rating": 1636.1,
           "lobby_size": 44
         },
         {
           "cup": "COTD 127",
           "position": 25,
-          "rating": 1632.2,
+          "rating": 1632.0,
           "lobby_size": 50
         },
         {
           "cup": "COTD 128",
           "position": 33,
-          "rating": 1624.1,
+          "rating": 1623.8,
           "lobby_size": 52
         },
         {
           "cup": "COTD 129",
           "position": 14,
-          "rating": 1625.3,
+          "rating": 1625.1,
           "lobby_size": 52
         },
         {
           "cup": "COTD 130",
           "position": 15,
-          "rating": 1627.6,
+          "rating": 1627.4,
           "lobby_size": 58
         },
         {
           "cup": "COTD 131",
           "position": 15,
-          "rating": 1630.1,
+          "rating": 1629.9,
           "lobby_size": 58
         },
         {
           "cup": "COTD 132",
           "position": 13,
-          "rating": 1637.8,
+          "rating": 1637.6,
           "lobby_size": 59
         },
         {
           "cup": "COTD 134",
           "position": 16,
-          "rating": 1636.8,
+          "rating": 1636.6,
           "lobby_size": 49
         },
         {
           "cup": "COTD 135",
           "position": 21,
-          "rating": 1635.5,
+          "rating": 1635.3,
           "lobby_size": 51
         },
         {
           "cup": "COTD 136",
           "position": 15,
-          "rating": 1635.4,
+          "rating": 1635.2,
           "lobby_size": 46
         }
       ]
@@ -10998,7 +11004,7 @@
     {
       "rank": 41,
       "name": "agix",
-      "rating": 1628.9,
+      "rating": 1628.8,
       "cups": 83,
       "wins": 1,
       "podiums": {
@@ -11008,7 +11014,7 @@
       },
       "avg_position": 18.4,
       "best_finish": 1,
-      "peak_rating": 1628.9,
+      "peak_rating": 1628.8,
       "history": [
         {
           "cup": "COTD 13",
@@ -11343,169 +11349,169 @@
         {
           "cup": "COTD 100",
           "position": 10,
-          "rating": 1555.2,
-          "lobby_size": 50
+          "rating": 1554.8,
+          "lobby_size": 51
         },
         {
           "cup": "COTD 101",
           "position": 12,
-          "rating": 1558.4,
+          "rating": 1558.0,
           "lobby_size": 45
         },
         {
           "cup": "COTD 102",
           "position": 15,
-          "rating": 1560.9,
+          "rating": 1560.6,
           "lobby_size": 50
         },
         {
           "cup": "COTD 104",
           "position": 1,
-          "rating": 1608.5,
+          "rating": 1608.2,
           "lobby_size": 43
         },
         {
           "cup": "COTD 105",
           "position": 23,
-          "rating": 1604.1,
+          "rating": 1603.8,
           "lobby_size": 50
         },
         {
           "cup": "COTD 106",
           "position": 19,
-          "rating": 1596.0,
+          "rating": 1595.6,
           "lobby_size": 48
         },
         {
           "cup": "COTD 107",
           "position": 43,
-          "rating": 1582.2,
+          "rating": 1581.9,
           "lobby_size": 47
         },
         {
           "cup": "COTD 109",
           "position": 13,
-          "rating": 1584.7,
+          "rating": 1584.4,
           "lobby_size": 49
         },
         {
           "cup": "COTD 112",
           "position": 6,
-          "rating": 1607.0,
+          "rating": 1606.7,
           "lobby_size": 52
         },
         {
           "cup": "COTD 113",
           "position": 10,
-          "rating": 1615.9,
+          "rating": 1615.6,
           "lobby_size": 47
         },
         {
           "cup": "COTD 114",
           "position": 19,
-          "rating": 1610.5,
+          "rating": 1610.2,
           "lobby_size": 38
         },
         {
           "cup": "COTD 115",
           "position": 8,
-          "rating": 1622.5,
+          "rating": 1622.2,
           "lobby_size": 51
         },
         {
           "cup": "COTD 116",
           "position": 44,
-          "rating": 1609.7,
+          "rating": 1609.5,
           "lobby_size": 55
         },
         {
           "cup": "COTD 117",
           "position": 14,
-          "rating": 1611.5,
+          "rating": 1611.3,
           "lobby_size": 50
         },
         {
           "cup": "COTD 118",
           "position": 43,
-          "rating": 1596.0,
+          "rating": 1595.8,
           "lobby_size": 49
         },
         {
           "cup": "COTD 119",
           "position": 11,
-          "rating": 1606.5,
+          "rating": 1606.3,
           "lobby_size": 51
         },
         {
           "cup": "COTD 120",
           "position": 30,
-          "rating": 1600.7,
+          "rating": 1600.5,
           "lobby_size": 51
         },
         {
           "cup": "COTD 121",
           "position": 32,
-          "rating": 1588.5,
+          "rating": 1588.3,
           "lobby_size": 49
         },
         {
           "cup": "COTD 122",
           "position": 8,
-          "rating": 1600.5,
+          "rating": 1600.3,
           "lobby_size": 45
         },
         {
           "cup": "COTD 123",
           "position": 25,
-          "rating": 1594.6,
+          "rating": 1594.4,
           "lobby_size": 49
         },
         {
           "cup": "COTD 126",
           "position": 27,
-          "rating": 1587.5,
+          "rating": 1587.4,
           "lobby_size": 44
         },
         {
           "cup": "COTD 127",
           "position": 16,
-          "rating": 1590.3,
+          "rating": 1590.1,
           "lobby_size": 50
         },
         {
           "cup": "COTD 129",
           "position": 8,
-          "rating": 1602.7,
+          "rating": 1602.5,
           "lobby_size": 52
         },
         {
           "cup": "COTD 131",
           "position": 11,
-          "rating": 1613.6,
+          "rating": 1613.4,
           "lobby_size": 58
         },
         {
           "cup": "COTD 132",
           "position": 20,
-          "rating": 1614.0,
+          "rating": 1613.9,
           "lobby_size": 59
         },
         {
           "cup": "COTD 133",
           "position": 22,
-          "rating": 1613.5,
+          "rating": 1613.4,
           "lobby_size": 54
         },
         {
           "cup": "COTD 134",
           "position": 12,
-          "rating": 1619.8,
+          "rating": 1619.7,
           "lobby_size": 49
         },
         {
           "cup": "COTD 136",
           "position": 9,
-          "rating": 1628.9,
+          "rating": 1628.8,
           "lobby_size": 46
         }
       ]
@@ -11546,7 +11552,7 @@
         {
           "cup": "COTD 121",
           "position": 18,
-          "rating": 1487.1,
+          "rating": 1487.0,
           "lobby_size": 49
         },
         {
@@ -11576,7 +11582,7 @@
         {
           "cup": "COTD 128",
           "position": 11,
-          "rating": 1588.0,
+          "rating": 1587.9,
           "lobby_size": 52
         },
         {
@@ -12203,97 +12209,97 @@
         {
           "cup": "COTD 100",
           "position": 28,
-          "rating": 1551.5,
-          "lobby_size": 50
+          "rating": 1551.7,
+          "lobby_size": 51
         },
         {
           "cup": "COTD 101",
           "position": 11,
-          "rating": 1561.2,
+          "rating": 1561.3,
           "lobby_size": 45
         },
         {
           "cup": "COTD 102",
           "position": 24,
-          "rating": 1558.4,
+          "rating": 1558.5,
           "lobby_size": 50
         },
         {
           "cup": "COTD 103",
           "position": 19,
-          "rating": 1557.2,
+          "rating": 1557.3,
           "lobby_size": 48
         },
         {
           "cup": "COTD 104",
           "position": 7,
-          "rating": 1569.7,
+          "rating": 1569.9,
           "lobby_size": 43
         },
         {
           "cup": "COTD 105",
           "position": 13,
-          "rating": 1572.8,
+          "rating": 1572.9,
           "lobby_size": 50
         },
         {
           "cup": "COTD 106",
           "position": 5,
-          "rating": 1594.7,
+          "rating": 1594.8,
           "lobby_size": 48
         },
         {
           "cup": "COTD 107",
           "position": 11,
-          "rating": 1603.1,
+          "rating": 1603.2,
           "lobby_size": 47
         },
         {
           "cup": "COTD 108",
           "position": 13,
-          "rating": 1603.5,
+          "rating": 1603.6,
           "lobby_size": 50
         },
         {
           "cup": "COTD 109",
           "position": 16,
-          "rating": 1603.4,
+          "rating": 1603.5,
           "lobby_size": 49
         },
         {
           "cup": "COTD 110",
           "position": 28,
-          "rating": 1596.5,
+          "rating": 1596.6,
           "lobby_size": 48
         },
         {
           "cup": "COTD 112",
           "position": 46,
-          "rating": 1581.4,
+          "rating": 1581.5,
           "lobby_size": 52
         },
         {
           "cup": "COTD 114",
           "position": 6,
-          "rating": 1594.4,
+          "rating": 1594.5,
           "lobby_size": 38
         },
         {
           "cup": "COTD 115",
           "position": 13,
-          "rating": 1598.3,
+          "rating": 1598.4,
           "lobby_size": 51
         },
         {
           "cup": "COTD 116",
           "position": 7,
-          "rating": 1620.0,
+          "rating": 1620.1,
           "lobby_size": 55
         },
         {
           "cup": "COTD 117",
           "position": 15,
-          "rating": 1620.0,
+          "rating": 1620.1,
           "lobby_size": 50
         },
         {
@@ -12305,7 +12311,7 @@
         {
           "cup": "COTD 119",
           "position": 15,
-          "rating": 1611.6,
+          "rating": 1611.7,
           "lobby_size": 51
         },
         {
@@ -12329,7 +12335,7 @@
         {
           "cup": "COTD 123",
           "position": 26,
-          "rating": 1598.8,
+          "rating": 1598.9,
           "lobby_size": 49
         },
         {
@@ -12353,7 +12359,7 @@
         {
           "cup": "COTD 127",
           "position": 18,
-          "rating": 1625.3,
+          "rating": 1625.4,
           "lobby_size": 50
         },
         {
@@ -13126,7 +13132,7 @@
         {
           "cup": "COTD 122",
           "position": 37,
-          "rating": 1602.3,
+          "rating": 1602.2,
           "lobby_size": 45
         },
         {
@@ -13199,7 +13205,7 @@
     {
       "rank": 54,
       "name": "St Nicholas",
-      "rating": 1601.8,
+      "rating": 1601.7,
       "cups": 121,
       "wins": 0,
       "podiums": {
@@ -13766,49 +13772,49 @@
         {
           "cup": "COTD 100",
           "position": 17,
-          "rating": 1629.3,
-          "lobby_size": 50
+          "rating": 1629.2,
+          "lobby_size": 51
         },
         {
           "cup": "COTD 101",
           "position": 16,
-          "rating": 1627.4,
+          "rating": 1627.3,
           "lobby_size": 45
         },
         {
           "cup": "COTD 102",
           "position": 17,
-          "rating": 1626.1,
+          "rating": 1626.0,
           "lobby_size": 50
         },
         {
           "cup": "COTD 103",
           "position": 34,
-          "rating": 1613.2,
+          "rating": 1613.1,
           "lobby_size": 48
         },
         {
           "cup": "COTD 104",
           "position": 10,
-          "rating": 1619.7,
+          "rating": 1619.6,
           "lobby_size": 43
         },
         {
           "cup": "COTD 105",
           "position": 22,
-          "rating": 1615.3,
+          "rating": 1615.2,
           "lobby_size": 50
         },
         {
           "cup": "COTD 106",
           "position": 3,
-          "rating": 1649.6,
+          "rating": 1649.5,
           "lobby_size": 48
         },
         {
           "cup": "COTD 107",
           "position": 14,
-          "rating": 1649.2,
+          "rating": 1649.1,
           "lobby_size": 47
         },
         {
@@ -13820,7 +13826,7 @@
         {
           "cup": "COTD 109",
           "position": 15,
-          "rating": 1651.3,
+          "rating": 1651.2,
           "lobby_size": 49
         },
         {
@@ -13832,7 +13838,7 @@
         {
           "cup": "COTD 111",
           "position": 16,
-          "rating": 1639.5,
+          "rating": 1639.4,
           "lobby_size": 49
         },
         {
@@ -13844,79 +13850,79 @@
         {
           "cup": "COTD 113",
           "position": 14,
-          "rating": 1635.4,
+          "rating": 1635.3,
           "lobby_size": 47
         },
         {
           "cup": "COTD 115",
           "position": 20,
-          "rating": 1633.9,
+          "rating": 1633.8,
           "lobby_size": 51
         },
         {
           "cup": "COTD 116",
           "position": 34,
-          "rating": 1624.6,
+          "rating": 1624.5,
           "lobby_size": 55
         },
         {
           "cup": "COTD 118",
           "position": 15,
-          "rating": 1623.4,
+          "rating": 1623.3,
           "lobby_size": 49
         },
         {
           "cup": "COTD 121",
           "position": 10,
-          "rating": 1628.7,
+          "rating": 1628.6,
           "lobby_size": 49
         },
         {
           "cup": "COTD 122",
           "position": 29,
-          "rating": 1619.3,
+          "rating": 1619.2,
           "lobby_size": 45
         },
         {
           "cup": "COTD 123",
           "position": 16,
-          "rating": 1619.1,
+          "rating": 1619.0,
           "lobby_size": 49
         },
         {
           "cup": "COTD 124",
           "position": 19,
-          "rating": 1618.1,
+          "rating": 1618.0,
           "lobby_size": 51
         },
         {
           "cup": "COTD 126",
           "position": 15,
-          "rating": 1618.6,
+          "rating": 1618.5,
           "lobby_size": 44
         },
         {
           "cup": "COTD 127",
           "position": 31,
-          "rating": 1611.4,
+          "rating": 1611.3,
           "lobby_size": 50
         },
         {
           "cup": "COTD 128",
           "position": 27,
-          "rating": 1606.0,
+          "rating": 1605.9,
           "lobby_size": 52
         },
         {
           "cup": "COTD 130",
           "position": 19,
-          "rating": 1607.2,
+          "rating": 1607.1,
           "lobby_size": 58
         },
         {
           "cup": "COTD 131",
           "position": 24,
-          "rating": 1606.3,
+          "rating": 1606.2,
           "lobby_size": 58
         },
         {
@@ -13928,13 +13934,13 @@
         {
           "cup": "COTD 134",
           "position": 13,
-          "rating": 1601.2,
+          "rating": 1601.1,
           "lobby_size": 49
         },
         {
           "cup": "COTD 135",
           "position": 20,
-          "rating": 1601.8,
+          "rating": 1601.7,
           "lobby_size": 51
         }
       ]
@@ -13971,7 +13977,7 @@
     {
       "rank": 56,
       "name": "Hi Im Yolo",
-      "rating": 1588.8,
+      "rating": 1588.7,
       "cups": 87,
       "wins": 0,
       "podiums": {
@@ -13981,7 +13987,7 @@
       },
       "avg_position": 19.3,
       "best_finish": 4,
-      "peak_rating": 1592.7,
+      "peak_rating": 1592.6,
       "history": [
         {
           "cup": "COTD 1",
@@ -14364,13 +14370,13 @@
         {
           "cup": "COTD 100",
           "position": 21,
-          "rating": 1526.3,
-          "lobby_size": 50
+          "rating": 1526.2,
+          "lobby_size": 51
         },
         {
           "cup": "COTD 101",
           "position": 4,
-          "rating": 1554.8,
+          "rating": 1554.7,
           "lobby_size": 45
         },
         {
@@ -14382,7 +14388,7 @@
         {
           "cup": "COTD 109",
           "position": 10,
-          "rating": 1567.4,
+          "rating": 1567.3,
           "lobby_size": 49
         },
         {
@@ -14394,13 +14400,13 @@
         {
           "cup": "COTD 111",
           "position": 9,
-          "rating": 1591.3,
+          "rating": 1591.2,
           "lobby_size": 49
         },
         {
           "cup": "COTD 113",
           "position": 15,
-          "rating": 1592.7,
+          "rating": 1592.6,
           "lobby_size": 47
         },
         {
@@ -14418,19 +14424,19 @@
         {
           "cup": "COTD 116",
           "position": 49,
-          "rating": 1575.1,
+          "rating": 1575.0,
           "lobby_size": 55
         },
         {
           "cup": "COTD 119",
           "position": 16,
-          "rating": 1578.5,
+          "rating": 1578.4,
           "lobby_size": 51
         },
         {
           "cup": "COTD 120",
           "position": 33,
-          "rating": 1572.1,
+          "rating": 1572.0,
           "lobby_size": 51
         },
         {
@@ -14442,7 +14448,7 @@
         {
           "cup": "COTD 123",
           "position": 12,
-          "rating": 1572.0,
+          "rating": 1571.9,
           "lobby_size": 49
         },
         {
@@ -14454,13 +14460,13 @@
         {
           "cup": "COTD 125",
           "position": 23,
-          "rating": 1567.5,
+          "rating": 1567.4,
           "lobby_size": 45
         },
         {
           "cup": "COTD 127",
           "position": 28,
-          "rating": 1563.2,
+          "rating": 1563.1,
           "lobby_size": 50
         },
         {
@@ -14472,13 +14478,13 @@
         {
           "cup": "COTD 130",
           "position": 32,
-          "rating": 1583.1,
+          "rating": 1583.0,
           "lobby_size": 58
         },
         {
           "cup": "COTD 131",
           "position": 16,
-          "rating": 1586.8,
+          "rating": 1586.7,
           "lobby_size": 58
         },
         {
@@ -14502,7 +14508,7 @@
         {
           "cup": "COTD 135",
           "position": 14,
-          "rating": 1588.8,
+          "rating": 1588.7,
           "lobby_size": 51
         }
       ]
@@ -14643,7 +14649,7 @@
       },
       "avg_position": 20.9,
       "best_finish": 7,
-      "peak_rating": 1577.5,
+      "peak_rating": 1577.4,
       "history": [
         {
           "cup": "COTD 79",
@@ -14762,13 +14768,13 @@
         {
           "cup": "COTD 119",
           "position": 13,
-          "rating": 1542.7,
+          "rating": 1542.6,
           "lobby_size": 51
         },
         {
           "cup": "COTD 120",
           "position": 32,
-          "rating": 1538.3,
+          "rating": 1538.2,
           "lobby_size": 51
         },
         {
@@ -14786,7 +14792,7 @@
         {
           "cup": "COTD 124",
           "position": 15,
-          "rating": 1549.9,
+          "rating": 1549.8,
           "lobby_size": 51
         },
         {
@@ -14816,7 +14822,7 @@
         {
           "cup": "COTD 133",
           "position": 21,
-          "rating": 1577.5,
+          "rating": 1577.4,
           "lobby_size": 54
         },
         {
@@ -15802,7 +15808,7 @@
         {
           "cup": "COTD 125",
           "position": 27,
-          "rating": 1540.3,
+          "rating": 1540.2,
           "lobby_size": 45
         },
         {
@@ -15814,7 +15820,7 @@
         {
           "cup": "COTD 127",
           "position": 15,
-          "rating": 1546.9,
+          "rating": 1546.8,
           "lobby_size": 50
         },
         {
@@ -15976,7 +15982,7 @@
     {
       "rank": 73,
       "name": "Shadynook",
-      "rating": 1547.0,
+      "rating": 1546.9,
       "cups": 86,
       "wins": 0,
       "podiums": {
@@ -15986,7 +15992,7 @@
       },
       "avg_position": 18.2,
       "best_finish": 7,
-      "peak_rating": 1577.5,
+      "peak_rating": 1577.3,
       "history": [
         {
           "cup": "COTD 17",
@@ -16357,151 +16363,151 @@
         {
           "cup": "COTD 100",
           "position": 13,
-          "rating": 1538.8,
-          "lobby_size": 50
+          "rating": 1538.6,
+          "lobby_size": 51
         },
         {
           "cup": "COTD 101",
           "position": 15,
-          "rating": 1541.2,
+          "rating": 1541.0,
           "lobby_size": 45
         },
         {
           "cup": "COTD 102",
           "position": 48,
-          "rating": 1528.4,
+          "rating": 1528.2,
           "lobby_size": 50
         },
         {
           "cup": "COTD 103",
           "position": 10,
-          "rating": 1540.1,
+          "rating": 1539.9,
           "lobby_size": 48
         },
         {
           "cup": "COTD 104",
           "position": 25,
-          "rating": 1534.0,
+          "rating": 1533.8,
           "lobby_size": 43
         },
         {
           "cup": "COTD 105",
           "position": 9,
-          "rating": 1547.6,
+          "rating": 1547.5,
           "lobby_size": 50
         },
         {
           "cup": "COTD 106",
           "position": 7,
-          "rating": 1568.8,
+          "rating": 1568.6,
           "lobby_size": 48
         },
         {
           "cup": "COTD 107",
           "position": 12,
-          "rating": 1572.7,
+          "rating": 1572.5,
           "lobby_size": 47
         },
         {
           "cup": "COTD 108",
           "position": 15,
-          "rating": 1573.4,
+          "rating": 1573.2,
           "lobby_size": 50
         },
         {
           "cup": "COTD 109",
           "position": 20,
-          "rating": 1572.4,
+          "rating": 1572.3,
           "lobby_size": 49
         },
         {
           "cup": "COTD 110",
           "position": 19,
-          "rating": 1572.9,
+          "rating": 1572.8,
           "lobby_size": 48
         },
         {
           "cup": "COTD 115",
           "position": 16,
-          "rating": 1576.0,
+          "rating": 1575.9,
           "lobby_size": 51
         },
         {
           "cup": "COTD 118",
           "position": 14,
-          "rating": 1577.5,
+          "rating": 1577.3,
           "lobby_size": 49
         },
         {
           "cup": "COTD 119",
           "position": 23,
-          "rating": 1576.9,
+          "rating": 1576.8,
           "lobby_size": 51
         },
         {
           "cup": "COTD 120",
           "position": 23,
-          "rating": 1576.8,
+          "rating": 1576.6,
           "lobby_size": 51
         },
         {
           "cup": "COTD 121",
           "position": 22,
-          "rating": 1571.8,
+          "rating": 1571.7,
           "lobby_size": 49
         },
         {
           "cup": "COTD 123",
           "position": 28,
-          "rating": 1565.7,
+          "rating": 1565.6,
           "lobby_size": 49
         },
         {
           "cup": "COTD 124",
           "position": 25,
-          "rating": 1563.9,
+          "rating": 1563.8,
           "lobby_size": 51
         },
         {
           "cup": "COTD 125",
           "position": 20,
-          "rating": 1564.0,
+          "rating": 1563.9,
           "lobby_size": 45
         },
         {
           "cup": "COTD 126",
           "position": 30,
-          "rating": 1556.8,
+          "rating": 1556.7,
           "lobby_size": 44
         },
         {
           "cup": "COTD 127",
           "position": 21,
-          "rating": 1558.0,
+          "rating": 1557.9,
           "lobby_size": 50
         },
         {
           "cup": "COTD 128",
           "position": 30,
-          "rating": 1553.4,
+          "rating": 1553.3,
           "lobby_size": 52
         },
         {
           "cup": "COTD 129",
           "position": 23,
-          "rating": 1552.9,
+          "rating": 1552.8,
           "lobby_size": 52
         },
         {
           "cup": "COTD 131",
           "position": 21,
-          "rating": 1555.4,
+          "rating": 1555.3,
           "lobby_size": 58
         },
         {
           "cup": "COTD 134",
           "position": 35,
-          "rating": 1547.0,
+          "rating": 1546.9,
           "lobby_size": 49
         }
       ]
@@ -16509,7 +16515,7 @@
     {
       "rank": 74,
       "name": "Yoshi",
-      "rating": 1543.6,
+      "rating": 1543.1,
       "cups": 4,
       "wins": 0,
       "podiums": {
@@ -16519,30 +16525,30 @@
       },
       "avg_position": 17.0,
       "best_finish": 10,
-      "peak_rating": 1543.6,
+      "peak_rating": 1543.1,
       "history": [
         {
           "cup": "COTD 100",
           "position": 11,
-          "rating": 1521.5,
-          "lobby_size": 50
+          "rating": 1520.8,
+          "lobby_size": 51
         },
         {
           "cup": "COTD 102",
           "position": 10,
-          "rating": 1542.8,
+          "rating": 1542.2,
           "lobby_size": 50
         },
         {
           "cup": "COTD 108",
           "position": 23,
-          "rating": 1543.0,
+          "rating": 1542.4,
           "lobby_size": 50
         },
         {
           "cup": "COTD 109",
           "position": 24,
-          "rating": 1543.6,
+          "rating": 1543.1,
           "lobby_size": 49
         }
       ]
@@ -16702,13 +16708,13 @@
         {
           "cup": "COTD 100",
           "position": 21,
-          "rating": 1499.5,
-          "lobby_size": 50
+          "rating": 1499.4,
+          "lobby_size": 51
         },
         {
           "cup": "COTD 101",
           "position": 38,
-          "rating": 1490.2,
+          "rating": 1490.1,
           "lobby_size": 45
         },
         {
@@ -16720,7 +16726,7 @@
         {
           "cup": "COTD 103",
           "position": 25,
-          "rating": 1480.2,
+          "rating": 1480.1,
           "lobby_size": 48
         },
         {
@@ -16732,13 +16738,13 @@
         {
           "cup": "COTD 105",
           "position": 27,
-          "rating": 1491.5,
+          "rating": 1491.4,
           "lobby_size": 50
         },
         {
           "cup": "COTD 107",
           "position": 19,
-          "rating": 1494.3,
+          "rating": 1494.2,
           "lobby_size": 47
         },
         {
@@ -16762,13 +16768,13 @@
         {
           "cup": "COTD 120",
           "position": 17,
-          "rating": 1529.8,
+          "rating": 1529.7,
           "lobby_size": 51
         },
         {
           "cup": "COTD 122",
           "position": 16,
-          "rating": 1533.0,
+          "rating": 1532.9,
           "lobby_size": 45
         },
         {
@@ -17118,7 +17124,7 @@
         {
           "cup": "COTD 120",
           "position": 43,
-          "rating": 1529.8,
+          "rating": 1529.7,
           "lobby_size": 51
         },
         {
@@ -18178,7 +18184,7 @@
         {
           "cup": "COTD 122",
           "position": 26,
-          "rating": 1518.6,
+          "rating": 1518.5,
           "lobby_size": 45
         },
         {
@@ -18523,7 +18529,7 @@
     {
       "rank": 106,
       "name": "DeeDeeNaNaNa",
-      "rating": 1517.8,
+      "rating": 1517.7,
       "cups": 60,
       "wins": 0,
       "podiums": {
@@ -18533,7 +18539,7 @@
       },
       "avg_position": 22.1,
       "best_finish": 10,
-      "peak_rating": 1517.8,
+      "peak_rating": 1517.7,
       "history": [
         {
           "cup": "COTD 26",
@@ -18760,139 +18766,139 @@
         {
           "cup": "COTD 100",
           "position": 14,
-          "rating": 1431.2,
-          "lobby_size": 50
+          "rating": 1431.0,
+          "lobby_size": 51
         },
         {
           "cup": "COTD 101",
           "position": 22,
-          "rating": 1433.7,
+          "rating": 1433.4,
           "lobby_size": 45
         },
         {
           "cup": "COTD 102",
           "position": 25,
-          "rating": 1435.5,
+          "rating": 1435.2,
           "lobby_size": 50
         },
         {
           "cup": "COTD 103",
           "position": 13,
-          "rating": 1442.9,
+          "rating": 1442.7,
           "lobby_size": 48
         },
         {
           "cup": "COTD 104",
           "position": 21,
-          "rating": 1444.6,
+          "rating": 1444.4,
           "lobby_size": 43
         },
         {
           "cup": "COTD 106",
           "position": 13,
-          "rating": 1449.4,
+          "rating": 1449.2,
           "lobby_size": 48
         },
         {
           "cup": "COTD 109",
           "position": 18,
-          "rating": 1454.3,
+          "rating": 1454.1,
           "lobby_size": 49
         },
         {
           "cup": "COTD 110",
           "position": 24,
-          "rating": 1456.6,
+          "rating": 1456.4,
           "lobby_size": 48
         },
         {
           "cup": "COTD 112",
           "position": 14,
-          "rating": 1463.7,
+          "rating": 1463.5,
           "lobby_size": 52
         },
         {
           "cup": "COTD 113",
           "position": 26,
-          "rating": 1461.5,
+          "rating": 1461.3,
           "lobby_size": 47
         },
         {
           "cup": "COTD 115",
           "position": 27,
-          "rating": 1460.6,
+          "rating": 1460.4,
           "lobby_size": 51
         },
         {
           "cup": "COTD 116",
           "position": 16,
-          "rating": 1467.7,
+          "rating": 1467.5,
           "lobby_size": 55
         },
         {
           "cup": "COTD 117",
           "position": 27,
-          "rating": 1465.6,
+          "rating": 1465.4,
           "lobby_size": 50
         },
         {
           "cup": "COTD 118",
           "position": 10,
-          "rating": 1480.8,
+          "rating": 1480.7,
           "lobby_size": 49
         },
         {
           "cup": "COTD 119",
           "position": 27,
-          "rating": 1479.6,
+          "rating": 1479.5,
           "lobby_size": 51
         },
         {
           "cup": "COTD 120",
           "position": 24,
-          "rating": 1482.5,
+          "rating": 1482.3,
           "lobby_size": 51
         },
         {
           "cup": "COTD 121",
           "position": 18,
-          "rating": 1483.7,
+          "rating": 1483.6,
           "lobby_size": 49
         },
         {
           "cup": "COTD 122",
           "position": 15,
-          "rating": 1489.2,
+          "rating": 1489.0,
           "lobby_size": 45
         },
         {
           "cup": "COTD 123",
           "position": 22,
-          "rating": 1491.1,
+          "rating": 1490.9,
           "lobby_size": 49
         },
         {
           "cup": "COTD 129",
           "position": 13,
-          "rating": 1504.5,
+          "rating": 1504.4,
           "lobby_size": 52
         },
         {
           "cup": "COTD 130",
           "position": 31,
-          "rating": 1502.3,
+          "rating": 1502.1,
           "lobby_size": 58
         },
         {
           "cup": "COTD 132",
           "position": 14,
-          "rating": 1515.7,
+          "rating": 1515.5,
           "lobby_size": 59
         },
         {
           "cup": "COTD 134",
           "position": 19,
-          "rating": 1517.8,
+          "rating": 1517.7,
           "lobby_size": 49
         }
       ]
@@ -19292,7 +19298,7 @@
         {
           "cup": "COTD 124",
           "position": 39,
-          "rating": 1518.9,
+          "rating": 1519.0,
           "lobby_size": 51
         },
         {
@@ -20198,13 +20204,13 @@
         {
           "cup": "COTD 131",
           "position": 47,
-          "rating": 1521.4,
+          "rating": 1521.3,
           "lobby_size": 58
         },
         {
           "cup": "COTD 132",
           "position": 40,
-          "rating": 1515.9,
+          "rating": 1515.8,
           "lobby_size": 59
         },
         {
@@ -21311,7 +21317,7 @@
         {
           "cup": "COTD 122",
           "position": 33,
-          "rating": 1500.4,
+          "rating": 1500.3,
           "lobby_size": 45
         },
         {
@@ -21323,7 +21329,7 @@
         {
           "cup": "COTD 127",
           "position": 29,
-          "rating": 1504.3,
+          "rating": 1504.2,
           "lobby_size": 50
         },
         {
@@ -21341,7 +21347,7 @@
         {
           "cup": "COTD 131",
           "position": 25,
-          "rating": 1500.8,
+          "rating": 1500.7,
           "lobby_size": 58
         },
         {
@@ -22337,29 +22343,6 @@
     },
     {
       "rank": 173,
-      "name": "chris13503",
-      "rating": 1501.1,
-      "cups": 1,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 24.0,
-      "best_finish": 24,
-      "peak_rating": 1501.1,
-      "history": [
-        {
-          "cup": "COTD 108",
-          "position": 24,
-          "rating": 1501.1,
-          "lobby_size": 50
-        }
-      ]
-    },
-    {
-      "rank": 174,
       "name": "Dylan",
       "rating": 1501.0,
       "cups": 1,
@@ -22378,6 +22361,29 @@
           "position": 16,
           "rating": 1501.0,
           "lobby_size": 34
+        }
+      ]
+    },
+    {
+      "rank": 174,
+      "name": "chris13503",
+      "rating": 1501.0,
+      "cups": 1,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 24.0,
+      "best_finish": 24,
+      "peak_rating": 1501.0,
+      "history": [
+        {
+          "cup": "COTD 108",
+          "position": 24,
+          "rating": 1501.0,
+          "lobby_size": 50
         }
       ]
     },
@@ -24921,41 +24927,6 @@
     },
     {
       "rank": 265,
-      "name": "TrubP02",
-      "rating": 1494.5,
-      "cups": 3,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 28.3,
-      "best_finish": 17,
-      "peak_rating": 1494.5,
-      "history": [
-        {
-          "cup": "COTD 46",
-          "position": 26,
-          "rating": 1494.1,
-          "lobby_size": 35
-        },
-        {
-          "cup": "COTD 96",
-          "position": 42,
-          "rating": 1487.0,
-          "lobby_size": 49
-        },
-        {
-          "cup": "COTD 100",
-          "position": 17,
-          "rating": 1494.5,
-          "lobby_size": 50
-        }
-      ]
-    },
-    {
-      "rank": 266,
       "name": "b0baphettyWAP",
       "rating": 1494.5,
       "cups": 1,
@@ -24978,7 +24949,7 @@
       ]
     },
     {
-      "rank": 267,
+      "rank": 266,
       "name": "Drrcp",
       "rating": 1494.5,
       "cups": 4,
@@ -25019,7 +24990,7 @@
       ]
     },
     {
-      "rank": 268,
+      "rank": 267,
       "name": "snailspace",
       "rating": 1494.4,
       "cups": 1,
@@ -25042,7 +25013,7 @@
       ]
     },
     {
-      "rank": 269,
+      "rank": 268,
       "name": "[CHZB] PizzaCat1732",
       "rating": 1494.4,
       "cups": 1,
@@ -25065,7 +25036,7 @@
       ]
     },
     {
-      "rank": 270,
+      "rank": 269,
       "name": "Keno_O",
       "rating": 1494.4,
       "cups": 1,
@@ -25088,7 +25059,7 @@
       ]
     },
     {
-      "rank": 271,
+      "rank": 270,
       "name": "Wiwiknight",
       "rating": 1494.3,
       "cups": 1,
@@ -25111,7 +25082,7 @@
       ]
     },
     {
-      "rank": 272,
+      "rank": 271,
       "name": "Clayne0",
       "rating": 1494.3,
       "cups": 1,
@@ -25130,6 +25101,41 @@
           "position": 19,
           "rating": 1494.3,
           "lobby_size": 31
+        }
+      ]
+    },
+    {
+      "rank": 272,
+      "name": "TrubP02",
+      "rating": 1494.2,
+      "cups": 3,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 28.3,
+      "best_finish": 17,
+      "peak_rating": 1494.2,
+      "history": [
+        {
+          "cup": "COTD 46",
+          "position": 26,
+          "rating": 1494.1,
+          "lobby_size": 35
+        },
+        {
+          "cup": "COTD 96",
+          "position": 42,
+          "rating": 1487.0,
+          "lobby_size": 49
+        },
+        {
+          "cup": "COTD 100",
+          "position": 17,
+          "rating": 1494.2,
+          "lobby_size": 51
         }
       ]
     },
@@ -26384,6 +26390,98 @@
     },
     {
       "rank": 326,
+      "name": "n1emand",
+      "rating": 1492.6,
+      "cups": 1,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 28.0,
+      "best_finish": 28,
+      "peak_rating": 1492.6,
+      "history": [
+        {
+          "cup": "COTD 100",
+          "position": 28,
+          "rating": 1492.6,
+          "lobby_size": 51
+        }
+      ]
+    },
+    {
+      "rank": 327,
+      "name": "[MRBL]dave.ahlersmeyer",
+      "rating": 1492.6,
+      "cups": 1,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 28.0,
+      "best_finish": 28,
+      "peak_rating": 1492.6,
+      "history": [
+        {
+          "cup": "COTD 100",
+          "position": 28,
+          "rating": 1492.6,
+          "lobby_size": 51
+        }
+      ]
+    },
+    {
+      "rank": 328,
+      "name": "Timsen07",
+      "rating": 1492.6,
+      "cups": 1,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 28.0,
+      "best_finish": 28,
+      "peak_rating": 1492.6,
+      "history": [
+        {
+          "cup": "COTD 100",
+          "position": 28,
+          "rating": 1492.6,
+          "lobby_size": 51
+        }
+      ]
+    },
+    {
+      "rank": 329,
+      "name": "which prevented Kernkob from making Finals",
+      "rating": 1492.6,
+      "cups": 1,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 28.0,
+      "best_finish": 28,
+      "peak_rating": 1492.6,
+      "history": [
+        {
+          "cup": "COTD 100",
+          "position": 28,
+          "rating": 1492.6,
+          "lobby_size": 51
+        }
+      ]
+    },
+    {
+      "rank": 330,
       "name": "[Frik] DinoDeano",
       "rating": 1492.6,
       "cups": 1,
@@ -26406,7 +26504,7 @@
       ]
     },
     {
-      "rank": 327,
+      "rank": 331,
       "name": "That Weird Guy",
       "rating": 1492.6,
       "cups": 1,
@@ -26429,7 +26527,7 @@
       ]
     },
     {
-      "rank": 328,
+      "rank": 332,
       "name": "quint097",
       "rating": 1492.5,
       "cups": 1,
@@ -26452,7 +26550,7 @@
       ]
     },
     {
-      "rank": 329,
+      "rank": 333,
       "name": "Ulv_RaVn",
       "rating": 1492.5,
       "cups": 3,
@@ -26487,7 +26585,7 @@
       ]
     },
     {
-      "rank": 330,
+      "rank": 334,
       "name": "robertrdemare",
       "rating": 1492.4,
       "cups": 1,
@@ -26510,7 +26608,7 @@
       ]
     },
     {
-      "rank": 331,
+      "rank": 335,
       "name": "[TOG[Lazy_Echidna",
       "rating": 1492.4,
       "cups": 1,
@@ -26533,7 +26631,7 @@
       ]
     },
     {
-      "rank": 332,
+      "rank": 336,
       "name": "Piru",
       "rating": 1492.4,
       "cups": 2,
@@ -26558,98 +26656,6 @@
           "position": 31,
           "rating": 1492.4,
           "lobby_size": 49
-        }
-      ]
-    },
-    {
-      "rank": 333,
-      "name": "n1emand",
-      "rating": 1492.4,
-      "cups": 1,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 28.0,
-      "best_finish": 28,
-      "peak_rating": 1492.4,
-      "history": [
-        {
-          "cup": "COTD 100",
-          "position": 28,
-          "rating": 1492.4,
-          "lobby_size": 50
-        }
-      ]
-    },
-    {
-      "rank": 334,
-      "name": "[MRBL]dave.ahlersmeyer",
-      "rating": 1492.4,
-      "cups": 1,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 28.0,
-      "best_finish": 28,
-      "peak_rating": 1492.4,
-      "history": [
-        {
-          "cup": "COTD 100",
-          "position": 28,
-          "rating": 1492.4,
-          "lobby_size": 50
-        }
-      ]
-    },
-    {
-      "rank": 335,
-      "name": "Timsen07",
-      "rating": 1492.4,
-      "cups": 1,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 28.0,
-      "best_finish": 28,
-      "peak_rating": 1492.4,
-      "history": [
-        {
-          "cup": "COTD 100",
-          "position": 28,
-          "rating": 1492.4,
-          "lobby_size": 50
-        }
-      ]
-    },
-    {
-      "rank": 336,
-      "name": "which prevented Kernkob from making Finals",
-      "rating": 1492.4,
-      "cups": 1,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 28.0,
-      "best_finish": 28,
-      "peak_rating": 1492.4,
-      "history": [
-        {
-          "cup": "COTD 100",
-          "position": 28,
-          "rating": 1492.4,
-          "lobby_size": 50
         }
       ]
     },
@@ -28853,158 +28859,8 @@
     },
     {
       "rank": 425,
-      "name": "JP_pne96",
-      "rating": 1490.5,
-      "cups": 2,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 21.0,
-      "best_finish": 21,
-      "peak_rating": 1493.3,
-      "history": [
-        {
-          "cup": "COTD 18",
-          "position": 21,
-          "rating": 1493.3,
-          "lobby_size": 37
-        },
-        {
-          "cup": "COTD 86",
-          "position": 21,
-          "rating": 1490.5,
-          "lobby_size": 40
-        }
-      ]
-    },
-    {
-      "rank": 426,
-      "name": "[AAA] AmusedApple",
-      "rating": 1490.5,
-      "cups": 2,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 31.0,
-      "best_finish": 20,
-      "peak_rating": 1500.9,
-      "history": [
-        {
-          "cup": "COTD 73",
-          "position": 20,
-          "rating": 1500.9,
-          "lobby_size": 43
-        },
-        {
-          "cup": "COTD 75",
-          "position": 42,
-          "rating": 1490.5,
-          "lobby_size": 47
-        }
-      ]
-    },
-    {
-      "rank": 427,
-      "name": "ehki",
-      "rating": 1490.5,
-      "cups": 1,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 42.0,
-      "best_finish": 42,
-      "peak_rating": 1490.5,
-      "history": [
-        {
-          "cup": "COTD 81",
-          "position": 42,
-          "rating": 1490.5,
-          "lobby_size": 46
-        }
-      ]
-    },
-    {
-      "rank": 428,
-      "name": "Skyes",
-      "rating": 1490.5,
-      "cups": 1,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 45.0,
-      "best_finish": 45,
-      "peak_rating": 1490.5,
-      "history": [
-        {
-          "cup": "COTD 102",
-          "position": 45,
-          "rating": 1490.5,
-          "lobby_size": 50
-        }
-      ]
-    },
-    {
-      "rank": 429,
-      "name": "LL10884",
-      "rating": 1490.5,
-      "cups": 1,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 43.0,
-      "best_finish": 43,
-      "peak_rating": 1490.5,
-      "history": [
-        {
-          "cup": "COTD 125",
-          "position": 43,
-          "rating": 1490.5,
-          "lobby_size": 45
-        }
-      ]
-    },
-    {
-      "rank": 430,
-      "name": "emdoki22",
-      "rating": 1490.5,
-      "cups": 1,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 40.0,
-      "best_finish": 40,
-      "peak_rating": 1490.5,
-      "history": [
-        {
-          "cup": "COTD 126",
-          "position": 40,
-          "rating": 1490.5,
-          "lobby_size": 44
-        }
-      ]
-    },
-    {
-      "rank": 431,
       "name": "Ender",
-      "rating": 1490.4,
+      "rating": 1490.5,
       "cups": 5,
       "wins": 0,
       "podiums": {
@@ -29037,14 +28893,164 @@
         {
           "cup": "COTD 100",
           "position": 28,
-          "rating": 1494.1,
-          "lobby_size": 50
+          "rating": 1494.2,
+          "lobby_size": 51
         },
         {
           "cup": "COTD 128",
           "position": 37,
-          "rating": 1490.4,
+          "rating": 1490.5,
           "lobby_size": 52
+        }
+      ]
+    },
+    {
+      "rank": 426,
+      "name": "JP_pne96",
+      "rating": 1490.5,
+      "cups": 2,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 21.0,
+      "best_finish": 21,
+      "peak_rating": 1493.3,
+      "history": [
+        {
+          "cup": "COTD 18",
+          "position": 21,
+          "rating": 1493.3,
+          "lobby_size": 37
+        },
+        {
+          "cup": "COTD 86",
+          "position": 21,
+          "rating": 1490.5,
+          "lobby_size": 40
+        }
+      ]
+    },
+    {
+      "rank": 427,
+      "name": "[AAA] AmusedApple",
+      "rating": 1490.5,
+      "cups": 2,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 31.0,
+      "best_finish": 20,
+      "peak_rating": 1500.9,
+      "history": [
+        {
+          "cup": "COTD 73",
+          "position": 20,
+          "rating": 1500.9,
+          "lobby_size": 43
+        },
+        {
+          "cup": "COTD 75",
+          "position": 42,
+          "rating": 1490.5,
+          "lobby_size": 47
+        }
+      ]
+    },
+    {
+      "rank": 428,
+      "name": "ehki",
+      "rating": 1490.5,
+      "cups": 1,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 42.0,
+      "best_finish": 42,
+      "peak_rating": 1490.5,
+      "history": [
+        {
+          "cup": "COTD 81",
+          "position": 42,
+          "rating": 1490.5,
+          "lobby_size": 46
+        }
+      ]
+    },
+    {
+      "rank": 429,
+      "name": "Skyes",
+      "rating": 1490.5,
+      "cups": 1,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 45.0,
+      "best_finish": 45,
+      "peak_rating": 1490.5,
+      "history": [
+        {
+          "cup": "COTD 102",
+          "position": 45,
+          "rating": 1490.5,
+          "lobby_size": 50
+        }
+      ]
+    },
+    {
+      "rank": 430,
+      "name": "LL10884",
+      "rating": 1490.5,
+      "cups": 1,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 43.0,
+      "best_finish": 43,
+      "peak_rating": 1490.5,
+      "history": [
+        {
+          "cup": "COTD 125",
+          "position": 43,
+          "rating": 1490.5,
+          "lobby_size": 45
+        }
+      ]
+    },
+    {
+      "rank": 431,
+      "name": "emdoki22",
+      "rating": 1490.5,
+      "cups": 1,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 40.0,
+      "best_finish": 40,
+      "peak_rating": 1490.5,
+      "history": [
+        {
+          "cup": "COTD 126",
+          "position": 40,
+          "rating": 1490.5,
+          "lobby_size": 44
         }
       ]
     },
@@ -30212,12 +30218,12 @@
       },
       "avg_position": 30.7,
       "best_finish": 25,
-      "peak_rating": 1491.2,
+      "peak_rating": 1491.1,
       "history": [
         {
           "cup": "COTD 108",
           "position": 39,
-          "rating": 1491.2,
+          "rating": 1491.1,
           "lobby_size": 50
         },
         {
@@ -30471,7 +30477,7 @@
         {
           "cup": "COTD 115",
           "position": 24,
-          "rating": 1492.5,
+          "rating": 1492.4,
           "lobby_size": 51
         },
         {
@@ -37067,6 +37073,35 @@
     },
     {
       "rank": 755,
+      "name": "DRWright38",
+      "rating": 1484.6,
+      "cups": 2,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 34.5,
+      "best_finish": 28,
+      "peak_rating": 1492.6,
+      "history": [
+        {
+          "cup": "COTD 100",
+          "position": 28,
+          "rating": 1492.6,
+          "lobby_size": 51
+        },
+        {
+          "cup": "COTD 109",
+          "position": 41,
+          "rating": 1484.6,
+          "lobby_size": 49
+        }
+      ]
+    },
+    {
+      "rank": 756,
       "name": "Es3en",
       "rating": 1484.5,
       "cups": 3,
@@ -37101,7 +37136,7 @@
       ]
     },
     {
-      "rank": 756,
+      "rank": 757,
       "name": "Max Scaffold",
       "rating": 1484.5,
       "cups": 1,
@@ -37124,7 +37159,7 @@
       ]
     },
     {
-      "rank": 757,
+      "rank": 758,
       "name": "sander",
       "rating": 1484.5,
       "cups": 1,
@@ -37143,35 +37178,6 @@
           "position": 32,
           "rating": 1484.5,
           "lobby_size": 39
-        }
-      ]
-    },
-    {
-      "rank": 758,
-      "name": "DRWright38",
-      "rating": 1484.5,
-      "cups": 2,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 34.5,
-      "best_finish": 28,
-      "peak_rating": 1492.4,
-      "history": [
-        {
-          "cup": "COTD 100",
-          "position": 28,
-          "rating": 1492.4,
-          "lobby_size": 50
-        },
-        {
-          "cup": "COTD 109",
-          "position": 41,
-          "rating": 1484.5,
-          "lobby_size": 49
         }
       ]
     },
@@ -38572,7 +38578,7 @@
         {
           "cup": "COTD 112",
           "position": 18,
-          "rating": 1511.1,
+          "rating": 1511.0,
           "lobby_size": 52
         },
         {
@@ -38632,7 +38638,7 @@
         {
           "cup": "COTD 134",
           "position": 37,
-          "rating": 1493.1,
+          "rating": 1493.0,
           "lobby_size": 49
         },
         {
@@ -39710,8 +39716,72 @@
     },
     {
       "rank": 830,
+      "name": "ColdTwilight",
+      "rating": 1480.7,
+      "cups": 2,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 24.5,
+      "best_finish": 22,
+      "peak_rating": 1492.8,
+      "history": [
+        {
+          "cup": "COTD 39",
+          "position": 22,
+          "rating": 1492.8,
+          "lobby_size": 30
+        },
+        {
+          "cup": "COTD 40",
+          "position": 27,
+          "rating": 1480.7,
+          "lobby_size": 30
+        }
+      ]
+    },
+    {
+      "rank": 831,
+      "name": "Sheriff",
+      "rating": 1480.7,
+      "cups": 3,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 20.7,
+      "best_finish": 14,
+      "peak_rating": 1489.4,
+      "history": [
+        {
+          "cup": "COTD 42",
+          "position": 23,
+          "rating": 1489.4,
+          "lobby_size": 30
+        },
+        {
+          "cup": "COTD 46",
+          "position": 25,
+          "rating": 1485.0,
+          "lobby_size": 35
+        },
+        {
+          "cup": "Troll COTD 7",
+          "position": 14,
+          "rating": 1480.7,
+          "lobby_size": 10
+        }
+      ]
+    },
+    {
+      "rank": 832,
       "name": "variableferret",
-      "rating": 1480.8,
+      "rating": 1480.7,
       "cups": 16,
       "wins": 0,
       "podiums": {
@@ -39786,102 +39856,38 @@
         {
           "cup": "COTD 100",
           "position": 21,
-          "rating": 1467.6,
-          "lobby_size": 50
+          "rating": 1467.4,
+          "lobby_size": 51
         },
         {
           "cup": "COTD 104",
           "position": 22,
-          "rating": 1467.4,
+          "rating": 1467.2,
           "lobby_size": 43
         },
         {
           "cup": "COTD 106",
           "position": 12,
-          "rating": 1479.8,
+          "rating": 1479.6,
           "lobby_size": 48
         },
         {
           "cup": "COTD 108",
           "position": 14,
-          "rating": 1485.1,
+          "rating": 1484.9,
           "lobby_size": 50
         },
         {
           "cup": "COTD 110",
           "position": 23,
-          "rating": 1486.8,
+          "rating": 1486.6,
           "lobby_size": 48
         },
         {
           "cup": "COTD 117",
           "position": 35,
-          "rating": 1480.8,
+          "rating": 1480.7,
           "lobby_size": 50
-        }
-      ]
-    },
-    {
-      "rank": 831,
-      "name": "ColdTwilight",
-      "rating": 1480.7,
-      "cups": 2,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 24.5,
-      "best_finish": 22,
-      "peak_rating": 1492.8,
-      "history": [
-        {
-          "cup": "COTD 39",
-          "position": 22,
-          "rating": 1492.8,
-          "lobby_size": 30
-        },
-        {
-          "cup": "COTD 40",
-          "position": 27,
-          "rating": 1480.7,
-          "lobby_size": 30
-        }
-      ]
-    },
-    {
-      "rank": 832,
-      "name": "Sheriff",
-      "rating": 1480.7,
-      "cups": 3,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 20.7,
-      "best_finish": 14,
-      "peak_rating": 1489.4,
-      "history": [
-        {
-          "cup": "COTD 42",
-          "position": 23,
-          "rating": 1489.4,
-          "lobby_size": 30
-        },
-        {
-          "cup": "COTD 46",
-          "position": 25,
-          "rating": 1485.0,
-          "lobby_size": 35
-        },
-        {
-          "cup": "Troll COTD 7",
-          "position": 14,
-          "rating": 1480.7,
-          "lobby_size": 10
         }
       ]
     },
@@ -40056,13 +40062,13 @@
         {
           "cup": "COTD 124",
           "position": 30,
-          "rating": 1464.8,
+          "rating": 1464.7,
           "lobby_size": 51
         },
         {
           "cup": "COTD 125",
           "position": 38,
-          "rating": 1459.2,
+          "rating": 1459.1,
           "lobby_size": 45
         },
         {
@@ -41055,7 +41061,7 @@
       },
       "avg_position": 26.7,
       "best_finish": 12,
-      "peak_rating": 1511.4,
+      "peak_rating": 1511.5,
       "history": [
         {
           "cup": "COTD 96",
@@ -41084,55 +41090,55 @@
         {
           "cup": "COTD 100",
           "position": 28,
-          "rating": 1494.1,
-          "lobby_size": 50
+          "rating": 1494.2,
+          "lobby_size": 51
         },
         {
           "cup": "COTD 102",
           "position": 19,
-          "rating": 1500.7,
+          "rating": 1500.8,
           "lobby_size": 50
         },
         {
           "cup": "COTD 105",
           "position": 30,
-          "rating": 1497.3,
+          "rating": 1497.4,
           "lobby_size": 50
         },
         {
           "cup": "COTD 106",
           "position": 19,
-          "rating": 1496.9,
+          "rating": 1497.1,
           "lobby_size": 48
         },
         {
           "cup": "COTD 107",
           "position": 18,
-          "rating": 1504.0,
+          "rating": 1504.1,
           "lobby_size": 47
         },
         {
           "cup": "COTD 108",
           "position": 16,
-          "rating": 1511.4,
+          "rating": 1511.5,
           "lobby_size": 50
         },
         {
           "cup": "COTD 109",
           "position": 35,
-          "rating": 1505.4,
+          "rating": 1505.5,
           "lobby_size": 49
         },
         {
           "cup": "COTD 110",
           "position": 32,
-          "rating": 1501.3,
+          "rating": 1501.4,
           "lobby_size": 48
         },
         {
           "cup": "COTD 111",
           "position": 18,
-          "rating": 1504.5,
+          "rating": 1504.6,
           "lobby_size": 49
         },
         {
@@ -41150,19 +41156,19 @@
         {
           "cup": "COTD 120",
           "position": 42,
-          "rating": 1495.9,
+          "rating": 1496.0,
           "lobby_size": 51
         },
         {
           "cup": "COTD 121",
           "position": 43,
-          "rating": 1483.3,
+          "rating": 1483.4,
           "lobby_size": 49
         },
         {
           "cup": "COTD 122",
           "position": 22,
-          "rating": 1484.8,
+          "rating": 1484.9,
           "lobby_size": 45
         },
         {
@@ -41431,7 +41437,7 @@
         {
           "cup": "COTD 111",
           "position": 31,
-          "rating": 1474.5,
+          "rating": 1474.4,
           "lobby_size": 49
         },
         {
@@ -41461,7 +41467,7 @@
         {
           "cup": "COTD 119",
           "position": 24,
-          "rating": 1482.0,
+          "rating": 1481.9,
           "lobby_size": 51
         },
         {
@@ -41509,7 +41515,7 @@
         {
           "cup": "COTD 131",
           "position": 34,
-          "rating": 1475.4,
+          "rating": 1475.3,
           "lobby_size": 58
         },
         {
@@ -41551,66 +41557,8 @@
     },
     {
       "rank": 879,
-      "name": "MaxVerstappen9768",
-      "rating": 1478.0,
-      "cups": 2,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 26.5,
-      "best_finish": 23,
-      "peak_rating": 1489.4,
-      "history": [
-        {
-          "cup": "COTD 7",
-          "position": 23,
-          "rating": 1489.4,
-          "lobby_size": 39
-        },
-        {
-          "cup": "COTD Roulette 1",
-          "position": 30,
-          "rating": 1478.0,
-          "lobby_size": 41
-        }
-      ]
-    },
-    {
-      "rank": 880,
-      "name": "smaier29",
-      "rating": 1478.0,
-      "cups": 2,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 47.5,
-      "best_finish": 47,
-      "peak_rating": 1488.9,
-      "history": [
-        {
-          "cup": "COTD 105",
-          "position": 48,
-          "rating": 1488.9,
-          "lobby_size": 50
-        },
-        {
-          "cup": "COTD 107",
-          "position": 47,
-          "rating": 1478.0,
-          "lobby_size": 47
-        }
-      ]
-    },
-    {
-      "rank": 881,
       "name": "Lazy_Echidna",
-      "rating": 1477.9,
+      "rating": 1478.0,
       "cups": 76,
       "wins": 0,
       "podiums": {
@@ -41979,37 +41927,37 @@
         {
           "cup": "COTD 100",
           "position": 28,
-          "rating": 1480.2,
-          "lobby_size": 50
+          "rating": 1480.3,
+          "lobby_size": 51
         },
         {
           "cup": "COTD 101",
           "position": 38,
-          "rating": 1471.6,
+          "rating": 1471.7,
           "lobby_size": 45
         },
         {
           "cup": "COTD 102",
           "position": 26,
-          "rating": 1469.3,
+          "rating": 1469.4,
           "lobby_size": 50
         },
         {
           "cup": "COTD 104",
           "position": 18,
-          "rating": 1471.7,
+          "rating": 1471.8,
           "lobby_size": 43
         },
         {
           "cup": "COTD 105",
           "position": 19,
-          "rating": 1475.3,
+          "rating": 1475.4,
           "lobby_size": 50
         },
         {
           "cup": "COTD 107",
           "position": 15,
-          "rating": 1480.9,
+          "rating": 1481.0,
           "lobby_size": 47
         },
         {
@@ -42021,31 +41969,31 @@
         {
           "cup": "COTD 110",
           "position": 21,
-          "rating": 1485.2,
+          "rating": 1485.3,
           "lobby_size": 48
         },
         {
           "cup": "COTD 112",
           "position": 20,
-          "rating": 1488.4,
+          "rating": 1488.5,
           "lobby_size": 52
         },
         {
           "cup": "COTD 113",
           "position": 28,
-          "rating": 1484.6,
+          "rating": 1484.7,
           "lobby_size": 47
         },
         {
           "cup": "COTD 115",
           "position": 29,
-          "rating": 1482.4,
+          "rating": 1482.5,
           "lobby_size": 51
         },
         {
           "cup": "COTD 117",
           "position": 35,
-          "rating": 1476.6,
+          "rating": 1476.7,
           "lobby_size": 50
         },
         {
@@ -42057,13 +42005,13 @@
         {
           "cup": "COTD 119",
           "position": 34,
-          "rating": 1477.4,
+          "rating": 1477.5,
           "lobby_size": 51
         },
         {
           "cup": "COTD 120",
           "position": 41,
-          "rating": 1472.2,
+          "rating": 1472.3,
           "lobby_size": 51
         },
         {
@@ -42075,8 +42023,66 @@
         {
           "cup": "COTD 131",
           "position": 29,
-          "rating": 1477.9,
+          "rating": 1478.0,
           "lobby_size": 58
+        }
+      ]
+    },
+    {
+      "rank": 880,
+      "name": "MaxVerstappen9768",
+      "rating": 1478.0,
+      "cups": 2,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 26.5,
+      "best_finish": 23,
+      "peak_rating": 1489.4,
+      "history": [
+        {
+          "cup": "COTD 7",
+          "position": 23,
+          "rating": 1489.4,
+          "lobby_size": 39
+        },
+        {
+          "cup": "COTD Roulette 1",
+          "position": 30,
+          "rating": 1478.0,
+          "lobby_size": 41
+        }
+      ]
+    },
+    {
+      "rank": 881,
+      "name": "smaier29",
+      "rating": 1478.0,
+      "cups": 2,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 47.5,
+      "best_finish": 47,
+      "peak_rating": 1488.9,
+      "history": [
+        {
+          "cup": "COTD 105",
+          "position": 48,
+          "rating": 1488.9,
+          "lobby_size": 50
+        },
+        {
+          "cup": "COTD 107",
+          "position": 47,
+          "rating": 1478.0,
+          "lobby_size": 47
         }
       ]
     },
@@ -43447,7 +43453,7 @@
     {
       "rank": 916,
       "name": "alpa",
-      "rating": 1473.2,
+      "rating": 1473.3,
       "cups": 20,
       "wins": 0,
       "podiums": {
@@ -43516,67 +43522,67 @@
         {
           "cup": "COTD 100",
           "position": 28,
-          "rating": 1499.4,
-          "lobby_size": 50
+          "rating": 1499.5,
+          "lobby_size": 51
         },
         {
           "cup": "COTD 102",
           "position": 22,
-          "rating": 1503.6,
+          "rating": 1503.8,
           "lobby_size": 50
         },
         {
           "cup": "COTD 103",
           "position": 41,
-          "rating": 1493.1,
+          "rating": 1493.2,
           "lobby_size": 48
         },
         {
           "cup": "COTD 111",
           "position": 40,
-          "rating": 1484.7,
+          "rating": 1484.8,
           "lobby_size": 49
         },
         {
           "cup": "COTD 112",
           "position": 26,
-          "rating": 1484.0,
+          "rating": 1484.2,
           "lobby_size": 52
         },
         {
           "cup": "COTD 113",
           "position": 22,
-          "rating": 1485.6,
+          "rating": 1485.7,
           "lobby_size": 47
         },
         {
           "cup": "COTD 114",
           "position": 30,
-          "rating": 1477.7,
+          "rating": 1477.8,
           "lobby_size": 38
         },
         {
           "cup": "COTD 116",
           "position": 26,
-          "rating": 1479.3,
+          "rating": 1479.4,
           "lobby_size": 55
         },
         {
           "cup": "COTD 117",
           "position": 35,
-          "rating": 1473.7,
+          "rating": 1473.8,
           "lobby_size": 50
         },
         {
           "cup": "COTD 129",
           "position": 37,
-          "rating": 1468.8,
+          "rating": 1468.9,
           "lobby_size": 52
         },
         {
           "cup": "COTD 136",
           "position": 17,
-          "rating": 1473.2,
+          "rating": 1473.3,
           "lobby_size": 46
         }
       ]
@@ -43770,6 +43776,47 @@
     },
     {
       "rank": 922,
+      "name": "koprol In de kringloop",
+      "rating": 1472.4,
+      "cups": 4,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 35.5,
+      "best_finish": 28,
+      "peak_rating": 1492.6,
+      "history": [
+        {
+          "cup": "COTD 100",
+          "position": 28,
+          "rating": 1492.6,
+          "lobby_size": 51
+        },
+        {
+          "cup": "COTD 102",
+          "position": 40,
+          "rating": 1485.6,
+          "lobby_size": 50
+        },
+        {
+          "cup": "COTD 108",
+          "position": 41,
+          "rating": 1476.4,
+          "lobby_size": 50
+        },
+        {
+          "cup": "COTD 109",
+          "position": 33,
+          "rating": 1472.4,
+          "lobby_size": 49
+        }
+      ]
+    },
+    {
+      "rank": 923,
       "name": "Pilaf",
       "rating": 1472.3,
       "cups": 3,
@@ -43800,47 +43847,6 @@
           "position": 22,
           "rating": 1472.3,
           "lobby_size": 31
-        }
-      ]
-    },
-    {
-      "rank": 923,
-      "name": "koprol In de kringloop",
-      "rating": 1472.3,
-      "cups": 4,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 35.5,
-      "best_finish": 28,
-      "peak_rating": 1492.4,
-      "history": [
-        {
-          "cup": "COTD 100",
-          "position": 28,
-          "rating": 1492.4,
-          "lobby_size": 50
-        },
-        {
-          "cup": "COTD 102",
-          "position": 40,
-          "rating": 1485.5,
-          "lobby_size": 50
-        },
-        {
-          "cup": "COTD 108",
-          "position": 41,
-          "rating": 1476.2,
-          "lobby_size": 50
-        },
-        {
-          "cup": "COTD 109",
-          "position": 33,
-          "rating": 1472.3,
-          "lobby_size": 49
         }
       ]
     },
@@ -46194,7 +46200,7 @@
     {
       "rank": 971,
       "name": "JoeRobot",
-      "rating": 1460.7,
+      "rating": 1460.8,
       "cups": 5,
       "wins": 0,
       "podiums": {
@@ -46227,13 +46233,13 @@
         {
           "cup": "COTD 100",
           "position": 28,
-          "rating": 1470.1,
-          "lobby_size": 50
+          "rating": 1470.2,
+          "lobby_size": 51
         },
         {
           "cup": "COTD 113",
           "position": 44,
-          "rating": 1460.7,
+          "rating": 1460.8,
           "lobby_size": 47
         }
       ]
@@ -46558,13 +46564,13 @@
         {
           "cup": "COTD 107",
           "position": 35,
-          "rating": 1505.6,
+          "rating": 1505.5,
           "lobby_size": 47
         },
         {
           "cup": "COTD 108",
           "position": 36,
-          "rating": 1496.3,
+          "rating": 1496.2,
           "lobby_size": 50
         },
         {
@@ -46576,7 +46582,7 @@
         {
           "cup": "COTD 111",
           "position": 17,
-          "rating": 1493.3,
+          "rating": 1493.2,
           "lobby_size": 49
         },
         {
@@ -46630,7 +46636,7 @@
         {
           "cup": "COTD 129",
           "position": 41,
-          "rating": 1463.9,
+          "rating": 1463.8,
           "lobby_size": 52
         },
         {
@@ -46743,6 +46749,59 @@
     },
     {
       "rank": 979,
+      "name": "Apokus",
+      "rating": 1457.9,
+      "cups": 6,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 35.5,
+      "best_finish": 28,
+      "peak_rating": 1487.1,
+      "history": [
+        {
+          "cup": "COTD 76",
+          "position": 41,
+          "rating": 1487.1,
+          "lobby_size": 50
+        },
+        {
+          "cup": "COTD 85",
+          "position": 31,
+          "rating": 1483.7,
+          "lobby_size": 47
+        },
+        {
+          "cup": "COTD 92",
+          "position": 41,
+          "rating": 1474.8,
+          "lobby_size": 48
+        },
+        {
+          "cup": "COTD 100",
+          "position": 28,
+          "rating": 1468.4,
+          "lobby_size": 51
+        },
+        {
+          "cup": "COTD 101",
+          "position": 35,
+          "rating": 1462.2,
+          "lobby_size": 45
+        },
+        {
+          "cup": "COTD 123",
+          "position": 37,
+          "rating": 1457.9,
+          "lobby_size": 49
+        }
+      ]
+    },
+    {
+      "rank": 980,
       "name": "frenchteost",
       "rating": 1457.8,
       "cups": 10,
@@ -46815,59 +46874,6 @@
           "position": 23,
           "rating": 1457.8,
           "lobby_size": 47
-        }
-      ]
-    },
-    {
-      "rank": 980,
-      "name": "Apokus",
-      "rating": 1457.8,
-      "cups": 6,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 35.5,
-      "best_finish": 28,
-      "peak_rating": 1487.1,
-      "history": [
-        {
-          "cup": "COTD 76",
-          "position": 41,
-          "rating": 1487.1,
-          "lobby_size": 50
-        },
-        {
-          "cup": "COTD 85",
-          "position": 31,
-          "rating": 1483.7,
-          "lobby_size": 47
-        },
-        {
-          "cup": "COTD 92",
-          "position": 41,
-          "rating": 1474.8,
-          "lobby_size": 48
-        },
-        {
-          "cup": "COTD 100",
-          "position": 28,
-          "rating": 1468.3,
-          "lobby_size": 50
-        },
-        {
-          "cup": "COTD 101",
-          "position": 35,
-          "rating": 1462.1,
-          "lobby_size": 45
-        },
-        {
-          "cup": "COTD 123",
-          "position": 37,
-          "rating": 1457.8,
-          "lobby_size": 49
         }
       ]
     },
@@ -47766,7 +47772,7 @@
     {
       "rank": 995,
       "name": "Ploddip",
-      "rating": 1453.6,
+      "rating": 1453.7,
       "cups": 14,
       "wins": 0,
       "podiums": {
@@ -47853,13 +47859,13 @@
         {
           "cup": "COTD 100",
           "position": 28,
-          "rating": 1446.0,
-          "lobby_size": 50
+          "rating": 1446.1,
+          "lobby_size": 51
         },
         {
           "cup": "COTD 102",
           "position": 13,
-          "rating": 1453.6,
+          "rating": 1453.7,
           "lobby_size": 50
         }
       ]
@@ -48149,7 +48155,7 @@
         {
           "cup": "COTD 134",
           "position": 44,
-          "rating": 1457.4,
+          "rating": 1457.3,
           "lobby_size": 49
         },
         {
@@ -48184,49 +48190,49 @@
         {
           "cup": "COTD 100",
           "position": 28,
-          "rating": 1487.2,
-          "lobby_size": 50
+          "rating": 1487.3,
+          "lobby_size": 51
         },
         {
           "cup": "COTD 102",
           "position": 41,
-          "rating": 1480.0,
+          "rating": 1480.1,
           "lobby_size": 50
         },
         {
           "cup": "COTD 106",
           "position": 31,
-          "rating": 1469.4,
+          "rating": 1469.5,
           "lobby_size": 48
         },
         {
           "cup": "COTD 107",
           "position": 33,
-          "rating": 1466.0,
+          "rating": 1466.1,
           "lobby_size": 47
         },
         {
           "cup": "COTD 109",
           "position": 43,
-          "rating": 1457.0,
+          "rating": 1457.1,
           "lobby_size": 49
         },
         {
           "cup": "COTD 111",
           "position": 24,
-          "rating": 1461.8,
+          "rating": 1461.9,
           "lobby_size": 49
         },
         {
           "cup": "COTD 112",
           "position": 40,
-          "rating": 1456.0,
+          "rating": 1456.1,
           "lobby_size": 52
         },
         {
           "cup": "COTD 114",
           "position": 26,
-          "rating": 1453.0,
+          "rating": 1453.1,
           "lobby_size": 38
         },
         {
@@ -48399,7 +48405,7 @@
     {
       "rank": 1004,
       "name": "Wheelie",
-      "rating": 1449.2,
+      "rating": 1449.1,
       "cups": 63,
       "wins": 0,
       "podiums": {
@@ -48648,43 +48654,43 @@
         {
           "cup": "COTD 100",
           "position": 21,
-          "rating": 1464.9,
-          "lobby_size": 50
+          "rating": 1464.8,
+          "lobby_size": 51
         },
         {
           "cup": "COTD 101",
           "position": 21,
-          "rating": 1466.7,
+          "rating": 1466.6,
           "lobby_size": 45
         },
         {
           "cup": "COTD 102",
           "position": 36,
-          "rating": 1461.2,
+          "rating": 1461.1,
           "lobby_size": 50
         },
         {
           "cup": "COTD 103",
           "position": 23,
-          "rating": 1461.9,
+          "rating": 1461.8,
           "lobby_size": 48
         },
         {
           "cup": "COTD 104",
           "position": 11,
-          "rating": 1469.0,
+          "rating": 1468.9,
           "lobby_size": 43
         },
         {
           "cup": "COTD 106",
           "position": 8,
-          "rating": 1485.0,
+          "rating": 1484.9,
           "lobby_size": 48
         },
         {
           "cup": "COTD 107",
           "position": 16,
-          "rating": 1489.8,
+          "rating": 1489.7,
           "lobby_size": 47
         },
         {
@@ -48696,19 +48702,19 @@
         {
           "cup": "COTD 109",
           "position": 36,
-          "rating": 1485.7,
+          "rating": 1485.6,
           "lobby_size": 49
         },
         {
           "cup": "COTD 112",
           "position": 26,
-          "rating": 1485.1,
+          "rating": 1485.0,
           "lobby_size": 52
         },
         {
           "cup": "COTD 114",
           "position": 34,
-          "rating": 1475.4,
+          "rating": 1475.3,
           "lobby_size": 38
         },
         {
@@ -48720,13 +48726,13 @@
         {
           "cup": "COTD 118",
           "position": 28,
-          "rating": 1469.1,
+          "rating": 1469.0,
           "lobby_size": 49
         },
         {
           "cup": "COTD 120",
           "position": 25,
-          "rating": 1471.8,
+          "rating": 1471.7,
           "lobby_size": 51
         },
         {
@@ -48738,7 +48744,7 @@
         {
           "cup": "COTD 124",
           "position": 33,
-          "rating": 1459.0,
+          "rating": 1458.9,
           "lobby_size": 51
         },
         {
@@ -48750,43 +48756,43 @@
         {
           "cup": "COTD 129",
           "position": 27,
-          "rating": 1461.5,
+          "rating": 1461.4,
           "lobby_size": 52
         },
         {
           "cup": "COTD 130",
           "position": 39,
-          "rating": 1457.8,
+          "rating": 1457.7,
           "lobby_size": 58
         },
         {
           "cup": "COTD 131",
           "position": 26,
-          "rating": 1461.3,
+          "rating": 1461.2,
           "lobby_size": 58
         },
         {
           "cup": "COTD 132",
           "position": 39,
-          "rating": 1458.0,
+          "rating": 1457.9,
           "lobby_size": 59
         },
         {
           "cup": "COTD 133",
           "position": 33,
-          "rating": 1456.4,
+          "rating": 1456.3,
           "lobby_size": 54
         },
         {
           "cup": "COTD 134",
           "position": 33,
-          "rating": 1452.3,
+          "rating": 1452.2,
           "lobby_size": 49
         },
         {
           "cup": "COTD 136",
           "position": 30,
-          "rating": 1449.2,
+          "rating": 1449.1,
           "lobby_size": 46
         }
       ]
@@ -49648,7 +49654,7 @@
     {
       "rank": 1015,
       "name": "Kiprosa",
-      "rating": 1441.5,
+      "rating": 1441.3,
       "cups": 32,
       "wins": 0,
       "podiums": {
@@ -49837,19 +49843,19 @@
         {
           "cup": "COTD 100",
           "position": 17,
-          "rating": 1433.2,
-          "lobby_size": 50
+          "rating": 1433.0,
+          "lobby_size": 51
         },
         {
           "cup": "COTD 116",
           "position": 22,
-          "rating": 1438.3,
+          "rating": 1438.1,
           "lobby_size": 55
         },
         {
           "cup": "COTD 123",
           "position": 23,
-          "rating": 1441.5,
+          "rating": 1441.3,
           "lobby_size": 49
         }
       ]
@@ -50076,7 +50082,7 @@
     {
       "rank": 1019,
       "name": "ferinine",
-      "rating": 1437.7,
+      "rating": 1437.6,
       "cups": 31,
       "wins": 0,
       "podiums": {
@@ -50253,25 +50259,25 @@
         {
           "cup": "COTD 100",
           "position": 21,
-          "rating": 1428.1,
-          "lobby_size": 50
+          "rating": 1428.0,
+          "lobby_size": 51
         },
         {
           "cup": "COTD 110",
           "position": 37,
-          "rating": 1423.9,
+          "rating": 1423.8,
           "lobby_size": 48
         },
         {
           "cup": "COTD 116",
           "position": 12,
-          "rating": 1441.7,
+          "rating": 1441.5,
           "lobby_size": 55
         },
         {
           "cup": "COTD 123",
           "position": 35,
-          "rating": 1437.7,
+          "rating": 1437.6,
           "lobby_size": 49
         }
       ]
@@ -50279,7 +50285,7 @@
     {
       "rank": 1020,
       "name": "Matic_D",
-      "rating": 1428.1,
+      "rating": 1428.0,
       "cups": 45,
       "wins": 0,
       "podiums": {
@@ -50414,151 +50420,151 @@
         {
           "cup": "COTD 100",
           "position": 17,
-          "rating": 1442.6,
-          "lobby_size": 50
+          "rating": 1442.4,
+          "lobby_size": 51
         },
         {
           "cup": "COTD 101",
           "position": 20,
-          "rating": 1445.8,
+          "rating": 1445.6,
           "lobby_size": 45
         },
         {
           "cup": "COTD 102",
           "position": 28,
-          "rating": 1443.7,
+          "rating": 1443.5,
           "lobby_size": 50
         },
         {
           "cup": "COTD 103",
           "position": 21,
-          "rating": 1446.4,
+          "rating": 1446.2,
           "lobby_size": 48
         },
         {
           "cup": "COTD 106",
           "position": 19,
-          "rating": 1446.0,
+          "rating": 1445.8,
           "lobby_size": 48
         },
         {
           "cup": "COTD 109",
           "position": 21,
-          "rating": 1449.5,
+          "rating": 1449.3,
           "lobby_size": 49
         },
         {
           "cup": "COTD 111",
           "position": 23,
-          "rating": 1451.8,
+          "rating": 1451.6,
           "lobby_size": 49
         },
         {
           "cup": "COTD 112",
           "position": 19,
-          "rating": 1456.7,
+          "rating": 1456.5,
           "lobby_size": 52
         },
         {
           "cup": "COTD 114",
           "position": 34,
-          "rating": 1448.1,
+          "rating": 1447.9,
           "lobby_size": 38
         },
         {
           "cup": "COTD 115",
           "position": 41,
-          "rating": 1442.9,
+          "rating": 1442.8,
           "lobby_size": 51
         },
         {
           "cup": "COTD 116",
           "position": 38,
-          "rating": 1439.3,
+          "rating": 1439.1,
           "lobby_size": 55
         },
         {
           "cup": "COTD 118",
           "position": 40,
-          "rating": 1432.3,
+          "rating": 1432.2,
           "lobby_size": 49
         },
         {
           "cup": "COTD 120",
           "position": 21,
-          "rating": 1438.1,
+          "rating": 1438.0,
           "lobby_size": 51
         },
         {
           "cup": "COTD 121",
           "position": 15,
-          "rating": 1443.5,
+          "rating": 1443.3,
           "lobby_size": 49
         },
         {
           "cup": "COTD 122",
           "position": 34,
-          "rating": 1439.1,
+          "rating": 1438.9,
           "lobby_size": 45
         },
         {
           "cup": "COTD 124",
           "position": 23,
-          "rating": 1443.0,
+          "rating": 1442.8,
           "lobby_size": 51
         },
         {
           "cup": "COTD 125",
           "position": 28,
-          "rating": 1441.2,
+          "rating": 1441.1,
           "lobby_size": 45
         },
         {
           "cup": "COTD 126",
           "position": 35,
-          "rating": 1436.4,
+          "rating": 1436.3,
           "lobby_size": 44
         },
         {
           "cup": "COTD 129",
           "position": 30,
-          "rating": 1434.9,
+          "rating": 1434.7,
           "lobby_size": 52
         },
         {
           "cup": "COTD 131",
           "position": 30,
-          "rating": 1434.9,
+          "rating": 1434.8,
           "lobby_size": 58
         },
         {
           "cup": "COTD 132",
           "position": 30,
-          "rating": 1434.9,
+          "rating": 1434.8,
           "lobby_size": 59
         },
         {
           "cup": "COTD 133",
           "position": 36,
-          "rating": 1433.1,
+          "rating": 1433.0,
           "lobby_size": 54
         },
         {
           "cup": "COTD 134",
           "position": 36,
-          "rating": 1428.8,
+          "rating": 1428.7,
           "lobby_size": 49
         },
         {
           "cup": "COTD 135",
           "position": 30,
-          "rating": 1428.5,
+          "rating": 1428.4,
           "lobby_size": 51
         },
         {
           "cup": "COTD 136",
           "position": 24,
-          "rating": 1428.1,
+          "rating": 1428.0,
           "lobby_size": 46
         }
       ]
@@ -50909,13 +50915,13 @@
         {
           "cup": "COTD 100",
           "position": 28,
-          "rating": 1421.3,
-          "lobby_size": 50
+          "rating": 1421.4,
+          "lobby_size": 51
         },
         {
           "cup": "COTD 101",
           "position": 35,
-          "rating": 1416.1,
+          "rating": 1416.2,
           "lobby_size": 45
         },
         {
@@ -50927,13 +50933,13 @@
         {
           "cup": "COTD 103",
           "position": 27,
-          "rating": 1411.5,
+          "rating": 1411.6,
           "lobby_size": 48
         },
         {
           "cup": "COTD 105",
           "position": 43,
-          "rating": 1405.3,
+          "rating": 1405.4,
           "lobby_size": 50
         },
         {
@@ -50951,7 +50957,7 @@
         {
           "cup": "COTD 108",
           "position": 36,
-          "rating": 1401.9,
+          "rating": 1402.0,
           "lobby_size": 50
         },
         {
@@ -50975,13 +50981,13 @@
         {
           "cup": "COTD 112",
           "position": 43,
-          "rating": 1392.7,
+          "rating": 1392.8,
           "lobby_size": 52
         },
         {
           "cup": "COTD 113",
           "position": 39,
-          "rating": 1387.5,
+          "rating": 1387.6,
           "lobby_size": 47
         },
         {
@@ -50993,7 +50999,7 @@
         {
           "cup": "COTD 116",
           "position": 33,
-          "rating": 1384.6,
+          "rating": 1384.7,
           "lobby_size": 55
         },
         {
@@ -51017,7 +51023,7 @@
         {
           "cup": "COTD 121",
           "position": 21,
-          "rating": 1401.2,
+          "rating": 1401.3,
           "lobby_size": 49
         },
         {
@@ -51041,13 +51047,13 @@
         {
           "cup": "COTD 125",
           "position": 40,
-          "rating": 1388.3,
+          "rating": 1388.4,
           "lobby_size": 45
         },
         {
           "cup": "COTD 127",
           "position": 20,
-          "rating": 1395.6,
+          "rating": 1395.7,
           "lobby_size": 50
         },
         {
@@ -51059,13 +51065,13 @@
         {
           "cup": "COTD 129",
           "position": 33,
-          "rating": 1395.2,
+          "rating": 1395.3,
           "lobby_size": 52
         },
         {
           "cup": "COTD 130",
           "position": 25,
-          "rating": 1401.0,
+          "rating": 1401.1,
           "lobby_size": 58
         },
         {
@@ -51180,7 +51186,7 @@
     {
       "rank": 1025,
       "name": "Lamp",
-      "rating": 1404.7,
+      "rating": 1404.5,
       "cups": 39,
       "wins": 0,
       "podiums": {
@@ -51297,133 +51303,133 @@
         {
           "cup": "COTD 100",
           "position": 15,
-          "rating": 1439.6,
-          "lobby_size": 50
+          "rating": 1439.4,
+          "lobby_size": 51
         },
         {
           "cup": "COTD 101",
           "position": 31,
-          "rating": 1435.7,
+          "rating": 1435.5,
           "lobby_size": 45
         },
         {
           "cup": "COTD 102",
           "position": 48,
-          "rating": 1426.9,
+          "rating": 1426.7,
           "lobby_size": 50
         },
         {
           "cup": "COTD 103",
           "position": 30,
-          "rating": 1423.8,
+          "rating": 1423.6,
           "lobby_size": 48
         },
         {
           "cup": "COTD 104",
           "position": 37,
-          "rating": 1416.7,
+          "rating": 1416.5,
           "lobby_size": 43
         },
         {
           "cup": "COTD 105",
           "position": 44,
-          "rating": 1409.6,
+          "rating": 1409.4,
           "lobby_size": 50
         },
         {
           "cup": "COTD 106",
           "position": 19,
-          "rating": 1410.8,
+          "rating": 1410.6,
           "lobby_size": 48
         },
         {
           "cup": "COTD 107",
           "position": 23,
-          "rating": 1414.3,
+          "rating": 1414.1,
           "lobby_size": 47
         },
         {
           "cup": "COTD 108",
           "position": 24,
-          "rating": 1416.1,
+          "rating": 1415.9,
           "lobby_size": 50
         },
         {
           "cup": "COTD 109",
           "position": 33,
-          "rating": 1413.0,
+          "rating": 1412.8,
           "lobby_size": 49
         },
         {
           "cup": "COTD 112",
           "position": 35,
-          "rating": 1409.7,
+          "rating": 1409.6,
           "lobby_size": 52
         },
         {
           "cup": "COTD 113",
           "position": 39,
-          "rating": 1404.0,
+          "rating": 1403.8,
           "lobby_size": 47
         },
         {
           "cup": "COTD 114",
           "position": 22,
-          "rating": 1403.2,
+          "rating": 1403.0,
           "lobby_size": 38
         },
         {
           "cup": "COTD 115",
           "position": 30,
-          "rating": 1403.0,
+          "rating": 1402.8,
           "lobby_size": 51
         },
         {
           "cup": "COTD 117",
           "position": 34,
-          "rating": 1400.5,
+          "rating": 1400.3,
           "lobby_size": 50
         },
         {
           "cup": "COTD 118",
           "position": 27,
-          "rating": 1399.5,
+          "rating": 1399.3,
           "lobby_size": 49
         },
         {
           "cup": "COTD 119",
           "position": 33,
-          "rating": 1398.6,
+          "rating": 1398.4,
           "lobby_size": 51
         },
         {
           "cup": "COTD 120",
           "position": 37,
-          "rating": 1396.7,
+          "rating": 1396.5,
           "lobby_size": 51
         },
         {
           "cup": "COTD 122",
           "position": 27,
-          "rating": 1396.2,
+          "rating": 1396.0,
           "lobby_size": 45
         },
         {
           "cup": "COTD 124",
           "position": 24,
-          "rating": 1401.0,
+          "rating": 1400.8,
           "lobby_size": 51
         },
         {
           "cup": "COTD 128",
           "position": 43,
-          "rating": 1397.0,
+          "rating": 1396.9,
           "lobby_size": 52
         },
         {
           "cup": "COTD 129",
           "position": 18,
-          "rating": 1404.7,
+          "rating": 1404.5,
           "lobby_size": 52
         }
       ]
@@ -51506,7 +51512,7 @@
         {
           "cup": "COTD 124",
           "position": 41,
-          "rating": 1439.2,
+          "rating": 1439.1,
           "lobby_size": 51
         },
         {
@@ -51524,7 +51530,7 @@
         {
           "cup": "COTD 129",
           "position": 42,
-          "rating": 1425.6,
+          "rating": 1425.5,
           "lobby_size": 52
         },
         {
@@ -51899,43 +51905,43 @@
         {
           "cup": "COTD 100",
           "position": 28,
-          "rating": 1433.4,
-          "lobby_size": 50
+          "rating": 1433.5,
+          "lobby_size": 51
         },
         {
           "cup": "COTD 101",
           "position": 28,
-          "rating": 1432.3,
+          "rating": 1432.4,
           "lobby_size": 45
         },
         {
           "cup": "COTD 102",
           "position": 43,
-          "rating": 1426.2,
+          "rating": 1426.3,
           "lobby_size": 50
         },
         {
           "cup": "COTD 103",
           "position": 37,
-          "rating": 1421.7,
+          "rating": 1421.8,
           "lobby_size": 48
         },
         {
           "cup": "COTD 104",
           "position": 28,
-          "rating": 1418.7,
+          "rating": 1418.8,
           "lobby_size": 43
         },
         {
           "cup": "COTD 105",
           "position": 40,
-          "rating": 1413.2,
+          "rating": 1413.3,
           "lobby_size": 50
         },
         {
           "cup": "COTD 106",
           "position": 19,
-          "rating": 1414.2,
+          "rating": 1414.3,
           "lobby_size": 48
         },
         {
@@ -51947,25 +51953,25 @@
         {
           "cup": "COTD 108",
           "position": 31,
-          "rating": 1409.5,
+          "rating": 1409.6,
           "lobby_size": 50
         },
         {
           "cup": "COTD 110",
           "position": 37,
-          "rating": 1405.8,
+          "rating": 1405.9,
           "lobby_size": 48
         },
         {
           "cup": "COTD 111",
           "position": 39,
-          "rating": 1401.0,
+          "rating": 1401.1,
           "lobby_size": 49
         },
         {
           "cup": "COTD 112",
           "position": 46,
-          "rating": 1393.7,
+          "rating": 1393.8,
           "lobby_size": 52
         },
         {
@@ -51985,7 +51991,7 @@
     {
       "rank": 1030,
       "name": "bunzen",
-      "rating": 1380.6,
+      "rating": 1380.7,
       "cups": 22,
       "wins": 0,
       "podiums": {
@@ -52097,7 +52103,7 @@
           "cup": "COTD 100",
           "position": 28,
           "rating": 1401.4,
-          "lobby_size": 50
+          "lobby_size": 51
         },
         {
           "cup": "COTD 101",
@@ -52120,13 +52126,13 @@
         {
           "cup": "COTD 104",
           "position": 24,
-          "rating": 1385.3,
+          "rating": 1385.4,
           "lobby_size": 43
         },
         {
           "cup": "COTD 105",
           "position": 41,
-          "rating": 1380.6,
+          "rating": 1380.7,
           "lobby_size": 50
         }
       ]
@@ -52134,7 +52140,7 @@
     {
       "rank": 1031,
       "name": "Dartho Mas",
-      "rating": 1366.7,
+      "rating": 1366.8,
       "cups": 25,
       "wins": 0,
       "podiums": {
@@ -52185,19 +52191,19 @@
         {
           "cup": "COTD 100",
           "position": 28,
-          "rating": 1435.8,
-          "lobby_size": 50
+          "rating": 1435.9,
+          "lobby_size": 51
         },
         {
           "cup": "COTD 101",
           "position": 38,
-          "rating": 1429.1,
+          "rating": 1429.2,
           "lobby_size": 45
         },
         {
           "cup": "COTD 102",
           "position": 47,
-          "rating": 1421.5,
+          "rating": 1421.6,
           "lobby_size": 50
         },
         {
@@ -52209,13 +52215,13 @@
         {
           "cup": "COTD 107",
           "position": 46,
-          "rating": 1408.3,
+          "rating": 1408.4,
           "lobby_size": 47
         },
         {
           "cup": "COTD 111",
           "position": 43,
-          "rating": 1401.2,
+          "rating": 1401.3,
           "lobby_size": 49
         },
         {
@@ -52233,7 +52239,7 @@
         {
           "cup": "COTD 118",
           "position": 46,
-          "rating": 1395.0,
+          "rating": 1395.1,
           "lobby_size": 49
         },
         {
@@ -52245,25 +52251,25 @@
         {
           "cup": "COTD 121",
           "position": 43,
-          "rating": 1383.2,
+          "rating": 1383.3,
           "lobby_size": 49
         },
         {
           "cup": "COTD 125",
           "position": 37,
-          "rating": 1379.7,
+          "rating": 1379.8,
           "lobby_size": 45
         },
         {
           "cup": "COTD 128",
           "position": 44,
-          "rating": 1376.0,
+          "rating": 1376.1,
           "lobby_size": 52
         },
         {
           "cup": "COTD 130",
           "position": 39,
-          "rating": 1374.6,
+          "rating": 1374.7,
           "lobby_size": 58
         },
         {
@@ -52275,7 +52281,7 @@
         {
           "cup": "COTD 132",
           "position": 44,
-          "rating": 1371.9,
+          "rating": 1372.0,
           "lobby_size": 59
         },
         {
@@ -52287,13 +52293,13 @@
         {
           "cup": "COTD 135",
           "position": 42,
-          "rating": 1368.2,
+          "rating": 1368.3,
           "lobby_size": 51
         },
         {
           "cup": "COTD 136",
           "position": 32,
-          "rating": 1366.7,
+          "rating": 1366.8,
           "lobby_size": 46
         }
       ]
@@ -52301,7 +52307,7 @@
     {
       "rank": 1032,
       "name": "[ZET]Sword125",
-      "rating": 1339.5,
+      "rating": 1339.6,
       "cups": 35,
       "wins": 0,
       "podiums": {
@@ -52424,8 +52430,8 @@
         {
           "cup": "COTD 100",
           "position": 28,
-          "rating": 1386.6,
-          "lobby_size": 50
+          "rating": 1386.7,
+          "lobby_size": 51
         },
         {
           "cup": "COTD 101",
@@ -52436,7 +52442,7 @@
         {
           "cup": "COTD 102",
           "position": 46,
-          "rating": 1378.8,
+          "rating": 1378.9,
           "lobby_size": 50
         },
         {
@@ -52448,19 +52454,19 @@
         {
           "cup": "COTD 108",
           "position": 40,
-          "rating": 1372.4,
+          "rating": 1372.5,
           "lobby_size": 50
         },
         {
           "cup": "COTD 109",
           "position": 32,
-          "rating": 1371.0,
+          "rating": 1371.1,
           "lobby_size": 49
         },
         {
           "cup": "COTD 110",
           "position": 39,
-          "rating": 1366.5,
+          "rating": 1366.6,
           "lobby_size": 48
         },
         {
@@ -52472,19 +52478,19 @@
         {
           "cup": "COTD 114",
           "position": 30,
-          "rating": 1356.7,
+          "rating": 1356.8,
           "lobby_size": 38
         },
         {
           "cup": "COTD 118",
           "position": 31,
-          "rating": 1355.3,
+          "rating": 1355.4,
           "lobby_size": 49
         },
         {
           "cup": "COTD 123",
           "position": 38,
-          "rating": 1352.8,
+          "rating": 1352.9,
           "lobby_size": 49
         },
         {
@@ -52496,19 +52502,19 @@
         {
           "cup": "COTD 125",
           "position": 39,
-          "rating": 1348.0,
+          "rating": 1348.1,
           "lobby_size": 45
         },
         {
           "cup": "COTD 131",
           "position": 47,
-          "rating": 1344.0,
+          "rating": 1344.1,
           "lobby_size": 58
         },
         {
           "cup": "COTD 133",
           "position": 38,
-          "rating": 1343.7,
+          "rating": 1343.8,
           "lobby_size": 54
         },
         {
@@ -52520,7 +52526,7 @@
         {
           "cup": "COTD 136",
           "position": 42,
-          "rating": 1339.5,
+          "rating": 1339.6,
           "lobby_size": 46
         }
       ]
@@ -52528,7 +52534,7 @@
     {
       "rank": 1033,
       "name": "Chinpokomon",
-      "rating": 1338.3,
+      "rating": 1338.4,
       "cups": 53,
       "wins": 0,
       "podiums": {
@@ -52718,12 +52724,12 @@
           "cup": "COTD 100",
           "position": 28,
           "rating": 1389.7,
-          "lobby_size": 50
+          "lobby_size": 51
         },
         {
           "cup": "COTD 101",
           "position": 38,
-          "rating": 1384.1,
+          "rating": 1384.2,
           "lobby_size": 45
         },
         {
@@ -52735,19 +52741,19 @@
         {
           "cup": "COTD 103",
           "position": 29,
-          "rating": 1380.2,
+          "rating": 1380.3,
           "lobby_size": 48
         },
         {
           "cup": "COTD 105",
           "position": 26,
-          "rating": 1380.6,
+          "rating": 1380.7,
           "lobby_size": 50
         },
         {
           "cup": "COTD 106",
           "position": 19,
-          "rating": 1382.9,
+          "rating": 1383.0,
           "lobby_size": 48
         },
         {
@@ -52771,19 +52777,19 @@
         {
           "cup": "COTD 112",
           "position": 26,
-          "rating": 1387.4,
+          "rating": 1387.5,
           "lobby_size": 52
         },
         {
           "cup": "COTD 113",
           "position": 29,
-          "rating": 1386.5,
+          "rating": 1386.6,
           "lobby_size": 47
         },
         {
           "cup": "COTD 118",
           "position": 47,
-          "rating": 1378.8,
+          "rating": 1378.9,
           "lobby_size": 49
         },
         {
@@ -52801,7 +52807,7 @@
         {
           "cup": "COTD 122",
           "position": 39,
-          "rating": 1366.9,
+          "rating": 1367.0,
           "lobby_size": 45
         },
         {
@@ -52843,7 +52849,7 @@
         {
           "cup": "COTD 130",
           "position": 44,
-          "rating": 1344.3,
+          "rating": 1344.4,
           "lobby_size": 58
         },
         {
@@ -52855,7 +52861,7 @@
         {
           "cup": "COTD 136",
           "position": 35,
-          "rating": 1338.3,
+          "rating": 1338.4,
           "lobby_size": 46
         }
       ]
@@ -53423,8 +53429,8 @@
         {
           "cup": "COTD 100",
           "position": 28,
-          "rating": 1347.0,
-          "lobby_size": 50
+          "rating": 1347.1,
+          "lobby_size": 51
         },
         {
           "cup": "COTD 101",
@@ -53435,13 +53441,13 @@
         {
           "cup": "COTD 102",
           "position": 39,
-          "rating": 1338.7,
+          "rating": 1338.8,
           "lobby_size": 50
         },
         {
           "cup": "COTD 105",
           "position": 37,
-          "rating": 1336.6,
+          "rating": 1336.7,
           "lobby_size": 50
         },
         {
@@ -53477,7 +53483,7 @@
         {
           "cup": "COTD 121",
           "position": 30,
-          "rating": 1325.2,
+          "rating": 1325.3,
           "lobby_size": 49
         },
         {
@@ -53698,8 +53704,8 @@
         {
           "cup": "COTD 100",
           "position": 28,
-          "rating": 1330.6,
-          "lobby_size": 50
+          "rating": 1330.7,
+          "lobby_size": 51
         },
         {
           "cup": "COTD 102",
@@ -53926,7 +53932,7 @@
           "cup": "COTD 100",
           "position": 28,
           "rating": 1319.1,
-          "lobby_size": 50
+          "lobby_size": 51
         },
         {
           "cup": "COTD 117",
@@ -53955,7 +53961,7 @@
         {
           "cup": "COTD 132",
           "position": 58,
-          "rating": 1296.6,
+          "rating": 1296.7,
           "lobby_size": 59
         },
         {

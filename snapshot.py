@@ -57,7 +57,7 @@ def build_snap_at(players, target, no_decay=False):
         pods = sum(1 for h in hist_before if h['p'] <= 3)
         entries.append((name, raw, active, wins, pods))
     entries.sort(key=lambda x: x[2], reverse=True)  # rank by active
-    return {name: [i + 1, raw, wins, pods] for i, (name, raw, _, wins, pods) in enumerate(entries[:150])}
+    return {name: [i + 1, active, wins, pods] for i, (name, _, active, wins, pods) in enumerate(entries[:150])}
 
 with open(_p('lexercurse.json')) as f:
     curse_players = json.load(f).get('l', [])

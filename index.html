@@ -881,7 +881,7 @@ function renderCurse() {
     }
     let eloDelta = "";
     if (prev) {
-      const ed = Math.round(p.rating - prev[1]);
+      const ed = Math.round(p.active - prev[1]);
       if (Math.abs(ed) >= 1) eloDelta = ed > 0
         ? `<span class="elo-delta-up">+${ed}</span>`
         : `<span class="elo-delta-down">${ed}</span>`;
@@ -1491,7 +1491,7 @@ function render() {
 
     let eloDelta = "";
     if (prev) {
-      const ed = Math.round(p.rating - prev[1]);
+      const ed = Math.round(p.active - prev[1]);
       if (Math.abs(ed) >= 1) eloDelta = ed > 0
         ? `<span class="elo-delta-up">+${ed}</span>`
         : `<span class="elo-delta-down">${ed}</span>`;
