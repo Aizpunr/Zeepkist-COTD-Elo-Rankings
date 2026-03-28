@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ELO Stability Points</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --accent: #f59e0b; --green: #10b981; --red: #ef4444;
+    --mono: 'JetBrains Mono', monospace;
+    --bg: #08080d; --surface: rgba(255,255,255,0.02); --border: rgba(255,255,255,0.06);
+    --text: #e5e7eb; --text-dim: #9ca3af; --text-muted: #6b7280; --text-dark: #4b5563;
+    --row-hover: rgba(255,255,255,0.03); --row-border: rgba(255,255,255,0.03);
+    --surface-hover: rgba(255,255,255,0.05);
+  }
+  html { background: var(--bg); color: var(--text); }
+  body { font-family: 'Space Grotesk', system-ui, sans-serif; min-height: 100vh; padding: 20px 12px; }
+  ::selection { background: rgba(245,158,11,0.3); }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+  .container { max-width: 1080px; margin: 0 auto; }
+  .header { text-align: center; margin-bottom: 28px; }
+  .header h1 {
+    font-size: 28px; font-weight: 800; margin: 0;
+    background: linear-gradient(135deg, #f59e0b, #ef4444, #8b5cf6);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .header .sub { font-family: var(--mono); font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+  .table { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  table { border-collapse: collapse; width: 100%; }
+  th { background: transparent; color: var(--text-muted); padding: 10px 14px; text-align: left;
+       font-size: 9px; font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.5px;
+       position: sticky; top: 0; cursor: pointer; user-select: none;
+       border-bottom: 1px solid var(--border); z-index: 1; background: var(--bg); }
+  th:hover { color: var(--accent); }
+  th.sorted-asc::after { content: ' ▲'; color: var(--accent); }
+  th.sorted-desc::after { content: ' ▼'; color: var(--accent); }
+  td { padding: 7px 14px; border-bottom: 1px solid var(--row-border); font-size: 13px; }
+  tr:hover { background: var(--row-hover); }
+  .under { color: var(--green); }
+  .over { color: var(--red); }
+  .stable { color: var(--accent); }
+  .bar-cell { position: relative; width: 200px; }
+  .bar { height: 18px; position: absolute; top: 50%; transform: translateY(-50%); opacity: 0.3; border-radius: 2px; }
+  .bar.pos { background: var(--green); left: 50%; }
+  .bar.neg { background: var(--red); right: 50%; }
+  .bar-label { position: relative; z-index: 1; text-align: center; font-family: var(--mono); font-size: 12px; }
+  .mid-line { position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: rgba(255,255,255,0.08); }
+  input { background: var(--surface-hover); border: 1px solid var(--border); color: var(--text);
+          padding: 5px 10px; border-radius: 6px; margin-bottom: 15px; font-family: var(--mono);
+          font-size: 11px; width: 250px; outline: none; transition: border-color 0.15s; }
+  input::placeholder { color: var(--text-dark); }
+  input:focus { border-color: rgba(245,158,11,0.4); }
+  .controls {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    margin-bottom: 12px; padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .legend { display: flex; gap: 20px; font-size: 12px; color: var(--text-dim); }
+  .legend span { display: flex; align-items: center; gap: 5px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .rank { font-family: var(--mono); font-size: 12px; color: var(--text-muted); }
+  .pname { font-weight: 600; }
+  .num { font-family: var(--mono); text-align: right; }
+</style>
+</head>
+<body>
+<div class="container">
+<div class="header">
+  <h1>Who is Cooking?</h1>
+  <div class="sub" id="info"></div>
+</div>
+<div class="controls">
+  <div class="legend">
+    <span><span class="dot" style="background:var(--green)"></span> Cooking (should rise)</span>
+    <span><span class="dot" style="background:var(--red)"></span> Washed (should fall)</span>
+    <span><span class="dot" style="background:var(--accent)"></span> Following Script</span>
+  </div>
+  <input type="text" id="search" placeholder="Search player..." style="margin-left:auto;margin-bottom:0">
+</div>
+<div class="table">
+<table>
+  <thead>
+    <tr>
+      <th data-col="rank">#</th>
+      <th data-col="name">Player</th>
+      <th data-col="current_elo">Current</th>
+      <th data-col="stability_point">Stable</th>
+      <th data-col="gap">Gap</th>
+      <th data-col="attendance_pct">Attend%</th>
+      <th data-col="recent_cups">Cups</th>
+      <th data-col="avg_position">Avg Pos</th>
+      <th data-col="status">Status</th>
+    </tr>
+  </thead>
+  <tbody id="tbody"></tbody>
+</table>
+</div>
+
+<script>
+let results = [];
+let sortCol = 'stability_point';
+let sortDir = -1; // -1 = desc
+
+fetch('elo_stability.json')
+  .then(r => r.json())
+  .then(data => {
+    const p = data.parameters;
+    document.getElementById('info').textContent =
+      `ELO Stability Points, 3 months (cups ${p.window_start} - ${p.current_cup})`;
+    results = data.results;
+    render();
+  });
+
+function render() {
+  const search = document.getElementById('search').value.toLowerCase();
+  let filtered = results.filter(r => r.name.toLowerCase().includes(search));
+
+  filtered.sort((a, b) => {
+    let va = a[sortCol], vb = b[sortCol];
+    if (typeof va === 'string') return sortDir * va.localeCompare(vb);
+    return sortDir * (va - vb);
+  });
+
+  const maxGap = Math.max(...filtered.map(r => Math.abs(r.gap)), 1);
+  const tbody = document.getElementById('tbody');
+  tbody.innerHTML = filtered.map((r, i) => {
+    const margin = 50;
+    const cls = r.gap < -margin ? 'under' : (r.gap > margin ? 'over' : 'stable');
+    const statusLabel = cls === 'under' ? 'Cooking' : cls === 'over' ? 'Washed' : 'Following Script';
+    const barW = Math.min(Math.abs(r.gap) / maxGap * 50, 50);
+    const barCls = r.gap < 0 ? 'neg' : 'pos';
+    const barStyle = barCls === 'pos'
+      ? `width:${barW}%;left:50%`
+      : `width:${barW}%;right:50%`;
+    return `<tr>
+      <td class="rank">${i + 1}</td>
+      <td class="pname">${esc(r.name)}</td>
+      <td class="num">${r.current_elo.toFixed(1)}</td>
+      <td class="num">${r.stability_point.toFixed(1)}</td>
+      <td class="bar-cell">
+        <div class="mid-line"></div>
+        <div class="bar ${barCls}" style="${barStyle}"></div>
+        <div class="bar-label ${cls}">${r.gap > 0 ? '+' : ''}${r.gap.toFixed(1)}</div>
+      </td>
+      <td class="num">${r.attendance_pct}%</td>
+      <td class="num">${r.recent_cups}</td>
+      <td class="num">${r.avg_position.toFixed(1)}</td>
+      <td class="${cls}" style="font-weight:600">${statusLabel}</td>
+    </tr>`;
+  }).join('');
+}
+
+function esc(s) {
+  const d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+
+document.getElementById('search').addEventListener('input', render);
+
+document.querySelectorAll('th').forEach(th => {
+  th.addEventListener('click', () => {
+    const col = th.dataset.col;
+    if (col === sortCol) sortDir *= -1;
+    else { sortCol = col; sortDir = col === 'name' ? 1 : -1; }
+    document.querySelectorAll('th').forEach(t => t.classList.remove('sorted-asc', 'sorted-desc'));
+    th.classList.add(sortDir === 1 ? 'sorted-asc' : 'sorted-desc');
+    render();
+  });
+});
+</script>
+</div>
+</body>
+</html>
