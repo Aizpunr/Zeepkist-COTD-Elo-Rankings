@@ -560,11 +560,12 @@ function getFiltered() {
 // ── RANK HISTORY ──
 function buildRankHistory(player) {
   const dataset = getActiveData();
+  const qualified = dataset.filter(p => p.cups >= 5 || (p.podiums.gold + p.podiums.silver + p.podiums.bronze) > 0);
   const noDecay = eloMode === "season";
   const DECAY = 0.995, GRACE = 3;
   const cups = [...new Set(player.history.map(h => h.c))].sort((a, b) => a - b);
   return cups.map(cup => {
-    const actives = dataset.map(p => {
+    const actives = qualified.map(p => {
       const entries = p.history.filter(h => h.c <= cup);
       if (!entries.length) return null;
       const last = entries[entries.length - 1];
