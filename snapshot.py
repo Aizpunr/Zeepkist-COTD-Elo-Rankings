@@ -37,7 +37,7 @@ print(f"Current cup: {current_cup}  |  Snapshot at cup: {target_cup}")
 # Format: cup_number → real_player_name
 GHOST_HIDE = {133: 'Kernkob'}
 
-def build_snap_at(players, target, no_decay=False):
+def build_snap_at(players, target, no_decay=False, min_cups=5):
     entries = []
     for p in players:
         # Support both compact keys (alldata) and verbose keys (lexercurse)
@@ -55,7 +55,9 @@ def build_snap_at(players, target, no_decay=False):
             active = round(1500 + (raw - 1500) * (DECAY ** (missed - GRACE)), 1) if missed > GRACE else round(raw, 1)
         wins = sum(1 for h in hist_before if h['p'] == 1)
         pods = sum(1 for h in hist_before if h['p'] <= 3 and not (h['c'] == 41.5 and h['p'] == 3))
-        entries.append((name, raw, active, wins, pods))
+        cups_played = len(hist_before)
+        if cups_played >= min_cups or pods > 0:
+            entries.append((name, raw, active, wins, pods))
     entries.sort(key=lambda x: x[2], reverse=True)  # rank by active
     return {name: [i + 1, active, wins, pods] for i, (name, _, active, wins, pods) in enumerate(entries[:150])}
 
@@ -101,7 +103,7 @@ snap = {
     'std_pure': build_snap_at(std_pure,    target_cup),
     'w_pure':   build_snap_at(w_pure,      target_cup),
     'curse':    build_snap_at(curse_players, target_cup),
-    'season':   build_snap_at(season,      target_cup, no_decay=True),
+    'season':   build_snap_at(season,      target_cup, no_decay=True, min_cups=2),
 }
 
 if ghost_hide_name:

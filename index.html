@@ -545,7 +545,7 @@ function getFiltered() {
   } else {
     tl.innerHTML = '<span style="color:#dc2626">Legend 1850+</span> \u00b7 <span style="color:#a855f7">Pro 1700+</span> \u00b7 <span style="color:#3b82f6">Master 1650+</span> \u00b7 <span style="color:#10b981">Gold 1600+</span>';
   }
-  const minCups = eloMode === "season" ? 1 : 5;
+  const minCups = eloMode === "season" ? 2 : 5;
   let d = src.filter(p => p.cups >= minCups || (p.podiums.gold + p.podiums.silver + p.podiums.bronze) > 0);
   if (sortKey === "rating") d.sort((a,b) => b.rating - a.rating);
   else if (sortKey === "active") d.sort((a,b) => b.active - a.active);
@@ -560,7 +560,8 @@ function getFiltered() {
 // ── RANK HISTORY ──
 function buildRankHistory(player) {
   const dataset = getActiveData();
-  const qualified = dataset.filter(p => p.cups >= 5 || (p.podiums.gold + p.podiums.silver + p.podiums.bronze) > 0);
+  const minCups = eloMode === "season" ? 2 : 5;
+  const qualified = dataset.filter(p => p.cups >= minCups || (p.podiums.gold + p.podiums.silver + p.podiums.bronze) > 0);
   const noDecay = eloMode === "season";
   const DECAY = 0.995, GRACE = 3;
   const cups = [...new Set(player.history.map(h => h.c))].sort((a, b) => a - b);
@@ -599,8 +600,8 @@ function drawChart(player, panel) {
         <span class="stats">${viewMode === "curse"
           ? `Curse ${Math.round(player.active)} · ${player.cups} cups · 4ths: ${player.fourths} · peak ${Math.round(player.peak_rating)}`
           : `Active ${Math.round(player.active)} · ${player.cups} cups · Podium ${player.podiums.gold}/${player.podiums.silver}/${player.podiums.bronze} · avg ${player.avg_position} · peak ${Math.round(player.peak_rating)}`}</span>
-        ${player.cups < 5 && (player.podiums.gold + player.podiums.silver + player.podiums.bronze) === 0
-          ? `<br><span style="font-size:10px;color:var(--accent);font-family:var(--mono)">Play ${5 - player.cups} more cup${5 - player.cups !== 1 ? 's' : ''} to get ranked, or get a podium</span>` : ''}
+        ${player.cups < (eloMode === "season" ? 2 : 5) && (player.podiums.gold + player.podiums.silver + player.podiums.bronze) === 0
+          ? `<br><span style="font-size:10px;color:var(--accent);font-family:var(--mono)">Play ${(eloMode === "season" ? 2 : 5) - player.cups} more cup${(eloMode === "season" ? 2 : 5) - player.cups !== 1 ? 's' : ''} to get ranked, or get a podium</span>` : ''}
       </div>
       <button class="close-btn" id="closeChart">✕</button>
     </div>
@@ -959,17 +960,19 @@ function renderSearch(query) {
   header.style.gridTemplateColumns = SEARCH_COLS;
   header.innerHTML = `<div>#</div><div>Player</div><div style="text-align:right">Active</div><div style="text-align:right">App</div><div style="text-align:center">Best</div><div style="text-align:right">Avg</div>`;
 
+  const minCups = eloMode === "season" ? 2 : 5;
+  const qualifiedList = list.filter(q => q.cups >= minCups || (q.podiums.gold + q.podiums.silver + q.podiums.bronze) > 0);
   let html = "";
   matches.slice(0, 50).forEach(p => {
-    const rank = list.indexOf(p) + 1;
+    const rank = qualifiedList.indexOf(p) + 1 || null;
     const c = rColor(p.active);
     const nameColor = customColors[p.name] || cssVar('--pname');
     const avgColor = p.avg_position <= 5 ? "var(--green)" : p.avg_position <= 10 ? "var(--text-dim)" : "var(--text-muted)";
     const bestColor = p.best_finish === 1 ? "var(--accent)" : p.best_finish <= 3 ? "var(--text-dim)" : "var(--text-muted)";
-    const ranked = p.cups >= 5 || (p.podiums.gold + p.podiums.silver + p.podiums.bronze) > 0;
+    const ranked = p.cups >= (eloMode === "season" ? 2 : 5) || (p.podiums.gold + p.podiums.silver + p.podiums.bronze) > 0;
     const srCompClass = compareMode && compareList[0] === p.name ? " comp-p1" : compareMode && compareList[1] === p.name ? " comp-p2" : "";
     html += `<div class="row${selected === p.name ? " selected" : ""}${srCompClass}" data-name="${esc(p.name)}" style="grid-template-columns:${SEARCH_COLS}">
-      <div class="rank" style="${ranked ? '' : 'color:var(--text-dark)'}">${ranked ? rank : '—'}</div>
+      <div class="rank" style="${rank ? '' : 'color:var(--text-dark)'}">${rank || '—'}</div>
       <div class="player"><span class="dot" style="background:${c}"></span><span class="pname" style="color:${nameColor}">${esc(p.name)}</span></div>
       <div class="elo-cell" style="color:${c}">${Math.round(p.active)}</div>
       <div style="text-align:right;font-family:var(--mono);font-size:11px;color:var(--text-muted)">${p.cups}</div>
