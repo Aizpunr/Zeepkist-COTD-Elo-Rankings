@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Giant Killers — Zeepkist COTD</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🗡️</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#08080d;--surface:rgba(255,255,255,0.02);--border:rgba(255,255,255,0.06);
+--text:#e5e7eb;--dim:#9ca3af;--muted:#6b7280;--dark:#4b5563;
+--mono:'JetBrains Mono',monospace;--accent:#f59e0b;--red:#ef4444;--green:#10b981;
+--upset:linear-gradient(135deg,#f59e0b,#ef4444)}
+html{background:var(--bg);color:var(--text)}
+body{font-family:'Space Grotesk',system-ui,sans-serif;min-height:100vh;padding:20px 12px}
+::selection{background:rgba(245,158,11,0.3)}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.1);border-radius:3px}
+.container{max-width:1100px;margin:0 auto}
+
+h1{text-align:center;font-size:32px;font-weight:800;margin-bottom:4px;
+background:var(--upset);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sub{text-align:center;font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:32px}
+.back-link{display:inline-block;font-family:var(--mono);font-size:12px;color:var(--muted);text-decoration:none;margin-bottom:16px}
+.back-link:hover{color:var(--text)}
+.section-label{font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:1px}
+
+/* Hero spotlight */
+.hero{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px 24px;margin-bottom:28px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--upset)}
+.hero-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
+.hero-winner{font-size:22px;font-weight:800;background:var(--upset);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-cup{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.hero-seed{font-family:var(--mono);font-size:12px;color:var(--dim);margin-bottom:12px}
+.hero-bar{height:36px;border-radius:6px;overflow:hidden;display:flex;margin-bottom:8px;position:relative}
+.hero-bar .bar-winner{background:var(--upset);display:flex;align-items:center;padding-left:10px;font-family:var(--mono);font-size:11px;font-weight:700;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,0.5);white-space:nowrap}
+.hero-bar .bar-gap{background:rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--muted);flex:1}
+.hero-bar .bar-top{background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:flex-end;padding-right:10px;font-family:var(--mono);font-size:11px;font-weight:600;color:var(--dim);white-space:nowrap}
+.hero-footer{font-family:var(--mono);font-size:11px;color:var(--dim)}
+
+/* Stat pills */
+.pills{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:28px}
+.pill{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 12px;text-align:center}
+.pill .pill-label{font-size:14px;font-weight:700;background:var(--upset);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px}
+.pill .pill-who{font-family:var(--mono);font-size:11px;color:var(--dim)}
+.pill .pill-val{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:2px}
+
+/* Repeat killers */
+.repeats{display:flex;gap:10px;margin-bottom:28px;flex-wrap:wrap}
+.repeat-badge{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px 14px;font-family:var(--mono);font-size:12px;display:flex;align-items:center;gap:8px}
+.repeat-badge .rname{font-weight:600}
+.repeat-badge .rcount{background:var(--upset);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:700;font-size:14px}
+.repeat-badge .ravg{color:var(--muted);font-size:10px}
+
+/* Controls */
+.controls{display:flex;align-items:center;gap:12px;margin-bottom:10px;flex-wrap:wrap}
+.controls input[type="text"]{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:6px 10px;color:var(--text);font-family:var(--mono);font-size:12px;outline:none;width:180px}
+.controls input[type="text"]:focus{border-color:rgba(245,158,11,0.4)}
+.controls label{font-family:var(--mono);font-size:11px;color:var(--muted);cursor:pointer;display:flex;align-items:center;gap:4px}
+
+/* Table */
+table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:12px}
+thead th{text-align:left;padding:8px 6px;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);cursor:pointer;user-select:none;white-space:nowrap;border-bottom:1px solid var(--border)}
+thead th:hover{color:var(--text)}
+thead th.sorted-asc::after{content:' ▲';color:var(--accent)}
+thead th.sorted-desc::after{content:' ▼';color:var(--accent)}
+tbody tr{border-bottom:1px solid rgba(255,255,255,0.02)}
+tbody tr:hover{background:rgba(255,255,255,0.03)}
+tbody tr.troll{opacity:0.5}
+td{padding:6px;vertical-align:middle}
+td.num{text-align:right;font-variant-numeric:tabular-nums}
+td.rank{color:var(--muted);text-align:right;width:30px}
+td.winner{font-weight:600}
+td.deficit-cell{position:relative;width:120px}
+.deficit-bar{height:14px;border-radius:3px;background:var(--upset);opacity:0.3;position:absolute;top:50%;transform:translateY(-50%);left:6px}
+.deficit-val{position:relative;font-weight:600;color:var(--accent)}
+td.gain{color:var(--green)}
+td.seed{color:var(--dim)}
+td.cup-cell{color:var(--dim)}
+
+.methodology{font-family:var(--mono);font-size:10px;color:var(--dark);margin-top:20px;padding:12px 0;border-top:1px solid var(--border)}
+
+@media(max-width:768px){
+  .pills{grid-template-columns:repeat(2,1fr)}
+  .hero-bar .bar-gap{font-size:10px}
+}
+</style>
+</head>
+<body>
+<div class="container">
+<a href="index.html" class="back-link">&larr; back to rankings</a>
+<h1>Giant Killers</h1>
+<div class="sub" id="sub">biggest upsets in COTD history</div>
+
+<div class="hero" id="hero"></div>
+<div class="pills" id="pills"></div>
+
+<div class="section-label">Repeat Giant Killers</div>
+<div class="repeats" id="repeats"></div>
+
+<div class="controls">
+  <input type="text" id="search" placeholder="Search player...">
+  <label><input type="checkbox" id="trollToggle" checked> Include Troll/Roulette</label>
+</div>
+
+<table>
+  <thead><tr>
+    <th data-col="rank">#</th>
+    <th data-col="cup_id">Cup</th>
+    <th data-col="winner">Winner</th>
+    <th data-col="winner_pre_elo">Pre-ELO</th>
+    <th data-col="elo_rank">Seed</th>
+    <th data-col="deficit" class="sorted-desc">Deficit</th>
+    <th data-col="beaten_above">Beaten</th>
+    <th data-col="elo_gain">+ELO</th>
+  </tr></thead>
+  <tbody id="tbody"></tbody>
+</table>
+
+<div class="methodology">Pre-cup ELO derived from previous cup results. First-time players start at 1500. Upset = winner was not the highest-rated player entering the cup.</div>
+</div>
+
+<script>
+let data = null;
+let sortCol = 'deficit';
+let sortDir = -1;
+
+function esc(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+fetch('giantkillers.json').then(r=>r.json()).then(d=>{
+  data = d;
+  const upsets = d.upsets;
+  document.getElementById('sub').textContent = `biggest upsets across ${upsets.length} non-favorite wins`;
+
+  // Hero — #1 upset by deficit
+  const top = upsets[0];
+  const heroMaxElo = top.top_elo_value;
+  const winnerPct = Math.max(15, (top.winner_pre_elo / heroMaxElo) * 100);
+  const topPct = 15;
+  document.getElementById('hero').innerHTML = `
+    <div class="hero-top">
+      <div class="hero-winner">${esc(top.winner)}</div>
+      <div class="hero-cup">${esc(top.cup_id)}</div>
+    </div>
+    <div class="hero-seed">${Math.round(top.winner_pre_elo)} ELO · ranked ${top.elo_rank}${ordSuf(top.elo_rank)} of ${top.lobby_size}</div>
+    <div class="hero-bar">
+      <div class="bar-winner" style="width:${winnerPct}%">${esc(top.winner)} ${Math.round(top.winner_pre_elo)}</div>
+      <div class="bar-gap">&larr; ${Math.round(top.deficit)} ELO gap &rarr;</div>
+      <div class="bar-top" style="width:${topPct}%">${esc(top.top_elo_player)} ${Math.round(top.top_elo_value)}</div>
+    </div>
+    <div class="hero-footer">Beat ${top.beaten_above} higher-rated players &nbsp;·&nbsp; <span style="color:var(--green)">+${Math.round(top.elo_gain)} ELO gained</span></div>`;
+
+  // Stat pills
+  const byRank = [...upsets].sort((a,b) => b.elo_rank - a.elo_rank)[0];
+  const byBeaten = [...upsets].sort((a,b) => b.beaten_above - a.beaten_above)[0];
+  const byGain = [...upsets].sort((a,b) => b.elo_gain - a.elo_gain)[0];
+  document.getElementById('pills').innerHTML = `
+    <div class="pill"><div class="pill-label">Biggest Deficit</div><div class="pill-who">${esc(top.winner)} · ${esc(top.cup_id)}</div><div class="pill-val">${Math.round(top.deficit)} ELO gap</div></div>
+    <div class="pill"><div class="pill-label">Lowest Seed Win</div><div class="pill-who">${esc(byRank.winner)} · ${esc(byRank.cup_id)}</div><div class="pill-val">${byRank.elo_rank}${ordSuf(byRank.elo_rank)} of ${byRank.lobby_size}</div></div>
+    <div class="pill"><div class="pill-label">Most Beaten Above</div><div class="pill-who">${esc(byBeaten.winner)} · ${esc(byBeaten.cup_id)}</div><div class="pill-val">${byBeaten.beaten_above} players</div></div>
+    <div class="pill"><div class="pill-label">Biggest ELO Gain</div><div class="pill-who">${esc(byGain.winner)} · ${esc(byGain.cup_id)}</div><div class="pill-val">+${Math.round(byGain.elo_gain)} ELO</div></div>`;
+
+  // Repeat killers
+  const rk = d.repeat_killers;
+  document.getElementById('repeats').innerHTML = rk.map(r =>
+    `<div class="repeat-badge"><span class="rcount">${r.count}x</span><span class="rname">${esc(r.name)}</span><span class="ravg">avg deficit ${Math.round(r.avg_deficit)}</span></div>`
+  ).join('');
+
+  render();
+});
+
+function ordSuf(n) {
+  const s = ['th','st','nd','rd'];
+  const v = n % 100;
+  return (s[(v-20)%10]||s[v]||s[0]);
+}
+
+function render() {
+  if (!data) return;
+  const search = document.getElementById('search').value.toLowerCase();
+  const showTroll = document.getElementById('trollToggle').checked;
+
+  let filtered = data.upsets.filter(u => {
+    if (!showTroll && u.is_troll) return false;
+    if (search && !u.winner.toLowerCase().includes(search) && !u.cup_id.toLowerCase().includes(search)) return false;
+    return true;
+  });
+
+  filtered.sort((a, b) => {
+    let va = a[sortCol], vb = b[sortCol];
+    if (sortCol === 'rank') return 0; // rank is just row number
+    if (sortCol === 'winner' || sortCol === 'cup_id') return sortDir * String(va).localeCompare(String(vb));
+    return sortDir * (va - vb);
+  });
+
+  const maxDeficit = Math.max(...filtered.map(u => u.deficit), 1);
+  const tbody = document.getElementById('tbody');
+  tbody.innerHTML = filtered.map((u, i) => {
+    const barW = (u.deficit / maxDeficit * 80).toFixed(0);
+    return `<tr class="${u.is_troll ? 'troll' : ''}">
+      <td class="rank">${i + 1}</td>
+      <td class="cup-cell">${esc(u.cup_id)}</td>
+      <td class="winner">${esc(u.winner)}</td>
+      <td class="num">${Math.round(u.winner_pre_elo)}</td>
+      <td class="seed">${u.elo_rank}${ordSuf(u.elo_rank)} of ${u.lobby_size}</td>
+      <td class="deficit-cell"><div class="deficit-bar" style="width:${barW}%"></div><span class="deficit-val">${Math.round(u.deficit)}</span></td>
+      <td class="num">${u.beaten_above}</td>
+      <td class="num gain">+${Math.round(u.elo_gain)}</td>
+    </tr>`;
+  }).join('');
+}
+
+document.getElementById('search').addEventListener('input', render);
+document.getElementById('trollToggle').addEventListener('change', render);
+
+document.querySelectorAll('th').forEach(th => {
+  th.addEventListener('click', () => {
+    const col = th.dataset.col;
+    if (!col) return;
+    if (col === sortCol) sortDir *= -1;
+    else { sortCol = col; sortDir = (col === 'winner' || col === 'cup_id') ? 1 : -1; }
+    document.querySelectorAll('th').forEach(t => t.classList.remove('sorted-asc','sorted-desc'));
+    th.classList.add(sortDir === 1 ? 'sorted-asc' : 'sorted-desc');
+    render();
+  });
+});
+</script>
+</body>
+</html>

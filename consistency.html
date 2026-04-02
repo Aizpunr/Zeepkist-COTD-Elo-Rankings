@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Consistency Index — Zeepkist COTD</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#08080d;--surface:rgba(255,255,255,0.02);--border:rgba(255,255,255,0.06);
+--text:#e5e7eb;--dim:#9ca3af;--muted:#6b7280;--dark:#4b5563;
+--mono:'JetBrains Mono',monospace;--accent:#f59e0b;--red:#ef4444;--green:#10b981;--blue:#3b82f6;
+--consist:linear-gradient(135deg,#10b981,#3b82f6)}
+html{background:var(--bg);color:var(--text)}
+body{font-family:'Space Grotesk',system-ui,sans-serif;min-height:100vh;padding:20px 12px}
+::selection{background:rgba(16,185,129,0.3)}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.1);border-radius:3px}
+.container{max-width:1100px;margin:0 auto}
+
+h1{text-align:center;font-size:32px;font-weight:800;margin-bottom:4px;
+background:var(--consist);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sub{text-align:center;font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:32px}
+.back-link{display:inline-block;font-family:var(--mono);font-size:12px;color:var(--muted);text-decoration:none;margin-bottom:16px}
+.back-link:hover{color:var(--text)}
+.section-label{font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:1px}
+
+/* Hero — top 3 consistent */
+.hero-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px}
+.hero-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;position:relative;overflow:hidden}
+.hero-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--consist)}
+.hero-rank{font-family:var(--mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.hero-name{font-size:18px;font-weight:700;margin-bottom:8px}
+.hero-stats{font-family:var(--mono);font-size:11px;color:var(--dim);display:flex;flex-direction:column;gap:2px}
+.hero-spread{font-family:var(--mono);font-size:24px;font-weight:700;background:var(--consist);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sparkline{margin-top:8px;height:24px}
+
+/* Stat pills */
+.pills{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:28px}
+.pill{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 12px;text-align:center}
+.pill .pill-label{font-size:14px;font-weight:700;margin-bottom:6px}
+.pill .pill-who{font-family:var(--mono);font-size:11px;color:var(--dim)}
+.pill .pill-val{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:2px}
+
+/* Controls */
+.controls{display:flex;align-items:center;gap:12px;margin-bottom:10px;flex-wrap:wrap}
+.controls input[type="text"]{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:6px 10px;color:var(--text);font-family:var(--mono);font-size:12px;outline:none;width:180px}
+.controls input[type="text"]:focus{border-color:rgba(16,185,129,0.4)}
+
+/* Table */
+table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:12px}
+thead th{text-align:left;padding:8px 6px;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);cursor:pointer;user-select:none;white-space:nowrap;border-bottom:1px solid var(--border)}
+thead th:hover{color:var(--text)}
+thead th.sorted-asc::after{content:' ▲';color:var(--green)}
+thead th.sorted-desc::after{content:' ▼';color:var(--green)}
+tbody tr{border-bottom:1px solid rgba(255,255,255,0.02)}
+tbody tr:hover{background:rgba(255,255,255,0.03)}
+td{padding:6px;vertical-align:middle}
+td.num{text-align:right;font-variant-numeric:tabular-nums}
+td.rank{color:var(--muted);text-align:right;width:30px}
+td.pname{font-weight:600}
+td.spread-cell{position:relative;width:120px}
+.spread-bar{height:14px;border-radius:3px;opacity:0.3;position:absolute;top:50%;transform:translateY(-50%);left:6px}
+.spread-val{position:relative;font-weight:600}
+
+.methodology{font-family:var(--mono);font-size:10px;color:var(--dark);margin-top:20px;padding:12px 0;border-top:1px solid var(--border)}
+
+@media(max-width:768px){
+  .hero-grid{grid-template-columns:1fr}
+  .pills{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="container">
+<a href="index.html" class="back-link">&larr; back to rankings</a>
+<h1>Consistency Index</h1>
+<div class="sub" id="sub">who always delivers — and who's a wildcard</div>
+
+<div class="hero-grid" id="hero"></div>
+<div class="pills" id="pills"></div>
+
+<div class="controls">
+  <input type="text" id="search" placeholder="Search player...">
+</div>
+
+<table>
+  <thead><tr>
+    <th data-col="rank">#</th>
+    <th data-col="name">Player</th>
+    <th data-col="cups">Cups</th>
+    <th data-col="best">Best</th>
+    <th data-col="avg">Avg Pos</th>
+    <th data-col="spread" class="sorted-asc">Spread</th>
+    <th data-col="pb_gap">PB Gap</th>
+  </tr></thead>
+  <tbody id="tbody"></tbody>
+</table>
+
+<div class="methodology">Spread = standard deviation of finishing positions across all cups. Lower = more consistent. Minimum 10 cups to qualify.</div>
+</div>
+
+<script>
+let data = null;
+let sortCol = 'spread';
+let sortDir = 1; // 1 = asc (most consistent first)
+
+function esc(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+function spreadColor(spread, max) {
+  const t = Math.min(spread / max, 1);
+  // green (consistent) -> red (wildcard)
+  const r = Math.round(16 + t * (239 - 16));
+  const g = Math.round(185 - t * (185 - 68));
+  const b = Math.round(129 - t * (129 - 68));
+  return `rgb(${r},${g},${b})`;
+}
+
+function drawSparkline(canvas, positions) {
+  const dpr = window.devicePixelRatio || 1;
+  const W = canvas.offsetWidth, H = 24;
+  canvas.width = W * dpr;
+  canvas.height = H * dpr;
+  canvas.style.height = H + 'px';
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+  const max = Math.max(...positions, 1);
+  const step = W / (positions.length - 1 || 1);
+  ctx.beginPath();
+  ctx.strokeStyle = 'rgba(16,185,129,0.6)';
+  ctx.lineWidth = 1.5;
+  positions.forEach((p, i) => {
+    const x = i * step;
+    const y = 2 + (p / max) * (H - 4);
+    if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+  });
+  ctx.stroke();
+}
+
+fetch('consistency.json').then(r=>r.json()).then(d=>{
+  data = d;
+  const players = d.players;
+  document.getElementById('sub').textContent = `who always delivers — and who's a wildcard · ${players.length} players`;
+
+  const maxSpread = Math.max(...players.map(p => p.spread));
+
+  // Hero — top 3 most consistent
+  const top3 = players.slice(0, 3);
+  const labels = ['Most Consistent', '2nd Most Consistent', '3rd Most Consistent'];
+  document.getElementById('hero').innerHTML = top3.map((p, i) => `
+    <div class="hero-card">
+      <div class="hero-rank">${labels[i]}</div>
+      <div class="hero-name">${esc(p.name)}</div>
+      <div class="hero-spread">${p.spread}</div>
+      <div class="hero-stats">
+        <span>Avg ${p.avg} · Best ${p.best}${ordSuf(p.best)} · ${p.cups} cups</span>
+      </div>
+      <canvas class="sparkline" data-idx="${i}" style="width:100%"></canvas>
+    </div>
+  `).join('');
+
+  // Draw sparklines
+  document.querySelectorAll('.sparkline').forEach(c => {
+    const idx = parseInt(c.dataset.idx);
+    requestAnimationFrame(() => drawSparkline(c, top3[idx].positions));
+  });
+
+  // Stat pills
+  const mostConsistent = players[0];
+  const wildcard = [...players].sort((a,b) => b.spread - a.spread)[0];
+  const closestPB = [...players].sort((a,b) => a.pb_gap - b.pb_gap)[0];
+  document.getElementById('pills').innerHTML = `
+    <div class="pill"><div class="pill-label" style="color:var(--green)">Most Consistent</div><div class="pill-who">${esc(mostConsistent.name)}</div><div class="pill-val">spread ${mostConsistent.spread} · ${mostConsistent.cups} cups</div></div>
+    <div class="pill"><div class="pill-label" style="color:var(--red)">Biggest Wildcard</div><div class="pill-who">${esc(wildcard.name)}</div><div class="pill-val">spread ${wildcard.spread} · ${wildcard.cups} cups</div></div>
+    <div class="pill"><div class="pill-label" style="color:var(--blue)">Closest to PB</div><div class="pill-who">${esc(closestPB.name)}</div><div class="pill-val">gap ${closestPB.pb_gap} · avg ${closestPB.avg} · best ${closestPB.best}</div></div>`;
+
+  render();
+});
+
+function ordSuf(n) {
+  const s = ['th','st','nd','rd'];
+  const v = n % 100;
+  return (s[(v-20)%10]||s[v]||s[0]);
+}
+
+function render() {
+  if (!data) return;
+  const search = document.getElementById('search').value.toLowerCase();
+  const maxSpread = Math.max(...data.players.map(p => p.spread), 1);
+
+  let filtered = data.players.filter(p => {
+    if (search && !p.name.toLowerCase().includes(search)) return false;
+    return true;
+  });
+
+  filtered.sort((a, b) => {
+    if (sortCol === 'rank') return 0;
+    if (sortCol === 'name') return sortDir * a.name.localeCompare(b.name);
+    return sortDir * (a[sortCol] - b[sortCol]);
+  });
+
+  const tbody = document.getElementById('tbody');
+  tbody.innerHTML = filtered.map((p, i) => {
+    const barW = (p.spread / maxSpread * 80).toFixed(0);
+    const color = spreadColor(p.spread, maxSpread);
+    return `<tr>
+      <td class="rank">${i + 1}</td>
+      <td class="pname">${esc(p.name)}</td>
+      <td class="num">${p.cups}</td>
+      <td class="num">${p.best}</td>
+      <td class="num">${p.avg}</td>
+      <td class="spread-cell"><div class="spread-bar" style="width:${barW}%;background:${color}"></div><span class="spread-val" style="color:${color}">${p.spread}</span></td>
+      <td class="num">${p.pb_gap}</td>
+    </tr>`;
+  }).join('');
+}
+
+document.getElementById('search').addEventListener('input', render);
+
+document.querySelectorAll('th').forEach(th => {
+  th.addEventListener('click', () => {
+    const col = th.dataset.col;
+    if (!col) return;
+    if (col === sortCol) sortDir *= -1;
+    else { sortCol = col; sortDir = (col === 'name') ? 1 : (col === 'spread' ? 1 : -1); }
+    document.querySelectorAll('th').forEach(t => t.classList.remove('sorted-asc','sorted-desc'));
+    th.classList.add(sortDir === 1 ? 'sorted-asc' : 'sorted-desc');
+    render();
+  });
+});
+</script>
+</body>
+</html>

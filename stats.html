@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cool Stats — Zeepkist COTD</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📊</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#08080d;--surface:rgba(255,255,255,0.02);--border:rgba(255,255,255,0.06);
+--text:#e5e7eb;--dim:#9ca3af;--muted:#6b7280;--mono:'JetBrains Mono',monospace;
+--accent:#f59e0b;--kern:#f59e0b;--maki:#ef4444;--zoman:#3b82f6;
+--green:#10b981;--red:#ef4444}
+html{background:var(--bg);color:var(--text)}
+body{font-family:'Space Grotesk',system-ui,sans-serif;min-height:100vh;padding:20px 12px}
+::selection{background:rgba(245,158,11,0.3)}
+.container{max-width:900px;margin:0 auto}
+
+h1{text-align:center;font-size:28px;font-weight:800;margin-bottom:4px;
+background:linear-gradient(135deg,var(--accent),var(--red),#8b5cf6);
+-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sub{text-align:center;font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:36px}
+
+.back-link{display:inline-block;font-family:var(--mono);font-size:12px;color:var(--muted);text-decoration:none;margin-bottom:16px}
+.back-link:hover{color:var(--text)}
+
+/* Stat cards */
+.stat-cards{display:flex;flex-direction:column;gap:16px}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px 24px;
+text-decoration:none;color:var(--text);transition:all 0.2s ease;cursor:pointer;display:block}
+.stat-card:hover{border-color:rgba(255,255,255,0.12);background:rgba(255,255,255,0.04);transform:translateY(-1px)}
+.stat-card .card-title{font-size:18px;font-weight:700;margin-bottom:4px}
+.stat-card .card-desc{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:14px}
+
+/* Mini Big3 bar */
+.mini-vs{display:flex;align-items:center;gap:12px}
+.mini-vs .side{font-family:var(--mono);font-size:11px;color:var(--dim);white-space:nowrap}
+.mini-vs .side .pct{font-size:20px;font-weight:800;display:block}
+.mini-vs .side.b3 .pct{background:linear-gradient(135deg,var(--kern),var(--maki),var(--zoman));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.mini-vs .side.rest .pct{color:var(--muted)}
+.mini-vs .vs-word{font-size:11px;font-weight:800;color:var(--muted);opacity:0.4}
+.mini-bar{flex:1;height:28px;border-radius:6px;overflow:hidden;display:flex;
+box-shadow:0 0 20px rgba(245,158,11,0.05),0 0 20px rgba(239,68,68,0.05),0 0 20px rgba(59,130,246,0.05)}
+.mini-bar .bar-b3{background:linear-gradient(90deg,var(--kern),var(--maki),var(--zoman));display:flex;align-items:center;justify-content:center;
+font-family:var(--mono);font-size:12px;font-weight:700;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,0.5)}
+.mini-bar .bar-rest{background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;
+font-family:var(--mono);font-size:11px;font-weight:600;color:var(--muted)}
+
+</style>
+</head>
+<body>
+<div class="container">
+<a href="index.html" class="back-link">&larr; back to rankings</a>
+<h1>Cool Stats</h1>
+<div class="sub">Zeepkist COTD deep dives</div>
+
+<div class="stat-cards">
+
+<!-- Big 3 card -->
+<a href="big3.html" class="stat-card" id="big3Card">
+  <div class="card-title" style="background:linear-gradient(135deg,var(--kern),var(--maki),var(--zoman));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">The Big 3</div>
+  <div class="card-desc">Kernkob, justMaki & ZOMAN — win rates, H2H, streaks, timeline</div>
+  <div class="mini-vs" id="miniVs"></div>
+</a>
+
+<!-- Stability card -->
+<a href="stability.html" class="stat-card" id="stabilityCard">
+  <div class="card-title" style="background:linear-gradient(135deg,var(--green),var(--accent),var(--red));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Who is Cooking?</div>
+  <div class="card-desc">Who is underrated or overrated by ELO? Are you cooking compared to your own ELO? Or are you washed?</div>
+  <div id="miniStability"></div>
+</a>
+
+<!-- Giant Killers card -->
+<a href="giantkillers.html" class="stat-card" id="giantKillersCard">
+  <div class="card-title" style="background:linear-gradient(135deg,var(--accent),var(--red));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Giant Killers</div>
+  <div class="card-desc">Biggest upsets — who defied the ELO odds?</div>
+  <div id="miniGiantKillers"></div>
+</a>
+
+<!-- Lexer Curse card (4th spot, obviously) -->
+<a href="index.html?curse=1" class="stat-card" id="curseCard">
+  <div class="card-title" style="color:#a855f7">☠ Lexer Curse</div>
+  <div class="card-desc">4th is the new 1st — who's the most cursed player in COTD?</div>
+  <div id="miniCurse"></div>
+</a>
+
+<!-- Consistency Index card -->
+<a href="consistency.html" class="stat-card" id="consistencyCard">
+  <div class="card-title" style="background:linear-gradient(135deg,#10b981,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Consistency Index</div>
+  <div class="card-desc">Who always delivers — and who's a wildcard?</div>
+  <div id="miniConsistency"></div>
+</a>
+
+<!-- PCDJ Rankings card -->
+<a href="https://aizpunr.github.io/PCDJ-Rankings/" class="stat-card" id="pcdjCard">
+  <div class="card-title" style="background:linear-gradient(135deg,#a855f7,#ec4899,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">PCDJ Rankings</div>
+  <div class="card-desc">Petite Cup du Jour — Wednesdays 20:00 CET</div>
+  <div id="miniPcdj"></div>
+</a>
+
+</div>
+</div>
+
+<script>
+const B3 = ['Kernkob','justMaki','ZOMAN'];
+
+// Big 3 mini bar
+fetch('big3_data.json').then(r=>r.json()).then(data=>{
+  const cups = data.cups;
+  const total = cups.length;
+  const b3w = cups.filter(c=>B3.includes(c.winner)).length;
+  const pct = (b3w/total*100).toFixed(0);
+  const restPct = 100 - pct;
+  document.getElementById('miniVs').innerHTML = `
+    <div class="side b3"><span class="pct">${pct}%</span></div>
+    <div class="mini-bar">
+      <div class="bar-b3" style="width:${pct}%">${b3w}</div>
+      <div class="bar-rest" style="width:${restPct}%">${total - b3w}</div>
+    </div>
+    <div class="side rest"><span class="pct">${restPct}%</span></div>`;
+}).catch(()=>{});
+
+// Stability mini preview — top 5 cooking table
+fetch('elo_stability.json').then(r=>r.json()).then(data=>{
+  const top5 = data.results.filter(p=>p.gap < -50).sort((a,b)=>a.gap - b.gap).slice(0,5);
+  let rows = top5.map((p,i)=>`<tr>
+    <td style="color:var(--muted);text-align:right;padding-right:8px">${i+1}</td>
+    <td style="color:var(--green);font-weight:600">${p.name}</td>
+    <td style="text-align:right">${Math.round(p.current_elo)}</td>
+    <td style="text-align:center;color:var(--muted)">&rarr;</td>
+    <td style="text-align:right;color:var(--green)">${Math.round(p.stability_point)}</td>
+    <td style="text-align:right;color:var(--green)">+${Math.round(Math.abs(p.gap))}</td>
+  </tr>`).join('');
+  document.getElementById('miniStability').innerHTML = `
+    <table style="width:100%;font-family:var(--mono);font-size:11px;border-collapse:collapse">
+      <thead><tr style="color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:1px">
+        <th style="text-align:right;padding-right:8px;padding-bottom:6px">#</th>
+        <th style="text-align:left;padding-bottom:6px">Player</th>
+        <th style="text-align:right;padding-bottom:6px">ELO</th>
+        <th style="padding-bottom:6px"></th>
+        <th style="text-align:right;padding-bottom:6px">3M Snap</th>
+        <th style="text-align:right;padding-bottom:6px">Gap</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+}).catch(()=>{});
+
+// Giant Killers top 3
+fetch('giantkillers.json').then(r=>r.json()).then(data=>{
+  const top3 = data.upsets.slice(0,3);
+  const rows = top3.map((u,i)=>{
+    const medals = ['#f59e0b','#9ca3af','#b45309'];
+    return `<tr>
+      <td style="color:${medals[i]};text-align:right;padding-right:8px;font-weight:700">${i+1}</td>
+      <td style="font-weight:600">${u.winner}</td>
+      <td style="text-align:right;color:var(--accent)">${Math.round(u.deficit)}</td>
+      <td style="text-align:right;color:var(--muted)">${u.cup_id}</td>
+    </tr>`;
+  }).join('');
+  document.getElementById('miniGiantKillers').innerHTML = `
+    <table style="width:100%;font-family:var(--mono);font-size:11px;border-collapse:collapse">
+      <thead><tr style="color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:1px">
+        <th style="text-align:right;padding-right:8px;padding-bottom:6px">#</th>
+        <th style="text-align:left;padding-bottom:6px">Winner</th>
+        <th style="text-align:right;padding-bottom:6px">Deficit</th>
+        <th style="text-align:right;padding-bottom:6px">Cup</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+}).catch(()=>{});
+
+// Consistency Index top 3
+fetch('consistency.json').then(r=>r.json()).then(data=>{
+  const top3 = data.players.slice(0,3);
+  const medals = ['#f59e0b','#9ca3af','#b45309'];
+  const rows = top3.map((p,i)=>`<tr>
+    <td style="color:${medals[i]};text-align:right;padding-right:8px;font-weight:700">${i+1}</td>
+    <td style="font-weight:600">${p.name}</td>
+    <td style="text-align:right;color:#10b981">${p.spread}</td>
+    <td style="text-align:right;color:var(--muted)">${p.cups} cups</td>
+  </tr>`).join('');
+  document.getElementById('miniConsistency').innerHTML = `
+    <table style="width:100%;font-family:var(--mono);font-size:11px;border-collapse:collapse">
+      <thead><tr style="color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:1px">
+        <th style="text-align:right;padding-right:8px;padding-bottom:6px">#</th>
+        <th style="text-align:left;padding-bottom:6px">Player</th>
+        <th style="text-align:right;padding-bottom:6px">Spread</th>
+        <th style="text-align:right;padding-bottom:6px"></th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+}).catch(()=>{});
+
+// Lexer Curse top 3
+fetch('lexercurse.json').then(r=>r.json()).then(data=>{
+  const top3 = data.l.sort((a,b)=>b.active - a.active).slice(0,3);
+  const medals = ['#f59e0b','#9ca3af','#b45309'];
+  const rows = top3.map((p,i)=>{
+    const pct = p.cups ? Math.round(p.fourths/p.cups*100) : 0;
+    return `<tr>
+      <td style="color:${medals[i]};text-align:right;padding-right:8px;font-weight:700">${i+1}</td>
+      <td style="font-weight:600">${p.name}</td>
+      <td style="text-align:right;color:#a855f7">${Math.round(p.active)}</td>
+      <td style="text-align:right">${p.fourths} <span style="color:var(--muted);font-size:10px">(${pct}%)</span></td>
+    </tr>`;
+  }).join('');
+  document.getElementById('miniCurse').innerHTML = `
+    <table style="width:100%;font-family:var(--mono);font-size:11px;border-collapse:collapse">
+      <thead><tr style="color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:1px">
+        <th style="text-align:right;padding-right:8px;padding-bottom:6px">#</th>
+        <th style="text-align:left;padding-bottom:6px">Player</th>
+        <th style="text-align:right;padding-bottom:6px">Curse ELO</th>
+        <th style="text-align:right;padding-bottom:6px">4ths</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+}).catch(()=>{});
+
+// PCDJ Season 3 top 3
+fetch('https://aizpunr.github.io/PCDJ-Rankings/petite_rankings.json').then(r=>r.json()).then(data=>{
+  const s3 = data['Season 3'];
+  if(!s3) return;
+  const top3 = s3.rankings.filter(p=>p.points>0).sort((a,b)=>a.rank-b.rank).slice(0,3);
+  const medals = ['#f59e0b','#9ca3af','#b45309'];
+  const rows = top3.map((p,i)=>`<tr>
+    <td style="color:${medals[i]};text-align:right;padding-right:8px;font-weight:700">${i+1}</td>
+    <td style="font-weight:600">${p.name}</td>
+    <td style="text-align:right">${Math.round(p.points)}</td>
+    <td style="text-align:right;color:var(--muted)">${p.wins||0}W</td>
+  </tr>`).join('');
+  document.getElementById('miniPcdj').innerHTML = `
+    <table style="width:100%;font-family:var(--mono);font-size:11px;border-collapse:collapse">
+      <thead><tr style="color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:1px">
+        <th style="text-align:right;padding-right:8px;padding-bottom:6px">#</th>
+        <th style="text-align:left;padding-bottom:6px">Player</th>
+        <th style="text-align:right;padding-bottom:6px">Pts</th>
+        <th style="text-align:right;padding-bottom:6px">Wins</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+    <div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:6px">Season 3</div>`;
+}).catch(()=>{});
+</script>
+</body>
+</html>

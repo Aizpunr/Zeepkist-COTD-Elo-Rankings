@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Big 3 — Zeepkist COTD</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👑</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#08080d;--surface:rgba(255,255,255,0.02);--border:rgba(255,255,255,0.06);--text:#e5e7eb;--dim:#9ca3af;--muted:#6b7280;--mono:'JetBrains Mono',monospace;
+--kern:#f59e0b;--maki:#ef4444;--zoman:#3b82f6;--rest:#6b7280}
+html{background:var(--bg);color:var(--text)}
+body{font-family:'Space Grotesk',system-ui,sans-serif;min-height:100vh;padding:20px 12px}
+.container{max-width:1100px;margin:0 auto}
+
+h1{text-align:center;font-size:32px;font-weight:800;margin-bottom:4px;
+background:linear-gradient(135deg,var(--kern),var(--maki),var(--zoman));
+-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sub{text-align:center;font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:32px}
+
+/* Score cards */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:28px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 12px;text-align:center}
+.card .name{font-size:14px;font-weight:700;margin-bottom:2px}
+.card .wins{font-family:var(--mono);font-size:26px;font-weight:700}
+.card .winlabel{font-family:var(--mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+
+/* Big3 vs Rest — HERO */
+.vs-bar{margin-bottom:36px;padding:24px 0}
+.vs-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px}
+.vs-header .side{font-family:var(--mono);font-size:14px;color:var(--dim)}
+.vs-header .side .pct{font-size:48px;font-weight:800;line-height:1;display:block;margin-bottom:2px}
+.vs-header .side .lbl{font-size:12px;text-transform:uppercase;letter-spacing:2px}
+.vs-header .side.b3 .pct{background:linear-gradient(135deg,var(--kern),var(--maki),var(--zoman));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.vs-header .side.rest .pct{color:var(--muted)}
+.vs-header .vs-word{font-size:20px;font-weight:800;color:var(--muted);align-self:center;opacity:0.4}
+.bar-track{height:56px;border-radius:10px;overflow:hidden;display:flex;position:relative;box-shadow:0 0 40px rgba(245,158,11,0.08),0 0 40px rgba(239,68,68,0.08),0 0 40px rgba(59,130,246,0.08)}
+.bar-b3{background:linear-gradient(90deg,var(--kern),var(--maki),var(--zoman));display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:22px;font-weight:700;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,0.5);transition:width 1s ease}
+.bar-rest{background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:18px;font-weight:600;color:var(--muted)}
+
+/* Presence breakdown */
+.presence{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:28px}
+.pres-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 12px;text-align:center}
+.pres-card .pres-label{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:6px}
+.pres-card .pres-pct{font-family:var(--mono);font-size:22px;font-weight:700;margin-bottom:2px}
+.pres-card .pres-detail{font-family:var(--mono);font-size:10px;color:var(--muted)}
+.pres-bar{height:5px;border-radius:3px;overflow:hidden;display:flex;margin-top:6px}
+
+/* H2H section */
+.h2h-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px}
+.h2h-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center}
+.h2h-title{font-size:12px;font-family:var(--mono);color:var(--muted);margin-bottom:8px}
+.h2h-score{font-family:var(--mono);font-size:28px;font-weight:700}
+.h2h-bar{height:6px;border-radius:3px;overflow:hidden;display:flex;margin-top:8px}
+
+/* Timeline */
+.timeline-section{margin-bottom:28px}
+.timeline-label{font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:1px}
+canvas#timeline{width:100%;border-radius:8px;background:var(--surface);border:1px solid var(--border)}
+
+/* Cup list */
+.cup-list{margin-bottom:20px}
+.cup-row{display:flex;align-items:center;padding:4px 8px;border-radius:4px;font-family:var(--mono);font-size:12px;gap:8px;cursor:default}
+.cup-row:hover{background:rgba(255,255,255,0.03)}
+.cup-num{color:var(--muted);width:65px;flex-shrink:0}
+.cup-winner{font-weight:600;flex:1}
+.cup-positions{color:var(--dim);font-size:11px;display:flex;gap:10px}
+.cup-positions span{min-width:50px}
+
+/* Streak badges */
+.streaks{display:flex;gap:12px;margin-bottom:28px;flex-wrap:wrap}
+.streak{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px 16px;font-family:var(--mono);font-size:12px;display:flex;flex-direction:column;align-items:center;gap:4px}
+.streak .num{font-size:24px;font-weight:700}
+.streak .lbl{color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:1px}
+
+.back-link{display:inline-block;font-family:var(--mono);font-size:12px;color:var(--muted);text-decoration:none;margin-bottom:16px}
+.back-link:hover{color:var(--text)}
+</style>
+</head>
+<body>
+<div class="container">
+<a href="index.html" class="back-link">← back to rankings</a>
+<h1>👑 The Big 3</h1>
+<div class="sub">Kernkob · justMaki · ZOMAN — dominance across <span id="totalCups"></span> cups</div>
+
+<div class="vs-bar" id="vsBar"></div>
+<div class="presence" id="presence"></div>
+<div class="cards" id="cards"></div>
+<div class="streaks" id="streaks"></div>
+
+<div class="timeline-label">Head-to-Head</div>
+<div class="h2h-grid" id="h2h"></div>
+
+<div class="timeline-label">Cup Timeline</div>
+<canvas id="timeline" height="120"></canvas>
+
+<div style="margin-top:20px">
+<div class="timeline-label">All Cups</div>
+<div class="cup-list" id="cupList"></div>
+</div>
+</div>
+
+<script>
+const B3 = ['Kernkob','justMaki','ZOMAN'];
+const COLORS = {Kernkob:'#f59e0b',justMaki:'#ef4444',ZOMAN:'#3b82f6'};
+const REST = '#555';
+
+fetch('big3_data.json').then(r=>r.json()).then(data=>{
+  const cups = data.cups;
+  const totalCups = cups.length;
+  document.getElementById('totalCups').textContent = totalCups;
+
+  // Count wins
+  const wins = {Kernkob:0, justMaki:0, ZOMAN:0, rest:0};
+  cups.forEach(c=>{ if(B3.includes(c.winner)) wins[c.winner]++; else wins.rest++; });
+  const b3Total = wins.Kernkob + wins.justMaki + wins.ZOMAN;
+
+  // Cards
+  const cardsEl = document.getElementById('cards');
+  B3.forEach(n=>{
+    cardsEl.innerHTML += `<div class="card"><div class="name" style="color:${COLORS[n]}">${n}</div><div class="wins" style="color:${COLORS[n]}">${wins[n]}</div><div class="winlabel">cups won</div></div>`;
+  });
+
+  // VS bar — hero
+  const pct = (b3Total/totalCups*100).toFixed(0);
+  const restPct = 100 - pct;
+  document.getElementById('vsBar').innerHTML = `
+    <div class="vs-header">
+      <div class="side b3"><span class="pct">${pct}%</span><span class="lbl">The Big 3</span></div>
+      <div class="vs-word">vs</div>
+      <div class="side rest" style="text-align:right"><span class="pct">${restPct}%</span><span class="lbl">The Rest</span></div>
+    </div>
+    <div class="bar-track">
+      <div class="bar-b3" style="width:${pct}%">${b3Total}</div>
+      <div class="bar-rest" style="width:${restPct}%">${wins.rest}</div>
+    </div>`;
+
+  // Presence breakdown
+  const pBuckets = [0,1,2,3].map(()=>({total:0,b3w:0}));
+  cups.forEach(c=>{
+    const present = B3.filter(n=>c.big3[n]!==undefined).length;
+    pBuckets[present].total++;
+    if(B3.includes(c.winner)) pBuckets[present].b3w++;
+  });
+  const presLabels = ['None play','1 plays','2 play','All 3 play'];
+  const restWinsFromAbsence = pBuckets[0].total; // all 0-presence cups are rest wins
+  const restAbsPct = wins.rest ? (restWinsFromAbsence/wins.rest*100).toFixed(0) : 0;
+  let presHTML = '';
+  [3,2,1,0].forEach(i=>{
+    const b = pBuckets[i];
+    if(i === 0){
+      presHTML += `<div class="pres-card">
+        <div class="pres-label">Of "The Rest" wins,<br>no Big 3 in lobby</div>
+        <div class="pres-pct" style="color:var(--muted)">${restAbsPct}%</div>
+        <div class="pres-detail">${restWinsFromAbsence} of ${wins.rest} wins were free</div>
+        <div class="pres-bar"><div style="width:${restAbsPct}%;background:var(--muted);border-radius:3px"></div><div style="width:${100-restAbsPct}%;background:rgba(255,255,255,0.06);border-radius:3px"></div></div>
+    </div>`;
+    } else {
+      const wp = b.total ? (b.b3w/b.total*100).toFixed(0) : 0;
+      presHTML += `<div class="pres-card">
+        <div class="pres-label">${presLabels[i]}</div>
+        <div class="pres-pct" style="background:linear-gradient(135deg,var(--kern),var(--maki),var(--zoman));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">${wp}%</div>
+        <div class="pres-detail">${b.b3w}/${b.total} cups</div>
+        <div class="pres-bar"><div style="width:${wp}%;background:linear-gradient(90deg,var(--kern),var(--maki),var(--zoman));border-radius:3px"></div><div style="width:${100-wp}%;background:rgba(255,255,255,0.06);border-radius:3px"></div></div>
+      </div>`;
+    }
+  });
+  document.getElementById('presence').innerHTML = presHTML;
+
+  // Streaks
+  let maxB3=0,curB3=0,maxRest=0,curRest=0,maxEach={Kernkob:0,justMaki:0,ZOMAN:0},curEach={Kernkob:0,justMaki:0,ZOMAN:0};
+  cups.forEach(c=>{
+    if(B3.includes(c.winner)){curB3++;curRest=0;maxB3=Math.max(maxB3,curB3)}
+    else{curRest++;curB3=0;maxRest=Math.max(maxRest,curRest)}
+    B3.forEach(n=>{
+      if(c.winner===n){curEach[n]++;maxEach[n]=Math.max(maxEach[n],curEach[n])}
+      else curEach[n]=0;
+    });
+  });
+  let streaksHTML = `<div class="streak"><div class="num" style="background:linear-gradient(135deg,#ef4444,#3b82f6,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent">${maxB3}</div><div class="lbl">longest Big3 streak</div></div>`;
+  streaksHTML += `<div class="streak"><div class="num" style="color:#6b7280">${maxRest}</div><div class="lbl">longest upset streak</div></div>`;
+  B3.forEach(n=>{ streaksHTML += `<div class="streak"><div class="num" style="color:${COLORS[n]}">${maxEach[n]}</div><div class="lbl">${n} streak</div></div>`; });
+  document.getElementById('streaks').innerHTML = streaksHTML;
+
+  // H2H
+  const pairs = [['Kernkob','justMaki'],['Kernkob','ZOMAN'],['justMaki','ZOMAN']];
+  let h2hHTML = '';
+  pairs.forEach(([a,b])=>{
+    const key = `${a}_vs_${b}`;
+    const raw = data.h2h[key] || [0,0];
+    const w = Array.isArray(raw) ? raw[0] : raw.w||0;
+    const l = Array.isArray(raw) ? raw[1] : raw.l||0;
+    const total = w+l;
+    const pctA = total ? (w/total*100).toFixed(0) : 50;
+    h2hHTML += `<div class="h2h-card">
+      <div class="h2h-title"><span style="color:${COLORS[a]}">${a}</span> vs <span style="color:${COLORS[b]}">${b}</span></div>
+      <div class="h2h-score"><span style="color:${COLORS[a]}">${w}</span> <span style="color:#444">-</span> <span style="color:${COLORS[b]}">${l}</span></div>
+      <div class="h2h-bar"><div style="width:${pctA}%;background:${COLORS[a]};border-radius:3px 0 0 3px"></div><div style="width:${100-pctA}%;background:${COLORS[b]};border-radius:0 3px 3px 0"></div></div>
+      <div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:4px">${total} meetings</div>
+    </div>`;
+  });
+  document.getElementById('h2h').innerHTML = h2hHTML;
+
+  // Timeline canvas
+  const canvas = document.getElementById('timeline');
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = canvas.offsetWidth * dpr;
+  canvas.height = 120 * dpr;
+  canvas.style.height = '120px';
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+  const W = canvas.offsetWidth, H = 120;
+  const pad = {l:30, r:10, t:10, b:20};
+  const plotW = W - pad.l - pad.r;
+  const barW = Math.max(2, plotW / totalCups - 1);
+
+  cups.forEach((c, i) => {
+    const x = pad.l + (i / totalCups) * plotW;
+    const color = COLORS[c.winner] || REST;
+    ctx.fillStyle = color;
+    ctx.globalAlpha = B3.includes(c.winner) ? 1 : 0.35;
+    ctx.fillRect(x, pad.t, barW, H - pad.t - pad.b);
+  });
+  ctx.globalAlpha = 1;
+
+  // Running Big3 win %
+  ctx.beginPath();
+  ctx.strokeStyle = '#fff';
+  ctx.lineWidth = 1.5;
+  let runB3 = 0;
+  cups.forEach((c, i) => {
+    if (B3.includes(c.winner)) runB3++;
+    const pct = runB3 / (i + 1);
+    const x = pad.l + ((i + 0.5) / totalCups) * plotW;
+    const y = pad.t + (1 - pct) * (H - pad.t - pad.b);
+    if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+  });
+  ctx.stroke();
+
+  // Y-axis labels
+  ctx.fillStyle = '#6b7280';
+  ctx.font = '10px JetBrains Mono';
+  ctx.textAlign = 'right';
+  ctx.fillText('100%', pad.l - 4, pad.t + 8);
+  ctx.fillText('50%', pad.l - 4, pad.t + (H - pad.t - pad.b) / 2 + 4);
+  ctx.fillText('0%', pad.l - 4, H - pad.b);
+
+  // 50% line
+  ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([4,4]);
+  ctx.beginPath();
+  ctx.moveTo(pad.l, pad.t + (H - pad.t - pad.b) / 2);
+  ctx.lineTo(W - pad.r, pad.t + (H - pad.t - pad.b) / 2);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Cup list
+  let listHTML = '';
+  cups.slice().reverse().forEach(c => {
+    const color = COLORS[c.winner] || 'var(--dim)';
+    const isB3 = B3.includes(c.winner);
+    const cupLabel = typeof c.c === 'number' ? (Number.isInteger(c.c) ? `COTD ${c.c}` : `Special`) : c.c;
+    let posHTML = '';
+    B3.forEach(n => {
+      if (c.big3[n] !== undefined) {
+        posHTML += `<span style="color:${COLORS[n]}">#${c.big3[n]}</span>`;
+      }
+    });
+    listHTML += `<div class="cup-row">
+      <span class="cup-num">${cupLabel}</span>
+      <span class="cup-winner" style="color:${color}">${isB3 ? '👑 ' : ''}${c.winner}</span>
+      <span class="cup-positions">${posHTML}</span>
+    </div>`;
+  });
+  document.getElementById('cupList').innerHTML = listHTML;
+});
+</script>
+</body>
+</html>

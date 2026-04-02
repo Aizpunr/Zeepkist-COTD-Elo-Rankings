@@ -252,7 +252,12 @@
     transition: opacity 0.2s, transform 0.2s;
   }
   [data-theme="light"] .mascot-sprite { mix-blend-mode: multiply; }
-  #sandalsSprite { left: 10px; pointer-events: none; }
+  #sandalsSprite { left: 10px; cursor: pointer; }
+  #sandalsSprite:hover { opacity: 1; transform: scale(1.04); }
+  .sandals-wrap { position: fixed; bottom: 60px; left: 10px; z-index: 1; text-align: center; text-decoration: none; }
+  .sandals-wrap .mascot-sprite { position: static; }
+  .sandals-label { font-family: var(--mono); font-size: 10px; color: var(--text-muted); margin-top: 2px; transition: color 0.2s; display: block; }
+  .sandals-wrap:hover .sandals-label { color: var(--accent); }
   #lexerSprite { right: 10px; cursor: pointer; }
   #lexerSprite:hover { opacity: 1; transform: scale(1.04); }
   #lexerSprite.curse-active { filter: drop-shadow(0 0 12px #ef4444); opacity: 1; }
@@ -273,7 +278,7 @@
   }
   .theme-toggle:hover { border-color: var(--btn-border-hover); }
 
-  @media (max-width: 1280px) { .mascot-sprite { display: none; } #lexerCrashSprite { display: none; } }
+  @media (max-width: 1280px) { .mascot-sprite { display: none; } #lexerCrashSprite { display: none; } .sandals-wrap { display: none; } }
   @media (max-width: 700px) {
     .table-header, .row { grid-template-columns: 30px 1fr 50px 50px 24px 70px; font-size: 10px; }
     .table-header > :nth-child(7), .table-header > :nth-child(8), .table-header > :nth-child(9), .table-header > :nth-child(10),
@@ -362,7 +367,7 @@
   </div>
 </div>
 
-<img id="sandalsSprite" src="sandals.png" class="mascot-sprite">
+<a href="stats.html" class="sandals-wrap"><img id="sandalsSprite" src="sandals.png" class="mascot-sprite"><span class="sandals-label">Cool Stats</span></a>
 <img id="lexerSprite" src="lexer.png" class="mascot-sprite" title="...">
 <img id="lexerCrashSprite" src="lexercrash.png">
 
@@ -1570,6 +1575,11 @@ Promise.all([
   // Derive max cup number from data
   const allHists = [...eloData, ...weightedData];
   globalCupMax = Math.max(...allHists.flatMap(p => p.history.map(h => h.c)), globalCupMax);
+  // URL param: ?curse=1 activates Lexer Curse view
+  if (new URLSearchParams(location.search).has('curse')) {
+    viewMode = 'curse';
+    setCurseActive(true);
+  }
   render();
 });
 </script>
