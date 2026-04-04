@@ -243,7 +243,29 @@ if result.returncode != 0:
     sys.exit(1)
 print()
 
-# ── 7. Summary ──
+# ── 7. Rebuild Cool Stats ──
+cool_stats = [
+    ('build_big3.py', 'Big 3 H2H'),
+    ('build_giantkillers.py', 'Giant Killers'),
+    ('build_consistency.py', 'Consistency Index'),
+    ('elo_stability.py', 'ELO Stability'),
+]
+print("=" * 50)
+print("Rebuilding Cool Stats...")
+print("=" * 50)
+for script, label in cool_stats:
+    path = _p(script)
+    if os.path.exists(path):
+        r = subprocess.run([sys.executable, path], cwd=_dir)
+        if r.returncode != 0:
+            print(f"  WARNING: {label} ({script}) failed!")
+        else:
+            print(f"  {label} OK")
+    else:
+        print(f"  SKIP: {script} not found")
+print()
+
+# ── 8. Summary ──
 print("=" * 50)
 print(f"{cup_id} COMPLETE")
 print(f"  Players: {len(leaderboard)}")
@@ -253,7 +275,6 @@ if fastest_time:
 print(f"  Columns: {col_start}-{col_start+3}")
 print()
 print("Next steps:")
-print(f"  - Add map name to build_cups.py: map_index['{cup_id}'] = {{'map': '...', 'mapper': '{mapper}'}}")
-print(f"  - Run snapshot.py if needed for arrows")
-print(f"  - Test on localhost before pushing")
+print(f"  - Add map name to build_cups.py map_index")
+print(f"  - Git commit + push")
 print("=" * 50)
