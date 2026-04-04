@@ -46,9 +46,13 @@ background:var(--consist);-webkit-background-clip:text;-webkit-text-fill-color:t
 .controls{display:flex;align-items:center;gap:12px;margin-bottom:10px;flex-wrap:wrap}
 .controls input[type="text"]{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:6px 10px;color:var(--text);font-family:var(--mono);font-size:12px;outline:none;width:180px}
 .controls input[type="text"]:focus{border-color:rgba(16,185,129,0.4)}
+.tabs{display:flex;gap:3px;background:rgba(255,255,255,0.05);border-radius:8px;padding:3px}
+.tab{padding:5px 12px;border-radius:6px;border:none;font-size:11px;font-family:var(--mono);font-weight:600;cursor:pointer;background:transparent;color:var(--muted);transition:all 0.15s}
+.tab.active{background:rgba(16,185,129,0.2);color:var(--green)}
+.tab:hover:not(.active){color:var(--dim)}
 
 /* Table */
-table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:12px}
+table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:12px;table-layout:fixed}
 thead th{text-align:left;padding:8px 6px;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);cursor:pointer;user-select:none;white-space:nowrap;border-bottom:1px solid var(--border)}
 thead th:hover{color:var(--text)}
 thead th.sorted-asc::after{content:' ▲';color:var(--green)}
@@ -57,6 +61,7 @@ tbody tr{border-bottom:1px solid rgba(255,255,255,0.02)}
 tbody tr:hover{background:rgba(255,255,255,0.03)}
 td{padding:6px;vertical-align:middle}
 td.num{text-align:right;font-variant-numeric:tabular-nums}
+th[data-col="cups"],th[data-col="best"],th[data-col="avg"],th[data-col="pb_gap"]{text-align:right}
 td.rank{color:var(--muted);text-align:right;width:30px}
 td.pname{font-weight:600}
 td.spread-cell{position:relative;width:120px}
@@ -64,6 +69,21 @@ td.spread-cell{position:relative;width:120px}
 .spread-val{position:relative;font-weight:600}
 
 .methodology{font-family:var(--mono);font-size:10px;color:var(--dark);margin-top:20px;padding:12px 0;border-top:1px solid var(--border)}
+tbody tr{cursor:pointer}
+tr.selected{background:rgba(16,185,129,0.06)}
+.chart-panel{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:16px 12px;margin:4px 0;animation:slideDown 0.2s ease-out}
+@keyframes slideDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.chart-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.chart-header .name{font-size:17px;font-weight:700}
+.chart-header .tier{margin-left:8px;font-size:10px;font-family:var(--mono);opacity:0.7;padding:2px 6px;border-radius:4px}
+.chart-header .stats{font-size:12px;color:var(--dim);font-family:var(--mono)}
+.close-btn{background:none;border:1px solid rgba(255,255,255,0.15);color:var(--dim);border-radius:6px;padding:3px 8px;cursor:pointer;font-size:11px;flex-shrink:0}
+.close-btn:hover{border-color:rgba(255,255,255,0.3);color:var(--text)}
+.chart-canvas{width:100%;height:180px;position:relative}
+.tooltip{background:rgba(10,10,15,0.95);border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:8px 12px;font-family:var(--mono);font-size:12px;pointer-events:none;position:absolute;z-index:10;display:none}
+.tooltip .t-cup{color:#f3f4f6;font-weight:700}
+.tooltip .t-pos{color:var(--dim)}.tooltip .t-pos span{color:var(--accent)}
+.tooltip .t-elo{color:var(--dim)}.tooltip .t-elo span{color:#3b82f6}
 
 @media(max-width:768px){
   .hero-grid{grid-template-columns:1fr}
@@ -81,18 +101,22 @@ td.spread-cell{position:relative;width:120px}
 <div class="pills" id="pills"></div>
 
 <div class="controls">
+  <div class="tabs">
+    <button class="tab active" id="tabAlltime" onclick="setTimeMode('alltime')">All-time</button>
+    <button class="tab" id="tabRecent" onclick="setTimeMode('recent')">Last 6 months</button>
+  </div>
   <input type="text" id="search" placeholder="Search player...">
 </div>
 
 <table>
   <thead><tr>
-    <th data-col="rank">#</th>
+    <th data-col="rank" style="width:36px">#</th>
     <th data-col="name">Player</th>
-    <th data-col="cups">Cups</th>
-    <th data-col="best">Best</th>
-    <th data-col="avg">Avg Pos</th>
-    <th data-col="spread" class="sorted-asc">Spread</th>
-    <th data-col="pb_gap">PB Gap</th>
+    <th data-col="cups" style="width:80px">Cups</th>
+    <th data-col="best" style="width:70px">Best</th>
+    <th data-col="avg" style="width:90px">Avg Pos</th>
+    <th data-col="spread" class="sorted-asc" style="width:120px">Spread</th>
+    <th data-col="pb_gap" style="width:80px">PB Gap</th>
   </tr></thead>
   <tbody id="tbody"></tbody>
 </table>
@@ -102,10 +126,188 @@ td.spread-cell{position:relative;width:120px}
 
 <script>
 let data = null;
+let allPlayersRaw = []; // raw weighted array from alldata.json
+let allPlayers = {};  // name → expanded player from alldata.json
+let globalCupMax = 138;
+let selectedPlayer = null;
 let sortCol = 'spread';
 let sortDir = 1; // 1 = asc (most consistent first)
+let timeMode = 'alltime';
+const WINDOW_SIZE = 26;
+
+function computeStats(hist) {
+  const positions = hist.map(h => h.p);
+  const n = positions.length;
+  if (n < 2) return null;
+  const avg = Math.round(positions.reduce((s, v) => s + v, 0) / n * 10) / 10;
+  const best = Math.min(...positions);
+  const worst = Math.max(...positions);
+  const variance = positions.reduce((s, v) => s + (v - avg) ** 2, 0) / (n - 1);
+  const spread = Math.round(Math.sqrt(variance) * 100) / 100;
+  const pb_gap = Math.round((avg - best) * 10) / 10;
+  return { cups: n, best, avg, spread, pb_gap, worst, positions };
+}
+
+function getActiveData() {
+  if (timeMode === 'alltime') return data.players;
+
+  // Find the last WINDOW_SIZE cup numbers globally
+  const allCupNums = new Set();
+  allPlayersRaw.forEach(p => p.h.forEach(h => allCupNums.add(h.c)));
+  const sortedCups = [...allCupNums].sort((a, b) => a - b);
+  const recentCups = new Set(sortedCups.slice(-WINDOW_SIZE));
+  const minCups = Math.max(1, Math.round(recentCups.size * 0.3));
+
+  // Filter each player's history to only recent events
+  const players = [];
+  allPlayersRaw.forEach(p => {
+    const hist = p.h.filter(h => recentCups.has(h.c));
+    if (hist.length < 2) return;
+    const stats = computeStats(hist);
+    if (!stats) return;
+    players.push({ name: p.n, ...stats, history: hist });
+  });
+
+  return players.filter(p => p.cups >= minCups);
+}
+
+function setTimeMode(mode) {
+  timeMode = mode;
+  selectedPlayer = null;
+  document.getElementById('tabAlltime').classList.toggle('active', mode === 'alltime');
+  document.getElementById('tabRecent').classList.toggle('active', mode === 'recent');
+  renderAll();
+}
 
 function esc(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+function cssVar(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+
+function rColor(r) {
+  if (r >= 2000) return "#dc2626";
+  if (r >= 1800) return "#a855f7";
+  if (r >= 1700) return "#3b82f6";
+  if (r >= 1600) return "#10b981";
+  if (r >= 1500) return "#6b7280";
+  return "#78716c";
+}
+function tier(r) {
+  if (r >= 2000) return "LEGEND";
+  if (r >= 1800) return "PRO";
+  if (r >= 1700) return "MASTER";
+  if (r >= 1600) return "GOLD";
+  if (r >= 1500) return "SILVER";
+  return "BRONZE";
+}
+
+function drawStar(ctx, cx, cy, r, pts, inner) {
+  ctx.beginPath();
+  for (let i = 0; i < pts * 2; i++) {
+    const ang = -Math.PI / 2 + i * Math.PI / pts;
+    const rad = i % 2 === 0 ? r : inner;
+    const method = i === 0 ? 'moveTo' : 'lineTo';
+    ctx[method](cx + Math.cos(ang) * rad, cy + Math.sin(ang) * rad);
+  }
+  ctx.closePath();
+}
+
+function drawChartContent(ctx, W, H, pad, points, vMin, vMax, cMin, cMax, c, x, y, highlight) {
+  ctx.strokeStyle = cssVar('--border') || 'rgba(255,255,255,0.06)'; ctx.lineWidth = 1;
+  const steps = 5;
+  for (let i = 0; i <= steps; i++) {
+    const rv = vMin + (vMax - vMin) * i / steps;
+    const yv = y(rv);
+    ctx.beginPath(); ctx.moveTo(pad.l, yv); ctx.lineTo(W - pad.r, yv); ctx.stroke();
+    ctx.fillStyle = cssVar('--muted') || '#6b7280'; ctx.font = "9px 'JetBrains Mono',monospace"; ctx.textAlign = "right";
+    ctx.fillText(Math.round(rv).toString(), pad.l - 6, yv + 3);
+  }
+  ctx.fillStyle = cssVar('--muted') || '#6b7280'; ctx.font = "9px 'JetBrains Mono',monospace"; ctx.textAlign = "center";
+  let xTicks;
+  if (cMax - cMin <= 20) { xTicks = []; for (let t = cMin; t <= cMax; t++) xTicks.push(t); }
+  else { xTicks = [cMin]; const step = cMin === 1 ? 20 : 10; const start = Math.ceil(cMin / step) * step; for (let t = start; t < cMax; t += step) { if (t > cMin) xTicks.push(t); } xTicks.push(cMax); }
+  xTicks.forEach(cn => { ctx.fillText("#" + cn, x(cn), H - 6); });
+  ctx.strokeStyle = c; ctx.lineWidth = 2; ctx.lineJoin = "round";
+  ctx.beginPath();
+  points.forEach((pt, i) => { i === 0 ? ctx.moveTo(x(pt.c), y(pt.v)) : ctx.lineTo(x(pt.c), y(pt.v)); });
+  ctx.stroke();
+  ctx.save(); ctx.globalAlpha = 0.15; ctx.strokeStyle = c; ctx.lineWidth = 6;
+  ctx.beginPath();
+  points.forEach((pt, i) => { i === 0 ? ctx.moveTo(x(pt.c), y(pt.v)) : ctx.lineTo(x(pt.c), y(pt.v)); });
+  ctx.stroke(); ctx.restore();
+  points.forEach(pt => {
+    const isHl = highlight && pt.c === highlight.c;
+    const isWin = pt.p === 1;
+    if (isWin) {
+      const r = isHl ? 7 : 4.5;
+      drawStar(ctx, x(pt.c), y(pt.v), r, 5, r * 0.45);
+      ctx.fillStyle = "#ffd700"; ctx.fill(); ctx.strokeStyle = "#b8960c"; ctx.lineWidth = isHl ? 1.5 : 1; ctx.stroke();
+    } else {
+      ctx.beginPath(); ctx.arc(x(pt.c), y(pt.v), isHl ? 5 : 2.5, 0, Math.PI * 2);
+      if (isHl) { ctx.fillStyle = "#fff"; ctx.fill(); ctx.strokeStyle = c; ctx.lineWidth = 2; ctx.stroke(); }
+      else { ctx.fillStyle = c; ctx.fill(); }
+    }
+  });
+}
+
+function drawChart(player, panel) {
+  if (!player || !player.history || player.history.length === 0) return;
+  const c = rColor(player.active);
+  const t = tier(player.active);
+  panel.innerHTML = `
+    <div class="chart-header">
+      <div style="min-width:0;overflow:hidden">
+        <span class="name" style="color:${c}">${esc(player.name)}</span>
+        <span class="tier" style="color:${c};background:${c}15">${t}</span><br>
+        <span class="stats">Active ${Math.round(player.active)} · ${player.cups} cups · Podium ${player.podiums.gold}/${player.podiums.silver}/${player.podiums.bronze} · avg ${player.avg_position} · peak ${Math.round(player.peak_rating)}</span>
+      </div>
+      <button class="close-btn" onclick="selectedPlayer=null;render()">✕</button>
+    </div>
+    <div class="chart-canvas"><canvas id="eloCanvas"></canvas><div class="tooltip" id="chartTip"></div></div>
+  `;
+  const canvas = panel.querySelector("#eloCanvas");
+  const tip = panel.querySelector("#chartTip");
+  const ctx = canvas.getContext("2d");
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.parentElement.getBoundingClientRect();
+  canvas.width = rect.width * dpr; canvas.height = 180 * dpr;
+  canvas.style.width = rect.width + "px"; canvas.style.height = "180px";
+  ctx.scale(dpr, dpr);
+  const W = rect.width, H = 180;
+  const pad = { l: 46, r: 12, t: 12, b: 28 };
+  const hist = player.history;
+  const cupNums = hist.map(h => h.c);
+  const cMin = Math.min(...cupNums), cMax = Math.max(...cupNums);
+  function x(cupNum) { return pad.l + (cupNum - cMin) / (cMax - cMin || 1) * (W - pad.l - pad.r); }
+  const vMin = 1;
+  const vMax = 60;
+  // Inverted: position 1 at top
+  function yFn(pos) { return pad.t + (pos - vMin) / (vMax - vMin || 1) * (H - pad.t - pad.b); }
+  const points = hist.map(h => ({ c: h.c, v: h.p, p: h.p, r: h.r }));
+  drawChartContent(ctx, W, H, pad, points, vMin, vMax, cMin, cMax, c, x, yFn, null);
+  canvas.onmousemove = (e) => {
+    const br = canvas.getBoundingClientRect();
+    const mx = e.clientX - br.left;
+    let closest = null, minDist = Infinity;
+    points.forEach(pt => { const d = Math.abs(x(pt.c) - mx); if (d < minDist) { minDist = d; closest = pt; } });
+    if (closest && minDist < 30) {
+      canvas.style.cursor = "pointer";
+      tip.style.display = "block";
+      tip.innerHTML = `<div class="t-cup">Cup #${Math.round(closest.c)}</div><div class="t-pos">Position: <span>#${closest.p}</span></div><div class="t-elo">Elo: <span>${closest.r.toFixed(1)}</span></div>`;
+      let tx = x(closest.c) + 12; if (tx + 120 > W) tx = x(closest.c) - 130;
+      tip.style.left = tx + "px"; tip.style.top = (yFn(closest.v) - 40) + "px";
+      ctx.clearRect(0, 0, W, H);
+      drawChartContent(ctx, W, H, pad, points, vMin, vMax, cMin, cMax, c, x, yFn, closest);
+    } else {
+      canvas.style.cursor = ""; tip.style.display = "none";
+      ctx.clearRect(0, 0, W, H);
+      drawChartContent(ctx, W, H, pad, points, vMin, vMax, cMin, cMax, c, x, yFn, null);
+    }
+  };
+  canvas.onmouseleave = () => {
+    tip.style.display = "none"; canvas.style.cursor = "";
+    ctx.clearRect(0, 0, W, H);
+    drawChartContent(ctx, W, H, pad, points, vMin, vMax, cMin, cMax, c, x, yFn, null);
+  };
+}
 
 function spreadColor(spread, max) {
   const t = Math.min(spread / max, 1);
@@ -137,12 +339,31 @@ function drawSparkline(canvas, positions) {
   ctx.stroke();
 }
 
-fetch('consistency.json').then(r=>r.json()).then(d=>{
+Promise.all([
+  fetch('consistency.json').then(r=>r.json()),
+  fetch('alldata.json').then(r=>r.json())
+]).then(([d, alldata]) => {
+  allPlayersRaw = alldata.weighted;
+  alldata.weighted.forEach(p => {
+    allPlayers[p.n] = {
+      name: p.n, rating: p.r, active: p.a, cups: p.c, wins: p.w,
+      podiums: { gold: p.g, silver: p.s, bronze: p.z },
+      avg_position: p.v, best_finish: p.b, peak_rating: p.p,
+      history: p.h
+    };
+  });
+  globalCupMax = Math.max(...alldata.weighted.flatMap(p => p.h.map(h => h.c)), globalCupMax);
   data = d;
-  const players = d.players;
-  document.getElementById('sub').textContent = `who always delivers — and who's a wildcard · ${players.length} players`;
+  renderAll();
+});
 
-  const maxSpread = Math.max(...players.map(p => p.spread));
+function renderAll() {
+  const players = getActiveData();
+  // Sort by spread ascending for hero/pills
+  players.sort((a, b) => a.spread - b.spread);
+
+  const modeLabel = timeMode === 'alltime' ? 'all-time' : 'last 6 months';
+  document.getElementById('sub').textContent = `who always delivers \u2014 and who's a wildcard \u00b7 ${players.length} players \u00b7 ${modeLabel}`;
 
   // Hero — top 3 most consistent
   const top3 = players.slice(0, 3);
@@ -153,13 +374,12 @@ fetch('consistency.json').then(r=>r.json()).then(d=>{
       <div class="hero-name">${esc(p.name)}</div>
       <div class="hero-spread">${p.spread}</div>
       <div class="hero-stats">
-        <span>Avg ${p.avg} · Best ${p.best}${ordSuf(p.best)} · ${p.cups} cups</span>
+        <span>Avg ${p.avg} \u00b7 Best ${p.best}${ordSuf(p.best)} \u00b7 ${p.cups} cups</span>
       </div>
       <canvas class="sparkline" data-idx="${i}" style="width:100%"></canvas>
     </div>
   `).join('');
 
-  // Draw sparklines
   document.querySelectorAll('.sparkline').forEach(c => {
     const idx = parseInt(c.dataset.idx);
     requestAnimationFrame(() => drawSparkline(c, top3[idx].positions));
@@ -170,12 +390,12 @@ fetch('consistency.json').then(r=>r.json()).then(d=>{
   const wildcard = [...players].sort((a,b) => b.spread - a.spread)[0];
   const closestPB = [...players].sort((a,b) => a.pb_gap - b.pb_gap)[0];
   document.getElementById('pills').innerHTML = `
-    <div class="pill"><div class="pill-label" style="color:var(--green)">Most Consistent</div><div class="pill-who">${esc(mostConsistent.name)}</div><div class="pill-val">spread ${mostConsistent.spread} · ${mostConsistent.cups} cups</div></div>
-    <div class="pill"><div class="pill-label" style="color:var(--red)">Biggest Wildcard</div><div class="pill-who">${esc(wildcard.name)}</div><div class="pill-val">spread ${wildcard.spread} · ${wildcard.cups} cups</div></div>
-    <div class="pill"><div class="pill-label" style="color:var(--blue)">Closest to PB</div><div class="pill-who">${esc(closestPB.name)}</div><div class="pill-val">gap ${closestPB.pb_gap} · avg ${closestPB.avg} · best ${closestPB.best}</div></div>`;
+    <div class="pill"><div class="pill-label" style="color:var(--green)">Most Consistent</div><div class="pill-who">${esc(mostConsistent.name)}</div><div class="pill-val">spread ${mostConsistent.spread} \u00b7 ${mostConsistent.cups} cups</div></div>
+    <div class="pill"><div class="pill-label" style="color:var(--red)">Biggest Wildcard</div><div class="pill-who">${esc(wildcard.name)}</div><div class="pill-val">spread ${wildcard.spread} \u00b7 ${wildcard.cups} cups</div></div>
+    <div class="pill"><div class="pill-label" style="color:var(--blue)">Closest to PB</div><div class="pill-who">${esc(closestPB.name)}</div><div class="pill-val">gap ${closestPB.pb_gap} \u00b7 avg ${closestPB.avg} \u00b7 best ${closestPB.best}</div></div>`;
 
   render();
-});
+}
 
 function ordSuf(n) {
   const s = ['th','st','nd','rd'];
@@ -186,9 +406,10 @@ function ordSuf(n) {
 function render() {
   if (!data) return;
   const search = document.getElementById('search').value.toLowerCase();
-  const maxSpread = Math.max(...data.players.map(p => p.spread), 1);
+  const activeData = getActiveData();
+  const maxSpread = Math.max(...activeData.map(p => p.spread), 1);
 
-  let filtered = data.players.filter(p => {
+  let filtered = activeData.filter(p => {
     if (search && !p.name.toLowerCase().includes(search)) return false;
     return true;
   });
@@ -200,19 +421,48 @@ function render() {
   });
 
   const tbody = document.getElementById('tbody');
-  tbody.innerHTML = filtered.map((p, i) => {
+  tbody.innerHTML = '';
+
+  filtered.forEach((p, i) => {
     const barW = (p.spread / maxSpread * 80).toFixed(0);
     const color = spreadColor(p.spread, maxSpread);
-    return `<tr>
+    const sel = p.name === selectedPlayer ? ' selected' : '';
+
+    const tr = document.createElement('tr');
+    tr.className = sel;
+    tr.innerHTML = `
       <td class="rank">${i + 1}</td>
       <td class="pname">${esc(p.name)}</td>
       <td class="num">${p.cups}</td>
       <td class="num">${p.best}</td>
       <td class="num">${p.avg}</td>
       <td class="spread-cell"><div class="spread-bar" style="width:${barW}%;background:${color}"></div><span class="spread-val" style="color:${color}">${p.spread}</span></td>
-      <td class="num">${p.pb_gap}</td>
-    </tr>`;
-  }).join('');
+      <td class="num">${p.pb_gap}</td>`;
+    tr.onclick = () => { selectedPlayer = selectedPlayer === p.name ? null : p.name; render(); };
+    tbody.appendChild(tr);
+
+    if (p.name === selectedPlayer) {
+      let player = allPlayers[p.name];
+      if (player && timeMode === 'recent') {
+        const allCupNums = new Set();
+        allPlayersRaw.forEach(q => q.h.forEach(h => allCupNums.add(h.c)));
+        const recentCups = new Set([...allCupNums].sort((a, b) => a - b).slice(-WINDOW_SIZE));
+        player = { ...player, history: player.history.filter(h => recentCups.has(h.c)) };
+      }
+      if (player) {
+        const chartTr = document.createElement('tr');
+        chartTr.className = 'detail-row';
+        const td = document.createElement('td');
+        td.colSpan = 7;
+        const panel = document.createElement('div');
+        panel.className = 'chart-panel';
+        td.appendChild(panel);
+        chartTr.appendChild(td);
+        tbody.appendChild(chartTr);
+        drawChart(player, panel);
+      }
+    }
+  });
 }
 
 document.getElementById('search').addEventListener('input', render);

@@ -28,7 +28,14 @@ cup_id = f"COTD {cup_num}"
 print(f"Processing {cup_id}, mapper: {mapper}")
 print()
 
-# ── 1. Parse mod logs ──
+# ── 1. Save raw log + parse mod logs ──
+log_dir = _p('cup logs')
+os.makedirs(log_dir, exist_ok=True)
+import shutil
+log_backup = os.path.join(log_dir, f'cotd_{cup_num}.log')
+shutil.copy2(LOG_PATH, log_backup)
+print(f"Raw log saved: {log_backup}")
+
 with open(LOG_PATH, encoding='utf-8', errors='replace') as f:
     lines = [l for l in f.readlines() if 'COTDTracker' in l]
 

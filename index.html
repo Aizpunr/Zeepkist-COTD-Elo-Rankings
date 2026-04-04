@@ -1586,6 +1586,10 @@ Promise.all([
     viewMode = 'curse';
     setCurseActive(true);
   }
+  const searchParam = new URLSearchParams(location.search).get('search');
+  if (searchParam) {
+    document.getElementById('searchInput').value = searchParam;
+  }
   render();
 });
 </script>

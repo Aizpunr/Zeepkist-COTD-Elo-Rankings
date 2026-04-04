@@ -8,16 +8,19 @@ sys.stdout.reconfigure(encoding='utf-8')
 base = os.path.dirname(os.path.abspath(__file__))
 def _p(f): return os.path.join(base, f)
 
-MIN_CUPS = 10
-
 with open(_p('alldata.json'), encoding='utf-8') as f:
     data = json.load(f)
+
+max_cups = max(p['c'] for p in data['weighted'])
+MIN_CUPS = max(1, round(max_cups * 0.1))
+print(f"Appearance leader: {max_cups} cups → min threshold: {MIN_CUPS}")
 
 players = []
 for p in data['weighted']:
     if p['c'] < MIN_CUPS:
         continue
     positions = [h['p'] for h in p['h']]
+    history = [{'c': h['c'], 'p': h['p']} for h in p['h']]
     spread = round(statistics.stdev(positions), 2)
     avg = round(statistics.mean(positions), 1)
     best = p['b']
@@ -32,7 +35,8 @@ for p in data['weighted']:
         'spread': spread,
         'pb_gap': pb_gap,
         'worst': worst,
-        'positions': positions
+        'positions': positions,
+        'history': history
     })
 
 # Sort by spread ascending (most consistent first)

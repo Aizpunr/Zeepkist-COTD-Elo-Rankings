@@ -35,6 +35,7 @@ map_index['COTD 133']        = {'map': "Serpent's Lair", 'mapper': '[CTR]Rourie1
 map_index['COTD 134']        = {'map': 'Urbs Noctu', 'mapper': '[20x]K410K3N'}
 map_index['COTD 135']        = {'map': 'Hypnerotomachia', 'mapper': '[CSC] Sahne mit Bohnen'}
 map_index['COTD 136']        = {'map': 'Volcanic', 'mapper': '[TTR] Tigerplaysonpc'}
+map_index['COTD 138']        = {'map': 'Niwashade', 'mapper': '[CTR]Mortishade'}
 
 # ── Ghost display: real player played under a ghost account ──
 # cups.json keeps real player name + adds "ghost" field for frontend display
