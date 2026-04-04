@@ -151,9 +151,8 @@ fetch('big3_data.json').then(r=>r.json()).then(data=>{
     const b = pBuckets[i];
     if(i === 0){
       presHTML += `<div class="pres-card">
-        <div class="pres-label">Of "The Rest" wins,<br>no Big 3 in lobby</div>
         <div class="pres-pct" style="color:var(--muted)">${restAbsPct}%</div>
-        <div class="pres-detail">${restWinsFromAbsence} of ${wins.rest} wins were free</div>
+        <div class="pres-detail">${restWinsFromAbsence} of ${wins.rest} wins by The Rest were free<br>(no Big 3 in lobby)</div>
         <div class="pres-bar"><div style="width:${restAbsPct}%;background:var(--muted);border-radius:3px"></div><div style="width:${100-restAbsPct}%;background:rgba(255,255,255,0.06);border-radius:3px"></div></div>
     </div>`;
     } else {
