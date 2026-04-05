@@ -88,6 +88,13 @@ tr.selected{background:rgba(16,185,129,0.06)}
 @media(max-width:768px){
   .hero-grid{grid-template-columns:1fr}
   .pills{grid-template-columns:1fr}
+  table{font-size:10px}
+  td,thead th{padding:4px 3px}
+  td.spread-cell{width:80px}
+  th[data-col="spread"]{width:80px!important}
+  th[data-col="best"],td:nth-child(4),
+  th[data-col="pb_gap"],td:nth-child(7){display:none}
+  .chart-canvas{overflow-x:auto;overflow-y:hidden}
 }
 </style>
 </head>
@@ -267,11 +274,16 @@ function drawChart(player, panel) {
   const tip = panel.querySelector("#chartTip");
   const ctx = canvas.getContext("2d");
   const dpr = window.devicePixelRatio || 1;
-  const rect = canvas.parentElement.getBoundingClientRect();
-  canvas.width = rect.width * dpr; canvas.height = 180 * dpr;
-  canvas.style.width = rect.width + "px"; canvas.style.height = "180px";
+  const container = canvas.parentElement;
+  const containerW = container.getBoundingClientRect().width;
+  const minPxPerCup = 4;
+  const cupRange = Math.max(...player.history.map(h=>h.c)) - Math.min(...player.history.map(h=>h.c)) || 1;
+  const desiredW = Math.max(containerW, cupRange * minPxPerCup + 58);
+  canvas.width = desiredW * dpr; canvas.height = 180 * dpr;
+  canvas.style.width = desiredW + "px"; canvas.style.height = "180px";
   ctx.scale(dpr, dpr);
-  const W = rect.width, H = 180;
+  container.scrollLeft = container.scrollWidth;
+  const W = desiredW, H = 180;
   const pad = { l: 46, r: 12, t: 12, b: 28 };
   const hist = player.history;
   const cupNums = hist.map(h => h.c);

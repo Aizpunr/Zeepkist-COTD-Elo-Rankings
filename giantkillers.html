@@ -83,6 +83,11 @@ td.cup-cell{color:var(--dim)}
 @media(max-width:768px){
   .pills{grid-template-columns:repeat(2,1fr)}
   .hero-bar .bar-gap{font-size:10px}
+  table{font-size:10px}
+  td,thead th{padding:4px 3px}
+  td.deficit-cell{width:80px}
+  th[data-col="winner_pre_elo"],th[data-col="elo_rank"],th[data-col="beaten_above"],
+  td:nth-child(4),td:nth-child(5),td:nth-child(7){display:none}
 }
 </style>
 </head>

@@ -109,7 +109,7 @@
   }
   .close-btn:hover { border-color: var(--btn-border-hover); color: var(--text); }
 
-  .chart-canvas { width: 100%; height: 180px; position: relative; }
+  .chart-canvas { width: 100%; height: 180px; position: relative; overflow-x: auto; overflow-y: hidden; }
 
   .table { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
   .table-header {
@@ -279,11 +279,12 @@
   .theme-toggle:hover { border-color: var(--btn-border-hover); }
 
   .mobile-stats-link { display: none; }
-  @media (max-width: 1280px) { .mascot-sprite { display: none; } #lexerCrashSprite { display: none; } .sandals-wrap { display: none; } .mobile-stats-link { display: inline; } }
+  .mobile-stats-btn { display: none; font-size: 11px; font-family: var(--mono); color: var(--accent); text-decoration: none; padding: 4px 8px; border: 1px solid var(--accent); border-radius: 6px; white-space: nowrap; }
+  @media (max-width: 1280px) { .mascot-sprite { display: none; } #lexerCrashSprite { display: none; } .sandals-wrap { display: none; } .mobile-stats-link { display: inline; } .mobile-stats-btn { display: inline-block; } }
   @media (max-width: 700px) {
-    .table-header, .row { grid-template-columns: 30px 1fr 50px 50px 24px 70px; font-size: 10px; }
+    .table-header, .row { grid-template-columns: 30px 1fr 50px 50px 24px 70px !important; font-size: 10px; }
     .table-header > :nth-child(7), .table-header > :nth-child(8), .table-header > :nth-child(9), .table-header > :nth-child(10),
-    .row > :nth-child(7), .row > :nth-child(8), .row > :nth-child(9), .row > :nth-child(10) { display: none; }
+    .row > :nth-child(7), .row > :nth-child(8), .row > :nth-child(9), .row > :nth-child(10) { display: none !important; }
     .header h1 { font-size: 22px; }
     .quote { display: none; }
   }
@@ -314,6 +315,7 @@
     <label class="cup-toggle" id="risingToggle"><input type="checkbox" id="risingCheck"><span class="cup-toggle-label">On the Rise</span></label>
     <input type="checkbox" id="curseCheck" style="display:none">
     <label class="cup-toggle" id="compareToggle"><input type="checkbox" id="compareCheck"><span class="cup-toggle-label">Compare</span></label>
+    <a href="stats.html" class="mobile-stats-btn">Cool Stats</a>
     <input type="text" class="search-input" id="searchInput" placeholder="Search player...">
   </div>
 
@@ -635,14 +637,21 @@ function drawChart(player, panel) {
   const tip = panel.querySelector("#chartTip");
   const ctx = canvas.getContext("2d");
   const dpr = window.devicePixelRatio || 1;
-  const rect = canvas.parentElement.getBoundingClientRect();
-  canvas.width = rect.width * dpr;
+  const container = canvas.parentElement;
+  const containerW = container.getBoundingClientRect().width;
+  // On narrow screens, use minimum 4px per cup so points aren't bunched
+  const minPxPerCup = 4;
+  const cupRange = (eloMode === "season" ? Math.max(...player.history.map(h=>h.c)) - Math.min(...player.history.map(h=>h.c)) : globalCupMax) || 1;
+  const desiredW = Math.max(containerW, cupRange * minPxPerCup + 58);
+  canvas.width = desiredW * dpr;
   canvas.height = 180 * dpr;
-  canvas.style.width = rect.width + "px";
+  canvas.style.width = desiredW + "px";
   canvas.style.height = "180px";
   ctx.scale(dpr, dpr);
+  // Scroll to right (most recent) on load
+  container.scrollLeft = container.scrollWidth;
 
-  const W = rect.width, H = 180;
+  const W = desiredW, H = 180;
   const pad = { l: 46, r: 12, t: 12, b: 28 };
   const hist = player.history;
   const cupNums = hist.map(h => h.c);

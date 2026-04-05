@@ -76,6 +76,17 @@ canvas#timeline{width:100%;border-radius:8px;background:var(--surface);border:1p
 
 .back-link{display:inline-block;font-family:var(--mono);font-size:12px;color:var(--muted);text-decoration:none;margin-bottom:16px}
 .back-link:hover{color:var(--text)}
+@media(max-width:700px){
+  .cards{grid-template-columns:1fr}
+  .presence{grid-template-columns:repeat(2,1fr)}
+  .h2h-grid{grid-template-columns:1fr}
+  .cup-row{font-size:10px}
+  .cup-positions{font-size:9px;gap:6px}
+  .cup-positions span{min-width:40px}
+  .streaks{gap:6px}
+  .streak{padding:8px 10px;font-size:10px}
+  .streak .num{font-size:18px}
+}
 </style>
 </head>
 <body>

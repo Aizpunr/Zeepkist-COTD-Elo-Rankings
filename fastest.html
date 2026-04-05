@@ -99,8 +99,12 @@ td.cup-cell{color:var(--dim)}
 @media(max-width:768px){
   .pills{grid-template-columns:repeat(2,1fr)}
   .leaders{grid-template-columns:1fr}
-  th.round-col{width:80px}
-  th.player-col{width:140px}
+  table{font-size:10px}
+  td,thead th{padding:4px 3px}
+  th.player-col{width:auto}
+  th.round-col,td.round-cell{display:none}
+  th.time-col{width:70px}
+  .chart-canvas{overflow-x:auto;overflow-y:hidden}
 }
 </style>
 </head>
@@ -253,10 +257,14 @@ function drawChart(player,panel,ftCups){
   `;
   const canvas=panel.querySelector("#eloCanvas");const tip=panel.querySelector("#chartTip");
   const ctx=canvas.getContext("2d");const dpr=window.devicePixelRatio||1;
-  const rect=canvas.parentElement.getBoundingClientRect();
-  canvas.width=rect.width*dpr;canvas.height=180*dpr;
-  canvas.style.width=rect.width+"px";canvas.style.height="180px";
-  ctx.scale(dpr,dpr);const W=rect.width,H=180;
+  const container=canvas.parentElement;
+  const containerW=container.getBoundingClientRect().width;
+  const cupRange=Math.max(...player.history.map(h=>h.c))-Math.min(...player.history.map(h=>h.c))||1;
+  const desiredW=Math.max(containerW,cupRange*4+58);
+  canvas.width=desiredW*dpr;canvas.height=180*dpr;
+  canvas.style.width=desiredW+"px";canvas.style.height="180px";
+  ctx.scale(dpr,dpr);container.scrollLeft=container.scrollWidth;
+  const W=desiredW,H=180;
   const pad={l:46,r:12,t:12,b:28};
   const hist=player.history;const cupNums=hist.map(h=>h.c);
   const cMin=Math.min(...cupNums),cMax=Math.max(...cupNums);
