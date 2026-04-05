@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fastest Times — Zeepkist COTD</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>%E2%9A%A1</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#08080d;--surface:rgba(255,255,255,0.02);--border:rgba(255,255,255,0.06);
+--text:#e5e7eb;--dim:#9ca3af;--muted:#6b7280;--dark:#4b5563;
+--mono:'JetBrains Mono',monospace;--accent:#3b82f6;--gold:#f59e0b;--red:#ef4444;--green:#10b981;
+--fast:linear-gradient(135deg,#3b82f6,#8b5cf6)}
+html{background:var(--bg);color:var(--text)}
+body{font-family:'Space Grotesk',system-ui,sans-serif;min-height:100vh;padding:20px 12px}
+::selection{background:rgba(59,130,246,0.3)}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.1);border-radius:3px}
+.container{max-width:1100px;margin:0 auto}
+
+h1{text-align:center;font-size:32px;font-weight:800;margin-bottom:4px;
+background:var(--fast);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sub{text-align:center;font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:32px}
+.back-link{display:inline-block;font-family:var(--mono);font-size:12px;color:var(--muted);text-decoration:none;margin-bottom:16px}
+.back-link:hover{color:var(--text)}
+
+/* Hero */
+.hero{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px 24px;margin-bottom:28px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--fast)}
+.hero-time{font-size:42px;font-weight:800;background:var(--fast);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-family:var(--mono)}
+.hero-detail{font-family:var(--mono);font-size:13px;color:var(--dim);margin-top:4px}
+.hero-detail span{color:var(--text);font-weight:600}
+
+/* Pills */
+.pills{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:28px}
+.pill{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 12px;text-align:center}
+.pill-label{font-size:13px;font-weight:700;background:var(--fast);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px}
+.pill-who{font-family:var(--mono);font-size:12px;color:var(--text);font-weight:600}
+.pill-val{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:2px}
+
+/* Leaderboard cards */
+.leaders{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:28px}
+.leader{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px 14px;text-align:center}
+.leader-rank{font-family:var(--mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.leader-name{font-size:16px;font-weight:700;margin-bottom:2px}
+.leader-name.gold{color:var(--gold)}.leader-name.silver{color:#94a3b8}.leader-name.bronze{color:#cd7f32}
+.leader-count{font-family:var(--mono);font-size:20px;font-weight:800;background:var(--fast);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.leader-best{font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:2px}
+
+/* Controls */
+.controls{display:flex;align-items:center;gap:12px;margin-bottom:10px;flex-wrap:wrap}
+.controls input[type="text"]{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:6px 10px;color:var(--text);font-family:var(--mono);font-size:12px;outline:none;width:180px}
+.controls input[type="text"]:focus{border-color:rgba(59,130,246,0.4)}
+.controls label{font-family:var(--mono);font-size:11px;color:var(--muted);cursor:pointer;display:flex;align-items:center;gap:4px}
+.tabs{display:flex;gap:4px}
+.tab{font-family:var(--mono);font-size:11px;padding:4px 10px;border-radius:4px;background:var(--surface);border:1px solid var(--border);color:var(--muted);cursor:pointer}
+.tab.active{background:rgba(59,130,246,0.15);border-color:rgba(59,130,246,0.3);color:var(--text)}
+
+/* Table */
+table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:12px;table-layout:fixed}
+thead th{text-align:left;padding:8px 6px;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);cursor:pointer;user-select:none;white-space:nowrap;border-bottom:1px solid var(--border)}
+thead th:hover{color:var(--text)}
+thead th.sorted-asc::after{content:' \25B2';color:var(--accent)}
+thead th.sorted-desc::after{content:' \25BC';color:var(--accent)}
+th.r{width:36px;text-align:right}
+th.time-col{width:90px;text-align:right}
+th.player-col{width:200px}
+th.round-col{width:100px}
+th.cup-col{}
+tbody tr{border-bottom:1px solid rgba(255,255,255,0.02)}
+tbody tr:hover{background:rgba(255,255,255,0.03)}
+tbody tr.troll{opacity:0.5}
+td{padding:6px;vertical-align:middle;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+td.rank{color:var(--muted);text-align:right;width:36px}
+td.time-cell{text-align:right;font-weight:600;font-variant-numeric:tabular-nums}
+td.player-cell{font-weight:600}
+td.round-cell{color:var(--dim)}
+td.cup-cell{color:var(--dim)}
+.time-bar{display:inline-block;height:10px;border-radius:2px;background:var(--fast);opacity:0.3;vertical-align:middle;margin-right:6px}
+
+/* Chart panel */
+.chart-panel{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:16px 12px;margin:4px 0;animation:slideDown 0.2s ease-out}
+@keyframes slideDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.chart-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.chart-header .name{font-size:17px;font-weight:700}
+.chart-header .tier{margin-left:8px;font-size:10px;font-family:var(--mono);opacity:0.7;padding:2px 6px;border-radius:4px}
+.chart-header .stats{font-size:12px;color:var(--dim);font-family:var(--mono)}
+.close-btn{background:none;border:1px solid rgba(255,255,255,0.15);color:var(--dim);border-radius:6px;padding:3px 8px;cursor:pointer;font-size:11px;flex-shrink:0}
+.close-btn:hover{border-color:rgba(255,255,255,0.3);color:var(--text)}
+.chart-canvas{width:100%;height:180px;position:relative}
+.tooltip{background:rgba(10,10,15,0.95);border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:8px 12px;font-family:var(--mono);font-size:12px;pointer-events:none;position:absolute;z-index:10;display:none}
+.tooltip .t-cup{color:#f3f4f6;font-weight:700}
+.tooltip .t-pos{color:var(--dim)}.tooltip .t-pos span{color:var(--accent)}
+.tooltip .t-elo{color:var(--dim)}.tooltip .t-elo span{color:#3b82f6}
+.tooltip .t-ft{color:#a855f7;font-weight:600}
+#playerTable tbody tr{cursor:pointer}
+#roundTable tbody tr{cursor:pointer}
+
+@media(max-width:768px){
+  .pills{grid-template-columns:repeat(2,1fr)}
+  .leaders{grid-template-columns:1fr}
+  th.round-col{width:80px}
+  th.player-col{width:140px}
+}
+</style>
+</head>
+<body>
+<div class="container">
+<a href="stats.html" class="back-link">&larr; back to cool stats</a>
+<h1>Fastest Times</h1>
+<div class="sub" id="sub">who sets the pace in every cup</div>
+
+<div class="controls" style="margin-bottom:20px">
+  <div class="tabs" id="modeTabs">
+    <div class="tab active" data-mode="player">Per Player</div>
+    <div class="tab" data-mode="round">Per Round</div>
+  </div>
+  <input type="text" id="search" placeholder="Search player or cup...">
+  <label><input type="checkbox" id="trollToggle" checked> Include Troll/Roulette</label>
+</div>
+
+<div id="playerView">
+  <div class="leaders" id="leaders"></div>
+  <div class="pills" id="pills"></div>
+
+  <div class="section-label" style="font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">Player Rankings</div>
+  <table id="playerTable">
+    <thead><tr>
+      <th class="r" data-col="rank">#</th>
+      <th class="player-col" data-col="player">Player</th>
+      <th class="r" data-col="count" style="text-align:right">FTs</th>
+      <th class="r" data-col="pct" style="text-align:right">%</th>
+      <th class="r" data-col="finals" style="text-align:right">In Finals</th>
+    </tr></thead>
+    <tbody id="playerBody"></tbody>
+  </table>
+
+  <div class="section-label" style="font-family:var(--mono);font-size:12px;color:var(--muted);margin:24px 0 8px;text-transform:uppercase;letter-spacing:1px">Map Records</div>
+  <table id="mapTable">
+    <thead><tr>
+      <th class="r" data-col="rank">#</th>
+      <th class="cup-col" data-col="cup">Cup</th>
+      <th data-col="map">Map</th>
+      <th class="player-col" data-col="player">Fastest By</th>
+      <th class="time-col" data-col="time" style="text-align:right">Time</th>
+      <th class="round-col" data-col="round">Round</th>
+    </tr></thead>
+    <tbody id="mapBody"></tbody>
+  </table>
+</div>
+
+<div id="roundView" style="display:none">
+  <div class="leaders" id="roundLeaders" style="grid-template-columns:1fr 1fr"></div>
+  <div class="pills" id="roundPills"></div>
+
+  <div class="section-label" style="font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">Round Breakdown</div>
+  <table id="roundTable">
+    <thead><tr>
+      <th style="width:36px;text-align:right" data-col="rank">#</th>
+      <th data-col="round">Stage</th>
+      <th style="width:50px;text-align:right" data-col="count">FTs</th>
+      <th style="width:60px;text-align:right" data-col="pct">%</th>
+      <th style="width:180px" data-col="leader">Most FTs</th>
+      <th style="width:60px;text-align:right" data-col="players">Unique</th>
+    </tr></thead>
+    <tbody id="roundBody"></tbody>
+  </table>
+</div>
+
+<div id="methodology" style="font-family:var(--mono);font-size:10px;color:var(--dark);margin-top:20px;padding:12px 0;border-top:1px solid var(--border)"></div>
+</div>
+
+<script>
+let DATA=[], CUPS_MAP={}, CUP_ORDER={}, ALL_PLAYERS={}, selectedPlayer=null, selectedRound=null, viewMode='player';
+
+const SPECIAL_CUP_NUM={'COTD Roulette 1':25.5,'COTD Roulette 2':65.5,'Troll COTD 1':15.5,'Troll COTD 2':26.5,'Troll COTD 3':36.5,'Troll COTD 4':41.5,'Troll COTD 5':44.5,'Troll COTD 6':48.5,'Troll COTD 7':50.5,'Troll COTD 8':56.5,'Troll COTW 9':63.5,'Troll COTD 10':71.5,'Troll COTD 11':88.5};
+function cupUrl(id){
+  const n=SPECIAL_CUP_NUM[id]||(id.match(/(\d+)/)?parseFloat(id.match(/(\d+)/)[1]):0);
+  return 'index.html?cup='+n;
+}
+function isTroll(cup){return /troll|roulette/i.test(cup)}
+function stripTag(n){return n.replace(/^\[.*?\]\s*/,'')}
+function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
+function fmt(t){return t>=60?Math.floor(t/60)+':'+(t%60).toFixed(3).padStart(6,'0'):t.toFixed(3)}
+function cssVar(name){return getComputedStyle(document.documentElement).getPropertyValue(name).trim()}
+function rColor(r){if(r>=2000)return"#dc2626";if(r>=1800)return"#a855f7";if(r>=1700)return"#3b82f6";if(r>=1600)return"#10b981";if(r>=1500)return"#6b7280";return"#78716c"}
+function tier(r){if(r>=2000)return"LEGEND";if(r>=1800)return"PRO";if(r>=1700)return"MASTER";if(r>=1600)return"GOLD";if(r>=1500)return"SILVER";return"BRONZE"}
+
+function drawStar(ctx,cx,cy,r,pts,inner){
+  ctx.beginPath();
+  for(let i=0;i<pts*2;i++){const ang=-Math.PI/2+i*Math.PI/pts;const rad=i%2===0?r:inner;const m=i===0?'moveTo':'lineTo';ctx[m](cx+Math.cos(ang)*rad,cy+Math.sin(ang)*rad);}
+  ctx.closePath();
+}
+
+function drawDiamond(ctx,cx,cy,r){
+  ctx.beginPath();
+  ctx.moveTo(cx,cy-r);ctx.lineTo(cx+r,cy);ctx.lineTo(cx,cy+r);ctx.lineTo(cx-r,cy);
+  ctx.closePath();
+}
+
+function drawChartContent(ctx,W,H,pad,points,vMin,vMax,cMin,cMax,c,x,y,highlight,ftCups){
+  ctx.strokeStyle=cssVar('--border')||'rgba(255,255,255,0.06)';ctx.lineWidth=1;
+  const steps=5;
+  for(let i=0;i<=steps;i++){
+    const rv=vMin+(vMax-vMin)*i/steps;const yv=y(rv);
+    ctx.beginPath();ctx.moveTo(pad.l,yv);ctx.lineTo(W-pad.r,yv);ctx.stroke();
+    ctx.fillStyle=cssVar('--muted')||'#6b7280';ctx.font="9px 'JetBrains Mono',monospace";ctx.textAlign="right";
+    ctx.fillText(Math.round(rv).toString(),pad.l-6,yv+3);
+  }
+  ctx.fillStyle=cssVar('--muted')||'#6b7280';ctx.font="9px 'JetBrains Mono',monospace";ctx.textAlign="center";
+  let xTicks;
+  if(cMax-cMin<=20){xTicks=[];for(let t=cMin;t<=cMax;t++)xTicks.push(t);}
+  else{xTicks=[cMin];const step=cMin===1?20:10;const start=Math.ceil(cMin/step)*step;for(let t=start;t<cMax;t+=step){if(t>cMin)xTicks.push(t);}xTicks.push(cMax);}
+  xTicks.forEach(cn=>{ctx.fillText("#"+cn,x(cn),H-6);});
+  ctx.strokeStyle=c;ctx.lineWidth=2;ctx.lineJoin="round";
+  ctx.beginPath();points.forEach((pt,i)=>{i===0?ctx.moveTo(x(pt.c),y(pt.v)):ctx.lineTo(x(pt.c),y(pt.v));});ctx.stroke();
+  ctx.save();ctx.globalAlpha=0.15;ctx.strokeStyle=c;ctx.lineWidth=6;
+  ctx.beginPath();points.forEach((pt,i)=>{i===0?ctx.moveTo(x(pt.c),y(pt.v)):ctx.lineTo(x(pt.c),y(pt.v));});ctx.stroke();ctx.restore();
+  points.forEach(pt=>{
+    const isHl=highlight&&pt.c===highlight.c;
+    const isWin=pt.p===1;
+    const isFT=ftCups&&ftCups.has(pt.c);
+    if(isWin&&isFT){
+      const r=isHl?7:4.5;drawStar(ctx,x(pt.c),y(pt.v),r,5,r*0.45);
+      ctx.fillStyle="#a855f7";ctx.fill();ctx.strokeStyle="#7c3aed";ctx.lineWidth=isHl?1.5:1;ctx.stroke();
+    }else if(isWin){
+      const r=isHl?7:4.5;drawStar(ctx,x(pt.c),y(pt.v),r,5,r*0.45);
+      ctx.fillStyle="#ffd700";ctx.fill();ctx.strokeStyle="#b8960c";ctx.lineWidth=isHl?1.5:1;ctx.stroke();
+    }else if(isFT){
+      const r=isHl?7:5;drawDiamond(ctx,x(pt.c),y(pt.v),r);
+      ctx.fillStyle="#a855f7";ctx.fill();ctx.strokeStyle="#7c3aed";ctx.lineWidth=isHl?1.5:1;ctx.stroke();
+    }else{
+      ctx.beginPath();ctx.arc(x(pt.c),y(pt.v),isHl?5:2.5,0,Math.PI*2);
+      if(isHl){ctx.fillStyle="#fff";ctx.fill();ctx.strokeStyle=c;ctx.lineWidth=2;ctx.stroke();}
+      else{ctx.fillStyle=c;ctx.fill();}
+    }
+  });
+}
+
+function drawChart(player,panel,ftCups){
+  if(!player||!player.history||player.history.length===0)return;
+  const c=rColor(player.active);const t=tier(player.active);
+  panel.innerHTML=`
+    <div class="chart-header">
+      <div style="min-width:0;overflow:hidden">
+        <span class="name" style="color:${c}">${esc(player.name)}</span>
+        <span class="tier" style="color:${c};background:${c}15">${t}</span><br>
+        <span class="stats">Active ${Math.round(player.active)} · ${player.cups} cups · FTs: ${ftCups.size}</span>
+      </div>
+      <button class="close-btn" onclick="selectedPlayer=null;render()">&#10005;</button>
+    </div>
+    <div class="chart-canvas"><canvas id="eloCanvas"></canvas><div class="tooltip" id="chartTip"></div></div>
+  `;
+  const canvas=panel.querySelector("#eloCanvas");const tip=panel.querySelector("#chartTip");
+  const ctx=canvas.getContext("2d");const dpr=window.devicePixelRatio||1;
+  const rect=canvas.parentElement.getBoundingClientRect();
+  canvas.width=rect.width*dpr;canvas.height=180*dpr;
+  canvas.style.width=rect.width+"px";canvas.style.height="180px";
+  ctx.scale(dpr,dpr);const W=rect.width,H=180;
+  const pad={l:46,r:12,t:12,b:28};
+  const hist=player.history;const cupNums=hist.map(h=>h.c);
+  const cMin=Math.min(...cupNums),cMax=Math.max(...cupNums);
+  function x(cupNum){return pad.l+(cupNum-cMin)/(cMax-cMin||1)*(W-pad.l-pad.r);}
+  const vMin=1,vMax=60;
+  function yFn(pos){return pad.t+(pos-vMin)/(vMax-vMin||1)*(H-pad.t-pad.b);}
+  const points=hist.map(h=>({c:h.c,v:h.p,p:h.p,r:h.r}));
+  drawChartContent(ctx,W,H,pad,points,vMin,vMax,cMin,cMax,c,x,yFn,null,ftCups);
+  canvas.onmousemove=(e)=>{
+    const br=canvas.getBoundingClientRect();const mx=e.clientX-br.left;
+    let closest=null,minDist=Infinity;
+    points.forEach(pt=>{const d=Math.abs(x(pt.c)-mx);if(d<minDist){minDist=d;closest=pt;}});
+    if(closest&&minDist<30){
+      canvas.style.cursor="pointer";tip.style.display="block";
+      const ft=ftCups.has(closest.c)?'<div class="t-ft">&#9670; Fastest Time</div>':'';
+      tip.innerHTML=`<div class="t-cup">Cup #${Math.round(closest.c)}</div><div class="t-pos">Position: <span>#${closest.p}</span></div><div class="t-elo">Elo: <span>${closest.r.toFixed(1)}</span></div>${ft}`;
+      let tx=x(closest.c)+12;if(tx+140>W)tx=x(closest.c)-150;
+      tip.style.left=tx+"px";tip.style.top=(yFn(closest.v)-40)+"px";
+      ctx.clearRect(0,0,W,H);drawChartContent(ctx,W,H,pad,points,vMin,vMax,cMin,cMax,c,x,yFn,closest,ftCups);
+    }else{
+      canvas.style.cursor="";tip.style.display="none";
+      ctx.clearRect(0,0,W,H);drawChartContent(ctx,W,H,pad,points,vMin,vMax,cMin,cMax,c,x,yFn,null,ftCups);
+    }
+  };
+  canvas.onmouseleave=()=>{
+    tip.style.display="none";canvas.style.cursor="";
+    ctx.clearRect(0,0,W,H);drawChartContent(ctx,W,H,pad,points,vMin,vMax,cMin,cMax,c,x,yFn,null,ftCups);
+  };
+}
+
+function getFiltered(){
+  const q=document.getElementById('search').value.toLowerCase();
+  const troll=document.getElementById('trollToggle').checked;
+  return DATA.filter(e=>{
+    if(!troll&&isTroll(e.cup))return false;
+    if(q&&!e.player.toLowerCase().includes(q)&&!e.cup.toLowerCase().includes(q)&&!stripTag(e.player).toLowerCase().includes(q))return false;
+    return true;
+  });
+}
+
+function buildPlayerStats(data){
+  const stats={};
+  data.forEach(e=>{
+    const base=stripTag(e.player);
+    if(!stats[base]) stats[base]={count:0,finals:0,cups:[]};
+    stats[base].count++;
+    if(e.round==='Final') stats[base].finals++;
+    stats[base].cups.push(e.cup);
+  });
+  return Object.entries(stats).map(([name,s])=>({
+    name, count:s.count, finals:s.finals, cups:s.cups,
+    pct:Math.round(s.count/data.length*1000)/10
+  })).sort((a,b)=>b.count-a.count||b.finals-a.finals);
+}
+
+function render(){
+  const data=getFiltered();
+  const players=buildPlayerStats(data);
+  const maxCount=players.length?players[0].count:1;
+
+  // Player table
+  const pb=document.getElementById('playerBody');
+  pb.innerHTML='';
+  players.forEach((p,i)=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`
+      <td class="rank">${i+1}</td>
+      <td class="player-cell">${esc(p.name)}</td>
+      <td class="time-cell">${p.count}</td>
+      <td class="time-cell">${p.pct}%</td>
+      <td class="time-cell">${p.finals}</td>`;
+    tr.onclick=()=>{selectedPlayer=selectedPlayer===p.name?null:p.name;render();};
+    pb.appendChild(tr);
+    if(p.name===selectedPlayer){
+      const player=ALL_PLAYERS[p.name];
+      if(player){
+        // Build FT cup set for this player
+        const ftCups=new Set();
+        DATA.forEach(e=>{if(stripTag(e.player)===p.name)ftCups.add(CUP_ORDER[e.cup]!==undefined?
+          // Need cup number from history, not order. Find matching cup num.
+          player.history.find(h=>h.c===(CUP_ORDER[e.cup]+1))?.c : null);});
+        // Actually simpler: match by cup ID to cup index in cups.json order
+        const ftCupNums=new Set();
+        DATA.forEach(e=>{if(stripTag(e.player)===p.name){
+          // Find the cup number in player history that matches this cup ID
+          // cups.json id -> we need the cup number used in alldata history
+          // The cup number in history IS the cups.json index+1 (COTD 1 = c:1)
+          // But troll cups have different numbering. Let's match by CUP_ORDER
+          const order=CUP_ORDER[e.cup];
+          if(order!==undefined){
+            // history uses sequential cup numbers matching cups.json order (1-indexed)
+            ftCupNums.add(order+1);
+          }
+        }});
+        const chartTr=document.createElement('tr');chartTr.className='detail-row';
+        const td=document.createElement('td');td.colSpan=5;
+        const panel=document.createElement('div');panel.className='chart-panel';
+        td.appendChild(panel);chartTr.appendChild(td);pb.appendChild(chartTr);
+        drawChart(player,panel,ftCupNums);
+      }
+    }
+  });
+
+  // Map table (all cups, sorted by event order from cups.json)
+  const sorted=[...data].sort((a,b)=>(CUP_ORDER[a.cup]??999)-(CUP_ORDER[b.cup]??999));
+  const mb=document.getElementById('mapBody');
+  mb.innerHTML=sorted.map((e,i)=>{
+    const troll=isTroll(e.cup)?'class="troll"':'';
+    return `<tr ${troll}>
+      <td class="rank">${i+1}</td>
+      <td class="cup-cell"><a href="${cupUrl(e.cup)}" style="color:inherit;text-decoration:none" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">${esc(e.cup)}</a></td>
+      <td class="cup-cell">${esc(CUPS_MAP[e.cup]||'')}</td>
+      <td class="player-cell">${esc(e.player)}</td>
+      <td class="time-cell">${fmt(e.time)}</td>
+      <td class="round-cell">${esc(e.round||'?')}</td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('methodology').textContent=`${data.length} cups with fastest times. Source: Lexer's COTD spreadsheets.`;
+  buildLeaders(data);
+  buildPills(data);
+
+  // Show/hide views
+  document.getElementById('playerView').style.display=viewMode==='player'?'':'none';
+  document.getElementById('roundView').style.display=viewMode==='round'?'':'none';
+  if(viewMode==='round') renderRoundView(data);
+}
+
+function leftLabel(n){
+  if(n<=2)return'Final';
+  if(n===3)return'Podium Round (3 left)';
+  return n+' Players Left';
+}
+
+function buildRoundStats(data){
+  const stats={};
+  data.forEach(e=>{
+    const left=e.left||0;
+    const label=leftLabel(left);
+    if(!stats[label]) stats[label]={count:0,players:{},left:left};
+    stats[label].count++;
+    const base=stripTag(e.player);
+    stats[label].players[base]=(stats[label].players[base]||0)+1;
+  });
+  return Object.entries(stats).map(([round,s])=>{
+    const playersSorted=Object.entries(s.players).sort((a,b)=>b[1]-a[1]);
+    return {
+      round, left:s.left, count:s.count, pct:Math.round(s.count/data.length*1000)/10,
+      leader:playersSorted[0]?playersSorted[0][0]:'-',
+      leaderCount:playersSorted[0]?playersSorted[0][1]:0,
+      unique:Object.keys(s.players).length
+    };
+  }).sort((a,b)=>b.count-a.count);
+}
+
+function renderRoundView(data){
+  const rounds=buildRoundStats(data);
+  const colors=['gold','silver','bronze'];
+
+  // Leaders: top 3 rounds — big card for #1, two smaller for 2nd/3rd
+  const rl=document.getElementById('roundLeaders');
+  const top3=rounds.slice(0,3);
+  rl.innerHTML=`
+    <div class="leader" style="grid-column:1/-1">
+      <div class="leader-rank">Most Fastest Times</div>
+      <div class="leader-name gold">${esc(top3[0].round)}</div>
+      <div class="leader-count">${top3[0].count}</div>
+      <div class="leader-best">${top3[0].pct}% of all cups &middot; ${top3[0].unique} different players &middot; led by ${esc(top3[0].leader)}</div>
+    </div>
+    ${top3.slice(1).map((r,i)=>`
+    <div class="leader">
+      <div class="leader-rank">${['2nd','3rd'][i]}</div>
+      <div class="leader-name ${['silver','bronze'][i]}">${esc(r.round)}</div>
+      <div class="leader-count">${r.count}</div>
+      <div class="leader-best">${r.pct}% &middot; ${r.unique} players &middot; led by ${esc(r.leader)}</div>
+    </div>`).join('')}
+  `;
+
+  // Pills: round-specific stats
+  const finalRound=rounds.find(r=>r.left===2);
+  const podiumRounds=rounds.filter(r=>r.left<=3);
+  const topSix=rounds.filter(r=>r.left<=6);
+  const crowded=rounds.filter(r=>r.left>=10);
+  const podiumTotal=podiumRounds.reduce((s,r)=>s+r.count,0);
+  const topSixTotal=topSix.reduce((s,r)=>s+r.count,0);
+  const crowdedTotal=crowded.reduce((s,r)=>s+r.count,0);
+
+  // Who dominates most rounds?
+  const roundWins={};
+  rounds.forEach(r=>{
+    if(!roundWins[r.leader]) roundWins[r.leader]=0;
+    roundWins[r.leader]++;
+  });
+  const topDominator=Object.entries(roundWins).sort((a,b)=>b[1]-a[1])[0];
+
+  const rp=document.getElementById('roundPills');
+  rp.innerHTML=`
+    <div class="pill">
+      <div class="pill-label">FTs in Final</div>
+      <div class="pill-who">${finalRound?finalRound.count:0}</div>
+      <div class="pill-val">${finalRound?finalRound.pct+'%':'-'} of all cups</div>
+    </div>
+    <div class="pill">
+      <div class="pill-label">FTs in Top 6</div>
+      <div class="pill-who">${topSixTotal}</div>
+      <div class="pill-val">${Math.round(topSixTotal/data.length*1000)/10}% of cups</div>
+    </div>
+    <div class="pill">
+      <div class="pill-label">FTs with 10+ Left</div>
+      <div class="pill-who">${crowdedTotal}</div>
+      <div class="pill-val">${Math.round(crowdedTotal/data.length*1000)/10}% of cups</div>
+    </div>
+    <div class="pill">
+      <div class="pill-label">Leads Most Stages</div>
+      <div class="pill-who">${esc(topDominator?topDominator[0]:'-')}</div>
+      <div class="pill-val">${topDominator?topDominator[1]:0} of ${rounds.length} stages</div>
+    </div>
+  `;
+
+  // Table: sorted by players left ascending (Final first)
+  const byOrder=[...rounds].sort((a,b)=>a.left-b.left);
+  const rb=document.getElementById('roundBody');
+  rb.innerHTML='';
+  byOrder.forEach((r,i)=>{
+    const tr=document.createElement('tr');
+    tr.style.cursor='pointer';
+    tr.innerHTML=`
+      <td class="rank">${i+1}</td>
+      <td class="player-cell">${esc(r.round)}</td>
+      <td class="time-cell">${r.count}</td>
+      <td class="time-cell">${r.pct}%</td>
+      <td class="player-cell">${esc(r.leader)} <span style="color:var(--muted)">(${r.leaderCount})</span></td>
+      <td class="time-cell">${r.unique}</td>`;
+    tr.onclick=()=>{selectedRound=selectedRound===r.round?null:r.round;render();};
+    rb.appendChild(tr);
+
+    if(r.round===selectedRound){
+      const entries=data.filter(e=>leftLabel(e.left||0)===r.round);
+      // Group by player, sorted by count desc
+      const byPlayer={};
+      entries.forEach(e=>{
+        const base=stripTag(e.player);
+        if(!byPlayer[base]) byPlayer[base]=[];
+        byPlayer[base].push(e.cup);
+      });
+      const playerList=Object.entries(byPlayer).sort((a,b)=>b[1].length-a[1].length);
+
+      const detailTr=document.createElement('tr');
+      detailTr.className='detail-row';
+      const td=document.createElement('td');
+      td.colSpan=6;
+      td.innerHTML=`
+        <div class="chart-panel" style="padding:12px">
+          <div class="chart-header">
+            <span class="name" style="color:var(--accent)">${esc(r.round)}</span>
+            <button class="close-btn" onclick="selectedRound=null;render()">&#10005;</button>
+          </div>
+          <div style="margin-top:8px;font-family:var(--mono);font-size:12px;line-height:1.8">
+            ${playerList.map(([name,cups])=>`
+              <div><span style="color:var(--text);font-weight:600">${esc(name)}</span> <span style="color:var(--muted)">(${cups.length})</span> <span style="color:var(--dim)">${cups.map(c=>'<a href="'+cupUrl(c)+'" style="color:inherit;text-decoration:none" onmouseover="this.style.textDecoration=\'underline\'" onmouseout="this.style.textDecoration=\'none\'">'+esc(c)+'</a>').join(', ')}</span></div>
+            `).join('')}
+          </div>
+        </div>`;
+      detailTr.appendChild(td);
+      rb.appendChild(detailTr);
+    }
+  });
+}
+
+function buildLeaders(data){
+  const players=buildPlayerStats(data);
+  const colors=['gold','silver','bronze'];
+  const el=document.getElementById('leaders');
+  el.innerHTML=players.slice(0,3).map((p,i)=>`
+    <div class="leader">
+      <div class="leader-rank">${['1st','2nd','3rd'][i]} place</div>
+      <div class="leader-name ${colors[i]}">${esc(p.name)}</div>
+      <div class="leader-count">${p.count}</div>
+      <div class="leader-best">${p.pct}% of cups &middot; ${p.finals} in finals</div>
+    </div>
+  `).join('');
+}
+
+function buildPills(data){
+  const players=buildPlayerStats(data);
+  const totalFinals=data.filter(e=>e.round==='Final').length;
+  const topFinals=[...players].sort((a,b)=>b.finals-a.finals)[0];
+
+  // Longest streak
+  let bestStreak={name:'',len:0}, cur={name:'',len:0};
+  data.forEach(e=>{
+    const base=stripTag(e.player);
+    if(base===cur.name){cur.len++;}
+    else{cur={name:base,len:1};}
+    if(cur.len>bestStreak.len) bestStreak={...cur};
+  });
+
+  // Unique players
+  const unique=new Set(data.map(e=>stripTag(e.player))).size;
+
+  const pills=document.getElementById('pills');
+  pills.innerHTML=`
+    <div class="pill">
+      <div class="pill-label">Most FTs Overall</div>
+      <div class="pill-who">${esc(players[0].name)}</div>
+      <div class="pill-val">${players[0].count} of ${data.length} cups (${players[0].pct}%)</div>
+    </div>
+    <div class="pill">
+      <div class="pill-label">Most FTs in Finals</div>
+      <div class="pill-who">${esc(topFinals?topFinals.name:'-')}</div>
+      <div class="pill-val">${topFinals?topFinals.finals:0} of ${totalFinals} finals</div>
+    </div>
+    <div class="pill">
+      <div class="pill-label">Longest Streak</div>
+      <div class="pill-who">${esc(bestStreak.name)}</div>
+      <div class="pill-val">${bestStreak.len} consecutive cups</div>
+    </div>
+    <div class="pill">
+      <div class="pill-label">Different Players</div>
+      <div class="pill-who">${unique}</div>
+      <div class="pill-val">out of ${data.length} cups</div>
+    </div>
+  `;
+}
+
+Promise.all([
+  fetch('fastest.json').then(r=>r.json()),
+  fetch('cups.json').then(r=>r.json()),
+  fetch('alldata.json').then(r=>r.json()),
+]).then(([data, cups, alldata])=>{
+  cups.forEach((c,i)=>{ if(c.map) CUPS_MAP[c.id]=c.map; CUP_ORDER[c.id]=i; });
+  // Build player lookup from weighted ELO data
+  (alldata.weighted||[]).forEach(p=>{
+    ALL_PLAYERS[p.n]={
+      name:p.n, active:p.a, cups:p.c, peak_rating:p.p,
+      podiums:{gold:p.g||0,silver:p.s||0,bronze:p.z||0},
+      history:(p.h||[]).map(h=>({c:h.c,r:h.r,p:h.p}))
+    };
+  });
+  DATA=data;
+  render();
+});
+
+document.getElementById('search').addEventListener('input',render);
+document.getElementById('trollToggle').addEventListener('change',render);
+
+// Mode toggle
+document.querySelectorAll('#modeTabs .tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('#modeTabs .tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    viewMode=tab.dataset.mode;
+    selectedPlayer=null;
+    render();
+  });
+});
+
+// Sortable headers for all tables
+document.querySelectorAll('table').forEach(table=>{
+  let sortCol=null, sortAsc=true;
+  table.querySelectorAll('thead th').forEach(th=>{
+    th.addEventListener('click',()=>{
+      const col=th.dataset.col;
+      if(!col)return;
+      if(sortCol===col)sortAsc=!sortAsc;
+      else{sortCol=col;sortAsc=false;}
+      table.querySelectorAll('thead th').forEach(t=>t.classList.remove('sorted-asc','sorted-desc'));
+      th.classList.add(sortAsc?'sorted-asc':'sorted-desc');
+      // Re-sort the visible rows
+      const tbody=table.querySelector('tbody');
+      const rows=[...tbody.querySelectorAll('tr')];
+      rows.sort((a,b)=>{
+        const ci=[...table.querySelectorAll('thead th')].indexOf(th);
+        let va=a.children[ci]?.textContent.trim()||'';
+        let vb=b.children[ci]?.textContent.trim()||'';
+        const na=parseFloat(va.replace('%','')), nb=parseFloat(vb.replace('%',''));
+        if(!isNaN(na)&&!isNaN(nb)) return sortAsc?na-nb:nb-na;
+        return sortAsc?va.localeCompare(vb):vb.localeCompare(va);
+      });
+      rows.forEach(r=>tbody.appendChild(r));
+    });
+  });
+});
+</script>
+</body>
+</html>

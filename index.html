@@ -1590,6 +1590,11 @@ Promise.all([
   if (searchParam) {
     document.getElementById('searchInput').value = searchParam;
   }
+  const cupParam = new URLSearchParams(location.search).get('cup');
+  if (cupParam) {
+    const cn = parseFloat(cupParam);
+    if (cn) { render(); navigateToCup(cn); return; }
+  }
   render();
 });
 </script>

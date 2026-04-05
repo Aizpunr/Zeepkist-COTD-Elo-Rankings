@@ -256,6 +256,7 @@ cool_stats = [
     ('build_giantkillers.py', 'Giant Killers'),
     ('build_consistency.py', 'Consistency Index'),
     ('elo_stability.py', 'ELO Stability'),
+    ('build_fastest.py', 'Fastest Times'),
 ]
 print("=" * 50)
 print("Rebuilding Cool Stats...")
