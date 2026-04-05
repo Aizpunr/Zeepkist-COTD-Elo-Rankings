@@ -385,17 +385,33 @@ function render(){
   if(viewMode==='round') renderRoundView(data);
 }
 
-function leftLabel(n){
-  if(n<=2)return'Final';
-  if(n===3)return'Podium Round (3 left)';
-  return n+' Players Left';
+function stageLabel(e){
+  const left=e.left||0;
+  if(left<=2)return'Final';
+  if(left===3)return'Podium';
+  if(left<=6)return'Top '+left;
+  if(left===7)return'Best 8';
+  if(left===8)return'Best 10';
+  if(left===9)return'Best 12';
+  // Early rounds — use actual round number
+  return e.round||'Round ?';
+}
+
+// Sort order: Final first, then podium, then top4-6, then best8-12, then early rounds last
+function stageSortKey(label){
+  if(label==='Final')return 0;
+  if(label==='Podium')return 1;
+  const topM=label.match(/^Top (\d+)/);if(topM)return 2+parseInt(topM[1]);
+  const bestM=label.match(/^Best (\d+)/);if(bestM)return 10+parseInt(bestM[1]);
+  const rdM=label.match(/Round (\d+)/);if(rdM)return 100-parseInt(rdM[1]);// reverse: higher round first
+  return 50;
 }
 
 function buildRoundStats(data){
   const stats={};
   data.forEach(e=>{
+    const label=stageLabel(e);
     const left=e.left||0;
-    const label=leftLabel(left);
     if(!stats[label]) stats[label]={count:0,players:{},left:left};
     stats[label].count++;
     const base=stripTag(e.player);
@@ -436,13 +452,13 @@ function renderRoundView(data){
   `;
 
   // Pills: round-specific stats
-  const finalRound=rounds.find(r=>r.left===2);
-  const podiumRounds=rounds.filter(r=>r.left<=3);
-  const topSix=rounds.filter(r=>r.left<=6);
-  const crowded=rounds.filter(r=>r.left>=10);
-  const podiumTotal=podiumRounds.reduce((s,r)=>s+r.count,0);
-  const topSixTotal=topSix.reduce((s,r)=>s+r.count,0);
-  const crowdedTotal=crowded.reduce((s,r)=>s+r.count,0);
+  const finalRound=rounds.find(r=>r.round==='Final');
+  const singleElim=rounds.filter(r=>['Final','Podium','Top 4','Top 5','Top 6'].includes(r.round));
+  const doubleElim=rounds.filter(r=>/^Best/.test(r.round));
+  const earlyRounds=rounds.filter(r=>/^Round/.test(r.round));
+  const singleTotal=singleElim.reduce((s,r)=>s+r.count,0);
+  const doubleTotal=doubleElim.reduce((s,r)=>s+r.count,0);
+  const earlyTotal=earlyRounds.reduce((s,r)=>s+r.count,0);
 
   // Who dominates most rounds?
   const roundWins={};
@@ -455,19 +471,19 @@ function renderRoundView(data){
   const rp=document.getElementById('roundPills');
   rp.innerHTML=`
     <div class="pill">
-      <div class="pill-label">FTs in Final</div>
-      <div class="pill-who">${finalRound?finalRound.count:0}</div>
-      <div class="pill-val">${finalRound?finalRound.pct+'%':'-'} of all cups</div>
+      <div class="pill-label">Single Elim FTs</div>
+      <div class="pill-who">${singleTotal}</div>
+      <div class="pill-val">${Math.round(singleTotal/data.length*1000)/10}% &middot; Final to Top 6</div>
     </div>
     <div class="pill">
-      <div class="pill-label">FTs in Top 6</div>
-      <div class="pill-who">${topSixTotal}</div>
-      <div class="pill-val">${Math.round(topSixTotal/data.length*1000)/10}% of cups</div>
+      <div class="pill-label">Double Elim FTs</div>
+      <div class="pill-who">${doubleTotal}</div>
+      <div class="pill-val">${Math.round(doubleTotal/data.length*1000)/10}% &middot; Best 8-12</div>
     </div>
     <div class="pill">
-      <div class="pill-label">FTs with 10+ Left</div>
-      <div class="pill-who">${crowdedTotal}</div>
-      <div class="pill-val">${Math.round(crowdedTotal/data.length*1000)/10}% of cups</div>
+      <div class="pill-label">Early Round FTs</div>
+      <div class="pill-who">${earlyTotal}</div>
+      <div class="pill-val">${Math.round(earlyTotal/data.length*1000)/10}% &middot; Bulk elims</div>
     </div>
     <div class="pill">
       <div class="pill-label">Leads Most Stages</div>
@@ -476,8 +492,8 @@ function renderRoundView(data){
     </div>
   `;
 
-  // Table: sorted by players left ascending (Final first)
-  const byOrder=[...rounds].sort((a,b)=>a.left-b.left);
+  // Table: sorted by stage (Final first, early rounds last)
+  const byOrder=[...rounds].sort((a,b)=>stageSortKey(a.round)-stageSortKey(b.round));
   const rb=document.getElementById('roundBody');
   rb.innerHTML='';
   byOrder.forEach((r,i)=>{
@@ -494,7 +510,7 @@ function renderRoundView(data){
     rb.appendChild(tr);
 
     if(r.round===selectedRound){
-      const entries=data.filter(e=>leftLabel(e.left||0)===r.round);
+      const entries=data.filter(e=>stageLabel(e)===r.round);
       // Group by player, sorted by count desc
       const byPlayer={};
       entries.forEach(e=>{
