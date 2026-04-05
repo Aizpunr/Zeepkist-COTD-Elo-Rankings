@@ -10,6 +10,42 @@ sys.stdout.reconfigure(encoding='utf-8')
 base = os.path.dirname(os.path.abspath(__file__))
 def _p(f): return os.path.join(base, f)
 
+# Import CANONICAL aliases from elo_75.py
+def load_aliases():
+    """Parse CANONICAL dict from elo_75.py source."""
+    name_map = {}
+    lines = open(_p('elo_75.py'), encoding='utf-8').readlines()
+    collecting = False
+    buf = []
+    for line in lines:
+        if not collecting and re.match(r'^CANONICAL\s*=\s*\{', line):
+            collecting = True
+        if collecting:
+            buf.append(line)
+            # Stop when we hit a line that's just "}" (the closing of CANONICAL)
+            if line.strip() == '}':
+                break
+    if not buf:
+        return name_map
+    block = ''.join(buf).split('=', 1)[1].strip()
+    canonical = eval(block)
+    for canon, aliases in canonical.items():
+        for alias in aliases:
+            name_map[alias] = canon
+    return name_map
+
+NAME_MAP = load_aliases()
+
+def normalize_name(name):
+    """Resolve tagged/aliased name to canonical."""
+    if name in NAME_MAP:
+        return NAME_MAP[name]
+    # Strip tag and check
+    stripped = re.sub(r'^\[.*?\]\s*', '', name).strip()
+    if stripped in NAME_MAP:
+        return NAME_MAP[stripped]
+    return stripped
+
 FILES = [
     'Zeepkist COTDs 1-25.xlsx',
     'Zeepkist COTDs 26-50.xlsx',
@@ -133,7 +169,7 @@ def scan_file(filepath):
                 entry = {
                     'cup': cup_id,
                     'time': time_val,
-                    'player': player,
+                    'player': normalize_name(player),
                     'round': round_info,
                 }
                 if players_left:

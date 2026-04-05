@@ -190,7 +190,7 @@ CANONICAL = {
     'readfreak7': ['[HRR] readfreak7','[HRR]readfreak7','[PFE] readfreak7'],
     'Renergy': ['[TOOB] Renergy','[TOOB]Renergy','[UP] Renergy','[WSHD] Renergy','[just] Renergy','[meh] Renergy'],
     'rsgold': ['[OR] rsgold'],
-    'rtyyyyb': ['[TOB] rtyyyyb','[ZET] rtyyyyb','[ZET]rtyyyyb','[TBD] rtyyyyb','rtube','[SUCK] rtube','[TBD] rtube','[TBD]rtube','[BAP]rtube','[Toob]rtube','[dumb]rtube','[sad]rtube'],
+    'rtube': ['[TOB] rtyyyyb','[ZET] rtyyyyb','[ZET]rtyyyyb','[TBD] rtyyyyb','rtyyyyb','[SUCK] rtube','[TBD] rtube','[TBD]rtube','[BAP]rtube','[Toob]rtube','[dumb]rtube','[sad]rtube'],
     'Sandals': ['[CTR] Sandals'],
     'schmxrg': ['[6dog] schmxrg','[dogg] schmxrg','[goat] schmxrg'],
     'shadeely': ['Shadeely','[KBR] shadeely','[RonC] shadeely'],
