@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<title>DNF Tie Fix Report</title>
+<style>
+  :root { --bg: #0d0d14; --surface: #13131f; --border: #23233a; --text: #e2e2e8; --text-dim: #8888a0; --accent: #f59e0b; --green: #10b981; --red: #ef4444; --mono: 'Cascadia Code','Fira Code',monospace; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: var(--mono); font-size: 12px; padding: 24px; }
+  h1 { font-size: 15px; margin-bottom: 4px; }
+  .subtitle { color: var(--text-dim); font-size: 11px; margin-bottom: 16px; }
+  .controls { display: flex; gap: 12px; align-items: center; margin-bottom: 12px; flex-wrap: wrap; }
+  .controls label { color: var(--text-dim); font-size: 11px; }
+  input[type=text] { background: var(--surface); border: 1px solid var(--border); color: var(--text); border-radius: 6px; padding: 4px 8px; font-family: var(--mono); font-size: 11px; width: 180px; }
+  select { background: var(--surface); border: 1px solid var(--border); color: var(--text); border-radius: 6px; padding: 4px 8px; font-family: var(--mono); font-size: 11px; }
+  .count { color: var(--text-dim); font-size: 11px; margin-left: auto; }
+  .grid { display: grid; grid-template-columns: 36px 180px 80px 80px 70px 60px 60px 70px; gap: 0; max-width: 750px; }
+  .header { display: contents; }
+  .header > div { background: var(--surface); border-bottom: 1px solid var(--border); padding: 6px 8px; font-weight: 700; font-size: 10px; color: var(--text-dim); text-transform: uppercase; cursor: pointer; user-select: none; }
+  .header > div:hover { color: var(--text); }
+  .cell { padding: 5px 8px; border-bottom: 1px solid var(--border); }
+  .r { text-align: right; }
+  .name { font-weight: 600; color: #c4b5fd; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .pos { color: var(--green); } .neg { color: var(--red); }
+</style>
+</head>
+<body>
+<h1>DNF Tie Fix Report — 07.04.26</h1>
+<div class="subtitle">Same-round DNFs now share position. Affected players sorted by rank change.</div>
+<div class="controls">
+  <div><label>Search</label><br><input type="text" id="search" placeholder="Player name..."></div>
+  <div><label>Filter</label><br>
+    <select id="filter">
+      <option value="all">All affected</option>
+      <option value="winners">Winners (rank up)</option>
+      <option value="losers">Losers (rank down)</option>
+      <option value="elo5">ELO change > 1</option>
+    </select>
+  </div>
+  <div class="count" id="count"></div>
+</div>
+<div class="grid" id="grid">
+  <div class="header">
+    <div data-sort="idx">#</div>
+    <div data-sort="name">Player</div>
+    <div class="r" data-sort="old_elo">Old ELO</div>
+    <div class="r" data-sort="new_elo">New ELO</div>
+    <div class="r" data-sort="elo_d">ELO +/-</div>
+    <div class="r" data-sort="old_rank">Old #</div>
+    <div class="r" data-sort="new_rank">New #</div>
+    <div class="r" data-sort="rank_d">Rank +/-</div>
+  </div>
+</div>
+<script>
+let DATA = [];
+let sortCol = 'rank_d', sortDir = -1;
+
+fetch('dnf_fix_report.json?v=' + Date.now())
+  .then(r => r.json())
+  .then(d => { DATA = d; render(); });
+
+const searchEl = document.getElementById('search');
+const filterEl = document.getElementById('filter');
+searchEl.addEventListener('input', render);
+filterEl.addEventListener('change', render);
+
+document.querySelectorAll('[data-sort]').forEach(el => {
+  el.addEventListener('click', () => {
+    const col = el.dataset.sort;
+    if (col === sortCol) sortDir *= -1;
+    else { sortCol = col; sortDir = col === 'name' ? 1 : -1; }
+    render();
+  });
+});
+
+function render() {
+  const q = searchEl.value.toLowerCase();
+  const f = filterEl.value;
+  let rows = DATA.filter(r => {
+    if (q && !r.name.toLowerCase().includes(q)) return false;
+    if (f === 'winners' && r.rank_d <= 0) return false;
+    if (f === 'losers' && r.rank_d >= 0) return false;
+    if (f === 'elo5' && Math.abs(r.elo_d) <= 1) return false;
+    return true;
+  });
+  rows.sort((a, b) => {
+    let av = a[sortCol], bv = b[sortCol];
+    if (typeof av === 'string') return sortDir * av.localeCompare(bv);
+    if (sortCol === 'rank_d' || sortCol === 'elo_d') return (Math.abs(bv) - Math.abs(av)) || bv - av;
+    return sortDir * (bv - av);
+  });
+  const grid = document.getElementById('grid');
+  grid.querySelectorAll('.cell').forEach(r => r.remove());
+  rows.forEach((r, i) => {
+    const ec = r.elo_d > 0 ? 'pos' : r.elo_d < 0 ? 'neg' : '';
+    const rc = r.rank_d > 0 ? 'pos' : r.rank_d < 0 ? 'neg' : '';
+    const eSign = r.elo_d > 0 ? '+' : '';
+    const rSign = r.rank_d > 0 ? '+' : '';
+    const cells = [
+      `<div class="cell r">${i + 1}</div>`,
+      `<div class="cell name">${r.name}</div>`,
+      `<div class="cell r">${r.old_elo.toFixed(1)}</div>`,
+      `<div class="cell r">${r.new_elo.toFixed(1)}</div>`,
+      `<div class="cell r ${ec}">${eSign}${r.elo_d.toFixed(1)}</div>`,
+      `<div class="cell r">${r.old_rank}</div>`,
+      `<div class="cell r">${r.new_rank}</div>`,
+      `<div class="cell r ${rc}">${rSign}${r.rank_d}</div>`,
+    ];
+    grid.insertAdjacentHTML('beforeend', cells.join(''));
+  });
+  document.getElementById('count').textContent = rows.length + ' players';
+}
+</script>
+</body>
+</html>

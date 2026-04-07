@@ -113,9 +113,20 @@ for line in reversed(lines):
         winner_time = m.group(1).strip()
         break
 
-# Build leaderboard
+# Build leaderboard with tied positions for same-round eliminations
 elim_order.reverse()
-leaderboard = [(winner, winner_time, None)] + [(n, t, r) for n, t, r in elim_order]
+leaderboard = [(winner, winner_time, None, 1)]
+pos = 2
+i = 0
+while i < len(elim_order):
+    rnd = elim_order[i][2]
+    group = []
+    while i < len(elim_order) and elim_order[i][2] == rnd:
+        group.append(elim_order[i])
+        i += 1
+    for name, time, r in group:
+        leaderboard.append((name, time, r, pos))
+    pos += len(group)
 
 print(f"Parsed {len(leaderboard)} players (mapper {mapper} excluded)")
 print(f"Winner: {winner} ({winner_time})")
@@ -179,9 +190,9 @@ ws.cell(row=5, column=col_start + 1, value='Name')
 ws.cell(row=5, column=col_start + 2, value='Elim Time')
 ws.cell(row=5, column=col_start + 3, value='Elim Round')
 
-for i, (name, time, rnd) in enumerate(leaderboard):
+for i, (name, time, rnd, position) in enumerate(leaderboard):
     row = 6 + i
-    ws.cell(row=row, column=col_start, value=i + 1)
+    ws.cell(row=row, column=col_start, value=position)
     ws.cell(row=row, column=col_start + 1, value=name)
     if time == 'DNF':
         ws.cell(row=row, column=col_start + 2, value='DNF')
@@ -220,8 +231,8 @@ cup_json = {
     'cup_num': cup_num,
     'mapper': mapper,
     'players': [
-        {'pos': i + 1, 'name': name, 'time': time, 'round': rnd}
-        for i, (name, time, rnd) in enumerate(leaderboard)
+        {'pos': position, 'name': name, 'time': time, 'round': rnd}
+        for name, time, rnd, position in leaderboard
     ]
 }
 json_path = _p(f'cup_{cup_num}.json')

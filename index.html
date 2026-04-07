@@ -212,6 +212,12 @@
   .entry-date { color: var(--accent); font-weight: 700; margin-bottom: 8px; }
   .modal ul { padding-left: 18px; margin: 0; }
   .modal li { margin-bottom: 5px; }
+  .modal h4 { color: var(--accent); font-size: 11px; font-weight: 700; margin: 14px 0 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .modal p { margin: 0 0 8px; }
+  .modal .sof-formula { background: rgba(255,255,255,0.05); border: 1px solid var(--btn-border); border-radius: 6px; padding: 8px 12px; margin: 8px 0; text-align: center; font-size: 13px; font-weight: 600; color: var(--text); }
+  .modal .sof-ref { display: flex; gap: 8px; align-items: baseline; margin-bottom: 6px; }
+  .modal .sof-ref .sof-pct { font-weight: 700; min-width: 52px; font-size: 12px; }
+  .modal .sof-ref .sof-desc { color: var(--text-dim); }
 
   .quote {
     position: fixed; font-family: 'Luckiest Guy', cursive; pointer-events: none;
@@ -358,6 +364,35 @@
   </div>
 </div>
 
+<div class="modal-overlay" id="sofModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>Cup Strength (SOF)</h3>
+      <button class="modal-close" onclick="document.getElementById('sofModal').classList.remove('open')">&#10005; close</button>
+    </div>
+    <p>Measures how stacked a cup's lobby is compared to a theoretical maximum field.</p>
+
+    <h4>How it's calculated</h4>
+    <ul>
+      <li>All rated players are normalized to a <b style="color:var(--text)">0&ndash;2000</b> scale, where the #1 rated player = 2000.</li>
+      <li>From each cup, the <b style="color:var(--text)">top 10 finishers</b> by normalized rating are selected.</li>
+      <li>If fewer than 10 rated players, remaining slots are padded with the lowest rated player in the pool.</li>
+    </ul>
+    <div class="sof-formula">SOF = average(top 10) / 1850 &times; 100</div>
+
+    <h4>Why top 10?</h4>
+    <p>Lobby sizes vary wildly (5 to 60+). Using the top 10 makes cups comparable regardless of how many casuals show up. A 58-player cup and a 35-player cup with the same elite players get the same SOF.</p>
+
+    <h4>Why normalize?</h4>
+    <p>As ELO ratings inflate over time, raw values would make older cups look weaker. Normalization scales everyone relative to the current best, keeping the metric fair across all cups.</p>
+
+    <h4>Reference</h4>
+    <div class="sof-ref"><span class="sof-pct" style="color:#10b981">99%+</span><span class="sof-desc">All-time stacked. Big 3 + top 10 present. Only 6 cups ever hit this.</span></div>
+    <div class="sof-ref"><span class="sof-pct" style="color:#eab308">97&ndash;93%</span><span class="sof-desc">Strong cup. Some top players missing, top 20 fill the gaps.</span></div>
+    <div class="sof-ref"><span class="sof-pct" style="color:#ef4444">90&ndash;80%</span><span class="sof-desc">Weak cup. Some top players present, top 40 players fill the top 10.</span></div>
+  </div>
+</div>
+
 <div class="modal-overlay" id="changelogModal">
   <div class="modal">
     <div class="modal-head">
@@ -479,6 +514,8 @@ modeOpts.forEach(([k,l]) => {
 const modal = document.getElementById("changelogModal");
 document.getElementById("modalCloseBtn").onclick = () => modal.classList.remove("open");
 modal.addEventListener("click", e => { if (e.target === modal) modal.classList.remove("open"); });
+const sofModal = document.getElementById("sofModal");
+sofModal.addEventListener("click", e => { if (e.target === sofModal) sofModal.classList.remove("open"); });
 function updateModeTabs() {
   modeTabsEl.querySelectorAll(".tab").forEach(b => b.classList.toggle("active", b.dataset.key === eloMode));
 }
@@ -697,7 +734,7 @@ function drawChart(player, panel) {
       let tx = x(closest.c) + 12;
       if (tx + 120 > W) tx = x(closest.c) - 130;
       tip.style.left = tx + "px";
-      tip.style.top = (yFn(closest.v) - 40) + "px";
+      tip.style.top = Math.max(0, yFn(closest.v) - 40) + "px";
       ctx.clearRect(0, 0, W, H);
       drawChartContent(ctx, W, H, pad, points, vMin, vMax, cMin, cMax, c, x, yFn, closest, chartMode);
     } else {
@@ -1300,12 +1337,7 @@ function renderCups() {
     const arrow = active ? (cupSort.dir === 1 ? ' ▲' : ' ▼') : '';
     return `<div data-sort="${col}" style="cursor:pointer;user-select:none;text-align:${align};color:${active ? 'var(--text)' : 'inherit'}">${label}${arrow}</div>`;
   };
-  const cupsInfoBtn = '<span class="info-tip-wrap"><button class="info-btn" onclick="event.stopPropagation()" style="pointer-events:auto;margin-left:4px">ℹ</button>'
-    + '<div class="info-tip"><div class="st-head">Cup Strength (SOF)</div>'
-    + '1. Normalize ratings:<br><code>norm = elo × (2000 / max_elo)</code><br>'
-    + '2. Take top 10 players in the cup<br>'
-    + '3. <code>strength = avg(top10) / 1850 × 100</code>'
-    + '</div></span>';
+  const cupsInfoBtn = ' <button class="info-btn" onclick="event.stopPropagation();document.getElementById(\'sofModal\').classList.add(\'open\')" style="pointer-events:auto;margin-left:4px">ℹ</button>';
   header.innerHTML = sh('index','#' + cupsInfoBtn) + sh('cup','Cup') + sh('map','Map') + sh('mapper','Mapper') + sh('winner','Winner') + sh('size','Size','center') + sh('strength','Cup Strength','center');
   header.querySelectorAll('[data-sort]').forEach(el => {
     el.onclick = () => {
