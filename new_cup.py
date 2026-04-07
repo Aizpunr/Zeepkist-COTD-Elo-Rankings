@@ -268,6 +268,7 @@ cool_stats = [
     ('build_consistency.py', 'Consistency Index'),
     ('elo_stability.py', 'ELO Stability'),
     ('build_fastest.py', 'Fastest Times'),
+    ('build_whatif.py', 'What-If ELO'),
 ]
 print("=" * 50)
 print("Rebuilding Cool Stats...")

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What-If ELO — Zeepkist COTD</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔮</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#08080d;--surface:rgba(255,255,255,0.02);--border:rgba(255,255,255,0.06);
+--text:#e5e7eb;--dim:#9ca3af;--muted:#6b7280;--dark:#4b5563;
+--mono:'JetBrains Mono',monospace;--accent:#f59e0b;--red:#ef4444;--green:#10b981;--blue:#3b82f6;--purple:#8b5cf6;
+--grad:linear-gradient(135deg,#8b5cf6,#3b82f6)}
+html{background:var(--bg);color:var(--text)}
+body{font-family:'Space Grotesk',system-ui,sans-serif;min-height:100vh;padding:20px 12px}
+::selection{background:rgba(139,92,246,0.3)}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.1);border-radius:3px}
+.container{max-width:1000px;margin:0 auto}
+
+h1{text-align:center;font-size:32px;font-weight:800;margin-bottom:4px;
+background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sub{text-align:center;font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:28px}
+.back-link{display:inline-block;font-family:var(--mono);font-size:12px;color:var(--muted);text-decoration:none;margin-bottom:16px}
+.back-link:hover{color:var(--text)}
+
+/* Skip control */
+.skip-control{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 20px;margin-bottom:20px}
+.skip-label{font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.skip-row{display:flex;align-items:center;gap:16px}
+.skip-row input[type=range]{flex:1;-webkit-appearance:none;background:transparent;cursor:pointer;height:20px}
+.skip-row input[type=range]::-webkit-slider-track{height:4px;border-radius:2px;background:rgba(255,255,255,0.08)}
+.skip-row input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--purple);margin-top:-7px;box-shadow:0 0 10px rgba(139,92,246,0.4)}
+.skip-val{font-family:var(--mono);font-size:28px;font-weight:800;min-width:40px;text-align:center;
+background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.skip-meta{font-family:var(--mono);font-size:11px;color:var(--dark);margin-top:6px}
+
+/* Pills */
+.pills{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
+.pill{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 12px;text-align:center}
+.pill .pill-label{font-size:14px;font-weight:700;margin-bottom:4px}
+.pill .pill-who{font-family:var(--mono);font-size:11px;color:var(--dim)}
+.pill .pill-val{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:2px}
+
+/* Controls */
+.controls{display:flex;align-items:center;gap:12px;margin-bottom:10px;flex-wrap:wrap}
+.controls input[type="text"]{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:6px 10px;color:var(--text);font-family:var(--mono);font-size:12px;outline:none;width:180px}
+.controls input[type="text"]:focus{border-color:rgba(139,92,246,0.4)}
+.count{font-family:var(--mono);font-size:11px;color:var(--dark);margin-left:auto}
+
+/* Table */
+table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:12px;table-layout:fixed}
+thead th{text-align:left;padding:8px 6px;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);cursor:pointer;user-select:none;white-space:nowrap;border-bottom:1px solid var(--border)}
+thead th:hover{color:var(--text)}
+thead th.sorted-asc::after{content:' ▲';color:var(--purple)}
+thead th.sorted-desc::after{content:' ▼';color:var(--purple)}
+tbody tr{border-bottom:1px solid rgba(255,255,255,0.02);cursor:pointer}
+tbody tr:hover{background:rgba(255,255,255,0.03)}
+tr.selected{background:rgba(139,92,246,0.06)}
+td{padding:6px;vertical-align:middle}
+td.num{text-align:right;font-variant-numeric:tabular-nums}
+td.rank{color:var(--muted);text-align:right;width:30px}
+td.pname{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+th[data-col="elo"],th[data-col="cups"],th[data-col="avg"],
+th[data-col="best"],th[data-col="delta"],th[data-col="rdelta"]{text-align:right}
+
+.pos{color:var(--green)}.neg{color:var(--red)}
+
+/* Compare panel */
+.compare-panel{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:16px;margin:4px 0;animation:slideDown 0.2s ease-out}
+@keyframes slideDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.compare-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.compare-header .name{font-size:17px;font-weight:700}
+.close-btn{background:none;border:1px solid rgba(255,255,255,0.15);color:var(--dim);border-radius:6px;padding:3px 8px;cursor:pointer;font-size:11px}
+.compare-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:6px}
+.compare-cell{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:8px 6px;text-align:center}
+.compare-cell.active{border-color:rgba(139,92,246,0.4);background:rgba(139,92,246,0.06)}
+.cc-skip{font-family:var(--mono);font-size:10px;color:var(--muted)}
+.cc-rank{font-size:16px;font-weight:800;margin:2px 0}
+.cc-elo{font-family:var(--mono);font-size:11px;color:var(--dim)}
+.cc-delta{font-family:var(--mono);font-size:10px;margin-top:2px}
+
+/* Info */
+.info{font-family:var(--mono);font-size:10px;color:var(--dark);margin-top:20px;padding:12px 0;border-top:1px solid var(--border);line-height:1.6}
+
+@media(max-width:700px){
+  h1{font-size:24px}
+  .pills{grid-template-columns:1fr}
+  .compare-grid{grid-template-columns:repeat(auto-fill,minmax(65px,1fr))}
+  table{font-size:11px}
+  th[data-col="avg"],th[data-col="best"]{display:none}
+  td:nth-child(7),td:nth-child(8){display:none}
+}
+</style>
+</head>
+<body>
+<div class="container">
+<a href="stats.html" class="back-link">&larr; back to cool stats</a>
+<h1>What-If ELO</h1>
+<div class="sub">Remove early rounds, recalculate everything</div>
+
+<div class="skip-control">
+  <div class="skip-label">Skip first N elimination rounds</div>
+  <div class="skip-row">
+    <input type="range" id="skipSlider" min="0" max="14" value="0">
+    <div class="skip-val" id="skipVal">0</div>
+  </div>
+  <div class="skip-meta" id="skipMeta"></div>
+</div>
+
+<div class="pills" id="pills"></div>
+
+<div id="compareSlot"></div>
+
+<div class="controls">
+  <input type="text" id="search" placeholder="Search player...">
+  <div class="count" id="count"></div>
+</div>
+
+<table>
+  <thead><tr>
+    <th data-col="rank" style="width:36px;text-align:right">#</th>
+    <th data-col="name" style="width:160px">Player</th>
+    <th data-col="elo" style="width:70px;text-align:right">ELO</th>
+    <th data-col="delta" style="width:70px;text-align:right">ELO +/-</th>
+    <th data-col="rdelta" style="width:60px;text-align:right">Rank +/-</th>
+    <th data-col="cups" style="width:50px;text-align:right">Cups</th>
+    <th data-col="avg" style="width:55px;text-align:right">Avg</th>
+    <th data-col="best" style="width:45px;text-align:right">Best</th>
+  </tr></thead>
+  <tbody id="tbody"></tbody>
+</table>
+
+<div class="info">
+  <strong>How it works:</strong> For each cup, all players eliminated in the first N rounds are removed.
+  Remaining players get renumbered positions (with ties for same-round eliminations).
+  Weighted ELO is recalculated from scratch across all cups.
+  This shows who performs best when early-round variance is removed.<br><br>
+  <strong>Why?</strong> Early rounds can be chaotic — one bad start and you're out.
+  Skip rounds reveals who consistently performs in mid-to-late game elimination.
+</div>
+</div>
+
+<script>
+let DATA, maxSkip, levels, baseline, baseRank;
+let sortCol = 'rank', sortDir = 1;
+let selectedPlayer = null;
+
+fetch('whatif.json?v=' + Date.now()).then(r => r.json()).then(data => {
+  DATA = data;
+  maxSkip = data.max_skip;
+  levels = data.levels;
+  baseline = {};
+  data.levels['0'].forEach((p, i) => { baseline[p.n] = { elo: p.a, rank: i + 1 }; });
+  document.getElementById('skipSlider').max = maxSkip;
+  render();
+});
+
+const slider = document.getElementById('skipSlider');
+const searchEl = document.getElementById('search');
+slider.addEventListener('input', render);
+searchEl.addEventListener('input', render);
+
+document.querySelectorAll('th[data-col]').forEach(th => {
+  th.addEventListener('click', () => {
+    const col = th.dataset.col;
+    if (col === sortCol) sortDir *= -1;
+    else { sortCol = col; sortDir = col === 'name' ? 1 : -1; }
+    render();
+  });
+});
+
+function render() {
+  const skip = +slider.value;
+  const q = searchEl.value.toLowerCase();
+  document.getElementById('skipVal').textContent = skip;
+
+  const cupCount = DATA.meta.cups_per_level[String(skip)] || 0;
+  const level = levels[String(skip)] || [];
+  document.getElementById('skipMeta').textContent =
+    `${cupCount} cups · ${level.length} qualified players · avg lobby shrinks as rounds are removed`;
+
+  // Build rows with rank and deltas
+  let rows = level.map((p, i) => {
+    const b = baseline[p.n];
+    return {
+      rank: i + 1, ...p,
+      eloDelta: b ? +(p.a - b.elo).toFixed(1) : 0,
+      rankDelta: b ? b.rank - (i + 1) : 0,
+      baseRank: b ? b.rank : 999,
+    };
+  });
+
+  // Search filter
+  if (q) rows = rows.filter(r => r.n.toLowerCase().includes(q));
+
+  // Sort
+  rows.sort((a, b) => {
+    if (sortCol === 'name') return sortDir * a.n.localeCompare(b.n);
+    if (sortCol === 'rank') return sortDir * (a.rank - b.rank);
+    if (sortCol === 'elo') return sortDir * (b.a - a.a);
+    if (sortCol === 'delta') return sortDir > 0 ? Math.abs(b.eloDelta) - Math.abs(a.eloDelta) : a.eloDelta - b.eloDelta;
+    if (sortCol === 'rdelta') return sortDir > 0 ? Math.abs(b.rankDelta) - Math.abs(a.rankDelta) : a.rankDelta - b.rankDelta;
+    if (sortCol === 'cups') return sortDir * (b.c - a.c);
+    if (sortCol === 'avg') return sortDir * (a.v - b.v);
+    if (sortCol === 'best') return sortDir * (a.b - b.b);
+    return 0;
+  });
+
+  // Update sort indicators
+  document.querySelectorAll('th[data-col]').forEach(th => {
+    th.classList.remove('sorted-asc', 'sorted-desc');
+    if (th.dataset.col === sortCol)
+      th.classList.add(sortDir > 0 ? 'sorted-desc' : 'sorted-asc');
+  });
+
+  // Pills
+  if (skip > 0 && level.length > 0) {
+    let bigWin = null, bigLose = null, mostStable = null;
+    level.forEach((p, i) => {
+      const b = baseline[p.n];
+      if (!b) return;
+      const rd = b.rank - (i + 1);
+      const ed = +(p.a - b.elo).toFixed(1);
+      if (!bigWin || rd > bigWin.rd) bigWin = { n: p.n, rd, ed };
+      if (!bigLose || rd < bigLose.rd) bigLose = { n: p.n, rd, ed };
+      if (!mostStable || Math.abs(ed) < Math.abs(mostStable.ed)) mostStable = { n: p.n, rd, ed };
+    });
+    document.getElementById('pills').innerHTML = `
+      <div class="pill"><div class="pill-label" style="color:var(--green)">Biggest Climber</div>
+        <div class="pill-who">${bigWin ? bigWin.n : '—'}</div>
+        <div class="pill-val">${bigWin ? (bigWin.rd > 0 ? '+' : '') + bigWin.rd + ' ranks' : ''}</div></div>
+      <div class="pill"><div class="pill-label" style="color:var(--red)">Biggest Drop</div>
+        <div class="pill-who">${bigLose ? bigLose.n : '—'}</div>
+        <div class="pill-val">${bigLose ? (bigLose.rd > 0 ? '+' : '') + bigLose.rd + ' ranks' : ''}</div></div>
+      <div class="pill"><div class="pill-label" style="color:var(--purple)">Most Stable</div>
+        <div class="pill-who">${mostStable ? mostStable.n : '—'}</div>
+        <div class="pill-val">${mostStable ? (mostStable.ed > 0 ? '+' : '') + mostStable.ed + ' ELO' : ''}</div></div>`;
+  } else {
+    document.getElementById('pills').innerHTML = '';
+  }
+
+  // Table
+  const tbody = document.getElementById('tbody');
+  tbody.innerHTML = rows.map(r => {
+    const ec = r.eloDelta > 0.5 ? 'pos' : r.eloDelta < -0.5 ? 'neg' : '';
+    const rc = r.rankDelta > 0 ? 'pos' : r.rankDelta < 0 ? 'neg' : '';
+    const eSign = r.eloDelta > 0 ? '+' : '';
+    const rSign = r.rankDelta > 0 ? '+' : '';
+    const sel = selectedPlayer === r.n ? ' selected' : '';
+    return `<tr class="${sel}" data-name="${r.n}">
+      <td class="rank num">${r.rank}</td>
+      <td class="pname">${r.n}</td>
+      <td class="num">${r.a.toFixed(1)}</td>
+      <td class="num ${ec}">${skip > 0 ? eSign + r.eloDelta.toFixed(1) : '—'}</td>
+      <td class="num ${rc}">${skip > 0 ? rSign + r.rankDelta : '—'}</td>
+      <td class="num">${r.c}</td>
+      <td class="num">${r.v.toFixed(1)}</td>
+      <td class="num">${r.b || '—'}</td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('count').textContent = rows.length + ' players';
+
+  // Row click → compare
+  tbody.querySelectorAll('tr').forEach(tr => {
+    tr.addEventListener('click', () => {
+      const name = tr.dataset.name;
+      if (selectedPlayer === name) { selectedPlayer = null; document.getElementById('compareSlot').innerHTML = ''; }
+      else { selectedPlayer = name; renderCompare(name, skip); }
+      render();
+    });
+  });
+}
+
+function renderCompare(name, currentSkip) {
+  let cells = '';
+  for (let s = 0; s <= maxSkip; s++) {
+    const level = levels[String(s)] || [];
+    const idx = level.findIndex(p => p.n === name);
+    const active = s === currentSkip ? ' active' : '';
+    if (idx === -1) {
+      cells += `<div class="compare-cell${active}"><div class="cc-skip">Skip ${s}</div>
+        <div class="cc-rank" style="color:var(--dark)">—</div><div class="cc-elo">N/Q</div></div>`;
+      continue;
+    }
+    const p = level[idx];
+    const rank = idx + 1;
+    const b = baseline[name];
+    const rd = b ? b.rank - rank : 0;
+    const ed = b ? +(p.a - b.elo).toFixed(1) : 0;
+    const rc = rd > 0 ? 'pos' : rd < 0 ? 'neg' : '';
+    const ec = ed > 0.5 ? 'pos' : ed < -0.5 ? 'neg' : '';
+    cells += `<div class="compare-cell${active}">
+      <div class="cc-skip">Skip ${s}</div>
+      <div class="cc-rank">#${rank}</div>
+      <div class="cc-elo">${p.a.toFixed(0)}</div>
+      <div class="cc-delta ${rc}">${rd > 0 ? '+' : ''}${rd} ranks</div>
+      <div class="cc-delta ${ec}">${ed > 0 ? '+' : ''}${ed.toFixed(1)} ELO</div>
+    </div>`;
+  }
+  document.getElementById('compareSlot').innerHTML = `
+    <div class="compare-panel">
+      <div class="compare-header">
+        <span class="name">${name}</span>
+        <button class="close-btn" onclick="selectedPlayer=null;document.getElementById('compareSlot').innerHTML='';render()">close</button>
+      </div>
+      <div class="compare-grid">${cells}</div>
+    </div>`;
+}
+</script>
+<script data-goatcounter="https://aizpun.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

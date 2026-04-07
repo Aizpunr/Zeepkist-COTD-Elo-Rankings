@@ -731,10 +731,16 @@ function drawChart(player, panel) {
       } else {
         tip.innerHTML = `<div class="t-cup">${closest.l ? closest.l : "Cup #" + Math.round(closest.c)}</div><div class="t-pos">Pos: <span>#${closest.p}</span></div><div class="t-elo">Elo: <span>${closest.r.toFixed(1)}</span></div>`;
       }
-      let tx = x(closest.c) + 12;
-      if (tx + 120 > W) tx = x(closest.c) - 130;
+      const px = x(closest.c), py = yFn(closest.v);
+      const tipH = 70;
+      let tx = px - 60;
+      if (tx < 0) tx = 0;
+      if (tx + 120 > W) tx = W - 120;
       tip.style.left = tx + "px";
-      tip.style.top = Math.max(0, yFn(closest.v) - 40) + "px";
+      tip.style.right = "auto";
+      tip.style.bottom = "auto";
+      if (py > H / 2) { tip.style.top = (py - tipH - 12) + "px"; }
+      else { tip.style.top = (py + 12) + "px"; }
       ctx.clearRect(0, 0, W, H);
       drawChartContent(ctx, W, H, pad, points, vMin, vMax, cMin, cMax, c, x, yFn, closest, chartMode);
     } else {
