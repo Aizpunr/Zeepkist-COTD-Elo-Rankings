@@ -151,13 +151,13 @@ for rnd_num, rnd in enumerate(rounds, 1):
                     fastest_round = rnd_num
 
 # ── 2. Auto-detect xlsx file + columns ──
-elo_py_path = _p('elo_75.py')
+elo_py_path = _p('elo_engine.py')
 with open(elo_py_path) as f:
     elo_src = f.read()
 
 xlsx_matches = re.findall(r"parse_file\(_p\('(COTD \d+-\d+\.xlsx)'\)\)", elo_src)
 if not xlsx_matches:
-    print("ERROR: Could not find COTD xlsx reference in elo_75.py")
+    print("ERROR: Could not find COTD xlsx reference in elo_engine.py")
     sys.exit(1)
 current_xlsx = xlsx_matches[-1]
 xlsx_path = _p(current_xlsx)
@@ -217,7 +217,7 @@ if m:
         new_src = elo_src.replace(f"'{current_xlsx}'", f"'{new_xlsx}'")
         with open(elo_py_path, 'w') as f:
             f.write(new_src)
-        print(f"Updated elo_75.py: {current_xlsx} -> {new_xlsx}")
+        print(f"Updated elo_engine.py: {current_xlsx} -> {new_xlsx}")
     else:
         wb.save(xlsx_path)
         print(f"Saved to {current_xlsx}")
@@ -241,13 +241,13 @@ with open(json_path, 'w', encoding='utf-8') as f:
 print(f"JSON backup: cup_{cup_num}.json")
 print()
 
-# ── 5. Run elo_75.py ──
+# ── 5. Run elo_engine.py ──
 print("=" * 50)
-print("Running elo_75.py...")
+print("Running elo_engine.py...")
 print("=" * 50)
-result = subprocess.run([sys.executable, _p('elo_75.py')], cwd=_dir)
+result = subprocess.run([sys.executable, _p('elo_engine.py')], cwd=_dir)
 if result.returncode != 0:
-    print("ERROR: elo_75.py failed!")
+    print("ERROR: elo_engine.py failed!")
     sys.exit(1)
 print()
 
@@ -269,6 +269,7 @@ cool_stats = [
     ('elo_stability.py', 'ELO Stability'),
     ('build_fastest.py', 'Fastest Times'),
     ('build_whatif.py', 'What-If ELO'),
+    ('build_altrank.py', 'Alt Rankings'),
 ]
 print("=" * 50)
 print("Rebuilding Cool Stats...")

@@ -19,7 +19,7 @@ def _p(f): return os.path.join(base, f)
 def load_aliases():
     name_map = {}
     canonical = {}
-    lines = open(_p('elo_75.py'), encoding='utf-8').readlines()
+    lines = open(_p('elo_engine.py'), encoding='utf-8').readlines()
     collecting = False
     buf = []
     for line in lines:
@@ -116,8 +116,8 @@ def parse_file_with_rounds(filepath):
 
 # ── Load cups ───────────────────────────────────────────────────────────────
 
-# Read xlsx file list from elo_75.py source (auto-syncs when files change)
-elo_src = open(_p('elo_75.py'), encoding='utf-8').read()
+# Read xlsx file list from elo_engine.py source (auto-syncs when files change)
+elo_src = open(_p('elo_engine.py'), encoding='utf-8').read()
 xlsx_files = re.findall(r"parse_file\(_p\('(.+?\.xlsx)'\)\)", elo_src)
 xlsx_files = [f for f in xlsx_files if 'Troll' not in f and 'roulette' not in f.lower()]
 
@@ -180,7 +180,7 @@ for cup in all_cups:
 unique = set(name for cup in all_cups for _, name, _ in cup['players'])
 print(f"Unique players: {len(unique)}")
 
-# ── ELO functions (from elo_75.py, no ghost handling) ───────────────────────
+# ── ELO functions (from elo_engine.py, no ghost handling) ───────────────────────
 
 STARTING = 1500
 K_BASE = 32

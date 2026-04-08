@@ -569,7 +569,7 @@ output = {
         for i,(name,rating,cp,w,pd,bf,tp,ac) in enumerate(lb)
     ]
 }
-with open(_p('elo_results_75.json'),'w') as f:
+with open(_p('elo_results.json'),'w') as f:
     json.dump(output,f,indent=2)
 print("JSON saved")
 

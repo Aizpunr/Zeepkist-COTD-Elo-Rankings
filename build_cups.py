@@ -46,7 +46,7 @@ GHOST_DISPLAY = {
 }
 
 # ── 3. Invert player history into cup-centric data ──
-with open('elo_results_75.json', encoding='utf-8') as f:
+with open('elo_results.json', encoding='utf-8') as f:
     elo = json.load(f)
 
 cups = {}  # cup_id -> {players: [...], lobby_size, map, mapper}
@@ -66,7 +66,7 @@ for player in elo['leaderboard']:
 for cid in cups:
     cups[cid]['players'].sort(key=lambda p: p['pos'])
 
-# ── 4. Build ordered output using same sort as elo_75.py ──
+# ── 4. Build ordered output using same sort as elo_engine.py ──
 SPECIAL_CUP_ORDER = {
     'COTD Roulette 1': 25.5, 'COTD Roulette 2': 65.5,
     'Troll COTD 1': 15.5, 'Troll COTD 2': 26.5, 'Troll COTD 3': 36.5,

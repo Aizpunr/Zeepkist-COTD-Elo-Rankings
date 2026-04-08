@@ -10,11 +10,11 @@ sys.stdout.reconfigure(encoding='utf-8')
 base = os.path.dirname(os.path.abspath(__file__))
 def _p(f): return os.path.join(base, f)
 
-# Import CANONICAL aliases from elo_75.py
+# Import CANONICAL aliases from elo_engine.py
 def load_aliases():
-    """Parse CANONICAL dict from elo_75.py source."""
+    """Parse CANONICAL dict from elo_engine.py source."""
     name_map = {}
-    lines = open(_p('elo_75.py'), encoding='utf-8').readlines()
+    lines = open(_p('elo_engine.py'), encoding='utf-8').readlines()
     collecting = False
     buf = []
     for line in lines:
