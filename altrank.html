@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zeepkist COTD Alternative Rankings</title>
+<meta name="description" content="Alternative rankings for Zeepkist Cup of the Day — TrueSkill and Glicko-2 rating systems">
+<meta name="google-site-verification" content="7IX3Vehdh6Ll_2I7F7agYiGNxbJ4uNF0dtKQOj_o4BQ" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏆</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;600;700;800&family=Luckiest+Guy&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --accent: #f59e0b;
+    --legend: #dc2626; --gm: #ef4444; --master: #f59e0b; --diamond: #a855f7;
+    --plat: #3b82f6; --gold: #10b981; --silver: #6b7280; --bronze: #78716c;
+    --green: #10b981; --red: #ef4444; --mono: 'JetBrains Mono', monospace;
+  }
+  [data-theme="dark"] {
+    --bg: #08080d; --surface: rgba(255,255,255,0.02); --border: rgba(255,255,255,0.06);
+    --border-bright: rgba(255,255,255,0.08); --text: #e5e7eb; --text-dim: #9ca3af;
+    --text-muted: #6b7280; --text-dark: #4b5563;
+    --surface-hover: rgba(255,255,255,0.05); --row-hover: rgba(255,255,255,0.03);
+    --btn-border: rgba(255,255,255,0.15); --btn-border-hover: rgba(255,255,255,0.3);
+    --modal-bg: #0d0d14; --modal-overlay: rgba(0,0,0,0.65);
+    --tooltip-bg: rgba(10,10,15,0.95); --scrollbar: rgba(255,255,255,0.1);
+    --chart-grid: rgba(255,255,255,0.06); --chart-guide: rgba(255,255,255,0.12);
+    --row-border: rgba(255,255,255,0.03); --modal-border: rgba(255,255,255,0.12);
+    --pname: #f3f4f6; --link: #ccc;
+  }
+  [data-theme="light"] {
+    --bg: #f5f5f7; --surface: rgba(0,0,0,0.02); --border: rgba(0,0,0,0.08);
+    --border-bright: rgba(0,0,0,0.12); --text: #1f2937; --text-dim: #4b5563;
+    --text-muted: #6b7280; --text-dark: #9ca3af;
+    --surface-hover: rgba(0,0,0,0.05); --row-hover: rgba(0,0,0,0.03);
+    --btn-border: rgba(0,0,0,0.15); --btn-border-hover: rgba(0,0,0,0.3);
+    --modal-bg: #ffffff; --modal-overlay: rgba(0,0,0,0.35);
+    --tooltip-bg: rgba(255,255,255,0.95); --scrollbar: rgba(0,0,0,0.15);
+    --chart-grid: rgba(0,0,0,0.06); --chart-guide: rgba(0,0,0,0.15);
+    --row-border: rgba(0,0,0,0.05); --modal-border: rgba(0,0,0,0.12);
+    --pname: #111827; --link: #4b5563;
+  }
+  html { background: var(--bg); color: var(--text); }
+  body { font-family: 'Space Grotesk', system-ui, sans-serif; min-height: 100vh; padding: 20px 12px; }
+  ::selection { background: rgba(245,158,11,0.3); }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--scrollbar); border-radius: 3px; }
+
+  .container { max-width: 1080px; margin: 0 auto; }
+
+  .header { text-align: center; margin-bottom: 28px; position: relative; }
+  .header h1 {
+    font-size: 28px; font-weight: 800; margin: 0;
+    background: linear-gradient(135deg, #f59e0b, #ef4444, #8b5cf6);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .header .sub { font-family: var(--mono); font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+
+  .controls { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; align-items: center; position: sticky; top: 0; z-index: 20; background: var(--bg); padding: 8px 0; }
+  .tabs { display: flex; gap: 3px; background: var(--surface-hover); border-radius: 8px; padding: 3px; }
+  .tab {
+    padding: 5px 12px; border-radius: 6px; border: none; font-size: 11px;
+    font-family: var(--mono); font-weight: 600; cursor: pointer;
+    background: transparent; color: var(--text-muted); transition: all 0.15s;
+  }
+  .tab.active { background: rgba(245,158,11,0.2); color: var(--accent); }
+  .tab:hover:not(.active) { color: var(--text-dim); }
+  .tab.race-tab { background: linear-gradient(135deg, rgba(239,68,68,0.15), rgba(245,158,11,0.15)); color: #ef4444; font-weight: 700; }
+  .tab.race-tab:not(.active) { animation: racePulse 2s ease-in-out infinite; }
+  .tab.race-tab.active { background: linear-gradient(135deg, rgba(239,68,68,0.25), rgba(245,158,11,0.25)); color: #f59e0b; }
+  @keyframes racePulse { 0%,100% { opacity: 0.85; } 50% { opacity: 1; box-shadow: 0 0 8px rgba(239,68,68,0.3); } }
+
+  .cup-toggle {
+    display: flex; align-items: center; gap: 5px; cursor: pointer;
+    font-family: var(--mono); font-size: 11px; color: var(--text-muted);
+    user-select: none; padding: 3px 0;
+  }
+  .cup-toggle input[type="checkbox"] {
+    accent-color: var(--accent); width: 13px; height: 13px; cursor: pointer;
+  }
+  .cup-toggle-label { transition: color 0.15s; }
+  .cup-toggle:hover .cup-toggle-label { color: var(--text-dim); }
+
+  .min-cups { display: flex; align-items: center; gap: 6px; }
+  .min-cups span { font-size: 11px; font-family: var(--mono); color: var(--text-muted); }
+  .min-cups .val { color: var(--accent); width: 16px; }
+  input[type="range"] { width: 70px; accent-color: var(--accent); }
+
+  .chart-panel {
+    background: var(--row-hover); border: 1px solid var(--border-bright);
+    border-radius: 12px; padding: 16px 12px; margin-bottom: 16px;
+    animation: slideDown 0.2s ease-out;
+  }
+  @keyframes slideDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+
+  .chart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .chart-header .name { font-size: 17px; font-weight: 700; }
+  .chart-header .tier {
+    margin-left: 8px; font-size: 10px; font-family: var(--mono); opacity: 0.7;
+    padding: 2px 6px; border-radius: 4px;
+  }
+  .chart-header .stats { font-size: 12px; color: var(--text-dim); font-family: var(--mono); }
+  .close-btn {
+    background: none; border: 1px solid var(--btn-border); color: var(--text-dim);
+    border-radius: 6px; padding: 3px 8px; cursor: pointer; font-size: 11px; flex-shrink: 0;
+  }
+  .close-btn:hover { border-color: var(--btn-border-hover); color: var(--text); }
+
+  .chart-canvas { width: 100%; height: 180px; position: relative; overflow-x: auto; overflow-y: hidden; }
+
+  .table { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  .table-header {
+    display: grid; grid-template-columns: 36px 1fr 56px 66px 36px 118px 46px 40px 38px 54px;
+    align-items: center;
+    padding: 10px 14px; border-bottom: 1px solid var(--border-bright);
+    font-family: var(--mono); font-size: 12px; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .table-header .sortable { cursor: pointer; transition: color 0.15s; }
+  .table-header .sortable:hover { color: var(--accent); }
+  .table-header .sortable.sort-active { color: var(--accent); }
+  .row {
+    display: grid; grid-template-columns: 36px 1fr 56px 66px 36px 118px 46px 40px 38px 54px;
+    padding: 8px 14px; border-bottom: 1px solid var(--row-border);
+    cursor: pointer; align-items: center; transition: background 0.1s;
+  }
+  .row:hover { background: var(--row-hover); }
+  .row.selected { background: rgba(245,158,11,0.08); }
+  .row.faded { opacity: 0.65; }
+  .row .rank { font-family: var(--mono); font-size: 14px; color: var(--text-muted); display: flex; align-items: center; gap: 2px; }
+  .row .player { display: flex; align-items: center; gap: 6px; min-width: 0; }
+  .row .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .row .pname { font-size: 15px; font-weight: 600; color: var(--pname); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .row .raw { text-align: right; font-family: var(--mono); font-size: 14px; color: var(--text-muted); }
+  .row .elo-cell { text-align: right; font-family: var(--mono); font-size: 15px; font-weight: 700; display: flex; align-items: center; justify-content: flex-end; gap: 3px; }
+  .row .wins-cell { text-align: center; font-family: var(--mono); font-size: 14px; }
+  .row .podium-cell { text-align: center; font-family: var(--mono); font-size: 13px; color: var(--text-dim); }
+  .row .avg-cell { text-align: right; font-family: var(--mono); font-size: 14px; }
+  .row .cups-cell { text-align: center; font-family: var(--mono); font-size: 14px; color: var(--text-muted); }
+  .row .best-cell { text-align: center; font-family: var(--mono); font-size: 14px; }
+  .row .peak-cell { text-align: right; font-family: var(--mono); font-size: 14px; color: var(--text-muted); }
+  .delta-up { color: var(--green); font-size: 10px; font-weight: 700; }
+  .delta-down { color: var(--red); font-size: 10px; font-weight: 700; }
+  .elo-delta-up { color: var(--green); font-size: 9px; font-weight: 600; }
+  .elo-delta-down { color: var(--red); font-size: 9px; font-weight: 600; }
+
+  .footer { margin-top: 12px; font-family: var(--mono); font-size: 12px; color: var(--text-dark); text-align: center; line-height: 1.6; }
+  .footer-link { display: inline-flex; align-items: center; gap: 5px; color: var(--text-dim); text-decoration: none; transition: color 0.15s; }
+  .footer-link.yt:hover { color: #ff0000; }
+  .footer-link.tw:hover { color: #9146ff; }
+
+  .tooltip {
+    background: var(--tooltip-bg); border: 1px solid var(--btn-border);
+    border-radius: 8px; padding: 8px 12px; font-family: var(--mono); font-size: 12px;
+    pointer-events: none; position: absolute; z-index: 10; display: none;
+  }
+  .tooltip .t-cup { color: var(--pname); font-weight: 700; }
+  .tooltip .t-pos { color: var(--text-dim); }
+  .tooltip .t-pos span { color: var(--accent); }
+  .tooltip .t-elo { color: var(--text-dim); }
+  .tooltip .t-elo span { color: var(--plat); }
+
+  .chart-tabs { display: flex; gap: 3px; margin-bottom: 10px; }
+  .chart-tab {
+    padding: 3px 10px; border-radius: 5px; border: none; font-size: 10px;
+    font-family: var(--mono); font-weight: 600; cursor: pointer;
+    background: transparent; color: var(--text-muted); transition: all 0.15s;
+  }
+  .chart-tab.active { background: rgba(245,158,11,0.2); color: var(--accent); }
+  .chart-tab:hover:not(.active) { color: var(--text-dim); }
+
+  .info-btn {
+    background: none; border: 1px solid var(--border-bright); color: var(--text-muted);
+    border-radius: 4px; padding: 2px 7px; cursor: pointer; font-size: 11px;
+    font-family: var(--mono); margin-left: 2px; transition: all 0.15s; line-height: 1;
+  }
+  .info-btn:hover { border-color: var(--btn-border-hover); color: var(--accent); }
+
+  .info-tip-wrap { position: relative; display: inline-flex; align-items: center; }
+  .info-tip {
+    display: none; position: absolute; top: 100%; left: 0; margin-top: 8px;
+    background: var(--tooltip-bg); border: 1px solid var(--btn-border);
+    border-radius: 8px; padding: 10px 14px; font-family: var(--mono); font-size: 10px;
+    color: var(--text-dim); width: 300px; z-index: 20; line-height: 1.7;
+    white-space: normal; text-align: left;
+  }
+  .info-tip code { color: var(--accent); font-size: 10px; }
+  .info-tip .st-head { color: var(--text); font-weight: 700; margin-bottom: 4px; }
+  .info-tip-wrap:hover .info-tip { display: block; }
+
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; background: var(--modal-overlay);
+    z-index: 100; align-items: center; justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--modal-bg); border: 1px solid var(--modal-border);
+    border-radius: 12px; padding: 24px 28px; max-width: 520px; width: 90%;
+    font-family: var(--mono); font-size: 12px; line-height: 1.75; color: var(--text-dim);
+    max-height: 80vh; overflow-y: auto;
+  }
+  .modal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+  .modal-head h3 { color: var(--text); font-size: 13px; font-weight: 700; margin: 0; }
+  .modal-close {
+    background: none; border: 1px solid var(--btn-border); color: var(--text-dim);
+    border-radius: 6px; padding: 3px 8px; cursor: pointer; font-size: 11px; font-family: var(--mono);
+  }
+  .modal-close:hover { border-color: var(--btn-border-hover); color: var(--text); }
+  .entry-date { color: var(--accent); font-weight: 700; margin-bottom: 8px; }
+  .modal ul { padding-left: 18px; margin: 0; }
+  .modal li { margin-bottom: 5px; }
+  .modal h4 { color: var(--accent); font-size: 11px; font-weight: 700; margin: 14px 0 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .modal p { margin: 0 0 8px; }
+  .modal .sof-formula { background: rgba(255,255,255,0.05); border: 1px solid var(--btn-border); border-radius: 6px; padding: 8px 12px; margin: 8px 0; text-align: center; font-size: 13px; font-weight: 600; color: var(--text); }
+  .modal .sof-ref { display: flex; gap: 8px; align-items: baseline; margin-bottom: 6px; }
+  .modal .sof-ref .sof-pct { font-weight: 700; min-width: 52px; font-size: 12px; }
+  .modal .sof-ref .sof-desc { color: var(--text-dim); }
+
+  .quote {
+    position: fixed; font-family: 'Luckiest Guy', cursive; pointer-events: none;
+    opacity: 0.11; z-index: 0; white-space: nowrap;
+  }
+  .quote .q-name { color: var(--accent); }
+  .quote .q-text { color: var(--pname); }
+
+  .search-input {
+    background: var(--surface-hover); border: 1px solid var(--border);
+    border-radius: 6px; padding: 5px 10px; font-size: 11px;
+    font-family: var(--mono); color: var(--text); outline: none;
+    width: 150px; transition: border-color 0.15s; margin-left: auto;
+  }
+  .search-input::placeholder { color: var(--text-dark); }
+  .search-input:focus { border-color: rgba(245,158,11,0.4); }
+
+  .compare-panel {
+    background: var(--row-hover); border: 1px solid var(--border-bright);
+    border-radius: 12px; padding: 16px; margin-bottom: 16px;
+    animation: slideDown 0.2s ease-out;
+  }
+  #comparePanel.sticky-panel {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--bg);
+    padding-top: 6px;
+  }
+  .row.comp-p1 { background: rgba(6,182,212,0.08); }
+  .row.comp-p2 { background: rgba(249,115,22,0.08); }
+  .row.comp-p1:hover { background: rgba(6,182,212,0.12) !important; }
+  .row.comp-p2:hover { background: rgba(249,115,22,0.12) !important; }
+
+  .mascot-sprite {
+    position: fixed; bottom: 60px; width: 160px;
+    mix-blend-mode: lighten; opacity: 0.75; z-index: 1;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  [data-theme="light"] .mascot-sprite { mix-blend-mode: multiply; }
+  #sandalsSprite { left: 10px; cursor: pointer; }
+  #sandalsSprite:hover { opacity: 1; transform: scale(1.04); }
+  .sandals-wrap { position: fixed; bottom: 60px; left: 10px; z-index: 1; text-align: center; text-decoration: none; }
+  .sandals-wrap .mascot-sprite { position: static; }
+  .sandals-label { font-family: var(--mono); font-size: 10px; color: var(--text-muted); margin-top: 2px; transition: color 0.2s; display: block; }
+  .sandals-wrap:hover .sandals-label { color: var(--accent); }
+  #lexerSprite { right: 10px; cursor: pointer; }
+  #lexerSprite:hover { opacity: 1; transform: scale(1.04); }
+  #lexerSprite.curse-active { filter: drop-shadow(0 0 12px #ef4444); opacity: 1; }
+
+  #lexerCrashSprite {
+    position: fixed; top: 10px; right: 10px; width: 320px;
+    mix-blend-mode: lighten; opacity: 0; z-index: 1;
+    pointer-events: none; transition: opacity 0.3s;
+  }
+  [data-theme="light"] #lexerCrashSprite { mix-blend-mode: multiply; }
+  #lexerCrashSprite.curse-active { opacity: 0.85; }
+
+  .theme-toggle {
+    position: absolute; top: 8px; right: 0;
+    background: var(--surface-hover); border: 1px solid var(--border);
+    border-radius: 8px; padding: 5px 10px; cursor: pointer;
+    font-size: 16px; line-height: 1; transition: border-color 0.15s;
+  }
+  .theme-toggle:hover { border-color: var(--btn-border-hover); }
+
+  .mobile-stats-link { display: none; }
+  .mobile-stats-btn { display: none; font-size: 11px; font-family: var(--mono); color: var(--accent); text-decoration: none; padding: 4px 8px; border: 1px solid var(--accent); border-radius: 6px; white-space: nowrap; }
+  @media (max-width: 1280px) { .mascot-sprite { display: none; } #lexerCrashSprite { display: none; } .sandals-wrap { display: none; } .mobile-stats-link { display: inline; } .mobile-stats-btn { display: inline-block; } }
+  @media (max-width: 700px) {
+    .table-header, .row { grid-template-columns: 30px 1fr 50px 24px 70px !important; font-size: 10px; }
+    .table-header > :nth-child(4),
+    .table-header > :nth-child(7), .table-header > :nth-child(8), .table-header > :nth-child(9), .table-header > :nth-child(10),
+    .row > :nth-child(4),
+    .row > :nth-child(7), .row > :nth-child(8), .row > :nth-child(9), .row > :nth-child(10) { display: none !important; }
+    .header h1 { font-size: 22px; }
+    .quote { display: none; }
+  }
+</style>
+<script>
+(function(){
+  var t = localStorage.getItem('theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', t);
+})();
+</script>
+</head>
+<body>
+<div class="quote" style="top:6%;left:5%;font-size:21px;transform:rotate(-5deg)"><span class="q-name" style="color:#aa55ff">sandals:</span> <span class="q-text">"what am i doing, ok lets get a good run"</span></div>
+<div class="quote" style="top:35%;right:4%;font-size:20px;transform:rotate(3deg)"><span class="q-name" style="color:#ff3333">Northwind:</span> <span class="q-text">"i hate this map"</span></div>
+<div class="quote" style="top:65%;left:3%;font-size:23px;transform:rotate(-4deg)"><span class="q-name" style="color:#10b981">quickracer10:</span> <span class="q-text">"this the map?"</span></div>
+<div class="quote" style="top:62%;right:5%;font-size:21px;transform:rotate(2deg)"><span class="q-name" style="color:#10b981">Hi Im Yolo:</span> <span class="q-text">"this risky is evil"</span></div>
+<div class="quote" style="top:48%;left:4.5%;font-size:20px;transform:rotate(-3deg)"><span class="q-name" style="color:#10b981">Lexer:</span> <span class="q-text">"oh no, outer tube!"</span></div>
+<div class="container" id="app">
+  <div class="header">
+    <h1>Zeepkist COTD Alternative Rankings</h1>
+    <button class="theme-toggle" id="themeToggle" title="Toggle light/dark mode"></button>
+  </div>
+
+  <div class="controls">
+    <div class="tabs" id="eloModeTabs"></div>
+    <div class="tabs"><button class="tab" id="cupsTabBtn" data-key="cups">Cups</button></div>
+    <label class="cup-toggle" id="cupToggle"><input type="checkbox" id="trollCheck" checked><span class="cup-toggle-label">Include troll cups</span></label>
+    <label class="cup-toggle" id="risingToggle"><input type="checkbox" id="risingCheck"><span class="cup-toggle-label">On the Rise</span></label>
+    <input type="checkbox" id="curseCheck" style="display:none">
+    <label class="cup-toggle" id="compareToggle"><input type="checkbox" id="compareCheck"><span class="cup-toggle-label">Compare</span></label>
+    <a href="stats.html" class="mobile-stats-btn">Cool Stats</a>
+    <input type="text" class="search-input" id="searchInput" placeholder="Search player...">
+  </div>
+
+  <div id="comparePanel"></div>
+
+  <div class="table">
+    <div class="table-header" id="tableHeader">
+      <div>#</div><div>Player</div><div class="sortable" data-sort="rating" style="text-align:right">Elo</div><div class="sortable sort-active" data-sort="active" style="text-align:right">Active</div><div class="sortable" data-sort="wins" style="text-align:center">Wins</div><div class="sortable" data-sort="podium" style="text-align:center">Podium</div><div class="sortable" data-sort="avg" style="text-align:right">Avg</div><div class="sortable" data-sort="cups" style="text-align:center">App</div><div style="text-align:center">Best</div><div class="sortable" data-sort="peak" style="text-align:right">Peak</div>
+    </div>
+    <div id="tableBody"></div>
+  </div>
+
+  <div class="footer">
+    Click player for history · Faded = inactive decay · <span id="tierLegend"></span>
+    <div style="margin-top:10px;display:flex;align-items:center;justify-content:center;gap:18px">
+      <span style="color:var(--text-dim)">Watch COTD:</span>
+      <a href="https://www.youtube.com/@The_Lexer" target="_blank" rel="noopener" class="footer-link yt">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        Lexer
+      </a>
+      <a href="https://www.youtube.com/@Hi_Im_Sandals" target="_blank" rel="noopener" class="footer-link yt">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        Sandals
+      </a>
+      <a href="https://www.twitch.tv/gualexitar" target="_blank" rel="noopener" class="footer-link tw">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg>
+        GuAlexItar
+      </a>
+      <span class="mobile-stats-link" style="color:var(--border-bright)">|</span>
+      <a href="stats.html" class="footer-link mobile-stats-link" style="color:var(--accent)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>
+        Cool Stats
+      </a>
+      <span style="color:var(--border-bright)">|</span>
+      <a href="lexertools.html" class="footer-link" style="color:var(--text-dark)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg>
+        lexertools
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="sofModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>Cup Strength (SOF)</h3>
+      <button class="modal-close" onclick="document.getElementById('sofModal').classList.remove('open')">&#10005; close</button>
+    </div>
+    <p>Measures how stacked a cup's lobby is compared to a theoretical maximum field.</p>
+
+    <h4>How it's calculated</h4>
+    <ul>
+      <li>All rated players are normalized to a <b style="color:var(--text)">0&ndash;2000</b> scale, where the #1 rated player = 2000.</li>
+      <li>From each cup, the <b style="color:var(--text)">top 10 finishers</b> by normalized rating are selected.</li>
+      <li>If fewer than 10 rated players, remaining slots are padded with the lowest rated player in the pool.</li>
+    </ul>
+    <div class="sof-formula">SOF = average(top 10) / 1850 &times; 100</div>
+
+    <h4>Why top 10?</h4>
+    <p>Lobby sizes vary wildly (5 to 60+). Using the top 10 makes cups comparable regardless of how many casuals show up. A 58-player cup and a 35-player cup with the same elite players get the same SOF.</p>
+
+    <h4>Why normalize?</h4>
+    <p>As ratings inflate over time, raw values would make older cups look weaker. Normalization scales everyone relative to the current best, keeping the metric fair across all cups.</p>
+
+    <h4>Reference</h4>
+    <div class="sof-ref"><span class="sof-pct" style="color:#10b981">99%+</span><span class="sof-desc">All-time stacked. Big 3 + top 10 present. Only 6 cups ever hit this.</span></div>
+    <div class="sof-ref"><span class="sof-pct" style="color:#eab308">97&ndash;93%</span><span class="sof-desc">Strong cup. Some top players missing, top 20 fill the gaps.</span></div>
+    <div class="sof-ref"><span class="sof-pct" style="color:#ef4444">90&ndash;80%</span><span class="sof-desc">Weak cup. Some top players present, top 40 players fill the top 10.</span></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="changelogModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>Alternative Rankings — About</h3>
+      <button class="modal-close" id="modalCloseBtn">✕ close</button>
+    </div>
+    <div class="entry-date">08.04.26</div>
+    <ul>
+      <li><b>TrueSkill</b> — Microsoft's Bayesian rating system. Each player has a skill estimate (mu) and uncertainty (sigma). Shows the conservative rating (mu - 3sigma), which penalizes uncertainty and rewards grinding cups. FFA adapted via pairwise decomposition.</li>
+      <li><b>Glicko-2</b> — Mark Glickman's iterative rating system. Tracks rating, deviation, and volatility. More responsive to form changes than ELO. FFA adapted with per-opponent scaling.</li>
+      <li><b>Both systems handle inactivity naturally</b> — uncertainty grows when you don't play, so returning players need fewer cups to move. Display decay still applied (0.5%/cup after 3 missed) for consistency with the main leaderboard.</li>
+      <li><b>Same data, different stories</b> — both process the exact same cup results as the main ELO page. Differences in rankings reveal which players benefit from different mathematical assumptions.</li>
+    </ul>
+  </div>
+</div>
+
+<a href="stats.html" class="sandals-wrap"><img id="sandalsSprite" src="sandals.png" class="mascot-sprite"><span class="sandals-label">Cool Stats</span></a>
+<img id="lexerSprite" src="lexer.png" class="mascot-sprite" title="...">
+<img id="lexerCrashSprite" src="lexercrash.png">
+
+<script>
+// ── DATA ──
+let eloData, weightedData, eloDataPure, weightedDataPure, seasonData = null, snap = null, risingData = null, curseData = null, allData = null, cupsData = null;
+let globalCupMax = 133;
+
+// ── THEME ──
+function setTheme(t) {
+  document.documentElement.setAttribute('data-theme', t);
+  localStorage.setItem('theme', t);
+  const btn = document.getElementById('themeToggle');
+  if (btn) btn.textContent = t === 'dark' ? '\u2600\uFE0F' : '\uD83C\uDF19';
+  if (typeof render === 'function') render();
+}
+document.addEventListener('DOMContentLoaded', function() {
+  var cur = document.documentElement.getAttribute('data-theme') || 'dark';
+  var btn = document.getElementById('themeToggle');
+  btn.textContent = cur === 'dark' ? '\u2600\uFE0F' : '\uD83C\uDF19';
+  btn.addEventListener('click', function() {
+    setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+});
+
+// ── HELPERS ──
+function rColor(r) {
+  if (eloMode === "trueskill") {
+    if (r >= 2750) return "#dc2626";
+    if (r >= 2500) return "#a855f7";
+    if (r >= 2250) return "#3b82f6";
+    if (r >= 2000) return "#10b981";
+    if (r >= 1500) return "#6b7280";
+    return "#78716c";
+  }
+  // glicko2
+  if (r >= 2000) return "#dc2626";
+  if (r >= 1800) return "#a855f7";
+  if (r >= 1700) return "#3b82f6";
+  if (r >= 1600) return "#10b981";
+  if (r >= 1500) return "#6b7280";
+  return "#78716c";
+}
+function tier(r) {
+  if (eloMode === "trueskill") {
+    if (r >= 2750) return "LEGEND";
+    if (r >= 2500) return "PRO";
+    if (r >= 2250) return "MASTER";
+    if (r >= 2000) return "GOLD";
+    if (r >= 1500) return "SILVER";
+    return "BRONZE";
+  }
+  // glicko2
+  if (r >= 2000) return "LEGEND";
+  if (r >= 1800) return "PRO";
+  if (r >= 1700) return "MASTER";
+  if (r >= 1600) return "GOLD";
+  if (r >= 1500) return "SILVER";
+  return "BRONZE";
+}
+function esc(s) { const d = document.createElement("div"); d.textContent = s; return d.innerHTML; }
+function cssVar(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+
+// ── CUSTOM NAME COLORS (request yours!) ──
+const customColors = {
+  "Lexer": "#10b981",
+  "Sandals": "#aa55ff",
+  "GuAlexItar": "#f5c842",
+};
+
+// ── STATE ──
+let sortKey = "active";
+let eloMode = "trueskill";
+let viewMode = "leaderboard";
+let includeTroll = true;
+let selected = null;
+let chartMode = "elo";
+let compareMode = false;
+let compareList = []; // up to 2 player names
+const COMP_COLORS = ['#06b6d4', '#f97316'];
+
+function getActiveData() {
+  if (eloMode === "glicko2") return includeTroll ? weightedData : weightedDataPure;
+  return includeTroll ? eloData : eloDataPure;
+}
+
+// ── SORT (via clickable table headers) ──
+
+// ── MIN CUPS SLIDER ──
+// ── ELO MODE TABS ──
+const modeOpts = [["trueskill","TrueSkill"],["glicko2","Glicko-2"]];
+const modeTabsEl = document.getElementById("eloModeTabs");
+modeOpts.forEach(([k,l]) => {
+  const btn = document.createElement("button");
+  btn.className = "tab" + (k === eloMode ? " active" : "") + (k === "season" ? " race-tab" : "");
+  btn.textContent = l;
+  btn.dataset.key = k;
+  btn.onclick = () => { eloMode = k; updateModeTabs(); selected = null; if (viewMode === "cups") viewMode = "leaderboard"; document.getElementById("cupsTabBtn").classList.remove("active"); document.getElementById("cupToggle").style.display = k === "season" ? "none" : ""; render(); };
+  modeTabsEl.appendChild(btn);
+});
+
+const modal = document.getElementById("changelogModal");
+document.getElementById("modalCloseBtn").onclick = () => modal.classList.remove("open");
+modal.addEventListener("click", e => { if (e.target === modal) modal.classList.remove("open"); });
+const sofModal = document.getElementById("sofModal");
+sofModal.addEventListener("click", e => { if (e.target === sofModal) sofModal.classList.remove("open"); });
+function updateModeTabs() {
+  modeTabsEl.querySelectorAll(".tab").forEach(b => b.classList.toggle("active", b.dataset.key === eloMode));
+}
+
+// ── CUPS TAB ──
+document.getElementById("cupsTabBtn").onclick = () => {
+  viewMode = viewMode === "cups" ? "leaderboard" : "cups";
+  document.getElementById("cupsTabBtn").classList.toggle("active", viewMode === "cups");
+  if (viewMode !== "cups") { selected = null; }
+  else {
+    document.getElementById("risingCheck").checked = false;
+    setCurseActive(false);
+    compareMode = false; document.getElementById("compareCheck").checked = false; compareList = [];
+    selected = null;
+  }
+  render();
+};
+
+// ── CUP FILTER TOGGLE ──
+document.getElementById("trollCheck").onchange = (e) => {
+  includeTroll = e.target.checked;
+  selected = null;
+  render();
+};
+
+// ── RISING TOGGLE ──
+document.getElementById("risingCheck").onchange = (e) => {
+  viewMode = e.target.checked ? "rising" : "leaderboard";
+  setCurseActive(false);
+  document.getElementById("cupsTabBtn").classList.remove("active");
+  selected = null;
+  render();
+};
+
+// ── LEXER CURSE TOGGLE ──
+document.getElementById("curseCheck").onchange = (e) => {
+  viewMode = e.target.checked ? "curse" : "leaderboard";
+  document.getElementById("risingCheck").checked = false;
+  selected = null;
+  setCurseActive(e.target.checked);
+  render();
+};
+function setCurseActive(on) {
+  document.getElementById("curseCheck").checked = on;
+  document.getElementById("lexerSprite").classList.toggle("curse-active", on);
+  document.getElementById("lexerCrashSprite").classList.toggle("curse-active", on);
+}
+document.getElementById("lexerSprite").addEventListener("click", () => {
+  const cb = document.getElementById("curseCheck");
+  cb.checked = !cb.checked;
+  cb.dispatchEvent(new Event("change"));
+});
+
+// ── COMPARE TOGGLE ──
+document.getElementById("compareCheck").onchange = (e) => {
+  compareMode = e.target.checked;
+  if (compareMode) {
+    selected = null;
+    if (viewMode === "curse") {
+      setCurseActive(false);
+      viewMode = "leaderboard";
+    }
+  } else { compareList = []; }
+  render();
+};
+
+// ── SEARCH ──
+document.getElementById("searchInput").oninput = () => render();
+
+// ── FILTERING & SORTING ──
+function getFiltered() {
+  const src = getActiveData();
+  // Update tier legend
+  const tl = document.getElementById("tierLegend");
+  if (eloMode === "trueskill") {
+    tl.innerHTML = '<span style="color:#dc2626">Legend 2750+</span> \u00b7 <span style="color:#a855f7">Pro 2500+</span> \u00b7 <span style="color:#3b82f6">Master 2250+</span> \u00b7 <span style="color:#10b981">Gold 2000+</span>';
+  } else {
+    tl.innerHTML = '<span style="color:#dc2626">Legend 2000+</span> \u00b7 <span style="color:#a855f7">Pro 1800+</span> \u00b7 <span style="color:#3b82f6">Master 1700+</span> \u00b7 <span style="color:#10b981">Gold 1600+</span>';
+  }
+  const minCups = eloMode === "season" ? 2 : 5;
+  let d = src.filter(p => p.cups >= minCups || (p.podiums.gold + p.podiums.silver + p.podiums.bronze) > 0);
+  if (sortKey === "rating") d.sort((a,b) => b.rating - a.rating);
+  else if (sortKey === "active") d.sort((a,b) => b.active - a.active);
+  else if (sortKey === "wins") d.sort((a,b) => b.wins - a.wins || b.podiums.silver - a.podiums.silver || b.podiums.bronze - a.podiums.bronze || b.active - a.active);
+  else if (sortKey === "podium") d.sort((a,b) => (b.podiums.gold+b.podiums.silver+b.podiums.bronze) - (a.podiums.gold+a.podiums.silver+a.podiums.bronze) || b.podiums.gold - a.podiums.gold || b.podiums.silver - a.podiums.silver || b.podiums.bronze - a.podiums.bronze || b.active - a.active);
+  else if (sortKey === "cups") d.sort((a,b) => b.cups - a.cups || b.active - a.active);
+  else if (sortKey === "uncertainty") d.sort((a,b) => a.uncertainty - b.uncertainty || b.active - a.active);
+  else if (sortKey === "avg") d.sort((a,b) => a.avg_position - b.avg_position);
+  else if (sortKey === "peak") d.sort((a,b) => b.peak_rating - a.peak_rating);
+  return d;
+}
+
+// ── RANK HISTORY ──
+function buildRankHistory(player) {
+  const dataset = getActiveData();
+  const minCups = eloMode === "season" ? 2 : 5;
+  const qualified = dataset.filter(p => p.cups >= minCups || (p.podiums.gold + p.podiums.silver + p.podiums.bronze) > 0);
+  const noDecay = eloMode === "season";
+  const DECAY = 0.995, GRACE = 3;
+  const cups = [...new Set(player.history.map(h => h.c))].sort((a, b) => a - b);
+  return cups.map(cup => {
+    const actives = qualified.map(p => {
+      const entries = p.history.filter(h => h.c <= cup);
+      if (!entries.length) return null;
+      const last = entries[entries.length - 1];
+      const raw = last.r;
+      if (noDecay) return Math.round(raw * 10) / 10;
+      const missed = cup - last.c;
+      return missed > GRACE ? Math.round((1500 + (raw - 1500) * Math.pow(DECAY, missed - GRACE)) * 10) / 10 : Math.round(raw * 10) / 10;
+    }).filter(r => r !== null);
+    actives.sort((a, b) => b - a);
+    const playerEntry = player.history.filter(h => h.c <= cup).pop();
+    const playerRaw = playerEntry.r;
+    const playerMissed = cup - playerEntry.c;
+    const playerActive = noDecay ? Math.round(playerRaw * 10) / 10 :
+      playerMissed > GRACE ? Math.round((1500 + (playerRaw - 1500) * Math.pow(DECAY, playerMissed - GRACE)) * 10) / 10 : Math.round(playerRaw * 10) / 10;
+    const rank = actives.filter(a => a > playerActive).length + 1;
+    return { c: cup, rank, p: playerEntry.p };
+  });
+}
+
+// ── CHART ──
+function drawChart(player, panel) {
+  if (!player || !player.history || player.history.length === 0) return;
+  const c = rColor(player.active);
+  const t = tier(player.active);
+
+  panel.innerHTML = `
+    <div class="chart-header">
+      <div style="min-width:0;overflow:hidden">
+        <span class="name" style="color:${c}">${esc(player.name)}</span>
+        <span class="tier" style="color:${c};background:${c}15">${t}</span><br>
+        <span class="stats">${viewMode === "curse"
+          ? `Curse ${Math.round(player.active)} · ${player.cups} cups · 4ths: ${player.fourths} · peak ${Math.round(player.peak_rating)}`
+          : `Active ${Math.round(player.active)} · ${player.cups} cups · Podium ${player.podiums.gold}/${player.podiums.silver}/${player.podiums.bronze} · avg ${player.avg_position} · peak ${Math.round(player.peak_rating)}`}</span>
+        ${player.cups < (eloMode === "season" ? 2 : 5) && (player.podiums.gold + player.podiums.silver + player.podiums.bronze) === 0
+          ? `<br><span style="font-size:10px;color:var(--accent);font-family:var(--mono)">Play ${(eloMode === "season" ? 2 : 5) - player.cups} more cup${(eloMode === "season" ? 2 : 5) - player.cups !== 1 ? 's' : ''} to get ranked, or get a podium</span>` : ''}
+      </div>
+      <button class="close-btn" id="closeChart">✕</button>
+    </div>
+    <div class="chart-tabs">
+      ${viewMode === "curse"
+        ? `<button class="chart-tab active" id="chartTabElo">CURSE RATING</button>`
+        : `<button class="chart-tab${chartMode === 'elo' ? ' active' : ''}" id="chartTabElo">Rating</button>
+      <button class="chart-tab${chartMode === 'rank' ? ' active' : ''}" id="chartTabRank">Rank<sup style="color:#10b981;font-size:8px;margin-left:2px">[new]</sup></button>`}
+    </div>
+    <div class="chart-canvas"><canvas id="eloCanvas"></canvas><div class="tooltip" id="chartTip"></div></div>
+  `;
+  const closeBtn = panel.querySelector("#closeChart");
+  const isInline = panel.classList.contains("cup-inline-chart");
+  closeBtn.onclick = () => { if (isInline) { panel.remove(); } else { selected = null; render(); } };
+  panel.querySelector("#chartTabElo").onclick = () => { chartMode = "elo"; drawChart(player, panel); };
+  const rankTab = panel.querySelector("#chartTabRank");
+  if (rankTab) rankTab.onclick = () => { chartMode = "rank"; drawChart(player, panel); };
+
+  const canvas = panel.querySelector("#eloCanvas");
+  const tip = panel.querySelector("#chartTip");
+  const ctx = canvas.getContext("2d");
+  const dpr = window.devicePixelRatio || 1;
+  const container = canvas.parentElement;
+  const containerW = container.getBoundingClientRect().width;
+  // On narrow screens, use minimum 4px per cup so points aren't bunched
+  const minPxPerCup = 4;
+  const cupRange = (eloMode === "season" ? Math.max(...player.history.map(h=>h.c)) - Math.min(...player.history.map(h=>h.c)) : globalCupMax) || 1;
+  const desiredW = Math.max(containerW, cupRange * minPxPerCup + 58);
+  canvas.width = desiredW * dpr;
+  canvas.height = 180 * dpr;
+  canvas.style.width = desiredW + "px";
+  canvas.style.height = "180px";
+  ctx.scale(dpr, dpr);
+  // Scroll to right (most recent) on load
+  container.scrollLeft = container.scrollWidth;
+
+  const W = desiredW, H = 180;
+  const pad = { l: 46, r: 12, t: 12, b: 28 };
+  const hist = player.history;
+  const cupNums = hist.map(h => h.c);
+  const cMin = eloMode === "season" ? Math.min(...cupNums) : 1;
+  const cMax = eloMode === "season" ? Math.max(...cupNums) : globalCupMax;
+  function x(cupNum) { return pad.l + (cupNum - cMin) / (cMax - cMin || 1) * (W - pad.l - pad.r); }
+
+  let points, yFn, vMin, vMax;
+  if (chartMode === "rank") {
+    const rankHist = buildRankHistory(player);
+    vMin = 1;
+    vMax = Math.max(...rankHist.map(d => d.rank));
+    // Inverted: rank 1 at top
+    yFn = (rank) => pad.t + (rank - vMin) / (vMax - vMin || 1) * (H - pad.t - pad.b);
+    points = rankHist.map(d => ({ c: d.c, v: d.rank, p: d.p }));
+  } else {
+    const ratings = hist.map(h => h.r);
+    vMin = Math.min(...ratings) - 30;
+    vMax = Math.max(...ratings) + 20;
+    yFn = (rating) => pad.t + (1 - (rating - vMin) / (vMax - vMin || 1)) * (H - pad.t - pad.b);
+    points = hist.map(h => ({ c: h.c, v: h.r, p: h.p, r: h.r, l: h.l }));
+  }
+
+  drawChartContent(ctx, W, H, pad, points, vMin, vMax, cMin, cMax, c, x, yFn, null, chartMode);
+
+  // Tooltip on hover
+  canvas.onmousemove = (e) => {
+    const br = canvas.getBoundingClientRect();
+    const mx = e.clientX - br.left;
+    let closest = null, minDist = Infinity;
+    points.forEach(pt => {
+      const d = Math.abs(x(pt.c) - mx);
+      if (d < minDist) { minDist = d; closest = pt; }
+    });
+    if (closest && minDist < 30) {
+      canvas.style.cursor = "pointer";
+      tip.style.display = "block";
+      if (chartMode === "rank") {
+        tip.innerHTML = `<div class="t-cup">Cup #${closest.c}</div><div class="t-pos">Cup position: <span>#${closest.p}</span></div><div class="t-elo">Leaderboard rank: <span>#${closest.v}</span></div>`;
+      } else {
+        tip.innerHTML = `<div class="t-cup">${closest.l ? closest.l : "Cup #" + Math.round(closest.c)}</div><div class="t-pos">Pos: <span>#${closest.p}</span></div><div class="t-elo">Elo: <span>${closest.r.toFixed(1)}</span></div>`;
+      }
+      const px = x(closest.c), py = yFn(closest.v);
+      const tipH = 70;
+      let tx = px - 60;
+      if (tx < 0) tx = 0;
+      if (tx + 120 > W) tx = W - 120;
+      tip.style.left = tx + "px";
+      tip.style.right = "auto";
+      tip.style.bottom = "auto";
+      if (py > H / 2) { tip.style.top = (py - tipH - 12) + "px"; }
+      else { tip.style.top = (py + 12) + "px"; }
+      ctx.clearRect(0, 0, W, H);
+      drawChartContent(ctx, W, H, pad, points, vMin, vMax, cMin, cMax, c, x, yFn, closest, chartMode);
+    } else {
+      canvas.style.cursor = "";
+      tip.style.display = "none";
+      ctx.clearRect(0, 0, W, H);
+      drawChartContent(ctx, W, H, pad, points, vMin, vMax, cMin, cMax, c, x, yFn, null, chartMode);
+    }
+  };
+  canvas.onmouseleave = () => {
+    tip.style.display = "none";
+    canvas.style.cursor = "";
+    ctx.clearRect(0, 0, W, H);
+    drawChartContent(ctx, W, H, pad, points, vMin, vMax, cMin, cMax, c, x, yFn, null, chartMode);
+  };
+  canvas.onclick = (e) => {
+    const br = canvas.getBoundingClientRect();
+    const mx = e.clientX - br.left;
+    let closest = null, minDist = Infinity;
+    points.forEach(pt => { const d = Math.abs(x(pt.c) - mx); if (d < minDist) { minDist = d; closest = pt; } });
+    if (closest && minDist < 30) navigateToCup(closest.c);
+  };
+}
+
+function drawStar(ctx, cx, cy, r, pts, inner) {
+  ctx.beginPath();
+  for (let i = 0; i < pts * 2; i++) {
+    const ang = -Math.PI / 2 + i * Math.PI / pts;
+    const rad = i % 2 === 0 ? r : inner;
+    const method = i === 0 ? 'moveTo' : 'lineTo';
+    ctx[method](cx + Math.cos(ang) * rad, cy + Math.sin(ang) * rad);
+  }
+  ctx.closePath();
+}
+
+function drawChartContent(ctx, W, H, pad, points, vMin, vMax, cMin, cMax, c, x, y, highlight, mode) {
+  // Grid
+  ctx.strokeStyle = cssVar('--chart-grid'); ctx.lineWidth = 1;
+  const steps = 5;
+  for (let i = 0; i <= steps; i++) {
+    const rv = vMin + (vMax - vMin) * i / steps;
+    const yv = y(rv);
+    ctx.beginPath(); ctx.moveTo(pad.l, yv); ctx.lineTo(W - pad.r, yv); ctx.stroke();
+    ctx.fillStyle = cssVar('--text-muted'); ctx.font = "9px 'JetBrains Mono',monospace"; ctx.textAlign = "right";
+    ctx.fillText(Math.round(rv).toString(), pad.l - 6, yv + 3);
+  }
+  // 1500 reference line (ELO mode only)
+  if (mode !== "rank" && vMin < 1500 && vMax > 1500) {
+    ctx.strokeStyle = cssVar('--chart-guide'); ctx.setLineDash([4, 4]);
+    ctx.beginPath(); ctx.moveTo(pad.l, y(1500)); ctx.lineTo(W - pad.r, y(1500)); ctx.stroke();
+    ctx.setLineDash([]);
+  }
+  // X axis labels
+  ctx.fillStyle = cssVar('--text-muted'); ctx.font = "9px 'JetBrains Mono',monospace"; ctx.textAlign = "center";
+  let xTicks;
+  if (cMax - cMin <= 20) {
+    xTicks = [];
+    for (let t = cMin; t <= cMax; t++) xTicks.push(t);
+  } else {
+    xTicks = [cMin];
+    const step = cMin === 1 ? 20 : 10;
+    const start = Math.ceil(cMin / step) * step;
+    for (let t = start; t < cMax; t += step) { if (t > cMin) xTicks.push(t); }
+    xTicks.push(cMax);
+  }
+  xTicks.forEach(cn => {
+    ctx.fillText("#" + cn, x(cn), H - 6);
+  });
+  // Line
+  ctx.strokeStyle = c; ctx.lineWidth = 2; ctx.lineJoin = "round";
+  ctx.beginPath();
+  points.forEach((pt, i) => { i === 0 ? ctx.moveTo(x(pt.c), y(pt.v)) : ctx.lineTo(x(pt.c), y(pt.v)); });
+  ctx.stroke();
+  // Glow
+  ctx.save(); ctx.globalAlpha = 0.15; ctx.strokeStyle = c; ctx.lineWidth = 6;
+  ctx.beginPath();
+  points.forEach((pt, i) => { i === 0 ? ctx.moveTo(x(pt.c), y(pt.v)) : ctx.lineTo(x(pt.c), y(pt.v)); });
+  ctx.stroke(); ctx.restore();
+  // Dots (stars for wins)
+  points.forEach(pt => {
+    const isHl = highlight && pt.c === highlight.c;
+    const isWin = pt.p === 1;
+    if (isWin) {
+      const r = isHl ? 7 : 4.5;
+      drawStar(ctx, x(pt.c), y(pt.v), r, 5, r * 0.45);
+      if (isHl) { ctx.fillStyle = "#ffd700"; ctx.fill(); ctx.strokeStyle = "#b8960c"; ctx.lineWidth = 1.5; ctx.stroke(); }
+      else { ctx.fillStyle = "#ffd700"; ctx.fill(); ctx.strokeStyle = "#b8960c"; ctx.lineWidth = 1; ctx.stroke(); }
+    } else {
+      ctx.beginPath(); ctx.arc(x(pt.c), y(pt.v), isHl ? 5 : 2.5, 0, Math.PI * 2);
+      if (isHl) { ctx.fillStyle = "#fff"; ctx.fill(); ctx.strokeStyle = c; ctx.lineWidth = 2; ctx.stroke(); }
+      else { ctx.fillStyle = c; ctx.fill(); }
+    }
+  });
+}
+
+const RISING_COLS = "36px 1fr 72px 72px 62px 62px";
+let risingSort = { col: 'pct6', dir: -1 };
+
+// ── RISING VIEW ──
+function renderRising() {
+  const body = document.getElementById("tableBody");
+  const header = document.querySelector(".table-header");
+  if (!risingData) { body.innerHTML = `<div style="padding:24px;color:var(--text-muted);font-family:var(--mono);font-size:12px">Loading...</div>`; header.style.display = "none"; return; }
+  const risingKey = (eloMode === "weighted" || eloMode === "season")
+    ? (includeTroll ? "weighted" : "weighted_pure")
+    : (includeTroll ? "standard" : "standard_pure");
+  const list = risingData[risingKey] || [];
+  const from = risingData.lookback_cup, to = risingData.current_cup;
+
+  header.style.display = "grid";
+  header.style.gridTemplateColumns = RISING_COLS;
+  const rsh = (col, label, align = 'left') => {
+    const active = risingSort.col === col;
+    const arrow = active ? (risingSort.dir === 1 ? ' ▲' : ' ▼') : '';
+    return `<div data-rsort="${col}" style="cursor:pointer;user-select:none;text-align:${align};color:${active ? 'var(--text)' : 'inherit'}">${label}${arrow}</div>`;
+  };
+  const risingInfoBtn = `<span class="info-tip-wrap"><button class="info-btn" onclick="event.stopPropagation()" style="pointer-events:auto;margin-left:4px">ℹ</button>`
+    + `<div class="info-tip"><div class="st-head">On the Rise</div>`
+    + `Percentage increase in ELO over the last <code>6 months</code> (26 cups) and <code>3 months</code> (13 cups).<br><br>`
+    + `Qualifying if:<br>`
+    + `· ELO ≥ <code>1600</code> OR in <code>top 50</code> by active rating<br>`
+    + `· At least <code>+1%</code> growth in either period</div></span>`;
+  header.innerHTML = rsh('index','#' + risingInfoBtn) + rsh('name','Player') + rsh('then','Cup ' + from,'right') + rsh('now','Now','right') + rsh('pct6','6 Month','right') + rsh('pct3','3 Month','right');
+  header.querySelectorAll('[data-rsort]').forEach(el => {
+    el.onclick = () => {
+      const col = el.dataset.rsort;
+      if (risingSort.col === col) { risingSort.dir *= -1; }
+      else { risingSort.col = col; risingSort.dir = col === 'name' ? 1 : -1; }
+      renderRising();
+    };
+  });
+
+  const sorted = list.map((p, i) => ({ ...p, _i: i }));
+  sorted.sort((a, b) => {
+    let av, bv;
+    switch (risingSort.col) {
+      case 'index': av = a._i; bv = b._i; break;
+      case 'name':  av = a.name; bv = b.name; break;
+      case 'then':  av = a.rating_then; bv = b.rating_then; break;
+      case 'now':   av = a.rating_now; bv = b.rating_now; break;
+      case 'pct6':  av = a.pct; bv = b.pct; break;
+      case 'pct3':  av = a.pct_3m || 0; bv = b.pct_3m || 0; break;
+      default:      av = a._i; bv = b._i;
+    }
+    if (typeof av === 'string') return av.localeCompare(bv) * risingSort.dir;
+    return (av - bv) * risingSort.dir;
+  });
+
+  let html = "";
+  sorted.forEach((p, i) => {
+    const c = rColor(p.rating_now);
+    const nameColor = customColors[p.name] || cssVar('--pname');
+    const sign6 = p.pct >= 0 ? "+" : "";
+    const pctColor6 = p.pct >= 8 ? "#10b981" : p.pct >= 5 ? "#f59e0b" : "var(--text-dim)";
+    const pct3 = p.pct_3m || 0;
+    const sign3 = pct3 >= 0 ? "+" : "";
+    const pctColor3 = pct3 >= 8 ? "#10b981" : pct3 >= 5 ? "#f59e0b" : "var(--text-dim)";
+    html += `<div class="row${selected === p.name ? " selected" : ""}" data-name="${esc(p.name)}" style="grid-template-columns:${RISING_COLS}">
+      <div class="rank">${i + 1}</div>
+      <div class="player"><span class="dot" style="background:${c}"></span><span class="pname" style="color:${nameColor}">${esc(p.name)}</span></div>
+      <div class="raw">${p.rating_then}</div>
+      <div class="elo-cell" style="color:${c}">${p.rating_now}</div>
+      <div class="avg-cell" style="color:${pctColor6};font-weight:700">${sign6}${p.pct}%</div>
+      <div class="avg-cell" style="color:${pctColor3};font-weight:700">${sign3}${pct3}%</div>
+    </div>`;
+  });
+  body.innerHTML = html;
+  attachRowHandlers(body);
+}
+
+// ── LEXER CURSE VIEW ──
+const CURSE_COLS = "36px 1fr 66px 52px 40px";
+function renderCurse() {
+  const body = document.getElementById("tableBody");
+  const header = document.querySelector(".table-header");
+  if (!curseData || !curseData.length) {
+    header.style.display = "none";
+    body.innerHTML = `<div style="padding:24px;color:var(--text-muted);font-family:var(--mono);font-size:12px">No curse data</div>`;
+    return;
+  }
+  const tl = document.getElementById("tierLegend");
+  tl.innerHTML = '<span style="color:#a855f7">Lexer Curse</span> · 4th is the new 1st · <span style="color:var(--text-dark)">4\u21921, 3\u21922, 5\u21923, 2\u21924, 6\u21925, 1\u21926</span>';
+
+  header.style.display = "grid";
+  header.style.gridTemplateColumns = CURSE_COLS;
+  header.innerHTML = `<div>#</div><div>Player</div><div style="text-align:right">Curse Elo</div><div style="text-align:right">4ths</div><div style="text-align:right">Cups</div>`;
+
+  let html = `<div style="padding:12px 16px;border-bottom:1px solid rgba(168,85,247,0.15);background:rgba(168,85,247,0.05);font-family:var(--mono);font-size:11px;color:var(--text-dim);line-height:1.8">
+    <span style="color:#a855f7;font-weight:700">☠ Lexer Curse</span> &nbsp;·&nbsp; In Zeepkist COTD, finishing 4th is the cursed position — immortalised by Lexer. This leaderboard scores it as the best: <span style="color:#a855f7">4th→1st · 3rd→2nd · 5th→3rd · 2nd→4th · 6th→5th · 1st→6th</span>
+  </div>`;
+  curseData.forEach((p, i) => {
+    const c = rColor(p.active);
+    const nameColor = customColors[p.name] || cssVar('--pname');
+    const faded = Math.abs(p.active - p.rating) > 5;
+    const pct = p.cups > 0 ? ((p.fourths / p.cups) * 100).toFixed(0) : "0";
+    const prev = snap && snap.curse && snap.curse[p.name];
+    let rankDelta = "";
+    if (prev) {
+      const rd = prev[0] - (i + 1);
+      if (rd !== 0) rankDelta = rd > 0
+        ? `<span class="delta-up">\u25B2${rd}</span>`
+        : `<span class="delta-down">\u25BC${Math.abs(rd)}</span>`;
+    }
+    let eloDelta = "";
+    if (prev) {
+      const ed = Math.round(p.active - prev[1]);
+      if (Math.abs(ed) >= 1) eloDelta = ed > 0
+        ? `<span class="elo-delta-up">+${ed}</span>`
+        : `<span class="elo-delta-down">${ed}</span>`;
+    }
+    html += `<div class="row${selected === p.name ? " selected" : ""}${faded ? " faded" : ""}" data-name="${esc(p.name)}" style="grid-template-columns:${CURSE_COLS}">
+      <div class="rank">${i + 1}${rankDelta}</div>
+      <div class="player"><span class="dot" style="background:${c}"></span><span class="pname" style="color:${nameColor}">${esc(p.name)}</span></div>
+      <div class="elo-cell" style="color:${c}">${Math.round(p.active)}${eloDelta}</div>
+      <div style="text-align:right;font-family:var(--mono);font-size:13px;font-weight:700;color:#a855f7">${p.fourths} <span style="font-size:10px;color:var(--text-muted)">(${pct}%)</span></div>
+      <div style="text-align:right;font-family:var(--mono);font-size:11px;color:var(--text-muted)">${p.cups}</div>
+    </div>`;
+  });
+  body.innerHTML = html;
+  attachRowHandlers(body, curseData);
+}
+
+// ── SHARED: click handlers + chart panel ──
+function attachRowHandlers(body, dataSource) {
+  body.querySelectorAll(".row").forEach(row => {
+    row.onclick = () => {
+      const name = row.dataset.name;
+      if (compareMode) {
+        const idx = compareList.indexOf(name);
+        if (idx >= 0) compareList.splice(idx, 1);
+        else if (compareList.length < 2) compareList.push(name);
+        else compareList = [compareList[1], name];
+        // Update row highlights without full re-render
+        body.querySelectorAll(".row").forEach(r => {
+          r.classList.remove("comp-p1", "comp-p2");
+          if (r.dataset.name === compareList[0]) r.classList.add("comp-p1");
+          else if (compareList[1] && r.dataset.name === compareList[1]) r.classList.add("comp-p2");
+        });
+        renderComparePanel();
+        return;
+      }
+      if (selected !== name) chartMode = "elo";
+      selected = selected === name ? null : name;
+      render();
+    };
+  });
+  if (selected && !compareMode) {
+    const row = body.querySelector(`.row[data-name="${CSS.escape(selected)}"]`);
+    const player = (dataSource || getActiveData()).find(p => p.name === selected);
+    if (row && player) {
+      const panel = document.createElement("div");
+      panel.className = "chart-panel";
+      row.after(panel);
+      drawChart(player, panel);
+      panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+  }
+}
+
+// ── SEARCH VIEW ──
+const SEARCH_COLS = "36px 1fr 66px 40px 36px 44px";
+function searchPlayerObj(p) {
+  return {
+    name: p.n, active: p.a, rating: p.r, cups: p.c,
+    best_finish: p.b, avg_position: p.v, wins: p.w,
+    podiums: { gold: p.g, silver: p.s, bronze: p.z },
+    peak_rating: p.p, history: p.h
+  };
+}
+function renderSearch(query) {
+  const header = document.querySelector(".table-header");
+  const body = document.getElementById("tableBody");
+  const list = getActiveData();
+  const matches = list.filter(p => p.name.toLowerCase().includes(query));
+
+  const tl = document.getElementById("tierLegend");
+  tl.innerHTML = `<span style="color:var(--text-muted)">${matches.length} result${matches.length !== 1 ? 's' : ''}</span>`;
+
+  header.style.display = "grid";
+  header.style.gridTemplateColumns = SEARCH_COLS;
+  header.innerHTML = `<div>#</div><div>Player</div><div style="text-align:right">Active</div><div style="text-align:right">App</div><div style="text-align:center">Best</div><div style="text-align:right">Avg</div>`;
+
+  const minCups = eloMode === "season" ? 2 : 5;
+  const qualifiedList = list.filter(q => q.cups >= minCups || (q.podiums.gold + q.podiums.silver + q.podiums.bronze) > 0);
+  let html = "";
+  matches.slice(0, 50).forEach(p => {
+    const rank = qualifiedList.indexOf(p) + 1 || null;
+    const c = rColor(p.active);
+    const nameColor = customColors[p.name] || cssVar('--pname');
+    const avgColor = p.avg_position <= 5 ? "var(--green)" : p.avg_position <= 10 ? "var(--text-dim)" : "var(--text-muted)";
+    const bestColor = p.best_finish === 1 ? "var(--accent)" : p.best_finish <= 3 ? "var(--text-dim)" : "var(--text-muted)";
+    const ranked = p.cups >= (eloMode === "season" ? 2 : 5) || (p.podiums.gold + p.podiums.silver + p.podiums.bronze) > 0;
+    const srCompClass = compareMode && compareList[0] === p.name ? " comp-p1" : compareMode && compareList[1] === p.name ? " comp-p2" : "";
+    html += `<div class="row${selected === p.name ? " selected" : ""}${srCompClass}" data-name="${esc(p.name)}" style="grid-template-columns:${SEARCH_COLS}">
+      <div class="rank" style="${rank ? '' : 'color:var(--text-dark)'}">${rank || '—'}</div>
+      <div class="player"><span class="dot" style="background:${c}"></span><span class="pname" style="color:${nameColor}">${esc(p.name)}</span></div>
+      <div class="elo-cell" style="color:${c}">${Math.round(p.active)}</div>
+      <div style="text-align:right;font-family:var(--mono);font-size:11px;color:var(--text-muted)">${p.cups}</div>
+      <div style="text-align:center;font-family:var(--mono);font-size:11px;color:${bestColor}">${p.best_finish}</div>
+      <div style="text-align:right;font-family:var(--mono);font-size:11px;color:${avgColor}">${p.avg_position}</div>
+    </div>`;
+  });
+  if (!matches.length) {
+    html = `<div style="padding:24px;color:var(--text-muted);font-family:var(--mono);font-size:12px">No players found</div>`;
+  }
+  body.innerHTML = html;
+  attachRowHandlers(body, matches.slice(0, 50));
+}
+
+// ── COMPARE ──
+function computeH2H(p1, p2) {
+  const h1 = p1.history || [], h2 = p2.history || [];
+  const map2 = new Map(h2.map(h => [h.c, h.p]));
+  let p1w = 0, p2w = 0, ties = 0, total = 0;
+  h1.forEach(h => {
+    if (map2.has(h.c)) {
+      const p2pos = map2.get(h.c);
+      total++;
+      if (h.p < p2pos) p1w++;
+      else if (p2pos < h.p) p2w++;
+      else ties++;
+    }
+  });
+  return { p1w, p2w, ties, total };
+}
+
+function drawCompareChart(p1, p2, container) {
+  const [c1, c2] = COMP_COLORS;
+  const h1 = p1.history || [], h2 = p2.history || [];
+  const allR = [...h1.map(h => h.r), ...h2.map(h => h.r)];
+  if (!allR.length) return;
+  const vMin = Math.min(...allR) - 30, vMax = Math.max(...allR) + 20;
+  const allCups = [...h1.map(h => h.c), ...h2.map(h => h.c)];
+  const cMin = eloMode === "season" ? Math.min(...allCups) : 1;
+  const cMax = eloMode === "season" ? Math.max(...allCups) : globalCupMax;
+  container.innerHTML = `<div style="position:relative"><canvas id="cmpCanvas"></canvas><div class="tooltip" id="cmpTip"></div></div>`;
+  const canvas = document.getElementById("cmpCanvas");
+  const tip = document.getElementById("cmpTip");
+  const ctx = canvas.getContext("2d");
+  const dpr = window.devicePixelRatio || 1;
+  const W = container.getBoundingClientRect().width, H = 180;
+  canvas.width = W * dpr; canvas.height = H * dpr;
+  canvas.style.width = W + "px"; canvas.style.height = H + "px";
+  ctx.scale(dpr, dpr);
+  const pad = {l:46, r:12, t:12, b:28};
+  const xf = n => pad.l + (n - cMin) / (cMax - cMin) * (W - pad.l - pad.r);
+  const yf = v => pad.t + (1 - (v - vMin) / (vMax - vMin || 1)) * (H - pad.t - pad.b);
+  function draw(hl) {
+    ctx.clearRect(0, 0, W, H);
+    ctx.strokeStyle = cssVar('--chart-grid'); ctx.lineWidth = 1;
+    for (let i = 0; i <= 5; i++) {
+      const v = vMin + (vMax - vMin) * i / 5;
+      ctx.beginPath(); ctx.moveTo(pad.l, yf(v)); ctx.lineTo(W - pad.r, yf(v)); ctx.stroke();
+      ctx.fillStyle = cssVar('--text-muted'); ctx.font = "9px 'JetBrains Mono',monospace"; ctx.textAlign = "right";
+      ctx.fillText(Math.round(v), pad.l - 6, yf(v) + 3);
+    }
+    if (vMin < 1500 && vMax > 1500) {
+      ctx.strokeStyle = cssVar('--chart-guide'); ctx.setLineDash([4,4]);
+      ctx.beginPath(); ctx.moveTo(pad.l, yf(1500)); ctx.lineTo(W - pad.r, yf(1500)); ctx.stroke();
+      ctx.setLineDash([]);
+    }
+    ctx.fillStyle = cssVar('--text-muted'); ctx.font = "9px 'JetBrains Mono',monospace"; ctx.textAlign = "center";
+    let xT;
+    if (cMax - cMin <= 20) { xT = []; for (let t = cMin; t <= cMax; t++) xT.push(t); }
+    else { xT = [cMin]; const step = cMin === 1 ? 20 : 10; const st = Math.ceil(cMin/step)*step; for (let t = st; t < cMax; t += step) { if (t > cMin) xT.push(t); } xT.push(cMax); }
+    xT.forEach(n => ctx.fillText("#"+n, xf(n), H-6));
+    [[h1,c1],[h2,c2]].forEach(([pts,col]) => {
+      if (!pts.length) return;
+      ctx.strokeStyle = col; ctx.lineWidth = 2; ctx.lineJoin = "round";
+      ctx.beginPath();
+      pts.forEach((pt,i) => i===0 ? ctx.moveTo(xf(pt.c),yf(pt.r)) : ctx.lineTo(xf(pt.c),yf(pt.r)));
+      ctx.stroke();
+      ctx.save(); ctx.globalAlpha = 0.12; ctx.strokeStyle = col; ctx.lineWidth = 6;
+      ctx.beginPath();
+      pts.forEach((pt,i) => i===0 ? ctx.moveTo(xf(pt.c),yf(pt.r)) : ctx.lineTo(xf(pt.c),yf(pt.r)));
+      ctx.stroke(); ctx.restore();
+      pts.forEach(pt => {
+        const isHl = hl !== null && pt.c === hl;
+        const isWin = pt.p === 1;
+        if (isWin) {
+          const r = isHl ? 7 : 4.5;
+          drawStar(ctx, xf(pt.c), yf(pt.r), r, 5, r * 0.45);
+          if (isHl) { ctx.fillStyle="#ffd700"; ctx.fill(); ctx.strokeStyle="#b8960c"; ctx.lineWidth=1.5; ctx.stroke(); }
+          else { ctx.fillStyle="#ffd700"; ctx.fill(); ctx.strokeStyle="#b8960c"; ctx.lineWidth=1; ctx.stroke(); }
+        } else {
+          ctx.beginPath(); ctx.arc(xf(pt.c), yf(pt.r), isHl ? 5 : 2.5, 0, Math.PI*2);
+          if (isHl) { ctx.fillStyle="#fff"; ctx.fill(); ctx.strokeStyle=col; ctx.lineWidth=2; ctx.stroke(); }
+          else { ctx.fillStyle=col; ctx.fill(); }
+        }
+      });
+    });
+  }
+  draw(null);
+  canvas.onmousemove = e => {
+    const br = canvas.getBoundingClientRect(), mx = e.clientX - br.left;
+    const allCups = new Set([...h1.map(h=>h.c), ...h2.map(h=>h.c)]);
+    let best = null, minD = Infinity;
+    allCups.forEach(c => { const d = Math.abs(xf(c)-mx); if (d<minD){minD=d;best=c;} });
+    if (best !== null && minD < 30) {
+      canvas.style.cursor = "pointer";
+      const pt1 = h1.find(h=>h.c===best), pt2 = h2.find(h=>h.c===best);
+      let html = `<div class="t-cup">Cup #${best}</div>`;
+      if (pt1) html += `<div style="color:${c1}">${esc(p1.name)}: ${pt1.r.toFixed(1)} <span style="color:var(--text-muted)">#${pt1.p}</span></div>`;
+      if (pt2) html += `<div style="color:${c2}">${esc(p2.name)}: ${pt2.r.toFixed(1)} <span style="color:var(--text-muted)">#${pt2.p}</span></div>`;
+      tip.innerHTML = html; tip.style.display = "block";
+      const ref = pt1 || pt2;
+      let tx = xf(best) + 12; if (tx + 170 > W) tx = xf(best) - 175;
+      tip.style.left = tx + "px"; tip.style.top = Math.max(0, yf(ref.r) - 50) + "px";
+      draw(best);
+    } else { canvas.style.cursor = ""; tip.style.display = "none"; draw(null); }
+  };
+  canvas.onmouseleave = () => { canvas.style.cursor = ""; tip.style.display = "none"; draw(null); };
+  canvas.onclick = (e) => {
+    const br = canvas.getBoundingClientRect(), mx = e.clientX - br.left;
+    const allCups = new Set([...h1.map(h=>h.c), ...h2.map(h=>h.c)]);
+    let best = null, minD = Infinity;
+    allCups.forEach(c => { const d = Math.abs(xf(c)-mx); if (d<minD){minD=d;best=c;} });
+    if (best !== null && minD < 30) navigateToCup(best);
+  };
+}
+
+function renderComparePanel() {
+  const panel = document.getElementById("comparePanel");
+  if (!panel) return;
+  if (!compareMode) { panel.innerHTML = ""; panel.classList.remove("sticky-panel"); return; }
+  panel.classList.add("sticky-panel");
+  const pool = getActiveData();
+  const [c1,c2] = COMP_COLORS;
+  const p1 = compareList[0] ? pool.find(p=>p.name===compareList[0]) : null;
+  const p2 = compareList[1] ? pool.find(p=>p.name===compareList[1]) : null;
+  const hint = `<div style="font-family:var(--mono);font-size:10px;color:var(--text-muted);margin-bottom:${p1?'8px':'0'}">Compare mode — click two players on the leaderboard</div>`;
+  if (!p1) {
+    panel.innerHTML = `<div class="compare-panel">${hint}</div>`;
+    return;
+  }
+  const t1 = tier(p1.active);
+  if (!p2) {
+    panel.innerHTML = `<div class="compare-panel">
+      ${hint}
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="width:7px;height:7px;border-radius:50%;background:${c1};display:inline-block;flex-shrink:0"></span>
+          <span style="font-size:14px;font-weight:700;color:${c1}">${esc(p1.name)}</span>
+          <span style="font-family:var(--mono);font-size:10px;color:${c1};opacity:0.8">${t1}</span>
+          <span style="font-family:var(--mono);font-size:11px;color:var(--text-muted)">· select a 2nd player</span>
+        </div>
+        <button class="close-btn" onclick="clearCompare()">✕ clear</button>
+      </div>
+    </div>`;
+    return;
+  }
+  const t2 = tier(p2.active);
+  const h2h = computeH2H(p1, p2);
+  const lc = h2h.p1w > h2h.p2w ? c1 : c2;
+  const leader = h2h.p1w > h2h.p2w ? p1.name : h2h.p2w > h2h.p1w ? p2.name : null;
+  const h2hHTML = h2h.total === 0
+    ? `<span style="color:var(--text-muted)">No shared cups</span>`
+    : leader
+      ? `<span style="color:${lc};font-weight:700">${esc(leader)}</span> leads H2H <span style="color:${c1}">${h2h.p1w}</span>–<span style="color:${c2}">${h2h.p2w}</span>${h2h.ties?` (${h2h.ties} ties)`:""} in ${h2h.total} shared cups`
+      : `Even H2H <span style="color:var(--text-dim)">${h2h.p1w}–${h2h.p2w}</span>${h2h.ties?` (${h2h.ties} ties)`:""} in ${h2h.total} shared cups`;
+  function statRow(label, v1, v2, fmt, better) {
+    const w1 = better==="higher" ? v1 > v2 : v1 < v2;
+    const w2 = better==="higher" ? v2 > v1 : v2 < v1;
+    return `<div style="text-align:right;font-family:var(--mono);font-size:12px;color:${w1?c1:"var(--text-dim)"};font-weight:${w1?700:400}">${fmt(v1)}</div>
+      <div style="text-align:center;font-family:var(--mono);font-size:10px;color:var(--text-muted);padding:2px 10px">${label}</div>
+      <div style="text-align:left;font-family:var(--mono);font-size:12px;color:${w2?c2:"var(--text-dim)"};font-weight:${w2?700:400}">${fmt(v2)}</div>`;
+  }
+  const p1pods = p1.podiums.gold+p1.podiums.silver+p1.podiums.bronze;
+  const p2pods = p2.podiums.gold+p2.podiums.silver+p2.podiums.bronze;
+  const statsRows = [
+    statRow("Active ELO", p1.active, p2.active, v=>Math.round(v), "higher"),
+    statRow("Peak ELO",   p1.peak_rating, p2.peak_rating, v=>Math.round(v), "higher"),
+    statRow("Cups",       p1.cups, p2.cups, v=>v, "higher"),
+    statRow("Wins",       p1.wins, p2.wins, v=>v, "higher"),
+    statRow("Podiums",    p1pods, p2pods, v=>v, "higher"),
+    statRow("Avg Pos",    p1.avg_position||999, p2.avg_position||999, v=>v<999?v.toFixed(1):"—", "lower"),
+    statRow("Best Finish",p1.best_finish||999, p2.best_finish||999, v=>v<999?v:"—", "lower"),
+  ].join("");
+  panel.innerHTML = `<div class="compare-panel">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+      <div id="compSwap" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;cursor:pointer" title="Click to swap sides">
+        <div><span style="font-size:16px;font-weight:700;color:${c1}">${esc(p1.name)}</span> <span style="font-family:var(--mono);font-size:10px;color:${c1};opacity:0.8">${t1}</span></div>
+        <span style="font-family:var(--mono);font-size:12px;color:var(--text-muted)">vs</span>
+        <div><span style="font-size:16px;font-weight:700;color:${c2}">${esc(p2.name)}</span> <span style="font-family:var(--mono);font-size:10px;color:${c2};opacity:0.8">${t2}</span></div>
+      </div>
+      <button class="close-btn" onclick="clearCompare()">✕ clear</button>
+    </div>
+    <div id="cmpChartWrap" style="position:relative;margin-bottom:10px"></div>
+    <div style="font-family:var(--mono);font-size:11px;color:var(--text-dim);text-align:center;margin-bottom:12px">${h2hHTML}</div>
+    <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:4px 0;max-width:320px;margin:0 auto">${statsRows}</div>
+  </div>`;
+  document.getElementById("compSwap").onclick = () => { compareList.reverse(); renderComparePanel(); render(); };
+  const wrap = document.getElementById("cmpChartWrap");
+  if (wrap) requestAnimationFrame(() => drawCompareChart(p1, p2, wrap));
+}
+
+function clearCompare() {
+  compareList = [];
+  renderComparePanel();
+  render();
+}
+
+// ── TABLE RENDERING ──
+function leaderboardInfoBtn() {
+  if (eloMode === "trueskill") {
+    return `<span class="info-tip-wrap"><button class="info-btn" onclick="event.stopPropagation()" style="pointer-events:auto;margin-left:4px">ℹ</button>`
+      + `<div class="info-tip"><div class="st-head">TrueSkill</div>`
+      + `Microsoft's Bayesian rating. Each player has a skill estimate (<b>μ</b>) and uncertainty (<b>σ</b>).<br><br>`
+      + `Rating shown: <code>μ − 3σ</code> (conservative — penalizes uncertainty).<br>`
+      + `<b>σ</b> column = uncertainty. Lower = more confident. New players start with high σ.<br><br>`
+      + `All pairwise matchups per cup. σ shrinks as you play more, grows slightly when inactive.</div></span>`;
+  }
+  return `<span class="info-tip-wrap"><button class="info-btn" onclick="event.stopPropagation()" style="pointer-events:auto;margin-left:4px">ℹ</button>`
+    + `<div class="info-tip"><div class="st-head">Glicko-2</div>`
+    + `Mark Glickman's iterative system. Tracks rating, deviation (<b>RD</b>), and volatility.<br><br>`
+    + `<b>RD</b> column = rating deviation. High RD = uncertain rating. RD shrinks with play, grows when inactive.<br><br>`
+    + `Adapts faster to form changes — if results don't match expectations, volatility increases and allows bigger swings next time.</div></span>`;
+}
+function leaderboardCols() {
+  return eloMode === "season"
+    ? "36px 1fr 66px 36px 118px 46px 40px 38px 54px"
+    : "36px 1fr 66px 42px 36px 118px 46px 40px 38px 54px";
+}
+function leaderboardHeaderHTML() {
+  const isSeason = eloMode === "season";
+  const cols = isSeason
+    ? [['#',''],['Player',''],['Elo','active'],['Wins','wins'],['Podium','podium'],['Avg','avg'],['App','cups'],['Best',''],['Peak','peak']]
+    : [['#',''],['Player',''],['Rating','active'],[eloMode === 'trueskill' ? 'σ' : 'RD','uncertainty'],['Wins','wins'],['Podium','podium'],['Avg','avg'],['App','cups'],['Best',''],['Peak','peak']];
+  const aligns = isSeason
+    ? ['','','center','center','center','right','center','center','right']
+    : ['','','right','right','center','center','right','center','center','right'];
+  return cols.map(([label,key],i) => {
+    const al = aligns[i] ? `style="text-align:${aligns[i]}"` : '';
+    if (i === 0) return `<div ${al}>${label}${leaderboardInfoBtn()}</div>`;
+    if (!key) return `<div ${al}>${label}</div>`;
+    const cls = key === sortKey ? 'sortable sort-active' : 'sortable';
+    return `<div class="${cls}" data-sort="${key}" ${al}>${label}</div>`;
+  }).join('');
+}
+function bindHeaderSort() {
+  document.querySelectorAll(".table-header .sortable").forEach(el => {
+    el.onclick = () => { sortKey = el.dataset.sort; render(); };
+  });
+}
+// ── CUPS VIEW ──
+function cupDisplayName(id) {
+  return id
+    .replace(/^Troll COTD (\d+)$/, 'Troll $1')
+    .replace(/^Troll COTW (\d+)$/, 'Troll W$1')
+    .replace(/^COTD Roulette (\d+)$/, 'Roulette $1');
+}
+const SPECIAL_CUP_NUM = {'COTD Roulette 1':25.5,'COTD Roulette 2':65.5,'Troll COTD 1':15.5,'Troll COTD 2':26.5,'Troll COTD 3':36.5,'Troll COTD 4':41.5,'Troll COTD 5':44.5,'Troll COTD 6':48.5,'Troll COTD 7':50.5,'Troll COTD 8':56.5,'Troll COTW 9':63.5,'Troll COTD 10':71.5,'Troll COTD 11':88.5};
+function cupNumFromId(id) {
+  if (SPECIAL_CUP_NUM[id] !== undefined) return SPECIAL_CUP_NUM[id];
+  const m = id.match(/(\d+)/); return m ? parseInt(m[1]) : 0;
+}
+function navigateToCup(cupNum) {
+  if (!cupsData) return;
+  viewMode = "cups";
+  document.getElementById("cupsTabBtn").classList.add("active");
+  document.getElementById("risingCheck").checked = false;
+  setCurseActive(false);
+  compareMode = false; document.getElementById("compareCheck").checked = false; compareList = [];
+  selected = null;
+  render();
+  requestAnimationFrame(() => {
+    const row = document.querySelector(`.cup-row[data-cup-id="${cupsData.find(c => cupNumFromId(c.id) === cupNum)?.id}"]`);
+    if (row) { row.scrollIntoView({ behavior: 'smooth', block: 'center' }); row.click(); }
+  });
+}
+let cupSort = { col: 'index', dir: -1 };
+function ratingMapToRanks(ratingMap) {
+  const ranks = {};
+  Object.entries(ratingMap).sort((a, b) => b[1] - a[1]).forEach(([name], i) => { ranks[name] = i + 1; });
+  return ranks;
+}
+function strengthColor(val) {
+  if (val >= 100) return '#10b981';
+  if (val >= 97) return '#84cc16';
+  if (val >= 94) return '#eab308';
+  if (val >= 90) return '#f97316';
+  return '#ef4444';
+}
+const CUPS_COLS = "36px 100px 1fr 130px 140px 48px 80px";
+function renderCups() {
+  const header = document.querySelector(".table-header");
+  const body = document.getElementById("tableBody");
+  if (!cupsData) { body.innerHTML = `<div style="padding:24px;color:var(--text-muted);font-family:var(--mono);font-size:12px">Loading cups...</div>`; return; }
+
+  header.style.display = "grid";
+  header.style.gridTemplateColumns = CUPS_COLS;
+  const sh = (col, label, align = 'left') => {
+    const active = cupSort.col === col;
+    const arrow = active ? (cupSort.dir === 1 ? ' ▲' : ' ▼') : '';
+    return `<div data-sort="${col}" style="cursor:pointer;user-select:none;text-align:${align};color:${active ? 'var(--text)' : 'inherit'}">${label}${arrow}</div>`;
+  };
+  const cupsInfoBtn = ' <button class="info-btn" onclick="event.stopPropagation();document.getElementById(\'sofModal\').classList.add(\'open\')" style="pointer-events:auto;margin-left:4px">ℹ</button>';
+  header.innerHTML = sh('index','#' + cupsInfoBtn) + sh('cup','Cup') + sh('map','Map') + sh('mapper','Mapper') + sh('winner','Winner') + sh('size','Size','center') + sh('strength','Cup Strength','center');
+  header.querySelectorAll('[data-sort]').forEach(el => {
+    el.onclick = () => {
+      const col = el.dataset.sort;
+      if (cupSort.col === col) { cupSort.dir *= -1; }
+      else { cupSort.col = col; cupSort.dir = ['index','size','strength'].includes(col) ? -1 : 1; }
+      renderCups();
+    };
+  });
+
+  const annotated = cupsData.map((cup, i) => ({ cup, idx: i, strength: cup.strength || 0 }));
+  annotated.sort((a, b) => {
+    let av, bv;
+    switch (cupSort.col) {
+      case 'index':    av = a.idx; bv = b.idx; break;
+      case 'cup':      av = cupDisplayName(a.cup.id); bv = cupDisplayName(b.cup.id); break;
+      case 'map':      av = a.cup.map || ''; bv = b.cup.map || ''; break;
+      case 'mapper':   av = a.cup.mapper || ''; bv = b.cup.mapper || ''; break;
+      case 'winner':   av = a.cup.players[0]?.name || ''; bv = b.cup.players[0]?.name || ''; break;
+      case 'size':     av = a.cup.lobby_size; bv = b.cup.lobby_size; break;
+      case 'strength': av = a.strength; bv = b.strength; break;
+      default:         av = a.idx; bv = b.idx;
+    }
+    if (typeof av === 'string') return av.localeCompare(bv) * cupSort.dir;
+    return (av - bv) * cupSort.dir;
+  });
+
+  let html = "";
+  annotated.forEach(({ cup, idx, strength }, pos) => {
+    const winner = cup.players[0];
+    const wc = winner ? (rColor(winner.rating_after)) : "#6b7280";
+    const wnc = winner ? (customColors[winner.name] || cssVar('--pname')) : "#6b7280";
+    const sc = strengthColor(strength);
+    html += `<div class="row cup-row" data-cup-id="${esc(cup.id)}" style="grid-template-columns:${CUPS_COLS}">
+      <div class="rank">${pos + 1}</div>
+      <div style="font-family:var(--mono);font-size:11px;color:var(--text-muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0">${esc(cupDisplayName(cup.id))}</div>
+      <div style="font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text);min-width:0">${esc(cup.map) || '<span style="color:var(--text-dark)">—</span>'}</div>
+      <div style="font-family:var(--mono);font-size:11px;color:var(--text-dim);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0">${esc(cup.mapper)}</div>
+      <div style="display:flex;align-items:center;gap:5px;min-width:0">
+        <div class="dot" style="background:${wc};flex-shrink:0"></div>
+        <span style="font-size:12px;font-weight:600;color:${wnc};overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(winner?.name || '—')}</span>
+      </div>
+      <div style="text-align:center;font-family:var(--mono);font-size:11px;color:var(--text-muted)">${cup.lobby_size}</div>
+      <div style="text-align:center;font-family:var(--mono);font-size:11px;font-weight:600;color:${sc}">${strength.toFixed(1)}</div>
+    </div>`;
+  });
+  body.innerHTML = html;
+
+  body.querySelectorAll(".cup-row").forEach(row => {
+    row.onclick = () => {
+      body.querySelectorAll(".cup-detail-panel").forEach(p => p.remove());
+      if (row.classList.contains("selected")) { row.classList.remove("selected"); return; }
+      body.querySelectorAll(".cup-row.selected").forEach(r => r.classList.remove("selected"));
+      row.classList.add("selected");
+
+      const cup = cupsData.find(c => c.id === row.dataset.cupId);
+      if (!cup) return;
+      const panel = document.createElement("div");
+      panel.className = "cup-detail-panel";
+      panel.style.cssText = "background:var(--surface);border-bottom:1px solid var(--border);padding:10px 14px 14px;";
+
+      const cupNum = parseInt(cup.id.replace(/\D/g, ''));
+      const hasSeason = allData && allData.season_2026;
+      const detailCols = hasSeason ? '36px 1fr 120px 120px' : '36px 1fr 120px';
+
+      let d = `<div style="display:grid;grid-template-columns:${detailCols};font-family:var(--mono);font-size:9px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;padding:0 0 6px;margin-bottom:4px;border-bottom:1px solid var(--row-border)">
+        <div>Pos</div><div>Player</div><div style="text-align:right">ELO</div>${hasSeason ? '<div style="text-align:right">Race ELO</div>' : ''}</div>`;
+      cup.players.forEach((p, pi) => {
+        const rowBg = pi % 2 === 0 ? 'transparent' : 'var(--row-alt, rgba(255,255,255,0.03))';
+        const c = rColor(p.rating_after);
+        const displayName = p.ghost || p.name;
+        const nc = customColors[p.name] || customColors[displayName] || cssVar('--pname');
+        // Weighted ELO delta from allData history
+        let eloDelta = '';
+        if (allData && allData.weighted) {
+          const ap = allData.weighted.find(x => x.n === p.name);
+          if (ap && ap.h) {
+            const idx = ap.h.findIndex(e => e.c === cupNum);
+            if (idx >= 0) {
+              const before = idx > 0 ? ap.h[idx - 1].r : 1500;
+              const ed = Math.round(ap.h[idx].r - before);
+              if (ed > 0) eloDelta = `<span class="elo-delta-up">+${ed}</span>`;
+              else if (ed < 0) eloDelta = `<span class="elo-delta-down">${ed}</span>`;
+            }
+          }
+        }
+        // Season ELO
+        let seasonCell = '';
+        if (hasSeason) {
+          const sp = allData.season_2026.find(x => x.n === p.name);
+          if (sp && sp.h) {
+            const idx = sp.h.findIndex(e => e.c === cupNum);
+            if (idx >= 0) {
+              const sr = sp.h[idx].r;
+              const sc = rColor(sr);
+              const before = idx > 0 ? sp.h[idx - 1].r : 1500;
+              const sd = Math.round(sr - before);
+              let sDelta = '';
+              if (sd > 0) sDelta = `<span class="elo-delta-up">+${sd}</span>`;
+              else if (sd < 0) sDelta = `<span class="elo-delta-down">${sd}</span>`;
+              seasonCell = `<div style="text-align:right;font-family:var(--mono);font-size:12px;font-weight:700;color:${sc}">${Math.round(sr)}${sDelta}</div>`;
+            } else {
+              seasonCell = `<div style="text-align:right;font-family:var(--mono);font-size:11px;color:var(--text-dark)">—</div>`;
+            }
+          } else {
+            seasonCell = `<div style="text-align:right;font-family:var(--mono);font-size:11px;color:var(--text-dark)">—</div>`;
+          }
+        }
+        d += `<div style="display:grid;grid-template-columns:${detailCols};padding:3px 4px;align-items:center;background:${rowBg};border-bottom:1px solid var(--row-border)">
+          <div style="font-family:var(--mono);font-size:11px;color:var(--text-muted)">${p.pos}</div>
+          <div style="display:flex;align-items:center;gap:5px">
+            <div class="dot" style="background:${c}"></div>
+            <span class="cup-player-link" data-player="${esc(displayName)}" style="font-size:12px;font-weight:600;color:${nc};cursor:pointer">${esc(displayName)}</span>
+          </div>
+          <div style="text-align:right;font-family:var(--mono);font-size:12px;font-weight:700;color:${c}">${Math.round(p.rating_after)}${eloDelta}</div>
+          ${seasonCell}
+        </div>`;
+      });
+      panel.innerHTML = d;
+      row.after(panel);
+      panel.querySelectorAll('.cup-player-link').forEach(el => {
+        el.onmouseenter = () => { el.style.textDecoration = 'underline'; };
+        el.onmouseleave = () => { el.style.textDecoration = 'none'; };
+        el.onclick = (e) => {
+          e.stopPropagation();
+          const name = el.dataset.player;
+          const pRow = el.closest('div[style*="display:grid"]');
+          // Close any existing inline chart in this panel
+          panel.querySelectorAll('.cup-inline-chart').forEach(c => c.remove());
+          // Find player data — try current mode, fall back to weighted (most complete)
+          let player = getActiveData().find(x => x.name === name);
+          if (!player) player = weightedData.find(x => x.name === name);
+          const chartEl = document.createElement("div");
+          chartEl.className = "cup-inline-chart chart-panel";
+          chartEl.style.cssText = "margin:4px 0;border-radius:8px;";
+          pRow.after(chartEl);
+          if (player) {
+            drawChart(player, chartEl);
+          } else {
+            chartEl.innerHTML = `<div style="padding:12px 14px;font-family:var(--mono);font-size:11px;color:var(--text-muted)">No data available for ${esc(name)}</div>`;
+          }
+          chartEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        };
+      });
+      panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    };
+  });
+}
+
+function render() {
+  renderComparePanel();
+  const sq = document.getElementById("searchInput").value.trim().toLowerCase();
+  if (sq.length >= 2 && allData) { renderSearch(sq); return; }
+  if (viewMode === "rising") { renderRising(); return; }
+  if (viewMode === "curse") { renderCurse(); return; }
+  if (viewMode === "cups") { renderCups(); return; }
+  const header = document.querySelector(".table-header");
+  header.style.display = "grid";
+  header.style.gridTemplateColumns = leaderboardCols();
+  header.innerHTML = leaderboardHeaderHTML();
+  bindHeaderSort();
+  const filtered = getFiltered();
+  const body = document.getElementById("tableBody");
+  let html = "";
+
+  const snapMode = (() => {
+    const mode = eloMode === "glicko2" ? (includeTroll ? "g2" : "g2_pure")
+      : (includeTroll ? "ts" : "ts_pure");
+    return snap && snap[mode];
+  })();
+  let prevRanks = null;
+  if (snapMode && (sortKey === "wins" || sortKey === "podium" || sortKey === "cups" || sortKey === "avg" || sortKey === "peak")) {
+    const entries = Object.entries(snapMode);
+    if (sortKey === "wins") {
+      entries.sort((a, b) => ((b[1].length > 2 ? b[1][2] : 0) - (a[1].length > 2 ? a[1][2] : 0)) || (b[1][1] - a[1][1]));
+    } else if (sortKey === "podium") {
+      entries.sort((a, b) => ((b[1].length > 3 ? b[1][3] : 0) - (a[1].length > 3 ? a[1][3] : 0)) || (b[1][1] - a[1][1]));
+    } else {
+      prevRanks = null;
+    }
+    if (prevRanks !== null || sortKey === "wins" || sortKey === "podium") {
+      prevRanks = {};
+      entries.forEach(([name], idx) => { prevRanks[name] = idx + 1; });
+    }
+  }
+
+  filtered.forEach((p, i) => {
+    const isSel = selected === p.name;
+    const c = rColor(p.active);
+    const nameColor = customColors[p.name] || cssVar('--pname');
+    const compClass = compareMode && compareList[0] === p.name ? " comp-p1"
+      : compareMode && compareList[1] === p.name ? " comp-p2" : "";
+    const prev = snapMode && snapMode[p.name];
+
+    let rankDelta = "";
+    if (prev) {
+      const prevRank = prevRanks ? prevRanks[p.name] : (sortKey === "active" || sortKey === "rating") ? prev[0] : null;
+      if (prevRank) {
+        const rd = prevRank - (i + 1);
+        if (rd !== 0) rankDelta = rd > 0
+          ? `<span class="delta-up">▲${rd}</span>`
+          : `<span class="delta-down">▼${Math.abs(rd)}</span>`;
+      }
+    }
+
+    let eloDelta = "";
+    if (prev) {
+      const ed = Math.round(p.active - prev[1]);
+      if (Math.abs(ed) >= 1) eloDelta = ed > 0
+        ? `<span class="elo-delta-up">+${ed}</span>`
+        : `<span class="elo-delta-down">${ed}</span>`;
+    }
+
+    let winsDelta = "";
+    if (prev && prev.length > 2) {
+      const wd = p.wins - prev[2];
+      if (wd > 0) winsDelta = `<span class="elo-delta-up">+${wd}</span>`;
+    }
+
+    let podsDelta = "";
+    if (prev && prev.length > 3) {
+      const totalPodNow = p.podiums.gold + p.podiums.silver + p.podiums.bronze;
+      const pd = totalPodNow - prev[3];
+      if (pd > 0) podsDelta = `<span class="elo-delta-up">+${pd}</span>`;
+    }
+
+    const avgColor = p.avg_position <= 5 ? "var(--green)" : p.avg_position <= 10 ? "var(--text-dim)" : "var(--text-muted)";
+    const bestColor = p.best_finish === 1 ? "var(--accent)" : p.best_finish <= 3 ? "var(--text-dim)" : "var(--text-muted)";
+    const totalPod = p.podiums.gold + p.podiums.silver + p.podiums.bronze;
+    const podStr = totalPod > 0
+      ? `<span style="color:var(--accent)">${p.podiums.gold}</span>/<span style="color:var(--silver)">${p.podiums.silver}</span>/<span style="color:var(--bronze)">${p.podiums.bronze}</span> <span style="color:var(--text-muted)">(${totalPod})</span>`
+      : `<span style="color:var(--text-dark)">0</span>`;
+
+    const isSeason = eloMode === "season";
+    html += `<div class="row${isSel ? " selected" : ""}${compClass}" data-name="${esc(p.name)}" style="grid-template-columns:${leaderboardCols()}">
+      <div class="rank">${i+1}${rankDelta}</div>
+      <div class="player"><span class="dot" style="background:${c};box-shadow:0 0 5px ${c}40"></span><span class="pname" style="color:${nameColor}">${esc(p.name)}</span></div>
+      <div class="elo-cell" style="color:${c}">${Math.round(p.active)}${eloDelta}</div>
+      <div style="text-align:right;font-family:var(--mono);font-size:14px;color:var(--text-muted)">${Math.round(p.uncertainty)}</div>
+      <div class="wins-cell" style="color:${p.wins > 0 ? "var(--accent)" : "var(--text-dark)"}">${p.wins}${winsDelta}</div>
+      <div class="podium-cell">${podStr}${podsDelta}</div>
+      <div class="avg-cell" style="color:${avgColor}">${p.avg_position.toFixed(1)}</div>
+      <div class="cups-cell">${p.cups}</div>
+      <div class="best-cell" style="color:${bestColor}">${p.best_finish}</div>
+      <div class="peak-cell">${Math.round(p.peak_rating)}</div>
+    </div>`;
+  });
+
+  body.innerHTML = html;
+  attachRowHandlers(body);
+}
+
+// ── INIT ──
+const _v = '?v=' + Date.now();
+function expandPlayer(p) {
+  return {
+    name: p.n, rating: p.r, active: p.a, uncertainty: p.u || 0,
+    cups: p.c, wins: p.w,
+    podiums: { gold: p.g, silver: p.s, bronze: p.z },
+    avg_position: p.v, best_finish: p.b, peak_rating: p.p,
+    history: p.h
+  };
+}
+Promise.all([
+  fetch('altrank_data.json' + _v).then(r => r.json()),
+  fetch('altrank_snapshot.json' + _v).then(r => r.json()).catch(() => null),
+  fetch('rising.json' + _v).then(r => r.json()).catch(() => null),
+  fetch('lexercurse.json' + _v).then(r => r.json()).catch(() => null),
+  fetch('cups.json' + _v).then(r => r.json()).catch(() => null),
+]).then(([all, s, rising, curse, cups]) => {
+  eloData = all.trueskill.map(expandPlayer);
+  weightedData = all.glicko2.map(expandPlayer);
+  eloDataPure = all.trueskill_pure ? all.trueskill_pure.map(expandPlayer) : eloData;
+  weightedDataPure = all.glicko2_pure ? all.glicko2_pure.map(expandPlayer) : weightedData;
+  seasonData = null;
+  snap = s;
+  risingData = rising;
+  curseData = curse ? curse.l : null;
+  allData = all;
+  cupsData = cups;
+  // Derive max cup number from data
+  const allHists = [...eloData, ...weightedData];
+  globalCupMax = Math.max(...allHists.flatMap(p => p.history.map(h => h.c)), globalCupMax);
+  // URL param: ?curse=1 activates Lexer Curse view
+  if (new URLSearchParams(location.search).has('curse')) {
+    viewMode = 'curse';
+    setCurseActive(true);
+  }
+  const searchParam = new URLSearchParams(location.search).get('search');
+  if (searchParam) {
+    document.getElementById('searchInput').value = searchParam;
+  }
+  const cupParam = new URLSearchParams(location.search).get('cup');
+  if (cupParam) {
+    const cn = parseFloat(cupParam);
+    if (cn) { render(); navigateToCup(cn); return; }
+  }
+  render();
+});
+</script>
+<script data-goatcounter="https://aizpun.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
