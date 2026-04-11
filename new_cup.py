@@ -60,7 +60,9 @@ if not rounds:
     sys.exit(1)
 
 # Build elimination order
-# Track last known time per player across rounds (for DNF elim display)
+# For each eliminated player, track:
+#   display_time: last_known_time (shown in xlsx — fallback for DNFs)
+#   dnf:          True if they DNF'd their elimination round (determines tie)
 last_known_time = {}
 elim_order = []
 actual_round = 0
@@ -80,17 +82,15 @@ for rnd in rounds:
             name = m2.group(1).strip()
             if name not in eliminated_names:
                 eliminated_names.append(name)
-    # Only count rounds with eliminations (skip discovery)
     if not eliminated_names:
         continue
     actual_round += 1
     for name in eliminated_names:
         if name != mapper:
-            # Use current round time, fall back to last known time
-            time = player_times.get(name, 'DNF')
-            if time == 'DNF':
-                time = last_known_time.get(name, 'DNF')
-            elim_order.append((name, time, actual_round))
+            elim_round_time = player_times.get(name, 'DNF')
+            dnf = (elim_round_time == 'DNF')
+            display_time = elim_round_time if not dnf else last_known_time.get(name, 'DNF')
+            elim_order.append((name, display_time, actual_round, dnf))
 
 # Find winner
 all_named = set()
@@ -113,7 +113,9 @@ for line in reversed(lines):
         winner_time = m.group(1).strip()
         break
 
-# Build leaderboard with tied positions for same-round eliminations
+# Build leaderboard: within each elimination round, finishers get distinct
+# positions ordered by their elim-round time (faster = better), then DNFs
+# tie at the bottom of that round.
 elim_order.reverse()
 leaderboard = [(winner, winner_time, None, 1)]
 pos = 2
@@ -124,9 +126,28 @@ while i < len(elim_order):
     while i < len(elim_order) and elim_order[i][2] == rnd:
         group.append(elim_order[i])
         i += 1
-    for name, time, r in group:
-        leaderboard.append((name, time, r, pos))
-    pos += len(group)
+    # Split by dnf flag — finishers get distinct positions by elim-round time,
+    # DNFs (no valid time in elim round) all tie at the bottom of this round.
+    finishers = []
+    dnfs = []
+    for name, display_time, r, dnf in group:
+        if dnf:
+            dnfs.append((name, display_time, r))
+        else:
+            try:
+                t = float(str(display_time).replace(',', '.'))
+                finishers.append((name, display_time, r, t))
+            except (ValueError, TypeError):
+                dnfs.append((name, display_time, r))
+    finishers.sort(key=lambda x: x[3])
+    for name, display_time, r, _ in finishers:
+        leaderboard.append((name, display_time, r, pos))
+        pos += 1
+    if dnfs:
+        dnf_pos = pos
+        for name, display_time, r in dnfs:
+            leaderboard.append((name, display_time, r, dnf_pos))
+        pos += len(dnfs)
 
 print(f"Parsed {len(leaderboard)} players (mapper {mapper} excluded)")
 print(f"Winner: {winner} ({winner_time})")

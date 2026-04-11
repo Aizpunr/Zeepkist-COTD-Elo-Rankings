@@ -2993,7 +2993,7 @@
     {
       "rank": 6,
       "name": "Hydro",
-      "rating": 1952.3,
+      "rating": 1953.0,
       "cups": 74,
       "wins": 9,
       "podiums": {
@@ -3446,7 +3446,7 @@
         {
           "cup": "COTD 139",
           "position": 6,
-          "rating": 1952.3,
+          "rating": 1953.0,
           "lobby_size": 58
         }
       ]
@@ -4554,7 +4554,7 @@
     {
       "rank": 11,
       "name": "RoundNzt",
-      "rating": 1850.7,
+      "rating": 1850.0,
       "cups": 121,
       "wins": 11,
       "podiums": {
@@ -5288,8 +5288,8 @@
         },
         {
           "cup": "COTD 139",
-          "position": 6,
-          "rating": 1850.7,
+          "position": 7,
+          "rating": 1850.0,
           "lobby_size": 58
         }
       ]
@@ -5297,7 +5297,7 @@
     {
       "rank": 12,
       "name": "PandaMane",
-      "rating": 1848.9,
+      "rating": 1849.6,
       "cups": 59,
       "wins": 2,
       "podiums": {
@@ -5307,7 +5307,7 @@
       },
       "avg_position": 13.1,
       "best_finish": 1,
-      "peak_rating": 1848.9,
+      "peak_rating": 1849.6,
       "history": [
         {
           "cup": "COTD 58",
@@ -5660,7 +5660,7 @@
         {
           "cup": "COTD 139",
           "position": 8,
-          "rating": 1848.9,
+          "rating": 1849.6,
           "lobby_size": 58
         }
       ]
@@ -5949,7 +5949,7 @@
     {
       "rank": 14,
       "name": "MackCheesy",
-      "rating": 1800.7,
+      "rating": 1796.7,
       "cups": 54,
       "wins": 0,
       "podiums": {
@@ -5959,7 +5959,7 @@
       },
       "avg_position": 12.6,
       "best_finish": 3,
-      "peak_rating": 1800.7,
+      "peak_rating": 1798.0,
       "history": [
         {
           "cup": "COTD 67",
@@ -6281,8 +6281,8 @@
         },
         {
           "cup": "COTD 139",
-          "position": 8,
-          "rating": 1800.7,
+          "position": 9,
+          "rating": 1796.7,
           "lobby_size": 58
         }
       ]
@@ -7794,8 +7794,193 @@
     },
     {
       "rank": 22,
+      "name": "Murrl",
+      "rating": 1712.8,
+      "cups": 28,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 13.2,
+      "best_finish": 4,
+      "peak_rating": 1713.8,
+      "history": [
+        {
+          "cup": "COTD 28",
+          "position": 7,
+          "rating": 1507.7,
+          "lobby_size": 26
+        },
+        {
+          "cup": "COTD 29",
+          "position": 25,
+          "rating": 1499.4,
+          "lobby_size": 40
+        },
+        {
+          "cup": "COTD 34",
+          "position": 20,
+          "rating": 1501.2,
+          "lobby_size": 46
+        },
+        {
+          "cup": "COTD 36",
+          "position": 12,
+          "rating": 1504.1,
+          "lobby_size": 26
+        },
+        {
+          "cup": "COTD 46",
+          "position": 20,
+          "rating": 1502.1,
+          "lobby_size": 35
+        },
+        {
+          "cup": "COTD 66",
+          "position": 27,
+          "rating": 1492.7,
+          "lobby_size": 36
+        },
+        {
+          "cup": "COTD 70",
+          "position": 14,
+          "rating": 1501.7,
+          "lobby_size": 39
+        },
+        {
+          "cup": "COTD 71",
+          "position": 10,
+          "rating": 1523.2,
+          "lobby_size": 41
+        },
+        {
+          "cup": "COTD 78",
+          "position": 18,
+          "rating": 1528.5,
+          "lobby_size": 49
+        },
+        {
+          "cup": "COTD 79",
+          "position": 12,
+          "rating": 1547.1,
+          "lobby_size": 51
+        },
+        {
+          "cup": "COTD 80",
+          "position": 8,
+          "rating": 1567.1,
+          "lobby_size": 49
+        },
+        {
+          "cup": "COTD 81",
+          "position": 5,
+          "rating": 1606.9,
+          "lobby_size": 46
+        },
+        {
+          "cup": "COTD 83",
+          "position": 10,
+          "rating": 1615.3,
+          "lobby_size": 48
+        },
+        {
+          "cup": "COTD 92",
+          "position": 16,
+          "rating": 1615.2,
+          "lobby_size": 48
+        },
+        {
+          "cup": "COTD 93",
+          "position": 5,
+          "rating": 1633.2,
+          "lobby_size": 50
+        },
+        {
+          "cup": "COTD 95",
+          "position": 8,
+          "rating": 1641.1,
+          "lobby_size": 50
+        },
+        {
+          "cup": "COTD 96",
+          "position": 8,
+          "rating": 1651.0,
+          "lobby_size": 49
+        },
+        {
+          "cup": "COTD 102",
+          "position": 4,
+          "rating": 1683.0,
+          "lobby_size": 50
+        },
+        {
+          "cup": "COTD 105",
+          "position": 12,
+          "rating": 1685.6,
+          "lobby_size": 50
+        },
+        {
+          "cup": "COTD 107",
+          "position": 17,
+          "rating": 1681.9,
+          "lobby_size": 47
+        },
+        {
+          "cup": "COTD 108",
+          "position": 7,
+          "rating": 1692.8,
+          "lobby_size": 50
+        },
+        {
+          "cup": "COTD 113",
+          "position": 31,
+          "rating": 1679.2,
+          "lobby_size": 47
+        },
+        {
+          "cup": "COTD 114",
+          "position": 21,
+          "rating": 1668.4,
+          "lobby_size": 38
+        },
+        {
+          "cup": "COTD 115",
+          "position": 4,
+          "rating": 1700.7,
+          "lobby_size": 51
+        },
+        {
+          "cup": "COTD 117",
+          "position": 7,
+          "rating": 1713.8,
+          "lobby_size": 50
+        },
+        {
+          "cup": "COTD 122",
+          "position": 20,
+          "rating": 1706.4,
+          "lobby_size": 45
+        },
+        {
+          "cup": "COTD 124",
+          "position": 12,
+          "rating": 1709.4,
+          "lobby_size": 51
+        },
+        {
+          "cup": "COTD 129",
+          "position": 11,
+          "rating": 1712.8,
+          "lobby_size": 52
+        }
+      ]
+    },
+    {
+      "rank": 23,
       "name": "Pants",
-      "rating": 1714.7,
+      "rating": 1711.5,
       "cups": 36,
       "wins": 0,
       "podiums": {
@@ -8019,194 +8204,9 @@
         },
         {
           "cup": "COTD 139",
-          "position": 14,
-          "rating": 1714.7,
-          "lobby_size": 58
-        }
-      ]
-    },
-    {
-      "rank": 23,
-      "name": "Murrl",
-      "rating": 1712.8,
-      "cups": 28,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 13.2,
-      "best_finish": 4,
-      "peak_rating": 1713.8,
-      "history": [
-        {
-          "cup": "COTD 28",
-          "position": 7,
-          "rating": 1507.7,
-          "lobby_size": 26
-        },
-        {
-          "cup": "COTD 29",
-          "position": 25,
-          "rating": 1499.4,
-          "lobby_size": 40
-        },
-        {
-          "cup": "COTD 34",
-          "position": 20,
-          "rating": 1501.2,
-          "lobby_size": 46
-        },
-        {
-          "cup": "COTD 36",
-          "position": 12,
-          "rating": 1504.1,
-          "lobby_size": 26
-        },
-        {
-          "cup": "COTD 46",
-          "position": 20,
-          "rating": 1502.1,
-          "lobby_size": 35
-        },
-        {
-          "cup": "COTD 66",
-          "position": 27,
-          "rating": 1492.7,
-          "lobby_size": 36
-        },
-        {
-          "cup": "COTD 70",
-          "position": 14,
-          "rating": 1501.7,
-          "lobby_size": 39
-        },
-        {
-          "cup": "COTD 71",
-          "position": 10,
-          "rating": 1523.2,
-          "lobby_size": 41
-        },
-        {
-          "cup": "COTD 78",
-          "position": 18,
-          "rating": 1528.5,
-          "lobby_size": 49
-        },
-        {
-          "cup": "COTD 79",
-          "position": 12,
-          "rating": 1547.1,
-          "lobby_size": 51
-        },
-        {
-          "cup": "COTD 80",
-          "position": 8,
-          "rating": 1567.1,
-          "lobby_size": 49
-        },
-        {
-          "cup": "COTD 81",
-          "position": 5,
-          "rating": 1606.9,
-          "lobby_size": 46
-        },
-        {
-          "cup": "COTD 83",
-          "position": 10,
-          "rating": 1615.3,
-          "lobby_size": 48
-        },
-        {
-          "cup": "COTD 92",
-          "position": 16,
-          "rating": 1615.2,
-          "lobby_size": 48
-        },
-        {
-          "cup": "COTD 93",
-          "position": 5,
-          "rating": 1633.2,
-          "lobby_size": 50
-        },
-        {
-          "cup": "COTD 95",
-          "position": 8,
-          "rating": 1641.1,
-          "lobby_size": 50
-        },
-        {
-          "cup": "COTD 96",
-          "position": 8,
-          "rating": 1651.0,
-          "lobby_size": 49
-        },
-        {
-          "cup": "COTD 102",
-          "position": 4,
-          "rating": 1683.0,
-          "lobby_size": 50
-        },
-        {
-          "cup": "COTD 105",
-          "position": 12,
-          "rating": 1685.6,
-          "lobby_size": 50
-        },
-        {
-          "cup": "COTD 107",
           "position": 17,
-          "rating": 1681.9,
-          "lobby_size": 47
-        },
-        {
-          "cup": "COTD 108",
-          "position": 7,
-          "rating": 1692.8,
-          "lobby_size": 50
-        },
-        {
-          "cup": "COTD 113",
-          "position": 31,
-          "rating": 1679.2,
-          "lobby_size": 47
-        },
-        {
-          "cup": "COTD 114",
-          "position": 21,
-          "rating": 1668.4,
-          "lobby_size": 38
-        },
-        {
-          "cup": "COTD 115",
-          "position": 4,
-          "rating": 1700.7,
-          "lobby_size": 51
-        },
-        {
-          "cup": "COTD 117",
-          "position": 7,
-          "rating": 1713.8,
-          "lobby_size": 50
-        },
-        {
-          "cup": "COTD 122",
-          "position": 20,
-          "rating": 1706.4,
-          "lobby_size": 45
-        },
-        {
-          "cup": "COTD 124",
-          "position": 12,
-          "rating": 1709.4,
-          "lobby_size": 51
-        },
-        {
-          "cup": "COTD 129",
-          "position": 11,
-          "rating": 1712.8,
-          "lobby_size": 52
+          "rating": 1711.5,
+          "lobby_size": 58
         }
       ]
     },
@@ -9869,7 +9869,7 @@
     {
       "rank": 36,
       "name": "ping",
-      "rating": 1641.1,
+      "rating": 1642.4,
       "cups": 51,
       "wins": 0,
       "podiums": {
@@ -10184,7 +10184,7 @@
         {
           "cup": "COTD 139",
           "position": 14,
-          "rating": 1641.1,
+          "rating": 1642.4,
           "lobby_size": 58
         }
       ]
@@ -10192,7 +10192,7 @@
     {
       "rank": 37,
       "name": "microways",
-      "rating": 1639.7,
+      "rating": 1639.2,
       "cups": 19,
       "wins": 0,
       "podiums": {
@@ -10200,9 +10200,9 @@
         "silver": 0,
         "bronze": 0
       },
-      "avg_position": 19.6,
+      "avg_position": 19.7,
       "best_finish": 5,
-      "peak_rating": 1639.7,
+      "peak_rating": 1639.2,
       "history": [
         {
           "cup": "COTD 115",
@@ -10314,8 +10314,8 @@
         },
         {
           "cup": "COTD 139",
-          "position": 12,
-          "rating": 1639.7,
+          "position": 13,
+          "rating": 1639.2,
           "lobby_size": 58
         }
       ]
@@ -10621,8 +10621,144 @@
     },
     {
       "rank": 39,
+      "name": "Socks242",
+      "rating": 1634.3,
+      "cups": 8,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 9.4,
+      "best_finish": 4,
+      "peak_rating": 1634.3,
+      "history": [
+        {
+          "cup": "COTD 2",
+          "position": 7,
+          "rating": 1517.0,
+          "lobby_size": 38
+        },
+        {
+          "cup": "COTD 5",
+          "position": 14,
+          "rating": 1517.1,
+          "lobby_size": 39
+        },
+        {
+          "cup": "COTD 8",
+          "position": 4,
+          "rating": 1558.3,
+          "lobby_size": 41
+        },
+        {
+          "cup": "COTD 10",
+          "position": 6,
+          "rating": 1588.6,
+          "lobby_size": 40
+        },
+        {
+          "cup": "COTD 26",
+          "position": 24,
+          "rating": 1574.8,
+          "lobby_size": 38
+        },
+        {
+          "cup": "Troll COTD 2",
+          "position": 10,
+          "rating": 1563.6,
+          "lobby_size": 9
+        },
+        {
+          "cup": "COTD 76",
+          "position": 6,
+          "rating": 1598.5,
+          "lobby_size": 50
+        },
+        {
+          "cup": "COTD 80",
+          "position": 4,
+          "rating": 1634.3,
+          "lobby_size": 49
+        }
+      ]
+    },
+    {
+      "rank": 40,
+      "name": "NathWalt",
+      "rating": 1632.7,
+      "cups": 9,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 11.3,
+      "best_finish": 4,
+      "peak_rating": 1640.6,
+      "history": [
+        {
+          "cup": "COTD 4",
+          "position": 7,
+          "rating": 1518.5,
+          "lobby_size": 39
+        },
+        {
+          "cup": "COTD 5",
+          "position": 5,
+          "rating": 1554.7,
+          "lobby_size": 39
+        },
+        {
+          "cup": "COTD 19",
+          "position": 9,
+          "rating": 1568.2,
+          "lobby_size": 36
+        },
+        {
+          "cup": "COTD 55",
+          "position": 17,
+          "rating": 1561.6,
+          "lobby_size": 31
+        },
+        {
+          "cup": "COTD 57",
+          "position": 6,
+          "rating": 1595.9,
+          "lobby_size": 43
+        },
+        {
+          "cup": "COTD 67",
+          "position": 4,
+          "rating": 1631.2,
+          "lobby_size": 40
+        },
+        {
+          "cup": "COTD 70",
+          "position": 11,
+          "rating": 1636.5,
+          "lobby_size": 39
+        },
+        {
+          "cup": "COTD 74",
+          "position": 11,
+          "rating": 1640.6,
+          "lobby_size": 43
+        },
+        {
+          "cup": "COTD 115",
+          "position": 32,
+          "rating": 1632.7,
+          "lobby_size": 51
+        }
+      ]
+    },
+    {
+      "rank": 41,
       "name": "GuAlexItar",
-      "rating": 1634.6,
+      "rating": 1630.8,
       "cups": 101,
       "wins": 0,
       "podiums": {
@@ -11236,145 +11372,9 @@
         },
         {
           "cup": "COTD 139",
-          "position": 14,
-          "rating": 1634.6,
+          "position": 16,
+          "rating": 1630.8,
           "lobby_size": 58
-        }
-      ]
-    },
-    {
-      "rank": 40,
-      "name": "Socks242",
-      "rating": 1634.3,
-      "cups": 8,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 9.4,
-      "best_finish": 4,
-      "peak_rating": 1634.3,
-      "history": [
-        {
-          "cup": "COTD 2",
-          "position": 7,
-          "rating": 1517.0,
-          "lobby_size": 38
-        },
-        {
-          "cup": "COTD 5",
-          "position": 14,
-          "rating": 1517.1,
-          "lobby_size": 39
-        },
-        {
-          "cup": "COTD 8",
-          "position": 4,
-          "rating": 1558.3,
-          "lobby_size": 41
-        },
-        {
-          "cup": "COTD 10",
-          "position": 6,
-          "rating": 1588.6,
-          "lobby_size": 40
-        },
-        {
-          "cup": "COTD 26",
-          "position": 24,
-          "rating": 1574.8,
-          "lobby_size": 38
-        },
-        {
-          "cup": "Troll COTD 2",
-          "position": 10,
-          "rating": 1563.6,
-          "lobby_size": 9
-        },
-        {
-          "cup": "COTD 76",
-          "position": 6,
-          "rating": 1598.5,
-          "lobby_size": 50
-        },
-        {
-          "cup": "COTD 80",
-          "position": 4,
-          "rating": 1634.3,
-          "lobby_size": 49
-        }
-      ]
-    },
-    {
-      "rank": 41,
-      "name": "NathWalt",
-      "rating": 1632.7,
-      "cups": 9,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 11.3,
-      "best_finish": 4,
-      "peak_rating": 1640.6,
-      "history": [
-        {
-          "cup": "COTD 4",
-          "position": 7,
-          "rating": 1518.5,
-          "lobby_size": 39
-        },
-        {
-          "cup": "COTD 5",
-          "position": 5,
-          "rating": 1554.7,
-          "lobby_size": 39
-        },
-        {
-          "cup": "COTD 19",
-          "position": 9,
-          "rating": 1568.2,
-          "lobby_size": 36
-        },
-        {
-          "cup": "COTD 55",
-          "position": 17,
-          "rating": 1561.6,
-          "lobby_size": 31
-        },
-        {
-          "cup": "COTD 57",
-          "position": 6,
-          "rating": 1595.9,
-          "lobby_size": 43
-        },
-        {
-          "cup": "COTD 67",
-          "position": 4,
-          "rating": 1631.2,
-          "lobby_size": 40
-        },
-        {
-          "cup": "COTD 70",
-          "position": 11,
-          "rating": 1636.5,
-          "lobby_size": 39
-        },
-        {
-          "cup": "COTD 74",
-          "position": 11,
-          "rating": 1640.6,
-          "lobby_size": 43
-        },
-        {
-          "cup": "COTD 115",
-          "position": 32,
-          "rating": 1632.7,
-          "lobby_size": 51
         }
       ]
     },
@@ -11434,7 +11434,7 @@
     {
       "rank": 43,
       "name": "Beans",
-      "rating": 1630.5,
+      "rating": 1630.2,
       "cups": 19,
       "wins": 0,
       "podiums": {
@@ -11444,7 +11444,7 @@
       },
       "avg_position": 15.4,
       "best_finish": 5,
-      "peak_rating": 1630.5,
+      "peak_rating": 1630.2,
       "history": [
         {
           "cup": "COTD 7",
@@ -11556,8 +11556,8 @@
         },
         {
           "cup": "COTD 139",
-          "position": 10,
-          "rating": 1630.5,
+          "position": 11,
+          "rating": 1630.2,
           "lobby_size": 58
         }
       ]
@@ -11565,7 +11565,7 @@
     {
       "rank": 44,
       "name": "agix",
-      "rating": 1624.6,
+      "rating": 1625.1,
       "cups": 86,
       "wins": 1,
       "podiums": {
@@ -12090,7 +12090,7 @@
         {
           "cup": "COTD 139",
           "position": 10,
-          "rating": 1624.6,
+          "rating": 1625.1,
           "lobby_size": 58
         }
       ]
@@ -12753,7 +12753,7 @@
     {
       "rank": 50,
       "name": "M\u03bc",
-      "rating": 1606.9,
+      "rating": 1606.7,
       "cups": 61,
       "wins": 0,
       "podiums": {
@@ -12761,7 +12761,7 @@
         "silver": 0,
         "bronze": 0
       },
-      "avg_position": 19.6,
+      "avg_position": 19.7,
       "best_finish": 5,
       "peak_rating": 1630.9,
       "history": [
@@ -13127,8 +13127,8 @@
         },
         {
           "cup": "COTD 139",
-          "position": 36,
-          "rating": 1606.9,
+          "position": 40,
+          "rating": 1606.7,
           "lobby_size": 58
         }
       ]
@@ -14260,7 +14260,7 @@
     {
       "rank": 55,
       "name": "Hi Im Yolo",
-      "rating": 1595.3,
+      "rating": 1596.6,
       "cups": 89,
       "wins": 0,
       "podiums": {
@@ -14270,7 +14270,7 @@
       },
       "avg_position": 19.2,
       "best_finish": 4,
-      "peak_rating": 1596.4,
+      "peak_rating": 1596.6,
       "history": [
         {
           "cup": "COTD 1",
@@ -14803,7 +14803,7 @@
         {
           "cup": "COTD 139",
           "position": 18,
-          "rating": 1595.3,
+          "rating": 1596.6,
           "lobby_size": 58
         }
       ]
@@ -14963,7 +14963,7 @@
     {
       "rank": 60,
       "name": "redal",
-      "rating": 1578.7,
+      "rating": 1578.6,
       "cups": 32,
       "wins": 0,
       "podiums": {
@@ -15163,8 +15163,8 @@
         },
         {
           "cup": "COTD 139",
-          "position": 26,
-          "rating": 1578.7,
+          "position": 29,
+          "rating": 1578.6,
           "lobby_size": 58
         }
       ]
@@ -15978,7 +15978,7 @@
     {
       "rank": 71,
       "name": "Mortishade",
-      "rating": 1552.5,
+      "rating": 1553.2,
       "cups": 47,
       "wins": 0,
       "podiums": {
@@ -16268,8 +16268,8 @@
         },
         {
           "cup": "COTD 139",
-          "position": 18,
-          "rating": 1552.5,
+          "position": 19,
+          "rating": 1553.2,
           "lobby_size": 58
         }
       ]
@@ -19320,7 +19320,7 @@
     {
       "rank": 107,
       "name": "M4rv",
-      "rating": 1519.5,
+      "rating": 1519.7,
       "cups": 6,
       "wins": 0,
       "podiums": {
@@ -19328,9 +19328,9 @@
         "silver": 0,
         "bronze": 0
       },
-      "avg_position": 24.5,
+      "avg_position": 24.8,
       "best_finish": 10,
-      "peak_rating": 1519.5,
+      "peak_rating": 1519.7,
       "history": [
         {
           "cup": "COTD 87",
@@ -19364,8 +19364,8 @@
         },
         {
           "cup": "COTD 139",
-          "position": 18,
-          "rating": 1519.5,
+          "position": 20,
+          "rating": 1519.7,
           "lobby_size": 58
         }
       ]
@@ -19772,89 +19772,6 @@
     },
     {
       "rank": 110,
-      "name": "stindt",
-      "rating": 1517.7,
-      "cups": 11,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 26.6,
-      "best_finish": 13,
-      "peak_rating": 1517.7,
-      "history": [
-        {
-          "cup": "COTD 96",
-          "position": 37,
-          "rating": 1494.8,
-          "lobby_size": 49
-        },
-        {
-          "cup": "COTD 109",
-          "position": 27,
-          "rating": 1493.1,
-          "lobby_size": 49
-        },
-        {
-          "cup": "COTD 115",
-          "position": 33,
-          "rating": 1490.6,
-          "lobby_size": 51
-        },
-        {
-          "cup": "COTD 118",
-          "position": 26,
-          "rating": 1488.7,
-          "lobby_size": 49
-        },
-        {
-          "cup": "COTD 126",
-          "position": 28,
-          "rating": 1486.6,
-          "lobby_size": 44
-        },
-        {
-          "cup": "COTD 128",
-          "position": 29,
-          "rating": 1486.4,
-          "lobby_size": 52
-        },
-        {
-          "cup": "COTD 130",
-          "position": 28,
-          "rating": 1491.2,
-          "lobby_size": 58
-        },
-        {
-          "cup": "COTD 132",
-          "position": 34,
-          "rating": 1489.9,
-          "lobby_size": 59
-        },
-        {
-          "cup": "COTD 134",
-          "position": 24,
-          "rating": 1490.8,
-          "lobby_size": 49
-        },
-        {
-          "cup": "COTD 136",
-          "position": 13,
-          "rating": 1499.9,
-          "lobby_size": 46
-        },
-        {
-          "cup": "COTD 139",
-          "position": 14,
-          "rating": 1517.7,
-          "lobby_size": 58
-        }
-      ]
-    },
-    {
-      "rank": 111,
       "name": "PoopSheriff",
       "rating": 1517.0,
       "cups": 23,
@@ -20009,7 +19926,7 @@
       ]
     },
     {
-      "rank": 112,
+      "rank": 111,
       "name": "DragonBoi",
       "rating": 1516.5,
       "cups": 10,
@@ -20086,7 +20003,7 @@
       ]
     },
     {
-      "rank": 113,
+      "rank": 112,
       "name": "Goldfish",
       "rating": 1516.5,
       "cups": 6,
@@ -20139,9 +20056,9 @@
       ]
     },
     {
-      "rank": 114,
+      "rank": 113,
       "name": "Eclipse135",
-      "rating": 1514.6,
+      "rating": 1515.2,
       "cups": 2,
       "wins": 0,
       "podiums": {
@@ -20151,7 +20068,7 @@
       },
       "avg_position": 25.0,
       "best_finish": 12,
-      "peak_rating": 1514.6,
+      "peak_rating": 1515.2,
       "history": [
         {
           "cup": "COTD 111",
@@ -20162,44 +20079,15 @@
         {
           "cup": "COTD 139",
           "position": 12,
-          "rating": 1514.6,
+          "rating": 1515.2,
           "lobby_size": 58
         }
       ]
     },
     {
-      "rank": 115,
-      "name": "Barsik",
-      "rating": 1513.3,
-      "cups": 2,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 17.0,
-      "best_finish": 13,
-      "peak_rating": 1513.3,
-      "history": [
-        {
-          "cup": "COTD 134",
-          "position": 21,
-          "rating": 1504.9,
-          "lobby_size": 49
-        },
-        {
-          "cup": "COTD 136",
-          "position": 13,
-          "rating": 1513.3,
-          "lobby_size": 46
-        }
-      ]
-    },
-    {
-      "rank": 116,
+      "rank": 114,
       "name": "R0nanC",
-      "rating": 1513.1,
+      "rating": 1514.2,
       "cups": 92,
       "wins": 0,
       "podiums": {
@@ -20760,13 +20648,42 @@
         {
           "cup": "COTD 139",
           "position": 26,
-          "rating": 1513.1,
+          "rating": 1514.2,
           "lobby_size": 58
         }
       ]
     },
     {
-      "rank": 117,
+      "rank": 115,
+      "name": "Barsik",
+      "rating": 1513.3,
+      "cups": 2,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 17.0,
+      "best_finish": 13,
+      "peak_rating": 1513.3,
+      "history": [
+        {
+          "cup": "COTD 134",
+          "position": 21,
+          "rating": 1504.9,
+          "lobby_size": 49
+        },
+        {
+          "cup": "COTD 136",
+          "position": 13,
+          "rating": 1513.3,
+          "lobby_size": 46
+        }
+      ]
+    },
+    {
+      "rank": 116,
       "name": "[POG]Shivaxi",
       "rating": 1512.1,
       "cups": 2,
@@ -20795,7 +20712,7 @@
       ]
     },
     {
-      "rank": 118,
+      "rank": 117,
       "name": "Psycho No. 7",
       "rating": 1511.8,
       "cups": 8,
@@ -20860,7 +20777,7 @@
       ]
     },
     {
-      "rank": 119,
+      "rank": 118,
       "name": "ArmchairPolymath",
       "rating": 1510.2,
       "cups": 4,
@@ -20901,7 +20818,7 @@
       ]
     },
     {
-      "rank": 120,
+      "rank": 119,
       "name": "[ZET]LOLWOOLEY",
       "rating": 1510.1,
       "cups": 1,
@@ -20920,6 +20837,89 @@
           "position": 12,
           "rating": 1510.1,
           "lobby_size": 43
+        }
+      ]
+    },
+    {
+      "rank": 120,
+      "name": "stindt",
+      "rating": 1510.0,
+      "cups": 11,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 26.7,
+      "best_finish": 13,
+      "peak_rating": 1510.0,
+      "history": [
+        {
+          "cup": "COTD 96",
+          "position": 37,
+          "rating": 1494.8,
+          "lobby_size": 49
+        },
+        {
+          "cup": "COTD 109",
+          "position": 27,
+          "rating": 1493.1,
+          "lobby_size": 49
+        },
+        {
+          "cup": "COTD 115",
+          "position": 33,
+          "rating": 1490.6,
+          "lobby_size": 51
+        },
+        {
+          "cup": "COTD 118",
+          "position": 26,
+          "rating": 1488.7,
+          "lobby_size": 49
+        },
+        {
+          "cup": "COTD 126",
+          "position": 28,
+          "rating": 1486.6,
+          "lobby_size": 44
+        },
+        {
+          "cup": "COTD 128",
+          "position": 29,
+          "rating": 1486.4,
+          "lobby_size": 52
+        },
+        {
+          "cup": "COTD 130",
+          "position": 28,
+          "rating": 1491.2,
+          "lobby_size": 58
+        },
+        {
+          "cup": "COTD 132",
+          "position": 34,
+          "rating": 1489.9,
+          "lobby_size": 59
+        },
+        {
+          "cup": "COTD 134",
+          "position": 24,
+          "rating": 1490.8,
+          "lobby_size": 49
+        },
+        {
+          "cup": "COTD 136",
+          "position": 13,
+          "rating": 1499.9,
+          "lobby_size": 46
+        },
+        {
+          "cup": "COTD 139",
+          "position": 15,
+          "rating": 1510.0,
+          "lobby_size": 58
         }
       ]
     },
@@ -21588,6 +21588,29 @@
     },
     {
       "rank": 142,
+      "name": "Void",
+      "rating": 1505.4,
+      "cups": 1,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 23.0,
+      "best_finish": 23,
+      "peak_rating": 1505.4,
+      "history": [
+        {
+          "cup": "COTD 139",
+          "position": 23,
+          "rating": 1505.4,
+          "lobby_size": 58
+        }
+      ]
+    },
+    {
+      "rank": 143,
       "name": "xBluntz",
       "rating": 1504.9,
       "cups": 1,
@@ -21610,7 +21633,7 @@
       ]
     },
     {
-      "rank": 143,
+      "rank": 144,
       "name": "Irisdice",
       "rating": 1504.8,
       "cups": 1,
@@ -21633,7 +21656,7 @@
       ]
     },
     {
-      "rank": 144,
+      "rank": 145,
       "name": "[Err]ferninine",
       "rating": 1504.7,
       "cups": 1,
@@ -21656,7 +21679,7 @@
       ]
     },
     {
-      "rank": 145,
+      "rank": 146,
       "name": "cipi",
       "rating": 1504.6,
       "cups": 1,
@@ -21675,29 +21698,6 @@
           "position": 19,
           "rating": 1504.6,
           "lobby_size": 49
-        }
-      ]
-    },
-    {
-      "rank": 146,
-      "name": "Void",
-      "rating": 1504.6,
-      "cups": 1,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 22.0,
-      "best_finish": 22,
-      "peak_rating": 1504.6,
-      "history": [
-        {
-          "cup": "COTD 139",
-          "position": 22,
-          "rating": 1504.6,
-          "lobby_size": 58
         }
       ]
     },
@@ -22340,101 +22340,8 @@
     },
     {
       "rank": 164,
-      "name": "Striking Vyper",
-      "rating": 1502.2,
-      "cups": 5,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 21.0,
-      "best_finish": 14,
-      "peak_rating": 1502.2,
-      "history": [
-        {
-          "cup": "COTD 3",
-          "position": 30,
-          "rating": 1484.4,
-          "lobby_size": 40
-        },
-        {
-          "cup": "COTD 26",
-          "position": 14,
-          "rating": 1489.1,
-          "lobby_size": 38
-        },
-        {
-          "cup": "COTD 75",
-          "position": 23,
-          "rating": 1492.0,
-          "lobby_size": 47
-        },
-        {
-          "cup": "COTD 94",
-          "position": 20,
-          "rating": 1495.9,
-          "lobby_size": 49
-        },
-        {
-          "cup": "COTD 103",
-          "position": 18,
-          "rating": 1502.2,
-          "lobby_size": 48
-        }
-      ]
-    },
-    {
-      "rank": 165,
-      "name": "Acoustic Rooster",
-      "rating": 1502.1,
-      "cups": 1,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 18.0,
-      "best_finish": 18,
-      "peak_rating": 1502.1,
-      "history": [
-        {
-          "cup": "COTD 15",
-          "position": 18,
-          "rating": 1502.1,
-          "lobby_size": 42
-        }
-      ]
-    },
-    {
-      "rank": 166,
-      "name": "Toby",
-      "rating": 1502.1,
-      "cups": 1,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 22.0,
-      "best_finish": 22,
-      "peak_rating": 1502.1,
-      "history": [
-        {
-          "cup": "COTD 98",
-          "position": 22,
-          "rating": 1502.1,
-          "lobby_size": 44
-        }
-      ]
-    },
-    {
-      "rank": 167,
       "name": "elekvault",
-      "rating": 1501.9,
+      "rating": 1502.3,
       "cups": 11,
       "wins": 0,
       "podiums": {
@@ -22442,7 +22349,7 @@
         "silver": 0,
         "bronze": 0
       },
-      "avg_position": 26.7,
+      "avg_position": 27.0,
       "best_finish": 11,
       "peak_rating": 1523.2,
       "history": [
@@ -22508,9 +22415,102 @@
         },
         {
           "cup": "COTD 139",
-          "position": 30,
-          "rating": 1501.9,
+          "position": 33,
+          "rating": 1502.3,
           "lobby_size": 58
+        }
+      ]
+    },
+    {
+      "rank": 165,
+      "name": "Striking Vyper",
+      "rating": 1502.2,
+      "cups": 5,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 21.0,
+      "best_finish": 14,
+      "peak_rating": 1502.2,
+      "history": [
+        {
+          "cup": "COTD 3",
+          "position": 30,
+          "rating": 1484.4,
+          "lobby_size": 40
+        },
+        {
+          "cup": "COTD 26",
+          "position": 14,
+          "rating": 1489.1,
+          "lobby_size": 38
+        },
+        {
+          "cup": "COTD 75",
+          "position": 23,
+          "rating": 1492.0,
+          "lobby_size": 47
+        },
+        {
+          "cup": "COTD 94",
+          "position": 20,
+          "rating": 1495.9,
+          "lobby_size": 49
+        },
+        {
+          "cup": "COTD 103",
+          "position": 18,
+          "rating": 1502.2,
+          "lobby_size": 48
+        }
+      ]
+    },
+    {
+      "rank": 166,
+      "name": "Acoustic Rooster",
+      "rating": 1502.1,
+      "cups": 1,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 18.0,
+      "best_finish": 18,
+      "peak_rating": 1502.1,
+      "history": [
+        {
+          "cup": "COTD 15",
+          "position": 18,
+          "rating": 1502.1,
+          "lobby_size": 42
+        }
+      ]
+    },
+    {
+      "rank": 167,
+      "name": "Toby",
+      "rating": 1502.1,
+      "cups": 1,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 22.0,
+      "best_finish": 22,
+      "peak_rating": 1502.1,
+      "history": [
+        {
+          "cup": "COTD 98",
+          "position": 22,
+          "rating": 1502.1,
+          "lobby_size": 44
         }
       ]
     },
@@ -22872,286 +22872,8 @@
     },
     {
       "rank": 178,
-      "name": "[MIB]Joe Beidl",
-      "rating": 1500.6,
-      "cups": 2,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 28.0,
-      "best_finish": 20,
-      "peak_rating": 1500.6,
-      "history": [
-        {
-          "cup": "COTD 110",
-          "position": 36,
-          "rating": 1494.8,
-          "lobby_size": 48
-        },
-        {
-          "cup": "COTD 111",
-          "position": 20,
-          "rating": 1500.6,
-          "lobby_size": 49
-        }
-      ]
-    },
-    {
-      "rank": 179,
-      "name": "Iijil",
-      "rating": 1500.4,
-      "cups": 1,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 16.0,
-      "best_finish": 16,
-      "peak_rating": 1500.4,
-      "history": [
-        {
-          "cup": "COTD 21",
-          "position": 16,
-          "rating": 1500.4,
-          "lobby_size": 38
-        }
-      ]
-    },
-    {
-      "rank": 180,
-      "name": "temp_*****",
-      "rating": 1500.4,
-      "cups": 1,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 16.0,
-      "best_finish": 16,
-      "peak_rating": 1500.4,
-      "history": [
-        {
-          "cup": "COTD 25",
-          "position": 16,
-          "rating": 1500.4,
-          "lobby_size": 32
-        }
-      ]
-    },
-    {
-      "rank": 181,
-      "name": "Meiko",
-      "rating": 1500.4,
-      "cups": 1,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 16.0,
-      "best_finish": 16,
-      "peak_rating": 1500.4,
-      "history": [
-        {
-          "cup": "COTD 25",
-          "position": 16,
-          "rating": 1500.4,
-          "lobby_size": 32
-        }
-      ]
-    },
-    {
-      "rank": 182,
-      "name": "Clowny",
-      "rating": 1500.3,
-      "cups": 1,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 15.0,
-      "best_finish": 15,
-      "peak_rating": 1500.3,
-      "history": [
-        {
-          "cup": "COTD 30",
-          "position": 15,
-          "rating": 1500.3,
-          "lobby_size": 33
-        }
-      ]
-    },
-    {
-      "rank": 183,
-      "name": "a_random_tumbleweed",
-      "rating": 1500.2,
-      "cups": 8,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 20.4,
-      "best_finish": 6,
-      "peak_rating": 1505.2,
-      "history": [
-        {
-          "cup": "COTD 18",
-          "position": 26,
-          "rating": 1490.1,
-          "lobby_size": 37
-        },
-        {
-          "cup": "COTD 24",
-          "position": 28,
-          "rating": 1482.7,
-          "lobby_size": 38
-        },
-        {
-          "cup": "COTD Roulette 1",
-          "position": 24,
-          "rating": 1478.3,
-          "lobby_size": 41
-        },
-        {
-          "cup": "COTD 36",
-          "position": 16,
-          "rating": 1474.0,
-          "lobby_size": 26
-        },
-        {
-          "cup": "Troll COTD 3",
-          "position": 8,
-          "rating": 1496.8,
-          "lobby_size": 37
-        },
-        {
-          "cup": "Troll COTD 5",
-          "position": 6,
-          "rating": 1501.6,
-          "lobby_size": 11
-        },
-        {
-          "cup": "COTD 51",
-          "position": 14,
-          "rating": 1505.2,
-          "lobby_size": 31
-        },
-        {
-          "cup": "COTD 77",
-          "position": 41,
-          "rating": 1500.2,
-          "lobby_size": 64
-        }
-      ]
-    },
-    {
-      "rank": 184,
-      "name": "riisuna",
-      "rating": 1500.1,
-      "cups": 1,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 9.0,
-      "best_finish": 9,
-      "peak_rating": 1500.1,
-      "history": [
-        {
-          "cup": "Troll COTD 8",
-          "position": 9,
-          "rating": 1500.1,
-          "lobby_size": 16
-        }
-      ]
-    },
-    {
-      "rank": 185,
-      "name": "YGBell",
-      "rating": 1500.1,
-      "cups": 1,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 19.0,
-      "best_finish": 19,
-      "peak_rating": 1500.1,
-      "history": [
-        {
-          "cup": "Troll COTD 10",
-          "position": 19,
-          "rating": 1500.1,
-          "lobby_size": 37
-        }
-      ]
-    },
-    {
-      "rank": 186,
-      "name": "[TBD] robert tube",
-      "rating": 1500.1,
-      "cups": 1,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 24.0,
-      "best_finish": 24,
-      "peak_rating": 1500.1,
-      "history": [
-        {
-          "cup": "COTD 93",
-          "position": 24,
-          "rating": 1500.1,
-          "lobby_size": 50
-        }
-      ]
-    },
-    {
-      "rank": 187,
-      "name": "RubenMBL",
-      "rating": 1499.9,
-      "cups": 1,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 19.0,
-      "best_finish": 19,
-      "peak_rating": 1499.9,
-      "history": [
-        {
-          "cup": "COTD 106",
-          "position": 19,
-          "rating": 1499.9,
-          "lobby_size": 48
-        }
-      ]
-    },
-    {
-      "rank": 188,
       "name": "Gimpel",
-      "rating": 1499.9,
+      "rating": 1500.8,
       "cups": 16,
       "wins": 0,
       "podiums": {
@@ -23159,7 +22881,7 @@
         "silver": 0,
         "bronze": 0
       },
-      "avg_position": 27.7,
+      "avg_position": 27.8,
       "best_finish": 20,
       "peak_rating": 1505.4,
       "history": [
@@ -23255,9 +22977,287 @@
         },
         {
           "cup": "COTD 139",
-          "position": 30,
-          "rating": 1499.9,
+          "position": 31,
+          "rating": 1500.8,
           "lobby_size": 58
+        }
+      ]
+    },
+    {
+      "rank": 179,
+      "name": "[MIB]Joe Beidl",
+      "rating": 1500.6,
+      "cups": 2,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 28.0,
+      "best_finish": 20,
+      "peak_rating": 1500.6,
+      "history": [
+        {
+          "cup": "COTD 110",
+          "position": 36,
+          "rating": 1494.8,
+          "lobby_size": 48
+        },
+        {
+          "cup": "COTD 111",
+          "position": 20,
+          "rating": 1500.6,
+          "lobby_size": 49
+        }
+      ]
+    },
+    {
+      "rank": 180,
+      "name": "Iijil",
+      "rating": 1500.4,
+      "cups": 1,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 16.0,
+      "best_finish": 16,
+      "peak_rating": 1500.4,
+      "history": [
+        {
+          "cup": "COTD 21",
+          "position": 16,
+          "rating": 1500.4,
+          "lobby_size": 38
+        }
+      ]
+    },
+    {
+      "rank": 181,
+      "name": "temp_*****",
+      "rating": 1500.4,
+      "cups": 1,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 16.0,
+      "best_finish": 16,
+      "peak_rating": 1500.4,
+      "history": [
+        {
+          "cup": "COTD 25",
+          "position": 16,
+          "rating": 1500.4,
+          "lobby_size": 32
+        }
+      ]
+    },
+    {
+      "rank": 182,
+      "name": "Meiko",
+      "rating": 1500.4,
+      "cups": 1,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 16.0,
+      "best_finish": 16,
+      "peak_rating": 1500.4,
+      "history": [
+        {
+          "cup": "COTD 25",
+          "position": 16,
+          "rating": 1500.4,
+          "lobby_size": 32
+        }
+      ]
+    },
+    {
+      "rank": 183,
+      "name": "Clowny",
+      "rating": 1500.3,
+      "cups": 1,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 15.0,
+      "best_finish": 15,
+      "peak_rating": 1500.3,
+      "history": [
+        {
+          "cup": "COTD 30",
+          "position": 15,
+          "rating": 1500.3,
+          "lobby_size": 33
+        }
+      ]
+    },
+    {
+      "rank": 184,
+      "name": "a_random_tumbleweed",
+      "rating": 1500.2,
+      "cups": 8,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 20.4,
+      "best_finish": 6,
+      "peak_rating": 1505.2,
+      "history": [
+        {
+          "cup": "COTD 18",
+          "position": 26,
+          "rating": 1490.1,
+          "lobby_size": 37
+        },
+        {
+          "cup": "COTD 24",
+          "position": 28,
+          "rating": 1482.7,
+          "lobby_size": 38
+        },
+        {
+          "cup": "COTD Roulette 1",
+          "position": 24,
+          "rating": 1478.3,
+          "lobby_size": 41
+        },
+        {
+          "cup": "COTD 36",
+          "position": 16,
+          "rating": 1474.0,
+          "lobby_size": 26
+        },
+        {
+          "cup": "Troll COTD 3",
+          "position": 8,
+          "rating": 1496.8,
+          "lobby_size": 37
+        },
+        {
+          "cup": "Troll COTD 5",
+          "position": 6,
+          "rating": 1501.6,
+          "lobby_size": 11
+        },
+        {
+          "cup": "COTD 51",
+          "position": 14,
+          "rating": 1505.2,
+          "lobby_size": 31
+        },
+        {
+          "cup": "COTD 77",
+          "position": 41,
+          "rating": 1500.2,
+          "lobby_size": 64
+        }
+      ]
+    },
+    {
+      "rank": 185,
+      "name": "riisuna",
+      "rating": 1500.1,
+      "cups": 1,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 9.0,
+      "best_finish": 9,
+      "peak_rating": 1500.1,
+      "history": [
+        {
+          "cup": "Troll COTD 8",
+          "position": 9,
+          "rating": 1500.1,
+          "lobby_size": 16
+        }
+      ]
+    },
+    {
+      "rank": 186,
+      "name": "YGBell",
+      "rating": 1500.1,
+      "cups": 1,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 19.0,
+      "best_finish": 19,
+      "peak_rating": 1500.1,
+      "history": [
+        {
+          "cup": "Troll COTD 10",
+          "position": 19,
+          "rating": 1500.1,
+          "lobby_size": 37
+        }
+      ]
+    },
+    {
+      "rank": 187,
+      "name": "[TBD] robert tube",
+      "rating": 1500.1,
+      "cups": 1,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 24.0,
+      "best_finish": 24,
+      "peak_rating": 1500.1,
+      "history": [
+        {
+          "cup": "COTD 93",
+          "position": 24,
+          "rating": 1500.1,
+          "lobby_size": 50
+        }
+      ]
+    },
+    {
+      "rank": 188,
+      "name": "RubenMBL",
+      "rating": 1499.9,
+      "cups": 1,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 19.0,
+      "best_finish": 19,
+      "peak_rating": 1499.9,
+      "history": [
+        {
+          "cup": "COTD 106",
+          "position": 19,
+          "rating": 1499.9,
+          "lobby_size": 48
         }
       ]
     },
@@ -24325,13 +24325,13 @@
         "silver": 0,
         "bronze": 0
       },
-      "avg_position": 30.0,
-      "best_finish": 30,
+      "avg_position": 34.0,
+      "best_finish": 34,
       "peak_rating": 1496.9,
       "history": [
         {
           "cup": "COTD 139",
-          "position": 30,
+          "position": 34,
           "rating": 1496.9,
           "lobby_size": 58
         }
@@ -24523,276 +24523,8 @@
     },
     {
       "rank": 237,
-      "name": "Bridaggs",
-      "rating": 1496.1,
-      "cups": 5,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 20.4,
-      "best_finish": 10,
-      "peak_rating": 1507.2,
-      "history": [
-        {
-          "cup": "COTD 13",
-          "position": 20,
-          "rating": 1498.8,
-          "lobby_size": 43
-        },
-        {
-          "cup": "COTD 14",
-          "position": 10,
-          "rating": 1506.4,
-          "lobby_size": 39
-        },
-        {
-          "cup": "COTD 15",
-          "position": 19,
-          "rating": 1507.2,
-          "lobby_size": 42
-        },
-        {
-          "cup": "COTD 25",
-          "position": 18,
-          "rating": 1500.7,
-          "lobby_size": 32
-        },
-        {
-          "cup": "Troll COTD 10",
-          "position": 35,
-          "rating": 1496.1,
-          "lobby_size": 37
-        }
-      ]
-    },
-    {
-      "rank": 238,
-      "name": "Bram2323",
-      "rating": 1496.1,
-      "cups": 8,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 23.4,
-      "best_finish": 12,
-      "peak_rating": 1496.1,
-      "history": [
-        {
-          "cup": "COTD 57",
-          "position": 24,
-          "rating": 1495.6,
-          "lobby_size": 43
-        },
-        {
-          "cup": "COTD 58",
-          "position": 20,
-          "rating": 1492.9,
-          "lobby_size": 37
-        },
-        {
-          "cup": "COTW 61",
-          "position": 23,
-          "rating": 1487.7,
-          "lobby_size": 41
-        },
-        {
-          "cup": "COTW 65",
-          "position": 26,
-          "rating": 1481.4,
-          "lobby_size": 43
-        },
-        {
-          "cup": "COTD 66",
-          "position": 12,
-          "rating": 1490.3,
-          "lobby_size": 36
-        },
-        {
-          "cup": "COTD 69",
-          "position": 32,
-          "rating": 1485.8,
-          "lobby_size": 47
-        },
-        {
-          "cup": "COTD 77",
-          "position": 31,
-          "rating": 1489.1,
-          "lobby_size": 64
-        },
-        {
-          "cup": "COTD 82",
-          "position": 19,
-          "rating": 1496.1,
-          "lobby_size": 51
-        }
-      ]
-    },
-    {
-      "rank": 239,
-      "name": "Redstonecraft99",
-      "rating": 1496.1,
-      "cups": 3,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 18.7,
-      "best_finish": 15,
-      "peak_rating": 1499.8,
-      "history": [
-        {
-          "cup": "Troll COTW 9",
-          "position": 15,
-          "rating": 1499.8,
-          "lobby_size": 24
-        },
-        {
-          "cup": "COTD Roulette 2",
-          "position": 18,
-          "rating": 1493.0,
-          "lobby_size": 32
-        },
-        {
-          "cup": "COTD 69",
-          "position": 23,
-          "rating": 1496.1,
-          "lobby_size": 47
-        }
-      ]
-    },
-    {
-      "rank": 240,
-      "name": "Catch",
-      "rating": 1496.1,
-      "cups": 1,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 27.0,
-      "best_finish": 27,
-      "peak_rating": 1496.1,
-      "history": [
-        {
-          "cup": "COTD 104",
-          "position": 27,
-          "rating": 1496.1,
-          "lobby_size": 43
-        }
-      ]
-    },
-    {
-      "rank": 241,
-      "name": "Neon_King2",
-      "rating": 1496.0,
-      "cups": 1,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 32.0,
-      "best_finish": 32,
-      "peak_rating": 1496.0,
-      "history": [
-        {
-          "cup": "COTD 107",
-          "position": 32,
-          "rating": 1496.0,
-          "lobby_size": 47
-        }
-      ]
-    },
-    {
-      "rank": 242,
-      "name": "BWuuzi",
-      "rating": 1496.0,
-      "cups": 1,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 36.0,
-      "best_finish": 36,
-      "peak_rating": 1496.0,
-      "history": [
-        {
-          "cup": "COTD 115",
-          "position": 36,
-          "rating": 1496.0,
-          "lobby_size": 51
-        }
-      ]
-    },
-    {
-      "rank": 243,
-      "name": "Vananda Games",
-      "rating": 1495.9,
-      "cups": 1,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 21.0,
-      "best_finish": 21,
-      "peak_rating": 1495.9,
-      "history": [
-        {
-          "cup": "COTD 54",
-          "position": 21,
-          "rating": 1495.9,
-          "lobby_size": 38
-        }
-      ]
-    },
-    {
-      "rank": 244,
-      "name": "FlamingSquid",
-      "rating": 1495.9,
-      "cups": 2,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 26.5,
-      "best_finish": 26,
-      "peak_rating": 1498.9,
-      "history": [
-        {
-          "cup": "COTD 92",
-          "position": 26,
-          "rating": 1498.9,
-          "lobby_size": 48
-        },
-        {
-          "cup": "COTD 99",
-          "position": 27,
-          "rating": 1495.9,
-          "lobby_size": 45
-        }
-      ]
-    },
-    {
-      "rank": 245,
       "name": "PlusMicron",
-      "rating": 1495.9,
+      "rating": 1496.2,
       "cups": 11,
       "wins": 0,
       "podiums": {
@@ -24800,7 +24532,7 @@
         "silver": 0,
         "bronze": 0
       },
-      "avg_position": 29.9,
+      "avg_position": 30.1,
       "best_finish": 17,
       "peak_rating": 1496.9,
       "history": [
@@ -24866,14 +24598,305 @@
         },
         {
           "cup": "COTD 139",
-          "position": 22,
-          "rating": 1495.9,
+          "position": 24,
+          "rating": 1496.2,
           "lobby_size": 58
         }
       ]
     },
     {
+      "rank": 238,
+      "name": "MadTomato",
+      "rating": 1496.2,
+      "cups": 1,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 36.0,
+      "best_finish": 36,
+      "peak_rating": 1496.2,
+      "history": [
+        {
+          "cup": "COTD 139",
+          "position": 36,
+          "rating": 1496.2,
+          "lobby_size": 58
+        }
+      ]
+    },
+    {
+      "rank": 239,
+      "name": "Bridaggs",
+      "rating": 1496.1,
+      "cups": 5,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 20.4,
+      "best_finish": 10,
+      "peak_rating": 1507.2,
+      "history": [
+        {
+          "cup": "COTD 13",
+          "position": 20,
+          "rating": 1498.8,
+          "lobby_size": 43
+        },
+        {
+          "cup": "COTD 14",
+          "position": 10,
+          "rating": 1506.4,
+          "lobby_size": 39
+        },
+        {
+          "cup": "COTD 15",
+          "position": 19,
+          "rating": 1507.2,
+          "lobby_size": 42
+        },
+        {
+          "cup": "COTD 25",
+          "position": 18,
+          "rating": 1500.7,
+          "lobby_size": 32
+        },
+        {
+          "cup": "Troll COTD 10",
+          "position": 35,
+          "rating": 1496.1,
+          "lobby_size": 37
+        }
+      ]
+    },
+    {
+      "rank": 240,
+      "name": "Bram2323",
+      "rating": 1496.1,
+      "cups": 8,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 23.4,
+      "best_finish": 12,
+      "peak_rating": 1496.1,
+      "history": [
+        {
+          "cup": "COTD 57",
+          "position": 24,
+          "rating": 1495.6,
+          "lobby_size": 43
+        },
+        {
+          "cup": "COTD 58",
+          "position": 20,
+          "rating": 1492.9,
+          "lobby_size": 37
+        },
+        {
+          "cup": "COTW 61",
+          "position": 23,
+          "rating": 1487.7,
+          "lobby_size": 41
+        },
+        {
+          "cup": "COTW 65",
+          "position": 26,
+          "rating": 1481.4,
+          "lobby_size": 43
+        },
+        {
+          "cup": "COTD 66",
+          "position": 12,
+          "rating": 1490.3,
+          "lobby_size": 36
+        },
+        {
+          "cup": "COTD 69",
+          "position": 32,
+          "rating": 1485.8,
+          "lobby_size": 47
+        },
+        {
+          "cup": "COTD 77",
+          "position": 31,
+          "rating": 1489.1,
+          "lobby_size": 64
+        },
+        {
+          "cup": "COTD 82",
+          "position": 19,
+          "rating": 1496.1,
+          "lobby_size": 51
+        }
+      ]
+    },
+    {
+      "rank": 241,
+      "name": "Redstonecraft99",
+      "rating": 1496.1,
+      "cups": 3,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 18.7,
+      "best_finish": 15,
+      "peak_rating": 1499.8,
+      "history": [
+        {
+          "cup": "Troll COTW 9",
+          "position": 15,
+          "rating": 1499.8,
+          "lobby_size": 24
+        },
+        {
+          "cup": "COTD Roulette 2",
+          "position": 18,
+          "rating": 1493.0,
+          "lobby_size": 32
+        },
+        {
+          "cup": "COTD 69",
+          "position": 23,
+          "rating": 1496.1,
+          "lobby_size": 47
+        }
+      ]
+    },
+    {
+      "rank": 242,
+      "name": "Catch",
+      "rating": 1496.1,
+      "cups": 1,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 27.0,
+      "best_finish": 27,
+      "peak_rating": 1496.1,
+      "history": [
+        {
+          "cup": "COTD 104",
+          "position": 27,
+          "rating": 1496.1,
+          "lobby_size": 43
+        }
+      ]
+    },
+    {
+      "rank": 243,
+      "name": "Neon_King2",
+      "rating": 1496.0,
+      "cups": 1,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 32.0,
+      "best_finish": 32,
+      "peak_rating": 1496.0,
+      "history": [
+        {
+          "cup": "COTD 107",
+          "position": 32,
+          "rating": 1496.0,
+          "lobby_size": 47
+        }
+      ]
+    },
+    {
+      "rank": 244,
+      "name": "BWuuzi",
+      "rating": 1496.0,
+      "cups": 1,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 36.0,
+      "best_finish": 36,
+      "peak_rating": 1496.0,
+      "history": [
+        {
+          "cup": "COTD 115",
+          "position": 36,
+          "rating": 1496.0,
+          "lobby_size": 51
+        }
+      ]
+    },
+    {
+      "rank": 245,
+      "name": "Vananda Games",
+      "rating": 1495.9,
+      "cups": 1,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 21.0,
+      "best_finish": 21,
+      "peak_rating": 1495.9,
+      "history": [
+        {
+          "cup": "COTD 54",
+          "position": 21,
+          "rating": 1495.9,
+          "lobby_size": 38
+        }
+      ]
+    },
+    {
       "rank": 246,
+      "name": "FlamingSquid",
+      "rating": 1495.9,
+      "cups": 2,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 26.5,
+      "best_finish": 26,
+      "peak_rating": 1498.9,
+      "history": [
+        {
+          "cup": "COTD 92",
+          "position": 26,
+          "rating": 1498.9,
+          "lobby_size": 48
+        },
+        {
+          "cup": "COTD 99",
+          "position": 27,
+          "rating": 1495.9,
+          "lobby_size": 45
+        }
+      ]
+    },
+    {
+      "rank": 247,
       "name": "Ionjig",
       "rating": 1495.8,
       "cups": 5,
@@ -24920,7 +24943,7 @@
       ]
     },
     {
-      "rank": 247,
+      "rank": 248,
       "name": "TheBestMaidens",
       "rating": 1495.7,
       "cups": 3,
@@ -24955,7 +24978,7 @@
       ]
     },
     {
-      "rank": 248,
+      "rank": 249,
       "name": "Kabs666",
       "rating": 1495.6,
       "cups": 1,
@@ -24978,7 +25001,7 @@
       ]
     },
     {
-      "rank": 249,
+      "rank": 250,
       "name": "Bank Waffles",
       "rating": 1495.6,
       "cups": 3,
@@ -25013,7 +25036,7 @@
       ]
     },
     {
-      "rank": 250,
+      "rank": 251,
       "name": "Zwerggo",
       "rating": 1495.6,
       "cups": 1,
@@ -25036,7 +25059,7 @@
       ]
     },
     {
-      "rank": 251,
+      "rank": 252,
       "name": "steffiano",
       "rating": 1495.5,
       "cups": 1,
@@ -25059,7 +25082,7 @@
       ]
     },
     {
-      "rank": 252,
+      "rank": 253,
       "name": "jjwoznia",
       "rating": 1495.5,
       "cups": 1,
@@ -25082,7 +25105,7 @@
       ]
     },
     {
-      "rank": 253,
+      "rank": 254,
       "name": "[ARL]Aurum",
       "rating": 1495.5,
       "cups": 1,
@@ -25105,7 +25128,30 @@
       ]
     },
     {
-      "rank": 254,
+      "rank": 255,
+      "name": "[EEN] Hang Chang-Pang",
+      "rating": 1495.5,
+      "cups": 1,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 38.0,
+      "best_finish": 38,
+      "peak_rating": 1495.5,
+      "history": [
+        {
+          "cup": "COTD 139",
+          "position": 38,
+          "rating": 1495.5,
+          "lobby_size": 58
+        }
+      ]
+    },
+    {
+      "rank": 256,
       "name": "BuddhaBladez",
       "rating": 1495.3,
       "cups": 6,
@@ -25158,7 +25204,7 @@
       ]
     },
     {
-      "rank": 255,
+      "rank": 257,
       "name": "Darkspace",
       "rating": 1495.3,
       "cups": 1,
@@ -25181,7 +25227,7 @@
       ]
     },
     {
-      "rank": 256,
+      "rank": 258,
       "name": "Zachafinackus",
       "rating": 1495.3,
       "cups": 3,
@@ -25216,7 +25262,7 @@
       ]
     },
     {
-      "rank": 257,
+      "rank": 259,
       "name": "YTButItRuns",
       "rating": 1495.2,
       "cups": 1,
@@ -25239,7 +25285,7 @@
       ]
     },
     {
-      "rank": 258,
+      "rank": 260,
       "name": "kK-Nox",
       "rating": 1495.2,
       "cups": 1,
@@ -25262,7 +25308,7 @@
       ]
     },
     {
-      "rank": 259,
+      "rank": 261,
       "name": "Phoenjx",
       "rating": 1495.1,
       "cups": 4,
@@ -25303,7 +25349,7 @@
       ]
     },
     {
-      "rank": 260,
+      "rank": 262,
       "name": "franearthsea",
       "rating": 1495.0,
       "cups": 1,
@@ -25326,7 +25372,7 @@
       ]
     },
     {
-      "rank": 261,
+      "rank": 263,
       "name": "Potato Princess",
       "rating": 1495.0,
       "cups": 1,
@@ -25349,7 +25395,7 @@
       ]
     },
     {
-      "rank": 262,
+      "rank": 264,
       "name": "/<",
       "rating": 1494.9,
       "cups": 2,
@@ -25378,7 +25424,7 @@
       ]
     },
     {
-      "rank": 263,
+      "rank": 265,
       "name": "Ballenkrabber",
       "rating": 1494.8,
       "cups": 1,
@@ -25401,7 +25447,7 @@
       ]
     },
     {
-      "rank": 264,
+      "rank": 266,
       "name": "MatrixAware2",
       "rating": 1494.8,
       "cups": 1,
@@ -25424,7 +25470,7 @@
       ]
     },
     {
-      "rank": 265,
+      "rank": 267,
       "name": "Andy",
       "rating": 1494.8,
       "cups": 1,
@@ -25447,76 +25493,7 @@
       ]
     },
     {
-      "rank": 266,
-      "name": "MadTomato",
-      "rating": 1494.8,
-      "cups": 1,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 36.0,
-      "best_finish": 36,
-      "peak_rating": 1494.8,
-      "history": [
-        {
-          "cup": "COTD 139",
-          "position": 36,
-          "rating": 1494.8,
-          "lobby_size": 58
-        }
-      ]
-    },
-    {
-      "rank": 267,
-      "name": "[EEN] Hang Chang-Pang",
-      "rating": 1494.8,
-      "cups": 1,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 36.0,
-      "best_finish": 36,
-      "peak_rating": 1494.8,
-      "history": [
-        {
-          "cup": "COTD 139",
-          "position": 36,
-          "rating": 1494.8,
-          "lobby_size": 58
-        }
-      ]
-    },
-    {
       "rank": 268,
-      "name": "[NewB] Zeus",
-      "rating": 1494.8,
-      "cups": 1,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 36.0,
-      "best_finish": 36,
-      "peak_rating": 1494.8,
-      "history": [
-        {
-          "cup": "COTD 139",
-          "position": 36,
-          "rating": 1494.8,
-          "lobby_size": 58
-        }
-      ]
-    },
-    {
-      "rank": 269,
       "name": "Morishade",
       "rating": 1494.7,
       "cups": 1,
@@ -25539,7 +25516,7 @@
       ]
     },
     {
-      "rank": 270,
+      "rank": 269,
       "name": "zostawilmniemaz",
       "rating": 1494.7,
       "cups": 1,
@@ -25562,7 +25539,7 @@
       ]
     },
     {
-      "rank": 271,
+      "rank": 270,
       "name": "[FOOL} Ruckooe",
       "rating": 1494.7,
       "cups": 1,
@@ -25585,7 +25562,7 @@
       ]
     },
     {
-      "rank": 272,
+      "rank": 271,
       "name": "[ZET]maskeddog",
       "rating": 1494.6,
       "cups": 1,
@@ -25608,7 +25585,7 @@
       ]
     },
     {
-      "rank": 273,
+      "rank": 272,
       "name": "b0baphettyWAP",
       "rating": 1494.5,
       "cups": 1,
@@ -25631,7 +25608,7 @@
       ]
     },
     {
-      "rank": 274,
+      "rank": 273,
       "name": "Drrcp",
       "rating": 1494.5,
       "cups": 4,
@@ -25672,7 +25649,7 @@
       ]
     },
     {
-      "rank": 275,
+      "rank": 274,
       "name": "//////void",
       "rating": 1494.4,
       "cups": 5,
@@ -25719,7 +25696,7 @@
       ]
     },
     {
-      "rank": 276,
+      "rank": 275,
       "name": "snailspace",
       "rating": 1494.4,
       "cups": 1,
@@ -25742,7 +25719,7 @@
       ]
     },
     {
-      "rank": 277,
+      "rank": 276,
       "name": "[CHZB] PizzaCat1732",
       "rating": 1494.4,
       "cups": 1,
@@ -25765,7 +25742,7 @@
       ]
     },
     {
-      "rank": 278,
+      "rank": 277,
       "name": "Keno_O",
       "rating": 1494.4,
       "cups": 1,
@@ -25784,6 +25761,29 @@
           "position": 41,
           "rating": 1494.4,
           "lobby_size": 55
+        }
+      ]
+    },
+    {
+      "rank": 278,
+      "name": "[NewB] Zeus",
+      "rating": 1494.4,
+      "cups": 1,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 40.0,
+      "best_finish": 40,
+      "peak_rating": 1494.4,
+      "history": [
+        {
+          "cup": "COTD 139",
+          "position": 40,
+          "rating": 1494.4,
+          "lobby_size": 58
         }
       ]
     },
@@ -27876,6 +27876,29 @@
     },
     {
       "rank": 364,
+      "name": "True Chaotic Neutral",
+      "rating": 1491.8,
+      "cups": 1,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 48.0,
+      "best_finish": 48,
+      "peak_rating": 1491.8,
+      "history": [
+        {
+          "cup": "COTD 139",
+          "position": 48,
+          "rating": 1491.8,
+          "lobby_size": 58
+        }
+      ]
+    },
+    {
+      "rank": 365,
       "name": "RigatoniShip",
       "rating": 1491.7,
       "cups": 2,
@@ -27904,7 +27927,7 @@
       ]
     },
     {
-      "rank": 365,
+      "rank": 366,
       "name": "Phasmanian",
       "rating": 1491.7,
       "cups": 1,
@@ -27927,7 +27950,7 @@
       ]
     },
     {
-      "rank": 366,
+      "rank": 367,
       "name": "Ninjakurl7",
       "rating": 1491.6,
       "cups": 1,
@@ -27950,7 +27973,7 @@
       ]
     },
     {
-      "rank": 367,
+      "rank": 368,
       "name": "[R0nC] cham824",
       "rating": 1491.6,
       "cups": 1,
@@ -27973,7 +27996,7 @@
       ]
     },
     {
-      "rank": 368,
+      "rank": 369,
       "name": "SurxiousTheBranded",
       "rating": 1491.6,
       "cups": 1,
@@ -27996,7 +28019,7 @@
       ]
     },
     {
-      "rank": 369,
+      "rank": 370,
       "name": "jhf0601",
       "rating": 1491.6,
       "cups": 1,
@@ -28019,7 +28042,7 @@
       ]
     },
     {
-      "rank": 370,
+      "rank": 371,
       "name": "Kick Jerreinemy",
       "rating": 1491.6,
       "cups": 1,
@@ -28042,7 +28065,7 @@
       ]
     },
     {
-      "rank": 371,
+      "rank": 372,
       "name": ">LLF< Lord Zekrom",
       "rating": 1491.6,
       "cups": 1,
@@ -28065,7 +28088,7 @@
       ]
     },
     {
-      "rank": 372,
+      "rank": 373,
       "name": "jgorsc5200",
       "rating": 1491.6,
       "cups": 1,
@@ -28088,7 +28111,7 @@
       ]
     },
     {
-      "rank": 373,
+      "rank": 374,
       "name": "70reos",
       "rating": 1491.5,
       "cups": 1,
@@ -28111,7 +28134,7 @@
       ]
     },
     {
-      "rank": 374,
+      "rank": 375,
       "name": "[OwO] Fynn",
       "rating": 1491.5,
       "cups": 1,
@@ -28134,7 +28157,7 @@
       ]
     },
     {
-      "rank": 375,
+      "rank": 376,
       "name": "Andrew8Kavanagh",
       "rating": 1491.5,
       "cups": 1,
@@ -28157,7 +28180,7 @@
       ]
     },
     {
-      "rank": 376,
+      "rank": 377,
       "name": "Sensfan90",
       "rating": 1491.5,
       "cups": 1,
@@ -28180,7 +28203,7 @@
       ]
     },
     {
-      "rank": 377,
+      "rank": 378,
       "name": "Gurgies",
       "rating": 1491.5,
       "cups": 1,
@@ -28203,7 +28226,7 @@
       ]
     },
     {
-      "rank": 378,
+      "rank": 379,
       "name": "Brachaldis",
       "rating": 1491.5,
       "cups": 1,
@@ -28226,7 +28249,7 @@
       ]
     },
     {
-      "rank": 379,
+      "rank": 380,
       "name": "Shiftypowers83",
       "rating": 1491.5,
       "cups": 1,
@@ -28249,7 +28272,7 @@
       ]
     },
     {
-      "rank": 380,
+      "rank": 381,
       "name": "nicsaphire",
       "rating": 1491.5,
       "cups": 1,
@@ -28272,7 +28295,7 @@
       ]
     },
     {
-      "rank": 381,
+      "rank": 382,
       "name": "Shadymonkey",
       "rating": 1491.4,
       "cups": 1,
@@ -28295,7 +28318,7 @@
       ]
     },
     {
-      "rank": 382,
+      "rank": 383,
       "name": "Jozen",
       "rating": 1491.4,
       "cups": 1,
@@ -28318,7 +28341,7 @@
       ]
     },
     {
-      "rank": 383,
+      "rank": 384,
       "name": "Orange",
       "rating": 1491.4,
       "cups": 1,
@@ -28341,7 +28364,7 @@
       ]
     },
     {
-      "rank": 384,
+      "rank": 385,
       "name": "Zeus",
       "rating": 1491.4,
       "cups": 1,
@@ -28364,7 +28387,7 @@
       ]
     },
     {
-      "rank": 385,
+      "rank": 386,
       "name": "[WASD] Dentalon",
       "rating": 1491.3,
       "cups": 2,
@@ -28393,7 +28416,7 @@
       ]
     },
     {
-      "rank": 386,
+      "rank": 387,
       "name": "Spyder_0324",
       "rating": 1491.3,
       "cups": 3,
@@ -28428,7 +28451,7 @@
       ]
     },
     {
-      "rank": 387,
+      "rank": 388,
       "name": "Hex_Proto",
       "rating": 1491.3,
       "cups": 1,
@@ -28451,7 +28474,7 @@
       ]
     },
     {
-      "rank": 388,
+      "rank": 389,
       "name": "Croissant",
       "rating": 1491.3,
       "cups": 1,
@@ -28474,7 +28497,7 @@
       ]
     },
     {
-      "rank": 389,
+      "rank": 390,
       "name": "amylou1132",
       "rating": 1491.3,
       "cups": 1,
@@ -28497,7 +28520,7 @@
       ]
     },
     {
-      "rank": 390,
+      "rank": 391,
       "name": "Sir Cogwheel",
       "rating": 1491.3,
       "cups": 1,
@@ -28520,7 +28543,7 @@
       ]
     },
     {
-      "rank": 391,
+      "rank": 392,
       "name": "Geb1n",
       "rating": 1491.3,
       "cups": 1,
@@ -28543,7 +28566,7 @@
       ]
     },
     {
-      "rank": 392,
+      "rank": 393,
       "name": "Flamez",
       "rating": 1491.3,
       "cups": 1,
@@ -28566,7 +28589,7 @@
       ]
     },
     {
-      "rank": 393,
+      "rank": 394,
       "name": "CrackerBarrel Gaming",
       "rating": 1491.3,
       "cups": 1,
@@ -28589,7 +28612,7 @@
       ]
     },
     {
-      "rank": 394,
+      "rank": 395,
       "name": "gatlinggun511",
       "rating": 1491.3,
       "cups": 1,
@@ -28612,7 +28635,7 @@
       ]
     },
     {
-      "rank": 395,
+      "rank": 396,
       "name": "hiimfish",
       "rating": 1491.2,
       "cups": 1,
@@ -28635,7 +28658,7 @@
       ]
     },
     {
-      "rank": 396,
+      "rank": 397,
       "name": "Ezral",
       "rating": 1491.2,
       "cups": 1,
@@ -28658,7 +28681,7 @@
       ]
     },
     {
-      "rank": 397,
+      "rank": 398,
       "name": "Arturxxx",
       "rating": 1491.2,
       "cups": 2,
@@ -28687,7 +28710,7 @@
       ]
     },
     {
-      "rank": 398,
+      "rank": 399,
       "name": "zachwalt",
       "rating": 1491.2,
       "cups": 1,
@@ -28710,7 +28733,7 @@
       ]
     },
     {
-      "rank": 399,
+      "rank": 400,
       "name": "Absolute0CA",
       "rating": 1491.2,
       "cups": 1,
@@ -28733,7 +28756,7 @@
       ]
     },
     {
-      "rank": 400,
+      "rank": 401,
       "name": "Keeper",
       "rating": 1491.2,
       "cups": 1,
@@ -28756,7 +28779,7 @@
       ]
     },
     {
-      "rank": 401,
+      "rank": 402,
       "name": "aether34",
       "rating": 1491.2,
       "cups": 1,
@@ -28779,7 +28802,7 @@
       ]
     },
     {
-      "rank": 402,
+      "rank": 403,
       "name": "theo_f",
       "rating": 1491.2,
       "cups": 1,
@@ -28802,7 +28825,7 @@
       ]
     },
     {
-      "rank": 403,
+      "rank": 404,
       "name": "[Fart]KingKerf",
       "rating": 1491.1,
       "cups": 1,
@@ -28825,7 +28848,7 @@
       ]
     },
     {
-      "rank": 404,
+      "rank": 405,
       "name": "Fire_Mutt",
       "rating": 1491.0,
       "cups": 1,
@@ -28848,7 +28871,7 @@
       ]
     },
     {
-      "rank": 405,
+      "rank": 406,
       "name": "TusBro",
       "rating": 1490.9,
       "cups": 1,
@@ -28871,7 +28894,7 @@
       ]
     },
     {
-      "rank": 406,
+      "rank": 407,
       "name": "Warrel",
       "rating": 1490.9,
       "cups": 1,
@@ -28894,7 +28917,7 @@
       ]
     },
     {
-      "rank": 407,
+      "rank": 408,
       "name": "DoctorDaVnci",
       "rating": 1490.9,
       "cups": 1,
@@ -28917,7 +28940,7 @@
       ]
     },
     {
-      "rank": 408,
+      "rank": 409,
       "name": "wunderBarr",
       "rating": 1490.9,
       "cups": 1,
@@ -28940,7 +28963,7 @@
       ]
     },
     {
-      "rank": 409,
+      "rank": 410,
       "name": "Edi",
       "rating": 1490.9,
       "cups": 1,
@@ -28963,7 +28986,7 @@
       ]
     },
     {
-      "rank": 410,
+      "rank": 411,
       "name": "ZTR177",
       "rating": 1490.8,
       "cups": 2,
@@ -28992,7 +29015,7 @@
       ]
     },
     {
-      "rank": 411,
+      "rank": 412,
       "name": "qaau",
       "rating": 1490.8,
       "cups": 1,
@@ -29015,7 +29038,7 @@
       ]
     },
     {
-      "rank": 412,
+      "rank": 413,
       "name": "ChociCinna94",
       "rating": 1490.8,
       "cups": 1,
@@ -29038,7 +29061,7 @@
       ]
     },
     {
-      "rank": 413,
+      "rank": 414,
       "name": "Meowbee",
       "rating": 1490.8,
       "cups": 2,
@@ -29067,7 +29090,7 @@
       ]
     },
     {
-      "rank": 414,
+      "rank": 415,
       "name": "Drunkshinobi",
       "rating": 1490.8,
       "cups": 3,
@@ -29102,7 +29125,7 @@
       ]
     },
     {
-      "rank": 415,
+      "rank": 416,
       "name": "SnkyDerg",
       "rating": 1490.8,
       "cups": 1,
@@ -29125,7 +29148,7 @@
       ]
     },
     {
-      "rank": 416,
+      "rank": 417,
       "name": "Shaaz",
       "rating": 1490.8,
       "cups": 1,
@@ -29148,7 +29171,7 @@
       ]
     },
     {
-      "rank": 417,
+      "rank": 418,
       "name": "JeramySS",
       "rating": 1490.7,
       "cups": 1,
@@ -29171,7 +29194,7 @@
       ]
     },
     {
-      "rank": 418,
+      "rank": 419,
       "name": "frabrokar6",
       "rating": 1490.7,
       "cups": 1,
@@ -29194,7 +29217,7 @@
       ]
     },
     {
-      "rank": 419,
+      "rank": 420,
       "name": "kAN",
       "rating": 1490.6,
       "cups": 2,
@@ -29223,7 +29246,7 @@
       ]
     },
     {
-      "rank": 420,
+      "rank": 421,
       "name": "sirjdog21",
       "rating": 1490.6,
       "cups": 1,
@@ -29246,7 +29269,7 @@
       ]
     },
     {
-      "rank": 421,
+      "rank": 422,
       "name": "Berry",
       "rating": 1490.6,
       "cups": 1,
@@ -29269,7 +29292,7 @@
       ]
     },
     {
-      "rank": 422,
+      "rank": 423,
       "name": "[AAA] AmusedApple",
       "rating": 1490.6,
       "cups": 2,
@@ -29298,7 +29321,7 @@
       ]
     },
     {
-      "rank": 423,
+      "rank": 424,
       "name": "DOCTOR BIOHAZARD",
       "rating": 1490.6,
       "cups": 1,
@@ -29321,7 +29344,7 @@
       ]
     },
     {
-      "rank": 424,
+      "rank": 425,
       "name": "[GGG]Blacknight75_YT",
       "rating": 1490.6,
       "cups": 1,
@@ -29344,7 +29367,7 @@
       ]
     },
     {
-      "rank": 425,
+      "rank": 426,
       "name": "pheonixiosi",
       "rating": 1490.5,
       "cups": 1,
@@ -29367,7 +29390,7 @@
       ]
     },
     {
-      "rank": 426,
+      "rank": 427,
       "name": "JP_pne96",
       "rating": 1490.5,
       "cups": 2,
@@ -29396,7 +29419,7 @@
       ]
     },
     {
-      "rank": 427,
+      "rank": 428,
       "name": "ehki",
       "rating": 1490.5,
       "cups": 1,
@@ -29419,7 +29442,7 @@
       ]
     },
     {
-      "rank": 428,
+      "rank": 429,
       "name": "[CTR]Rourie13",
       "rating": 1490.5,
       "cups": 2,
@@ -29448,7 +29471,7 @@
       ]
     },
     {
-      "rank": 429,
+      "rank": 430,
       "name": "Skyes",
       "rating": 1490.5,
       "cups": 1,
@@ -29471,7 +29494,7 @@
       ]
     },
     {
-      "rank": 430,
+      "rank": 431,
       "name": "LL10884",
       "rating": 1490.5,
       "cups": 1,
@@ -29494,7 +29517,7 @@
       ]
     },
     {
-      "rank": 431,
+      "rank": 432,
       "name": "emdoki22",
       "rating": 1490.5,
       "cups": 1,
@@ -29517,7 +29540,7 @@
       ]
     },
     {
-      "rank": 432,
+      "rank": 433,
       "name": "Azrael",
       "rating": 1490.5,
       "cups": 1,
@@ -29540,7 +29563,7 @@
       ]
     },
     {
-      "rank": 433,
+      "rank": 434,
       "name": "grop44",
       "rating": 1490.5,
       "cups": 1,
@@ -29563,7 +29586,7 @@
       ]
     },
     {
-      "rank": 434,
+      "rank": 435,
       "name": "FedtStensDyr",
       "rating": 1490.5,
       "cups": 1,
@@ -29586,7 +29609,7 @@
       ]
     },
     {
-      "rank": 435,
+      "rank": 436,
       "name": "TrdMrk",
       "rating": 1490.4,
       "cups": 1,
@@ -29609,7 +29632,7 @@
       ]
     },
     {
-      "rank": 436,
+      "rank": 437,
       "name": "TamerSteak65167",
       "rating": 1490.4,
       "cups": 1,
@@ -29632,7 +29655,7 @@
       ]
     },
     {
-      "rank": 437,
+      "rank": 438,
       "name": "Ender",
       "rating": 1490.3,
       "cups": 5,
@@ -29679,7 +29702,7 @@
       ]
     },
     {
-      "rank": 438,
+      "rank": 439,
       "name": "UlverHausu",
       "rating": 1490.3,
       "cups": 1,
@@ -29702,7 +29725,7 @@
       ]
     },
     {
-      "rank": 439,
+      "rank": 440,
       "name": "DAAV",
       "rating": 1490.3,
       "cups": 1,
@@ -29725,7 +29748,7 @@
       ]
     },
     {
-      "rank": 440,
+      "rank": 441,
       "name": "Cheesy Cheeses",
       "rating": 1490.3,
       "cups": 1,
@@ -29748,7 +29771,7 @@
       ]
     },
     {
-      "rank": 441,
+      "rank": 442,
       "name": "Encarnado",
       "rating": 1490.3,
       "cups": 1,
@@ -29771,7 +29794,7 @@
       ]
     },
     {
-      "rank": 442,
+      "rank": 443,
       "name": "ZWIBM",
       "rating": 1490.3,
       "cups": 1,
@@ -29794,7 +29817,7 @@
       ]
     },
     {
-      "rank": 443,
+      "rank": 444,
       "name": "Hagavi",
       "rating": 1490.3,
       "cups": 1,
@@ -29817,53 +29840,7 @@
       ]
     },
     {
-      "rank": 444,
-      "name": "True Chaotic Neutral",
-      "rating": 1490.3,
-      "cups": 1,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 48.0,
-      "best_finish": 48,
-      "peak_rating": 1490.3,
-      "history": [
-        {
-          "cup": "COTD 139",
-          "position": 48,
-          "rating": 1490.3,
-          "lobby_size": 58
-        }
-      ]
-    },
-    {
       "rank": 445,
-      "name": "Fried",
-      "rating": 1490.3,
-      "cups": 1,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 48.0,
-      "best_finish": 48,
-      "peak_rating": 1490.3,
-      "history": [
-        {
-          "cup": "COTD 139",
-          "position": 48,
-          "rating": 1490.3,
-          "lobby_size": 58
-        }
-      ]
-    },
-    {
-      "rank": 446,
       "name": "Suits",
       "rating": 1490.2,
       "cups": 1,
@@ -29886,7 +29863,7 @@
       ]
     },
     {
-      "rank": 447,
+      "rank": 446,
       "name": "pald22",
       "rating": 1490.2,
       "cups": 1,
@@ -29909,7 +29886,7 @@
       ]
     },
     {
-      "rank": 448,
+      "rank": 447,
       "name": "Rigenix",
       "rating": 1490.2,
       "cups": 2,
@@ -29938,7 +29915,7 @@
       ]
     },
     {
-      "rank": 449,
+      "rank": 448,
       "name": "Moiso",
       "rating": 1490.2,
       "cups": 1,
@@ -29961,7 +29938,7 @@
       ]
     },
     {
-      "rank": 450,
+      "rank": 449,
       "name": "CasualReux",
       "rating": 1490.2,
       "cups": 1,
@@ -29984,7 +29961,7 @@
       ]
     },
     {
-      "rank": 451,
+      "rank": 450,
       "name": "MickeyM",
       "rating": 1490.2,
       "cups": 1,
@@ -30007,7 +29984,7 @@
       ]
     },
     {
-      "rank": 452,
+      "rank": 451,
       "name": "Baked Shark",
       "rating": 1490.2,
       "cups": 1,
@@ -30026,6 +30003,29 @@
           "position": 37,
           "rating": 1490.2,
           "lobby_size": 49
+        }
+      ]
+    },
+    {
+      "rank": 452,
+      "name": "Fried",
+      "rating": 1490.2,
+      "cups": 1,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 52.0,
+      "best_finish": 52,
+      "peak_rating": 1490.2,
+      "history": [
+        {
+          "cup": "COTD 139",
+          "position": 52,
+          "rating": 1490.2,
+          "lobby_size": 58
         }
       ]
     },
@@ -31368,6 +31368,29 @@
     },
     {
       "rank": 508,
+      "name": "bluedragonrs",
+      "rating": 1489.4,
+      "cups": 1,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 54.0,
+      "best_finish": 54,
+      "peak_rating": 1489.4,
+      "history": [
+        {
+          "cup": "COTD 139",
+          "position": 54,
+          "rating": 1489.4,
+          "lobby_size": 58
+        }
+      ]
+    },
+    {
+      "rank": 509,
       "name": "w32s",
       "rating": 1489.3,
       "cups": 1,
@@ -31390,7 +31413,7 @@
       ]
     },
     {
-      "rank": 509,
+      "rank": 510,
       "name": "gijidiji",
       "rating": 1489.3,
       "cups": 1,
@@ -31413,7 +31436,7 @@
       ]
     },
     {
-      "rank": 510,
+      "rank": 511,
       "name": "Mad Bull",
       "rating": 1489.3,
       "cups": 1,
@@ -31436,7 +31459,7 @@
       ]
     },
     {
-      "rank": 511,
+      "rank": 512,
       "name": "Sir Terter",
       "rating": 1489.3,
       "cups": 1,
@@ -31459,7 +31482,7 @@
       ]
     },
     {
-      "rank": 512,
+      "rank": 513,
       "name": "Squirrel",
       "rating": 1489.3,
       "cups": 1,
@@ -31482,7 +31505,7 @@
       ]
     },
     {
-      "rank": 513,
+      "rank": 514,
       "name": "azebramoomoo",
       "rating": 1489.3,
       "cups": 1,
@@ -31505,7 +31528,7 @@
       ]
     },
     {
-      "rank": 514,
+      "rank": 515,
       "name": "[MVT]Moving Target",
       "rating": 1489.3,
       "cups": 1,
@@ -31528,7 +31551,7 @@
       ]
     },
     {
-      "rank": 515,
+      "rank": 516,
       "name": "Maniac",
       "rating": 1489.3,
       "cups": 1,
@@ -31551,7 +31574,7 @@
       ]
     },
     {
-      "rank": 516,
+      "rank": 517,
       "name": "\u03bb SwiftEvolta",
       "rating": 1489.3,
       "cups": 1,
@@ -31574,7 +31597,7 @@
       ]
     },
     {
-      "rank": 517,
+      "rank": 518,
       "name": "Michael",
       "rating": 1489.2,
       "cups": 2,
@@ -31603,7 +31626,7 @@
       ]
     },
     {
-      "rank": 518,
+      "rank": 519,
       "name": "Agnostos",
       "rating": 1489.2,
       "cups": 1,
@@ -31626,7 +31649,7 @@
       ]
     },
     {
-      "rank": 519,
+      "rank": 520,
       "name": "elsaendi",
       "rating": 1489.2,
       "cups": 1,
@@ -31649,7 +31672,7 @@
       ]
     },
     {
-      "rank": 520,
+      "rank": 521,
       "name": "Cat_karma19",
       "rating": 1489.2,
       "cups": 1,
@@ -31672,7 +31695,7 @@
       ]
     },
     {
-      "rank": 521,
+      "rank": 522,
       "name": "Mr. X",
       "rating": 1489.2,
       "cups": 1,
@@ -31695,7 +31718,7 @@
       ]
     },
     {
-      "rank": 522,
+      "rank": 523,
       "name": "Jeffrey",
       "rating": 1489.2,
       "cups": 2,
@@ -31724,7 +31747,7 @@
       ]
     },
     {
-      "rank": 523,
+      "rank": 524,
       "name": "J0uuun3s",
       "rating": 1489.2,
       "cups": 1,
@@ -31747,7 +31770,7 @@
       ]
     },
     {
-      "rank": 524,
+      "rank": 525,
       "name": "Celery (Hcart)",
       "rating": 1489.1,
       "cups": 1,
@@ -31770,7 +31793,7 @@
       ]
     },
     {
-      "rank": 525,
+      "rank": 526,
       "name": "Invisible",
       "rating": 1489.1,
       "cups": 1,
@@ -31793,7 +31816,7 @@
       ]
     },
     {
-      "rank": 526,
+      "rank": 527,
       "name": "Kroete",
       "rating": 1489.1,
       "cups": 1,
@@ -31816,7 +31839,7 @@
       ]
     },
     {
-      "rank": 527,
+      "rank": 528,
       "name": "BootyMcShooty888",
       "rating": 1489.1,
       "cups": 1,
@@ -31839,7 +31862,7 @@
       ]
     },
     {
-      "rank": 528,
+      "rank": 529,
       "name": "S\u00e4\u00e4ron",
       "rating": 1489.1,
       "cups": 1,
@@ -31862,7 +31885,7 @@
       ]
     },
     {
-      "rank": 529,
+      "rank": 530,
       "name": "[TTR]DragonShadow84290",
       "rating": 1489.1,
       "cups": 1,
@@ -31885,7 +31908,7 @@
       ]
     },
     {
-      "rank": 530,
+      "rank": 531,
       "name": "[BLEH] Meowey",
       "rating": 1489.1,
       "cups": 1,
@@ -31908,7 +31931,7 @@
       ]
     },
     {
-      "rank": 531,
+      "rank": 532,
       "name": "Swan",
       "rating": 1489.0,
       "cups": 1,
@@ -31931,7 +31954,7 @@
       ]
     },
     {
-      "rank": 532,
+      "rank": 533,
       "name": "GorillaGames",
       "rating": 1489.0,
       "cups": 1,
@@ -31954,7 +31977,7 @@
       ]
     },
     {
-      "rank": 533,
+      "rank": 534,
       "name": "ScoobidyWoobidy",
       "rating": 1489.0,
       "cups": 1,
@@ -31977,7 +32000,7 @@
       ]
     },
     {
-      "rank": 534,
+      "rank": 535,
       "name": "Bugslvt",
       "rating": 1489.0,
       "cups": 1,
@@ -32000,7 +32023,7 @@
       ]
     },
     {
-      "rank": 535,
+      "rank": 536,
       "name": "Edhiluengo",
       "rating": 1489.0,
       "cups": 1,
@@ -32023,7 +32046,7 @@
       ]
     },
     {
-      "rank": 536,
+      "rank": 537,
       "name": "[BROT] Vrikka",
       "rating": 1489.0,
       "cups": 2,
@@ -32052,7 +32075,7 @@
       ]
     },
     {
-      "rank": 537,
+      "rank": 538,
       "name": "Lemo",
       "rating": 1489.0,
       "cups": 1,
@@ -32075,7 +32098,7 @@
       ]
     },
     {
-      "rank": 538,
+      "rank": 539,
       "name": "ArraTheFox (birchman26)",
       "rating": 1489.0,
       "cups": 1,
@@ -32098,7 +32121,7 @@
       ]
     },
     {
-      "rank": 539,
+      "rank": 540,
       "name": "[wozk]8Oreos",
       "rating": 1489.0,
       "cups": 1,
@@ -32121,7 +32144,7 @@
       ]
     },
     {
-      "rank": 540,
+      "rank": 541,
       "name": "gustavandren10",
       "rating": 1489.0,
       "cups": 1,
@@ -32144,7 +32167,7 @@
       ]
     },
     {
-      "rank": 541,
+      "rank": 542,
       "name": "Idontcare",
       "rating": 1489.0,
       "cups": 1,
@@ -32167,7 +32190,7 @@
       ]
     },
     {
-      "rank": 542,
+      "rank": 543,
       "name": "keithmorgan2012",
       "rating": 1489.0,
       "cups": 1,
@@ -32190,7 +32213,7 @@
       ]
     },
     {
-      "rank": 543,
+      "rank": 544,
       "name": "Prism",
       "rating": 1489.0,
       "cups": 1,
@@ -32213,7 +32236,7 @@
       ]
     },
     {
-      "rank": 544,
+      "rank": 545,
       "name": "Mokster",
       "rating": 1488.9,
       "cups": 3,
@@ -32248,7 +32271,7 @@
       ]
     },
     {
-      "rank": 545,
+      "rank": 546,
       "name": "Sly",
       "rating": 1488.9,
       "cups": 1,
@@ -32271,7 +32294,7 @@
       ]
     },
     {
-      "rank": 546,
+      "rank": 547,
       "name": "ProtioN",
       "rating": 1488.9,
       "cups": 2,
@@ -32300,7 +32323,7 @@
       ]
     },
     {
-      "rank": 547,
+      "rank": 548,
       "name": "[heyo]potatotron",
       "rating": 1488.9,
       "cups": 3,
@@ -32335,7 +32358,7 @@
       ]
     },
     {
-      "rank": 548,
+      "rank": 549,
       "name": "gobbs92",
       "rating": 1488.9,
       "cups": 1,
@@ -32358,7 +32381,7 @@
       ]
     },
     {
-      "rank": 549,
+      "rank": 550,
       "name": "[mour]jason.piette",
       "rating": 1488.9,
       "cups": 1,
@@ -32381,7 +32404,7 @@
       ]
     },
     {
-      "rank": 550,
+      "rank": 551,
       "name": "Flames1099",
       "rating": 1488.9,
       "cups": 1,
@@ -32404,7 +32427,7 @@
       ]
     },
     {
-      "rank": 551,
+      "rank": 552,
       "name": "evan.m.messerschmidt",
       "rating": 1488.9,
       "cups": 1,
@@ -32427,7 +32450,7 @@
       ]
     },
     {
-      "rank": 552,
+      "rank": 553,
       "name": "Onsra",
       "rating": 1488.9,
       "cups": 1,
@@ -32450,7 +32473,7 @@
       ]
     },
     {
-      "rank": 553,
+      "rank": 554,
       "name": "V1p3r",
       "rating": 1488.9,
       "cups": 1,
@@ -32473,7 +32496,7 @@
       ]
     },
     {
-      "rank": 554,
+      "rank": 555,
       "name": "[jfsf] jake from state farm frying eggs",
       "rating": 1488.9,
       "cups": 1,
@@ -32496,7 +32519,7 @@
       ]
     },
     {
-      "rank": 555,
+      "rank": 556,
       "name": "Miner_vdv",
       "rating": 1488.9,
       "cups": 1,
@@ -32519,7 +32542,7 @@
       ]
     },
     {
-      "rank": 556,
+      "rank": 557,
       "name": "Hype Flexington",
       "rating": 1488.9,
       "cups": 1,
@@ -32542,7 +32565,7 @@
       ]
     },
     {
-      "rank": 557,
+      "rank": 558,
       "name": "KingKongBigDong",
       "rating": 1488.9,
       "cups": 1,
@@ -32565,7 +32588,7 @@
       ]
     },
     {
-      "rank": 558,
+      "rank": 559,
       "name": "MaxRex",
       "rating": 1488.9,
       "cups": 1,
@@ -32588,7 +32611,7 @@
       ]
     },
     {
-      "rank": 559,
+      "rank": 560,
       "name": "joriz911",
       "rating": 1488.9,
       "cups": 1,
@@ -32611,7 +32634,7 @@
       ]
     },
     {
-      "rank": 560,
+      "rank": 561,
       "name": "SWSpecter",
       "rating": 1488.9,
       "cups": 1,
@@ -32634,7 +32657,7 @@
       ]
     },
     {
-      "rank": 561,
+      "rank": 562,
       "name": "Hexacosichoron",
       "rating": 1488.9,
       "cups": 1,
@@ -32657,7 +32680,30 @@
       ]
     },
     {
-      "rank": 562,
+      "rank": 563,
+      "name": "[GG]Viice",
+      "rating": 1488.9,
+      "cups": 1,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 55.0,
+      "best_finish": 55,
+      "peak_rating": 1488.9,
+      "history": [
+        {
+          "cup": "COTD 139",
+          "position": 55,
+          "rating": 1488.9,
+          "lobby_size": 58
+        }
+      ]
+    },
+    {
+      "rank": 564,
       "name": "Brian",
       "rating": 1488.8,
       "cups": 1,
@@ -32680,7 +32726,7 @@
       ]
     },
     {
-      "rank": 563,
+      "rank": 565,
       "name": "DonutDawg07",
       "rating": 1488.8,
       "cups": 1,
@@ -32703,7 +32749,7 @@
       ]
     },
     {
-      "rank": 564,
+      "rank": 566,
       "name": "Aceiys",
       "rating": 1488.8,
       "cups": 1,
@@ -32726,7 +32772,7 @@
       ]
     },
     {
-      "rank": 565,
+      "rank": 567,
       "name": "[ZET] Mangooo",
       "rating": 1488.8,
       "cups": 1,
@@ -32749,7 +32795,7 @@
       ]
     },
     {
-      "rank": 566,
+      "rank": 568,
       "name": "Orblets",
       "rating": 1488.8,
       "cups": 1,
@@ -32772,7 +32818,7 @@
       ]
     },
     {
-      "rank": 567,
+      "rank": 569,
       "name": "[GGG] Kreeeeee",
       "rating": 1488.8,
       "cups": 1,
@@ -32795,7 +32841,7 @@
       ]
     },
     {
-      "rank": 568,
+      "rank": 570,
       "name": "CodeingerCat",
       "rating": 1488.8,
       "cups": 1,
@@ -32818,7 +32864,7 @@
       ]
     },
     {
-      "rank": 569,
+      "rank": 571,
       "name": "Wagzzz.",
       "rating": 1488.8,
       "cups": 1,
@@ -32841,7 +32887,7 @@
       ]
     },
     {
-      "rank": 570,
+      "rank": 572,
       "name": "[Ramn] MasterTrainieT",
       "rating": 1488.8,
       "cups": 1,
@@ -32864,7 +32910,7 @@
       ]
     },
     {
-      "rank": 571,
+      "rank": 573,
       "name": "Arnok0306",
       "rating": 1488.8,
       "cups": 1,
@@ -32887,7 +32933,7 @@
       ]
     },
     {
-      "rank": 572,
+      "rank": 574,
       "name": "[MIB]TheRockingSheep",
       "rating": 1488.8,
       "cups": 1,
@@ -32910,7 +32956,7 @@
       ]
     },
     {
-      "rank": 573,
+      "rank": 575,
       "name": "SPEXWISE",
       "rating": 1488.7,
       "cups": 1,
@@ -32933,7 +32979,7 @@
       ]
     },
     {
-      "rank": 574,
+      "rank": 576,
       "name": "mofn",
       "rating": 1488.7,
       "cups": 1,
@@ -32956,7 +33002,7 @@
       ]
     },
     {
-      "rank": 575,
+      "rank": 577,
       "name": "Sprinty",
       "rating": 1488.7,
       "cups": 1,
@@ -32979,7 +33025,7 @@
       ]
     },
     {
-      "rank": 576,
+      "rank": 578,
       "name": "Ludi Becher",
       "rating": 1488.7,
       "cups": 1,
@@ -33002,7 +33048,7 @@
       ]
     },
     {
-      "rank": 577,
+      "rank": 579,
       "name": "[LBFT] IHaveNoIdeaDanny",
       "rating": 1488.6,
       "cups": 1,
@@ -33025,7 +33071,7 @@
       ]
     },
     {
-      "rank": 578,
+      "rank": 580,
       "name": "IronDwarf",
       "rating": 1488.6,
       "cups": 1,
@@ -33048,7 +33094,7 @@
       ]
     },
     {
-      "rank": 579,
+      "rank": 581,
       "name": "Simon4411",
       "rating": 1488.6,
       "cups": 1,
@@ -33071,7 +33117,7 @@
       ]
     },
     {
-      "rank": 580,
+      "rank": 582,
       "name": "Steve Irwin",
       "rating": 1488.6,
       "cups": 1,
@@ -33094,7 +33140,7 @@
       ]
     },
     {
-      "rank": 581,
+      "rank": 583,
       "name": "Namira",
       "rating": 1488.6,
       "cups": 1,
@@ -33117,7 +33163,7 @@
       ]
     },
     {
-      "rank": 582,
+      "rank": 584,
       "name": "Kostynha",
       "rating": 1488.6,
       "cups": 1,
@@ -33140,7 +33186,7 @@
       ]
     },
     {
-      "rank": 583,
+      "rank": 585,
       "name": "Tusdav",
       "rating": 1488.6,
       "cups": 1,
@@ -33163,7 +33209,7 @@
       ]
     },
     {
-      "rank": 584,
+      "rank": 586,
       "name": "Streaky",
       "rating": 1488.6,
       "cups": 1,
@@ -33186,7 +33232,7 @@
       ]
     },
     {
-      "rank": 585,
+      "rank": 587,
       "name": "jdeshone",
       "rating": 1488.5,
       "cups": 1,
@@ -33209,7 +33255,7 @@
       ]
     },
     {
-      "rank": 586,
+      "rank": 588,
       "name": "Gaspacio",
       "rating": 1488.5,
       "cups": 1,
@@ -33232,7 +33278,7 @@
       ]
     },
     {
-      "rank": 587,
+      "rank": 589,
       "name": "cattelan03",
       "rating": 1488.5,
       "cups": 1,
@@ -33255,7 +33301,7 @@
       ]
     },
     {
-      "rank": 588,
+      "rank": 590,
       "name": "shipbopskidop",
       "rating": 1488.5,
       "cups": 1,
@@ -33278,7 +33324,30 @@
       ]
     },
     {
-      "rank": 589,
+      "rank": 591,
+      "name": "sliver gaming",
+      "rating": 1488.5,
+      "cups": 1,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 56.0,
+      "best_finish": 56,
+      "peak_rating": 1488.5,
+      "history": [
+        {
+          "cup": "COTD 139",
+          "position": 56,
+          "rating": 1488.5,
+          "lobby_size": 58
+        }
+      ]
+    },
+    {
+      "rank": 592,
       "name": "Frey_Finley",
       "rating": 1488.4,
       "cups": 1,
@@ -33301,7 +33370,7 @@
       ]
     },
     {
-      "rank": 590,
+      "rank": 593,
       "name": "Domhnall",
       "rating": 1488.4,
       "cups": 1,
@@ -33324,7 +33393,7 @@
       ]
     },
     {
-      "rank": 591,
+      "rank": 594,
       "name": "Chuckyesduro",
       "rating": 1488.4,
       "cups": 1,
@@ -33347,7 +33416,7 @@
       ]
     },
     {
-      "rank": 592,
+      "rank": 595,
       "name": "Sunraku",
       "rating": 1488.4,
       "cups": 1,
@@ -33370,7 +33439,7 @@
       ]
     },
     {
-      "rank": 593,
+      "rank": 596,
       "name": "[CHZB]Willow!",
       "rating": 1488.4,
       "cups": 1,
@@ -33393,7 +33462,7 @@
       ]
     },
     {
-      "rank": 594,
+      "rank": 597,
       "name": "CodeZz",
       "rating": 1488.4,
       "cups": 1,
@@ -33416,7 +33485,7 @@
       ]
     },
     {
-      "rank": 595,
+      "rank": 598,
       "name": "MikeReddy",
       "rating": 1488.3,
       "cups": 1,
@@ -33439,7 +33508,7 @@
       ]
     },
     {
-      "rank": 596,
+      "rank": 599,
       "name": "Mr. Cranky",
       "rating": 1488.3,
       "cups": 1,
@@ -33462,7 +33531,7 @@
       ]
     },
     {
-      "rank": 597,
+      "rank": 600,
       "name": "[duck] dapper_duck",
       "rating": 1488.3,
       "cups": 1,
@@ -33485,7 +33554,7 @@
       ]
     },
     {
-      "rank": 598,
+      "rank": 601,
       "name": "Wolfman",
       "rating": 1488.3,
       "cups": 1,
@@ -33508,7 +33577,7 @@
       ]
     },
     {
-      "rank": 599,
+      "rank": 602,
       "name": "[Tech] Veneficus",
       "rating": 1488.3,
       "cups": 1,
@@ -33531,7 +33600,7 @@
       ]
     },
     {
-      "rank": 600,
+      "rank": 603,
       "name": "mezalsgreat",
       "rating": 1488.3,
       "cups": 1,
@@ -33554,7 +33623,7 @@
       ]
     },
     {
-      "rank": 601,
+      "rank": 604,
       "name": "fer1099",
       "rating": 1488.2,
       "cups": 4,
@@ -33595,7 +33664,7 @@
       ]
     },
     {
-      "rank": 602,
+      "rank": 605,
       "name": "CYBRON7",
       "rating": 1488.2,
       "cups": 1,
@@ -33618,7 +33687,7 @@
       ]
     },
     {
-      "rank": 603,
+      "rank": 606,
       "name": "Patty",
       "rating": 1488.2,
       "cups": 1,
@@ -33641,7 +33710,7 @@
       ]
     },
     {
-      "rank": 604,
+      "rank": 607,
       "name": "propulsion_man",
       "rating": 1488.2,
       "cups": 1,
@@ -33664,7 +33733,7 @@
       ]
     },
     {
-      "rank": 605,
+      "rank": 608,
       "name": "miese_Katheter",
       "rating": 1488.2,
       "cups": 1,
@@ -33687,7 +33756,7 @@
       ]
     },
     {
-      "rank": 606,
+      "rank": 609,
       "name": "HBRD",
       "rating": 1488.2,
       "cups": 1,
@@ -33710,7 +33779,7 @@
       ]
     },
     {
-      "rank": 607,
+      "rank": 610,
       "name": "EdVilone",
       "rating": 1488.2,
       "cups": 1,
@@ -33733,7 +33802,7 @@
       ]
     },
     {
-      "rank": 608,
+      "rank": 611,
       "name": "[125] gcerul2",
       "rating": 1488.2,
       "cups": 1,
@@ -33756,7 +33825,7 @@
       ]
     },
     {
-      "rank": 609,
+      "rank": 612,
       "name": "TRIPLe HeLeX",
       "rating": 1488.2,
       "cups": 1,
@@ -33779,7 +33848,7 @@
       ]
     },
     {
-      "rank": 610,
+      "rank": 613,
       "name": "Marcotik",
       "rating": 1488.1,
       "cups": 1,
@@ -33802,7 +33871,7 @@
       ]
     },
     {
-      "rank": 611,
+      "rank": 614,
       "name": "JayTheGamer",
       "rating": 1488.1,
       "cups": 1,
@@ -33825,7 +33894,7 @@
       ]
     },
     {
-      "rank": 612,
+      "rank": 615,
       "name": "Zylcel",
       "rating": 1488.1,
       "cups": 1,
@@ -33848,7 +33917,7 @@
       ]
     },
     {
-      "rank": 613,
+      "rank": 616,
       "name": "DMILKS",
       "rating": 1488.1,
       "cups": 1,
@@ -33871,7 +33940,7 @@
       ]
     },
     {
-      "rank": 614,
+      "rank": 617,
       "name": "Cubmid",
       "rating": 1488.1,
       "cups": 1,
@@ -33894,7 +33963,7 @@
       ]
     },
     {
-      "rank": 615,
+      "rank": 618,
       "name": "Lightning_Jude",
       "rating": 1488.1,
       "cups": 1,
@@ -33917,7 +33986,7 @@
       ]
     },
     {
-      "rank": 616,
+      "rank": 619,
       "name": "Im_Coled",
       "rating": 1488.1,
       "cups": 1,
@@ -33940,7 +34009,7 @@
       ]
     },
     {
-      "rank": 617,
+      "rank": 620,
       "name": "SKULL",
       "rating": 1488.1,
       "cups": 2,
@@ -33969,7 +34038,7 @@
       ]
     },
     {
-      "rank": 618,
+      "rank": 621,
       "name": "Waterlemon147",
       "rating": 1488.1,
       "cups": 1,
@@ -33992,7 +34061,7 @@
       ]
     },
     {
-      "rank": 619,
+      "rank": 622,
       "name": "Chowder219",
       "rating": 1488.1,
       "cups": 1,
@@ -34015,7 +34084,7 @@
       ]
     },
     {
-      "rank": 620,
+      "rank": 623,
       "name": "[Dino] Rex",
       "rating": 1488.1,
       "cups": 2,
@@ -34044,75 +34113,6 @@
       ]
     },
     {
-      "rank": 621,
-      "name": "bluedragonrs",
-      "rating": 1488.1,
-      "cups": 1,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 54.0,
-      "best_finish": 54,
-      "peak_rating": 1488.1,
-      "history": [
-        {
-          "cup": "COTD 139",
-          "position": 54,
-          "rating": 1488.1,
-          "lobby_size": 58
-        }
-      ]
-    },
-    {
-      "rank": 622,
-      "name": "[GG]Viice",
-      "rating": 1488.1,
-      "cups": 1,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 54.0,
-      "best_finish": 54,
-      "peak_rating": 1488.1,
-      "history": [
-        {
-          "cup": "COTD 139",
-          "position": 54,
-          "rating": 1488.1,
-          "lobby_size": 58
-        }
-      ]
-    },
-    {
-      "rank": 623,
-      "name": "sliver gaming",
-      "rating": 1488.1,
-      "cups": 1,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 54.0,
-      "best_finish": 54,
-      "peak_rating": 1488.1,
-      "history": [
-        {
-          "cup": "COTD 139",
-          "position": 54,
-          "rating": 1488.1,
-          "lobby_size": 58
-        }
-      ]
-    },
-    {
       "rank": 624,
       "name": "SpookyRose",
       "rating": 1488.1,
@@ -34123,13 +34123,13 @@
         "silver": 0,
         "bronze": 0
       },
-      "avg_position": 54.0,
-      "best_finish": 54,
+      "avg_position": 57.0,
+      "best_finish": 57,
       "peak_rating": 1488.1,
       "history": [
         {
           "cup": "COTD 139",
-          "position": 54,
+          "position": 57,
           "rating": 1488.1,
           "lobby_size": 58
         }
@@ -37989,35 +37989,6 @@
     },
     {
       "rank": 775,
-      "name": "Jaydark",
-      "rating": 1484.2,
-      "cups": 2,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 39.0,
-      "best_finish": 36,
-      "peak_rating": 1491.4,
-      "history": [
-        {
-          "cup": "COTD 104",
-          "position": 36,
-          "rating": 1491.4,
-          "lobby_size": 43
-        },
-        {
-          "cup": "COTD 139",
-          "position": 42,
-          "rating": 1484.2,
-          "lobby_size": 58
-        }
-      ]
-    },
-    {
-      "rank": 776,
       "name": "Nusszucker",
       "rating": 1484.1,
       "cups": 1,
@@ -38040,7 +38011,7 @@
       ]
     },
     {
-      "rank": 777,
+      "rank": 776,
       "name": "Flamedglitch",
       "rating": 1484.1,
       "cups": 1,
@@ -38063,7 +38034,7 @@
       ]
     },
     {
-      "rank": 778,
+      "rank": 777,
       "name": "OfMany",
       "rating": 1484.0,
       "cups": 3,
@@ -38098,7 +38069,7 @@
       ]
     },
     {
-      "rank": 779,
+      "rank": 778,
       "name": "MasterGamer64",
       "rating": 1483.9,
       "cups": 3,
@@ -38133,7 +38104,7 @@
       ]
     },
     {
-      "rank": 780,
+      "rank": 779,
       "name": "Trash Salad",
       "rating": 1483.9,
       "cups": 1,
@@ -38156,7 +38127,7 @@
       ]
     },
     {
-      "rank": 781,
+      "rank": 780,
       "name": "General",
       "rating": 1483.9,
       "cups": 1,
@@ -38179,7 +38150,7 @@
       ]
     },
     {
-      "rank": 782,
+      "rank": 781,
       "name": "Giganten",
       "rating": 1483.9,
       "cups": 4,
@@ -38220,7 +38191,7 @@
       ]
     },
     {
-      "rank": 783,
+      "rank": 782,
       "name": "daniel",
       "rating": 1483.9,
       "cups": 2,
@@ -38245,6 +38216,35 @@
           "position": 27,
           "rating": 1483.9,
           "lobby_size": 37
+        }
+      ]
+    },
+    {
+      "rank": 783,
+      "name": "Jaydark",
+      "rating": 1483.9,
+      "cups": 2,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 41.5,
+      "best_finish": 36,
+      "peak_rating": 1491.4,
+      "history": [
+        {
+          "cup": "COTD 104",
+          "position": 36,
+          "rating": 1491.4,
+          "lobby_size": 43
+        },
+        {
+          "cup": "COTD 139",
+          "position": 47,
+          "rating": 1483.9,
+          "lobby_size": 58
         }
       ]
     },
@@ -39022,6 +39022,143 @@
     },
     {
       "rank": 810,
+      "name": "K410K3N",
+      "rating": 1482.5,
+      "cups": 20,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 28.6,
+      "best_finish": 12,
+      "peak_rating": 1499.4,
+      "history": [
+        {
+          "cup": "COTD 93",
+          "position": 40,
+          "rating": 1487.1,
+          "lobby_size": 50
+        },
+        {
+          "cup": "COTD 110",
+          "position": 30,
+          "rating": 1485.0,
+          "lobby_size": 48
+        },
+        {
+          "cup": "COTD 111",
+          "position": 27,
+          "rating": 1483.6,
+          "lobby_size": 49
+        },
+        {
+          "cup": "COTD 112",
+          "position": 40,
+          "rating": 1477.0,
+          "lobby_size": 52
+        },
+        {
+          "cup": "COTD 114",
+          "position": 16,
+          "rating": 1483.5,
+          "lobby_size": 38
+        },
+        {
+          "cup": "COTD 115",
+          "position": 22,
+          "rating": 1490.4,
+          "lobby_size": 51
+        },
+        {
+          "cup": "COTD 116",
+          "position": 24,
+          "rating": 1496.2,
+          "lobby_size": 55
+        },
+        {
+          "cup": "COTD 120",
+          "position": 33,
+          "rating": 1493.5,
+          "lobby_size": 51
+        },
+        {
+          "cup": "COTD 121",
+          "position": 17,
+          "rating": 1499.4,
+          "lobby_size": 49
+        },
+        {
+          "cup": "COTD 122",
+          "position": 37,
+          "rating": 1492.4,
+          "lobby_size": 45
+        },
+        {
+          "cup": "COTD 124",
+          "position": 31,
+          "rating": 1490.5,
+          "lobby_size": 51
+        },
+        {
+          "cup": "COTD 126",
+          "position": 40,
+          "rating": 1481.4,
+          "lobby_size": 44
+        },
+        {
+          "cup": "COTD 127",
+          "position": 30,
+          "rating": 1479.2,
+          "lobby_size": 50
+        },
+        {
+          "cup": "COTD 128",
+          "position": 21,
+          "rating": 1483.4,
+          "lobby_size": 52
+        },
+        {
+          "cup": "COTD 129",
+          "position": 29,
+          "rating": 1480.7,
+          "lobby_size": 52
+        },
+        {
+          "cup": "COTD 130",
+          "position": 44,
+          "rating": 1473.6,
+          "lobby_size": 58
+        },
+        {
+          "cup": "COTD 133",
+          "position": 25,
+          "rating": 1476.6,
+          "lobby_size": 54
+        },
+        {
+          "cup": "COTD 135",
+          "position": 27,
+          "rating": 1475.7,
+          "lobby_size": 51
+        },
+        {
+          "cup": "COTD 137",
+          "position": 12,
+          "rating": 1482.2,
+          "lobby_size": 46
+        },
+        {
+          "cup": "COTD 139",
+          "position": 28,
+          "rating": 1482.5,
+          "lobby_size": 58
+        }
+      ]
+    },
+    {
+      "rank": 811,
       "name": "LumpinLoaf",
       "rating": 1482.4,
       "cups": 1,
@@ -39044,7 +39181,7 @@
       ]
     },
     {
-      "rank": 811,
+      "rank": 812,
       "name": "DeiRex",
       "rating": 1482.3,
       "cups": 93,
@@ -39619,143 +39756,6 @@
       ]
     },
     {
-      "rank": 812,
-      "name": "K410K3N",
-      "rating": 1482.3,
-      "cups": 20,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 28.6,
-      "best_finish": 12,
-      "peak_rating": 1499.4,
-      "history": [
-        {
-          "cup": "COTD 93",
-          "position": 40,
-          "rating": 1487.1,
-          "lobby_size": 50
-        },
-        {
-          "cup": "COTD 110",
-          "position": 30,
-          "rating": 1485.0,
-          "lobby_size": 48
-        },
-        {
-          "cup": "COTD 111",
-          "position": 27,
-          "rating": 1483.6,
-          "lobby_size": 49
-        },
-        {
-          "cup": "COTD 112",
-          "position": 40,
-          "rating": 1477.0,
-          "lobby_size": 52
-        },
-        {
-          "cup": "COTD 114",
-          "position": 16,
-          "rating": 1483.5,
-          "lobby_size": 38
-        },
-        {
-          "cup": "COTD 115",
-          "position": 22,
-          "rating": 1490.4,
-          "lobby_size": 51
-        },
-        {
-          "cup": "COTD 116",
-          "position": 24,
-          "rating": 1496.2,
-          "lobby_size": 55
-        },
-        {
-          "cup": "COTD 120",
-          "position": 33,
-          "rating": 1493.5,
-          "lobby_size": 51
-        },
-        {
-          "cup": "COTD 121",
-          "position": 17,
-          "rating": 1499.4,
-          "lobby_size": 49
-        },
-        {
-          "cup": "COTD 122",
-          "position": 37,
-          "rating": 1492.4,
-          "lobby_size": 45
-        },
-        {
-          "cup": "COTD 124",
-          "position": 31,
-          "rating": 1490.5,
-          "lobby_size": 51
-        },
-        {
-          "cup": "COTD 126",
-          "position": 40,
-          "rating": 1481.4,
-          "lobby_size": 44
-        },
-        {
-          "cup": "COTD 127",
-          "position": 30,
-          "rating": 1479.2,
-          "lobby_size": 50
-        },
-        {
-          "cup": "COTD 128",
-          "position": 21,
-          "rating": 1483.4,
-          "lobby_size": 52
-        },
-        {
-          "cup": "COTD 129",
-          "position": 29,
-          "rating": 1480.7,
-          "lobby_size": 52
-        },
-        {
-          "cup": "COTD 130",
-          "position": 44,
-          "rating": 1473.6,
-          "lobby_size": 58
-        },
-        {
-          "cup": "COTD 133",
-          "position": 25,
-          "rating": 1476.6,
-          "lobby_size": 54
-        },
-        {
-          "cup": "COTD 135",
-          "position": 27,
-          "rating": 1475.7,
-          "lobby_size": 51
-        },
-        {
-          "cup": "COTD 137",
-          "position": 12,
-          "rating": 1482.2,
-          "lobby_size": 46
-        },
-        {
-          "cup": "COTD 139",
-          "position": 26,
-          "rating": 1482.3,
-          "lobby_size": 58
-        }
-      ]
-    },
-    {
       "rank": 813,
       "name": "thefaststloth31",
       "rating": 1482.2,
@@ -40280,401 +40280,8 @@
     },
     {
       "rank": 830,
-      "name": "[EEN] Nick",
-      "rating": 1481.4,
-      "cups": 2,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 46.5,
-      "best_finish": 43,
-      "peak_rating": 1490.6,
-      "history": [
-        {
-          "cup": "COTD 85",
-          "position": 43,
-          "rating": 1490.6,
-          "lobby_size": 47
-        },
-        {
-          "cup": "COTD 128",
-          "position": 50,
-          "rating": 1481.4,
-          "lobby_size": 52
-        }
-      ]
-    },
-    {
-      "rank": 831,
-      "name": "FreckledBard23",
-      "rating": 1481.3,
-      "cups": 2,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 26.0,
-      "best_finish": 23,
-      "peak_rating": 1488.0,
-      "history": [
-        {
-          "cup": "COTD 34",
-          "position": 29,
-          "rating": 1488.0,
-          "lobby_size": 46
-        },
-        {
-          "cup": "Troll COTD 3",
-          "position": 23,
-          "rating": 1481.3,
-          "lobby_size": 37
-        }
-      ]
-    },
-    {
-      "rank": 832,
-      "name": "TheGerm",
-      "rating": 1481.2,
-      "cups": 2,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 23.5,
-      "best_finish": 23,
-      "peak_rating": 1491.3,
-      "history": [
-        {
-          "cup": "COTD 8",
-          "position": 24,
-          "rating": 1491.3,
-          "lobby_size": 41
-        },
-        {
-          "cup": "COTD 12",
-          "position": 23,
-          "rating": 1481.2,
-          "lobby_size": 35
-        }
-      ]
-    },
-    {
-      "rank": 833,
-      "name": "slainsco",
-      "rating": 1481.2,
-      "cups": 2,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 25.5,
-      "best_finish": 18,
-      "peak_rating": 1493.2,
-      "history": [
-        {
-          "cup": "COTD Roulette 2",
-          "position": 18,
-          "rating": 1493.2,
-          "lobby_size": 32
-        },
-        {
-          "cup": "COTD 66",
-          "position": 33,
-          "rating": 1481.2,
-          "lobby_size": 36
-        }
-      ]
-    },
-    {
-      "rank": 834,
-      "name": "Rubbish",
-      "rating": 1481.1,
-      "cups": 1,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 35.0,
-      "best_finish": 35,
-      "peak_rating": 1481.1,
-      "history": [
-        {
-          "cup": "COTD 3",
-          "position": 35,
-          "rating": 1481.1,
-          "lobby_size": 40
-        }
-      ]
-    },
-    {
-      "rank": 835,
-      "name": "Inno",
-      "rating": 1481.1,
-      "cups": 1,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 32.0,
-      "best_finish": 32,
-      "peak_rating": 1481.1,
-      "history": [
-        {
-          "cup": "COTD 4",
-          "position": 32,
-          "rating": 1481.1,
-          "lobby_size": 39
-        }
-      ]
-    },
-    {
-      "rank": 836,
-      "name": "Cozmotic Gamer",
-      "rating": 1481.1,
-      "cups": 1,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 32.0,
-      "best_finish": 32,
-      "peak_rating": 1481.1,
-      "history": [
-        {
-          "cup": "COTD 4",
-          "position": 32,
-          "rating": 1481.1,
-          "lobby_size": 39
-        }
-      ]
-    },
-    {
-      "rank": 837,
-      "name": "Sblob197",
-      "rating": 1481.1,
-      "cups": 1,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 32.0,
-      "best_finish": 32,
-      "peak_rating": 1481.1,
-      "history": [
-        {
-          "cup": "COTD 4",
-          "position": 32,
-          "rating": 1481.1,
-          "lobby_size": 39
-        }
-      ]
-    },
-    {
-      "rank": 838,
-      "name": "KeaVa",
-      "rating": 1481.1,
-      "cups": 2,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 27.5,
-      "best_finish": 23,
-      "peak_rating": 1491.9,
-      "history": [
-        {
-          "cup": "COTD 40",
-          "position": 23,
-          "rating": 1491.9,
-          "lobby_size": 30
-        },
-        {
-          "cup": "COTD 41",
-          "position": 32,
-          "rating": 1481.1,
-          "lobby_size": 36
-        }
-      ]
-    },
-    {
-      "rank": 839,
-      "name": "Werun",
-      "rating": 1481.1,
-      "cups": 2,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 35.0,
-      "best_finish": 34,
-      "peak_rating": 1491.4,
-      "history": [
-        {
-          "cup": "COTD 70",
-          "position": 34,
-          "rating": 1491.4,
-          "lobby_size": 39
-        },
-        {
-          "cup": "COTD 71",
-          "position": 36,
-          "rating": 1481.1,
-          "lobby_size": 41
-        }
-      ]
-    },
-    {
-      "rank": 840,
-      "name": "Fang",
-      "rating": 1481.1,
-      "cups": 2,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 43.5,
-      "best_finish": 32,
-      "peak_rating": 1489.4,
-      "history": [
-        {
-          "cup": "Troll COTD 10",
-          "position": 55,
-          "rating": 1489.4,
-          "lobby_size": 37
-        },
-        {
-          "cup": "COTD 72",
-          "position": 32,
-          "rating": 1481.1,
-          "lobby_size": 39
-        }
-      ]
-    },
-    {
-      "rank": 841,
-      "name": "Telumehtar",
-      "rating": 1481.1,
-      "cups": 2,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 45.0,
-      "best_finish": 40,
-      "peak_rating": 1490.2,
-      "history": [
-        {
-          "cup": "COTD 119",
-          "position": 50,
-          "rating": 1490.2,
-          "lobby_size": 51
-        },
-        {
-          "cup": "COTD 126",
-          "position": 40,
-          "rating": 1481.1,
-          "lobby_size": 44
-        }
-      ]
-    },
-    {
-      "rank": 842,
-      "name": "SirMagicEarlobeTheFirst",
-      "rating": 1481.0,
-      "cups": 1,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 34.0,
-      "best_finish": 34,
-      "peak_rating": 1481.0,
-      "history": [
-        {
-          "cup": "COTD 7",
-          "position": 34,
-          "rating": 1481.0,
-          "lobby_size": 39
-        }
-      ]
-    },
-    {
-      "rank": 843,
-      "name": "DRDOOM",
-      "rating": 1481.0,
-      "cups": 1,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 34.0,
-      "best_finish": 34,
-      "peak_rating": 1481.0,
-      "history": [
-        {
-          "cup": "COTD 7",
-          "position": 34,
-          "rating": 1481.0,
-          "lobby_size": 39
-        }
-      ]
-    },
-    {
-      "rank": 844,
-      "name": "Tie208",
-      "rating": 1481.0,
-      "cups": 1,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 34.0,
-      "best_finish": 34,
-      "peak_rating": 1481.0,
-      "history": [
-        {
-          "cup": "COTD 7",
-          "position": 34,
-          "rating": 1481.0,
-          "lobby_size": 39
-        }
-      ]
-    },
-    {
-      "rank": 845,
       "name": "variableferret",
-      "rating": 1480.9,
+      "rating": 1481.5,
       "cups": 17,
       "wins": 0,
       "podiums": {
@@ -40682,7 +40289,7 @@
         "silver": 0,
         "bronze": 0
       },
-      "avg_position": 25.9,
+      "avg_position": 26.0,
       "best_finish": 7,
       "peak_rating": 1495.3,
       "history": [
@@ -40784,9 +40391,402 @@
         },
         {
           "cup": "COTD 139",
-          "position": 26,
-          "rating": 1480.9,
+          "position": 27,
+          "rating": 1481.5,
           "lobby_size": 58
+        }
+      ]
+    },
+    {
+      "rank": 831,
+      "name": "[EEN] Nick",
+      "rating": 1481.4,
+      "cups": 2,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 46.5,
+      "best_finish": 43,
+      "peak_rating": 1490.6,
+      "history": [
+        {
+          "cup": "COTD 85",
+          "position": 43,
+          "rating": 1490.6,
+          "lobby_size": 47
+        },
+        {
+          "cup": "COTD 128",
+          "position": 50,
+          "rating": 1481.4,
+          "lobby_size": 52
+        }
+      ]
+    },
+    {
+      "rank": 832,
+      "name": "FreckledBard23",
+      "rating": 1481.3,
+      "cups": 2,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 26.0,
+      "best_finish": 23,
+      "peak_rating": 1488.0,
+      "history": [
+        {
+          "cup": "COTD 34",
+          "position": 29,
+          "rating": 1488.0,
+          "lobby_size": 46
+        },
+        {
+          "cup": "Troll COTD 3",
+          "position": 23,
+          "rating": 1481.3,
+          "lobby_size": 37
+        }
+      ]
+    },
+    {
+      "rank": 833,
+      "name": "TheGerm",
+      "rating": 1481.2,
+      "cups": 2,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 23.5,
+      "best_finish": 23,
+      "peak_rating": 1491.3,
+      "history": [
+        {
+          "cup": "COTD 8",
+          "position": 24,
+          "rating": 1491.3,
+          "lobby_size": 41
+        },
+        {
+          "cup": "COTD 12",
+          "position": 23,
+          "rating": 1481.2,
+          "lobby_size": 35
+        }
+      ]
+    },
+    {
+      "rank": 834,
+      "name": "slainsco",
+      "rating": 1481.2,
+      "cups": 2,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 25.5,
+      "best_finish": 18,
+      "peak_rating": 1493.2,
+      "history": [
+        {
+          "cup": "COTD Roulette 2",
+          "position": 18,
+          "rating": 1493.2,
+          "lobby_size": 32
+        },
+        {
+          "cup": "COTD 66",
+          "position": 33,
+          "rating": 1481.2,
+          "lobby_size": 36
+        }
+      ]
+    },
+    {
+      "rank": 835,
+      "name": "Rubbish",
+      "rating": 1481.1,
+      "cups": 1,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 35.0,
+      "best_finish": 35,
+      "peak_rating": 1481.1,
+      "history": [
+        {
+          "cup": "COTD 3",
+          "position": 35,
+          "rating": 1481.1,
+          "lobby_size": 40
+        }
+      ]
+    },
+    {
+      "rank": 836,
+      "name": "Inno",
+      "rating": 1481.1,
+      "cups": 1,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 32.0,
+      "best_finish": 32,
+      "peak_rating": 1481.1,
+      "history": [
+        {
+          "cup": "COTD 4",
+          "position": 32,
+          "rating": 1481.1,
+          "lobby_size": 39
+        }
+      ]
+    },
+    {
+      "rank": 837,
+      "name": "Cozmotic Gamer",
+      "rating": 1481.1,
+      "cups": 1,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 32.0,
+      "best_finish": 32,
+      "peak_rating": 1481.1,
+      "history": [
+        {
+          "cup": "COTD 4",
+          "position": 32,
+          "rating": 1481.1,
+          "lobby_size": 39
+        }
+      ]
+    },
+    {
+      "rank": 838,
+      "name": "Sblob197",
+      "rating": 1481.1,
+      "cups": 1,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 32.0,
+      "best_finish": 32,
+      "peak_rating": 1481.1,
+      "history": [
+        {
+          "cup": "COTD 4",
+          "position": 32,
+          "rating": 1481.1,
+          "lobby_size": 39
+        }
+      ]
+    },
+    {
+      "rank": 839,
+      "name": "KeaVa",
+      "rating": 1481.1,
+      "cups": 2,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 27.5,
+      "best_finish": 23,
+      "peak_rating": 1491.9,
+      "history": [
+        {
+          "cup": "COTD 40",
+          "position": 23,
+          "rating": 1491.9,
+          "lobby_size": 30
+        },
+        {
+          "cup": "COTD 41",
+          "position": 32,
+          "rating": 1481.1,
+          "lobby_size": 36
+        }
+      ]
+    },
+    {
+      "rank": 840,
+      "name": "Werun",
+      "rating": 1481.1,
+      "cups": 2,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 35.0,
+      "best_finish": 34,
+      "peak_rating": 1491.4,
+      "history": [
+        {
+          "cup": "COTD 70",
+          "position": 34,
+          "rating": 1491.4,
+          "lobby_size": 39
+        },
+        {
+          "cup": "COTD 71",
+          "position": 36,
+          "rating": 1481.1,
+          "lobby_size": 41
+        }
+      ]
+    },
+    {
+      "rank": 841,
+      "name": "Fang",
+      "rating": 1481.1,
+      "cups": 2,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 43.5,
+      "best_finish": 32,
+      "peak_rating": 1489.4,
+      "history": [
+        {
+          "cup": "Troll COTD 10",
+          "position": 55,
+          "rating": 1489.4,
+          "lobby_size": 37
+        },
+        {
+          "cup": "COTD 72",
+          "position": 32,
+          "rating": 1481.1,
+          "lobby_size": 39
+        }
+      ]
+    },
+    {
+      "rank": 842,
+      "name": "Telumehtar",
+      "rating": 1481.1,
+      "cups": 2,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 45.0,
+      "best_finish": 40,
+      "peak_rating": 1490.2,
+      "history": [
+        {
+          "cup": "COTD 119",
+          "position": 50,
+          "rating": 1490.2,
+          "lobby_size": 51
+        },
+        {
+          "cup": "COTD 126",
+          "position": 40,
+          "rating": 1481.1,
+          "lobby_size": 44
+        }
+      ]
+    },
+    {
+      "rank": 843,
+      "name": "SirMagicEarlobeTheFirst",
+      "rating": 1481.0,
+      "cups": 1,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 34.0,
+      "best_finish": 34,
+      "peak_rating": 1481.0,
+      "history": [
+        {
+          "cup": "COTD 7",
+          "position": 34,
+          "rating": 1481.0,
+          "lobby_size": 39
+        }
+      ]
+    },
+    {
+      "rank": 844,
+      "name": "DRDOOM",
+      "rating": 1481.0,
+      "cups": 1,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 34.0,
+      "best_finish": 34,
+      "peak_rating": 1481.0,
+      "history": [
+        {
+          "cup": "COTD 7",
+          "position": 34,
+          "rating": 1481.0,
+          "lobby_size": 39
+        }
+      ]
+    },
+    {
+      "rank": 845,
+      "name": "Tie208",
+      "rating": 1481.0,
+      "cups": 1,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 34.0,
+      "best_finish": 34,
+      "peak_rating": 1481.0,
+      "history": [
+        {
+          "cup": "COTD 7",
+          "position": 34,
+          "rating": 1481.0,
+          "lobby_size": 39
         }
       ]
     },
@@ -42048,35 +42048,6 @@
     },
     {
       "rank": 886,
-      "name": "Green Squirrel",
-      "rating": 1478.5,
-      "cups": 2,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 46.5,
-      "best_finish": 45,
-      "peak_rating": 1487.7,
-      "history": [
-        {
-          "cup": "COTD 90",
-          "position": 45,
-          "rating": 1487.7,
-          "lobby_size": 46
-        },
-        {
-          "cup": "COTD 139",
-          "position": 48,
-          "rating": 1478.5,
-          "lobby_size": 58
-        }
-      ]
-    },
-    {
-      "rank": 887,
       "name": "Forewander",
       "rating": 1478.4,
       "cups": 2,
@@ -42105,7 +42076,7 @@
       ]
     },
     {
-      "rank": 888,
+      "rank": 887,
       "name": "yacobus73",
       "rating": 1478.4,
       "cups": 2,
@@ -42134,7 +42105,7 @@
       ]
     },
     {
-      "rank": 889,
+      "rank": 888,
       "name": "MetalCJ",
       "rating": 1478.4,
       "cups": 19,
@@ -42265,7 +42236,7 @@
       ]
     },
     {
-      "rank": 890,
+      "rank": 889,
       "name": "dencar85",
       "rating": 1478.3,
       "cups": 4,
@@ -42306,7 +42277,7 @@
       ]
     },
     {
-      "rank": 891,
+      "rank": 890,
       "name": "JaBabbit",
       "rating": 1478.3,
       "cups": 5,
@@ -42353,7 +42324,7 @@
       ]
     },
     {
-      "rank": 892,
+      "rank": 891,
       "name": "SneezyPilar",
       "rating": 1478.2,
       "cups": 2,
@@ -42382,7 +42353,7 @@
       ]
     },
     {
-      "rank": 893,
+      "rank": 892,
       "name": "smaier29",
       "rating": 1478.2,
       "cups": 2,
@@ -42411,7 +42382,7 @@
       ]
     },
     {
-      "rank": 894,
+      "rank": 893,
       "name": "Bynzyldyhydeditoximonothaixatide",
       "rating": 1478.1,
       "cups": 2,
@@ -42436,6 +42407,41 @@
           "position": 40,
           "rating": 1478.1,
           "lobby_size": 50
+        }
+      ]
+    },
+    {
+      "rank": 894,
+      "name": "timesprout",
+      "rating": 1478.1,
+      "cups": 3,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 44.3,
+      "best_finish": 40,
+      "peak_rating": 1490.6,
+      "history": [
+        {
+          "cup": "COTD 124",
+          "position": 47,
+          "rating": 1490.6,
+          "lobby_size": 51
+        },
+        {
+          "cup": "COTD 138",
+          "position": 40,
+          "rating": 1484.9,
+          "lobby_size": 52
+        },
+        {
+          "cup": "COTD 139",
+          "position": 46,
+          "rating": 1478.1,
+          "lobby_size": 58
         }
       ]
     },
@@ -42470,35 +42476,29 @@
     },
     {
       "rank": 896,
-      "name": "timesprout",
-      "rating": 1478.0,
-      "cups": 3,
+      "name": "Green Squirrel",
+      "rating": 1477.9,
+      "cups": 2,
       "wins": 0,
       "podiums": {
         "gold": 0,
         "silver": 0,
         "bronze": 0
       },
-      "avg_position": 43.0,
-      "best_finish": 40,
-      "peak_rating": 1490.6,
+      "avg_position": 49.0,
+      "best_finish": 45,
+      "peak_rating": 1487.7,
       "history": [
         {
-          "cup": "COTD 124",
-          "position": 47,
-          "rating": 1490.6,
-          "lobby_size": 51
-        },
-        {
-          "cup": "COTD 138",
-          "position": 40,
-          "rating": 1484.9,
-          "lobby_size": 52
+          "cup": "COTD 90",
+          "position": 45,
+          "rating": 1487.7,
+          "lobby_size": 46
         },
         {
           "cup": "COTD 139",
-          "position": 42,
-          "rating": 1478.0,
+          "position": 53,
+          "rating": 1477.9,
           "lobby_size": 58
         }
       ]
@@ -45166,249 +45166,8 @@
     },
     {
       "rank": 954,
-      "name": "[XTR]Hawk",
-      "rating": 1468.7,
-      "cups": 15,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 1
-      },
-      "avg_position": 20.7,
-      "best_finish": 3,
-      "peak_rating": 1490.9,
-      "history": [
-        {
-          "cup": "COTD 20",
-          "position": 24,
-          "rating": 1490.9,
-          "lobby_size": 36
-        },
-        {
-          "cup": "COTD 22",
-          "position": 23,
-          "rating": 1483.2,
-          "lobby_size": 33
-        },
-        {
-          "cup": "COTD 23",
-          "position": 25,
-          "rating": 1472.0,
-          "lobby_size": 40
-        },
-        {
-          "cup": "COTD 27",
-          "position": 25,
-          "rating": 1465.5,
-          "lobby_size": 36
-        },
-        {
-          "cup": "COTD 31",
-          "position": 18,
-          "rating": 1467.2,
-          "lobby_size": 39
-        },
-        {
-          "cup": "COTD 32",
-          "position": 9,
-          "rating": 1476.4,
-          "lobby_size": 25
-        },
-        {
-          "cup": "COTD 33",
-          "position": 20,
-          "rating": 1464.4,
-          "lobby_size": 38
-        },
-        {
-          "cup": "COTD 35",
-          "position": 26,
-          "rating": 1460.4,
-          "lobby_size": 43
-        },
-        {
-          "cup": "COTD 40",
-          "position": 22,
-          "rating": 1454.9,
-          "lobby_size": 30
-        },
-        {
-          "cup": "COTD 42",
-          "position": 18,
-          "rating": 1452.0,
-          "lobby_size": 30
-        },
-        {
-          "cup": "COTD 43",
-          "position": 13,
-          "rating": 1462.5,
-          "lobby_size": 41
-        },
-        {
-          "cup": "COTD 44",
-          "position": 23,
-          "rating": 1460.9,
-          "lobby_size": 41
-        },
-        {
-          "cup": "COTD 46",
-          "position": 15,
-          "rating": 1464.7,
-          "lobby_size": 35
-        },
-        {
-          "cup": "Troll COTD 7",
-          "position": 3,
-          "rating": 1476.4,
-          "lobby_size": 10
-        },
-        {
-          "cup": "COTD 131",
-          "position": 47,
-          "rating": 1468.7,
-          "lobby_size": 58
-        }
-      ]
-    },
-    {
-      "rank": 955,
-      "name": "md_PL_",
-      "rating": 1468.6,
-      "cups": 3,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 25.3,
-      "best_finish": 24,
-      "peak_rating": 1488.4,
-      "history": [
-        {
-          "cup": "COTD 10",
-          "position": 28,
-          "rating": 1488.4,
-          "lobby_size": 40
-        },
-        {
-          "cup": "COTD 12",
-          "position": 24,
-          "rating": 1477.9,
-          "lobby_size": 35
-        },
-        {
-          "cup": "COTD 14",
-          "position": 24,
-          "rating": 1468.6,
-          "lobby_size": 39
-        }
-      ]
-    },
-    {
-      "rank": 956,
-      "name": "Amystique",
-      "rating": 1468.1,
-      "cups": 2,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 34.5,
-      "best_finish": 33,
-      "peak_rating": 1483.1,
-      "history": [
-        {
-          "cup": "COTD 18",
-          "position": 36,
-          "rating": 1483.1,
-          "lobby_size": 37
-        },
-        {
-          "cup": "COTD 20",
-          "position": 33,
-          "rating": 1468.1,
-          "lobby_size": 36
-        }
-      ]
-    },
-    {
-      "rank": 957,
-      "name": "DragonShadow84290",
-      "rating": 1468.0,
-      "cups": 3,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 41.7,
-      "best_finish": 40,
-      "peak_rating": 1489.5,
-      "history": [
-        {
-          "cup": "COTD 82",
-          "position": 40,
-          "rating": 1489.5,
-          "lobby_size": 51
-        },
-        {
-          "cup": "COTD 83",
-          "position": 41,
-          "rating": 1479.2,
-          "lobby_size": 48
-        },
-        {
-          "cup": "COTD 89",
-          "position": 44,
-          "rating": 1468.0,
-          "lobby_size": 47
-        }
-      ]
-    },
-    {
-      "rank": 958,
-      "name": "I Have No Fork",
-      "rating": 1467.9,
-      "cups": 3,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 30.7,
-      "best_finish": 26,
-      "peak_rating": 1483.1,
-      "history": [
-        {
-          "cup": "COTD 21",
-          "position": 33,
-          "rating": 1483.1,
-          "lobby_size": 38
-        },
-        {
-          "cup": "COTD 24",
-          "position": 33,
-          "rating": 1472.9,
-          "lobby_size": 38
-        },
-        {
-          "cup": "COTD Roulette 1",
-          "position": 26,
-          "rating": 1467.9,
-          "lobby_size": 41
-        }
-      ]
-    },
-    {
-      "rank": 959,
       "name": "Six",
-      "rating": 1467.8,
+      "rating": 1468.8,
       "cups": 22,
       "wins": 0,
       "podiums": {
@@ -45549,8 +45308,249 @@
         {
           "cup": "COTD 139",
           "position": 30,
-          "rating": 1467.8,
+          "rating": 1468.8,
           "lobby_size": 58
+        }
+      ]
+    },
+    {
+      "rank": 955,
+      "name": "[XTR]Hawk",
+      "rating": 1468.7,
+      "cups": 15,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 1
+      },
+      "avg_position": 20.7,
+      "best_finish": 3,
+      "peak_rating": 1490.9,
+      "history": [
+        {
+          "cup": "COTD 20",
+          "position": 24,
+          "rating": 1490.9,
+          "lobby_size": 36
+        },
+        {
+          "cup": "COTD 22",
+          "position": 23,
+          "rating": 1483.2,
+          "lobby_size": 33
+        },
+        {
+          "cup": "COTD 23",
+          "position": 25,
+          "rating": 1472.0,
+          "lobby_size": 40
+        },
+        {
+          "cup": "COTD 27",
+          "position": 25,
+          "rating": 1465.5,
+          "lobby_size": 36
+        },
+        {
+          "cup": "COTD 31",
+          "position": 18,
+          "rating": 1467.2,
+          "lobby_size": 39
+        },
+        {
+          "cup": "COTD 32",
+          "position": 9,
+          "rating": 1476.4,
+          "lobby_size": 25
+        },
+        {
+          "cup": "COTD 33",
+          "position": 20,
+          "rating": 1464.4,
+          "lobby_size": 38
+        },
+        {
+          "cup": "COTD 35",
+          "position": 26,
+          "rating": 1460.4,
+          "lobby_size": 43
+        },
+        {
+          "cup": "COTD 40",
+          "position": 22,
+          "rating": 1454.9,
+          "lobby_size": 30
+        },
+        {
+          "cup": "COTD 42",
+          "position": 18,
+          "rating": 1452.0,
+          "lobby_size": 30
+        },
+        {
+          "cup": "COTD 43",
+          "position": 13,
+          "rating": 1462.5,
+          "lobby_size": 41
+        },
+        {
+          "cup": "COTD 44",
+          "position": 23,
+          "rating": 1460.9,
+          "lobby_size": 41
+        },
+        {
+          "cup": "COTD 46",
+          "position": 15,
+          "rating": 1464.7,
+          "lobby_size": 35
+        },
+        {
+          "cup": "Troll COTD 7",
+          "position": 3,
+          "rating": 1476.4,
+          "lobby_size": 10
+        },
+        {
+          "cup": "COTD 131",
+          "position": 47,
+          "rating": 1468.7,
+          "lobby_size": 58
+        }
+      ]
+    },
+    {
+      "rank": 956,
+      "name": "md_PL_",
+      "rating": 1468.6,
+      "cups": 3,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 25.3,
+      "best_finish": 24,
+      "peak_rating": 1488.4,
+      "history": [
+        {
+          "cup": "COTD 10",
+          "position": 28,
+          "rating": 1488.4,
+          "lobby_size": 40
+        },
+        {
+          "cup": "COTD 12",
+          "position": 24,
+          "rating": 1477.9,
+          "lobby_size": 35
+        },
+        {
+          "cup": "COTD 14",
+          "position": 24,
+          "rating": 1468.6,
+          "lobby_size": 39
+        }
+      ]
+    },
+    {
+      "rank": 957,
+      "name": "Amystique",
+      "rating": 1468.1,
+      "cups": 2,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 34.5,
+      "best_finish": 33,
+      "peak_rating": 1483.1,
+      "history": [
+        {
+          "cup": "COTD 18",
+          "position": 36,
+          "rating": 1483.1,
+          "lobby_size": 37
+        },
+        {
+          "cup": "COTD 20",
+          "position": 33,
+          "rating": 1468.1,
+          "lobby_size": 36
+        }
+      ]
+    },
+    {
+      "rank": 958,
+      "name": "DragonShadow84290",
+      "rating": 1468.0,
+      "cups": 3,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 41.7,
+      "best_finish": 40,
+      "peak_rating": 1489.5,
+      "history": [
+        {
+          "cup": "COTD 82",
+          "position": 40,
+          "rating": 1489.5,
+          "lobby_size": 51
+        },
+        {
+          "cup": "COTD 83",
+          "position": 41,
+          "rating": 1479.2,
+          "lobby_size": 48
+        },
+        {
+          "cup": "COTD 89",
+          "position": 44,
+          "rating": 1468.0,
+          "lobby_size": 47
+        }
+      ]
+    },
+    {
+      "rank": 959,
+      "name": "I Have No Fork",
+      "rating": 1467.9,
+      "cups": 3,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 30.7,
+      "best_finish": 26,
+      "peak_rating": 1483.1,
+      "history": [
+        {
+          "cup": "COTD 21",
+          "position": 33,
+          "rating": 1483.1,
+          "lobby_size": 38
+        },
+        {
+          "cup": "COTD 24",
+          "position": 33,
+          "rating": 1472.9,
+          "lobby_size": 38
+        },
+        {
+          "cup": "COTD Roulette 1",
+          "position": 26,
+          "rating": 1467.9,
+          "lobby_size": 41
         }
       ]
     },
@@ -47107,6 +47107,53 @@
     },
     {
       "rank": 987,
+      "name": "Kurtis",
+      "rating": 1460.1,
+      "cups": 5,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 44.6,
+      "best_finish": 36,
+      "peak_rating": 1494.8,
+      "history": [
+        {
+          "cup": "COTD 131",
+          "position": 42,
+          "rating": 1494.8,
+          "lobby_size": 58
+        },
+        {
+          "cup": "COTD 132",
+          "position": 57,
+          "rating": 1485.4,
+          "lobby_size": 59
+        },
+        {
+          "cup": "COTD 134",
+          "position": 39,
+          "rating": 1475.9,
+          "lobby_size": 49
+        },
+        {
+          "cup": "COTD 137",
+          "position": 36,
+          "rating": 1467.4,
+          "lobby_size": 46
+        },
+        {
+          "cup": "COTD 139",
+          "position": 49,
+          "rating": 1460.1,
+          "lobby_size": 58
+        }
+      ]
+    },
+    {
+      "rank": 988,
       "name": "ttv/Lilly the Bun",
       "rating": 1459.7,
       "cups": 4,
@@ -47147,7 +47194,7 @@
       ]
     },
     {
-      "rank": 988,
+      "rank": 989,
       "name": "alpa\\",
       "rating": 1459.5,
       "cups": 6,
@@ -47196,53 +47243,6 @@
           "position": 19,
           "rating": 1459.5,
           "lobby_size": 40
-        }
-      ]
-    },
-    {
-      "rank": 989,
-      "name": "Kurtis",
-      "rating": 1459.1,
-      "cups": 5,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 44.4,
-      "best_finish": 36,
-      "peak_rating": 1494.8,
-      "history": [
-        {
-          "cup": "COTD 131",
-          "position": 42,
-          "rating": 1494.8,
-          "lobby_size": 58
-        },
-        {
-          "cup": "COTD 132",
-          "position": 57,
-          "rating": 1485.4,
-          "lobby_size": 59
-        },
-        {
-          "cup": "COTD 134",
-          "position": 39,
-          "rating": 1475.9,
-          "lobby_size": 49
-        },
-        {
-          "cup": "COTD 137",
-          "position": 36,
-          "rating": 1467.4,
-          "lobby_size": 46
-        },
-        {
-          "cup": "COTD 139",
-          "position": 48,
-          "rating": 1459.1,
-          "lobby_size": 58
         }
       ]
     },
@@ -47383,8 +47383,161 @@
     },
     {
       "rank": 993,
-      "name": "icRS",
+      "name": "SkarMatrix",
       "rating": 1457.8,
+      "cups": 8,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 32.1,
+      "best_finish": 18,
+      "peak_rating": 1487.3,
+      "history": [
+        {
+          "cup": "COTW 61",
+          "position": 30,
+          "rating": 1487.3,
+          "lobby_size": 41
+        },
+        {
+          "cup": "COTW 64",
+          "position": 29,
+          "rating": 1481.4,
+          "lobby_size": 40
+        },
+        {
+          "cup": "COTD 66",
+          "position": 18,
+          "rating": 1482.9,
+          "lobby_size": 36
+        },
+        {
+          "cup": "COTD 68",
+          "position": 30,
+          "rating": 1476.1,
+          "lobby_size": 41
+        },
+        {
+          "cup": "COTD 74",
+          "position": 35,
+          "rating": 1469.1,
+          "lobby_size": 43
+        },
+        {
+          "cup": "COTD 75",
+          "position": 42,
+          "rating": 1460.1,
+          "lobby_size": 47
+        },
+        {
+          "cup": "COTD 76",
+          "position": 22,
+          "rating": 1464.5,
+          "lobby_size": 50
+        },
+        {
+          "cup": "COTD 77",
+          "position": 51,
+          "rating": 1457.8,
+          "lobby_size": 64
+        }
+      ]
+    },
+    {
+      "rank": 994,
+      "name": "Apokus",
+      "rating": 1457.8,
+      "cups": 6,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 35.5,
+      "best_finish": 28,
+      "peak_rating": 1487.1,
+      "history": [
+        {
+          "cup": "COTD 76",
+          "position": 41,
+          "rating": 1487.1,
+          "lobby_size": 50
+        },
+        {
+          "cup": "COTD 85",
+          "position": 31,
+          "rating": 1483.7,
+          "lobby_size": 47
+        },
+        {
+          "cup": "COTD 92",
+          "position": 41,
+          "rating": 1474.8,
+          "lobby_size": 48
+        },
+        {
+          "cup": "COTD 100",
+          "position": 28,
+          "rating": 1468.3,
+          "lobby_size": 50
+        },
+        {
+          "cup": "COTD 101",
+          "position": 35,
+          "rating": 1462.1,
+          "lobby_size": 45
+        },
+        {
+          "cup": "COTD 123",
+          "position": 37,
+          "rating": 1457.8,
+          "lobby_size": 49
+        }
+      ]
+    },
+    {
+      "rank": 995,
+      "name": "S1mpl1c1ty",
+      "rating": 1457.5,
+      "cups": 3,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 30.3,
+      "best_finish": 21,
+      "peak_rating": 1488.0,
+      "history": [
+        {
+          "cup": "COTD 2",
+          "position": 21,
+          "rating": 1488.0,
+          "lobby_size": 38
+        },
+        {
+          "cup": "COTD 3",
+          "position": 38,
+          "rating": 1467.8,
+          "lobby_size": 40
+        },
+        {
+          "cup": "COTD 35",
+          "position": 32,
+          "rating": 1457.5,
+          "lobby_size": 43
+        }
+      ]
+    },
+    {
+      "rank": 996,
+      "name": "icRS",
+      "rating": 1457.4,
       "cups": 42,
       "wins": 0,
       "podiums": {
@@ -47392,7 +47545,7 @@
         "silver": 0,
         "bronze": 0
       },
-      "avg_position": 22.9,
+      "avg_position": 23.0,
       "best_finish": 8,
       "peak_rating": 1486.8,
       "history": [
@@ -47644,162 +47797,9 @@
         },
         {
           "cup": "COTD 139",
-          "position": 30,
-          "rating": 1457.8,
+          "position": 35,
+          "rating": 1457.4,
           "lobby_size": 58
-        }
-      ]
-    },
-    {
-      "rank": 994,
-      "name": "SkarMatrix",
-      "rating": 1457.8,
-      "cups": 8,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 32.1,
-      "best_finish": 18,
-      "peak_rating": 1487.3,
-      "history": [
-        {
-          "cup": "COTW 61",
-          "position": 30,
-          "rating": 1487.3,
-          "lobby_size": 41
-        },
-        {
-          "cup": "COTW 64",
-          "position": 29,
-          "rating": 1481.4,
-          "lobby_size": 40
-        },
-        {
-          "cup": "COTD 66",
-          "position": 18,
-          "rating": 1482.9,
-          "lobby_size": 36
-        },
-        {
-          "cup": "COTD 68",
-          "position": 30,
-          "rating": 1476.1,
-          "lobby_size": 41
-        },
-        {
-          "cup": "COTD 74",
-          "position": 35,
-          "rating": 1469.1,
-          "lobby_size": 43
-        },
-        {
-          "cup": "COTD 75",
-          "position": 42,
-          "rating": 1460.1,
-          "lobby_size": 47
-        },
-        {
-          "cup": "COTD 76",
-          "position": 22,
-          "rating": 1464.5,
-          "lobby_size": 50
-        },
-        {
-          "cup": "COTD 77",
-          "position": 51,
-          "rating": 1457.8,
-          "lobby_size": 64
-        }
-      ]
-    },
-    {
-      "rank": 995,
-      "name": "Apokus",
-      "rating": 1457.8,
-      "cups": 6,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 35.5,
-      "best_finish": 28,
-      "peak_rating": 1487.1,
-      "history": [
-        {
-          "cup": "COTD 76",
-          "position": 41,
-          "rating": 1487.1,
-          "lobby_size": 50
-        },
-        {
-          "cup": "COTD 85",
-          "position": 31,
-          "rating": 1483.7,
-          "lobby_size": 47
-        },
-        {
-          "cup": "COTD 92",
-          "position": 41,
-          "rating": 1474.8,
-          "lobby_size": 48
-        },
-        {
-          "cup": "COTD 100",
-          "position": 28,
-          "rating": 1468.3,
-          "lobby_size": 50
-        },
-        {
-          "cup": "COTD 101",
-          "position": 35,
-          "rating": 1462.1,
-          "lobby_size": 45
-        },
-        {
-          "cup": "COTD 123",
-          "position": 37,
-          "rating": 1457.8,
-          "lobby_size": 49
-        }
-      ]
-    },
-    {
-      "rank": 996,
-      "name": "S1mpl1c1ty",
-      "rating": 1457.5,
-      "cups": 3,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 30.3,
-      "best_finish": 21,
-      "peak_rating": 1488.0,
-      "history": [
-        {
-          "cup": "COTD 2",
-          "position": 21,
-          "rating": 1488.0,
-          "lobby_size": 38
-        },
-        {
-          "cup": "COTD 3",
-          "position": 38,
-          "rating": 1467.8,
-          "lobby_size": 40
-        },
-        {
-          "cup": "COTD 35",
-          "position": 32,
-          "rating": 1457.5,
-          "lobby_size": 43
         }
       ]
     },
@@ -48794,7 +48794,7 @@
     {
       "rank": 1011,
       "name": "FlyBoy",
-      "rating": 1451.5,
+      "rating": 1452.1,
       "cups": 8,
       "wins": 0,
       "podiums": {
@@ -48802,7 +48802,7 @@
         "silver": 0,
         "bronze": 0
       },
-      "avg_position": 40.6,
+      "avg_position": 40.9,
       "best_finish": 30,
       "peak_rating": 1490.8,
       "history": [
@@ -48850,8 +48850,8 @@
         },
         {
           "cup": "COTD 139",
-          "position": 48,
-          "rating": 1451.5,
+          "position": 50,
+          "rating": 1452.1,
           "lobby_size": 58
         }
       ]
@@ -48935,8 +48935,186 @@
     },
     {
       "rank": 1013,
+      "name": "Tudge Boat",
+      "rating": 1449.9,
+      "cups": 17,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 34.1,
+      "best_finish": 24,
+      "peak_rating": 1496.5,
+      "history": [
+        {
+          "cup": "COTD 111",
+          "position": 31,
+          "rating": 1495.5,
+          "lobby_size": 49
+        },
+        {
+          "cup": "COTD 112",
+          "position": 31,
+          "rating": 1492.4,
+          "lobby_size": 52
+        },
+        {
+          "cup": "COTD 117",
+          "position": 24,
+          "rating": 1496.5,
+          "lobby_size": 50
+        },
+        {
+          "cup": "COTD 118",
+          "position": 40,
+          "rating": 1487.9,
+          "lobby_size": 49
+        },
+        {
+          "cup": "COTD 119",
+          "position": 41,
+          "rating": 1482.6,
+          "lobby_size": 51
+        },
+        {
+          "cup": "COTD 120",
+          "position": 45,
+          "rating": 1476.5,
+          "lobby_size": 51
+        },
+        {
+          "cup": "COTD 121",
+          "position": 37,
+          "rating": 1467.7,
+          "lobby_size": 49
+        },
+        {
+          "cup": "COTD 123",
+          "position": 36,
+          "rating": 1463.7,
+          "lobby_size": 49
+        },
+        {
+          "cup": "COTD 127",
+          "position": 37,
+          "rating": 1460.7,
+          "lobby_size": 50
+        },
+        {
+          "cup": "COTD 128",
+          "position": 34,
+          "rating": 1459.3,
+          "lobby_size": 52
+        },
+        {
+          "cup": "COTD 129",
+          "position": 28,
+          "rating": 1459.7,
+          "lobby_size": 52
+        },
+        {
+          "cup": "COTD 131",
+          "position": 33,
+          "rating": 1460.1,
+          "lobby_size": 58
+        },
+        {
+          "cup": "COTD 132",
+          "position": 43,
+          "rating": 1455.6,
+          "lobby_size": 59
+        },
+        {
+          "cup": "COTD 135",
+          "position": 32,
+          "rating": 1454.1,
+          "lobby_size": 51
+        },
+        {
+          "cup": "COTD 136",
+          "position": 25,
+          "rating": 1452.0,
+          "lobby_size": 46
+        },
+        {
+          "cup": "COTD 138",
+          "position": 26,
+          "rating": 1453.7,
+          "lobby_size": 52
+        },
+        {
+          "cup": "COTD 139",
+          "position": 37,
+          "rating": 1449.9,
+          "lobby_size": 58
+        }
+      ]
+    },
+    {
+      "rank": 1014,
+      "name": "Prepe",
+      "rating": 1449.6,
+      "cups": 7,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 24.7,
+      "best_finish": 16,
+      "peak_rating": 1488.7,
+      "history": [
+        {
+          "cup": "COTD 3",
+          "position": 23,
+          "rating": 1488.7,
+          "lobby_size": 40
+        },
+        {
+          "cup": "COTD 5",
+          "position": 24,
+          "rating": 1478.7,
+          "lobby_size": 39
+        },
+        {
+          "cup": "COTD 9",
+          "position": 36,
+          "rating": 1461.6,
+          "lobby_size": 39
+        },
+        {
+          "cup": "COTD 10",
+          "position": 26,
+          "rating": 1453.6,
+          "lobby_size": 40
+        },
+        {
+          "cup": "COTD 11",
+          "position": 31,
+          "rating": 1442.9,
+          "lobby_size": 39
+        },
+        {
+          "cup": "COTD 12",
+          "position": 17,
+          "rating": 1444.5,
+          "lobby_size": 35
+        },
+        {
+          "cup": "COTD 14",
+          "position": 16,
+          "rating": 1449.6,
+          "lobby_size": 39
+        }
+      ]
+    },
+    {
+      "rank": 1015,
       "name": "Kiprosa",
-      "rating": 1449.8,
+      "rating": 1449.3,
       "cups": 34,
       "wins": 0,
       "podiums": {
@@ -48944,7 +49122,7 @@
         "silver": 0,
         "bronze": 0
       },
-      "avg_position": 24.2,
+      "avg_position": 24.3,
       "best_finish": 14,
       "peak_rating": 1494.3,
       "history": [
@@ -49148,186 +49326,8 @@
         },
         {
           "cup": "COTD 139",
-          "position": 22,
-          "rating": 1449.8,
-          "lobby_size": 58
-        }
-      ]
-    },
-    {
-      "rank": 1014,
-      "name": "Prepe",
-      "rating": 1449.6,
-      "cups": 7,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 24.7,
-      "best_finish": 16,
-      "peak_rating": 1488.7,
-      "history": [
-        {
-          "cup": "COTD 3",
-          "position": 23,
-          "rating": 1488.7,
-          "lobby_size": 40
-        },
-        {
-          "cup": "COTD 5",
-          "position": 24,
-          "rating": 1478.7,
-          "lobby_size": 39
-        },
-        {
-          "cup": "COTD 9",
-          "position": 36,
-          "rating": 1461.6,
-          "lobby_size": 39
-        },
-        {
-          "cup": "COTD 10",
-          "position": 26,
-          "rating": 1453.6,
-          "lobby_size": 40
-        },
-        {
-          "cup": "COTD 11",
-          "position": 31,
-          "rating": 1442.9,
-          "lobby_size": 39
-        },
-        {
-          "cup": "COTD 12",
-          "position": 17,
-          "rating": 1444.5,
-          "lobby_size": 35
-        },
-        {
-          "cup": "COTD 14",
-          "position": 16,
-          "rating": 1449.6,
-          "lobby_size": 39
-        }
-      ]
-    },
-    {
-      "rank": 1015,
-      "name": "Tudge Boat",
-      "rating": 1449.2,
-      "cups": 17,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 34.1,
-      "best_finish": 24,
-      "peak_rating": 1496.5,
-      "history": [
-        {
-          "cup": "COTD 111",
-          "position": 31,
-          "rating": 1495.5,
-          "lobby_size": 49
-        },
-        {
-          "cup": "COTD 112",
-          "position": 31,
-          "rating": 1492.4,
-          "lobby_size": 52
-        },
-        {
-          "cup": "COTD 117",
-          "position": 24,
-          "rating": 1496.5,
-          "lobby_size": 50
-        },
-        {
-          "cup": "COTD 118",
-          "position": 40,
-          "rating": 1487.9,
-          "lobby_size": 49
-        },
-        {
-          "cup": "COTD 119",
-          "position": 41,
-          "rating": 1482.6,
-          "lobby_size": 51
-        },
-        {
-          "cup": "COTD 120",
-          "position": 45,
-          "rating": 1476.5,
-          "lobby_size": 51
-        },
-        {
-          "cup": "COTD 121",
-          "position": 37,
-          "rating": 1467.7,
-          "lobby_size": 49
-        },
-        {
-          "cup": "COTD 123",
-          "position": 36,
-          "rating": 1463.7,
-          "lobby_size": 49
-        },
-        {
-          "cup": "COTD 127",
-          "position": 37,
-          "rating": 1460.7,
-          "lobby_size": 50
-        },
-        {
-          "cup": "COTD 128",
-          "position": 34,
-          "rating": 1459.3,
-          "lobby_size": 52
-        },
-        {
-          "cup": "COTD 129",
-          "position": 28,
-          "rating": 1459.7,
-          "lobby_size": 52
-        },
-        {
-          "cup": "COTD 131",
-          "position": 33,
-          "rating": 1460.1,
-          "lobby_size": 58
-        },
-        {
-          "cup": "COTD 132",
-          "position": 43,
-          "rating": 1455.6,
-          "lobby_size": 59
-        },
-        {
-          "cup": "COTD 135",
-          "position": 32,
-          "rating": 1454.1,
-          "lobby_size": 51
-        },
-        {
-          "cup": "COTD 136",
           "position": 25,
-          "rating": 1452.0,
-          "lobby_size": 46
-        },
-        {
-          "cup": "COTD 138",
-          "position": 26,
-          "rating": 1453.7,
-          "lobby_size": 52
-        },
-        {
-          "cup": "COTD 139",
-          "position": 36,
-          "rating": 1449.2,
+          "rating": 1449.3,
           "lobby_size": 58
         }
       ]
@@ -49611,6 +49611,59 @@
     },
     {
       "rank": 1021,
+      "name": "GuillaumePN",
+      "rating": 1445.3,
+      "cups": 6,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 33.2,
+      "best_finish": 22,
+      "peak_rating": 1485.1,
+      "history": [
+        {
+          "cup": "COTD 28",
+          "position": 22,
+          "rating": 1485.1,
+          "lobby_size": 26
+        },
+        {
+          "cup": "COTD 29",
+          "position": 34,
+          "rating": 1470.9,
+          "lobby_size": 40
+        },
+        {
+          "cup": "COTD 32",
+          "position": 23,
+          "rating": 1459.9,
+          "lobby_size": 25
+        },
+        {
+          "cup": "COTD 116",
+          "position": 52,
+          "rating": 1450.9,
+          "lobby_size": 55
+        },
+        {
+          "cup": "COTD 136",
+          "position": 29,
+          "rating": 1448.2,
+          "lobby_size": 46
+        },
+        {
+          "cup": "COTD 139",
+          "position": 39,
+          "rating": 1445.3,
+          "lobby_size": 58
+        }
+      ]
+    },
+    {
+      "rank": 1022,
       "name": "[XTR] NATHAN",
       "rating": 1445.2,
       "cups": 9,
@@ -49677,59 +49730,6 @@
           "position": 27,
           "rating": 1445.2,
           "lobby_size": 41
-        }
-      ]
-    },
-    {
-      "rank": 1022,
-      "name": "GuillaumePN",
-      "rating": 1445.1,
-      "cups": 6,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 32.7,
-      "best_finish": 22,
-      "peak_rating": 1485.1,
-      "history": [
-        {
-          "cup": "COTD 28",
-          "position": 22,
-          "rating": 1485.1,
-          "lobby_size": 26
-        },
-        {
-          "cup": "COTD 29",
-          "position": 34,
-          "rating": 1470.9,
-          "lobby_size": 40
-        },
-        {
-          "cup": "COTD 32",
-          "position": 23,
-          "rating": 1459.9,
-          "lobby_size": 25
-        },
-        {
-          "cup": "COTD 116",
-          "position": 52,
-          "rating": 1450.9,
-          "lobby_size": 55
-        },
-        {
-          "cup": "COTD 136",
-          "position": 29,
-          "rating": 1448.2,
-          "lobby_size": 46
-        },
-        {
-          "cup": "COTD 139",
-          "position": 36,
-          "rating": 1445.1,
-          "lobby_size": 58
         }
       ]
     },
@@ -50499,97 +50499,8 @@
     },
     {
       "rank": 1027,
-      "name": "Axo",
-      "rating": 1441.9,
-      "cups": 12,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 30.3,
-      "best_finish": 16,
-      "peak_rating": 1496.8,
-      "history": [
-        {
-          "cup": "COTD 54",
-          "position": 20,
-          "rating": 1496.8,
-          "lobby_size": 38
-        },
-        {
-          "cup": "COTW 60",
-          "position": 21,
-          "rating": 1489.4,
-          "lobby_size": 25
-        },
-        {
-          "cup": "COTD 67",
-          "position": 33,
-          "rating": 1477.6,
-          "lobby_size": 40
-        },
-        {
-          "cup": "COTD 70",
-          "position": 30,
-          "rating": 1473.6,
-          "lobby_size": 39
-        },
-        {
-          "cup": "Troll COTD 10",
-          "position": 38,
-          "rating": 1468.1,
-          "lobby_size": 37
-        },
-        {
-          "cup": "COTD 72",
-          "position": 31,
-          "rating": 1461.9,
-          "lobby_size": 39
-        },
-        {
-          "cup": "COTD 73",
-          "position": 27,
-          "rating": 1454.7,
-          "lobby_size": 43
-        },
-        {
-          "cup": "COTD 80",
-          "position": 16,
-          "rating": 1458.4,
-          "lobby_size": 49
-        },
-        {
-          "cup": "COTD 87",
-          "position": 28,
-          "rating": 1457.4,
-          "lobby_size": 48
-        },
-        {
-          "cup": "COTD 89",
-          "position": 34,
-          "rating": 1452.6,
-          "lobby_size": 47
-        },
-        {
-          "cup": "COTD 97",
-          "position": 38,
-          "rating": 1447.8,
-          "lobby_size": 49
-        },
-        {
-          "cup": "COTD 133",
-          "position": 48,
-          "rating": 1441.9,
-          "lobby_size": 54
-        }
-      ]
-    },
-    {
-      "rank": 1028,
       "name": "Reamerad",
-      "rating": 1441.6,
+      "rating": 1442.0,
       "cups": 16,
       "wins": 0,
       "podiums": {
@@ -50597,7 +50508,7 @@
         "silver": 0,
         "bronze": 0
       },
-      "avg_position": 32.4,
+      "avg_position": 32.6,
       "best_finish": 19,
       "peak_rating": 1505.0,
       "history": [
@@ -50693,16 +50604,105 @@
         },
         {
           "cup": "COTD 139",
-          "position": 30,
-          "rating": 1441.6,
+          "position": 32,
+          "rating": 1442.0,
           "lobby_size": 58
+        }
+      ]
+    },
+    {
+      "rank": 1028,
+      "name": "Axo",
+      "rating": 1441.9,
+      "cups": 12,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 30.3,
+      "best_finish": 16,
+      "peak_rating": 1496.8,
+      "history": [
+        {
+          "cup": "COTD 54",
+          "position": 20,
+          "rating": 1496.8,
+          "lobby_size": 38
+        },
+        {
+          "cup": "COTW 60",
+          "position": 21,
+          "rating": 1489.4,
+          "lobby_size": 25
+        },
+        {
+          "cup": "COTD 67",
+          "position": 33,
+          "rating": 1477.6,
+          "lobby_size": 40
+        },
+        {
+          "cup": "COTD 70",
+          "position": 30,
+          "rating": 1473.6,
+          "lobby_size": 39
+        },
+        {
+          "cup": "Troll COTD 10",
+          "position": 38,
+          "rating": 1468.1,
+          "lobby_size": 37
+        },
+        {
+          "cup": "COTD 72",
+          "position": 31,
+          "rating": 1461.9,
+          "lobby_size": 39
+        },
+        {
+          "cup": "COTD 73",
+          "position": 27,
+          "rating": 1454.7,
+          "lobby_size": 43
+        },
+        {
+          "cup": "COTD 80",
+          "position": 16,
+          "rating": 1458.4,
+          "lobby_size": 49
+        },
+        {
+          "cup": "COTD 87",
+          "position": 28,
+          "rating": 1457.4,
+          "lobby_size": 48
+        },
+        {
+          "cup": "COTD 89",
+          "position": 34,
+          "rating": 1452.6,
+          "lobby_size": 47
+        },
+        {
+          "cup": "COTD 97",
+          "position": 38,
+          "rating": 1447.8,
+          "lobby_size": 49
+        },
+        {
+          "cup": "COTD 133",
+          "position": 48,
+          "rating": 1441.9,
+          "lobby_size": 54
         }
       ]
     },
     {
       "rank": 1029,
       "name": "lucanakin",
-      "rating": 1440.6,
+      "rating": 1441.9,
       "cups": 12,
       "wins": 0,
       "podiums": {
@@ -50783,7 +50783,7 @@
         {
           "cup": "COTD 139",
           "position": 42,
-          "rating": 1440.6,
+          "rating": 1441.9,
           "lobby_size": 58
         }
       ]
@@ -50791,7 +50791,7 @@
     {
       "rank": 1030,
       "name": "ferinine",
-      "rating": 1440.5,
+      "rating": 1441.5,
       "cups": 33,
       "wins": 0,
       "podiums": {
@@ -50998,7 +50998,7 @@
         {
           "cup": "COTD 139",
           "position": 22,
-          "rating": 1440.5,
+          "rating": 1441.5,
           "lobby_size": 58
         }
       ]
@@ -51225,7 +51225,7 @@
     {
       "rank": 1034,
       "name": "aizpun",
-      "rating": 1432.8,
+      "rating": 1432.3,
       "cups": 12,
       "wins": 0,
       "podiums": {
@@ -51233,7 +51233,7 @@
         "silver": 0,
         "bronze": 0
       },
-      "avg_position": 39.2,
+      "avg_position": 39.6,
       "best_finish": 22,
       "peak_rating": 1490.5,
       "history": [
@@ -51305,8 +51305,8 @@
         },
         {
           "cup": "COTD 139",
-          "position": 54,
-          "rating": 1432.8,
+          "position": 58,
+          "rating": 1432.3,
           "lobby_size": 58
         }
       ]
@@ -51314,7 +51314,7 @@
     {
       "rank": 1035,
       "name": "BrickEdwards",
-      "rating": 1428.9,
+      "rating": 1429.0,
       "cups": 10,
       "wins": 0,
       "podiums": {
@@ -51322,7 +51322,7 @@
         "silver": 0,
         "bronze": 0
       },
-      "avg_position": 44.1,
+      "avg_position": 44.4,
       "best_finish": 36,
       "peak_rating": 1489.9,
       "history": [
@@ -51382,8 +51382,8 @@
         },
         {
           "cup": "COTD 139",
-          "position": 48,
-          "rating": 1428.9,
+          "position": 51,
+          "rating": 1429.0,
           "lobby_size": 58
         }
       ]
@@ -51391,7 +51391,7 @@
     {
       "rank": 1036,
       "name": "Matic_D",
-      "rating": 1426.5,
+      "rating": 1427.2,
       "cups": 48,
       "wins": 0,
       "podiums": {
@@ -51687,8 +51687,8 @@
         },
         {
           "cup": "COTD 139",
-          "position": 42,
-          "rating": 1426.5,
+          "position": 43,
+          "rating": 1427.2,
           "lobby_size": 58
         }
       ]
@@ -51963,7 +51963,7 @@
     {
       "rank": 1040,
       "name": "Noxitu",
-      "rating": 1405.6,
+      "rating": 1405.2,
       "cups": 58,
       "wins": 0,
       "podiums": {
@@ -52319,8 +52319,8 @@
         },
         {
           "cup": "COTD 139",
-          "position": 18,
-          "rating": 1405.6,
+          "position": 21,
+          "rating": 1405.2,
           "lobby_size": 58
         }
       ]
@@ -53294,7 +53294,7 @@
     {
       "rank": 1047,
       "name": "Dartho Mas",
-      "rating": 1358.3,
+      "rating": 1358.6,
       "cups": 28,
       "wins": 0,
       "podiums": {
@@ -53302,7 +53302,7 @@
         "silver": 0,
         "bronze": 0
       },
-      "avg_position": 38.7,
+      "avg_position": 38.8,
       "best_finish": 22,
       "peak_rating": 1488.7,
       "history": [
@@ -53470,8 +53470,8 @@
         },
         {
           "cup": "COTD 139",
-          "position": 42,
-          "rating": 1358.3,
+          "position": 44,
+          "rating": 1358.6,
           "lobby_size": 58
         }
       ]
@@ -53720,7 +53720,7 @@
         "silver": 0,
         "bronze": 0
       },
-      "avg_position": 32.0,
+      "avg_position": 32.1,
       "best_finish": 10,
       "peak_rating": 1493.4,
       "history": [
@@ -54056,7 +54056,7 @@
         },
         {
           "cup": "COTD 139",
-          "position": 42,
+          "position": 45,
           "rating": 1334.5,
           "lobby_size": 58
         }
