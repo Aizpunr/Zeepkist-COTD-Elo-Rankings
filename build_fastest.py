@@ -46,17 +46,10 @@ def normalize_name(name):
         return NAME_MAP[stripped]
     return stripped
 
-FILES = [
-    'Zeepkist COTDs 1-25.xlsx',
-    'Zeepkist COTDs 26-50.xlsx',
-    'Zeepkist COTDs 51-75.xlsx',
-    'COTDs 76-100.xlsx',
-    'COTDs 101-125.xlsx',
-    'COTD 126-130.xlsx',
-    'COTD 131-138.xlsx',
-    'cup roulette.xlsx',
-    'Troll cup.xlsx',
-]
+# Read xlsx file list from elo_engine.py source (auto-syncs when files change)
+_elo_src = open(_p('elo_engine.py'), encoding='utf-8').read()
+FILES = re.findall(r"parse_file\(_p\('(.+?\.xlsx)'\)\)", _elo_src)
+FILES += re.findall(r"parse_troll_cups\(_p\('(.+?\.xlsx)'\)\)", _elo_src)
 
 # Regex for standard format: "Fastest Time: 45.823 by justMaki in Round 12"
 # Also handles minutes format: "1:36.225 by ..."
