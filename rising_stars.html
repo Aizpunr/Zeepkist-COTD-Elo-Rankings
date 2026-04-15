@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Rising Stars — Weighted ELO History</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#1a1a2e;color:#e0e0e0;font-family:'Segoe UI',sans-serif;display:flex;flex-direction:column;align-items:center;padding:20px}
+h1{font-size:1.6rem;margin-bottom:4px;color:#fff}
+.sub{font-size:.85rem;color:#888;margin-bottom:16px}
+canvas{background:#12122a;border-radius:8px;border:1px solid #333}
+.legend{display:flex;gap:18px;margin-top:12px;flex-wrap:wrap;justify-content:center}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:.85rem}
+.legend-dot{width:12px;height:12px;border-radius:50%}
+</style>
+</head>
+<body>
+<h1>Rising Stars — Weighted ELO</h1>
+<div class="sub">On The Rise players — ELO history over time</div>
+<canvas id="chart" width="900" height="480"></canvas>
+<script>
+const players = {
+  'Sterben':      {color:'#da77f2', data:[]},
+  'MackCheesy':   {color:'#4dabf7', data:[]},
+  'Tommygaming':  {color:'#ff4d4d', data:[]},
+  'ping':         {color:'#69db7c', data:[]},
+  'microways':    {color:'#20c997', data:[]},
+  'MALIYO':       {color:'#ff922b', data:[]}
+};
+
+fetch('alldata.json').then(r=>r.json()).then(ad=>{
+  const w = ad.weighted;
+  for(const p of w){
+    if(players[p.n]){
+      players[p.n].data = p.h; // {c, r, p}
+    }
+  }
+  draw();
+});
+
+function drawStar(ctx, cx, cy, r, pts, inner, fill, stroke){
+  ctx.save();
+  ctx.fillStyle=fill; ctx.strokeStyle=stroke; ctx.lineWidth=1;
+  ctx.beginPath();
+  for(let i=0;i<pts*2;i++){
+    const a = Math.PI/2*-1 + (Math.PI/pts)*i;
+    const rad = i%2===0 ? r : r*inner;
+    const x=cx+Math.cos(a)*rad, y=cy+Math.sin(a)*rad;
+    i===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+  }
+  ctx.closePath(); ctx.fill(); ctx.stroke();
+  ctx.restore();
+}
+
+function draw(){
+  const canvas = document.getElementById('chart');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const pad = {t:30, r:30, b:40, l:55};
+  const cW = W-pad.l-pad.r, cH = H-pad.t-pad.b;
+
+  // find global min/max cup and rating
+  let minC=Infinity, maxC=-Infinity, minR=Infinity, maxR=-Infinity;
+  for(const name in players){
+    for(const d of players[name].data){
+      if(d.c<minC) minC=d.c;
+      if(d.c>maxC) maxC=d.c;
+      if(d.r<minR) minR=d.r;
+      if(d.r>maxR) maxR=d.r;
+    }
+  }
+  // pad rating range
+  minR = Math.floor((minR-20)/50)*50;
+  maxR = Math.ceil((maxR+20)/50)*50;
+
+  const xScale = c => pad.l + (c-minC)/(maxC-minC)*cW;
+  const yScale = r => pad.t + (1-(r-minR)/(maxR-minR))*cH;
+
+  // grid
+  ctx.strokeStyle='#2a2a4a'; ctx.lineWidth=1;
+  // horizontal grid + labels
+  ctx.fillStyle='#888'; ctx.font='11px Segoe UI'; ctx.textAlign='right';
+  for(let r=minR; r<=maxR; r+=50){
+    const y=yScale(r);
+    ctx.beginPath(); ctx.moveTo(pad.l,y); ctx.lineTo(W-pad.r,y); ctx.stroke();
+    ctx.fillText(r, pad.l-8, y+4);
+  }
+  // vertical grid + labels
+  ctx.textAlign='center';
+  const cupStep = maxC-minC > 80 ? 10 : 5;
+  for(let c=Math.ceil(minC/cupStep)*cupStep; c<=maxC; c+=cupStep){
+    const x=xScale(c);
+    ctx.beginPath(); ctx.moveTo(x,pad.t); ctx.lineTo(x,H-pad.b); ctx.stroke();
+    ctx.fillText(c, x, H-pad.b+16);
+  }
+  ctx.fillText('Cup #', W/2, H-6);
+
+  // 1500 baseline
+  ctx.strokeStyle='#555'; ctx.lineWidth=1; ctx.setLineDash([4,4]);
+  const y1500=yScale(1500);
+  ctx.beginPath(); ctx.moveTo(pad.l,y1500); ctx.lineTo(W-pad.r,y1500); ctx.stroke();
+  ctx.setLineDash([]);
+
+  // draw lines
+  for(const name in players){
+    const p = players[name];
+    if(!p.data.length) continue;
+    ctx.strokeStyle=p.color; ctx.lineWidth=2.5;
+    ctx.beginPath();
+    for(let i=0;i<p.data.length;i++){
+      const x=xScale(p.data[i].c), y=yScale(p.data[i].r);
+      i===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+    }
+    ctx.stroke();
+    // dots
+    ctx.fillStyle=p.color;
+    for(const d of p.data){
+      if(d.p===1){
+        drawStar(ctx, xScale(d.c), yScale(d.r), 8, 5, 0.45, '#ffd700','#b8960c');
+      } else if(d.p===2){
+        drawStar(ctx, xScale(d.c), yScale(d.r), 5.5, 5, 0.45, '#c0c0c0','#888');
+      } else if(d.p===3){
+        drawStar(ctx, xScale(d.c), yScale(d.r), 5.5, 5, 0.45, '#cd7f32','#8b5a2b');
+      } else {
+        ctx.beginPath();
+        ctx.arc(xScale(d.c), yScale(d.r), 3, 0, Math.PI*2);
+        ctx.fill();
+      }
+    }
+    // end label
+    const last = p.data[p.data.length-1];
+    ctx.fillStyle=p.color; ctx.font='bold 11px Segoe UI'; ctx.textAlign='left';
+    ctx.fillText(`${Math.round(last.r)}`, xScale(last.c)+6, yScale(last.r)+4);
+  }
+
+  // legend inside canvas (top-left)
+  const lx = pad.l + 16, ly = pad.t + 16;
+  ctx.fillStyle='rgba(18,18,42,0.85)';
+  ctx.strokeStyle='#444'; ctx.lineWidth=1;
+  const names = Object.keys(players);
+  const lh = names.length * 22 + 12;
+  ctx.beginPath(); ctx.roundRect(lx-8, ly-8, 140, lh, 6); ctx.fill(); ctx.stroke();
+  names.forEach((name,i)=>{
+    const y = ly + i*22;
+    ctx.fillStyle=players[name].color;
+    ctx.beginPath(); ctx.arc(lx+4, y+5, 5, 0, Math.PI*2); ctx.fill();
+    ctx.fillStyle='#ddd'; ctx.font='12px Segoe UI'; ctx.textAlign='left';
+    ctx.fillText(name, lx+16, y+9);
+  });
+}
+</script>
+<script data-goatcounter="https://aizpun.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
