@@ -187,6 +187,7 @@ function setTimeMode(mode) {
 }
 
 function esc(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+const customColors={"Lexer":"#10b981","Sandals":"#aa55ff","GuAlexItar":"#f5c842","justMaki":"#dc2626"};
 function cssVar(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
 
 function rColor(r) {
@@ -383,7 +384,7 @@ function renderAll() {
   document.getElementById('hero').innerHTML = top3.map((p, i) => `
     <div class="hero-card">
       <div class="hero-rank">${labels[i]}</div>
-      <div class="hero-name">${esc(p.name)}</div>
+      <div class="hero-name" style="color:${customColors[p.name]||''}">${esc(p.name)}</div>
       <div class="hero-spread">${p.spread}</div>
       <div class="hero-stats">
         <span>Avg ${p.avg} \u00b7 Best ${p.best}${ordSuf(p.best)} \u00b7 ${p.cups} cups</span>
@@ -402,9 +403,9 @@ function renderAll() {
   const wildcard = [...players].sort((a,b) => b.spread - a.spread)[0];
   const closestPB = [...players].sort((a,b) => a.pb_gap - b.pb_gap)[0];
   document.getElementById('pills').innerHTML = `
-    <div class="pill"><div class="pill-label" style="color:var(--green)">Most Consistent</div><div class="pill-who">${esc(mostConsistent.name)}</div><div class="pill-val">spread ${mostConsistent.spread} \u00b7 ${mostConsistent.cups} cups</div></div>
-    <div class="pill"><div class="pill-label" style="color:var(--red)">Biggest Wildcard</div><div class="pill-who">${esc(wildcard.name)}</div><div class="pill-val">spread ${wildcard.spread} \u00b7 ${wildcard.cups} cups</div></div>
-    <div class="pill"><div class="pill-label" style="color:var(--blue)">Closest to PB</div><div class="pill-who">${esc(closestPB.name)}</div><div class="pill-val">gap ${closestPB.pb_gap} \u00b7 avg ${closestPB.avg} \u00b7 best ${closestPB.best}</div></div>`;
+    <div class="pill"><div class="pill-label" style="color:var(--green)">Most Consistent</div><div class="pill-who" style="color:${customColors[mostConsistent.name]||'inherit'}">${esc(mostConsistent.name)}</div><div class="pill-val">spread ${mostConsistent.spread} \u00b7 ${mostConsistent.cups} cups</div></div>
+    <div class="pill"><div class="pill-label" style="color:var(--red)">Biggest Wildcard</div><div class="pill-who" style="color:${customColors[wildcard.name]||'inherit'}">${esc(wildcard.name)}</div><div class="pill-val">spread ${wildcard.spread} \u00b7 ${wildcard.cups} cups</div></div>
+    <div class="pill"><div class="pill-label" style="color:var(--blue)">Closest to PB</div><div class="pill-who" style="color:${customColors[closestPB.name]||'inherit'}">${esc(closestPB.name)}</div><div class="pill-val">gap ${closestPB.pb_gap} \u00b7 avg ${closestPB.avg} \u00b7 best ${closestPB.best}</div></div>`;
 
   render();
 }
@@ -444,7 +445,7 @@ function render() {
     tr.className = sel;
     tr.innerHTML = `
       <td class="rank">${i + 1}</td>
-      <td class="pname">${esc(p.name)}</td>
+      <td class="pname" style="color:${customColors[p.name]||''}">${esc(p.name)}</td>
       <td class="num">${p.cups}</td>
       <td class="num">${p.best}</td>
       <td class="num">${p.avg}</td>

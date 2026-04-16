@@ -116,6 +116,7 @@ canvas#timeline{width:100%;border-radius:8px;background:var(--surface);border:1p
 const B3 = ['Kernkob','justMaki','ZOMAN'];
 const COLORS = {Kernkob:'#f59e0b',justMaki:'#ef4444',ZOMAN:'#3b82f6'};
 const REST = '#555';
+const customColors={"Lexer":"#10b981","Sandals":"#aa55ff","GuAlexItar":"#f5c842","justMaki":"#dc2626"};
 
 fetch('big3_data.json').then(r=>r.json()).then(data=>{
   const cups = data.cups;
@@ -269,7 +270,7 @@ fetch('big3_data.json').then(r=>r.json()).then(data=>{
   // Cup list
   let listHTML = '';
   cups.slice().reverse().forEach(c => {
-    const color = COLORS[c.winner] || 'var(--dim)';
+    const color = COLORS[c.winner] || customColors[c.winner] || 'var(--dim)';
     const isB3 = B3.includes(c.winner);
     const cupLabel = typeof c.c === 'number' ? (Number.isInteger(c.c) ? `COTD ${c.c}` : `Special`) : c.c;
     let posHTML = '';

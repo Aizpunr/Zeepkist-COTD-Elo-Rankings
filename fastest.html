@@ -185,6 +185,7 @@ function cupUrl(id){
 function isTroll(cup){return /troll|roulette/i.test(cup)}
 function stripTag(n){return n.replace(/^\[.*?\]\s*/,'')}
 function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
+const customColors={"Lexer":"#10b981","Sandals":"#aa55ff","GuAlexItar":"#f5c842","justMaki":"#dc2626"};
 function fmt(t){return t>=60?Math.floor(t/60)+':'+(t%60).toFixed(3).padStart(6,'0'):t.toFixed(3)}
 function cssVar(name){return getComputedStyle(document.documentElement).getPropertyValue(name).trim()}
 function rColor(r){if(r>=2000)return"#dc2626";if(r>=1800)return"#a855f7";if(r>=1700)return"#3b82f6";if(r>=1600)return"#10b981";if(r>=1500)return"#6b7280";return"#78716c"}
@@ -332,7 +333,7 @@ function render(){
     const tr=document.createElement('tr');
     tr.innerHTML=`
       <td class="rank">${i+1}</td>
-      <td class="player-cell">${esc(p.name)}</td>
+      <td class="player-cell" style="color:${customColors[p.name]||''}">${esc(p.name)}</td>
       <td class="time-cell">${p.count}</td>
       <td class="time-cell">${p.pct}%</td>
       <td class="time-cell">${p.finals}</td>`;
@@ -540,7 +541,7 @@ function renderRoundView(data){
           </div>
           <div style="margin-top:8px;font-family:var(--mono);font-size:12px;line-height:1.8">
             ${playerList.map(([name,cups])=>`
-              <div><span style="color:var(--text);font-weight:600">${esc(name)}</span> <span style="color:var(--muted)">(${cups.length})</span> <span style="color:var(--dim)">${cups.map(c=>'<a href="'+cupUrl(c)+'" style="color:inherit;text-decoration:none" onmouseover="this.style.textDecoration=\'underline\'" onmouseout="this.style.textDecoration=\'none\'">'+esc(c)+'</a>').join(', ')}</span></div>
+              <div><span style="color:${customColors[name]||'var(--text)'};font-weight:600">${esc(name)}</span> <span style="color:var(--muted)">(${cups.length})</span> <span style="color:var(--dim)">${cups.map(c=>'<a href="'+cupUrl(c)+'" style="color:inherit;text-decoration:none" onmouseover="this.style.textDecoration=\'underline\'" onmouseout="this.style.textDecoration=\'none\'">'+esc(c)+'</a>').join(', ')}</span></div>
             `).join('')}
           </div>
         </div>`;
@@ -585,17 +586,17 @@ function buildPills(data){
   pills.innerHTML=`
     <div class="pill">
       <div class="pill-label">Most FTs Overall</div>
-      <div class="pill-who">${esc(players[0].name)}</div>
+      <div class="pill-who" style="color:${customColors[players[0].name]||'inherit'}">${esc(players[0].name)}</div>
       <div class="pill-val">${players[0].count} of ${data.length} cups (${players[0].pct}%)</div>
     </div>
     <div class="pill">
       <div class="pill-label">Most FTs in Finals</div>
-      <div class="pill-who">${esc(topFinals?topFinals.name:'-')}</div>
+      <div class="pill-who" style="color:${customColors[topFinals?topFinals.name:'']||'inherit'}">${esc(topFinals?topFinals.name:'-')}</div>
       <div class="pill-val">${topFinals?topFinals.finals:0} of ${totalFinals} finals</div>
     </div>
     <div class="pill">
       <div class="pill-label">Longest Streak</div>
-      <div class="pill-who">${esc(bestStreak.name)}</div>
+      <div class="pill-who" style="color:${customColors[bestStreak.name]||'inherit'}">${esc(bestStreak.name)}</div>
       <div class="pill-val">${bestStreak.len} consecutive cups</div>
     </div>
     <div class="pill">

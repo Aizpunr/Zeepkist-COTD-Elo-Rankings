@@ -142,6 +142,7 @@ th[data-col="best"],th[data-col="delta"],th[data-col="rdelta"]{text-align:right}
 </div>
 
 <script>
+const customColors={"Lexer":"#10b981","Sandals":"#aa55ff","GuAlexItar":"#f5c842","justMaki":"#dc2626"};
 let DATA, maxSkip, levels, baseline, baseRank;
 let sortCol = 'rank', sortDir = 1;
 let selectedPlayer = null;
@@ -250,7 +251,7 @@ function render() {
     const sel = selectedPlayer === r.n ? ' selected' : '';
     return `<tr class="${sel}" data-name="${r.n}">
       <td class="rank num">${r.rank}</td>
-      <td class="pname">${r.n}</td>
+      <td class="pname" style="color:${customColors[r.n]||''}">${r.n}</td>
       <td class="num">${r.a.toFixed(1)}</td>
       <td class="num ${ec}">${skip > 0 ? eSign + r.eloDelta.toFixed(1) : '—'}</td>
       <td class="num ${rc}">${skip > 0 ? rSign + r.rankDelta : '—'}</td>

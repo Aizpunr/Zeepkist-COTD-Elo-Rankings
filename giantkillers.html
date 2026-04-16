@@ -131,6 +131,7 @@ let sortCol = 'deficit';
 let sortDir = -1;
 
 function esc(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+const customColors={"Lexer":"#10b981","Sandals":"#aa55ff","GuAlexItar":"#f5c842","justMaki":"#dc2626"};
 
 fetch('giantkillers.json').then(r=>r.json()).then(d=>{
   data = d;
@@ -160,15 +161,15 @@ fetch('giantkillers.json').then(r=>r.json()).then(d=>{
   const byBeaten = [...upsets].sort((a,b) => b.beaten_above - a.beaten_above)[0];
   const byGain = [...upsets].sort((a,b) => b.elo_gain - a.elo_gain)[0];
   document.getElementById('pills').innerHTML = `
-    <div class="pill"><div class="pill-label">Biggest Deficit</div><div class="pill-who">${esc(top.winner)} · ${esc(top.cup_id)}</div><div class="pill-val">${Math.round(top.deficit)} ELO gap</div></div>
-    <div class="pill"><div class="pill-label">Lowest Seed Win</div><div class="pill-who">${esc(byRank.winner)} · ${esc(byRank.cup_id)}</div><div class="pill-val">${byRank.elo_rank}${ordSuf(byRank.elo_rank)} of ${byRank.lobby_size}</div></div>
-    <div class="pill"><div class="pill-label">Most Beaten Above</div><div class="pill-who">${esc(byBeaten.winner)} · ${esc(byBeaten.cup_id)}</div><div class="pill-val">${byBeaten.beaten_above} players</div></div>
-    <div class="pill"><div class="pill-label">Biggest ELO Gain</div><div class="pill-who">${esc(byGain.winner)} · ${esc(byGain.cup_id)}</div><div class="pill-val">+${Math.round(byGain.elo_gain)} ELO</div></div>`;
+    <div class="pill"><div class="pill-label">Biggest Deficit</div><div class="pill-who" style="color:${customColors[top.winner]||'inherit'}">${esc(top.winner)} · ${esc(top.cup_id)}</div><div class="pill-val">${Math.round(top.deficit)} ELO gap</div></div>
+    <div class="pill"><div class="pill-label">Lowest Seed Win</div><div class="pill-who" style="color:${customColors[byRank.winner]||'inherit'}">${esc(byRank.winner)} · ${esc(byRank.cup_id)}</div><div class="pill-val">${byRank.elo_rank}${ordSuf(byRank.elo_rank)} of ${byRank.lobby_size}</div></div>
+    <div class="pill"><div class="pill-label">Most Beaten Above</div><div class="pill-who" style="color:${customColors[byBeaten.winner]||'inherit'}">${esc(byBeaten.winner)} · ${esc(byBeaten.cup_id)}</div><div class="pill-val">${byBeaten.beaten_above} players</div></div>
+    <div class="pill"><div class="pill-label">Biggest ELO Gain</div><div class="pill-who" style="color:${customColors[byGain.winner]||'inherit'}">${esc(byGain.winner)} · ${esc(byGain.cup_id)}</div><div class="pill-val">+${Math.round(byGain.elo_gain)} ELO</div></div>`;
 
   // Repeat killers
   const rk = d.repeat_killers;
   document.getElementById('repeats').innerHTML = rk.map(r =>
-    `<div class="repeat-badge"><span class="rcount">${r.count}x</span><span class="rname">${esc(r.name)}</span><span class="ravg">avg deficit ${Math.round(r.avg_deficit)}</span></div>`
+    `<div class="repeat-badge"><span class="rcount">${r.count}x</span><span class="rname" style="color:${customColors[r.name]||''}">${esc(r.name)}</span><span class="ravg">avg deficit ${Math.round(r.avg_deficit)}</span></div>`
   ).join('');
 
   render();
