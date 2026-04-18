@@ -178,6 +178,7 @@ td.cup-cell{color:var(--dim)}
 let DATA=[], CUPS_MAP={}, CUP_ORDER={}, ALL_PLAYERS={}, selectedPlayer=null, selectedRound=null, viewMode='player';
 
 const SPECIAL_CUP_NUM={'COTD Roulette 1':25.5,'COTD Roulette 2':65.5,'Troll COTD 1':15.5,'Troll COTD 2':26.5,'Troll COTD 3':36.5,'Troll COTD 4':41.5,'Troll COTD 5':44.5,'Troll COTD 6':48.5,'Troll COTD 7':50.5,'Troll COTD 8':56.5,'Troll COTW 9':63.5,'Troll COTD 10':71.5,'Troll COTD 11':88.5};
+function cupNum(id){if(SPECIAL_CUP_NUM[id]!==undefined)return SPECIAL_CUP_NUM[id];const m=id.match(/(\d+)/);return m?parseFloat(m[1]):0;}
 function cupUrl(id){
   const n=SPECIAL_CUP_NUM[id]||(id.match(/(\d+)/)?parseFloat(id.match(/(\d+)/)[1]):0);
   return 'index.html?cup='+n;
@@ -350,15 +351,8 @@ function render(){
         // Actually simpler: match by cup ID to cup index in cups.json order
         const ftCupNums=new Set();
         DATA.forEach(e=>{if(stripTag(e.player)===p.name){
-          // Find the cup number in player history that matches this cup ID
-          // cups.json id -> we need the cup number used in alldata history
-          // The cup number in history IS the cups.json index+1 (COTD 1 = c:1)
-          // But troll cups have different numbering. Let's match by CUP_ORDER
-          const order=CUP_ORDER[e.cup];
-          if(order!==undefined){
-            // history uses sequential cup numbers matching cups.json order (1-indexed)
-            ftCupNums.add(order+1);
-          }
+          // history uses cup_num() values from elo_engine.py
+          ftCupNums.add(cupNum(e.cup));
         }});
         const chartTr=document.createElement('tr');chartTr.className='detail-row';
         const td=document.createElement('td');td.colSpan=5;
