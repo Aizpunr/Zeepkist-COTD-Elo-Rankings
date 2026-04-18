@@ -206,7 +206,7 @@ CANONICAL = {
               '[DNF] Did Not DNF ZOMAN','DNF artist (ZOMAN)',
               '[KUNG] ZOMAN','[Kung] ZOMAN','[SLOW]ZOMAN','[SNTA] ZOMAN',
               '[TOOB] ZOMAN','[oOOo] ZOMAN'],
-    'Zodiak': ['im washed [zodiakism]'],
+    'Zodiak': ['im washed [zodiakism]', 'zodiak'],
     'Cbad Cruiser': ['[CTR]Cbad Cruiser'],
     'LupensCruor': ['[CTR] LupensCruor'],
     'NathWalt': ['[CTR] NathWalt', '[CRT]NathWalt', '[CTR]NathWalt'],
