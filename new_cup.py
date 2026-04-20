@@ -61,9 +61,13 @@ if not rounds:
 
 # Build elimination order
 # For each eliminated player, track:
-#   display_time: last_known_time (shown in xlsx — fallback for DNFs)
+#   display_time: their time in their elim round (or 'DNF' if they DNF'd it)
 #   dnf:          True if they DNF'd their elimination round (determines tie)
-last_known_time = {}
+#
+# NOTE: display_time is ONLY from the elim round's own log entries. We used to
+# fall back to last_known_time (some prior round's time) for DNFs, but that was
+# misleading — it showed a time from a different round next to the round's
+# elim number. DNFs now stay DNF.
 elim_order = []
 actual_round = 0
 for rnd in rounds:
@@ -75,8 +79,6 @@ for rnd in rounds:
             name = m.group(1).strip()
             time_str = m.group(2).strip()
             player_times[name] = time_str
-            if time_str != 'DNF':
-                last_known_time[name] = time_str
         m2 = re.search(r'Eliminating (?:DNF|on time): (.+)', line)
         if m2:
             name = m2.group(1).strip()
@@ -89,8 +91,7 @@ for rnd in rounds:
         if name != mapper:
             elim_round_time = player_times.get(name, 'DNF')
             dnf = (elim_round_time == 'DNF')
-            display_time = elim_round_time if not dnf else last_known_time.get(name, 'DNF')
-            elim_order.append((name, display_time, actual_round, dnf))
+            elim_order.append((name, elim_round_time, actual_round, dnf))
 
 # Find winner
 all_named = set()
