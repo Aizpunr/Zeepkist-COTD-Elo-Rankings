@@ -17,15 +17,27 @@ COLS_PER_CUP = 6  # 4 data columns + 2 blank spacer
 
 # ── Parse arguments ──
 if len(sys.argv) < 3:
-    print("Usage: python new_cup.py <cup_number> <mapper_name>")
+    print("Usage: python new_cup.py <cup_number> <mapper_name> [--exclude name1,name2,...]")
     print('Example: python new_cup.py 135 "[20x]K410K3N"')
+    print('Example: python new_cup.py 141 "PlusMicron" --exclude justMaki')
     sys.exit(1)
 
 cup_num = int(sys.argv[1])
 mapper = sys.argv[2]
 cup_id = f"COTD {cup_num}"
 
+# Optional --exclude flag for playtesters or other non-cup players
+extra_excluded = []
+if '--exclude' in sys.argv:
+    idx = sys.argv.index('--exclude')
+    if idx + 1 < len(sys.argv):
+        extra_excluded = [n.strip() for n in sys.argv[idx + 1].split(',') if n.strip()]
+
+excluded = {mapper} | set(extra_excluded)
+
 print(f"Processing {cup_id}, mapper: {mapper}")
+if extra_excluded:
+    print(f"Also excluding: {', '.join(extra_excluded)}")
 print()
 
 # ── 1. Save raw log + parse mod logs ──
@@ -88,7 +100,7 @@ for rnd in rounds:
         continue
     actual_round += 1
     for name in eliminated_names:
-        if name != mapper:
+        if name not in excluded:
             elim_round_time = player_times.get(name, 'DNF')
             dnf = (elim_round_time == 'DNF')
             elim_order.append((name, elim_round_time, actual_round, dnf))
@@ -101,7 +113,7 @@ for rnd in rounds:
         if m:
             all_named.add(m.group(1).strip())
 elim_set = {e[0] for e in elim_order}
-winners = [n for n in all_named if n not in elim_set and n != mapper]
+winners = [n for n in all_named if n not in elim_set and n not in excluded]
 if not winners:
     print("ERROR: Could not determine winner.")
     sys.exit(1)
@@ -150,7 +162,7 @@ while i < len(elim_order):
             leaderboard.append((name, display_time, r, dnf_pos))
         pos += len(dnfs)
 
-print(f"Parsed {len(leaderboard)} players (mapper {mapper} excluded)")
+print(f"Parsed {len(leaderboard)} players (excluded: {', '.join(sorted(excluded))})")
 print(f"Winner: {winner} ({winner_time})")
 print(f"Rounds in log: {len(rounds)}")
 print()
