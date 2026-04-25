@@ -179,6 +179,7 @@ CANONICAL = {
     'Lazy_Echidna': ['[NIL]Lazy_Echidna','[TOG]Lazy_Echidna','[TOG]Lazy_echidna'],
     'Mark': ['[RTR]Mark'],
     'Metalted': ['[ZMS] Metalted','Matalted'],
+    'Northwind': ['Noweki'],
     'Not That Guy': ['[GANS] Not That Guy','[RTR] Not That Guy'],
     'OwlPlague': ['[CTR] OwlPlague','[CTR]OwlPlague'],
     'Pants': ['[COLD]Pants'],

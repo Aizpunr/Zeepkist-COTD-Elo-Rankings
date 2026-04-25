@@ -114,3 +114,33 @@ if ghost_hide_name:
 with open(_p('snapshot.json'), 'w') as f:
     json.dump(snap, f, separators=(',', ':'))
 print(f"snapshot.json written (cup {target_cup})")
+
+# ── Alt rankings snapshot (TrueSkill + Glicko-2) ───────────────────────────
+# Same history shape ({c, r, p}) so build_snap_at works directly.
+altrank_path = _p('altrank_data.json')
+altrank_snap_path = _p('altrank_snapshot.json')
+if os.path.exists(altrank_path):
+    with open(altrank_path) as f:
+        alt = json.load(f)
+    # Backup existing altrank snapshot
+    if os.path.exists(altrank_snap_path):
+        import shutil
+        os.makedirs(backup_dir, exist_ok=True)
+        bak = os.path.join(backup_dir, f'altrank_snapshot {target_cup}.json')
+        i = 0
+        while os.path.exists(bak):
+            i += 1
+            bak = os.path.join(backup_dir, f'altrank_snapshot {target_cup}_{i}.json')
+        shutil.copy2(altrank_snap_path, bak)
+        print(f"Backed up old altrank snapshot -> old snapshots/{os.path.basename(bak)}")
+    altrank_snap = {
+        'ts':      build_snap_at(alt['trueskill'],      target_cup),
+        'g2':      build_snap_at(alt['glicko2'],        target_cup),
+        'ts_pure': build_snap_at(alt['trueskill_pure'], target_cup),
+        'g2_pure': build_snap_at(alt['glicko2_pure'],   target_cup),
+    }
+    with open(altrank_snap_path, 'w') as f:
+        json.dump(altrank_snap, f, separators=(',', ':'))
+    print(f"altrank_snapshot.json written (cup {target_cup})")
+else:
+    print("(altrank_data.json missing — skipping altrank snapshot)")

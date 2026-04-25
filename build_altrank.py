@@ -582,26 +582,9 @@ size_kb = os.path.getsize(_p('altrank_data.json')) / 1024
 print(f"\naltrank_data.json written ({size_kb:.0f} KB)")
 
 # ── Snapshot ──────────────────────────────────────────────────────────────
-
-def build_snapshot(player_list, min_cups=5):
-    entries = []
-    for p in player_list:
-        if p['c'] < min_cups and (p['g'] + p['s'] + p['z']) == 0:
-            continue
-        entries.append((p['n'], p['a'], p['w'], p['g'] + p['s'] + p['z']))
-    entries.sort(key=lambda x: x[1], reverse=True)
-    return {name: [i + 1, act, w, pd] for i, (name, act, w, pd) in enumerate(entries[:150])}
-
-snap = {
-    'ts':      build_snapshot(altdata['trueskill']),
-    'g2':      build_snapshot(altdata['glicko2']),
-    'ts_pure': build_snapshot(altdata['trueskill_pure']),
-    'g2_pure': build_snapshot(altdata['glicko2_pure']),
-}
-
-with open(_p('altrank_snapshot.json'), 'w') as f:
-    json.dump(snap, f, separators=(',', ':'))
-print("altrank_snapshot.json written")
+# DISABLED: altrank_snapshot.json is now built by snapshot.py (pre-cup baseline
+# for arrows). Writing it here would overwrite the baseline with post-cup data.
+# If altrank_snapshot.json doesn't exist, snapshot.py builds it.
 
 # ── Sanity check ──────────────────────────────────────────────────────────
 
