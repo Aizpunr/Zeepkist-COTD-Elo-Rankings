@@ -421,7 +421,7 @@
 
 <script>
 // ── DATA ──
-let eloData, weightedData, eloDataPure, weightedDataPure, seasonData = null, snap = null, risingData = null, curseData = null, allData = null, cupsData = null;
+let eloData, weightedData, eloDataPure, weightedDataPure, seasonData = null, glicko2Data = null, glicko2DataPure = null, snap = null, risingData = null, curseData = null, allData = null, cupsData = null;
 let globalCupMax = 133;
 
 // ── THEME ──
@@ -443,7 +443,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // ── HELPERS ──
 function rColor(r) {
-  if (eloMode === "weighted" || eloMode === "season") {
+  // All three modes on this page (Skill / ELO / Race) use the same higher tier scale.
+  if (eloMode !== "standard") {
     if (r >= 2000) return "#dc2626";
     if (r >= 1800) return "#a855f7";
     if (r >= 1700) return "#3b82f6";
@@ -459,7 +460,7 @@ function rColor(r) {
   return "#78716c";
 }
 function tier(r) {
-  if (eloMode === "weighted") {
+  if (eloMode !== "standard") {
     if (r >= 2000) return "LEGEND";
     if (r >= 1800) return "PRO";
     if (r >= 1700) return "MASTER";
@@ -497,16 +498,37 @@ let compareList = []; // up to 2 player names
 const COMP_COLORS = ['#06b6d4', '#f97316'];
 
 function getActiveData() {
+  if (eloMode === "glicko2") return includeTroll ? glicko2Data : glicko2DataPure;
   if (eloMode === "season") return seasonData || [];
   if (eloMode === "weighted") return includeTroll ? weightedData : weightedDataPure;
   return includeTroll ? eloData : eloDataPure;
+}
+
+// Qualification (any one of):
+//   1. 6+ cups, OR
+//   2. 1+ lifetime podium, OR
+//   3. 4+ cups with at least one in the last 20 events (active recent player)
+// Season/Race mode keeps the older lenient rule (2+ cups OR any lifetime podium).
+function computeLast20Cups(dataset) {
+  const cs = new Set();
+  for (const p of dataset) for (const h of (p.history || [])) cs.add(h.c);
+  return new Set([...cs].sort((a, b) => b - a).slice(0, 20));
+}
+function hasPodium(p) {
+  return (p.podiums.gold + p.podiums.silver + p.podiums.bronze) > 0;
+}
+function isQualified(p, last20) {
+  if (eloMode === "season") return p.cups >= 2 || hasPodium(p);
+  if (p.cups >= 6) return true;
+  if (hasPodium(p)) return true;
+  return p.cups >= 4 && (p.history || []).some(h => last20.has(h.c));
 }
 
 // ── SORT (via clickable table headers) ──
 
 // ── MIN CUPS SLIDER ──
 // ── ELO MODE TABS ──
-const modeOpts = [["standard","Standard Elo"],["weighted","Weighted Elo"],["season","2026 Race"]];
+const modeOpts = [["weighted","ELO Ranking"],["glicko2","Skill Ranking"],["season","2026 Race"]];
 const modeTabsEl = document.getElementById("eloModeTabs");
 modeOpts.forEach(([k,l]) => {
   const btn = document.createElement("button");
@@ -596,13 +618,13 @@ function getFiltered() {
   const src = getActiveData();
   // Update tier legend
   const tl = document.getElementById("tierLegend");
-  if (eloMode === "weighted" || eloMode === "season") {
+  if (eloMode !== "standard") {
     tl.innerHTML = '<span style="color:#dc2626">Legend 2000+</span> \u00b7 <span style="color:#a855f7">Pro 1800+</span> \u00b7 <span style="color:#3b82f6">Master 1700+</span> \u00b7 <span style="color:#10b981">Gold 1600+</span>';
   } else {
     tl.innerHTML = '<span style="color:#dc2626">Legend 1850+</span> \u00b7 <span style="color:#a855f7">Pro 1700+</span> \u00b7 <span style="color:#3b82f6">Master 1650+</span> \u00b7 <span style="color:#10b981">Gold 1600+</span>';
   }
-  const minCups = eloMode === "season" ? 2 : 5;
-  let d = src.filter(p => p.cups >= minCups || (p.podiums.gold + p.podiums.silver + p.podiums.bronze) > 0);
+  const last20Main = computeLast20Cups(src);
+  let d = src.filter(p => isQualified(p, last20Main));
   if (sortKey === "rating") d.sort((a,b) => b.rating - a.rating);
   else if (sortKey === "active") d.sort((a,b) => b.active - a.active);
   else if (sortKey === "wins") d.sort((a,b) => b.wins - a.wins || b.podiums.silver - a.podiums.silver || b.podiums.bronze - a.podiums.bronze || b.active - a.active);
@@ -616,8 +638,8 @@ function getFiltered() {
 // ── RANK HISTORY ──
 function buildRankHistory(player) {
   const dataset = getActiveData();
-  const minCups = eloMode === "season" ? 2 : 5;
-  const qualified = dataset.filter(p => p.cups >= minCups || (p.podiums.gold + p.podiums.silver + p.podiums.bronze) > 0);
+  const last20 = computeLast20Cups(dataset);
+  const qualified = dataset.filter(p => isQualified(p, last20));
   const noDecay = eloMode === "season";
   const DECAY = 0.995, GRACE = 3;
   const cups = [...new Set(player.history.map(h => h.c))].sort((a, b) => a - b);
@@ -656,8 +678,20 @@ function drawChart(player, panel) {
         <span class="stats">${viewMode === "curse"
           ? `Curse ${Math.round(player.active)} · ${player.cups} cups · 4ths: ${player.fourths} · peak ${Math.round(player.peak_rating)}`
           : `Active ${Math.round(player.active)} · ${player.cups} cups · Podium ${player.podiums.gold}/${player.podiums.silver}/${player.podiums.bronze} · avg ${player.avg_position} · peak ${Math.round(player.peak_rating)}`}</span>
-        ${player.cups < (eloMode === "season" ? 2 : 5) && (player.podiums.gold + player.podiums.silver + player.podiums.bronze) === 0
-          ? `<br><span style="font-size:10px;color:var(--accent);font-family:var(--mono)">Play ${(eloMode === "season" ? 2 : 5) - player.cups} more cup${(eloMode === "season" ? 2 : 5) - player.cups !== 1 ? 's' : ''} to get ranked, or get a podium</span>` : ''}
+        ${(() => {
+          const last20 = computeLast20Cups(getActiveData());
+          if (isQualified(player, last20)) return '';
+          if (eloMode === "season") {
+            const need = 2 - player.cups;
+            return need > 0 ? `<br><span style="font-size:10px;color:var(--accent);font-family:var(--mono)">Play ${need} more cup${need !== 1 ? 's' : ''} to get ranked, or get a podium</span>` : '';
+          }
+          const need6 = 6 - player.cups;
+          const need4 = Math.max(0, 4 - player.cups);
+          const msg = need4 > 0
+            ? `Play ${need6} more cup${need6 !== 1 ? 's' : ''} (or ${need4} more in the last 20 events), or get a podium`
+            : `Play ${need6} more cup${need6 !== 1 ? 's' : ''} (or any cup in the last 20 events), or get a podium`;
+          return `<br><span style="font-size:10px;color:var(--accent);font-family:var(--mono)">${msg}</span>`;
+        })()}
       </div>
       <button class="close-btn" id="closeChart">✕</button>
     </div>
@@ -850,7 +884,8 @@ function renderRising() {
   const body = document.getElementById("tableBody");
   const header = document.querySelector(".table-header");
   if (!risingData) { body.innerHTML = `<div style="padding:24px;color:var(--text-muted);font-family:var(--mono);font-size:12px">Loading...</div>`; header.style.display = "none"; return; }
-  const risingKey = (eloMode === "weighted" || eloMode === "season")
+  // Glicko-2 (Skill) doesn't have a dedicated rising.json key — fall back to weighted as a stand-in.
+  const risingKey = (eloMode === "weighted" || eloMode === "season" || eloMode === "glicko2")
     ? (includeTroll ? "weighted" : "weighted_pure")
     : (includeTroll ? "standard" : "standard_pure");
   const list = risingData[risingKey] || [];
@@ -1029,8 +1064,8 @@ function renderSearch(query) {
   header.style.gridTemplateColumns = SEARCH_COLS;
   header.innerHTML = `<div>#</div><div>Player</div><div style="text-align:right">Active</div><div style="text-align:right">App</div><div style="text-align:center">Best</div><div style="text-align:right">Avg</div>`;
 
-  const minCups = eloMode === "season" ? 2 : 5;
-  const qualifiedList = list.filter(q => q.cups >= minCups || (q.podiums.gold + q.podiums.silver + q.podiums.bronze) > 0);
+  const last20Search = computeLast20Cups(list);
+  const qualifiedList = list.filter(q => isQualified(q, last20Search));
   let html = "";
   matches.slice(0, 50).forEach(p => {
     const rank = qualifiedList.indexOf(p) + 1 || null;
@@ -1038,7 +1073,7 @@ function renderSearch(query) {
     const nameColor = customColors[p.name] || cssVar('--pname');
     const avgColor = p.avg_position <= 5 ? "var(--green)" : p.avg_position <= 10 ? "var(--text-dim)" : "var(--text-muted)";
     const bestColor = p.best_finish === 1 ? "var(--accent)" : p.best_finish <= 3 ? "var(--text-dim)" : "var(--text-muted)";
-    const ranked = p.cups >= (eloMode === "season" ? 2 : 5) || (p.podiums.gold + p.podiums.silver + p.podiums.bronze) > 0;
+    const ranked = isQualified(p, last20Search);
     const srCompClass = compareMode && compareList[0] === p.name ? " comp-p1" : compareMode && compareList[1] === p.name ? " comp-p2" : "";
     html += `<div class="row${selected === p.name ? " selected" : ""}${srCompClass}" data-name="${esc(p.name)}" style="grid-template-columns:${SEARCH_COLS}">
       <div class="rank" style="${rank ? '' : 'color:var(--text-dark)'}">${rank || '—'}</div>
@@ -1254,22 +1289,23 @@ function leaderboardInfoBtn() {
   if (eloMode === "season") {
     return `<span class="info-tip-wrap"><button class="info-btn" onclick="event.stopPropagation()" style="pointer-events:auto;margin-left:4px">ℹ</button>`
       + `<div class="info-tip"><div class="st-head">2026 Race</div>`
-      + `Fresh weighted ELO from <code>1500</code> starting COTD 126 (Jan 3, 2026).<br><br>`
-      + `Same system as Weighted ELO but only 2026 cups count. Everyone starts equal.</div></span>`;
+      + `Fresh ELO from <code>1500</code> starting COTD 126 (Jan 3, 2026).<br><br>`
+      + `Same system as ELO but only 2026 cups count. Everyone starts equal.</div></span>`;
   }
   if (eloMode === "weighted") {
     return `<span class="info-tip-wrap"><button class="info-btn" onclick="event.stopPropagation()" style="pointer-events:auto;margin-left:4px">ℹ</button>`
-      + `<div class="info-tip"><div class="st-head">Weighted ELO</div>`
+      + `<div class="info-tip"><div class="st-head">ELO Ranking</div>`
       + `Pairwise ELO (<code>K=32/N</code>) with position-based multiplier:<br>`
       + `Top 8%: <code>3×</code>, 15%: <code>2×</code>, 25%: <code>1.3×</code>, 50%: <code>0.8×</code>, rest: <code>0.5×</code><br><br>`
       + `Lobby quality weighting. Provisional <code>1.5×</code> for &lt;12 cups.<br>`
       + `Decay: <code>0.995</code>/cup missed after 3 grace cups.</div></span>`;
   }
+  // glicko2 = "Skill Ranking"
   return `<span class="info-tip-wrap"><button class="info-btn" onclick="event.stopPropagation()" style="pointer-events:auto;margin-left:4px">ℹ</button>`
-    + `<div class="info-tip"><div class="st-head">Standard ELO</div>`
-    + `Pairwise ELO (<code>K=32/N</code>). Every matchup weighted equally regardless of finishing position.<br><br>`
-    + `Provisional <code>1.5×</code> for &lt;12 cups.<br>`
-    + `Decay: <code>0.995</code>/cup missed after 3 grace cups.</div></span>`;
+    + `<div class="info-tip"><div class="st-head">Skill Ranking</div>`
+    + `Glicko-2 rating: adapts to how confident we are in your number. Rises faster when you're new, more stable after many cups.<br><br>`
+    + `Each rating has an uncertainty (rating deviation) that shrinks with activity and grows when you're inactive.<br><br>`
+    + `Better predictor of cup outcomes than Standard ELO for this format.</div></span>`;
 }
 function leaderboardCols() {
   return eloMode === "season"
@@ -1517,6 +1553,7 @@ function render() {
 
   const snapMode = (() => {
     const mode = eloMode === "season" ? "season"
+      : eloMode === "glicko2" ? (includeTroll ? "g2" : "g2_pure")
       : eloMode === "weighted" ? (includeTroll ? "w" : "w_pure")
       : (includeTroll ? "std" : "std_pure");
     return snap && snap[mode];
@@ -1608,7 +1645,7 @@ function render() {
 const _v = '?v=' + Date.now();
 function expandPlayer(p) {
   return {
-    name: p.n, rating: p.r, active: p.a, cups: p.c, wins: p.w,
+    name: p.n, rating: p.r, active: p.a, uncertainty: p.u || 0, cups: p.c, wins: p.w,
     podiums: { gold: p.g, silver: p.s, bronze: p.z },
     avg_position: p.v, best_finish: p.b, peak_rating: p.p,
     history: p.h
@@ -1626,6 +1663,8 @@ Promise.all([
   eloDataPure = all.standard_pure ? all.standard_pure.map(expandPlayer) : eloData;
   weightedDataPure = all.weighted_pure ? all.weighted_pure.map(expandPlayer) : weightedData;
   seasonData = all.season_2026 ? all.season_2026.map(expandPlayer) : null;
+  glicko2Data = all.glicko2 ? all.glicko2.map(expandPlayer) : weightedData;
+  glicko2DataPure = all.glicko2_pure ? all.glicko2_pure.map(expandPlayer) : glicko2Data;
   snap = s;
   risingData = rising;
   curseData = curse ? curse.l : null;

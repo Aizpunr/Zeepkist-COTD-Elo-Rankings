@@ -37,10 +37,19 @@ print(f"Current cup: {current_cup}  |  Snapshot at cup: {target_cup}")
 # Format: cup_number → real_player_name
 GHOST_HIDE = {133: 'Kernkob'}
 
-def build_snap_at(players, target, no_decay=False, min_cups=5):
+def build_snap_at(players, target, no_decay=False, season_mode=False):
+    """Qualification (any one of):
+       1. 6+ cups, OR
+       2. 1+ lifetime podium, OR
+       3. 4+ cups with at least one in the last 20 events at the target cup.
+       Season mode keeps the older lenient rule: 2+ cups OR any podium.
+    """
+    # Last 20 events at the target cup (across all players' histories)
+    all_cs = sorted({h['c'] for p in players for h in (p.get('h') or p.get('history', [])) if h['c'] <= target})
+    last_20 = set(all_cs[-20:])
+
     entries = []
     for p in players:
-        # Support both compact keys (alldata) and verbose keys (lexercurse)
         name = p.get('n') or p.get('name')
         hist = p.get('h') or p.get('history', [])
         hist_before = [h for h in hist if h['c'] <= target]
@@ -56,7 +65,15 @@ def build_snap_at(players, target, no_decay=False, min_cups=5):
         wins = sum(1 for h in hist_before if h['p'] == 1)
         pods = sum(1 for h in hist_before if h['p'] <= 3 and not (h['c'] == 41.5 and h['p'] == 3))
         cups_played = len(hist_before)
-        if cups_played >= min_cups or pods > 0:
+
+        if season_mode:
+            qualified = cups_played >= 2 or pods > 0
+        else:
+            qualified = (cups_played >= 6
+                         or pods > 0
+                         or (cups_played >= 4 and any(h['c'] in last_20 for h in hist_before)))
+
+        if qualified:
             entries.append((name, raw, active, wins, pods))
     entries.sort(key=lambda x: x[2], reverse=True)  # rank by active
     return {name: [i + 1, active, wins, pods] for i, (name, _, active, wins, pods) in enumerate(entries[:150])}
@@ -103,44 +120,31 @@ snap = {
     'std_pure': build_snap_at(std_pure,    target_cup),
     'w_pure':   build_snap_at(w_pure,      target_cup),
     'curse':    build_snap_at(curse_players, target_cup),
-    'season':   build_snap_at(season,      target_cup, no_decay=True, min_cups=2),
+    'season':   build_snap_at(season,      target_cup, no_decay=True, season_mode=True),
 }
+
+# ── Merge alt rankings (TrueSkill + Glicko-2) into the same snapshot ──────
+# Both systems store history in the same {c, r, p} shape so build_snap_at works directly.
+ts_data = data.get('trueskill', [])
+g2_data = data.get('glicko2', [])
+ts_pure_data = data.get('trueskill_pure', [])
+g2_pure_data = data.get('glicko2_pure', [])
+if ts_data or g2_data:
+    snap['ts']      = build_snap_at(ts_data,      target_cup)
+    snap['g2']      = build_snap_at(g2_data,      target_cup)
+    snap['ts_pure'] = build_snap_at(ts_pure_data, target_cup)
+    snap['g2_pure'] = build_snap_at(g2_pure_data, target_cup)
+    print("Merged trueskill + glicko2 snapshots into snap")
+else:
+    print("(no trueskill/glicko2 keys in alldata.json — run build_altrank.py first)")
 
 if ghost_hide_name:
     for key in snap:
         snap[key].pop(ghost_hide_name, None)
     print(f"Hidden from snapshot: {ghost_hide_name} (ghost in cup {target_cup + 1})")
 
-with open(_p('snapshot.json'), 'w') as f:
+tmp = _p('snapshot.json') + '.tmp'
+with open(tmp, 'w') as f:
     json.dump(snap, f, separators=(',', ':'))
-print(f"snapshot.json written (cup {target_cup})")
-
-# ── Alt rankings snapshot (TrueSkill + Glicko-2) ───────────────────────────
-# Same history shape ({c, r, p}) so build_snap_at works directly.
-altrank_path = _p('altrank_data.json')
-altrank_snap_path = _p('altrank_snapshot.json')
-if os.path.exists(altrank_path):
-    with open(altrank_path) as f:
-        alt = json.load(f)
-    # Backup existing altrank snapshot
-    if os.path.exists(altrank_snap_path):
-        import shutil
-        os.makedirs(backup_dir, exist_ok=True)
-        bak = os.path.join(backup_dir, f'altrank_snapshot {target_cup}.json')
-        i = 0
-        while os.path.exists(bak):
-            i += 1
-            bak = os.path.join(backup_dir, f'altrank_snapshot {target_cup}_{i}.json')
-        shutil.copy2(altrank_snap_path, bak)
-        print(f"Backed up old altrank snapshot -> old snapshots/{os.path.basename(bak)}")
-    altrank_snap = {
-        'ts':      build_snap_at(alt['trueskill'],      target_cup),
-        'g2':      build_snap_at(alt['glicko2'],        target_cup),
-        'ts_pure': build_snap_at(alt['trueskill_pure'], target_cup),
-        'g2_pure': build_snap_at(alt['glicko2_pure'],   target_cup),
-    }
-    with open(altrank_snap_path, 'w') as f:
-        json.dump(altrank_snap, f, separators=(',', ':'))
-    print(f"altrank_snapshot.json written (cup {target_cup})")
-else:
-    print("(altrank_data.json missing — skipping altrank snapshot)")
+os.replace(tmp, _p('snapshot.json'))
+print(f"snapshot.json written (cup {target_cup}, {len(snap)} keys)")

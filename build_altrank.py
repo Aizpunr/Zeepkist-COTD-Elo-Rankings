@@ -568,18 +568,21 @@ g2_pure = compute_glicko2(pure_cups)
 
 # ── Build JSON ────────────────────────────────────────────────────────────
 
-altdata = {
-    'trueskill':      build_all_list(ts_full, all_cups),
-    'trueskill_pure': build_all_list(ts_pure, pure_cups),
-    'glicko2':        build_all_list(g2_full, all_cups),
-    'glicko2_pure':   build_all_list(g2_pure, pure_cups),
-}
+# Merge into alldata.json (single source of truth for all rating systems)
+alldata_path = _p('alldata.json')
+with open(alldata_path) as f:
+    alldata = json.load(f)
+alldata['trueskill']      = build_all_list(ts_full, all_cups)
+alldata['trueskill_pure'] = build_all_list(ts_pure, pure_cups)
+alldata['glicko2']        = build_all_list(g2_full, all_cups)
+alldata['glicko2_pure']   = build_all_list(g2_pure, pure_cups)
+tmp = alldata_path + '.tmp'
+with open(tmp, 'w') as f:
+    json.dump(alldata, f, separators=(',', ':'))
+os.replace(tmp, alldata_path)
 
-with open(_p('altrank_data.json'), 'w') as f:
-    json.dump(altdata, f, separators=(',', ':'))
-
-size_kb = os.path.getsize(_p('altrank_data.json')) / 1024
-print(f"\naltrank_data.json written ({size_kb:.0f} KB)")
+size_kb = os.path.getsize(alldata_path) / 1024
+print(f"\nalldata.json updated with trueskill + glicko2 keys ({size_kb:.0f} KB)")
 
 # ── Snapshot ──────────────────────────────────────────────────────────────
 # DISABLED: altrank_snapshot.json is now built by snapshot.py (pre-cup baseline
@@ -588,7 +591,7 @@ print(f"\naltrank_data.json written ({size_kb:.0f} KB)")
 
 # ── Sanity check ──────────────────────────────────────────────────────────
 
-for label, data in [('TrueSkill', altdata['trueskill']), ('Glicko-2', altdata['glicko2'])]:
+for label, data in [('TrueSkill', alldata['trueskill']), ('Glicko-2', alldata['glicko2'])]:
     top5 = data[:5]
     print(f"\n{label} top 5:")
     for i, p in enumerate(top5):

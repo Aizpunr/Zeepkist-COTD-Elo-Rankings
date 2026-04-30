@@ -299,9 +299,9 @@ fetch('whatif.json').then(r=>r.json()).then(data=>{
     <div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:6px">Skip 3 rounds</div>`;
 }).catch(()=>{});
 
-// Alt Rankings — top 3 TrueSkill
-fetch('altrank_data.json').then(r=>r.json()).then(data=>{
-  const top3=data.trueskill.slice(0,3);
+// Alt Rankings — top 3 TrueSkill (now lives in alldata.json)
+fetch('alldata.json').then(r=>r.json()).then(data=>{
+  const top3=(data.trueskill || []).slice(0,3);
   const medals=['#f59e0b','#9ca3af','#b45309'];
   const rows=top3.map((p,i)=>`<tr>
     <td style="color:${medals[i]};text-align:right;padding-right:8px;font-weight:700">${i+1}</td>
