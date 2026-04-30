@@ -164,7 +164,7 @@ CANONICAL = {
     'Butter': ['[ZST] Butter'],
     'Codewalt': ['CodeWalt'],
     'DragonBoi': ['[Top3]DragonBoi'],
-    'Naomi': ['[POIN]Fwogiie','[RTR]Fwogiie','[Tran]Fwogiie','[frog]Fwogiie','[RTR]Fwogiie.Kawaii','Fwogiie.Kawaii','Fwogiie','[ASJE]Naomi'],
+    'Naomi': ['[POIN]Fwogiie','[RTR]Fwogiie','[Tran]Fwogiie','[frog]Fwogiie','[RTR]Fwogiie.Kawaii','Fwogiie.Kawaii','Fwogiie','[ASJE]Naomi','Naomi :3'],
     'GuAlexItar': ['[RTR]GuAlexItar'],
     'Hi Im Yolo': ['[HRR]Hi Im Yolo','[RIP]Hi Im Yolo'],
     'Hydro': ['[BFP] Hydro','[CTR]Hydro','[RTR] Hydro','[SLOW] Hydro','k2blue','[WOW]Hydro','[ZOMN] Hydro','[CTR[Hydro','MystiCookies','MysticVoid','l3purple'],
@@ -232,7 +232,7 @@ CANONICAL = {
     'Mμ': ['[CTR]Mμ', 'Mu'],
     'Kaiser64': ['[TEA]Kaiser64'],
     'LKat': ['[GGG]Lkat','[GGG]LKat','[MMM]LKat'],
-    'void': ['[ZET]void','[poop]void','[bob]void','[popo]void'],
+    'void': ['[ZET]void','[poop]void','[bob]void','[popo]void','Void','//////void','[VOID[//////void','[gorp]//////void','[SWDN]//////void'],
     'Achmetha0626': ['[ERR]Achmetha0626'],
     'Ax1ss': ['[FaS] Ax1ss','[TOG] Ax1ss'],
     'BootyMcShooty88': ['[SBOI] BootyMcShooty88'],
@@ -288,7 +288,6 @@ CANONICAL = {
     'Tommygaming': ['[CSC]Tommygaming', '[OOPS]Tommygaming', '[jofk]Tommygaming', 'TommyGaming5132', 'Tommygaming5132', '[TG]Tommygaming5132', '[CSC]Tommygaming5132', '[CSC]Tommygaming6132', '[C3PO]Tommygaming5132'],
     'WotterBytes': ['Wotterbytes'],
     'ping': ['[bad] ping', '[boom] ping', '[no] ping', '[pong]ping'],
-    '//////void': ['[gorp]//////void'],
     'agix': ['[GYMC] agix'],
     'An Actual g00se': ['[CSC] An Actual g00se', '[Err] An Actual g00se', '[CSC] BaBa is g00se', '[CSC] CantFindTheg00se'],
     'BOB THE GAMER': ['[BOGO]BOB THE GAMER', '[MEAT]BOB THE GAMER'],
@@ -313,6 +312,8 @@ CANONICAL = {
     'Wheelie': ['[ZET] Wheelie', '[ZET]Wheelie'],
     'Zachafinackus': ['[Sumo]Zachafinackus'],
     'Heart-TGV': ['[TTR]Heart-TGV'],
+    'sailingman': ['segelnhoch3'],
+    'captancraft2': ['[PINK] captancraft2'],
 }
 
 NAME_MAP = {}
