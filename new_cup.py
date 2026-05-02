@@ -167,11 +167,18 @@ print(f"Winner: {winner} ({winner_time})")
 print(f"Rounds in log: {len(rounds)}")
 print()
 
-# Find fastest time
+# Find fastest time. Round numbering matches the elim_order loop above:
+# the first leaderboard with no eliminations is the discovery/warmup round (R0),
+# Round 1 is the first round that actually eliminates someone.
 fastest_time = None
 fastest_name = None
 fastest_round = None
-for rnd_num, rnd in enumerate(rounds, 1):
+actual_round = 0
+for rnd in rounds:
+    has_elim = any(re.search(r'Eliminating (?:DNF|on time):', line) for line in rnd)
+    if has_elim:
+        actual_round += 1
+    rnd_num = actual_round if has_elim else 0
     for line in rnd:
         m = re.search(r'Player (.+?): Time: (.+)', line)
         if m:
