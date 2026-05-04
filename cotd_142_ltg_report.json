@@ -1,0 +1,282 @@
+{
+  "cup": "COTD 142",
+  "cup_num": 142,
+  "dry_run": false,
+  "cup_tracker_rounds": 14,
+  "livelog_rounds": 15,
+  "matched_rounds": 14,
+  "match_log": [
+    {
+      "cup_round": 1,
+      "livelog_round_idx": 2,
+      "status": "matched (score=0.0011, ll_idx=2)"
+    },
+    {
+      "cup_round": 2,
+      "livelog_round_idx": 3,
+      "status": "matched (score=0.0008, ll_idx=3)"
+    },
+    {
+      "cup_round": 3,
+      "livelog_round_idx": 4,
+      "status": "matched (score=0.0005, ll_idx=4)"
+    },
+    {
+      "cup_round": 4,
+      "livelog_round_idx": 5,
+      "status": "matched (score=0.0012, ll_idx=5)"
+    },
+    {
+      "cup_round": 5,
+      "livelog_round_idx": 6,
+      "status": "matched (score=0.0006, ll_idx=6)"
+    },
+    {
+      "cup_round": 6,
+      "livelog_round_idx": 7,
+      "status": "matched (score=0.0005, ll_idx=7)"
+    },
+    {
+      "cup_round": 7,
+      "livelog_round_idx": 8,
+      "status": "matched (score=0.0010, ll_idx=8)"
+    },
+    {
+      "cup_round": 8,
+      "livelog_round_idx": 9,
+      "status": "matched (score=0.0007, ll_idx=9)"
+    },
+    {
+      "cup_round": 9,
+      "livelog_round_idx": 10,
+      "status": "matched (score=0.0009, ll_idx=10)"
+    },
+    {
+      "cup_round": 10,
+      "livelog_round_idx": 11,
+      "status": "matched (score=0.0008, ll_idx=11)"
+    },
+    {
+      "cup_round": 11,
+      "livelog_round_idx": 12,
+      "status": "matched (score=0.0005, ll_idx=12)"
+    },
+    {
+      "cup_round": 12,
+      "livelog_round_idx": 13,
+      "status": "matched (score=0.0010, ll_idx=13)"
+    },
+    {
+      "cup_round": 13,
+      "livelog_round_idx": 14,
+      "status": "matched (score=0.0008, ll_idx=14)"
+    },
+    {
+      "cup_round": 14,
+      "livelog_round_idx": 15,
+      "status": "matched (score=0.0006, ll_idx=15)"
+    }
+  ],
+  "findings": [
+    {
+      "round": 1,
+      "name": "[CSC] Shadynook",
+      "sid": "76561197980151170",
+      "verdict": "true_DNF",
+      "ltg_time": null
+    },
+    {
+      "round": 3,
+      "name": "[ZET] Wheelie",
+      "sid": "76561199218214543",
+      "verdict": "LTG",
+      "ltg_time": 44.771
+    },
+    {
+      "round": 4,
+      "name": "rtube",
+      "sid": "76561199208124083",
+      "verdict": "true_DNF",
+      "ltg_time": null
+    },
+    {
+      "round": 12,
+      "name": "[KURK] Quickracer10",
+      "sid": "76561198149636594",
+      "verdict": "true_DNF",
+      "ltg_time": null
+    }
+  ],
+  "cup_json_patch": {
+    "patched": true,
+    "changes": [
+      {
+        "round": 3,
+        "name": "[ZET] Wheelie",
+        "old_pos": 29,
+        "new_time": "44,77100"
+      }
+    ]
+  },
+  "steam_ids_merge": {
+    "added": [
+      {
+        "canonical": "Miner_vdv",
+        "sid": "76561198208927760",
+        "observed_as": "Miner_vdv"
+      },
+      {
+        "canonical": "Noot Noot 42.0",
+        "sid": "76561198177623035",
+        "observed_as": "Noot Noot 42.0"
+      },
+      {
+        "canonical": "[Err] Veneficus",
+        "sid": "76561198176178279",
+        "observed_as": "Veneficus"
+      },
+      {
+        "canonical": "Elaric",
+        "sid": "76561199049765226",
+        "observed_as": "Elaric"
+      }
+    ],
+    "confirmed_count": 78,
+    "conflicts": [
+      {
+        "canonical": "Pants",
+        "existing": "76561199529259554",
+        "observed": "76561199498272376",
+        "observed_as": "Pants"
+      }
+    ],
+    "unresolved": [
+      {
+        "sid": "76561199084192569",
+        "observed_names": [
+          "SKULL00",
+          "[num]SKULL00"
+        ]
+      },
+      {
+        "sid": "76561198758353504",
+        "observed_names": [
+          "M4DSCOTSM4N"
+        ]
+      },
+      {
+        "sid": "76561199225171855",
+        "observed_names": [
+          "tacklesskoala8"
+        ]
+      },
+      {
+        "sid": "76561198017223402",
+        "observed_names": [
+          "Knorrepot"
+        ]
+      },
+      {
+        "sid": "76561198770488606",
+        "observed_names": [
+          "riverman"
+        ]
+      },
+      {
+        "sid": "76561199806240100",
+        "observed_names": [
+          "lncln"
+        ]
+      },
+      {
+        "sid": "76561198025226685",
+        "observed_names": [
+          "Games_BS"
+        ]
+      },
+      {
+        "sid": "76561199731808063",
+        "observed_names": [
+          "Yksdjcj",
+          "[RABI]Yksdjcj"
+        ]
+      },
+      {
+        "sid": "76561199046303656",
+        "observed_names": [
+          "KingXfex"
+        ]
+      },
+      {
+        "sid": "76561198830315524",
+        "observed_names": [
+          "NewProdigy"
+        ]
+      },
+      {
+        "sid": "76561199064205221",
+        "observed_names": [
+          "meboy"
+        ]
+      },
+      {
+        "sid": "76561198314583077",
+        "observed_names": [
+          "ShyGirlyRaccoon",
+          "[CSC]ShyGirlyRaccoon"
+        ]
+      },
+      {
+        "sid": "76561199032318188",
+        "observed_names": [
+          "OccasionallyAmazingGamer",
+          "[CSC] OccasionallyAmazingGamer"
+        ]
+      },
+      {
+        "sid": "76561198019079245",
+        "observed_names": [
+          "MOW BIG T",
+          "[MBT] MOW BIG T"
+        ]
+      },
+      {
+        "sid": "76561198140981823",
+        "observed_names": [
+          "Minixerces2116"
+        ]
+      },
+      {
+        "sid": "76561198064750127",
+        "observed_names": [
+          "nilswa",
+          "[MIT] nilswa"
+        ]
+      },
+      {
+        "sid": "76561198122154036",
+        "observed_names": [
+          "DragonBlood91D"
+        ]
+      },
+      {
+        "sid": "76561198436518745",
+        "observed_names": [
+          "Gruselda1"
+        ]
+      },
+      {
+        "sid": "76561198414815154",
+        "observed_names": [
+          "Ooohbilly"
+        ]
+      },
+      {
+        "sid": "76561199002720572",
+        "observed_names": [
+          "[VK] Vortex"
+        ]
+      }
+    ]
+  }
+}

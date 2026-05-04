@@ -173,8 +173,16 @@
         <input class="search-input" id="searchInput" placeholder="Add player..." autocomplete="off">
         <div class="search-results" id="searchResults" style="display:none"></div>
       </div>
+      <button class="action-btn" id="lastCupBtn">Show last cup leaderboard</button>
       <button class="action-btn" id="topBtn" style="display:none;font-size:11px;padding:4px 8px"></button>
       <span class="player-count" id="playerCount">0 / 10</span>
+    </div>
+    <div id="lastCupPanel" style="display:none; margin-bottom:14px">
+      <div style="display:flex; gap:6px; margin-bottom:6px;">
+        <button class="action-btn" id="copyLastCupBtn">Copy</button>
+        <button class="action-btn" id="closeLastCupBtn">Close</button>
+      </div>
+      <pre id="lastCupOutput" style="background:var(--surface); border:1px solid var(--border); padding:12px; border-radius:6px; overflow-x:auto; font-family:var(--mono); font-size:12px; color:var(--text-dim); white-space:pre; tab-size:2; margin:0;"></pre>
     </div>
     <div class="chips" id="chips"></div>
 
@@ -247,7 +255,7 @@ let allPlayers = [];
 let pool = [];         // selected player objects
 let activeStats = ['elo', 'wins'];
 let tblSort = { col: null, dir: -1 }; // null = selection order
-let currentMode = 'season_2026';
+let currentMode = 'weighted';
 let weekBack = false; // -1 week mode
 
 function computePrevWeek(p) {
@@ -314,7 +322,7 @@ fetch('alldata.json').then(r => r.json()).then(data => {
 
 function initModeTabs() {
   const container = document.getElementById('statToggles');
-  const modes = [['weighted','ELO'],['season_2026','2026 Race']];
+  const modes = [['weighted','All Time'],['season_2026','2026 Race']];
   modes.forEach(([key, label], i) => {
     const btn = document.createElement('button');
     btn.className = 'mode-tog' + (key === currentMode ? ' active' : '') + (key === 'season_2026' ? ' race-tog' : '');
@@ -332,8 +340,26 @@ function initModeTabs() {
       render();
     };
     container.appendChild(btn);
-    // Insert -1 Week button after first mode button
+    // After All Time, insert ELO column toggle, then -1 Week, before 2026 Race
     if (i === 0) {
+      const eloStat = STATS.find(s => s.key === 'elo');
+      if (eloStat) {
+        const eb = document.createElement('button');
+        eb.className = 'stat-tog' + (activeStats.includes(eloStat.key) ? ' active' : '');
+        eb.textContent = eloStat.label;
+        eb.onclick = () => {
+          if (activeStats.includes(eloStat.key)) {
+            activeStats = activeStats.filter(k => k !== eloStat.key);
+            eb.classList.remove('active');
+          } else {
+            activeStats.push(eloStat.key);
+            eb.classList.add('active');
+          }
+          render();
+        };
+        container.appendChild(eb);
+      }
+
       const wb = document.createElement('button');
       wb.className = 'mode-tog';
       wb.id = 'weekBtn';
@@ -356,6 +382,7 @@ function initModeTabs() {
 function initToggles() {
   const container = document.getElementById('statToggles');
   STATS.forEach(s => {
+    if (s.key === 'elo') return; // ELO toggle is rendered earlier next to All Time
     const btn = document.createElement('button');
     btn.className = 'stat-tog' + (activeStats.includes(s.key) ? ' active' : '');
     btn.textContent = s.label;
@@ -533,6 +560,73 @@ function render() {
     </div>`;
   }).join('');
 }
+
+// --- Last cup leaderboard (Lexer-format paste-into-Sheets) ---
+function formatLexerSheet(cupData, cupRow, fastest) {
+  const lines = [];
+  lines.push(`${cupData.cup}\t\t\t`);
+  lines.push(`Map: ${cupRow.map} by ${cupRow.mapper}\t\t\t`);
+  if (fastest) {
+    lines.push(`\t\tFastest Time: ${Number(fastest.time).toFixed(3)} by ${fastest.player} in ${fastest.round}\t`);
+  }
+  lines.push('Position\tName\tElim Time\tElim Round');
+  for (const p of cupData.players) {
+    let timeStr;
+    if (p.time === 'DNF') {
+      timeStr = 'DNF';
+    } else {
+      const t = parseFloat(String(p.time).replace(',', '.'));
+      timeStr = Number.isFinite(t) ? t.toFixed(3) : String(p.time);
+    }
+    const roundStr = p.round != null ? p.round : '';
+    lines.push(`${p.pos}\t${p.name}\t${timeStr}\t${roundStr}`);
+  }
+  return lines.join('\n');
+}
+
+async function showLastCup() {
+  const panel = document.getElementById('lastCupPanel');
+  const out = document.getElementById('lastCupOutput');
+  out.textContent = 'Loading…';
+  panel.style.display = 'block';
+  try {
+    const [cups, fastest] = await Promise.all([
+      fetch('cups.json').then(r => r.json()),
+      fetch('fastest.json').then(r => r.json()),
+    ]);
+    const cotd = cups.filter(c => /^COTD \d+$/.test(c.id))
+                     .sort((a, b) => parseInt(a.id.split(' ')[1], 10) - parseInt(b.id.split(' ')[1], 10));
+    if (!cotd.length) throw new Error('No COTD cups in cups.json');
+    const last = cotd[cotd.length - 1];
+    const cupNum = parseInt(last.id.split(' ')[1], 10);
+    const cupData = await fetch(`cup_${cupNum}.json`).then(r => {
+      if (!r.ok) throw new Error(`cup_${cupNum}.json not found`);
+      return r.json();
+    });
+    const fastestEntry = (fastest || []).find(f => f.cup === last.id);
+    out.textContent = formatLexerSheet(cupData, last, fastestEntry);
+  } catch (e) {
+    out.textContent = 'Error: ' + e.message;
+  }
+}
+
+document.getElementById('lastCupBtn').addEventListener('click', showLastCup);
+document.getElementById('closeLastCupBtn').addEventListener('click', () => {
+  document.getElementById('lastCupPanel').style.display = 'none';
+});
+document.getElementById('copyLastCupBtn').addEventListener('click', async (e) => {
+  const btn = e.currentTarget;
+  const text = document.getElementById('lastCupOutput').textContent;
+  const old = btn.textContent;
+  try {
+    await navigator.clipboard.writeText(text);
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = old; btn.classList.remove('copied'); }, 1200);
+  } catch (err) {
+    alert('Copy failed: ' + err.message);
+  }
+});
 </script>
 <script data-goatcounter="https://aizpun.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>

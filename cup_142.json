@@ -1,0 +1,247 @@
+{
+  "cup": "COTD 142",
+  "cup_num": 142,
+  "mapper": "[CSC] Shadynook",
+  "players": [
+    {
+      "pos": 1,
+      "name": "justMaki",
+      "time": "41,86417",
+      "round": null
+    },
+    {
+      "pos": 2,
+      "name": "[CTR] Sandals",
+      "time": "42,13755",
+      "round": 14
+    },
+    {
+      "pos": 3,
+      "name": "Lexer",
+      "time": "42,15264",
+      "round": 13
+    },
+    {
+      "pos": 4,
+      "name": "[KURK] Quickracer10",
+      "time": "DNF",
+      "round": 12
+    },
+    {
+      "pos": 5,
+      "name": "Kernkob",
+      "time": "41,95383",
+      "round": 11
+    },
+    {
+      "pos": 6,
+      "name": "Hydro",
+      "time": "42,01591",
+      "round": 10
+    },
+    {
+      "pos": 7,
+      "name": "JakeAdjacent",
+      "time": "42,17436",
+      "round": 10
+    },
+    {
+      "pos": 8,
+      "name": "Pants",
+      "time": "42,24048",
+      "round": 9
+    },
+    {
+      "pos": 9,
+      "name": "Mμ",
+      "time": "42,3704",
+      "round": 9
+    },
+    {
+      "pos": 10,
+      "name": "RoundNzt",
+      "time": "42,43254",
+      "round": 8
+    },
+    {
+      "pos": 11,
+      "name": "Six",
+      "time": "42,57939",
+      "round": 8
+    },
+    {
+      "pos": 12,
+      "name": "[CTR]agix",
+      "time": "42,2364",
+      "round": 7
+    },
+    {
+      "pos": 13,
+      "name": "ping",
+      "time": "42,72739",
+      "round": 7
+    },
+    {
+      "pos": 14,
+      "name": "Void",
+      "time": "43,02527",
+      "round": 6
+    },
+    {
+      "pos": 15,
+      "name": "Kiprosa",
+      "time": "43,11361",
+      "round": 6
+    },
+    {
+      "pos": 16,
+      "name": "Noxitu",
+      "time": "43,22223",
+      "round": 6
+    },
+    {
+      "pos": 17,
+      "name": "St Nicholas",
+      "time": "43,23353",
+      "round": 6
+    },
+    {
+      "pos": 18,
+      "name": "brrryy",
+      "time": "43,27931",
+      "round": 5
+    },
+    {
+      "pos": 19,
+      "name": "alpa",
+      "time": "43,34475",
+      "round": 5
+    },
+    {
+      "pos": 20,
+      "name": "[CTR]GuAlexItar",
+      "time": "43,39017",
+      "round": 5
+    },
+    {
+      "pos": 21,
+      "name": "Hi Im Yolo",
+      "time": "43,4479",
+      "round": 5
+    },
+    {
+      "pos": 22,
+      "name": "aizpun",
+      "time": "43,57102",
+      "round": 4
+    },
+    {
+      "pos": 23,
+      "name": "PlusMicron",
+      "time": "43,60118",
+      "round": 4
+    },
+    {
+      "pos": 24,
+      "name": "M4rv",
+      "time": "43,60614",
+      "round": 4
+    },
+    {
+      "pos": 25,
+      "name": "rtube",
+      "time": "DNF",
+      "round": 4
+    },
+    {
+      "pos": 26,
+      "name": "Tudge Boat",
+      "time": "43,89723",
+      "round": 3
+    },
+    {
+      "pos": 27,
+      "name": "[20x]K410K3N",
+      "time": "44,40689",
+      "round": 3
+    },
+    {
+      "pos": 28,
+      "name": "[RB]Chinpokomon",
+      "time": "44,7658",
+      "round": 3
+    },
+    {
+      "pos": 29,
+      "name": "[ZET] Wheelie",
+      "time": "44,77100",
+      "round": 3
+    },
+    {
+      "pos": 30,
+      "name": "timesprout",
+      "time": "44,42937",
+      "round": 2
+    },
+    {
+      "pos": 31,
+      "name": "[ERR]ferinine",
+      "time": "45,22028",
+      "round": 2
+    },
+    {
+      "pos": 32,
+      "name": "Dartho Mas",
+      "time": "45,52833",
+      "round": 2
+    },
+    {
+      "pos": 33,
+      "name": "FINSTER83",
+      "time": "45,59261",
+      "round": 2
+    },
+    {
+      "pos": 34,
+      "name": "[SLOW]Zeus",
+      "time": "45,7185",
+      "round": 2
+    },
+    {
+      "pos": 35,
+      "name": "wokonbike",
+      "time": "46,10254",
+      "round": 2
+    },
+    {
+      "pos": 36,
+      "name": "BrickEdwards",
+      "time": "46,00867",
+      "round": 1
+    },
+    {
+      "pos": 37,
+      "name": "Savage Package",
+      "time": "46,20615",
+      "round": 1
+    },
+    {
+      "pos": 38,
+      "name": "[Err] Veneficus",
+      "time": "46,40824",
+      "round": 1
+    },
+    {
+      "pos": 39,
+      "name": "Noot Noot 42.0",
+      "time": "46,41809",
+      "round": 1
+    },
+    {
+      "pos": 40,
+      "name": "Elaric",
+      "time": "49,41851",
+      "round": 1
+    }
+  ]
+}
