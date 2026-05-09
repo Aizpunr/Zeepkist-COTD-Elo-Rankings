@@ -113,6 +113,20 @@ font-family:var(--mono);font-size:11px;font-weight:600;color:var(--muted)}
   <div id="miniAltrank"></div>
 </a>
 
+<!-- Kerki Comp card -->
+<a href="https://aizpunr.github.io/kerki/" class="stat-card" id="kerkiCard">
+  <div class="card-title" style="background:linear-gradient(135deg,#10b981,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Kerki Comp</div>
+  <div class="card-desc">Sundays — Kern &amp; Maki's topout, rolling 26-event ranking</div>
+  <div id="miniKerki"></div>
+</a>
+
+<!-- TyO Rankings card -->
+<a href="https://aizpunr.github.io/TyO-Rankings/" class="stat-card" id="tyoCard">
+  <div class="card-title" style="background:linear-gradient(135deg,#06b6d4,#10b981,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Tag You're Out</div>
+  <div class="card-desc">agix's tag-mechanic comp — Season 2 rolling 15-cup window</div>
+  <div id="miniTyo"></div>
+</a>
+
 <!-- PCDJ Rankings card -->
 <a href="https://aizpunr.github.io/PCDJ-Rankings/" class="stat-card" id="pcdjCard">
   <div class="card-title" style="background:linear-gradient(135deg,#a855f7,#ec4899,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">PCDJ Rankings</div>
@@ -343,6 +357,52 @@ fetch('https://aizpunr.github.io/PCDJ-Rankings/petite_rankings.json').then(r=>r.
       <tbody>${rows}</tbody>
     </table>
     <div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:6px">Season 3</div>`;
+}).catch(()=>{});
+
+// Kerki top 3 (rolling)
+fetch('https://aizpunr.github.io/kerki/kerki.json').then(r=>r.json()).then(data=>{
+  const top3 = (data.ranking?.players || []).slice(0,3);
+  const medals = ['#f59e0b','#9ca3af','#b45309'];
+  const rows = top3.map((p,i)=>`<tr>
+    <td style="color:${medals[i]};text-align:right;padding-right:8px;font-weight:700">${i+1}</td>
+    <td style="font-weight:600">${p.name}</td>
+    <td style="text-align:right">${Math.round(p.points)}</td>
+    <td style="text-align:right;color:var(--muted)">${p.wins||0}W</td>
+  </tr>`).join('');
+  document.getElementById('miniKerki').innerHTML = `
+    <table style="width:100%;font-family:var(--mono);font-size:11px;border-collapse:collapse">
+      <thead><tr style="color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:1px">
+        <th style="text-align:right;padding-right:8px;padding-bottom:6px">#</th>
+        <th style="text-align:left;padding-bottom:6px">Player</th>
+        <th style="text-align:right;padding-bottom:6px">Pts</th>
+        <th style="text-align:right;padding-bottom:6px">Wins</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+    <div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:6px">Rolling (best 18 of 26)</div>`;
+}).catch(()=>{});
+
+// TyO top 3 (Season 2)
+fetch('https://aizpunr.github.io/TyO-Rankings/tyo.json').then(r=>r.json()).then(data=>{
+  const top3 = (data.ranking?.players || []).slice(0,3);
+  const medals = ['#f59e0b','#9ca3af','#b45309'];
+  const rows = top3.map((p,i)=>`<tr>
+    <td style="color:${medals[i]};text-align:right;padding-right:8px;font-weight:700">${i+1}</td>
+    <td style="font-weight:600">${p.name}</td>
+    <td style="text-align:right">${Math.round(p.points)}</td>
+    <td style="text-align:right;color:var(--muted)">${p.wins||0}W</td>
+  </tr>`).join('');
+  document.getElementById('miniTyo').innerHTML = `
+    <table style="width:100%;font-family:var(--mono);font-size:11px;border-collapse:collapse">
+      <thead><tr style="color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:1px">
+        <th style="text-align:right;padding-right:8px;padding-bottom:6px">#</th>
+        <th style="text-align:left;padding-bottom:6px">Player</th>
+        <th style="text-align:right;padding-bottom:6px">Pts</th>
+        <th style="text-align:right;padding-bottom:6px">Wins</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+    <div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:6px">Season 2 — best 10 of 15</div>`;
 }).catch(()=>{});
 </script>
 <script data-goatcounter="https://aizpun.goatcounter.com/count"

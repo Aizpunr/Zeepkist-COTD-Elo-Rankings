@@ -93,7 +93,7 @@ all_cups = (parse_file(_p('Zeepkist COTDs 1-25.xlsx')) +
             parse_file(_p('COTDs 76-100.xlsx')) +
             parse_file(_p('COTDs 101-125.xlsx')) +
             parse_file(_p('COTD 126-130.xlsx')) +
-            parse_file(_p('COTD 131-142.xlsx')) +
+            parse_file(_p('COTD 131-143.xlsx')) +
             parse_file(_p('cup roulette.xlsx')) +
             parse_troll_cups(_p('Troll cup.xlsx')))
 
@@ -254,7 +254,7 @@ CANONICAL = {
     'Pilaf': ['[PILF] Pilaf'],
     'Sheriff': ['[Poop]Sheriff'],
     'Smullie': ['[KURK] Smullie','[KURK]Smullie'],
-    'ttv/Lilly the Bun': ['[bnuy]ttv/Lilly the Bun'],
+    'Lilly Fenn': ['[Fenn]Lilly Fenn','ttv/Lilly the Bun','[bnuy]ttv/Lilly the Bun','Lilly the Bun'],
     'Ulv_RaVn': ['[XTR] [VK] Ulv_RaVn','[XTR] [VK] Ulv_Ravn'],
     'vectortrajector': ['[ZET]vectortrajector'],
     'Victor': ['[GGG]Victor','[MMM]Victor'],
@@ -271,7 +271,7 @@ CANONICAL = {
     'DeeDeeNaNaNa': ['[CSC] DeeDeeNaNaNa', '[CSC]DeeDeeNaNaNa'],
     'Form': ['[fn]Form'],
     'Hellmet': ['[Dark]Hellmet', '[ZOFC]Hellmet'],
-    'Jakie': ['[CD] Jakie', '[ZET] Jakie'],
+    'Shattersmith': ['Jakie', '[CD] Jakie', '[ZET] Jakie', 'shattersmith'],
     'K410K3N': ['[20X]K410K3N', '[20x]K410K3N', '[Gwen]K410K3N'],
     'loganbradley714': ['[GFHL]loganbradley714', '[GLHF]loganbradley714'],
     'lucanakin': ['[DNFF]lucanakin'],

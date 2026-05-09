@@ -327,7 +327,32 @@ for script, label in cool_stats:
         print(f"  SKIP: {script} not found")
 print()
 
-# ── 8. Summary ──
+# ── 8. Refresh cross-comp ranking + SOF mod data ──
+# Cross-comp pipeline: rebuilds allsofdata.json + allcompdata.json + the
+# SOF mod's elo_pool.json (which now uses cross-comp ELO as its primary
+# source, GTR rank regression as fallback). Replaces the old COTD-only
+# join_cotd_gtr.py path.
+print("=" * 50)
+print("Refreshing cross-comp ranking + SOF data...")
+print("=" * 50)
+crosscomp_script = r"C:\Users\rafa\Desktop\Claude\zeepkist holistic\refresh.py"
+sof_repo_pool = r"C:\Users\rafa\Desktop\Claude\zeepkist mod\Zeepkist-Strength-of-Field\elo_pool.json"
+
+sof_ok = False
+if os.path.exists(crosscomp_script):
+    r = subprocess.run([sys.executable, crosscomp_script],
+                       cwd=os.path.dirname(crosscomp_script))
+    if r.returncode == 0:
+        print(f"  Cross-comp + SOF elo_pool.json refreshed.")
+        sof_ok = True
+    else:
+        print(f"  WARNING: cross-comp refresh failed (returncode={r.returncode}).")
+        print(f"  Run manually: python \"{crosscomp_script}\"")
+else:
+    print(f"  SKIP: refresh script not found at {crosscomp_script}")
+print()
+
+# ── 9. Summary ──
 print("=" * 50)
 print(f"{cup_id} COMPLETE")
 print(f"  Players: {len(leaderboard)}")
@@ -335,8 +360,12 @@ print(f"  Winner: {winner}")
 if fastest_time:
     print(f"  Fastest: {fastest_time:.3f} by {fastest_name}")
 print(f"  Columns: {col_start}-{col_start+3}")
+if sof_ok:
+    print(f"  SOF data: refreshed (commit+push the SOF repo too)")
 print()
 print("Next steps:")
 print(f"  - Add map name to build_cups.py map_index")
-print(f"  - Git commit + push")
+print(f"  - Git commit + push (COTD repo)")
+if sof_ok:
+    print(f"  - Git commit + push (SOF repo: {sof_repo_pool})")
 print("=" * 50)

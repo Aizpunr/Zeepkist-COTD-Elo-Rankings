@@ -1,8 +1,76 @@
-import openpyxl, json, re, sys
+import openpyxl, json, re, sys, os, datetime
 sys.stdout.reconfigure(encoding='utf-8')
 
+# ── Cup dates ──
+# Source of truth for cup dates. New cups (not in this dict) auto-resolve
+# from the cup-log mtime (cup logs/cotd_<N>.log). Add new cups here once
+# they're stable so the date doesn't depend on the log file sticking around.
+CUP_DATES = {
+    'COTD 1': '2023-03-05', 'COTD 2': '2023-03-12', 'COTD 3': '2023-03-24',
+    'COTD 4': '2023-04-01', 'COTD 5': '2023-04-07', 'COTD 6': '2023-04-15',
+    'COTD 7': '2023-04-22', 'COTD 8': '2023-04-29', 'COTD 9': '2023-05-06',
+    'COTD 10': '2023-05-12', 'COTD 11': '2023-05-20', 'COTD 12': '2023-05-27',
+    'COTD 13': '2023-06-04', 'COTD 14': '2023-06-11', 'COTD 15': '2023-06-16',
+    'COTD 16': '2023-06-23', 'COTD 17': '2023-07-01', 'COTD 18': '2023-07-08',
+    'COTD 19': '2023-07-15', 'COTD 20': '2023-07-23', 'COTD 21': '2023-07-30',
+    'COTD 22': '2023-08-06', 'COTD 23': '2023-08-13', 'COTD 24': '2023-08-19',
+    'COTD 25': '2023-09-03', 'COTD 26': '2023-09-17', 'COTD 27': '2023-09-24',
+    'COTD 28': '2023-10-07', 'COTD 29': '2023-10-28', 'COTD 30': '2023-11-05',
+    'COTD 31': '2023-11-10', 'COTD 32': '2023-11-17', 'COTD 33': '2023-11-26',
+    'COTD 34': '2023-12-03', 'COTD 35': '2023-12-10', 'COTD 36': '2023-12-16',
+    'COTD 37': '2024-01-13', 'COTD 38': '2024-01-20', 'COTD 39': '2024-01-27',
+    'COTD 40': '2024-02-11', 'COTD 41': '2024-02-17', 'COTD 42': '2024-03-03',
+    'COTD 43': '2024-03-10', 'COTD 44': '2024-03-17', 'COTD 45': '2024-03-30',
+    'COTD 46': '2024-04-07', 'COTD 47': '2024-04-20', 'COTD 48': '2024-04-27',
+    'COTD 49': '2024-05-11', 'COTD 50': '2024-05-25', 'COTD 51': '2024-06-09',
+    'COTD 52': '2024-06-15', 'COTD 53': '2024-06-29', 'COTD 54': '2024-07-06',
+    'COTD 55': '2024-07-13', 'COTD 56': '2024-07-20', 'COTD 57': '2024-08-03',
+    'COTD 58': '2024-08-10',
+    'COTW 59': '2024-08-17', 'COTW 60': '2024-08-24', 'COTW 61': '2024-08-31',
+    'COTW 62': '2024-09-07', 'COTW 63': '2024-09-14', 'COTW 64': '2024-09-28',
+    'COTW 65': '2024-10-05',
+    'COTD 66': '2024-10-19', 'COTD 67': '2024-10-26',
+    'COTD 68': '2024-11-02', 'COTD 69': '2024-11-09', 'COTD 70': '2024-11-16',
+    'COTD 71': '2024-11-23', 'COTD 72': '2024-12-07', 'COTD 73': '2024-12-14',
+    'COTD 74': '2024-12-21', 'COTD 75': '2025-01-04', 'COTD 76': '2025-01-11',
+    'COTD 77': '2025-01-18', 'COTD 78': '2025-01-25', 'COTD 79': '2025-02-01',
+    'COTD 80': '2025-02-08', 'COTD 81': '2025-03-09', 'COTD 82': '2025-03-09',
+    'COTD 83': '2025-03-09', 'COTD 84': '2025-03-10', 'COTD 85': '2025-03-15',
+    'COTD 86': '2025-03-22', 'COTD 87': '2025-03-29', 'COTD 88': '2025-04-05',
+    'COTD 89': '2025-04-12', 'COTD 90': '2025-04-19', 'COTD 91': '2025-04-26',
+    'COTD 92': '2025-05-03', 'COTD 93': '2025-05-10', 'COTD 94': '2025-05-17',
+    'COTD 95': '2025-05-24', 'COTD 96': '2025-05-31', 'COTD 97': '2025-06-07',
+    'COTD 98': '2025-06-14', 'COTD 99': '2025-06-28', 'COTD 100': '2025-07-05',
+    'COTD 101': '2025-07-12', 'COTD 102': '2025-07-19', 'COTD 103': '2025-07-26',
+    'COTD 104': '2025-08-02', 'COTD 105': '2025-08-09', 'COTD 106': '2025-08-16',
+    'COTD 107': '2025-08-23', 'COTD 108': '2025-08-30', 'COTD 109': '2025-09-06',
+    'COTD 110': '2025-09-13', 'COTD 111': '2025-09-20', 'COTD 112': '2025-09-27',
+    'COTD 113': '2025-10-04', 'COTD 114': '2025-10-11', 'COTD 115': '2025-10-18',
+    'COTD 116': '2025-10-25', 'COTD 117': '2025-11-01', 'COTD 118': '2025-11-08',
+    'COTD 119': '2025-11-15', 'COTD 120': '2025-11-22', 'COTD 121': '2025-11-29',
+    'COTD 122': '2025-12-06', 'COTD 123': '2025-12-13', 'COTD 124': '2025-12-20',
+    'COTD 125': '2025-12-27', 'COTD 126': '2026-01-03', 'COTD 127': '2026-01-17',
+    'COTD 128': '2026-01-24', 'COTD 129': '2026-01-31', 'COTD 130': '2026-02-07',
+    'COTD 131': '2026-02-14', 'COTD 132': '2026-02-21', 'COTD 133': '2026-02-28',
+    'COTD 134': '2026-03-07', 'COTD 135': '2026-03-14', 'COTD 136': '2026-03-21',
+    'COTD 137': '2026-03-28', 'COTD 138': '2026-04-04', 'COTD 139': '2026-04-11',
+    'COTD 140': '2026-04-18', 'COTD 141': '2026-04-25', 'COTD 142': '2026-05-02',
+    'COTD 143': '2026-05-09',
+}
+
+def cup_date(cid):
+    if cid in CUP_DATES:
+        return CUP_DATES[cid]
+    m = re.search(r'\d+', cid)
+    if not m:
+        return None
+    log_path = os.path.join('cup logs', f'cotd_{m.group()}.log')
+    if os.path.exists(log_path):
+        return datetime.date.fromtimestamp(os.path.getmtime(log_path)).isoformat()
+    return None
+
 # ── 1. Parse Map Index from Lexer's spreadsheet ──
-wb = openpyxl.load_workbook('Zeepkist COTD Results lexer original 23-02.xlsx', data_only=True)
+wb = openpyxl.load_workbook('Zeepkist COTD Results (lexer 23-02).xlsx', data_only=True)
 ws = wb['Map Index']
 rows = list(ws.iter_rows(values_only=True))
 
@@ -40,6 +108,7 @@ map_index['COTD 139']        = {'map': 'Tripe', 'mapper': 'JobW'}
 map_index['COTD 140']        = {'map': 'Ice Field Arctic', 'mapper': '[CSC]ShyGirlyRaccoon'}
 map_index['COTD 141']        = {'map': 'Farewell', 'mapper': 'PlusMicron'}
 map_index['COTD 142']        = {'map': 'COTD - Slowtown', 'mapper': '[CSC] Shadynook'}
+map_index['COTD 143']        = {'map': '', 'mapper': 'Cripsy'}
 
 # ── Ghost display: real player played under a ghost account ──
 # cups.json keeps real player name + adds "ghost" field for frontend display
@@ -102,6 +171,7 @@ for cid in sorted(cups.keys(), key=cup_sort_key):
         'id': cid,
         'map': meta['map'],
         'mapper': meta['mapper'],
+        'date': cup_date(cid),
         'lobby_size': cups[cid]['lobby_size'],
         'players': players
     })
