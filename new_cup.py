@@ -13,6 +13,7 @@ _dir = os.path.dirname(os.path.abspath(__file__))
 _p = lambda f: os.path.join(_dir, f)
 
 LOG_PATH = r"C:\Program Files (x86)\Steam\steamapps\common\Zeepkist\BepInEx\LogOutput.log"
+LIVE_LOG_PATH = r"C:\Program Files (x86)\Steam\steamapps\common\Zeepkist\BepInEx\LiveLeaderboardLogger.log"
 COLS_PER_CUP = 6  # 4 data columns + 2 blank spacer
 
 # ── Parse arguments ──
@@ -47,6 +48,13 @@ import shutil
 log_backup = os.path.join(log_dir, f'cotd_{cup_num}.log')
 shutil.copy2(LOG_PATH, log_backup)
 print(f"Raw log saved: {log_backup}")
+live_log_backup = os.path.join(log_dir, f'cotd_{cup_num}_liveleaderboard.log')
+if os.path.exists(LIVE_LOG_PATH):
+    shutil.copy2(LIVE_LOG_PATH, live_log_backup)
+    print(f"Live log saved: {live_log_backup}")
+else:
+    print(f"⚠ Live log not found at {LIVE_LOG_PATH} — alias SID check will be skipped")
+    live_log_backup = None
 
 with open(LOG_PATH, encoding='utf-8', errors='replace') as f:
     lines = [l for l in f.readlines() if 'COTDTracker' in l]
@@ -190,6 +198,101 @@ for rnd in rounds:
                     fastest_time = t
                     fastest_name = name
                     fastest_round = rnd_num
+
+# ── 1b. Cross-check leaderboard names against livelog Steam IDs ──
+# Catches alias drift: a player who joins a new clan and ends up tracked as a
+# fresh identity (e.g. "[NewB]Zeus" → "[SLOW]Zeus" → "Zeus"). Same Steam ID =
+# same player; mismatches between the lobby name and the canonical name in
+# steam_ids.json get flagged with a copy-pasteable CANONICAL entry suggestion.
+def check_aliases_against_livelog(leaderboard, live_log_path, steam_ids_path, canonical_src_path):
+    if not live_log_path or not os.path.exists(live_log_path):
+        print("⚠ ALIAS CHECK SKIPPED — no live log to read")
+        return
+    if not os.path.exists(steam_ids_path):
+        print(f"⚠ ALIAS CHECK SKIPPED — no steam_ids.json at {steam_ids_path}")
+        return
+    # name -> SID from ROSTER lines
+    roster = {}
+    with open(live_log_path, encoding='utf-8-sig', errors='replace') as f:
+        for line in f:
+            mr = re.search(r'ROSTER\|(\d+)\|([^|]*)\|([^|]*)', line)
+            if mr:
+                sid = mr.group(1)
+                for n in (mr.group(2).strip(), mr.group(3).strip()):
+                    if n:
+                        roster[n] = sid
+    # SID -> canonical from steam_ids.json
+    with open(steam_ids_path, encoding='utf-8') as f:
+        sids = json.load(f)
+    sid_to_canon = {v: k for k, v in sids.items()}
+    # alias -> canonical from CANONICAL block in elo_engine.py
+    with open(canonical_src_path, encoding='utf-8') as f:
+        src = f.read()
+    canon_block = re.search(r'CANONICAL\s*=\s*\{(.+?)^\}', src, re.MULTILINE | re.DOTALL)
+    alias_to_canon, canon_names = {}, set()
+    if canon_block:
+        canon_dict = eval('{' + canon_block.group(1) + '}')
+        canon_names = set(canon_dict.keys())
+        for cn, aliases in canon_dict.items():
+            for a in aliases:
+                alias_to_canon[a] = cn
+
+    drifts, new_players = [], []
+    for entry in leaderboard:
+        name = entry[0]
+        sid = roster.get(name)
+        if not sid:
+            bare = re.sub(r'[\[\{].*?[\]\}]\s*', '', name).strip()
+            sid = roster.get(bare)
+        if not sid:
+            continue
+        canon_for_sid = sid_to_canon.get(sid)
+        if canon_for_sid is None:
+            new_players.append((name, sid))
+            continue
+        if name in alias_to_canon:
+            resolved = alias_to_canon[name]
+        elif name in canon_names or name == canon_for_sid:
+            resolved = name if name in canon_names else canon_for_sid
+        else:
+            resolved = name  # would be tracked as the raw name = NOT merged
+        if resolved != canon_for_sid:
+            drifts.append((name, sid, canon_for_sid))
+
+    if not drifts and not new_players:
+        print("Alias check: all names match steam_ids.json canonicals ✓")
+        return
+    print()
+    print("=" * 50)
+    print("ALIAS CHECK — livelog SIDs vs steam_ids.json")
+    print("=" * 50)
+    if drifts:
+        print(f"\n{len(drifts)} alias drift(s):")
+        for name, sid, canon in drifts:
+            print(f"  - {name!r} (sid {sid}) should map to canonical {canon!r}")
+        print("\nUpdate CANONICAL in elo_engine.py — append these to the matching entry:")
+        from collections import defaultdict
+        by_canon = defaultdict(list)
+        for name, _, canon in drifts:
+            by_canon[canon].append(name)
+        for canon, names in by_canon.items():
+            names_lit = ', '.join(repr(n) for n in sorted(set(names)))
+            print(f"  '{canon}': [..., {names_lit}],")
+    if new_players:
+        print(f"\n{len(new_players)} new player(s) — no entry in steam_ids.json:")
+        for name, sid in new_players:
+            print(f"  - {name!r} (sid {sid})")
+        print("\nIf any are returning under a new name, add to steam_ids.json:")
+        for name, sid in new_players:
+            print(f'  "{name}": "{sid}",')
+    print()
+
+check_aliases_against_livelog(
+    leaderboard,
+    live_log_backup,
+    _p('steam_ids.json'),
+    _p('elo_engine.py'),
+)
 
 # ── 2. Auto-detect xlsx file + columns ──
 elo_py_path = _p('elo_engine.py')
