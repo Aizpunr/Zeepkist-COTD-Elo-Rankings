@@ -365,7 +365,7 @@ if sof_ok:
 print()
 print("Next steps:")
 print(f"  - Add map name to build_cups.py map_index")
-print(f"  - Git commit + push (COTD repo)")
+print(f"  - Git commit + push (COTD repo) — REMEMBER to stage cup_{cup_num}.json (lexertools last-cup view fetches it)")
 if sof_ok:
     print(f"  - Git commit + push (SOF repo: {sof_repo_pool})")
 print("=" * 50)

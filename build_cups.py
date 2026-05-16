@@ -108,7 +108,8 @@ map_index['COTD 139']        = {'map': 'Tripe', 'mapper': 'JobW'}
 map_index['COTD 140']        = {'map': 'Ice Field Arctic', 'mapper': '[CSC]ShyGirlyRaccoon'}
 map_index['COTD 141']        = {'map': 'Farewell', 'mapper': 'PlusMicron'}
 map_index['COTD 142']        = {'map': 'COTD - Slowtown', 'mapper': '[CSC] Shadynook'}
-map_index['COTD 143']        = {'map': '', 'mapper': 'Cripsy'}
+map_index['COTD 143']        = {'map': 'safe travels v4', 'mapper': 'crips.fourie'}
+map_index['COTD 144']        = {'map': 'COTD 144 - Chartreuse Valley', 'mapper': '[CSC]Tommygaming'}
 
 # ── Ghost display: real player played under a ghost account ──
 # cups.json keeps real player name + adds "ghost" field for frontend display
