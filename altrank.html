@@ -519,7 +519,7 @@ const customColors = {
 
 // ── STATE ──
 let sortKey = "active";
-let eloMode = "standard";
+let eloMode = "rolling";
 let viewMode = "leaderboard";
 let includeTroll = true;
 let selected = null;
@@ -718,7 +718,7 @@ function isQualified(p, last20) {
 
 // ── MIN CUPS SLIDER ──
 // ── ELO MODE TABS ──
-const modeOpts = [["standard","Standard ELO"],["trueskill","TrueSkill"],["rolling","Rolling"]];
+const modeOpts = [["rolling","Rolling"],["standard","Standard ELO"],["trueskill","TrueSkill"]];
 const modeTabsEl = document.getElementById("eloModeTabs");
 modeOpts.forEach(([k,l]) => {
   const btn = document.createElement("button");
@@ -731,13 +731,7 @@ modeOpts.forEach(([k,l]) => {
     selected = null;
     if (viewMode === "cups") viewMode = "leaderboard";
     document.getElementById("cupsTabBtn").classList.remove("active");
-    const isRolling = (k === "rolling");
-    document.getElementById("cupToggle").style.display = (k === "season" || isRolling) ? "none" : "";
-    document.getElementById("risingToggle").style.display = isRolling ? "none" : "";
-    document.getElementById("rollingControls").style.display = isRolling ? "" : "none";
-    // Rolling has no peak/wins delta vs prior snapshot — neutralize sort that depends on lifetime fields.
-    if (isRolling && sortKey === "uncertainty") sortKey = "active";
-    if (isRolling) renderRollingCurve();
+    applyEloModeUI();
     render();
   };
   modeTabsEl.appendChild(btn);
@@ -750,6 +744,16 @@ const sofModal = document.getElementById("sofModal");
 sofModal.addEventListener("click", e => { if (e.target === sofModal) sofModal.classList.remove("open"); });
 function updateModeTabs() {
   modeTabsEl.querySelectorAll(".tab").forEach(b => b.classList.toggle("active", b.dataset.key === eloMode));
+}
+// Show/hide the per-mode UI bits (rolling controls, cup toggle, rising toggle).
+// Called both on tab click and on initial load so the default tab gets its chrome.
+function applyEloModeUI() {
+  const isRolling = (eloMode === "rolling");
+  document.getElementById("cupToggle").style.display = (eloMode === "season" || isRolling) ? "none" : "";
+  document.getElementById("risingToggle").style.display = isRolling ? "none" : "";
+  document.getElementById("rollingControls").style.display = isRolling ? "" : "none";
+  if (isRolling && sortKey === "uncertainty") sortKey = "active";
+  if (isRolling) renderRollingCurve();
 }
 
 // ── CUPS TAB ──
@@ -1934,8 +1938,9 @@ Promise.all([
   const cupParam = new URLSearchParams(location.search).get('cup');
   if (cupParam) {
     const cn = parseFloat(cupParam);
-    if (cn) { render(); navigateToCup(cn); return; }
+    if (cn) { applyEloModeUI(); render(); navigateToCup(cn); return; }
   }
+  applyEloModeUI();
   render();
 });
 </script>
