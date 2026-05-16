@@ -231,13 +231,13 @@
     },
     {
       "name": "MackCheesy",
-      "current_elo": 1763.0,
-      "stability_point": 1748.9,
-      "gap": 14.1,
+      "current_elo": 1762.7,
+      "stability_point": 1748.2,
+      "gap": 14.5,
       "attendance_pct": 75.0,
       "cups_played": 57,
       "recent_cups": 9,
-      "avg_position": 16.2,
+      "avg_position": 16.3,
       "status": "Following Script"
     },
     {
@@ -254,8 +254,8 @@
     {
       "name": "Eclipse135",
       "current_elo": 1547.5,
-      "stability_point": 1712.0,
-      "gap": -164.5,
+      "stability_point": 1711.7,
+      "gap": -164.2,
       "attendance_pct": 33.3,
       "cups_played": 5,
       "recent_cups": 4,
@@ -374,20 +374,20 @@
     },
     {
       "name": "rtube",
-      "current_elo": 1701.6,
-      "stability_point": 1597.0,
-      "gap": 104.6,
+      "current_elo": 1701.3,
+      "stability_point": 1595.3,
+      "gap": 106.0,
       "attendance_pct": 41.7,
       "cups_played": 51,
       "recent_cups": 5,
-      "avg_position": 23.6,
+      "avg_position": 23.8,
       "status": "Washed"
     },
     {
       "name": "Minkus",
       "current_elo": 1539.3,
-      "stability_point": 1589.7,
-      "gap": -50.4,
+      "stability_point": 1589.4,
+      "gap": -50.1,
       "attendance_pct": 33.3,
       "cups_played": 11,
       "recent_cups": 4,
@@ -408,8 +408,8 @@
     {
       "name": "PlusMicron",
       "current_elo": 1519.2,
-      "stability_point": 1582.8,
-      "gap": -63.6,
+      "stability_point": 1582.5,
+      "gap": -63.3,
       "attendance_pct": 91.7,
       "cups_played": 15,
       "recent_cups": 11,
@@ -627,13 +627,13 @@
     },
     {
       "name": "Lazy_Echidna",
-      "current_elo": 1465.6,
-      "stability_point": 1385.7,
-      "gap": 79.9,
+      "current_elo": 1465.4,
+      "stability_point": 1381.7,
+      "gap": 83.7,
       "attendance_pct": 25.0,
       "cups_played": 79,
       "recent_cups": 3,
-      "avg_position": 32.6,
+      "avg_position": 32.9,
       "status": "Washed"
     },
     {
@@ -681,17 +681,6 @@
       "status": "Following Script"
     },
     {
-      "name": "aizpun",
-      "current_elo": 1414.8,
-      "stability_point": 1344.8,
-      "gap": 70.0,
-      "attendance_pct": 91.7,
-      "cups_played": 17,
-      "recent_cups": 11,
-      "avg_position": 37.6,
-      "status": "Washed"
-    },
-    {
       "name": "Dartho Mas",
       "current_elo": 1349.6,
       "stability_point": 1344.8,
@@ -701,6 +690,17 @@
       "recent_cups": 10,
       "avg_position": 36.4,
       "status": "Following Script"
+    },
+    {
+      "name": "aizpun",
+      "current_elo": 1414.4,
+      "stability_point": 1344.2,
+      "gap": 70.2,
+      "attendance_pct": 91.7,
+      "cups_played": 17,
+      "recent_cups": 11,
+      "avg_position": 37.7,
+      "status": "Washed"
     },
     {
       "name": "[SLOW]Zeus",

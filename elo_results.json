@@ -6338,7 +6338,7 @@
     {
       "rank": 15,
       "name": "MackCheesy",
-      "rating": 1763.0,
+      "rating": 1762.7,
       "cups": 57,
       "wins": 0,
       "podiums": {
@@ -6688,8 +6688,8 @@
         },
         {
           "cup": "COTD 144",
-          "position": 34,
-          "rating": 1763.0,
+          "position": 35,
+          "rating": 1762.7,
           "lobby_size": 49
         }
       ]
@@ -8668,7 +8668,7 @@
     {
       "rank": 25,
       "name": "rtube",
-      "rating": 1701.6,
+      "rating": 1701.3,
       "cups": 51,
       "wins": 1,
       "podiums": {
@@ -8676,7 +8676,7 @@
         "silver": 1,
         "bronze": 2
       },
-      "avg_position": 13.5,
+      "avg_position": 13.6,
       "best_finish": 1,
       "peak_rating": 1789.5,
       "history": [
@@ -8982,8 +8982,8 @@
         },
         {
           "cup": "COTD 144",
-          "position": 34,
-          "rating": 1701.6,
+          "position": 35,
+          "rating": 1701.3,
           "lobby_size": 49
         }
       ]
@@ -46637,8 +46637,144 @@
     },
     {
       "rank": 977,
-      "name": "Lazy_Echidna",
+      "name": "IronDragon111000",
+      "rating": 1465.9,
+      "cups": 9,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 36.2,
+      "best_finish": 24,
+      "peak_rating": 1489.0,
+      "history": [
+        {
+          "cup": "COTD 112",
+          "position": 46,
+          "rating": 1489.0,
+          "lobby_size": 52
+        },
+        {
+          "cup": "COTD 116",
+          "position": 42,
+          "rating": 1483.4,
+          "lobby_size": 55
+        },
+        {
+          "cup": "COTD 124",
+          "position": 47,
+          "rating": 1474.6,
+          "lobby_size": 51
+        },
+        {
+          "cup": "COTD 125",
+          "position": 30,
+          "rating": 1472.4,
+          "lobby_size": 45
+        },
+        {
+          "cup": "COTD 126",
+          "position": 29,
+          "rating": 1470.3,
+          "lobby_size": 44
+        },
+        {
+          "cup": "COTD 129",
+          "position": 40,
+          "rating": 1465.6,
+          "lobby_size": 52
+        },
+        {
+          "cup": "COTD 131",
+          "position": 35,
+          "rating": 1464.0,
+          "lobby_size": 58
+        },
+        {
+          "cup": "COTD 143",
+          "position": 24,
+          "rating": 1470.0,
+          "lobby_size": 56
+        },
+        {
+          "cup": "COTD 144",
+          "position": 33,
+          "rating": 1465.9,
+          "lobby_size": 49
+        }
+      ]
+    },
+    {
+      "rank": 978,
+      "name": "Neb",
       "rating": 1465.6,
+      "cups": 8,
+      "wins": 0,
+      "podiums": {
+        "gold": 0,
+        "silver": 0,
+        "bronze": 0
+      },
+      "avg_position": 22.9,
+      "best_finish": 10,
+      "peak_rating": 1483.1,
+      "history": [
+        {
+          "cup": "COTD 11",
+          "position": 36,
+          "rating": 1483.1,
+          "lobby_size": 39
+        },
+        {
+          "cup": "COTD 22",
+          "position": 29,
+          "rating": 1471.6,
+          "lobby_size": 33
+        },
+        {
+          "cup": "COTD 31",
+          "position": 25,
+          "rating": 1464.4,
+          "lobby_size": 39
+        },
+        {
+          "cup": "COTD 32",
+          "position": 18,
+          "rating": 1459.4,
+          "lobby_size": 25
+        },
+        {
+          "cup": "COTD 33",
+          "position": 10,
+          "rating": 1467.9,
+          "lobby_size": 38
+        },
+        {
+          "cup": "Troll COTD 4",
+          "position": 3,
+          "rating": 1474.3,
+          "lobby_size": 18
+        },
+        {
+          "cup": "COTD 46",
+          "position": 24,
+          "rating": 1471.1,
+          "lobby_size": 35
+        },
+        {
+          "cup": "COTD Roulette 2",
+          "position": 18,
+          "rating": 1465.6,
+          "lobby_size": 32
+        }
+      ]
+    },
+    {
+      "rank": 979,
+      "name": "Lazy_Echidna",
+      "rating": 1465.4,
       "cups": 79,
       "wins": 0,
       "podiums": {
@@ -47120,79 +47256,14 @@
         },
         {
           "cup": "COTD 144",
-          "position": 34,
-          "rating": 1465.6,
+          "position": 35,
+          "rating": 1465.4,
           "lobby_size": 49
         }
       ]
     },
     {
-      "rank": 978,
-      "name": "Neb",
-      "rating": 1465.6,
-      "cups": 8,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 22.9,
-      "best_finish": 10,
-      "peak_rating": 1483.1,
-      "history": [
-        {
-          "cup": "COTD 11",
-          "position": 36,
-          "rating": 1483.1,
-          "lobby_size": 39
-        },
-        {
-          "cup": "COTD 22",
-          "position": 29,
-          "rating": 1471.6,
-          "lobby_size": 33
-        },
-        {
-          "cup": "COTD 31",
-          "position": 25,
-          "rating": 1464.4,
-          "lobby_size": 39
-        },
-        {
-          "cup": "COTD 32",
-          "position": 18,
-          "rating": 1459.4,
-          "lobby_size": 25
-        },
-        {
-          "cup": "COTD 33",
-          "position": 10,
-          "rating": 1467.9,
-          "lobby_size": 38
-        },
-        {
-          "cup": "Troll COTD 4",
-          "position": 3,
-          "rating": 1474.3,
-          "lobby_size": 18
-        },
-        {
-          "cup": "COTD 46",
-          "position": 24,
-          "rating": 1471.1,
-          "lobby_size": 35
-        },
-        {
-          "cup": "COTD Roulette 2",
-          "position": 18,
-          "rating": 1465.6,
-          "lobby_size": 32
-        }
-      ]
-    },
-    {
-      "rank": 979,
+      "rank": 980,
       "name": "CopperFeather",
       "rating": 1465.3,
       "cups": 3,
@@ -47227,7 +47298,7 @@
       ]
     },
     {
-      "rank": 980,
+      "rank": 981,
       "name": "TtocsNeb",
       "rating": 1465.0,
       "cups": 5,
@@ -47274,7 +47345,7 @@
       ]
     },
     {
-      "rank": 981,
+      "rank": 982,
       "name": "cgwheeler96",
       "rating": 1464.9,
       "cups": 5,
@@ -47317,77 +47388,6 @@
           "position": 30,
           "rating": 1464.9,
           "lobby_size": 41
-        }
-      ]
-    },
-    {
-      "rank": 982,
-      "name": "IronDragon111000",
-      "rating": 1464.8,
-      "cups": 9,
-      "wins": 0,
-      "podiums": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
-      },
-      "avg_position": 36.3,
-      "best_finish": 24,
-      "peak_rating": 1489.0,
-      "history": [
-        {
-          "cup": "COTD 112",
-          "position": 46,
-          "rating": 1489.0,
-          "lobby_size": 52
-        },
-        {
-          "cup": "COTD 116",
-          "position": 42,
-          "rating": 1483.4,
-          "lobby_size": 55
-        },
-        {
-          "cup": "COTD 124",
-          "position": 47,
-          "rating": 1474.6,
-          "lobby_size": 51
-        },
-        {
-          "cup": "COTD 125",
-          "position": 30,
-          "rating": 1472.4,
-          "lobby_size": 45
-        },
-        {
-          "cup": "COTD 126",
-          "position": 29,
-          "rating": 1470.3,
-          "lobby_size": 44
-        },
-        {
-          "cup": "COTD 129",
-          "position": 40,
-          "rating": 1465.6,
-          "lobby_size": 52
-        },
-        {
-          "cup": "COTD 131",
-          "position": 35,
-          "rating": 1464.0,
-          "lobby_size": 58
-        },
-        {
-          "cup": "COTD 143",
-          "position": 24,
-          "rating": 1470.0,
-          "lobby_size": 56
-        },
-        {
-          "cup": "COTD 144",
-          "position": 34,
-          "rating": 1464.8,
-          "lobby_size": 49
         }
       ]
     },
@@ -53660,7 +53660,7 @@
     {
       "rank": 1053,
       "name": "aizpun",
-      "rating": 1414.8,
+      "rating": 1414.4,
       "cups": 17,
       "wins": 0,
       "podiums": {
@@ -53668,7 +53668,7 @@
         "silver": 0,
         "bronze": 0
       },
-      "avg_position": 38.7,
+      "avg_position": 38.8,
       "best_finish": 22,
       "peak_rating": 1490.5,
       "history": [
@@ -53770,8 +53770,8 @@
         },
         {
           "cup": "COTD 144",
-          "position": 33,
-          "rating": 1414.8,
+          "position": 34,
+          "rating": 1414.4,
           "lobby_size": 49
         }
       ]
