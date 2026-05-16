@@ -420,12 +420,14 @@
       <h3>Alternative Rankings — About</h3>
       <button class="modal-close" id="modalCloseBtn">✕ close</button>
     </div>
-    <div class="entry-date">08.04.26</div>
+    <div class="entry-date">16.05.26</div>
     <ul>
-      <li><b>TrueSkill</b> — Microsoft's Bayesian rating system. Each player has a skill estimate (mu) and uncertainty (sigma). Shows the conservative rating (mu - 3sigma), which penalizes uncertainty and rewards grinding cups. FFA adapted via pairwise decomposition.</li>
-      <li><b>Glicko-2</b> — Mark Glickman's iterative rating system. Tracks rating, deviation, and volatility. More responsive to form changes than ELO. FFA adapted with per-opponent scaling.</li>
-      <li><b>Both systems handle inactivity naturally</b> — uncertainty grows when you don't play, so returning players need fewer cups to move. Display decay still applied (0.5%/cup after 3 missed) for consistency with the main leaderboard.</li>
-      <li><b>Same data, different stories</b> — both process the exact same cup results as the main ELO page. Differences in rankings reveal which players benefit from different mathematical assumptions.</li>
+      <li><b>Rolling</b> (default) — pure points ranking over a sliding time window. Each cup awards points by finishing position, summed per player; the worst 30% of a player's results in the window are dropped, the rest counted. Slide the window from 3 months to full history. The points-per-position curve is fully editable — drag any of the 7 orange anchors on the SVG up/down to reshape (Reset restores the seeded curve). No rating system, no inactivity decay — just summed points within the window.</li>
+      <li><b>Standard ELO</b> — same engine as the main leaderboard, surfaced here for side-by-side reference with the other systems.</li>
+      <li><b>TrueSkill</b> — Microsoft's Bayesian rating system. Each player has a skill estimate (mu) and uncertainty (sigma). Shows the conservative rating (mu − 3σ), which penalizes uncertainty and rewards grinding cups. FFA adapted via pairwise decomposition.</li>
+      <li><b>Glicko-2</b> (under TrueSkill in the data) — Mark Glickman's iterative system. Tracks rating, deviation, and volatility. More responsive to form changes than ELO. FFA adapted with per-opponent scaling.</li>
+      <li><b>TrueSkill / Glicko-2 inactivity</b> — uncertainty grows when you don't play, so returning players need fewer cups to move. Display decay still applied (0.5%/cup after 3 missed) for consistency with the main leaderboard.</li>
+      <li><b>Same data, different stories</b> — Standard/TrueSkill/Glicko-2 all process the exact same cup results. Differences in rankings reveal which players benefit from different mathematical assumptions. Rolling answers a separate question: who's been hot recently?</li>
     </ul>
   </div>
 </div>
