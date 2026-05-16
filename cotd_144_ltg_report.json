@@ -134,50 +134,50 @@
       "round": 2,
       "name": "wokonbike",
       "sid": "76561198305054806",
-      "verdict": "LTG",
-      "ltg_time": 45.827
-    },
-    {
-      "round": 3,
-      "name": "[CSC]IronDragon111000",
-      "sid": "76561198103955123",
       "verdict": "true_DNF",
       "ltg_time": null
     },
     {
       "round": 3,
+      "name": "[CSC]IronDragon111000",
+      "sid": "76561198103955123",
+      "verdict": "LTG",
+      "ltg_time": 46.563
+    },
+    {
+      "round": 3,
       "name": "MackCheesy",
       "sid": "76561198865432343",
-      "verdict": "LTG",
-      "ltg_time": 44.299
+      "verdict": "true_DNF",
+      "ltg_time": null
     },
     {
       "round": 3,
       "name": "rtube",
       "sid": "76561199208124083",
-      "verdict": "LTG",
-      "ltg_time": 45.118
+      "verdict": "true_DNF",
+      "ltg_time": null
     },
     {
       "round": 3,
       "name": "[TOG]Lazy_Echidna",
       "sid": "76561198008859132",
-      "verdict": "LTG",
-      "ltg_time": 45.274
+      "verdict": "true_DNF",
+      "ltg_time": null
     },
     {
       "round": 4,
       "name": "Hi Im Yolo",
       "sid": "76561198091849339",
-      "verdict": "LTG",
-      "ltg_time": 44.617
+      "verdict": "true_DNF",
+      "ltg_time": null
     },
     {
       "round": 4,
       "name": "[Same]stindt",
       "sid": "76561198213715297",
-      "verdict": "LTG",
-      "ltg_time": 44.709
+      "verdict": "true_DNF",
+      "ltg_time": null
     },
     {
       "round": 5,
@@ -275,40 +275,17 @@
     "patched": true,
     "changes": [
       {
-        "round": 2,
-        "name": "wokonbike",
-        "status": "no_dnf_row_found"
-      },
-      {
         "round": 3,
-        "name": "MackCheesy",
-        "status": "no_dnf_row_found"
-      },
-      {
-        "round": 3,
-        "name": "rtube",
-        "status": "no_dnf_row_found"
-      },
-      {
-        "round": 3,
-        "name": "[TOG]Lazy_Echidna",
-        "status": "no_dnf_row_found"
-      },
-      {
-        "round": 4,
-        "name": "Hi Im Yolo",
-        "status": "no_dnf_row_found"
-      },
-      {
-        "round": 4,
-        "name": "[Same]stindt",
-        "status": "no_dnf_row_found"
+        "name": "[CSC]IronDragon111000",
+        "old_pos": 34,
+        "new_time": "46,56300",
+        "new_pos": 33
       }
     ]
   },
   "steam_ids_merge": {
     "added": [],
-    "confirmed_count": 121,
+    "confirmed_count": 122,
     "conflicts": [],
     "unresolved": [
       {
@@ -349,16 +326,16 @@
         ]
       },
       {
+        "sid": "76561199046303656",
+        "observed_names": [
+          "KingXfex"
+        ]
+      },
+      {
         "sid": "76561199731808063",
         "observed_names": [
           "Yksdjcj",
           "[RABI]Yksdjcj"
-        ]
-      },
-      {
-        "sid": "76561199046303656",
-        "observed_names": [
-          "KingXfex"
         ]
       },
       {
@@ -429,6 +406,12 @@
         "sid": "76561199002720572",
         "observed_names": [
           "[VK] Vortex"
+        ]
+      },
+      {
+        "sid": "76561198009983303",
+        "observed_names": [
+          "Sekter"
         ]
       },
       {
@@ -535,6 +518,12 @@
         "observed_names": [
           "hostile",
           "[NEWB]hostile"
+        ]
+      },
+      {
+        "sid": "76561199141683708",
+        "observed_names": [
+          "TheCatMan"
         ]
       },
       {

@@ -119,6 +119,7 @@ LEADERBOARD_RE = re.compile(r'\[LiveLeaderboardLogger\] LEADERBOARD\|(\d+)\|(\d+
 ROUND_ENDED_RE = re.compile(r'\[LiveLeaderboardLogger\] ROUND_ENDED\|(\d+)')
 SESSION_START_RE = re.compile(r'\[LiveLeaderboardLogger\] SESSION_START')
 ROSTER_RE = re.compile(r'\[LiveLeaderboardLogger\] ROSTER\|(\d+)\|([^|]*)\|([^|]*)')
+RESULT_RE = re.compile(r'\[LiveLeaderboardLogger\] RESULT\|(\d+)\|(\d+)\|([^|]+)\|time=([^|]+)\|')
 
 
 def parse_lb_entries(s):
@@ -150,6 +151,7 @@ def parse_livelog(path):
     sessions = []
     current_session = None
     current_events = []
+    current_fresh_results = {}  # sid -> last fresh time set in this round
 
     with open(path, encoding='utf-8-sig', errors='replace') as f:
         for line in f:
@@ -158,6 +160,7 @@ def parse_livelog(path):
                     sessions.append(current_session)
                 current_session = {'rounds': []}
                 current_events = []
+                current_fresh_results = {}
                 continue
             m = ROSTER_RE.search(line)
             if m:
@@ -171,6 +174,21 @@ def parse_livelog(path):
                 continue
             if current_session is None:
                 continue  # pre-SESSION_START events (probe data)
+            m = RESULT_RE.search(line)
+            if m:
+                sid = m.group(2)
+                name = m.group(3).strip()
+                tm = m.group(4).strip()
+                # Only fresh time-set events with a parseable numeric time count.
+                # "?" placeholders and the trailing event-end RESULT lines are skipped.
+                if tm not in ('?', 'None', ''):
+                    try:
+                        current_fresh_results[sid] = float(tm)
+                    except ValueError:
+                        pass
+                if name and name != '?':
+                    roster[sid][name] += 1
+                continue
             m = LEADERBOARD_RE.search(line)
             if m:
                 ts = line.split(' ', 1)[0]
@@ -191,9 +209,11 @@ def parse_livelog(path):
                     'round_idx': len(current_session['rounds']) + 1,
                     'final_lb': final_lb,
                     'all_sids_seen': all_sids_seen,
+                    'fresh_results': current_fresh_results,
                     'end_ts': ts,
                 })
                 current_events = []
+                current_fresh_results = {}
     if current_session is not None:
         sessions.append(current_session)
 
@@ -309,12 +329,16 @@ def infer_ltg(matches, name_to_sid, canonical_to_sid):
                     'verdict': 'unresolved_name', 'ltg_time': None,
                 })
                 continue
-            seen_time = lr['all_sids_seen'].get(sid)
-            in_final = sid in lr['final_lb']
-            if seen_time is not None and not in_final:
+            # Real LTG: player set a FRESH time in this round window
+            # (RESULT|...|time=X event with parseable numeric X), regardless of
+            # whether they appear in the final LEADERBOARD. LEADERBOARD entries
+            # carry over stale times from previous rounds, so we cannot use
+            # final_lb membership to detect "left mid-round with a time".
+            fresh_time = lr.get('fresh_results', {}).get(sid)
+            if fresh_time is not None:
                 findings.append({
                     'round': cr['round_n'], 'name': dnf_name, 'sid': sid,
-                    'verdict': 'LTG', 'ltg_time': round(seen_time, 5),
+                    'verdict': 'LTG', 'ltg_time': round(fresh_time, 5),
                 })
             else:
                 findings.append({
