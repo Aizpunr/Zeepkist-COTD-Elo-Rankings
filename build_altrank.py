@@ -576,6 +576,23 @@ alldata['trueskill']      = build_all_list(ts_full, all_cups)
 alldata['trueskill_pure'] = build_all_list(ts_pure, pure_cups)
 alldata['glicko2']        = build_all_list(g2_full, all_cups)
 alldata['glicko2_pure']   = build_all_list(g2_pure, pure_cups)
+
+# Cup dates — needed by altrank.html rolling tab. Sourced from cups.json
+# (built by build_cups.py with date+log-mtime fallback).
+cups_path = _p('cups.json')
+with open(cups_path, encoding='utf-8') as f:
+    cups_data = json.load(f)
+cup_date_map = {}
+for c in cups_data:
+    if c.get('date') and c.get('id'):
+        # id is like "COTD 144" or "Troll COTD 4" — skip non-pure cups (rolling = pure only)
+        cid = c['id']
+        if cid.startswith('Troll ') or 'Roulette' in cid:
+            continue
+        m = re.search(r'(\d+)', cid)
+        if m:
+            cup_date_map[int(m.group(1))] = c['date']
+alldata['cupDates'] = cup_date_map
 tmp = alldata_path + '.tmp'
 with open(tmp, 'w') as f:
     json.dump(alldata, f, separators=(',', ':'))

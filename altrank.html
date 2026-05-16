@@ -334,6 +334,20 @@
 
   <div id="comparePanel"></div>
 
+  <div id="rollingControls" style="display:none;margin:6px 0 14px;padding:10px 14px;background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.2);border-radius:6px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+      <span style="color:var(--text-dim);font-family:var(--mono);font-size:11px;font-weight:600">Points curve — drag anchors</span>
+      <button id="rollingResetCurve" type="button" style="font-family:var(--mono);font-size:10px;color:var(--text-dim);background:transparent;border:1px solid var(--btn-border);border-radius:4px;padding:2px 8px;cursor:pointer">reset curve</button>
+    </div>
+    <svg id="rollingCurveSVG" viewBox="0 0 600 180" preserveAspectRatio="none" style="width:100%;height:180px;background:rgba(0,0,0,0.15);border-radius:4px;display:block;touch-action:none"></svg>
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:10px">
+      <label style="color:var(--text-dim);font-family:var(--mono);font-size:12px;font-weight:600">Window:</label>
+      <input type="range" id="rollingSlider" min="3" max="48" value="6" step="1" style="flex:1;min-width:200px;accent-color:#f59e0b">
+      <span id="rollingMonthsLabel" style="color:var(--accent);font-family:var(--mono);font-weight:700;min-width:90px">6 months</span>
+    </div>
+    <div id="rollingStatsCaption" style="margin-top:6px;color:var(--text-dim);font-family:var(--mono);font-size:11px"></div>
+  </div>
+
   <div class="table">
     <div class="table-header" id="tableHeader">
       <div>#</div><div>Player</div><div class="sortable" data-sort="rating" style="text-align:right">Elo</div><div class="sortable sort-active" data-sort="active" style="text-align:right">Active</div><div class="sortable" data-sort="wins" style="text-align:center">Wins</div><div class="sortable" data-sort="podium" style="text-align:center">Podium</div><div class="sortable" data-sort="avg" style="text-align:right">Avg</div><div class="sortable" data-sort="cups" style="text-align:center">App</div><div style="text-align:center">Best</div><div class="sortable" data-sort="peak" style="text-align:right">Peak</div>
@@ -422,7 +436,7 @@
 
 <script>
 // ── DATA ──
-let eloData, weightedData, eloDataPure, weightedDataPure, seasonData = null, snap = null, risingData = null, curseData = null, allData = null, cupsData = null;
+let eloData, weightedData, eloDataPure, weightedDataPure, seasonData = null, snap = null, risingData = null, curseData = null, allData = null, cupsData = null, cupDates = null, rollingData = null, rollingMonths = 6, rollingMeta = null;
 let globalCupMax = 133;
 
 // ── THEME ──
@@ -444,6 +458,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // ── HELPERS ──
 function rColor(r) {
+  if (eloMode === "rolling") return "#f59e0b";
   if (eloMode === "trueskill") {
     if (r >= 2750) return "#dc2626";
     if (r >= 2500) return "#a855f7";
@@ -461,6 +476,7 @@ function rColor(r) {
   return "#78716c";
 }
 function tier(r) {
+  if (eloMode === "rolling") return "";
   if (eloMode === "trueskill") {
     if (r >= 2750) return "LEGEND";
     if (r >= 2500) return "PRO";
@@ -514,8 +530,170 @@ const COMP_COLORS = ['#06b6d4', '#f97316'];
 
 function getActiveData() {
   // eloData = Standard ELO (default tab); weightedData = TrueSkill (second tab)
+  if (eloMode === "rolling") return rollingData || [];
   if (eloMode === "trueskill") return includeTroll ? weightedData : weightedDataPure;
   return includeTroll ? eloData : eloDataPure;
+}
+
+// Rolling-points curve: piecewise linear through draggable anchor points.
+// Anchors are fixed at these positions (X) and have user-tunable Y values (points).
+// Default curve seeds from the 0.95-shallow exponential the user started with.
+const ROLLING_ANCHOR_POS = [1, 3, 5, 10, 20, 30, 50];
+const ROLLING_ANCHOR_DEFAULTS = [100, 75, 60, 40, 23, 13, 1]; // user-tuned defaults
+const ROLLING_MAX_POS = 50;       // SVG X axis upper bound
+const ROLLING_MAX_PTS_BASE = 100; // SVG Y axis default; grows to fit anchors > 100
+const ROLLING_DRAG_CAP = 200;     // hard cap on drag value (for sanity)
+function rollingMaxPts() {
+  const m = Math.max(ROLLING_MAX_PTS_BASE, ...rollingAnchors.map(a => a.pts));
+  return Math.ceil(m / 25) * 25;
+}
+function defaultRollingAnchors() {
+  return ROLLING_ANCHOR_POS.map((pos, i) => ({pos, pts: ROLLING_ANCHOR_DEFAULTS[i]}));
+}
+let rollingAnchors = defaultRollingAnchors();
+
+function rollingPoints(pos) {
+  const a = rollingAnchors;
+  if (pos <= a[0].pos) return a[0].pts;
+  if (pos >= a[a.length-1].pos) return a[a.length-1].pts;
+  for (let i = 0; i < a.length - 1; i++) {
+    if (pos >= a[i].pos && pos <= a[i+1].pos) {
+      const t = (pos - a[i].pos) / (a[i+1].pos - a[i].pos);
+      return +(a[i].pts + t * (a[i+1].pts - a[i].pts)).toFixed(2);
+    }
+  }
+  return 0;
+}
+
+// ── ROLLING CURVE SVG ──
+const ROLLING_SVG = { W: 600, H: 180, padL: 32, padR: 8, padT: 12, padB: 22 };
+function rollingSvgX(pos) {
+  const { W, padL, padR } = ROLLING_SVG;
+  return padL + (pos / ROLLING_MAX_POS) * (W - padL - padR);
+}
+function rollingSvgY(pts) {
+  const { H, padT, padB } = ROLLING_SVG;
+  return padT + (1 - pts / rollingMaxPts()) * (H - padT - padB);
+}
+function renderRollingCurve() {
+  const svg = document.getElementById("rollingCurveSVG");
+  if (!svg) return;
+  const { W, H, padL, padR, padT, padB } = ROLLING_SVG;
+  let parts = [];
+  // Horizontal grid + Y labels (0..max in 25-step)
+  const maxY = rollingMaxPts();
+  for (let p = 0; p <= maxY; p += 25) {
+    const y = rollingSvgY(p);
+    parts.push(`<line x1="${padL}" y1="${y}" x2="${W - padR}" y2="${y}" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>`);
+    parts.push(`<text x="${padL - 4}" y="${y + 3}" font-size="9" fill="rgba(255,255,255,0.45)" text-anchor="end" font-family="JetBrains Mono,monospace">${p}</text>`);
+  }
+  // X labels (1, 4-EGG, 10, 20, 30, 40, 50)
+  for (const p of [1, 4, 10, 20, 30, 40, 50]) {
+    const isEgg = p === 4;
+    const fill = isEgg ? '#22c55e' : 'rgba(255,255,255,0.45)';
+    const cursor = isEgg ? 'pointer' : 'default';
+    parts.push(`<text data-egg="${isEgg ? '4' : ''}" x="${rollingSvgX(p)}" y="${H - 6}" font-size="9" fill="${fill}" text-anchor="middle" font-family="JetBrains Mono,monospace" style="cursor:${cursor};user-select:none">${p}</text>`);
+  }
+  // Filled area under curve (subtle)
+  let area = `M ${rollingSvgX(0)},${rollingSvgY(0)} `;
+  for (let pos = 1; pos <= ROLLING_MAX_POS; pos += 0.5) {
+    area += `L ${rollingSvgX(pos)},${rollingSvgY(rollingPoints(pos))} `;
+  }
+  area += `L ${rollingSvgX(ROLLING_MAX_POS)},${rollingSvgY(0)} Z`;
+  parts.push(`<path d="${area}" fill="#f59e0b" fill-opacity="0.08"/>`);
+  // The curve itself
+  let line = `M ${rollingSvgX(1)},${rollingSvgY(rollingPoints(1))} `;
+  for (let pos = 1; pos <= ROLLING_MAX_POS; pos += 0.5) {
+    line += `L ${rollingSvgX(pos)},${rollingSvgY(rollingPoints(pos))} `;
+  }
+  parts.push(`<path d="${line}" fill="none" stroke="#f59e0b" stroke-width="2"/>`);
+  // Anchor handles + labels
+  rollingAnchors.forEach((a, i) => {
+    const cx = rollingSvgX(a.pos), cy = rollingSvgY(a.pts);
+    parts.push(`<text x="${cx}" y="${Math.max(padT + 8, cy - 9)}" font-size="9" fill="#f59e0b" text-anchor="middle" font-family="JetBrains Mono,monospace" font-weight="700">${a.pts.toFixed(0)}</text>`);
+    parts.push(`<circle data-anchor="${i}" cx="${cx}" cy="${cy}" r="7" fill="#f59e0b" stroke="#1a1a1f" stroke-width="2" style="cursor:ns-resize"/>`);
+  });
+  svg.innerHTML = parts.join('');
+  // Re-attach pointer-down on each anchor (document-level move/up handle the drag)
+  svg.querySelectorAll('[data-anchor]').forEach(circle => {
+    circle.onpointerdown = (e) => {
+      e.preventDefault();
+      rollingDragIdx = parseInt(circle.dataset.anchor);
+    };
+  });
+  // 4th-place easter egg: click the green "4" to toggle a 120-pt spike at pos 4
+  const egg = svg.querySelector('[data-egg="4"]');
+  if (egg) egg.onclick = toggleFourthEgg;
+}
+function toggleFourthEgg() {
+  const idx = rollingAnchors.findIndex(a => a.pos === 4);
+  if (idx >= 0) {
+    rollingAnchors.splice(idx, 1);
+  } else {
+    rollingAnchors.push({ pos: 4, pts: 120 });
+    rollingAnchors.sort((a, b) => a.pos - b.pos);
+  }
+  renderRollingCurve();
+  render();
+}
+let rollingDragIdx = null;
+function rollingDragMove(e) {
+  if (rollingDragIdx === null) return;
+  const svg = document.getElementById("rollingCurveSVG");
+  if (!svg) return;
+  const rect = svg.getBoundingClientRect();
+  const { H, padT, padB } = ROLLING_SVG;
+  const yPx = ((e.clientY - rect.top) / rect.height) * H;
+  let pts = rollingMaxPts() * (1 - (yPx - padT) / (H - padT - padB));
+  pts = Math.max(0, Math.min(ROLLING_DRAG_CAP, +pts.toFixed(1)));
+  rollingAnchors[rollingDragIdx].pts = pts;
+  renderRollingCurve();
+  render();
+}
+function rollingDragEnd() { rollingDragIdx = null; }
+
+// Build a player dataset shaped like the normal Standard/TrueSkill datasets but
+// where `active`/`rating`/`peak_rating` carry rolling-points sums instead of ELO.
+// Source: eloDataPure (pure cups only — rolling is COTD/COTW form, no Troll/Roulette).
+function buildRollingDataset(months) {
+  const out = { dataset: [], totalCups: 0 };
+  if (!cupDates || !eloDataPure) return out;
+  const now = new Date();
+  const cutoff = new Date(now); cutoff.setMonth(cutoff.getMonth() - months);
+  const inWindow = new Set();
+  for (const [cn, ds] of Object.entries(cupDates)) {
+    if (new Date(ds) >= cutoff) inWindow.add(parseInt(cn));
+  }
+  out.totalCups = inWindow.size;
+  for (const p of eloDataPure) {
+    const events = (p.history || []).filter(h => inWindow.has(h.c));
+    if (events.length === 0) continue;
+    const pts = events.map(h => rollingPoints(h.p));
+    const ptsSorted = [...pts].sort((a, b) => b - a);
+    const keepN = Math.max(1, Math.ceil(pts.length * 0.7));
+    const total = ptsSorted.slice(0, keepN).reduce((s, x) => s + x, 0);
+    const golds = events.filter(h => h.p === 1).length;
+    const silvers = events.filter(h => h.p === 2).length;
+    const bronzes = events.filter(h => h.p === 3).length;
+    const bestPos = Math.min(...events.map(h => h.p));
+    const avgPos = events.reduce((s, h) => s + h.p, 0) / events.length;
+    out.dataset.push({
+      name: p.name,
+      rating: +total.toFixed(1),
+      active: +total.toFixed(1),
+      uncertainty: 0,
+      cups: events.length,
+      wins: golds,
+      podiums: { gold: golds, silver: silvers, bronze: bronzes },
+      avg_position: +avgPos.toFixed(1),
+      best_finish: bestPos,
+      peak_rating: rollingPoints(bestPos),
+      history: events,
+      rolling_kept: keepN,
+    });
+  }
+  out.dataset.sort((a, b) => b.active - a.active);
+  return out;
 }
 
 // Qualification (any one of):
@@ -540,14 +718,28 @@ function isQualified(p, last20) {
 
 // ── MIN CUPS SLIDER ──
 // ── ELO MODE TABS ──
-const modeOpts = [["standard","Standard ELO"],["trueskill","TrueSkill"]];
+const modeOpts = [["standard","Standard ELO"],["trueskill","TrueSkill"],["rolling","Rolling"]];
 const modeTabsEl = document.getElementById("eloModeTabs");
 modeOpts.forEach(([k,l]) => {
   const btn = document.createElement("button");
   btn.className = "tab" + (k === eloMode ? " active" : "") + (k === "season" ? " race-tab" : "");
   btn.textContent = l;
   btn.dataset.key = k;
-  btn.onclick = () => { eloMode = k; updateModeTabs(); selected = null; if (viewMode === "cups") viewMode = "leaderboard"; document.getElementById("cupsTabBtn").classList.remove("active"); document.getElementById("cupToggle").style.display = k === "season" ? "none" : ""; render(); };
+  btn.onclick = () => {
+    eloMode = k;
+    updateModeTabs();
+    selected = null;
+    if (viewMode === "cups") viewMode = "leaderboard";
+    document.getElementById("cupsTabBtn").classList.remove("active");
+    const isRolling = (k === "rolling");
+    document.getElementById("cupToggle").style.display = (k === "season" || isRolling) ? "none" : "";
+    document.getElementById("risingToggle").style.display = isRolling ? "none" : "";
+    document.getElementById("rollingControls").style.display = isRolling ? "" : "none";
+    // Rolling has no peak/wins delta vs prior snapshot — neutralize sort that depends on lifetime fields.
+    if (isRolling && sortKey === "uncertainty") sortKey = "active";
+    if (isRolling) renderRollingCurve();
+    render();
+  };
   modeTabsEl.appendChild(btn);
 });
 
@@ -622,6 +814,24 @@ document.getElementById("compareCheck").onchange = (e) => {
   render();
 };
 
+// ── ROLLING SLIDER ──
+document.getElementById("rollingSlider").oninput = (e) => {
+  rollingMonths = parseInt(e.target.value);
+  document.getElementById("rollingMonthsLabel").textContent = `${rollingMonths} month${rollingMonths === 1 ? '' : 's'}`;
+  selected = null;
+  render();
+};
+
+// ── ROLLING CURVE: document-level drag move/end so re-rendering circles mid-drag is OK
+document.addEventListener('pointermove', rollingDragMove);
+document.addEventListener('pointerup', rollingDragEnd);
+document.addEventListener('pointercancel', rollingDragEnd);
+document.getElementById("rollingResetCurve").onclick = () => {
+  rollingAnchors = defaultRollingAnchors();
+  renderRollingCurve();
+  render();
+};
+
 // ── SEARCH ──
 document.getElementById("searchInput").oninput = () => render();
 
@@ -630,7 +840,9 @@ function getFiltered() {
   const src = getActiveData();
   // Update tier legend
   const tl = document.getElementById("tierLegend");
-  if (eloMode === "trueskill") {
+  if (eloMode === "rolling") {
+    tl.innerHTML = rollingMeta ? `<span style="color:var(--accent)">${rollingMeta.cupsInWindow} cups in window</span> \u00b7 keep best ${rollingMeta.keepFrac}` : '';
+  } else if (eloMode === "trueskill") {
     tl.innerHTML = '<span style="color:#dc2626">Legend 2750+</span> \u00b7 <span style="color:#a855f7">Pro 2500+</span> \u00b7 <span style="color:#3b82f6">Master 2250+</span> \u00b7 <span style="color:#10b981">Gold 2000+</span>';
   } else {
     tl.innerHTML = '<span style="color:#dc2626">Legend 1850+</span> \u00b7 <span style="color:#a855f7">Pro 1700+</span> \u00b7 <span style="color:#3b82f6">Master 1650+</span> \u00b7 <span style="color:#10b981">Gold 1600+</span>';
@@ -1312,19 +1524,26 @@ function leaderboardInfoBtn() {
     + `<i>Demoted from main page — ELO and Skill predict cup outcomes more accurately.</i></div></span>`;
 }
 function leaderboardCols() {
-  // Standard ELO has no uncertainty column — same column count as season.
-  return eloMode === "standard"
-    ? "36px 1fr 66px 36px 118px 46px 40px 38px 54px"
-    : "36px 1fr 66px 42px 36px 118px 46px 40px 38px 54px";
+  // Standard ELO + Rolling have no uncertainty column. Rolling also drops Peak.
+  if (eloMode === "rolling")  return "36px 1fr 66px 36px 118px 46px 40px 38px";
+  if (eloMode === "standard") return "36px 1fr 66px 36px 118px 46px 40px 38px 54px";
+  return "36px 1fr 66px 42px 36px 118px 46px 40px 38px 54px";
 }
 function leaderboardHeaderHTML() {
-  const noUncertainty = eloMode === "standard";
-  const cols = noUncertainty
-    ? [['#',''],['Player',''],['Elo','active'],['Wins','wins'],['Podium','podium'],['Avg','avg'],['App','cups'],['Best',''],['Peak','peak']]
-    : [['#',''],['Player',''],['Rating','active'],['σ','uncertainty'],['Wins','wins'],['Podium','podium'],['Avg','avg'],['App','cups'],['Best',''],['Peak','peak']];
-  const aligns = noUncertainty
-    ? ['','','center','center','center','right','center','center','right']
-    : ['','','right','right','center','center','right','center','center','right'];
+  const isRolling = eloMode === "rolling";
+  const noUncertainty = (eloMode === "standard" || isRolling);
+  const ratingLabel = isRolling ? "Points" : (noUncertainty ? "Elo" : "Rating");
+  let cols, aligns;
+  if (isRolling) {
+    cols = [['#',''],['Player',''],[ratingLabel,'active'],['Wins','wins'],['Podium','podium'],['Avg','avg'],['App','cups'],['Best','']];
+    aligns = ['','','center','center','center','right','center','center'];
+  } else if (noUncertainty) {
+    cols = [['#',''],['Player',''],[ratingLabel,'active'],['Wins','wins'],['Podium','podium'],['Avg','avg'],['App','cups'],['Best',''],['Peak','peak']];
+    aligns = ['','','center','center','center','right','center','center','right'];
+  } else {
+    cols = [['#',''],['Player',''],[ratingLabel,'active'],['σ','uncertainty'],['Wins','wins'],['Podium','podium'],['Avg','avg'],['App','cups'],['Best',''],['Peak','peak']];
+    aligns = ['','','right','right','center','center','right','center','center','right'];
+  }
   return cols.map(([label,key],i) => {
     const al = aligns[i] ? `style="text-align:${aligns[i]}"` : '';
     if (i === 0) return `<div ${al}>${label}${leaderboardInfoBtn()}</div>`;
@@ -1541,6 +1760,22 @@ function renderCups() {
 }
 
 function render() {
+  // Rolling tab: recompute dataset fresh against current slider window before anything else.
+  if (eloMode === "rolling") {
+    const r = buildRollingDataset(rollingMonths);
+    rollingData = r.dataset;
+    const sample = r.dataset[0];
+    const keepN = sample ? sample.rolling_kept : 0;
+    rollingMeta = { cupsInWindow: r.totalCups, keepFrac: `${keepN} (drop ${Math.max(0, sample ? sample.cups - keepN : 0)})` };
+    const cap = document.getElementById("rollingStatsCaption");
+    if (cap) {
+      cap.innerHTML = r.totalCups === 0
+        ? `<span style="color:#ef4444">No cups in window — slide right.</span>`
+        : `<span style="color:var(--text)">${r.totalCups}</span> cup${r.totalCups === 1 ? '' : 's'} in window · <span style="color:var(--text)">${r.dataset.length}</span> qualifying player${r.dataset.length === 1 ? '' : 's'} · best 70% of events counted`;
+    }
+  } else {
+    rollingMeta = null;
+  }
   renderComparePanel();
   const sq = document.getElementById("searchInput").value.trim().toLowerCase();
   if (sq.length >= 2 && allData) { renderSearch(sq); return; }
@@ -1557,6 +1792,7 @@ function render() {
   let html = "";
 
   const snapMode = (() => {
+    if (eloMode === "rolling") return null; // window is dynamic; no meaningful snapshot
     const mode = eloMode === "trueskill" ? (includeTroll ? "ts" : "ts_pure")
       : (includeTroll ? "std" : "std_pure");
     return snap && snap[mode];
@@ -1624,7 +1860,7 @@ function render() {
       ? `<span style="color:var(--accent)">${p.podiums.gold}</span>/<span style="color:var(--silver)">${p.podiums.silver}</span>/<span style="color:var(--bronze)">${p.podiums.bronze}</span> <span style="color:var(--text-muted)">(${totalPod})</span>`
       : `<span style="color:var(--text-dark)">0</span>`;
 
-    const noUncertainty = eloMode === "standard";
+    const noUncertainty = (eloMode === "standard" || eloMode === "rolling");
     const uncertaintyCell = noUncertainty ? '' : `<div style="text-align:right;font-family:var(--mono);font-size:14px;color:var(--text-muted)">${Math.round(p.uncertainty)}</div>`;
     html += `<div class="row${isSel ? " selected" : ""}${compClass}" data-name="${esc(p.name)}" style="grid-template-columns:${leaderboardCols()}">
       <div class="rank">${i+1}${rankDelta}</div>
@@ -1636,7 +1872,7 @@ function render() {
       <div class="avg-cell" style="color:${avgColor}">${p.avg_position.toFixed(1)}</div>
       <div class="cups-cell">${p.cups}</div>
       <div class="best-cell" style="color:${bestColor}">${p.best_finish}</div>
-      <div class="peak-cell">${Math.round(p.peak_rating)}</div>
+      ${eloMode === "rolling" ? '' : `<div class="peak-cell">${Math.round(p.peak_rating)}</div>`}
     </div>`;
   });
 
@@ -1674,6 +1910,15 @@ Promise.all([
   curseData = curse ? curse.l : null;
   allData = all;
   cupsData = cups;
+  cupDates = all.cupDates || {};
+  // Set slider max based on actual history span (3 → ceil((today - earliest)/30 days))
+  const slider = document.getElementById("rollingSlider");
+  if (slider && Object.keys(cupDates).length) {
+    const earliest = new Date(Math.min(...Object.values(cupDates).map(d => new Date(d).getTime())));
+    const monthsSpan = Math.max(3, Math.ceil((Date.now() - earliest.getTime()) / (1000*60*60*24*30)));
+    slider.max = monthsSpan;
+    document.getElementById("rollingMonthsLabel").textContent = `${slider.value} months`;
+  }
   // Derive max cup number from data
   const allHists = [...eloData, ...weightedData];
   globalCupMax = Math.max(...allHists.flatMap(p => p.history.map(h => h.c)), globalCupMax);
