@@ -292,7 +292,7 @@ CANONICAL = {
     'agix': ['[GYMC] agix'],
     'An Actual g00se': ['[CSC] An Actual g00se', '[Err] An Actual g00se', '[CSC] BaBa is g00se', '[CSC] CantFindTheg00se'],
     'BOB THE GAMER': ['[BOGO]BOB THE GAMER', '[MEAT]BOB THE GAMER'],
-    'ferinine': ['[Err]ferinine'],
+    'ferinine': ['[Err]ferinine', '[Err]ferninine'],
     'frenchteost': ['[LEXR]frenchteost', '[ZET]frenchteost'],
     'Ionjig': ['ionjig'],
     'Lamp': ['[CTR]Lamp', '[The]Lamp', '[bam]Lamp'],
