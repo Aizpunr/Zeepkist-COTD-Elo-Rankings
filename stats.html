@@ -134,6 +134,13 @@ font-family:var(--mono);font-size:11px;font-weight:600;color:var(--muted)}
   <div id="miniPcdj"></div>
 </a>
 
+<!-- Qube Rankings card -->
+<a href="https://aizpunr.github.io/qube-rankings/" class="stat-card" id="qubeCard">
+  <div class="card-title" style="background:linear-gradient(135deg,#5BCEFA,#F5A9B8,#ffffff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Qube of the Week</div>
+  <div class="card-desc">Thursdays — Lilly Fenn's qube cup, pairwise FFA ELO</div>
+  <div id="miniQube"></div>
+</a>
+
 </div>
 </div>
 
@@ -380,6 +387,29 @@ fetch('https://aizpunr.github.io/kerki/kerki.json').then(r=>r.json()).then(data=
       <tbody>${rows}</tbody>
     </table>
     <div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:6px">Rolling (best 18 of 26)</div>`;
+}).catch(()=>{});
+
+// Qube top 3 (FFA ELO ranking)
+fetch('https://aizpunr.github.io/qube-rankings/qube.json').then(r=>r.json()).then(data=>{
+  const top3 = (data.players || []).slice(0,3);
+  const medals = ['#f59e0b','#9ca3af','#b45309'];
+  const rows = top3.map((p,i)=>`<tr>
+    <td style="color:${medals[i]};text-align:right;padding-right:8px;font-weight:700">${i+1}</td>
+    <td style="font-weight:600">${p.name}</td>
+    <td style="text-align:right">${Math.round(p.rating)}</td>
+    <td style="text-align:right;color:var(--muted)">${p.gold||0}W</td>
+  </tr>`).join('');
+  document.getElementById('miniQube').innerHTML = `
+    <table style="width:100%;font-family:var(--mono);font-size:11px;border-collapse:collapse">
+      <thead><tr style="color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:1px">
+        <th style="text-align:right;padding-right:8px;padding-bottom:6px">#</th>
+        <th style="text-align:left;padding-bottom:6px">Player</th>
+        <th style="text-align:right;padding-bottom:6px">ELO</th>
+        <th style="text-align:right;padding-bottom:6px">Wins</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+    <div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:6px">Pairwise FFA ELO</div>`;
 }).catch(()=>{});
 
 // TyO top 3 (Season 2)
