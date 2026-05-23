@@ -176,7 +176,7 @@ CANONICAL = {
     'Kernkob': ['[CTR]Kernkob'],
     'L3it3R': ['L3it3r','[CTR] L3it3R','[CTR]L3it3R','[CTR]L3it3r'],
     'Last': ['[dumb] Last'],
-    'Lazy_Echidna': ['[NIL]Lazy_Echidna','[TOG]Lazy_Echidna','[TOG]Lazy_echidna'],
+    'Lazy_Echidna': ['[NIL]Lazy_Echidna','[TOG]Lazy_Echidna','[TOG]Lazy_echidna','[TOG]Lazy-Echidna','[TOG[Lazy_Echidna','Lazy_Ecidna'],
     'Mark': ['[RTR]Mark'],
     'Metalted': ['[ZMS] Metalted','Matalted'],
     'Northwind': ['Noweki'],
