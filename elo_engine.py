@@ -243,7 +243,7 @@ CANONICAL = {
     'DocRee': ['[CLWN]DocRee'],
     'dudeeitsraymond': ['[iDad] dudeeitsraymond','[iDad]dudeeitsraymond'],
     'Exterminate': ['[XTR] Exterminate','[XTR]Exterminate'],
-    'FlyBoy': ['Fly8oy'],
+    'Fly8oy': ['FlyBoy'],
     'Gimpel': ['Leviathan (Gimpel)'],
     'GuillaumePN': ['[Qc] GuillaumePN'],
     'incredulouspotato': ['[PINK]incredulouspotato','[TTV]incredulouspotato'],
