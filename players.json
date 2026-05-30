@@ -2452,7 +2452,8 @@
       "[VOID[//////void",
       "[gorp]//////void",
       "[SWDN]//////void",
-      "timeless void"
+      "timeless void",
+      "𝒱V𝑜o𝒾i𝒹d𝒱"
     ]
   },
   "vortex": {
@@ -2608,10 +2609,6 @@
   },
   "Zwerggo": {
     "steam_id": "76561198016152069",
-    "aliases": []
-  },
-  "𝒱V𝑜o𝒾i𝒹d𝒱": {
-    "steam_id": "76561199321598731",
     "aliases": []
   }
 }
