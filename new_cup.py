@@ -296,7 +296,7 @@ check_aliases_against_livelog(
 
 # ── 2. Auto-detect xlsx file + columns ──
 elo_py_path = _p('elo_engine.py')
-with open(elo_py_path) as f:
+with open(elo_py_path, encoding='utf-8') as f:
     elo_src = f.read()
 
 xlsx_matches = re.findall(r"parse_file\(_p\('(COTD \d+-\d+\.xlsx)'\)\)", elo_src)
@@ -359,7 +359,7 @@ if m:
         print(f"Saved as {new_xlsx} (renamed from {current_xlsx})")
 
         new_src = elo_src.replace(f"'{current_xlsx}'", f"'{new_xlsx}'")
-        with open(elo_py_path, 'w') as f:
+        with open(elo_py_path, 'w', encoding='utf-8') as f:
             f.write(new_src)
         print(f"Updated elo_engine.py: {current_xlsx} -> {new_xlsx}")
     else:
