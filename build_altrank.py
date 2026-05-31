@@ -1,10 +1,18 @@
 """
-build_altrank.py — Alternative Rankings: TrueSkill + Glicko-2 from scratch.
+build_altrank.py — Alternative Rankings: Standard ELO + TrueSkill.
 
-Two completely independent rating systems, both adapted for free-for-all cups.
-No pip dependencies — pure Python + math.
+Standard ELO is the legacy main-page metric, now demoted to alt-rank since
+index.html runs on Weighted ELO + Glicko-2 ("Skill Ranking"). TrueSkill is
+the second alt-rank view. Glicko-2 moved to elo_engine.py since it powers
+the main page.
 
-Outputs altrank_data.json and altrank_snapshot.json for altrank.html.
+Both systems are computed from scratch — no pip dependencies, pure Python.
+
+Reads alldata.json (written by elo_engine.py) and appends:
+  - 'standard', 'standard_pure', 'trueskill', 'trueskill_pure', 'cupDates'
+
+Reads rising.json (written by elo_engine.py) and appends:
+  - 'standard', 'standard_pure'
 """
 import openpyxl, json, re, sys, os, math
 from collections import defaultdict
@@ -341,151 +349,46 @@ def compute_trueskill(cups):
 
 
 # ═══════════════════════════════════════════════════════════════════════════
-# GLICKO-2 — from scratch
+# STANDARD ELO — the original pairwise system; lives here now because the
+# main page uses Weighted ELO + Glicko-2. Standard is shown only on altrank.
 # ═══════════════════════════════════════════════════════════════════════════
 
-G2_R0 = 1500.0
-G2_RD0 = 350.0
-G2_VOL0 = 0.06
-G2_TAU = 0.5                    # system constant
-G2_EPSILON = 0.000001           # convergence tolerance
-G2_SCALE = 173.7178             # 400 / ln(10)
-G2_MAX_ITER = 100
+STARTING = 1500
+K_BASE = 32
+PROV_CUPS = 12
+PROV_MULT = 1.5
+DECAY = 0.995
+GRACE = 3
+RISING_LOOKBACK_6M = 26
+RISING_LOOKBACK_3M = 13
+RISING_MIN_RATING = 1600
+RISING_TOP_N = 50
 
-def g2_to_mu(r): return (r - 1500) / G2_SCALE
-def g2_to_phi(rd): return rd / G2_SCALE
-def g2_from_mu(mu): return mu * G2_SCALE + 1500
-def g2_from_phi(phi): return phi * G2_SCALE
+def E(ra, rb): return 1.0 / (1.0 + 10.0 ** ((rb - ra) / 400.0))
 
-def g2_g(phi):
-    return 1.0 / math.sqrt(1 + 3 * phi**2 / (math.pi**2))
-
-def g2_E(mu, mu_j, phi_j):
-    x = -g2_g(phi_j) * (mu - mu_j)
-    if x > 700: return 0.0
-    if x < -700: return 1.0
-    return 1.0 / (1 + math.exp(x))
-
-def g2_new_volatility(sigma, phi, delta, v):
-    """Glicko-2 step 5: iterative volatility update (Illinois algorithm)."""
-    a = math.log(sigma**2)
-    tau2 = G2_TAU**2
-
-    def f(x):
-        ex = math.exp(x)
-        d2 = delta**2
-        p2v = phi**2 + v + ex
-        return (ex * (d2 - phi**2 - v - ex)) / (2 * p2v**2) - (x - a) / tau2
-
-    # Bracket
-    A = a
-    if delta**2 > phi**2 + v:
-        B = math.log(delta**2 - phi**2 - v)
-    else:
-        k = 1
-        while f(a - k * G2_TAU) < 0 and k < G2_MAX_ITER:
-            k += 1
-        B = a - k * G2_TAU
-
-    fA = f(A)
-    fB = f(B)
-    for _ in range(G2_MAX_ITER):
-        if abs(B - A) < G2_EPSILON:
-            break
-        C = A + (A - B) * fA / (fB - fA)
-        fC = f(C)
-        if fC * fB <= 0:
-            A = B; fA = fB
-        else:
-            fA /= 2
-        B = C; fB = fC
-
-    return math.exp(A / 2)
-
-
-def compute_glicko2(cups):
-    # State: name → (rating, RD, volatility) in Glicko-1 scale
-    state = {}
-    gp = defaultdict(int)
-    history = defaultdict(list)
-    wins = defaultdict(int)
-    pods = defaultdict(lambda: [0, 0, 0])
-    best = defaultdict(lambda: 999)
-    total_pos = defaultdict(int)
-    avg_cups = defaultdict(int)
-    peak_rating = defaultdict(lambda: -9999)
-
+def compute_standard_elo(cups, no_ghosts=False):
+    ratings = defaultdict(lambda: STARTING)
+    gp = defaultdict(int); history = defaultdict(list)
+    wins = defaultdict(int); pods = defaultdict(lambda: [0, 0, 0])
+    best = defaultdict(lambda: 999); total_pos = defaultdict(int); avg_cups = defaultdict(int)
     for cup in cups:
-        players = cup['players']
-        n = len(players)
+        players = cup['players']; n = len(players)
         if n < 2: continue
-
-        # RD growth for inactive players (natural Glicko-2 inactivity)
-        for name in state:
-            r, rd, vol = state[name]
-            phi = g2_to_phi(rd)
-            phi_star = math.sqrt(phi**2 + vol**2)
-            new_rd = min(g2_from_phi(phi_star), G2_RD0)
-            state[name] = (r, new_rd, vol)
-
-        # Initialize new players
-        for _, name in players:
-            if name not in state:
-                state[name] = (G2_R0, G2_RD0, G2_VOL0)
-
-        # Compute updates for each player in the cup
-        new_states = {}
+        deltas = defaultdict(float)
         for i in range(n):
-            pi, ni = players[i]
-            r_i, rd_i, vol_i = state[ni]
-            mu_i = g2_to_mu(r_i)
-            phi_i = g2_to_phi(rd_i)
-
-            # Pairwise against all opponents, scaled by 1/(N-1) to normalize FFA
-            v_sum = 0
-            delta_sum = 0
-            weight = 1.0 / (n - 1)
+            pi, ni = players[i]; ra = ratings[ni]
+            k = K_BASE / (n - 1)
+            if gp[ni] < PROV_CUPS: k *= PROV_MULT
             for j in range(n):
                 if i == j: continue
                 pj, nj = players[j]
-                r_j, rd_j, _ = state[nj]
-                mu_j = g2_to_mu(r_j)
-                phi_j = g2_to_phi(rd_j)
-
-                gj = g2_g(phi_j)
-                ej = g2_E(mu_i, mu_j, phi_j)
-                v_sum += weight * gj**2 * ej * (1 - ej)
-
+                e = E(ra, ratings[nj])
                 s = 1.0 if pi < pj else (0.0 if pi > pj else 0.5)
-                delta_sum += weight * gj * (s - ej)
-
-            v = 1.0 / v_sum if v_sum > 1e-10 else 1e6
-            delta = v * delta_sum
-
-            # New volatility
-            new_vol = g2_new_volatility(vol_i, phi_i, delta, v)
-
-            # New phi and mu
-            phi_star = math.sqrt(phi_i**2 + new_vol**2)
-            new_phi = 1.0 / math.sqrt(1 / phi_star**2 + 1 / v)
-            new_mu = mu_i + new_phi**2 * delta_sum
-
-            new_r = round(g2_from_mu(new_mu), 1)
-            new_rd = g2_from_phi(new_phi)
-            new_states[ni] = (new_r, new_rd, new_vol)
-
-        # Apply updates + track stats
+                deltas[ni] += k * (s - e)
         for pos, name in players:
-            if name in new_states:
-                state[name] = new_states[name]
-            r = state[name][0]
-
-            gp[name] += 1
+            ratings[name] += deltas[name]; gp[name] += 1
             history[name].append({'cup': cup['name'], 'position': pos,
-                                  'rating': round(r, 1), 'lobby_size': n})
-            if r > peak_rating[name]:
-                peak_rating[name] = r
-
+                                  'rating': round(ratings[name], 1), 'lobby_size': n})
             is_troll4_dnf = cup['name'] == 'Troll COTD 4' and pos == 3
             if not is_troll4_dnf:
                 total_pos[name] += pos
@@ -494,14 +397,88 @@ def compute_glicko2(cups):
             if pos == 1: wins[name] += 1; pods[name][0] += 1
             elif pos == 2: pods[name][1] += 1
             elif pos == 3 and not is_troll4_dnf: pods[name][2] += 1
+        # Ghost players: shadow ELO (pairwise vs lobby, no effect on others)
+        if not no_ghosts:
+            for pos, name, real in cup.get('ghosts', []):
+                ra = ratings[name]
+                k = K_BASE / (n - 1)
+                if gp[name] < PROV_CUPS: k *= PROV_MULT
+                ghost_delta = 0.0
+                for pj, nj in players:
+                    e = E(ra, ratings[nj])
+                    s = 1.0 if pos < pj else (0.0 if pos > pj else 0.5)
+                    ghost_delta += k * (s - e)
+                ratings[name] += ghost_delta
+                gp[name] += 1
+                history[name].append({'cup': cup['name'], 'position': pos,
+                                      'rating': round(ratings[name], 1), 'lobby_size': n})
+                if pos < best[name]: best[name] = pos
+                total_pos[name] += pos; avg_cups[name] += 1
+                if pos == 1: wins[name] += 1; pods[name][0] += 1
+                elif pos == 2: pods[name][1] += 1
+                elif pos == 3: pods[name][2] += 1
+    return {'ratings': ratings, 'gp': gp, 'history': history, 'wins': wins,
+            'pods': pods, 'best': best, 'total_pos': total_pos, 'avg_cups': avg_cups}
 
-    ratings = {name: round(state[name][0], 1) for name in state}
-    uncertainty = {name: round(state[name][1], 1) for name in state}
+# ── Site-list + rising helpers (ported from elo_engine.py for the standard
+# rising.json keys) ─────────────────────────────────────────────────────────
 
-    return {'ratings': ratings, 'uncertainty': uncertainty,
-            'gp': gp, 'history': history, 'wins': wins,
-            'pods': pods, 'best': best, 'total_pos': total_pos, 'avg_cups': avg_cups,
-            'peak': peak_rating}
+def build_site_list(elo_data, cups_list, min_cups=5, no_decay=False):
+    rat = elo_data['ratings']; hist = elo_data['history']
+    gp_d = elo_data['gp']; wins_d = elo_data['wins']; pods_d = elo_data['pods']
+    best_d = elo_data['best']; total_pos_d = elo_data['total_pos']; avg_cups_d = elo_data['avg_cups']
+    total_n = len(cups_list)
+    last_idx = {}
+    for idx, cup in enumerate(cups_list):
+        for _, name in cup['players']:
+            last_idx[name] = idx
+        for entry in cup.get('ghosts', []):
+            last_idx[entry[1]] = idx
+    def dec(rating, name):
+        if no_decay: return round(rating, 1)
+        missed = total_n - 1 - last_idx.get(name, 0)
+        if missed <= GRACE: return round(rating, 1)
+        return round(1500 + (rating - 1500) * (DECAY ** (missed - GRACE)), 1)
+    out = []
+    for name in rat:
+        has_pod = sum(pods_d[name]) > 0
+        if gp_d[name] < min_cups and not has_pod: continue
+        raw = round(rat[name], 1)
+        act = dec(rat[name], name)
+        peak = max(h['rating'] for h in hist[name]) if hist[name] else raw
+        avg = round(total_pos_d[name] / avg_cups_d[name], 1) if avg_cups_d[name] > 0 else 0
+        h_list = [{'c': cup_num(h['cup']), 'r': h['rating'], 'p': h['position']} for h in hist[name]]
+        out.append({
+            'name': name, 'rating': raw, 'active': act,
+            'cups': gp_d[name], 'wins': wins_d[name],
+            'podiums': {'gold': pods_d[name][0], 'silver': pods_d[name][1], 'bronze': pods_d[name][2]},
+            'avg_position': avg, 'best_finish': best_d[name] if best_d[name] < 999 else 0,
+            'peak_rating': round(peak, 1), 'history': h_list,
+        })
+    out.sort(key=lambda p: p['active'], reverse=True)
+    return out[:150]
+
+def build_rising_combined(player_list, lookback_6m, lookback_3m):
+    """Anyone with >=1% growth in either 6M or 3M gets included.
+       Eligible: rating >= RISING_MIN_RATING OR in top RISING_TOP_N by active."""
+    top50 = set(p['name'] for p in sorted(player_list, key=lambda x: x['active'], reverse=True)[:RISING_TOP_N])
+    entries = {}
+    for p in player_list:
+        if p['rating'] < RISING_MIN_RATING and p['name'] not in top50:
+            continue
+        past6 = [h for h in p['history'] if h['c'] <= lookback_6m]
+        past3 = [h for h in p['history'] if h['c'] <= lookback_3m]
+        r_then6 = past6[-1]['r'] if past6 else 1500.0
+        pct6 = round((p['rating'] - r_then6) / r_then6 * 100, 1)
+        r_then = round(r_then6, 1)
+        r_then3 = past3[-1]['r'] if past3 else 1500.0
+        pct3 = round((p['rating'] - r_then3) / r_then3 * 100, 1)
+        if pct6 >= 1.0 or pct3 >= 1.0:
+            entries[p['name']] = {
+                'name': p['name'], 'rating_now': p['rating'],
+                'rating_then': r_then, 'pct': pct6, 'pct_3m': pct3,
+            }
+    return sorted(entries.values(), key=lambda x: x['pct'], reverse=True)[:50]
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -512,8 +489,12 @@ DECAY = 0.995
 GRACE = 3
 
 def build_all_list(elo_data, cups_list, min_cups=1):
+    """Compact-key per-player entries for alldata.json. Supports both
+    Standard ELO (no 'uncertainty'/'peak' in elo_data) and TrueSkill
+    (both present). 'u' field included only when uncertainty is present."""
     rat = elo_data['ratings']
-    unc_d = elo_data['uncertainty']
+    unc_d = elo_data.get('uncertainty')
+    peak_d = elo_data.get('peak')
     hist = elo_data['history']
     gp_d = elo_data['gp']
     best_d = elo_data['best']
@@ -521,13 +502,14 @@ def build_all_list(elo_data, cups_list, min_cups=1):
     avg_cups_d = elo_data['avg_cups']
     wins_d = elo_data['wins']
     pods_d = elo_data['pods']
-    peak_d = elo_data['peak']
 
     total_n = len(cups_list)
     last_idx = {}
     for idx, cup in enumerate(cups_list):
         for _, name in cup['players']:
             last_idx[name] = idx
+        for entry in cup.get('ghosts', []):
+            last_idx[entry[1]] = idx
 
     def dec(rating, name):
         missed = total_n - 1 - last_idx.get(name, 0)
@@ -541,16 +523,22 @@ def build_all_list(elo_data, cups_list, min_cups=1):
         raw = round(rat[name], 1)
         act = dec(rat[name], name)
         avg = round(total_pos_d[name] / avg_cups_d[name], 1) if avg_cups_d[name] > 0 else 0
-        pk = peak_d.get(name, raw)
+        if peak_d is not None:
+            pk = peak_d.get(name, raw)
+        else:
+            pk = max(h['rating'] for h in hist[name]) if hist[name] else raw
         h_list = [{'c': cup_num(h['cup']), 'r': h['rating'], 'p': h['position']}
                   for h in hist[name]]
-        out.append({
-            'n': name, 'a': act, 'r': raw, 'u': unc_d.get(name, 0),
+        entry = {'n': name, 'a': act, 'r': raw}
+        if unc_d is not None:
+            entry['u'] = unc_d.get(name, 0)
+        entry.update({
             'c': gp_d[name], 'b': best_d[name] if best_d[name] < 999 else 0,
             'v': avg, 'w': wins_d[name],
             'g': pods_d[name][0], 's': pods_d[name][1], 'z': pods_d[name][2],
             'p': round(pk, 1), 'h': h_list
         })
+        out.append(entry)
     out.sort(key=lambda p: p['a'], reverse=True)
     return out
 
@@ -561,21 +549,22 @@ ts_full = compute_trueskill(all_cups)
 print("Computing TrueSkill (pure cups)...")
 ts_pure = compute_trueskill(pure_cups)
 
-print("Computing Glicko-2 (all cups)...")
-g2_full = compute_glicko2(all_cups)
-print("Computing Glicko-2 (pure cups)...")
-g2_pure = compute_glicko2(pure_cups)
+print("Computing Standard ELO (all cups)...")
+std_full = compute_standard_elo(all_cups)
+print("Computing Standard ELO (pure cups)...")
+std_pure = compute_standard_elo(pure_cups)
 
 # ── Build JSON ────────────────────────────────────────────────────────────
 
-# Merge into alldata.json (single source of truth for all rating systems)
+# Merge into alldata.json (elo_engine.py already wrote weighted/season/glicko2;
+# we append the alt-rank rating systems here).
 alldata_path = _p('alldata.json')
-with open(alldata_path) as f:
+with open(alldata_path, encoding='utf-8') as f:
     alldata = json.load(f)
+alldata['standard']       = build_all_list(std_full, all_cups, min_cups=1)
+alldata['standard_pure']  = build_all_list(std_pure, pure_cups, min_cups=1)
 alldata['trueskill']      = build_all_list(ts_full, all_cups)
 alldata['trueskill_pure'] = build_all_list(ts_pure, pure_cups)
-alldata['glicko2']        = build_all_list(g2_full, all_cups)
-alldata['glicko2_pure']   = build_all_list(g2_pure, pure_cups)
 
 # Cup dates — needed by altrank.html rolling tab. Sourced from cups.json
 # (built by build_cups.py with date+log-mtime fallback).
@@ -599,7 +588,27 @@ with open(tmp, 'w') as f:
 os.replace(tmp, alldata_path)
 
 size_kb = os.path.getsize(alldata_path) / 1024
-print(f"\nalldata.json updated with trueskill + glicko2 keys ({size_kb:.0f} KB)")
+print(f"\nalldata.json updated with standard + trueskill keys ({size_kb:.0f} KB)")
+
+# ── Append standard rising keys to rising.json ────────────────────────────
+# elo_engine.py writes rising.json with weighted/weighted_pure; altrank.html
+# reads standard/standard_pure for its rolling/standard modes, so we append.
+
+rising_path = _p('rising.json')
+with open(rising_path, encoding='utf-8') as f:
+    rising_out = json.load(f)
+
+lookback_6m = rising_out['lookback_cup']
+lookback_3m = rising_out['lookback_3m']
+
+std_list = build_site_list(std_full, all_cups)
+std_pure_list = build_site_list(std_pure, pure_cups)
+rising_out['standard']      = build_rising_combined(std_list, lookback_6m, lookback_3m)
+rising_out['standard_pure'] = build_rising_combined(std_pure_list, lookback_6m, lookback_3m)
+
+with open(rising_path, 'w', encoding='utf-8') as f:
+    json.dump(rising_out, f, indent=2)
+print("rising.json updated with standard + standard_pure keys")
 
 # ── Snapshot ──────────────────────────────────────────────────────────────
 # DISABLED: altrank_snapshot.json is now built by snapshot.py (pre-cup baseline
@@ -608,7 +617,7 @@ print(f"\nalldata.json updated with trueskill + glicko2 keys ({size_kb:.0f} KB)"
 
 # ── Sanity check ──────────────────────────────────────────────────────────
 
-for label, data in [('TrueSkill', alldata['trueskill']), ('Glicko-2', alldata['glicko2'])]:
+for label, data in [('Standard ELO', alldata['standard']), ('TrueSkill', alldata['trueskill'])]:
     top5 = data[:5]
     print(f"\n{label} top 5:")
     for i, p in enumerate(top5):

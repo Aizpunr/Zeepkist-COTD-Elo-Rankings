@@ -1,4 +1,4 @@
-import openpyxl, json, re, sys
+import openpyxl, json, re, sys, math
 from collections import defaultdict
 sys.stdout.reconfigure(encoding='utf-8')
 
@@ -392,57 +392,37 @@ def pct_mult(pos, n):
     if pct <= 0.50: return 0.8
     return 0.5
 
-def compute_standard_elo(cups, no_ghosts=False):
-    ratings = defaultdict(lambda: STARTING)
-    gp = defaultdict(int); history = defaultdict(list)
+def compute_player_stats(cups, no_ghosts=False):
+    """Per-player stat counters (gp, wins, pods, best, total_pos, avg_cups).
+    No ELO involved. Mirrors the stat-tracking that used to live inside
+    compute_standard_elo. Standard ELO computation now lives in build_altrank.py.
+    """
+    gp = defaultdict(int)
     wins = defaultdict(int); pods = defaultdict(lambda:[0,0,0])
     best = defaultdict(lambda:999); total_pos = defaultdict(int); avg_cups = defaultdict(int)
     for cup in cups:
         players = cup['players']; n = len(players)
         if n < 2: continue
-        deltas = defaultdict(float)
-        for i in range(n):
-            pi,ni = players[i]; ra = ratings[ni]
-            k = K_BASE/(n-1)
-            if gp[ni] < PROV_CUPS: k *= PROV_MULT
-            for j in range(n):
-                if i==j: continue
-                pj,nj = players[j]
-                e = E(ra, ratings[nj])
-                s = 1.0 if pi<pj else (0.0 if pi>pj else 0.5)
-                deltas[ni] += k*(s-e)
-        for pos,name in players:
-            ratings[name] += deltas[name]; gp[name] += 1
-            history[name].append({'cup':cup['name'],'position':pos,'rating':round(ratings[name],1),'lobby_size':n})
+        for pos, name in players:
+            gp[name] += 1
             is_troll4_dnf = cup['name'] == 'Troll COTD 4' and pos == 3
             if not is_troll4_dnf:
                 total_pos[name] += pos
                 avg_cups[name] += 1
                 if pos < best[name]: best[name] = pos
-            if pos==1: wins[name]+=1; pods[name][0]+=1
-            elif pos==2: pods[name][1]+=1
-            elif pos==3 and not is_troll4_dnf: pods[name][2]+=1
-        # Ghost players: shadow ELO calc (pairwise vs lobby, no effect on others)
+            if pos == 1: wins[name] += 1; pods[name][0] += 1
+            elif pos == 2: pods[name][1] += 1
+            elif pos == 3 and not is_troll4_dnf: pods[name][2] += 1
         if not no_ghosts:
             for pos, name, real in cup.get('ghosts', []):
-                ra = ratings[name]
-                k = K_BASE/(n-1)
-                if gp[name] < PROV_CUPS: k *= PROV_MULT
-                ghost_delta = 0.0
-                for pj, nj in players:
-                    e = E(ra, ratings[nj])
-                    s = 1.0 if pos<pj else (0.0 if pos>pj else 0.5)
-                    ghost_delta += k*(s-e)
-                ratings[name] += ghost_delta
                 gp[name] += 1
-                history[name].append({'cup':cup['name'],'position':pos,'rating':round(ratings[name],1),'lobby_size':n})
                 if pos < best[name]: best[name] = pos
                 total_pos[name] += pos; avg_cups[name] += 1
-                if pos==1: wins[name]+=1; pods[name][0]+=1
-                elif pos==2: pods[name][1]+=1
-                elif pos==3: pods[name][2]+=1
-    return {'ratings': ratings, 'gp': gp, 'history': history, 'wins': wins,
-            'pods': pods, 'best': best, 'total_pos': total_pos, 'avg_cups': avg_cups}
+                if pos == 1: wins[name] += 1; pods[name][0] += 1
+                elif pos == 2: pods[name][1] += 1
+                elif pos == 3: pods[name][2] += 1
+    return {'gp': gp, 'wins': wins, 'pods': pods, 'best': best,
+            'total_pos': total_pos, 'avg_cups': avg_cups}
 
 def compute_weighted_elo(cups, pct_fn=None, no_ghosts=False):
     if pct_fn is None: pct_fn = pct_mult
@@ -488,6 +468,162 @@ def compute_weighted_elo(cups, pct_fn=None, no_ghosts=False):
                 w_history[name].append({'cup': cup['name'], 'position': pos, 'rating': round(w_ratings[name], 1), 'lobby_size': n})
     return {'ratings': w_ratings, 'gp': w_gp, 'history': w_history}
 
+# === Glicko-2 ===
+# Self-contained free-for-all adaptation: pairwise updates within each cup,
+# scaled by 1/(N-1) to normalize. Used as the "Skill Ranking" on index.html.
+
+G2_R0 = 1500.0
+G2_RD0 = 350.0
+G2_VOL0 = 0.06
+G2_TAU = 0.5
+G2_EPSILON = 0.000001
+G2_SCALE = 173.7178
+G2_MAX_ITER = 100
+
+def g2_to_mu(r): return (r - 1500) / G2_SCALE
+def g2_to_phi(rd): return rd / G2_SCALE
+def g2_from_mu(mu): return mu * G2_SCALE + 1500
+def g2_from_phi(phi): return phi * G2_SCALE
+
+def g2_g(phi):
+    return 1.0 / math.sqrt(1 + 3 * phi**2 / (math.pi**2))
+
+def g2_E(mu, mu_j, phi_j):
+    x = -g2_g(phi_j) * (mu - mu_j)
+    if x > 700: return 0.0
+    if x < -700: return 1.0
+    return 1.0 / (1 + math.exp(x))
+
+def g2_new_volatility(sigma, phi, delta, v):
+    """Glicko-2 step 5: iterative volatility update (Illinois algorithm)."""
+    a = math.log(sigma**2)
+    tau2 = G2_TAU**2
+
+    def f(x):
+        ex = math.exp(x)
+        d2 = delta**2
+        p2v = phi**2 + v + ex
+        return (ex * (d2 - phi**2 - v - ex)) / (2 * p2v**2) - (x - a) / tau2
+
+    A = a
+    if delta**2 > phi**2 + v:
+        B = math.log(delta**2 - phi**2 - v)
+    else:
+        k = 1
+        while f(a - k * G2_TAU) < 0 and k < G2_MAX_ITER:
+            k += 1
+        B = a - k * G2_TAU
+
+    fA = f(A)
+    fB = f(B)
+    for _ in range(G2_MAX_ITER):
+        if abs(B - A) < G2_EPSILON:
+            break
+        C = A + (A - B) * fA / (fB - fA)
+        fC = f(C)
+        if fC * fB <= 0:
+            A = B; fA = fB
+        else:
+            fA /= 2
+        B = C; fB = fC
+
+    return math.exp(A / 2)
+
+def compute_glicko2(cups):
+    state = {}
+    gp = defaultdict(int)
+    history = defaultdict(list)
+    wins = defaultdict(int)
+    pods = defaultdict(lambda: [0, 0, 0])
+    best = defaultdict(lambda: 999)
+    total_pos = defaultdict(int)
+    avg_cups = defaultdict(int)
+    peak_rating = defaultdict(lambda: -9999)
+
+    for cup in cups:
+        players = cup['players']
+        n = len(players)
+        if n < 2: continue
+
+        # RD growth for inactive players (natural Glicko-2 inactivity)
+        for name in state:
+            r, rd, vol = state[name]
+            phi = g2_to_phi(rd)
+            phi_star = math.sqrt(phi**2 + vol**2)
+            new_rd = min(g2_from_phi(phi_star), G2_RD0)
+            state[name] = (r, new_rd, vol)
+
+        # Initialize new players
+        for _, name in players:
+            if name not in state:
+                state[name] = (G2_R0, G2_RD0, G2_VOL0)
+
+        # Compute updates for each player in the cup
+        new_states = {}
+        for i in range(n):
+            pi, ni = players[i]
+            r_i, rd_i, vol_i = state[ni]
+            mu_i = g2_to_mu(r_i)
+            phi_i = g2_to_phi(rd_i)
+
+            v_sum = 0
+            delta_sum = 0
+            weight = 1.0 / (n - 1)
+            for j in range(n):
+                if i == j: continue
+                pj, nj = players[j]
+                r_j, rd_j, _ = state[nj]
+                mu_j = g2_to_mu(r_j)
+                phi_j = g2_to_phi(rd_j)
+
+                gj = g2_g(phi_j)
+                ej = g2_E(mu_i, mu_j, phi_j)
+                v_sum += weight * gj**2 * ej * (1 - ej)
+
+                s = 1.0 if pi < pj else (0.0 if pi > pj else 0.5)
+                delta_sum += weight * gj * (s - ej)
+
+            v = 1.0 / v_sum if v_sum > 1e-10 else 1e6
+            delta = v * delta_sum
+
+            new_vol = g2_new_volatility(vol_i, phi_i, delta, v)
+
+            phi_star = math.sqrt(phi_i**2 + new_vol**2)
+            new_phi = 1.0 / math.sqrt(1 / phi_star**2 + 1 / v)
+            new_mu = mu_i + new_phi**2 * delta_sum
+
+            new_r = round(g2_from_mu(new_mu), 1)
+            new_rd = g2_from_phi(new_phi)
+            new_states[ni] = (new_r, new_rd, new_vol)
+
+        for pos, name in players:
+            if name in new_states:
+                state[name] = new_states[name]
+            r = state[name][0]
+
+            gp[name] += 1
+            history[name].append({'cup': cup['name'], 'position': pos,
+                                  'rating': round(r, 1), 'lobby_size': n})
+            if r > peak_rating[name]:
+                peak_rating[name] = r
+
+            is_troll4_dnf = cup['name'] == 'Troll COTD 4' and pos == 3
+            if not is_troll4_dnf:
+                total_pos[name] += pos
+                avg_cups[name] += 1
+                if pos < best[name]: best[name] = pos
+            if pos == 1: wins[name] += 1; pods[name][0] += 1
+            elif pos == 2: pods[name][1] += 1
+            elif pos == 3 and not is_troll4_dnf: pods[name][2] += 1
+
+    ratings = {name: round(state[name][0], 1) for name in state}
+    uncertainty = {name: round(state[name][1], 1) for name in state}
+
+    return {'ratings': ratings, 'uncertainty': uncertainty,
+            'gp': gp, 'history': history, 'wins': wins,
+            'pods': pods, 'best': best, 'total_pos': total_pos, 'avg_cups': avg_cups,
+            'peak': peak_rating}
+
 def build_site_list(elo_data, stat_data, cups_list, min_cups=5, no_decay=False):
     rat = elo_data['ratings']; hist = elo_data['history']
     gp_d = stat_data['gp']; wins_d = stat_data['wins']; pods_d = stat_data['pods']
@@ -530,22 +666,29 @@ season_cups = [c for c in pure_cups if cup_num(c['name']) >= SEASON_2026_START]
 print(f"\n2026 season cups: {len(season_cups)} (COTD {SEASON_2026_START}+)")
 
 # --- Compute all variants ---
-print("\nComputing standard ELO (all cups)...")
-std_full = compute_standard_elo(all_cups)
+# Standard ELO computation lives in build_altrank.py now (it's an alt-rank
+# view, not the main page). Here we compute stats once via compute_player_stats
+# and reuse them for weighted/season output columns.
+print("\nComputing player stats (all cups)...")
+stats_full = compute_player_stats(all_cups)
 print("Computing weighted ELO (all cups)...")
 w_full = compute_weighted_elo(all_cups)
-print("Computing standard ELO (pure cups)...")
-std_pure = compute_standard_elo(pure_cups)
+print("Computing Glicko-2 (all cups)...")
+g2_full = compute_glicko2(all_cups)
+print("Computing player stats (pure cups)...")
+stats_pure = compute_player_stats(pure_cups)
 print("Computing weighted ELO (pure cups)...")
 w_pure = compute_weighted_elo(pure_cups)
+print("Computing Glicko-2 (pure cups)...")
+g2_pure = compute_glicko2(pure_cups)
 print("Computing 2026 season ELO...")
-season_std = compute_standard_elo(season_cups, no_ghosts=True)
+season_stats = compute_player_stats(season_cups, no_ghosts=True)
 season_w = compute_weighted_elo(season_cups, no_ghosts=True)
 
-# --- Console output (from full standard) ---
-ratings = w_full['ratings']; gp = std_full['gp']; history = w_full['history']
-wins = std_full['wins']; pods = std_full['pods']; best = std_full['best']
-total_pos = std_full['total_pos']; avg_cups = std_full['avg_cups']
+# --- Console output (weighted ratings + counted stats) ---
+ratings = w_full['ratings']; gp = stats_full['gp']; history = w_full['history']
+wins = stats_full['wins']; pods = stats_full['pods']; best = stats_full['best']
+total_pos = stats_full['total_pos']; avg_cups = stats_full['avg_cups']
 
 lb = sorted([(n,round(ratings[n],1),gp[n],wins[n],pods[n],best[n],total_pos[n],avg_cups[n]) for n in ratings],
     key=lambda x:x[1],reverse=True)
@@ -577,16 +720,17 @@ with open(_p('elo_results.json'),'w') as f:
     json.dump(output,f,indent=2)
 print("JSON saved")
 
-# --- Build site lists (4 variants + season) ---
-std_list      = build_site_list(std_full, std_full, all_cups)
-w_list        = build_site_list(w_full,   std_full, all_cups)
-std_pure_list = build_site_list(std_pure, std_pure, pure_cups)
-w_pure_list   = build_site_list(w_pure,   std_pure, pure_cups)
-season_list   = build_site_list(season_w, season_std, season_cups, min_cups=1, no_decay=True)
+# --- Build site lists (weighted + pure + season; standard list is built
+#     by build_altrank.py and merged into rising.json there) ---
+w_list        = build_site_list(w_full, stats_full, all_cups)
+w_pure_list   = build_site_list(w_pure, stats_pure, pure_cups)
+season_list   = build_site_list(season_w, season_stats, season_cups, min_cups=1, no_decay=True)
 
 # --- alldata.json (all players, compact keys, with history) ---
+# Glicko-2 entries include a 'u' (uncertainty / RD) field; weighted/season do not.
 def build_all_list(elo_data, stat_data, cups_list, min_cups=3, no_decay=False):
     rat = elo_data['ratings']; hist = elo_data['history']
+    unc_d = elo_data.get('uncertainty')
     gp_d = stat_data['gp']
     best_d = stat_data['best']
     total_pos_d = stat_data['total_pos']
@@ -613,26 +757,31 @@ def build_all_list(elo_data, stat_data, cups_list, min_cups=3, no_decay=False):
         avg = round(total_pos_d[name] / avg_cups_d[name], 1) if avg_cups_d[name] > 0 else 0
         peak = max(h['rating'] for h in hist[name]) if hist[name] else raw
         h_list = [{'c': cup_num(h['cup']), 'r': h['rating'], 'p': h['position']} for h in hist[name]]
-        out.append({
-            'n': name, 'a': act, 'r': raw,
+        entry = {'n': name, 'a': act, 'r': raw}
+        if unc_d is not None:
+            entry['u'] = unc_d.get(name, 0)
+        entry.update({
             'c': gp_d[name], 'b': best_d[name] if best_d[name] < 999 else 0,
             'v': avg, 'w': wins_d[name],
             'g': pods_d[name][0], 's': pods_d[name][1], 'z': pods_d[name][2],
             'p': round(peak, 1), 'h': h_list
         })
+        out.append(entry)
     out.sort(key=lambda p: p['a'], reverse=True)
     return out
 
+# 'standard' and 'standard_pure' are written by build_altrank.py (which also
+# adds 'trueskill', 'trueskill_pure', 'cupDates') after this script.
 alldata = {
-    'standard':      build_all_list(std_full, std_full, all_cups, min_cups=1),
-    'weighted':      build_all_list(w_full,   std_full, all_cups, min_cups=1),
-    'standard_pure': build_all_list(std_pure, std_pure, pure_cups, min_cups=1),
-    'weighted_pure': build_all_list(w_pure,   std_pure, pure_cups, min_cups=1),
-    'season_2026':   build_all_list(season_w, season_std, season_cups, min_cups=1, no_decay=True),
+    'weighted':      build_all_list(w_full,   stats_full, all_cups, min_cups=1),
+    'weighted_pure': build_all_list(w_pure,   stats_pure, pure_cups, min_cups=1),
+    'season_2026':   build_all_list(season_w, season_stats, season_cups, min_cups=1, no_decay=True),
+    'glicko2':       build_all_list(g2_full,  g2_full, all_cups, min_cups=1),
+    'glicko2_pure':  build_all_list(g2_pure,  g2_pure, pure_cups, min_cups=1),
 }
 with open(_p('alldata.json'), 'w') as f:
     json.dump(alldata, f, separators=(',', ':'))
-print(f"alldata.json written ({len(alldata['standard'])} players)")
+print(f"alldata.json written ({len(alldata['weighted'])} players)")
 
 # --- Rising.json ---
 RISING_LOOKBACK_6M = 26
@@ -690,15 +839,15 @@ def build_rising_combined(player_list):
             }
     return sorted(entries.values(), key=lambda x: x['pct'], reverse=True)[:50]
 
+# 'standard' and 'standard_pure' rising keys are appended by build_altrank.py
+# (it owns Standard ELO now).
 rising_out = {
     'current_cup':   current_cup_n,
     'lookback_cup':  lookback_6m,
     'lookback_3m':   lookback_3m,
     'lookback_cups': RISING_LOOKBACK_6M,
     'min_rating':    RISING_MIN_RATING,
-    'standard':      build_rising_combined(std_list),
     'weighted':      build_rising_combined(w_list),
-    'standard_pure': build_rising_combined(std_pure_list),
     'weighted_pure': build_rising_combined(w_pure_list),
 }
 with open(_p('rising.json'), 'w') as f:
