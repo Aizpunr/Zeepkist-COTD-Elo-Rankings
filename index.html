@@ -1671,8 +1671,8 @@ Promise.all([
   fetch('lexercurse.json' + _v).then(r => r.json()).catch(() => null),
   fetch('cups.json' + _v).then(r => r.json()).catch(() => null),
 ]).then(([all, s, rising, curse, cups]) => {
-  eloData = all.standard.map(expandPlayer);
   weightedData = all.weighted.map(expandPlayer);
+  eloData = all.standard ? all.standard.map(expandPlayer) : weightedData;
   eloDataPure = all.standard_pure ? all.standard_pure.map(expandPlayer) : eloData;
   weightedDataPure = all.weighted_pure ? all.weighted_pure.map(expandPlayer) : weightedData;
   seasonData = all.season_2026 ? all.season_2026.map(expandPlayer) : null;
