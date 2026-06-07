@@ -2,6 +2,13 @@ import openpyxl, json, re, sys, math
 from collections import defaultdict
 sys.stdout.reconfigure(encoding='utf-8')
 
+# Importing this module (e.g. `from elo_engine import CANONICAL`, done by
+# petite_ranking / analyze_cup_livelog / seed_steam_ids / merge_gtr / match_gtr,
+# and transitively by the cross-comp refresh.py) must NOT overwrite the output
+# JSONs — doing so wiped the alt-rank keys build_altrank.py appends and blanked
+# the leaderboard. Output writes are gated on this so they only run as a script.
+_WRITE_OUTPUTS = (__name__ == '__main__')
+
 def parse_file(filepath):
     wb = openpyxl.load_workbook(filepath, data_only=True)
     cups = []
@@ -716,9 +723,10 @@ output = {
         for i,(name,rating,cp,w,pd,bf,tp,ac) in enumerate(lb)
     ]
 }
-with open(_p('elo_results.json'),'w') as f:
-    json.dump(output,f,indent=2)
-print("JSON saved")
+if _WRITE_OUTPUTS:
+    with open(_p('elo_results.json'),'w') as f:
+        json.dump(output,f,indent=2)
+    print("JSON saved")
 
 # --- Build site lists (weighted + pure + season; standard list is built
 #     by build_altrank.py and merged into rising.json there) ---
@@ -779,9 +787,10 @@ alldata = {
     'glicko2':       build_all_list(g2_full,  g2_full, all_cups, min_cups=1),
     'glicko2_pure':  build_all_list(g2_pure,  g2_pure, pure_cups, min_cups=1),
 }
-with open(_p('alldata.json'), 'w') as f:
-    json.dump(alldata, f, separators=(',', ':'))
-print(f"alldata.json written ({len(alldata['weighted'])} players)")
+if _WRITE_OUTPUTS:
+    with open(_p('alldata.json'), 'w') as f:
+        json.dump(alldata, f, separators=(',', ':'))
+    print(f"alldata.json written ({len(alldata['weighted'])} players)")
 
 # --- Rising.json ---
 RISING_LOOKBACK_6M = 26
@@ -850,9 +859,10 @@ rising_out = {
     'weighted':      build_rising_combined(w_list),
     'weighted_pure': build_rising_combined(w_pure_list),
 }
-with open(_p('rising.json'), 'w') as f:
-    json.dump(rising_out, f, indent=2)
-print("rising.json written")
+if _WRITE_OUTPUTS:
+    with open(_p('rising.json'), 'w') as f:
+        json.dump(rising_out, f, indent=2)
+    print("rising.json written")
 
 # --- Lexer Curse ELO ---
 # Remap positions: 4th=best, spiraling outward (4,3,5,2,6,1,7,8,9...)
@@ -906,6 +916,7 @@ for name in curse_result['ratings']:
 curse_list.sort(key=lambda p: p['active'], reverse=True)
 curse_list = curse_list[:150]
 
-with open(_p('lexercurse.json'), 'w') as f:
-    json.dump({'l': curse_list}, f, separators=(',', ':'))
-print(f"lexercurse.json written ({len(curse_list)} players)")
+if _WRITE_OUTPUTS:
+    with open(_p('lexercurse.json'), 'w') as f:
+        json.dump({'l': curse_list}, f, separators=(',', ':'))
+    print(f"lexercurse.json written ({len(curse_list)} players)")
