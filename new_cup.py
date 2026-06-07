@@ -9,6 +9,11 @@ Parses mod logs, writes to xlsx + JSON backup, rebuilds all ELO data.
 import re, os, sys, json, subprocess
 import openpyxl
 
+# Force UTF-8 stdout so printing unicode aliases (e.g. the 𝒱V𝑜o𝒾i𝒹d𝒱 void name)
+# in the alias-drift report can't crash the pipeline when stdout is redirected
+# to a file (Windows defaults to cp1252, which can't encode those glyphs).
+sys.stdout.reconfigure(encoding='utf-8')
+
 _dir = os.path.dirname(os.path.abspath(__file__))
 _p = lambda f: os.path.join(_dir, f)
 
