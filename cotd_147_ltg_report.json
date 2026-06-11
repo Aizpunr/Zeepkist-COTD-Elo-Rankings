@@ -1,0 +1,366 @@
+{
+  "cup": "COTD 147",
+  "cup_num": 147,
+  "dry_run": true,
+  "cup_tracker_rounds": 16,
+  "livelog_rounds": 17,
+  "matched_rounds": 16,
+  "match_log": [
+    {
+      "cup_round": 1,
+      "livelog_round_idx": 2,
+      "status": "matched (score=0.0011, ll_idx=2)"
+    },
+    {
+      "cup_round": 2,
+      "livelog_round_idx": 3,
+      "status": "matched (score=0.0006, ll_idx=3)"
+    },
+    {
+      "cup_round": 3,
+      "livelog_round_idx": 4,
+      "status": "matched (score=0.0009, ll_idx=4)"
+    },
+    {
+      "cup_round": 4,
+      "livelog_round_idx": 5,
+      "status": "matched (score=0.0007, ll_idx=5)"
+    },
+    {
+      "cup_round": 5,
+      "livelog_round_idx": 6,
+      "status": "matched (score=0.0010, ll_idx=6)"
+    },
+    {
+      "cup_round": 6,
+      "livelog_round_idx": 7,
+      "status": "matched (score=0.0011, ll_idx=7)"
+    },
+    {
+      "cup_round": 7,
+      "livelog_round_idx": 8,
+      "status": "matched (score=0.0007, ll_idx=8)"
+    },
+    {
+      "cup_round": 8,
+      "livelog_round_idx": 9,
+      "status": "matched (score=0.0009, ll_idx=9)"
+    },
+    {
+      "cup_round": 9,
+      "livelog_round_idx": 10,
+      "status": "matched (score=0.0008, ll_idx=10)"
+    },
+    {
+      "cup_round": 10,
+      "livelog_round_idx": 11,
+      "status": "matched (score=0.0004, ll_idx=11)"
+    },
+    {
+      "cup_round": 11,
+      "livelog_round_idx": 12,
+      "status": "matched (score=0.0005, ll_idx=12)"
+    },
+    {
+      "cup_round": 12,
+      "livelog_round_idx": 13,
+      "status": "matched (score=0.0008, ll_idx=13)"
+    },
+    {
+      "cup_round": 13,
+      "livelog_round_idx": 14,
+      "status": "matched (score=0.0009, ll_idx=14)"
+    },
+    {
+      "cup_round": 14,
+      "livelog_round_idx": 15,
+      "status": "matched (score=0.0006, ll_idx=15)"
+    },
+    {
+      "cup_round": 15,
+      "livelog_round_idx": 16,
+      "status": "matched (score=0.0008, ll_idx=16)"
+    },
+    {
+      "cup_round": 16,
+      "livelog_round_idx": 17,
+      "status": "matched (score=0.0008, ll_idx=17)"
+    }
+  ],
+  "findings": [
+    {
+      "round": 1,
+      "name": "𝒱V𝑜o𝒾i𝒹d𝒱",
+      "sid": "76561199321598731",
+      "verdict": "true_DNF",
+      "ltg_time": null
+    },
+    {
+      "round": 1,
+      "name": "ping",
+      "sid": "76561199109206781",
+      "verdict": "true_DNF",
+      "ltg_time": null
+    },
+    {
+      "round": 1,
+      "name": "PlusMicron",
+      "sid": "76561199186342067",
+      "verdict": "true_DNF",
+      "ltg_time": null
+    },
+    {
+      "round": 2,
+      "name": "Azrael",
+      "sid": "76561198131493031",
+      "verdict": "LTG",
+      "ltg_time": 51.658
+    },
+    {
+      "round": 2,
+      "name": "Microknigh7",
+      "sid": "76561198159335356",
+      "verdict": "true_DNF",
+      "ltg_time": null
+    },
+    {
+      "round": 2,
+      "name": "Darkblade",
+      "sid": "76561198054588006",
+      "verdict": "true_DNF",
+      "ltg_time": null
+    },
+    {
+      "round": 3,
+      "name": "[CTR]agix",
+      "sid": "76561198974231691",
+      "verdict": "true_DNF",
+      "ltg_time": null
+    },
+    {
+      "round": 3,
+      "name": "St Nicholas",
+      "sid": "76561198047403251",
+      "verdict": "true_DNF",
+      "ltg_time": null
+    },
+    {
+      "round": 3,
+      "name": "[ZET] Wheelie",
+      "sid": "76561199218214543",
+      "verdict": "true_DNF",
+      "ltg_time": null
+    },
+    {
+      "round": 3,
+      "name": "BrickEdwards",
+      "sid": "76561198748988602",
+      "verdict": "true_DNF",
+      "ltg_time": null
+    },
+    {
+      "round": 4,
+      "name": "alpa",
+      "sid": "76561197961191126",
+      "verdict": "true_DNF",
+      "ltg_time": null
+    },
+    {
+      "round": 5,
+      "name": "[CSC]Tommygaming",
+      "sid": "76561199187327002",
+      "verdict": "true_DNF",
+      "ltg_time": null
+    },
+    {
+      "round": 5,
+      "name": "zodiak",
+      "sid": "76561199292634733",
+      "verdict": "true_DNF",
+      "ltg_time": null
+    },
+    {
+      "round": 5,
+      "name": "Hi Im Yolo",
+      "sid": "76561198091849339",
+      "verdict": "true_DNF",
+      "ltg_time": null
+    },
+    {
+      "round": 5,
+      "name": "Hellmet",
+      "sid": "76561198093160301",
+      "verdict": "true_DNF",
+      "ltg_time": null
+    },
+    {
+      "round": 6,
+      "name": "Noweki",
+      "sid": "76561198160604987",
+      "verdict": "true_DNF",
+      "ltg_time": null
+    },
+    {
+      "round": 6,
+      "name": "Pants",
+      "sid": "76561199529259554",
+      "verdict": "true_DNF",
+      "ltg_time": null
+    },
+    {
+      "round": 6,
+      "name": "[Burp]Weak_Knees",
+      "sid": "76561199583884117",
+      "verdict": "true_DNF",
+      "ltg_time": null
+    },
+    {
+      "round": 7,
+      "name": "[ZET]Stick",
+      "sid": "76561199590715014",
+      "verdict": "true_DNF",
+      "ltg_time": null
+    },
+    {
+      "round": 7,
+      "name": "Murrl",
+      "sid": "76561198357638671",
+      "verdict": "true_DNF",
+      "ltg_time": null
+    },
+    {
+      "round": 9,
+      "name": "MackCheesy",
+      "sid": "76561198865432343",
+      "verdict": "LTG",
+      "ltg_time": 49.277
+    },
+    {
+      "round": 9,
+      "name": "[CSC] Shadynook",
+      "sid": "76561197980151170",
+      "verdict": "true_DNF",
+      "ltg_time": null
+    },
+    {
+      "round": 10,
+      "name": "RoundNzt",
+      "sid": "76561198896246339",
+      "verdict": "true_DNF",
+      "ltg_time": null
+    },
+    {
+      "round": 10,
+      "name": "[CTR]GuAlexItar",
+      "sid": "76561198159073318",
+      "verdict": "true_DNF",
+      "ltg_time": null
+    },
+    {
+      "round": 11,
+      "name": "Mμ",
+      "sid": "76561198041494034",
+      "verdict": "true_DNF",
+      "ltg_time": null
+    }
+  ],
+  "cup_json_patch": {
+    "patched": false,
+    "changes": [
+      {
+        "round": 2,
+        "name": "Azrael",
+        "status": "no_dnf_row_found"
+      },
+      {
+        "round": 9,
+        "name": "MackCheesy",
+        "status": "no_dnf_row_found"
+      }
+    ],
+    "position_moves": []
+  },
+  "steam_ids_merge": {
+    "added": [],
+    "confirmed_count": 104,
+    "conflicts": [
+      {
+        "canonical": "Pants",
+        "existing": "76561199498272376",
+        "observed": "76561199529259554",
+        "observed_as": "Pants"
+      }
+    ],
+    "unresolved": [
+      {
+        "sid": "76561198024241170",
+        "observed_names": [
+          "Namo ツ"
+        ]
+      },
+      {
+        "sid": "76561198068823305",
+        "observed_names": [
+          "Ritchi",
+          "[KURK] Ritchi"
+        ]
+      },
+      {
+        "sid": "76561199451242491",
+        "observed_names": [
+          "super_speedy_sloth"
+        ]
+      },
+      {
+        "sid": "76561198140409041",
+        "observed_names": [
+          "SkyPromp"
+        ]
+      },
+      {
+        "sid": "76561199091194223",
+        "observed_names": [
+          "faxo"
+        ]
+      },
+      {
+        "sid": "76561198201222842",
+        "observed_names": [
+          "tomsterkw"
+        ]
+      },
+      {
+        "sid": "76561198427762720",
+        "observed_names": [
+          "Mantis"
+        ]
+      },
+      {
+        "sid": "76561198354122361",
+        "observed_names": [
+          "dtmittens"
+        ]
+      },
+      {
+        "sid": "76561199093841299",
+        "observed_names": [
+          "Shinikage221",
+          "[CCC]Shinikage221"
+        ]
+      },
+      {
+        "sid": "76561199496863053",
+        "observed_names": [
+          "Koekje100"
+        ]
+      },
+      {
+        "sid": "76561198451895679",
+        "observed_names": [
+          "L3mmy",
+          "[Goob] L3mmy"
+        ]
+      }
+    ]
+  }
+}

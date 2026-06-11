@@ -9,3 +9,13 @@ __pycache__/
 backups/
 old snapshots/
 *.txt
+elo_video_frames/
+elo_test_frames/
+
+# Regenerated build intermediate: elo_engine.py writes it, build_cups.py reads it
+# in the same run. Not consumed by the deployed site, so it does not belong in git.
+elo_results.json
+
+# Raw lobby logs: irreplaceable source data, but ~20 MB and not needed by the site.
+# Kept out of the public repo; back these up off-SSD separately.
+cup logs/

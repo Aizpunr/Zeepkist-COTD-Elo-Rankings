@@ -1,0 +1,183 @@
+{
+  "cup": "COTD 145",
+  "cup_num": 145,
+  "dry_run": false,
+  "cup_tracker_rounds": 17,
+  "livelog_rounds": 17,
+  "matched_rounds": 17,
+  "match_log": [
+    {
+      "cup_round": 1,
+      "livelog_round_idx": 1,
+      "status": "matched (score=0.0010, ll_idx=1)"
+    },
+    {
+      "cup_round": 2,
+      "livelog_round_idx": 2,
+      "status": "matched (score=0.0010, ll_idx=2)"
+    },
+    {
+      "cup_round": 3,
+      "livelog_round_idx": 3,
+      "status": "matched (score=0.0004, ll_idx=3)"
+    },
+    {
+      "cup_round": 4,
+      "livelog_round_idx": 4,
+      "status": "matched (score=0.0007, ll_idx=4)"
+    },
+    {
+      "cup_round": 5,
+      "livelog_round_idx": 5,
+      "status": "matched (score=0.0011, ll_idx=5)"
+    },
+    {
+      "cup_round": 6,
+      "livelog_round_idx": 6,
+      "status": "matched (score=0.0005, ll_idx=6)"
+    },
+    {
+      "cup_round": 7,
+      "livelog_round_idx": 7,
+      "status": "matched (score=0.0008, ll_idx=7)"
+    },
+    {
+      "cup_round": 8,
+      "livelog_round_idx": 8,
+      "status": "matched (score=0.0007, ll_idx=8)"
+    },
+    {
+      "cup_round": 9,
+      "livelog_round_idx": 9,
+      "status": "matched (score=0.0007, ll_idx=9)"
+    },
+    {
+      "cup_round": 10,
+      "livelog_round_idx": 10,
+      "status": "matched (score=0.0012, ll_idx=10)"
+    },
+    {
+      "cup_round": 11,
+      "livelog_round_idx": 11,
+      "status": "matched (score=0.0005, ll_idx=11)"
+    },
+    {
+      "cup_round": 12,
+      "livelog_round_idx": 12,
+      "status": "matched (score=0.0011, ll_idx=12)"
+    },
+    {
+      "cup_round": 13,
+      "livelog_round_idx": 13,
+      "status": "matched (score=0.0009, ll_idx=13)"
+    },
+    {
+      "cup_round": 14,
+      "livelog_round_idx": 14,
+      "status": "matched (score=0.0010, ll_idx=14)"
+    },
+    {
+      "cup_round": 15,
+      "livelog_round_idx": 15,
+      "status": "matched (score=0.0008, ll_idx=15)"
+    },
+    {
+      "cup_round": 16,
+      "livelog_round_idx": 16,
+      "status": "matched (score=0.0009, ll_idx=16)"
+    },
+    {
+      "cup_round": 17,
+      "livelog_round_idx": 17,
+      "status": "matched (score=0.0007, ll_idx=17)"
+    }
+  ],
+  "findings": [
+    {
+      "round": 3,
+      "name": "ping",
+      "sid": "76561199109206781",
+      "verdict": "true_DNF",
+      "ltg_time": null
+    },
+    {
+      "round": 4,
+      "name": "Nails",
+      "sid": "76561198072185237",
+      "verdict": "true_DNF",
+      "ltg_time": null
+    },
+    {
+      "round": 4,
+      "name": "graysonvitek88",
+      "sid": "76561199852486528",
+      "verdict": "true_DNF",
+      "ltg_time": null
+    },
+    {
+      "round": 6,
+      "name": "PlusMicron",
+      "sid": "76561199186342067",
+      "verdict": "true_DNF",
+      "ltg_time": null
+    },
+    {
+      "round": 7,
+      "name": "RoundNzt",
+      "sid": "76561198896246339",
+      "verdict": "true_DNF",
+      "ltg_time": null
+    },
+    {
+      "round": 11,
+      "name": "[FPV]PandaMane",
+      "sid": "76561198253679880",
+      "verdict": "true_DNF",
+      "ltg_time": null
+    },
+    {
+      "round": 14,
+      "name": "ZOMAN",
+      "sid": "76561199126724675",
+      "verdict": "true_DNF",
+      "ltg_time": null
+    }
+  ],
+  "cup_json_patch": {
+    "patched": false,
+    "reason": "no LTG cases",
+    "changes": []
+  },
+  "steam_ids_merge": {
+    "added": [
+      {
+        "canonical": "Amoru",
+        "sid": "76561198051719708",
+        "observed_as": "Amoru"
+      },
+      {
+        "canonical": "SuperHeavy",
+        "sid": "76561198287630337",
+        "observed_as": "SuperHeavy"
+      },
+      {
+        "canonical": "Torro",
+        "sid": "76561198048203385",
+        "observed_as": "Torro"
+      },
+      {
+        "canonical": "pannekoekbijter",
+        "sid": "76561198016904215",
+        "observed_as": "pannekoekbijter"
+      },
+      {
+        "canonical": "[ZET] zeriv",
+        "sid": "76561199494381509",
+        "observed_as": "zeriv"
+      }
+    ],
+    "confirmed_count": 53,
+    "conflicts": [],
+    "unresolved": []
+  }
+}
