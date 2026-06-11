@@ -1,26 +1,28 @@
 """Validate that DNFs in the same round share the same position."""
-import openpyxl, sys, glob
+import openpyxl, sys, os, re
 from collections import defaultdict
 sys.stdout.reconfigure(encoding='utf-8')
 
-files = [
-    'Zeepkist COTDs 1-25.xlsx',
-    'Zeepkist COTDs 26-50.xlsx',
-    'Zeepkist COTDs 51-75.xlsx',
-    'COTDs 76-100.xlsx',
-    'COTDs 101-125.xlsx',
-    'COTD 126-130.xlsx',
-    'COTD 131-138.xlsx',
-]
+_dir = os.path.dirname(os.path.abspath(__file__))
+_p = lambda f: os.path.join(_dir, f)
+
+# Read the xlsx list from elo_engine.py source — never hardcode it here.
+# A hardcoded list silently went stale after the COTD 131-138 -> 131-139
+# rename and this script validated nothing past cup 130 for months.
+_elo_src = open(_p('elo_engine.py'), encoding='utf-8').read()
+files = re.findall(r"parse_file\(_p\('(.+?\.xlsx)'\)\)", _elo_src)
+files += re.findall(r"parse_troll_cups\(_p\('(.+?\.xlsx)'\)\)", _elo_src)
+if not files:
+    sys.exit("ERROR: no xlsx references found in elo_engine.py")
 
 issues = 0
 cups_checked = 0
 
 for fname in files:
     try:
-        wb = openpyxl.load_workbook(fname, data_only=True)
+        wb = openpyxl.load_workbook(_p(fname), data_only=True)
     except FileNotFoundError:
-        continue
+        sys.exit(f"ERROR: {fname} is referenced by elo_engine.py but missing on disk")
 
     for sheet_name in wb.sheetnames:
         ws = wb[sheet_name]
@@ -93,19 +95,10 @@ for fname in files:
                                   f"{len(group)} DNFs at positions "
                                   f"{sorted(positions)} — {names}")
 
-                # --- Check 2: same round → must share position ---
-                if has_round:
-                    by_round = defaultdict(list)
-                    for p in players:
-                        if p['round']:
-                            by_round[p['round']].append(p)
-
-                    for rnd, group in by_round.items():
-                        positions = set(p['pos'] for p in group)
-                        if len(positions) > 1:
-                            issues += 1
-                            print(f"[ROUND] {cup_name} round {rnd}: "
-                                  f"{len(group)} players at positions "
-                                  f"{sorted(positions)}")
+                # NOTE: there used to be a Check 2 here ("everyone eliminated in
+                # the same round must share a position"). That was the overzealous
+                # 2026-04-07 tie rule, corrected 2026-04-12: finishers in a round
+                # get DISTINCT positions ordered by elim time; only DNFs tie.
+                # Check 1 above is the only check valid under the current rule.
 
 print(f"\n{cups_checked} cups checked, {issues} issues found")

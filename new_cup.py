@@ -351,6 +351,16 @@ for i, (name, time, rnd, position) in enumerate(leaderboard):
     if rnd is not None:
         ws.cell(row=row, column=col_start + 3, value=rnd)
 
+def _recycle(path):
+    """Send a file to the Windows Recycle Bin — never permanently delete."""
+    r = subprocess.run([
+        'powershell', '-NoProfile', '-Command',
+        'Add-Type -AssemblyName Microsoft.VisualBasic; '
+        "[Microsoft.VisualBasic.FileIO.FileSystem]::DeleteFile("
+        f"'{path}', 'OnlyErrorDialogs', 'SendToRecycleBin')"
+    ], capture_output=True, text=True)
+    return r.returncode == 0
+
 # Rename xlsx if needed
 m = re.match(r'COTD (\d+)-(\d+)\.xlsx', current_xlsx)
 if m:
@@ -359,14 +369,23 @@ if m:
         new_xlsx = f'COTD {start_num}-{cup_num}.xlsx'
         new_path = _p(new_xlsx)
         wb.save(new_path)
-        if new_path != xlsx_path and os.path.exists(xlsx_path):
-            os.remove(xlsx_path)
         print(f"Saved as {new_xlsx} (renamed from {current_xlsx})")
 
+        # Point elo_engine.py at the new file BEFORE touching the old one, so
+        # a crash in between never leaves the engine referencing a missing file.
         new_src = elo_src.replace(f"'{current_xlsx}'", f"'{new_xlsx}'")
         with open(elo_py_path, 'w', encoding='utf-8') as f:
             f.write(new_src)
         print(f"Updated elo_engine.py: {current_xlsx} -> {new_xlsx}")
+
+        # The old file is the master results spreadsheet — Recycle Bin only,
+        # never os.remove. If recycling fails, leave it in place (harmless:
+        # every script resolves the xlsx via elo_engine.py source, not glob).
+        if new_path != xlsx_path and os.path.exists(xlsx_path):
+            if _recycle(xlsx_path):
+                print(f"Old xlsx sent to Recycle Bin: {current_xlsx}")
+            else:
+                print(f"WARNING: could not recycle {current_xlsx} — left in place, remove manually")
     else:
         wb.save(xlsx_path)
         print(f"Saved to {current_xlsx}")
@@ -411,6 +430,12 @@ if result.returncode != 0:
 print()
 
 # ── 7. Rebuild Cool Stats ──
+# build_altrank.py is NOT just a cool stat: it's the second writer of
+# alldata.json (elo_engine.py overwrites the file with 5 keys, build_altrank
+# re-appends standard/trueskill/cupDates). If it fails, alldata.json stays
+# half-written, altrank.html breaks and the next snapshot.py run crashes —
+# this shipped to the live site once (2026-06-02) and blanked the leaderboard.
+# So its failure aborts the pipeline; the rest only warn.
 cool_stats = [
     ('build_big3.py', 'Big 3 H2H'),
     ('build_giantkillers.py', 'Giant Killers'),
@@ -420,6 +445,8 @@ cool_stats = [
     ('build_whatif.py', 'What-If ELO'),
     ('build_altrank.py', 'Alt Rankings'),
 ]
+FATAL_STATS = {'build_altrank.py'}
+failed_steps = []
 print("=" * 50)
 print("Rebuilding Cool Stats...")
 print("=" * 50)
@@ -428,10 +455,21 @@ for script, label in cool_stats:
     if os.path.exists(path):
         r = subprocess.run([sys.executable, path], cwd=_dir)
         if r.returncode != 0:
+            if script in FATAL_STATS:
+                print(f"ERROR: {label} ({script}) failed — alldata.json is "
+                      f"HALF-WRITTEN (missing standard/trueskill/cupDates).")
+                print(f"Fix the error and re-run: python {script}")
+                print("Do NOT push until it succeeds.")
+                sys.exit(1)
+            failed_steps.append(f"{label} ({script})")
             print(f"  WARNING: {label} ({script}) failed!")
         else:
             print(f"  {label} OK")
     else:
+        if script in FATAL_STATS:
+            print(f"ERROR: {script} not found — alldata.json would stay half-written.")
+            sys.exit(1)
+        failed_steps.append(f"{label} ({script}) — not found")
         print(f"  SKIP: {script} not found")
 print()
 
@@ -460,20 +498,53 @@ else:
     print(f"  SKIP: refresh script not found at {crosscomp_script}")
 print()
 
+# ── 8b. Refresh the COTD-only SOF pool (the mod's `!sof cup` data) ──
+# elo_pool_cotd.json is the historical / COTD-only counterpart to the
+# cross-comp elo_pool.json above. It only changes when COTD ratings change,
+# so it lives here in the COTD pipeline. Non-fatal: a GTR outage (it hits
+# graphql.zeepki.st) shouldn't break cup processing.
+print("=" * 50)
+print("Refreshing COTD SOF pool (mod's !sof cup data)...")
+print("=" * 50)
+cotd_pool_script = r"C:\Users\rafa\Desktop\Claude\zeepkist mod\gtr_analysis\join_cotd_gtr.py"
+sof_repo_cotd_pool = r"C:\Users\rafa\Desktop\Claude\zeepkist mod\Zeepkist-Strength-of-Field\elo_pool_cotd.json"
+
+cotd_pool_ok = False
+if os.path.exists(cotd_pool_script):
+    r = subprocess.run([sys.executable, cotd_pool_script],
+                       cwd=os.path.dirname(cotd_pool_script))
+    if r.returncode == 0:
+        print(f"  COTD elo_pool_cotd.json refreshed.")
+        cotd_pool_ok = True
+    else:
+        print(f"  WARNING: COTD pool refresh failed (returncode={r.returncode}).")
+        print(f"  Run manually: python \"{cotd_pool_script}\"")
+else:
+    print(f"  SKIP: COTD pool script not found at {cotd_pool_script}")
+print()
+
 # ── 9. Summary ──
 print("=" * 50)
 print(f"{cup_id} COMPLETE")
+if failed_steps:
+    print(f"  !! {len(failed_steps)} non-fatal step(s) FAILED — fix before pushing:")
+    for s in failed_steps:
+        print(f"     - {s}")
 print(f"  Players: {len(leaderboard)}")
 print(f"  Winner: {winner}")
 if fastest_time:
     print(f"  Fastest: {fastest_time:.3f} by {fastest_name}")
 print(f"  Columns: {col_start}-{col_start+3}")
-if sof_ok:
+if sof_ok or cotd_pool_ok:
     print(f"  SOF data: refreshed (commit+push the SOF repo too)")
 print()
 print("Next steps:")
 print(f"  - Add map name to build_cups.py map_index")
 print(f"  - Git commit + push (COTD repo) — REMEMBER to stage cup_{cup_num}.json (lexertools last-cup view fetches it)")
-if sof_ok:
-    print(f"  - Git commit + push (SOF repo: {sof_repo_pool})")
+if sof_ok or cotd_pool_ok:
+    print(f"  - Git commit + push (SOF repo) — stage BOTH pools:")
+    if sof_ok:
+        print(f"      {sof_repo_pool}")
+    if cotd_pool_ok:
+        print(f"      {sof_repo_cotd_pool}")
 print("=" * 50)

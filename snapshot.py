@@ -16,7 +16,11 @@ GRACE = 3
 with open(_p('alldata.json')) as f:
     data = json.load(f)
 
-std_players  = data['standard']
+std_players  = data.get('standard')
+if std_players is None:
+    sys.exit("ERROR: alldata.json has no 'standard' key — it is half-written "
+             "(elo_engine.py ran without build_altrank.py after it). "
+             "Run: python build_altrank.py, then retry.")
 w_players    = data['weighted']
 std_pure     = data.get('standard_pure', [])
 w_pure       = data.get('weighted_pure', [])

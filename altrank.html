@@ -288,11 +288,22 @@
   .mobile-stats-btn { display: none; font-size: 11px; font-family: var(--mono); color: var(--accent); text-decoration: none; padding: 4px 8px; border: 1px solid var(--accent); border-radius: 6px; white-space: nowrap; }
   @media (max-width: 1280px) { .mascot-sprite { display: none; } #lexerCrashSprite { display: none; } .sandals-wrap { display: none; } .mobile-stats-link { display: inline; } .mobile-stats-btn { display: inline-block; } }
   @media (max-width: 700px) {
-    .table-header, .row { grid-template-columns: 30px 1fr 50px 24px 70px !important; font-size: 10px; }
-    .table-header > :nth-child(4),
-    .table-header > :nth-child(7), .table-header > :nth-child(8), .table-header > :nth-child(9), .table-header > :nth-child(10),
-    .row > :nth-child(4),
-    .row > :nth-child(7), .row > :nth-child(8), .row > :nth-child(9), .row > :nth-child(10) { display: none !important; }
+    /* Every view sets its grid template inline, so these !important overrides
+       must be scoped per view (body[data-view] set in render()) — unscoped
+       they flattened the Cups/Rising/Search/Curse views into the
+       leaderboard's 5-column template. */
+    body[data-view="leaderboard"] .table-header, body[data-view="leaderboard"] .row { grid-template-columns: 30px 1fr 50px 24px 70px !important; font-size: 10px; }
+    body[data-view="leaderboard"] .table-header > :nth-child(4),
+    body[data-view="leaderboard"] .table-header > :nth-child(7), body[data-view="leaderboard"] .table-header > :nth-child(8), body[data-view="leaderboard"] .table-header > :nth-child(9), body[data-view="leaderboard"] .table-header > :nth-child(10),
+    body[data-view="leaderboard"] .row > :nth-child(4),
+    body[data-view="leaderboard"] .row > :nth-child(7), body[data-view="leaderboard"] .row > :nth-child(8), body[data-view="leaderboard"] .row > :nth-child(9), body[data-view="leaderboard"] .row > :nth-child(10) { display: none !important; }
+    /* Cups view: drop the Mapper column, tighten the rest */
+    body[data-view="cups"] .table-header, body[data-view="cups"] .row { grid-template-columns: 30px 64px 1fr 80px 34px 50px !important; font-size: 10px; }
+    body[data-view="cups"] .table-header > :nth-child(4), body[data-view="cups"] .row > :nth-child(4) { display: none !important; }
+    /* Rising/search/curse templates already fit phones — just match the font */
+    body[data-view="rising"] .table-header, body[data-view="rising"] .row,
+    body[data-view="search"] .table-header, body[data-view="search"] .row,
+    body[data-view="curse"] .table-header, body[data-view="curse"] .row { font-size: 10px; }
     .header h1 { font-size: 22px; }
     .quote { display: none; }
   }
@@ -1677,7 +1688,7 @@ function renderCups() {
       panel.className = "cup-detail-panel";
       panel.style.cssText = "background:var(--surface);border-bottom:1px solid var(--border);padding:10px 14px 14px;";
 
-      const cupNum = parseInt(cup.id.replace(/\D/g, ''));
+      const cupNum = cupNumFromId(cup.id); /* special cups have fractional history nums (e.g. Troll COTD 11 = 88.5) — parseInt matched the wrong cup */
       const hasSeason = allData && allData.season_2026;
       const detailCols = hasSeason ? '36px 1fr 120px 120px' : '36px 1fr 120px';
 
@@ -1784,10 +1795,11 @@ function render() {
   }
   renderComparePanel();
   const sq = document.getElementById("searchInput").value.trim().toLowerCase();
-  if (sq.length >= 2 && allData) { renderSearch(sq); return; }
-  if (viewMode === "rising") { renderRising(); return; }
-  if (viewMode === "curse") { renderCurse(); return; }
-  if (viewMode === "cups") { renderCups(); return; }
+  if (sq.length >= 2 && allData) { document.body.dataset.view = "search"; renderSearch(sq); return; }
+  if (viewMode === "rising") { document.body.dataset.view = "rising"; renderRising(); return; }
+  if (viewMode === "curse") { document.body.dataset.view = "curse"; renderCurse(); return; }
+  if (viewMode === "cups") { document.body.dataset.view = "cups"; renderCups(); return; }
+  document.body.dataset.view = "leaderboard";
   const header = document.querySelector(".table-header");
   header.style.display = "grid";
   header.style.gridTemplateColumns = leaderboardCols();
@@ -1906,7 +1918,9 @@ Promise.all([
 ]).then(([all, s, rising, curse, cups]) => {
   // Default tab: Standard ELO. Second tab: TrueSkill.
   // Reusing existing globals (eloData / weightedData) so the rest of the JS doesn't change shape.
-  eloData = all.standard.map(expandPlayer);
+  // Guard: a half-written alldata.json (elo_engine without build_altrank) has no
+  // 'standard' key — fall back to weighted instead of blanking the page (2026-06-02 incident).
+  eloData = (all.standard || all.weighted || []).map(expandPlayer);
   weightedData = (all.trueskill || []).map(expandPlayer);
   eloDataPure = all.standard_pure ? all.standard_pure.map(expandPlayer) : eloData;
   weightedDataPure = all.trueskill_pure ? all.trueskill_pure.map(expandPlayer) : weightedData;
@@ -1944,6 +1958,10 @@ Promise.all([
   }
   applyEloModeUI();
   render();
+}).catch(err => {
+  console.error('Data load failed:', err);
+  const body = document.getElementById('tableBody');
+  if (body) body.innerHTML = '<div style="padding:24px;color:#ef4444;font-family:var(--mono);font-size:12px">Failed to load ranking data — try a hard refresh (Ctrl+F5).</div>';
 });
 </script>
 <script data-goatcounter="https://aizpun.goatcounter.com/count"

@@ -1,6 +1,11 @@
 import openpyxl, json, re, sys, os, datetime
 sys.stdout.reconfigure(encoding='utf-8')
 
+# Anchor all paths to this file's directory — running from another cwd used to
+# crash on 'cup logs' / write cups.json into the wrong place.
+_dir = os.path.dirname(os.path.abspath(__file__))
+_p = lambda f: os.path.join(_dir, f)
+
 # ── Cup dates ──
 # Source of truth for cup dates. New cups (not in this dict) auto-resolve
 # from the cup-log mtime (cup logs/cotd_<N>.log). Add new cups here once
@@ -55,7 +60,8 @@ CUP_DATES = {
     'COTD 134': '2026-03-07', 'COTD 135': '2026-03-14', 'COTD 136': '2026-03-21',
     'COTD 137': '2026-03-28', 'COTD 138': '2026-04-04', 'COTD 139': '2026-04-11',
     'COTD 140': '2026-04-18', 'COTD 141': '2026-04-25', 'COTD 142': '2026-05-02',
-    'COTD 143': '2026-05-09',
+    'COTD 143': '2026-05-09', 'COTD 144': '2026-05-16', 'COTD 145': '2026-05-23',
+    'COTD 146': '2026-05-30', 'COTD 147': '2026-06-06',
 }
 
 def cup_date(cid):
@@ -64,13 +70,13 @@ def cup_date(cid):
     m = re.search(r'\d+', cid)
     if not m:
         return None
-    log_path = os.path.join('cup logs', f'cotd_{m.group()}.log')
+    log_path = _p(os.path.join('cup logs', f'cotd_{m.group()}.log'))
     if os.path.exists(log_path):
         return datetime.date.fromtimestamp(os.path.getmtime(log_path)).isoformat()
     return None
 
 # ── 1. Parse Map Index from Lexer's spreadsheet ──
-wb = openpyxl.load_workbook('Zeepkist COTD Results (lexer 23-02).xlsx', data_only=True)
+wb = openpyxl.load_workbook(_p('Zeepkist COTD Results (lexer 23-02).xlsx'), data_only=True)
 ws = wb['Map Index']
 rows = list(ws.iter_rows(values_only=True))
 
@@ -114,17 +120,26 @@ map_index['COTD 145']        = {'map': 'COTD - Resonance Ridge', 'mapper': 'Rich
 map_index['COTD 146']        = {'map': 'Shambly COTD', 'mapper': '[CRT]Codewalt'}
 map_index['COTD 147']        = {'map': 'COTD - Ashlands Descent', 'mapper': '[CSC]Mokster'}
 
+# ── 3. Invert player history into cup-centric data ──
+with open(_p('elo_results.json'), encoding='utf-8') as f:
+    elo = json.load(f)
+
 # ── Ghost display: real player played under a ghost account ──
-# cups.json keeps real player name + adds "ghost" field for frontend display
+# cups.json keeps real player name + adds "ghost" field for frontend display.
 # Format: (cup_id, real_player) → ghost_display_name
+# Derived from elo_engine's ghost splits (the "account (elo=Real)" xlsx tags),
+# exported in elo_results.json — this used to be a manual dict that silently
+# shipped duplicate rows whenever a new ghost cup wasn't added to it.
 GHOST_DISPLAY = {
     ('COTD 133', 'Kernkob'): 'rtm_lover2007',
     ('COTD 135', 'Sterben'): 'del gaming',
 }
-
-# ── 3. Invert player history into cup-centric data ──
-with open('elo_results.json', encoding='utf-8') as f:
-    elo = json.load(f)
+for _cid, _glist in elo.get('ghosts', {}).items():
+    for _pos, _ghost, _real in _glist:
+        key = (_cid, _real)
+        if key not in GHOST_DISPLAY:
+            print(f'Ghost auto-derived from elo_results.json: {key} -> {_ghost}')
+        GHOST_DISPLAY[key] = _ghost
 
 cups = {}  # cup_id -> {players: [...], lobby_size, map, mapper}
 
@@ -222,7 +237,7 @@ for i, cup in enumerate(result):
     avg = sum(elos) / len(elos)
     cup['strength'] = round(avg / 1850 * 100, 1)
 
-with open('cups.json', 'w', encoding='utf-8') as f:
+with open(_p('cups.json'), 'w', encoding='utf-8') as f:
     json.dump(result, f, ensure_ascii=False, separators=(',', ':'))
 
 print(f'Done. {len(result)} cups written to cups.json')

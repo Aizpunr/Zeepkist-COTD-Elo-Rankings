@@ -28,13 +28,17 @@ CUP_LOGS = os.path.join(HERE, 'cup logs')
 ALLDATA = os.path.join(HERE, 'alldata.json')
 STEAM_IDS = os.path.join(HERE, 'steam_ids.json')
 
-# Import CANONICAL silently (elo_engine has no __main__ guard and prints on import)
+# Import CANONICAL silently (elo_engine's writes are __main__-gated but it
+# still prints its whole report on import)
 _real_stdout = sys.stdout
 sys.stdout = io.TextIOWrapper(io.BytesIO(), encoding='utf-8', write_through=True)
 try:
     from elo_engine import CANONICAL  # type: ignore
 finally:
     sys.stdout = _real_stdout
+# Windows defaults stdout to cp1252 (esp. when piped) — unicode player names
+# (e.g. ツ) crashed the unresolved-sids printout before the report was written.
+sys.stdout.reconfigure(encoding='utf-8')
 
 # alias -> canonical, plus canonical -> canonical
 NAME_MAP = {}
@@ -407,6 +411,7 @@ def patch_cup_json(cup_n, ltg_findings, dry_run=False):
     new_players = list(winner)
     for rn in sorted(rounds.keys(), reverse=True):
         new_players.extend(rounds[rn])
+    old_pos = {id(p): p['pos'] for p in new_players}
     for i, p in enumerate(new_players):
         new_pos = i + 1
         if p['pos'] != new_pos:
@@ -415,13 +420,21 @@ def patch_cup_json(cup_n, ltg_findings, dry_run=False):
                     c['new_pos'] = new_pos
         p['pos'] = new_pos
 
+    # Every row whose position shifted — the xlsx needs the same edits or the
+    # published ELO (computed from the xlsx) diverges from cup_<N>.json.
+    position_moves = [
+        {'name': p['name'], 'round': p.get('round'),
+         'old_pos': old_pos[id(p)], 'new_pos': p['pos']}
+        for p in new_players if old_pos[id(p)] != p['pos']
+    ]
+
     cup_data['players'] = new_players
 
     if not dry_run:
         with open(path, 'w', encoding='utf-8') as f:
             json.dump(cup_data, f, ensure_ascii=False, indent=2)
 
-    return {'patched': not dry_run, 'changes': changes}
+    return {'patched': not dry_run, 'changes': changes, 'position_moves': position_moves}
 
 
 # ============================================================================
@@ -528,6 +541,23 @@ def main():
                 print(f'    R{c["round"]} {c["name"]}: pos {c["old_pos"]} -> {c.get("new_pos", c["old_pos"])}, time DNF -> {c["new_time"]}')
             else:
                 print(f'    R{c["round"]} {c["name"]}: {c["status"]}')
+        # cup_<N>.json is only the lexertools last-cup view. The published ELO
+        # is computed from the xlsx, which still has the old DNF rows — until
+        # it gets the same edits, the site rankings and the last-cup view
+        # disagree. Print the exact edits so the manual step can't be missed.
+        applied_times = [c for c in patch_result['changes'] if 'new_time' in c]
+        if patch_result['patched'] and applied_times:
+            print()
+            print('  ' + '!' * 60)
+            print(f'  !! cup_{n}.json now DIVERGES from the xlsx (= what ELO uses).')
+            print(f'  !! Apply these edits to the COTD {n} block in the xlsx,')
+            print(f'  !! then re-run the pipeline (elo_engine.py ... build_altrank.py):')
+            for c in applied_times:
+                ms = round(float(c['new_time'].replace(',', '.')) * 1000)
+                print(f'  !!   {c["name"]} (R{c["round"]}): Elim Time DNF -> {ms}')
+            for mv in patch_result.get('position_moves', []):
+                print(f'  !!   {mv["name"]}: Position {mv["old_pos"]} -> {mv["new_pos"]}')
+            print('  ' + '!' * 60)
     else:
         print(f'  cup_{n}.json: no LTG patches needed')
 

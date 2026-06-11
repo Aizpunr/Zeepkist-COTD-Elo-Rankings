@@ -433,6 +433,12 @@ function buildRoundStats(data){
 
 function renderRoundView(data){
   const rounds=buildRoundStats(data);
+  if(!rounds.length){ /* empty search → no top3[0] */
+    document.getElementById('roundLeaders').innerHTML='';
+    document.getElementById('roundPills').innerHTML='';
+    document.getElementById('roundBody').innerHTML='';
+    return;
+  }
   const colors=['gold','silver','bronze'];
 
   // Leaders: top 3 rounds — big card for #1, two smaller for 2nd/3rd
@@ -561,6 +567,7 @@ function buildLeaders(data){
 
 function buildPills(data){
   const players=buildPlayerStats(data);
+  if(!players.length){document.getElementById('pills').innerHTML='';return;} /* empty search → no players[0] */
   const totalFinals=data.filter(e=>e.round==='Final').length;
   const topFinals=[...players].sort((a,b)=>b.finals-a.finals)[0];
 

@@ -194,7 +194,6 @@ CANONICAL = {
     'Phoenjx': ['[HUGS]Phoenjx'],
     'Pigbuy': ['[OREO] Pigbuy','[OREO]Pigbuy','[OR]Pigbuy'],
     'Principe': ['[GV] Principe'],
-    'Quickracer10': ['[KURK] Quickracer10','[AJSE] Quickracer10','quickracer10'],
     'R0nanC': ['[CTR] R0nanC','[CTR]R0nanC','R0nanc'],
     'readfreak7': ['[HRR] readfreak7','[HRR]readfreak7','[PFE] readfreak7'],
     'Renergy': ['[TOOB] Renergy','[TOOB]Renergy','[UP] Renergy','[WSHD] Renergy','[just] Renergy','[meh] Renergy'],
@@ -312,7 +311,6 @@ CANONICAL = {
     'Mr. Hubub': ['[Heyo]Mr. Hubub', '[heyo]Mr. Hubub'],
     'OLR94': ['[CSC]OLR94'],
     'Ploddip': ['[ZET] Ploddip', '[ZET]Ploddip'],
-    'R0nanC': ['R0nanc'],
     'redal': ['[CSC] redal'],
     'SkyVirus': ['[NOOB]SkyVirus'],
     'Socks242': ['[Fly] Socks242'],
@@ -324,6 +322,21 @@ CANONICAL = {
     'sailingman': ['segelnhoch3'],
     'captancraft2': ['[PINK] captancraft2'],
 }
+
+# A duplicate key in the hand-edited dict above silently clobbers the earlier
+# entry and drops its aliases (happened with 'R0nanC': the [CTR] aliases
+# vanished). Python dict literals don't error on duplicates, so re-parse our
+# own source and fail loud if any key appears twice.
+def _check_canonical_duplicates():
+    import ast, os
+    src = open(os.path.abspath(__file__), encoding='utf-8').read()
+    block = re.search(r'CANONICAL\s*=\s*(\{.+?^\})', src, re.MULTILINE | re.DOTALL)
+    keys = [k.value for k in ast.parse(block.group(1), mode='eval').body.keys]
+    dupes = sorted({k for k in keys if keys.count(k) > 1})
+    if dupes:
+        raise SystemExit(f"ERROR: duplicate CANONICAL keys {dupes} — "
+                         f"merge the entries, the later one clobbers the earlier one's aliases")
+_check_canonical_duplicates()
 
 NAME_MAP = {}
 for canonical, aliases in CANONICAL.items():
@@ -714,6 +727,9 @@ print(f"\nTotal: {len(lb)} | 5+: {sum(1 for _,_,g,_,_,_,_,_ in lb if g>=5)} | 10
 # Save elo_results JSON
 output = {
     'parameters': {'starting_rating':STARTING,'k_base':K_BASE,'provisional_cups':PROV_CUPS,'provisional_multiplier':PROV_MULT,'cups_processed':len(all_cups)},
+    # Ghost splits ("account (elo=Real)" in the xlsx) per cup, so downstream
+    # scripts (build_cups.py) can handle ghosts without a manual dict.
+    'ghosts': {cup['name']: cup['ghosts'] for cup in all_cups if cup.get('ghosts')},
     'leaderboard': [
         {'rank':i+1,'name':name,'rating':rating,'cups':cp,'wins':w,
          'podiums':{'gold':pd[0],'silver':pd[1],'bronze':pd[2]},
