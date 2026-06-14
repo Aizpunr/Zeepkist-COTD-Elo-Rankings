@@ -109,6 +109,7 @@ map_index['COTD 133']        = {'map': "Serpent's Lair", 'mapper': '[CTR]Rourie1
 map_index['COTD 134']        = {'map': 'Urbs Noctu', 'mapper': '[20x]K410K3N'}
 map_index['COTD 135']        = {'map': 'Hypnerotomachia', 'mapper': '[CSC] Sahne mit Bohnen'}
 map_index['COTD 136']        = {'map': 'Volcanic', 'mapper': '[TTR] Tigerplaysonpc'}
+map_index['COTD 137']        = {'map': 'COTD - Out of Breath', 'mapper': 'Diabler'}
 map_index['COTD 138']        = {'map': 'Niwashade', 'mapper': '[CTR]Mortishade'}
 map_index['COTD 139']        = {'map': 'Tripe', 'mapper': 'JobW'}
 map_index['COTD 140']        = {'map': 'Ice Field Arctic', 'mapper': '[CSC]ShyGirlyRaccoon'}
