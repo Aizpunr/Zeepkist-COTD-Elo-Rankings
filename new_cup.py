@@ -41,6 +41,31 @@ if '--exclude' in sys.argv:
 
 excluded = {mapper} | set(extra_excluded)
 
+# Optional --log / --livelog overrides: process a cup from a saved log file
+# (e.g. an attendee's LogOutput.log when you missed the cup) instead of the
+# live BepInEx log. When --log is given without --livelog, the local live log
+# is NOT used — it would be a stale, unrelated session — so the alias SID
+# check is skipped rather than run against the wrong cup.
+def _arg_after(flag):
+    if flag in sys.argv:
+        i = sys.argv.index(flag)
+        if i + 1 < len(sys.argv):
+            return sys.argv[i + 1]
+    return None
+
+def _resolve(p):
+    return p if os.path.isabs(p) else os.path.join(_dir, p)
+
+_log_override = _arg_after('--log')
+_livelog_override = _arg_after('--livelog')
+if _log_override:
+    LOG_PATH = _resolve(_log_override)
+    LIVE_LOG_PATH = _resolve(_livelog_override) if _livelog_override else None
+    print(f"Log override: {LOG_PATH}")
+    print(f"Livelog override: {LIVE_LOG_PATH if LIVE_LOG_PATH else '(none — alias SID check skipped)'}")
+elif _livelog_override:
+    LIVE_LOG_PATH = _resolve(_livelog_override)
+
 print(f"Processing {cup_id}, mapper: {mapper}")
 if extra_excluded:
     print(f"Also excluding: {', '.join(extra_excluded)}")
@@ -51,10 +76,13 @@ log_dir = _p('cup logs')
 os.makedirs(log_dir, exist_ok=True)
 import shutil
 log_backup = os.path.join(log_dir, f'cotd_{cup_num}.log')
-shutil.copy2(LOG_PATH, log_backup)
-print(f"Raw log saved: {log_backup}")
+if os.path.abspath(LOG_PATH) != os.path.abspath(log_backup):
+    shutil.copy2(LOG_PATH, log_backup)
+    print(f"Raw log saved: {log_backup}")
+else:
+    print(f"Raw log already in place: {log_backup}")
 live_log_backup = os.path.join(log_dir, f'cotd_{cup_num}_liveleaderboard.log')
-if os.path.exists(LIVE_LOG_PATH):
+if LIVE_LOG_PATH and os.path.exists(LIVE_LOG_PATH):
     shutil.copy2(LIVE_LOG_PATH, live_log_backup)
     print(f"Live log saved: {live_log_backup}")
 else:

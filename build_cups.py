@@ -61,7 +61,7 @@ CUP_DATES = {
     'COTD 137': '2026-03-28', 'COTD 138': '2026-04-04', 'COTD 139': '2026-04-11',
     'COTD 140': '2026-04-18', 'COTD 141': '2026-04-25', 'COTD 142': '2026-05-02',
     'COTD 143': '2026-05-09', 'COTD 144': '2026-05-16', 'COTD 145': '2026-05-23',
-    'COTD 146': '2026-05-30', 'COTD 147': '2026-06-06',
+    'COTD 146': '2026-05-30', 'COTD 147': '2026-06-06', 'COTD 148': '2026-06-13',
 }
 
 def cup_date(cid):
@@ -120,6 +120,7 @@ map_index['COTD 144']        = {'map': 'COTD 144 - Chartreuse Valley', 'mapper':
 map_index['COTD 145']        = {'map': 'COTD - Resonance Ridge', 'mapper': 'Richhyyyy'}
 map_index['COTD 146']        = {'map': 'Shambly COTD', 'mapper': '[CRT]Codewalt'}
 map_index['COTD 147']        = {'map': 'COTD - Ashlands Descent', 'mapper': '[CSC]Mokster'}
+map_index['COTD 148']        = {'map': 'Eleven Gallium', 'mapper': 'agix'}
 
 # ── 3. Invert player history into cup-centric data ──
 with open(_p('elo_results.json'), encoding='utf-8') as f:
