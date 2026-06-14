@@ -471,6 +471,7 @@ cool_stats = [
     ('elo_stability.py', 'ELO Stability'),
     ('build_fastest.py', 'Fastest Times'),
     ('build_whatif.py', 'What-If ELO'),
+    ('build_streaks.py', 'Streak Records'),
     ('build_altrank.py', 'Alt Rankings'),
 ]
 FATAL_STATS = {'build_altrank.py'}

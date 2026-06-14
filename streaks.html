@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Streak Records — Zeepkist COTD</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔥</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#08080d;--surface:rgba(255,255,255,0.02);--border:rgba(255,255,255,0.06);
+--text:#e5e7eb;--dim:#9ca3af;--muted:#6b7280;--dark:#4b5563;
+--mono:'JetBrains Mono',monospace;--accent:#f59e0b;--red:#ef4444;--green:#10b981;--blue:#3b82f6;
+--streak:linear-gradient(135deg,#f59e0b,#ef4444)}
+html{background:var(--bg);color:var(--text)}
+body{font-family:'Space Grotesk',system-ui,sans-serif;min-height:100vh;padding:20px 12px}
+::selection{background:rgba(245,158,11,0.3)}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.1);border-radius:3px}
+.container{max-width:1100px;margin:0 auto}
+h1{text-align:center;font-size:32px;font-weight:800;margin-bottom:4px;
+background:var(--streak);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sub{text-align:center;font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:18px}
+.back-link{display:inline-block;font-family:var(--mono);font-size:12px;color:var(--muted);text-decoration:none;margin-bottom:16px}
+.back-link:hover{color:var(--text)}
+
+.tabwrap{display:flex;justify-content:center;margin-bottom:22px}
+.tabs{display:flex;gap:3px;background:rgba(255,255,255,0.05);border-radius:8px;padding:3px}
+.tab{padding:6px 14px;border-radius:6px;border:none;font-size:11px;font-family:var(--mono);font-weight:600;cursor:pointer;background:transparent;color:var(--muted);transition:all 0.15s}
+.tab.active{background:rgba(245,158,11,0.18);color:var(--accent)}
+.tab:hover:not(.active){color:var(--dim)}
+
+.cards-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.streak-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 14px;position:relative;overflow:hidden}
+.streak-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--streak)}
+.card-title{font-size:17px;font-weight:700;margin-bottom:1px}
+.card-cut{font-family:var(--mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+.srow{display:flex;align-items:baseline;gap:8px;padding:4px 6px;border-radius:6px;font-family:var(--mono);font-size:12px}
+.srow:hover{background:rgba(255,255,255,0.03)}
+.srow.live{background:rgba(239,68,68,0.07)}
+.srow .rank{color:var(--muted);width:20px;text-align:right;flex-shrink:0}
+.srow .pname{flex:1;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:'Space Grotesk',sans-serif}
+.srow .size{font-weight:700;font-variant-numeric:tabular-nums;flex-shrink:0}
+.srow.live .size{color:var(--red)}
+.srow .atag{color:var(--red);font-size:9px;text-transform:uppercase;letter-spacing:1px;flex-shrink:0}
+.record-note{font-family:var(--mono);font-size:10px;color:var(--dark);margin-top:10px;padding-top:8px;border-top:1px solid var(--border)}
+.methodology{font-family:var(--mono);font-size:10px;color:var(--dark);margin-top:24px;padding:12px 0;border-top:1px solid var(--border);line-height:1.5}
+.methodology .rk{color:var(--red)}
+
+@media(max-width:760px){
+  .cards-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+  h1{font-size:26px}
+}
+@media(max-width:440px){
+  .cards-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="container">
+<a href="stats.html" class="back-link">&larr; back to cool stats</a>
+<h1>Streak Records</h1>
+<div class="sub" id="sub">consecutive top finishes &mdash; who's on a heater?</div>
+
+<div class="tabwrap">
+  <div class="tabs">
+    <button class="tab active" id="tabAll" onclick="setView('all')">Top streaks</button>
+    <button class="tab" id="tabPlayer" onclick="setView('player')">One per player</button>
+  </div>
+</div>
+
+<div class="cards-grid" id="cards"></div>
+
+<div class="methodology">
+  A streak = consecutive COTD cups a player <b>attended</b> finishing at or above the cutline.
+  Cups they sat out are skipped (they don't break it); a finish past the line breaks it.
+  Regular COTD only (no Troll/Roulette). <span class="rk">Red rows are still active</span>.
+  <b>Top streaks</b> ranks every run ever &mdash; a player can appear more than once;
+  <b>One per player</b> keeps each player's single longest.
+</div>
+</div>
+
+<script>
+const customColors={"Lexer":"#22c55e","Sandals":"#aa55ff","GuAlexItar":"#f5c842","justMaki":"#dc2626","Kernkob":"#facc15","Quickracer10":"#15803d","Hydro":"#22d3ee","JakeAdjacent":"#15803d","PandaMane":"#3b82f6","RoundNzt":"#f97316","agix":"#fb923c","ZOMAN":"#3b82f6","Cbad Cruiser":"#6366f1","jandje":"#f97316","Linzi":"#d946ef","rtube":"#c084fc","Sterben":"#ec4899"};
+function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+
+let DATA = null;
+let view = 'all';
+const LIMIT = 15;
+
+function setView(v){
+  view = v;
+  document.getElementById('tabAll').classList.toggle('active', v==='all');
+  document.getElementById('tabPlayer').classList.toggle('active', v==='player');
+  render();
+}
+
+function rowsFor(card){
+  // card.streaks is pre-sorted longest-first (active breaks ties).
+  if(view === 'player'){
+    const seen = new Set(); const out = [];
+    for(const s of card.streaks){ if(seen.has(s.name)) continue; seen.add(s.name); out.push(s); }
+    return out.slice(0, LIMIT);
+  }
+  return card.streaks.slice(0, LIMIT);
+}
+
+function render(){
+  if(!DATA) return;
+  document.getElementById('cards').innerHTML = DATA.cards.map(card => {
+    const list = rowsFor(card);
+    const rows = list.map((s,i) => {
+      const col = customColors[s.name] || '';
+      const span = s.span ? ` title="${esc(s.span[0])} → ${esc(s.span[1])}"` : '';
+      const atag = s.active ? '<span class="atag">active</span>' : '';
+      return `<div class="srow${s.active?' live':''}"${span}>
+        <span class="rank">${i+1}</span>
+        <span class="pname" style="color:${col}">${esc(s.name)}</span>
+        ${atag}
+        <span class="size">${s.len}</span>
+      </div>`;
+    }).join('');
+    const rec = card.streaks[0];
+    const note = rec ? `record: ${esc(rec.name)} ${rec.len}${rec.active?' (active)':''}` : '';
+    return `<div class="streak-card">
+      <div class="card-title">${esc(card.label)}</div>
+      <div class="card-cut">top ${card.cut}</div>
+      ${rows}
+      <div class="record-note">${note}</div>
+    </div>`;
+  }).join('');
+}
+
+fetch('streaks.json').then(r=>r.json()).then(data=>{
+  DATA = data;
+  document.getElementById('sub').innerHTML =
+    `consecutive top finishes &mdash; who's on a heater? &middot; through ${esc(data.generated_through||'')}`;
+  render();
+});
+</script>
+<script data-goatcounter="https://aizpun.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
