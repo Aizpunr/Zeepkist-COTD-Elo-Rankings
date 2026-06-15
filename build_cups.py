@@ -31,9 +31,9 @@ CUP_DATES = {
     'COTD 52': '2024-06-15', 'COTD 53': '2024-06-29', 'COTD 54': '2024-07-06',
     'COTD 55': '2024-07-13', 'COTD 56': '2024-07-20', 'COTD 57': '2024-08-03',
     'COTD 58': '2024-08-10',
-    'COTW 59': '2024-08-17', 'COTW 60': '2024-08-24', 'COTW 61': '2024-08-31',
-    'COTW 62': '2024-09-07', 'COTW 63': '2024-09-14', 'COTW 64': '2024-09-28',
-    'COTW 65': '2024-10-05',
+    'COTD 59': '2024-08-17', 'COTD 60': '2024-08-24', 'COTD 61': '2024-08-31',
+    'COTD 62': '2024-09-07', 'COTD 63': '2024-09-14', 'COTD 64': '2024-09-28',
+    'COTD 65': '2024-10-05',
     'COTD 66': '2024-10-19', 'COTD 67': '2024-10-26',
     'COTD 68': '2024-11-02', 'COTD 69': '2024-11-09', 'COTD 70': '2024-11-16',
     'COTD 71': '2024-11-23', 'COTD 72': '2024-12-07', 'COTD 73': '2024-12-14',
@@ -104,7 +104,7 @@ for r in rows[3:]:
 # ── 2. Add special cups manually ──
 map_index['COTD Roulette 1'] = {'map': 'All previous cup maps on shuffle (Cups #1-24)', 'mapper': ''}
 map_index['COTD Roulette 2'] = {'map': 'All previous cup maps on shuffle (Cups #1-65)', 'mapper': ''}
-map_index['Troll COTW 9']    = {'map': 'Cheese of the Week!', 'mapper': 'Lexer'}
+map_index['Troll COTD 9']    = {'map': 'Cheese of the Week!', 'mapper': 'Lexer'}
 map_index['COTD 133']        = {'map': "Serpent's Lair", 'mapper': '[CTR]Rourie13'}
 map_index['COTD 134']        = {'map': 'Urbs Noctu', 'mapper': '[20x]K410K3N'}
 map_index['COTD 135']        = {'map': 'Hypnerotomachia', 'mapper': '[CSC] Sahne mit Bohnen'}
@@ -190,7 +190,9 @@ for cid in sorted(cups.keys(), key=cup_sort_key):
     players = [p for p in players if p['name'] not in ghost_names_to_remove]
     result.append({
         'id': cid,
-        'map': meta['map'],
+        # Cups 59-65 were briefly branded "COTW"; normalize any lingering COTW
+        # tag in old map titles (e.g. "Palm Freeze - COTW #60") to COTD.
+        'map': meta['map'].replace('COTW', 'COTD'),
         'mapper': meta['mapper'],
         'date': cup_date(cid),
         'lobby_size': cups[cid]['lobby_size'],

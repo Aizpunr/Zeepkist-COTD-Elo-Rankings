@@ -59,7 +59,7 @@ def parse_troll_cups(filepath):
         ('Troll COTD 3', 36.5, 12), ('Troll COTD 4', 41.5, 17),
         ('Troll COTD 5', 44.5, 23), ('Troll COTD 6', 48.5, 29),
         ('Troll COTD 7', 50.5, 35), ('Troll COTD 8', 56.5, 41),
-        ('Troll COTW 9', 63.5, 47), ('Troll COTD 10', 71.5, 53),
+        ('Troll COTD 9', 63.5, 47), ('Troll COTD 10', 71.5, 53),
         ('Troll COTD 11', 88.5, 59),
     ]
     cups = []
@@ -116,7 +116,7 @@ SPECIAL_CUP_ORDER = {
     'Troll COTD 6': 48.5,
     'Troll COTD 7': 50.5,
     'Troll COTD 8': 56.5,
-    'Troll COTW 9': 63.5,
+    'Troll COTD 9': 63.5,
     'Troll COTD 10': 71.5,
     'Troll COTD 11': 88.5,
 }

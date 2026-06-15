@@ -4,7 +4,7 @@ build_streaks.py — consecutive-finish streak records for the Streaks cool-stat
 A streak = consecutive COTD cups a player ATTENDED finishing at or above a
 cutline (pos <= cut). Absences are skipped (they do NOT break it); a finish past
 the cutline breaks it; boundary ties count. Regular COTD cups only
-(no Troll/Roulette/COTW). Output: streaks.json, consumed by streaks.html.
+(Troll/Roulette excluded). Output: streaks.json, consumed by streaks.html.
 """
 import json, os, re, sys
 sys.stdout.reconfigure(encoding='utf-8')
@@ -15,7 +15,9 @@ def _p(f): return os.path.join(base, f)
 with open(_p('cups.json'), encoding='utf-8') as f:
     cups = json.load(f)
 
-# Regular COTD cups only, in chronological (numeric) order.
+# Regular COTD cups only, in chronological (numeric) order. (Cups 59-65 were
+# briefly branded "COTW"; they've been renamed to COTD at the source, so a plain
+# COTD match now covers the whole mainline series.)
 reg = [c for c in cups if re.fullmatch(r'COTD \d+', c['id']) and c['players']]
 reg.sort(key=lambda c: int(c['id'].split()[1]))
 
