@@ -118,7 +118,7 @@
       "pct_3m": 0.4
     },
     {
-      "name": "Northwind",
+      "name": "Northwind/Noweki",
       "rating_now": 1636.1,
       "rating_then": 1602.2,
       "pct": 2.1,
@@ -288,7 +288,7 @@
       "pct_3m": 2.7
     },
     {
-      "name": "Northwind",
+      "name": "Northwind/Noweki",
       "rating_now": 1637.1,
       "rating_then": 1604.1,
       "pct": 2.1,
@@ -479,7 +479,7 @@
       "pct_3m": 1.0
     },
     {
-      "name": "Northwind",
+      "name": "Northwind/Noweki",
       "rating_now": 1609.7,
       "rating_then": 1582.8,
       "pct": 1.7,
@@ -691,7 +691,7 @@
       "pct_3m": 1.0
     },
     {
-      "name": "Northwind",
+      "name": "Northwind/Noweki",
       "rating_now": 1613.2,
       "rating_then": 1587.8,
       "pct": 1.6,
