@@ -100,7 +100,7 @@ all_cups = (parse_file(_p('Zeepkist COTDs 1-25.xlsx')) +
             parse_file(_p('COTDs 76-100.xlsx')) +
             parse_file(_p('COTDs 101-125.xlsx')) +
             parse_file(_p('COTD 126-130.xlsx')) +
-            parse_file(_p('COTD 131-148.xlsx')) +
+            parse_file(_p('COTD 131-149.xlsx')) +
             parse_file(_p('cup roulette.xlsx')) +
             parse_troll_cups(_p('Troll cup.xlsx')))
 
@@ -399,7 +399,7 @@ for cup in all_cups:
 print(f"Unique players: {len(unique)}")
 
 # === ELO ===
-STARTING = 1500; K_BASE = 32; PROV_CUPS = 12; PROV_MULT = 1.5
+STARTING = 1500; K_BASE = 32; PROV_CUPS = 10; PROV_MULT = 1.5
 DECAY = 0.995; GRACE = 3
 
 def E(ra,rb): return 1.0/(1.0+10.0**((rb-ra)/400.0))
