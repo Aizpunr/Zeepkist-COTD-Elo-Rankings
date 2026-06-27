@@ -62,6 +62,7 @@ CUP_DATES = {
     'COTD 140': '2026-04-18', 'COTD 141': '2026-04-25', 'COTD 142': '2026-05-02',
     'COTD 143': '2026-05-09', 'COTD 144': '2026-05-16', 'COTD 145': '2026-05-23',
     'COTD 146': '2026-05-30', 'COTD 147': '2026-06-06', 'COTD 148': '2026-06-13',
+    'COTD 149': '2026-06-20', 'COTD 150': '2026-06-27',
 }
 
 def cup_date(cid):
@@ -105,6 +106,7 @@ for r in rows[3:]:
 map_index['COTD Roulette 1'] = {'map': 'All previous cup maps on shuffle (Cups #1-24)', 'mapper': ''}
 map_index['COTD Roulette 2'] = {'map': 'All previous cup maps on shuffle (Cups #1-65)', 'mapper': ''}
 map_index['Troll COTD 9']    = {'map': 'Cheese of the Week!', 'mapper': 'Lexer'}
+map_index['Troll COTD 12']   = {'map': 'COTD - Hangman', 'mapper': '[TOG]ioi8'}
 map_index['COTD 133']        = {'map': "Serpent's Lair", 'mapper': '[CTR]Rourie13'}
 map_index['COTD 134']        = {'map': 'Urbs Noctu', 'mapper': '[20x]K410K3N'}
 map_index['COTD 135']        = {'map': 'Hypnerotomachia', 'mapper': '[CSC] Sahne mit Bohnen'}
@@ -121,6 +123,8 @@ map_index['COTD 145']        = {'map': 'COTD - Resonance Ridge', 'mapper': 'Rich
 map_index['COTD 146']        = {'map': 'Shambly COTD', 'mapper': '[CRT]Codewalt'}
 map_index['COTD 147']        = {'map': 'COTD - Ashlands Descent', 'mapper': '[CSC]Mokster'}
 map_index['COTD 148']        = {'map': 'Eleven Gallium', 'mapper': 'agix'}
+map_index['COTD 149']        = {'map': 'The Spice Rack', 'mapper': '[CSC] OccasionallyAmazingGamer'}
+map_index['COTD 150']        = {'map': 'Sink into Madness', 'mapper': 'Form'}
 
 # ── 3. Invert player history into cup-centric data ──
 with open(_p('elo_results.json'), encoding='utf-8') as f:
@@ -166,7 +170,7 @@ SPECIAL_CUP_ORDER = {
     'Troll COTD 1': 15.5, 'Troll COTD 2': 26.5, 'Troll COTD 3': 36.5,
     'Troll COTD 4': 41.5, 'Troll COTD 5': 44.5, 'Troll COTD 6': 48.5,
     'Troll COTD 7': 50.5, 'Troll COTD 8': 56.5, 'Troll COTW 9': 63.5,
-    'Troll COTD 10': 71.5, 'Troll COTD 11': 88.5,
+    'Troll COTD 10': 71.5, 'Troll COTD 11': 88.5, 'Troll COTD 12': 144.5,
 }
 def cup_sort_key(cid):
     if cid in SPECIAL_CUP_ORDER: return SPECIAL_CUP_ORDER[cid]

@@ -100,9 +100,16 @@ all_cups = (parse_file(_p('Zeepkist COTDs 1-25.xlsx')) +
             parse_file(_p('COTDs 76-100.xlsx')) +
             parse_file(_p('COTDs 101-125.xlsx')) +
             parse_file(_p('COTD 126-130.xlsx')) +
-            parse_file(_p('COTD 131-149.xlsx')) +
+            parse_file(_p('COTD 131-150.xlsx')) +
             parse_file(_p('cup roulette.xlsx')) +
             parse_troll_cups(_p('Troll cup.xlsx')))
+
+# Troll COTD 12 — exhibition / "achievement-only" cup (Hangman by [TOG]ioi8,
+# 2026-05-18). Counts for wins/podiums/attendance and shows in history (frozen
+# rating), but applies NO rating change. See EXHIBITION below.
+_t12 = json.load(open(_p('troll12.json'), encoding='utf-8'))
+all_cups.append({'name': _t12['name'],
+                 'players': [(int(pos), nm) for pos, nm in _t12['players']]})
 
 # Extract cup number for sorting - handle both COTD and COTW and specials
 SPECIAL_CUP_ORDER = {
@@ -119,6 +126,7 @@ SPECIAL_CUP_ORDER = {
     'Troll COTD 9': 63.5,
     'Troll COTD 10': 71.5,
     'Troll COTD 11': 88.5,
+    'Troll COTD 12': 144.5,
 }
 def cup_num(name):
     if name in SPECIAL_CUP_ORDER:
@@ -143,6 +151,12 @@ def is_nonstandard(cup_name):
 
 pure_cups = [c for c in all_cups if not is_nonstandard(c['name'])]
 print(f"Pure cups: {len(pure_cups)} (excluded {len(all_cups) - len(pure_cups)} non-standard)")
+
+# Exhibition cups: counted for stats (wins/podiums/attendance) and shown in
+# each player's history at a FROZEN rating, but they apply no rating change.
+# elo_cups drives the rating math + decay so these never move ELO.
+EXHIBITION = {'Troll COTD 12'}
+elo_cups = [c for c in all_cups if c['name'] not in EXHIBITION]
 
 # Fix COTD 16: both jandje and justMaki DNF'd the final - tied at 2nd, no 1st place
 for c in all_cups:
@@ -451,6 +465,15 @@ def compute_weighted_elo(cups, pct_fn=None, no_ghosts=False):
     for cup in cups:
         players = cup['players']; n = len(players)
         if n < 2: continue
+        if cup['name'] in EXHIBITION:
+            # Non-rated: record history at the current (unchanged) rating, no delta.
+            # Do NOT bump w_gp — it gates the provisional K-factor, so counting an
+            # exhibition cup there would shift players' ratings in later real cups.
+            # (Displayed cup counts come from compute_player_stats, not w_gp.)
+            for pos, name in players:
+                w_history[name].append({'cup': cup['name'], 'position': pos,
+                                        'rating': round(w_ratings[name], 1), 'lobby_size': n})
+            continue
         avg_field = sum(w_ratings[nm] for _, nm in players) / n
         w_cup_deltas = defaultdict(float)
         for i in range(n):
@@ -564,6 +587,23 @@ def compute_glicko2(cups):
         players = cup['players']
         n = len(players)
         if n < 2: continue
+
+        if cup['name'] in EXHIBITION:
+            # Non-rated: freeze rating + RD, record history, count stats only.
+            for pos, name in players:
+                if name not in state:
+                    state[name] = (G2_R0, G2_RD0, G2_VOL0)
+                r = state[name][0]
+                gp[name] += 1
+                history[name].append({'cup': cup['name'], 'position': pos,
+                                      'rating': round(r, 1), 'lobby_size': n})
+                if r > peak_rating[name]: peak_rating[name] = r
+                total_pos[name] += pos; avg_cups[name] += 1
+                if pos < best[name]: best[name] = pos
+                if pos == 1: wins[name] += 1; pods[name][0] += 1
+                elif pos == 2: pods[name][1] += 1
+                elif pos == 3: pods[name][2] += 1
+            continue
 
         # RD growth for inactive players (natural Glicko-2 inactivity)
         for name in state:
@@ -746,7 +786,7 @@ if _WRITE_OUTPUTS:
 
 # --- Build site lists (weighted + pure + season; standard list is built
 #     by build_altrank.py and merged into rising.json there) ---
-w_list        = build_site_list(w_full, stats_full, all_cups)
+w_list        = build_site_list(w_full, stats_full, elo_cups)
 w_pure_list   = build_site_list(w_pure, stats_pure, pure_cups)
 season_list   = build_site_list(season_w, season_stats, season_cups, min_cups=1, no_decay=True)
 
@@ -797,10 +837,10 @@ def build_all_list(elo_data, stat_data, cups_list, min_cups=3, no_decay=False):
 # 'standard' and 'standard_pure' are written by build_altrank.py (which also
 # adds 'trueskill', 'trueskill_pure', 'cupDates') after this script.
 alldata = {
-    'weighted':      build_all_list(w_full,   stats_full, all_cups, min_cups=1),
+    'weighted':      build_all_list(w_full,   stats_full, elo_cups, min_cups=1),
     'weighted_pure': build_all_list(w_pure,   stats_pure, pure_cups, min_cups=1),
     'season_2026':   build_all_list(season_w, season_stats, season_cups, min_cups=1, no_decay=True),
-    'glicko2':       build_all_list(g2_full,  g2_full, all_cups, min_cups=1),
+    'glicko2':       build_all_list(g2_full,  g2_full, elo_cups, min_cups=1),
     'glicko2_pure':  build_all_list(g2_pure,  g2_pure, pure_cups, min_cups=1),
 }
 if _WRITE_OUTPUTS:

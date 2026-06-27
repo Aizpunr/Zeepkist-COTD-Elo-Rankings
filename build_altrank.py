@@ -165,6 +165,12 @@ troll_files = re.findall(r"parse_troll_cups\(_p\('(.+?\.xlsx)'\)\)", elo_src)
 for f in troll_files:
     all_cups += parse_troll_cups(_p(f))
 
+# Troll COTD 12 — exhibition cup (see elo_engine.py EXHIBITION). Counts for
+# stats + shows in history at a frozen rating, but never moves a rating.
+_t12 = json.load(open(_p('troll12.json'), encoding='utf-8'))
+all_cups.append({'name': _t12['name'],
+                 'players': [(int(pos), nm) for pos, nm in _t12['players']]})
+
 SPECIAL_CUP_ORDER = {
     'COTD Roulette 1': 25.5, 'COTD Roulette 2': 65.5,
     'Troll COTD 1': 15.5, 'Troll COTD 2': 26.5,
@@ -172,7 +178,7 @@ SPECIAL_CUP_ORDER = {
     'Troll COTD 5': 44.5, 'Troll COTD 6': 48.5,
     'Troll COTD 7': 50.5, 'Troll COTD 8': 56.5,
     'Troll COTD 9': 63.5, 'Troll COTD 10': 71.5,
-    'Troll COTD 11': 88.5,
+    'Troll COTD 11': 88.5, 'Troll COTD 12': 144.5,
 }
 
 def cup_num(name):
@@ -197,6 +203,11 @@ def is_nonstandard(cup_name):
 
 pure_cups = [c for c in all_cups if not is_nonstandard(c['name'])]
 print(f"Loaded {len(all_cups)} cups ({len(pure_cups)} pure)")
+
+# Exhibition cups: stats + frozen history only, no rating change. elo_cups
+# drives rating math + decay so they never move ELO.
+EXHIBITION = {'Troll COTD 12'}
+elo_cups = [c for c in all_cups if c['name'] not in EXHIBITION]
 
 # COTD 16 fix: both finalists DNF'd — tied at 2nd
 for c in all_cups:
@@ -274,6 +285,23 @@ def compute_trueskill(cups):
         players = cup['players']
         n = len(players)
         if n < 2: continue
+
+        if cup['name'] in EXHIBITION:
+            # Non-rated: record history at current rating, count stats, no drift/update.
+            for pos, name in players:
+                if name not in ts:
+                    ts[name] = (TS_MU0, TS_SIGMA0)
+                display = ts_display(*ts[name])
+                gp[name] += 1
+                history[name].append({'cup': cup['name'], 'position': pos,
+                                      'rating': display, 'lobby_size': n})
+                if display > peak[name]: peak[name] = display
+                total_pos[name] += pos; avg_cups[name] += 1
+                if pos < best[name]: best[name] = pos
+                if pos == 1: wins[name] += 1; pods[name][0] += 1
+                elif pos == 2: pods[name][1] += 1
+                elif pos == 3: pods[name][2] += 1
+            continue
 
         # Sigma drift for all known players (inactivity increases uncertainty)
         for name in ts:
@@ -368,17 +396,31 @@ def E(ra, rb): return 1.0 / (1.0 + 10.0 ** ((rb - ra) / 400.0))
 
 def compute_standard_elo(cups, no_ghosts=False):
     ratings = defaultdict(lambda: STARTING)
-    gp = defaultdict(int); history = defaultdict(list)
+    gp = defaultdict(int); rated_gp = defaultdict(int); history = defaultdict(list)
     wins = defaultdict(int); pods = defaultdict(lambda: [0, 0, 0])
     best = defaultdict(lambda: 999); total_pos = defaultdict(int); avg_cups = defaultdict(int)
     for cup in cups:
         players = cup['players']; n = len(players)
         if n < 2: continue
+        if cup['name'] in EXHIBITION:
+            # Non-rated: record history at current rating + count stats and display
+            # gp, but NOT rated_gp (the provisional gate) so later real cups are
+            # unaffected and ratings stay identical.
+            for pos, name in players:
+                gp[name] += 1
+                history[name].append({'cup': cup['name'], 'position': pos,
+                                      'rating': round(ratings[name], 1), 'lobby_size': n})
+                total_pos[name] += pos; avg_cups[name] += 1
+                if pos < best[name]: best[name] = pos
+                if pos == 1: wins[name] += 1; pods[name][0] += 1
+                elif pos == 2: pods[name][1] += 1
+                elif pos == 3: pods[name][2] += 1
+            continue
         deltas = defaultdict(float)
         for i in range(n):
             pi, ni = players[i]; ra = ratings[ni]
             k = K_BASE / (n - 1)
-            if gp[ni] < PROV_CUPS: k *= PROV_MULT
+            if rated_gp[ni] < PROV_CUPS: k *= PROV_MULT
             for j in range(n):
                 if i == j: continue
                 pj, nj = players[j]
@@ -386,7 +428,7 @@ def compute_standard_elo(cups, no_ghosts=False):
                 s = 1.0 if pi < pj else (0.0 if pi > pj else 0.5)
                 deltas[ni] += k * (s - e)
         for pos, name in players:
-            ratings[name] += deltas[name]; gp[name] += 1
+            ratings[name] += deltas[name]; gp[name] += 1; rated_gp[name] += 1
             history[name].append({'cup': cup['name'], 'position': pos,
                                   'rating': round(ratings[name], 1), 'lobby_size': n})
             is_troll4_dnf = cup['name'] == 'Troll COTD 4' and pos == 3
@@ -402,14 +444,14 @@ def compute_standard_elo(cups, no_ghosts=False):
             for pos, name, real in cup.get('ghosts', []):
                 ra = ratings[name]
                 k = K_BASE / (n - 1)
-                if gp[name] < PROV_CUPS: k *= PROV_MULT
+                if rated_gp[name] < PROV_CUPS: k *= PROV_MULT
                 ghost_delta = 0.0
                 for pj, nj in players:
                     e = E(ra, ratings[nj])
                     s = 1.0 if pos < pj else (0.0 if pos > pj else 0.5)
                     ghost_delta += k * (s - e)
                 ratings[name] += ghost_delta
-                gp[name] += 1
+                gp[name] += 1; rated_gp[name] += 1
                 history[name].append({'cup': cup['name'], 'position': pos,
                                       'rating': round(ratings[name], 1), 'lobby_size': n})
                 if pos < best[name]: best[name] = pos
@@ -561,9 +603,9 @@ std_pure = compute_standard_elo(pure_cups)
 alldata_path = _p('alldata.json')
 with open(alldata_path, encoding='utf-8') as f:
     alldata = json.load(f)
-alldata['standard']       = build_all_list(std_full, all_cups, min_cups=1)
+alldata['standard']       = build_all_list(std_full, elo_cups, min_cups=1)
 alldata['standard_pure']  = build_all_list(std_pure, pure_cups, min_cups=1)
-alldata['trueskill']      = build_all_list(ts_full, all_cups)
+alldata['trueskill']      = build_all_list(ts_full, elo_cups)
 alldata['trueskill_pure'] = build_all_list(ts_pure, pure_cups)
 
 # Cup dates — needed by altrank.html rolling tab. Sourced from cups.json
@@ -601,7 +643,7 @@ with open(rising_path, encoding='utf-8') as f:
 lookback_6m = rising_out['lookback_cup']
 lookback_3m = rising_out['lookback_3m']
 
-std_list = build_site_list(std_full, all_cups)
+std_list = build_site_list(std_full, elo_cups)
 std_pure_list = build_site_list(std_pure, pure_cups)
 rising_out['standard']      = build_rising_combined(std_list, lookback_6m, lookback_3m)
 rising_out['standard_pure'] = build_rising_combined(std_pure_list, lookback_6m, lookback_3m)

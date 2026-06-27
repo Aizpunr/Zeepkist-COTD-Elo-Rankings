@@ -186,7 +186,7 @@ function cupUrl(id){
 function isTroll(cup){return /troll|roulette/i.test(cup)}
 function stripTag(n){return n.replace(/^\[.*?\]\s*/,'')}
 function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
-const customColors={"Lexer":"#22c55e","Sandals":"#aa55ff","GuAlexItar":"#f5c842","justMaki":"#dc2626","Kernkob":"#facc15","Quickracer10":"#15803d","Hydro":"#22d3ee","JakeAdjacent":"#15803d","PandaMane":"#3b82f6","RoundNzt":"#f97316","agix":"#fb923c","ZOMAN":"#3b82f6","Cbad Cruiser":"#6366f1","jandje":"#f97316","Linzi":"#d946ef","rtube":"#c084fc","Sterben":"#ec4899"};
+const customColors={"Lexer":"#22c55e","Sandals":"#aa55ff","GuAlexItar":"#f5c842","justMaki":"#dc2626", "Minkus": "#dc2626","Kernkob":"#facc15","Quickracer10":"#15803d","Hydro":"#22d3ee","JakeAdjacent":"#15803d","PandaMane":"#3b82f6","RoundNzt":"#f97316","agix":"#fb923c","ZOMAN":"#3b82f6","Cbad Cruiser":"#6366f1","jandje":"#f97316","Linzi":"#d946ef","rtube":"#c084fc","Sterben":"#ec4899"};
 function fmt(t){return t>=60?Math.floor(t/60)+':'+(t%60).toFixed(3).padStart(6,'0'):t.toFixed(3)}
 function cssVar(name){return getComputedStyle(document.documentElement).getPropertyValue(name).trim()}
 function rColor(r){if(r>=2000)return"#dc2626";if(r>=1800)return"#a855f7";if(r>=1700)return"#3b82f6";if(r>=1600)return"#10b981";if(r>=1500)return"#6b7280";return"#78716c"}

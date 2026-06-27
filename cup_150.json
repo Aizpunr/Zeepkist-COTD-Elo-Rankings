@@ -1,0 +1,331 @@
+{
+  "cup": "COTD 150",
+  "cup_num": 150,
+  "mapper": "Form",
+  "players": [
+    {
+      "pos": 1,
+      "name": "Kernkob",
+      "time": "40,40229",
+      "round": null
+    },
+    {
+      "pos": 2,
+      "name": "[DNF] JakeAdjacent",
+      "time": "41,01427",
+      "round": 17
+    },
+    {
+      "pos": 3,
+      "name": "Hydro",
+      "time": "41,51258",
+      "round": 16
+    },
+    {
+      "pos": 4,
+      "name": "B_ES",
+      "time": "DNF",
+      "round": 15
+    },
+    {
+      "pos": 5,
+      "name": "ping",
+      "time": "42,90405",
+      "round": 14
+    },
+    {
+      "pos": 6,
+      "name": "RoundNzt",
+      "time": "42,49827",
+      "round": 13
+    },
+    {
+      "pos": 7,
+      "name": "Lexer",
+      "time": "41,72316",
+      "round": 12
+    },
+    {
+      "pos": 8,
+      "name": "Minkus",
+      "time": "42,21553",
+      "round": 12
+    },
+    {
+      "pos": 9,
+      "name": "[ZET]Stick",
+      "time": "42,63203",
+      "round": 11
+    },
+    {
+      "pos": 10,
+      "name": "[Quac] microways",
+      "time": "42,91665",
+      "round": 11
+    },
+    {
+      "pos": 11,
+      "name": "[CTR]GuAlexItar",
+      "time": "42,14683",
+      "round": 10
+    },
+    {
+      "pos": 12,
+      "name": "[CTR]NathWalt",
+      "time": "42,47703",
+      "round": 10
+    },
+    {
+      "pos": 13,
+      "name": "brrryy",
+      "time": "DNF",
+      "round": 9
+    },
+    {
+      "pos": 13,
+      "name": "PlusMicron",
+      "time": "DNF",
+      "round": 9
+    },
+    {
+      "pos": 15,
+      "name": "[KURK] Quickracer10",
+      "time": "42,74793",
+      "round": 8
+    },
+    {
+      "pos": 16,
+      "name": "Reamerad",
+      "time": "43,33959",
+      "round": 8
+    },
+    {
+      "pos": 17,
+      "name": "Savage Package",
+      "time": "43,48595",
+      "round": 8
+    },
+    {
+      "pos": 18,
+      "name": "[ZET] Wheelie",
+      "time": "44,74109",
+      "round": 8
+    },
+    {
+      "pos": 19,
+      "name": "alpa",
+      "time": "43,34631",
+      "round": 7
+    },
+    {
+      "pos": 20,
+      "name": "Dartho Mas",
+      "time": "43,83694",
+      "round": 7
+    },
+    {
+      "pos": 21,
+      "name": "Hi Im Yolo",
+      "time": "44,09902",
+      "round": 7
+    },
+    {
+      "pos": 22,
+      "name": "rtube",
+      "time": "44,71084",
+      "round": 7
+    },
+    {
+      "pos": 23,
+      "name": "Noxitu",
+      "time": "44,99365",
+      "round": 6
+    },
+    {
+      "pos": 24,
+      "name": "Mμ",
+      "time": "DNF",
+      "round": 6
+    },
+    {
+      "pos": 24,
+      "name": "Butter",
+      "time": "DNF",
+      "round": 6
+    },
+    {
+      "pos": 24,
+      "name": "Six",
+      "time": "DNF",
+      "round": 6
+    },
+    {
+      "pos": 27,
+      "name": "Tudge Boat",
+      "time": "44,5469",
+      "round": 5
+    },
+    {
+      "pos": 28,
+      "name": "MadTomato",
+      "time": "44,71061",
+      "round": 5
+    },
+    {
+      "pos": 29,
+      "name": "[ZET]Sword125",
+      "time": "44,80355",
+      "round": 5
+    },
+    {
+      "pos": 30,
+      "name": "Waaksaam",
+      "time": "45,03526",
+      "round": 5
+    },
+    {
+      "pos": 31,
+      "name": "DeiRex",
+      "time": "45,95418",
+      "round": 5
+    },
+    {
+      "pos": 32,
+      "name": "[ERR]ferinine",
+      "time": "DNF",
+      "round": 5
+    },
+    {
+      "pos": 33,
+      "name": "Gimpel",
+      "time": "45,25947",
+      "round": 4
+    },
+    {
+      "pos": 34,
+      "name": "[oiia]K410K3N",
+      "time": "45,58999",
+      "round": 4
+    },
+    {
+      "pos": 35,
+      "name": "aizpun",
+      "time": "45,88501",
+      "round": 4
+    },
+    {
+      "pos": 36,
+      "name": "Kiprosa",
+      "time": "46,64548",
+      "round": 4
+    },
+    {
+      "pos": 37,
+      "name": "[RB]Chinpokomon",
+      "time": "48,95143",
+      "round": 4
+    },
+    {
+      "pos": 38,
+      "name": "SjorsTea",
+      "time": "49,02593",
+      "round": 4
+    },
+    {
+      "pos": 39,
+      "name": "M4DSCOTSM4N",
+      "time": "47,96617",
+      "round": 3
+    },
+    {
+      "pos": 40,
+      "name": "timesprout",
+      "time": "51,33107",
+      "round": 3
+    },
+    {
+      "pos": 41,
+      "name": "BrickEdwards",
+      "time": "DNF",
+      "round": 3
+    },
+    {
+      "pos": 41,
+      "name": "wokonbike",
+      "time": "DNF",
+      "round": 3
+    },
+    {
+      "pos": 41,
+      "name": "SuperHeavy",
+      "time": "DNF",
+      "round": 3
+    },
+    {
+      "pos": 41,
+      "name": "Orb Bee Bob",
+      "time": "DNF",
+      "round": 3
+    },
+    {
+      "pos": 45,
+      "name": "imagineaclevernamehere",
+      "time": "49,21463",
+      "round": 2
+    },
+    {
+      "pos": 46,
+      "name": "[ZET]vectortrajector",
+      "time": "50,30386",
+      "round": 2
+    },
+    {
+      "pos": 47,
+      "name": "N1ghtH4WkEd",
+      "time": "53,64838",
+      "round": 2
+    },
+    {
+      "pos": 48,
+      "name": "Samueras",
+      "time": "DNF",
+      "round": 2
+    },
+    {
+      "pos": 48,
+      "name": "Hellmet",
+      "time": "DNF",
+      "round": 2
+    },
+    {
+      "pos": 48,
+      "name": "[Err] Veneficus",
+      "time": "DNF",
+      "round": 2
+    },
+    {
+      "pos": 51,
+      "name": "wunderBarr",
+      "time": "DNF",
+      "round": 1
+    },
+    {
+      "pos": 51,
+      "name": "[ItIs]St Nicholas",
+      "time": "DNF",
+      "round": 1
+    },
+    {
+      "pos": 51,
+      "name": "[SLOW]Zeus",
+      "time": "DNF",
+      "round": 1
+    },
+    {
+      "pos": 51,
+      "name": "zodiak",
+      "time": "DNF",
+      "round": 1
+    }
+  ]
+}
