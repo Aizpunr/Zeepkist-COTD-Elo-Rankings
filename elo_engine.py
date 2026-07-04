@@ -287,7 +287,7 @@ CANONICAL = {
     'vortex': ['[mib]vortex'],
     'Lexer': ['[BRIT] Lexer'],
     'Murrl': ['[BAP]Murrl', '[Burp]Murrl', '[Toob]Murrl', 'MeroMeroNoMi', '[Mero] Murri'],
-    'JakeAdjacent': ['[CD]SadD0ge', '[SWMG]SadD0ge', '[SWMG]JakeAdjacent', 'SadD0ge'],
+    'JakeAdjacent': ['[CD]SadD0ge', '[SWMG]SadD0ge', '[SWMG]JakeAdjacent', 'SadD0ge', '[DNF] Jake'],
     'Beans': ['[CTR]Beans'],
     'DeeDeeNaNaNa': ['[CSC] DeeDeeNaNaNa', '[CSC]DeeDeeNaNaNa'],
     'Form': ['[fn]Form'],
