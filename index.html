@@ -540,7 +540,7 @@ function getActiveData() {
 //   1. 6+ cups, OR
 //   2. 1+ lifetime podium, OR
 //   3. 4+ cups with at least one in the last 20 events (active recent player)
-// Season/Race mode keeps the older lenient rule (2+ cups OR any lifetime podium).
+// Season/Race mode: 3+ cups OR any lifetime podium.
 function computeLast20Cups(dataset) {
   const cs = new Set();
   for (const p of dataset) for (const h of (p.history || [])) cs.add(h.c);
@@ -550,7 +550,7 @@ function hasPodium(p) {
   return (p.podiums.gold + p.podiums.silver + p.podiums.bronze) > 0;
 }
 function isQualified(p, last20) {
-  if (eloMode === "season") return p.cups >= 2 || hasPodium(p);
+  if (eloMode === "season") return p.cups >= 3 || hasPodium(p);
   if (p.cups >= 6) return true;
   if (hasPodium(p)) return true;
   return p.cups >= 4 && (p.history || []).some(h => last20.has(h.c));
