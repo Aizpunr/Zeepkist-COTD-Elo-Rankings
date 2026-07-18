@@ -63,10 +63,22 @@ CUP_DATES = {
     'COTD 143': '2026-05-09', 'COTD 144': '2026-05-16', 'COTD 145': '2026-05-23',
     'COTD 146': '2026-05-30', 'COTD 147': '2026-06-06', 'COTD 148': '2026-06-13',
     'COTD 149': '2026-06-20', 'COTD 150': '2026-06-27',
-    'COTD 151': '2026-07-04', 'COTD 152': '2026-07-11',
+    'COTD 151': '2026-07-04',
 }
 
+# ── Cup meta (written by new_cup.py) ──
+# Source of truth for NEW cups: map name, raw mapper name, cup date.
+# Replaces hand-editing map_index / CUP_DATES here — do not add new cups to
+# the dicts above; new_cup.py --map writes them to cup_meta.json instead.
+CUP_META = {}
+_meta_path = _p('cup_meta.json')
+if os.path.exists(_meta_path):
+    with open(_meta_path, encoding='utf-8') as _f:
+        CUP_META = json.load(_f)
+
 def cup_date(cid):
+    if cid in CUP_META and CUP_META[cid].get('date'):
+        return CUP_META[cid]['date']
     if cid in CUP_DATES:
         return CUP_DATES[cid]
     m = re.search(r'\d+', cid)
@@ -127,7 +139,10 @@ map_index['COTD 148']        = {'map': 'Eleven Gallium', 'mapper': 'agix'}
 map_index['COTD 149']        = {'map': 'The Spice Rack', 'mapper': '[CSC] OccasionallyAmazingGamer'}
 map_index['COTD 150']        = {'map': 'Sink into Madness', 'mapper': 'Form'}
 map_index['COTD 151']        = {'map': 'COTD - Greenslide', 'mapper': '[ZET]void'}
-map_index['COTD 152']        = {'map': 'COTD - Blue Blitz', 'mapper': '[MMM]Victor'}
+
+# cup_meta.json entries win over everything above (new cups land here via new_cup.py)
+for _cid, _m in CUP_META.items():
+    map_index[_cid] = {'map': _m.get('map', ''), 'mapper': _m.get('mapper', '')}
 
 # ── 3. Invert player history into cup-centric data ──
 with open(_p('elo_results.json'), encoding='utf-8') as f:
