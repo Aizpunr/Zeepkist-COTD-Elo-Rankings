@@ -100,7 +100,7 @@ all_cups = (parse_file(_p('Zeepkist COTDs 1-25.xlsx')) +
             parse_file(_p('COTDs 76-100.xlsx')) +
             parse_file(_p('COTDs 101-125.xlsx')) +
             parse_file(_p('COTD 126-130.xlsx')) +
-            parse_file(_p('COTD 131-153.xlsx')) +
+            parse_file(_p('COTD 131-154.xlsx')) +
             parse_file(_p('cup roulette.xlsx')) +
             parse_troll_cups(_p('Troll cup.xlsx')))
 
@@ -287,7 +287,7 @@ CANONICAL = {
     'vortex': ['[mib]vortex'],
     'Lexer': ['[BRIT] Lexer'],
     'Murrl': ['[BAP]Murrl', '[Burp]Murrl', '[Toob]Murrl', 'MeroMeroNoMi', '[Mero] Murri'],
-    'JakeAdjacent': ['[CD]SadD0ge', '[SWMG]SadD0ge', '[SWMG]JakeAdjacent', 'SadD0ge', '[DNF] Jake', 'Jake'],
+    'JakeAdjacent': ['[CD]SadD0ge', '[SWMG]SadD0ge', '[SWMG]JakeAdjacent', 'SadD0ge', '[DNF] Jake', 'Jake', '[SOS] Jake'],
     'Beans': ['[CTR]Beans'],
     'DeeDeeNaNaNa': ['[CSC] DeeDeeNaNaNa', '[CSC]DeeDeeNaNaNa'],
     'Form': ['[fn]Form'],
@@ -299,6 +299,7 @@ CANONICAL = {
     'MarcSubstitute': ['[DHLU]MarcSubstitute', '[SLOW]MarcSubstitute'],
     'MetalCJ': ['[TTR]MetalCJ'],
     'microways': ['[Quac] microways'],
+    'PlusMicron': ['[CSC] PlusMicron'],
     'MMXD18': ['[Toob]MMXD18'],
     'Moody': ['[CTR]Moody', '[MIB]Moody'],
     'RadAbsRad': ['[Meow]RadAbsRad'],
