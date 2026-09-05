@@ -100,7 +100,7 @@ all_cups = (parse_file(_p('Zeepkist COTDs 1-25.xlsx')) +
             parse_file(_p('COTDs 76-100.xlsx')) +
             parse_file(_p('COTDs 101-125.xlsx')) +
             parse_file(_p('COTD 126-130.xlsx')) +
-            parse_file(_p('COTD 131-159.xlsx')) +
+            parse_file(_p('COTD 131-160.xlsx')) +
             parse_file(_p('cup roulette.xlsx')) +
             parse_troll_cups(_p('Troll cup.xlsx')))
 
@@ -208,7 +208,7 @@ CANONICAL = {
     'Phoenjx': ['[HUGS]Phoenjx'],
     'Pigbuy': ['[OREO] Pigbuy','[OREO]Pigbuy','[OR]Pigbuy'],
     'Principe': ['[GV] Principe'],
-    'R0nanC': ['[CTR] R0nanC','[CTR]R0nanC','R0nanc'],
+    'R0nanC': ['[CTR] R0nanC','[CTR]R0nanC','R0nanc','[GECK]RonanGeck','[GECK]R0nanGeck','RonanGeck','R0nanGeck'],
     'readfreak7': ['[HRR] readfreak7','[HRR]readfreak7','[PFE] readfreak7'],
     'Renergy': ['[TOOB] Renergy','[TOOB]Renergy','[UP] Renergy','[WSHD] Renergy','[just] Renergy','[meh] Renergy'],
     'rsgold': ['[OR] rsgold'],
