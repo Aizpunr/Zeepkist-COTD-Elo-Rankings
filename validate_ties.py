@@ -6,12 +6,11 @@ sys.stdout.reconfigure(encoding='utf-8')
 _dir = os.path.dirname(os.path.abspath(__file__))
 _p = lambda f: os.path.join(_dir, f)
 
-# Read the xlsx list from elo_engine.py source — never hardcode it here.
+# The xlsx list is imported from elo_engine — never hardcode it here.
 # A hardcoded list silently went stale after the COTD 131-138 -> 131-139
 # rename and this script validated nothing past cup 130 for months.
-_elo_src = open(_p('elo_engine.py'), encoding='utf-8').read()
-files = re.findall(r"parse_file\(_p\('(.+?\.xlsx)'\)\)", _elo_src)
-files += re.findall(r"parse_troll_cups\(_p\('(.+?\.xlsx)'\)\)", _elo_src)
+from elo_engine import XLSX_FILES, ROULETTE_XLSX, TROLL_XLSX
+files = XLSX_FILES + [ROULETTE_XLSX, TROLL_XLSX]
 if not files:
     sys.exit("ERROR: no xlsx references found in elo_engine.py")
 

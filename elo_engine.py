@@ -1,13 +1,14 @@
-import openpyxl, json, re, sys, math
+import openpyxl, json, re, sys, math, os
 from collections import defaultdict
-sys.stdout.reconfigure(encoding='utf-8')
 
-# Importing this module (e.g. `from elo_engine import CANONICAL`, done by
-# petite_ranking / analyze_cup_livelog / seed_steam_ids / merge_gtr / match_gtr,
-# and transitively by the cross-comp refresh.py) must NOT overwrite the output
-# JSONs — doing so wiped the alt-rank keys build_altrank.py appends and blanked
-# the leaderboard. Output writes are gated on this so they only run as a script.
-_WRITE_OUTPUTS = (__name__ == '__main__')
+# Importing this module is cheap and side-effect free: it defines CANONICAL,
+# the xlsx file list, the pure parsing/rating helpers and nothing else. All
+# workbook loading, rating computation, printing and JSON writing lives in
+# main() and only runs when this file is executed as a script. Several
+# scripts in this repo and in sibling repos do `from elo_engine import
+# CANONICAL`; older ones text-parse the CANONICAL literal below, which is
+# why it must stay a top-level dict literal with its closing brace at
+# column 0.
 
 def parse_file(filepath):
     wb = openpyxl.load_workbook(filepath, data_only=True)
@@ -91,25 +92,24 @@ def parse_troll_cups(filepath):
             cups.append({'name': name, 'players': troll4_override})
     return cups
 
-import os
 _dir = os.path.dirname(os.path.abspath(__file__))
 _p = lambda f: os.path.join(_dir, f)
-all_cups = (parse_file(_p('Zeepkist COTDs 1-25.xlsx')) +
-            parse_file(_p('Zeepkist COTDs 26-50.xlsx')) +
-            parse_file(_p('Zeepkist COTDs 51-75.xlsx')) +
-            parse_file(_p('COTDs 76-100.xlsx')) +
-            parse_file(_p('COTDs 101-125.xlsx')) +
-            parse_file(_p('COTD 126-130.xlsx')) +
-            parse_file(_p('COTD 131-160.xlsx')) +
-            parse_file(_p('cup roulette.xlsx')) +
-            parse_troll_cups(_p('Troll cup.xlsx')))
 
-# Troll COTD 12 — exhibition / "achievement-only" cup (Hangman by [TOG]ioi8,
-# 2026-05-18). Counts for wins/podiums/attendance and shows in history (frozen
-# rating), but applies NO rating change. See EXHIBITION below.
-_t12 = json.load(open(_p('troll12.json'), encoding='utf-8'))
-all_cups.append({'name': _t12['name'],
-                 'players': [(int(pos), nm) for pos, nm in _t12['players']]})
+# Result workbooks, oldest first. The LAST entry is rewritten in place by
+# new_cup.py when a cup pushes the file past its range (string replace of
+# the quoted filename), so keep exactly one quoted literal per line.
+XLSX_FILES = [
+    'Zeepkist COTDs 1-25.xlsx',
+    'Zeepkist COTDs 26-50.xlsx',
+    'Zeepkist COTDs 51-75.xlsx',
+    'COTDs 76-100.xlsx',
+    'COTDs 101-125.xlsx',
+    'COTD 126-130.xlsx',
+    'COTD 131-160.xlsx',
+]
+ROULETTE_XLSX = 'cup roulette.xlsx'
+TROLL_XLSX = 'Troll cup.xlsx'
+TROLL12_JSON = 'troll12.json'
 
 # Extract cup number for sorting - handle both COTD and COTW and specials
 SPECIAL_CUP_ORDER = {
@@ -133,46 +133,15 @@ def cup_num(name):
         return SPECIAL_CUP_ORDER[name]
     m = re.search(r'(\d+)', name)
     return int(m.group(1)) if m else 0
-all_cups.sort(key=lambda c: cup_num(c['name']))
-
-# Deduplicate (same cup number)
-seen = set()
-deduped = []
-for c in all_cups:
-    n = cup_num(c['name'])
-    if n not in seen:
-        seen.add(n)
-        deduped.append(c)
-all_cups = deduped
 
 # Filter non-standard cups (Troll COTDs, Roulette)
 def is_nonstandard(cup_name):
     return cup_name.startswith('Troll ') or 'Roulette' in cup_name
 
-pure_cups = [c for c in all_cups if not is_nonstandard(c['name'])]
-print(f"Pure cups: {len(pure_cups)} (excluded {len(all_cups) - len(pure_cups)} non-standard)")
-
 # Exhibition cups: counted for stats (wins/podiums/attendance) and shown in
 # each player's history at a FROZEN rating, but they apply no rating change.
 # elo_cups drives the rating math + decay so these never move ELO.
 EXHIBITION = {'Troll COTD 12'}
-elo_cups = [c for c in all_cups if c['name'] not in EXHIBITION]
-
-# Fix COTD 16: both jandje and justMaki DNF'd the final - tied at 2nd, no 1st place
-for c in all_cups:
-    if c['name'] == 'COTD 16':
-        c['players'] = [(2 if pos == 1 else pos, name) for pos, name in c['players']]
-        break
-
-print(f"Parsed {len(all_cups)} cups")
-for c in all_cups:
-    print(f"  {c['name']}: {len(c['players'])} players")
-
-# Collect all names for alias detection
-all_names = set()
-for cup in all_cups:
-    for _, name in cup['players']:
-        all_names.add(name)
 
 def strip_tag(name):
     return re.sub(r'\[.*?\]\s*', '', name).strip()
@@ -355,65 +324,119 @@ def _check_canonical_duplicates():
                          f"merge the entries, the later one clobbers the earlier one's aliases")
 _check_canonical_duplicates()
 
-NAME_MAP = {}
-for canonical, aliases in CANONICAL.items():
-    for alias in aliases:
-        NAME_MAP[alias] = canonical
+def build_name_map(all_names=()):
+    """alias -> canonical from CANONICAL, then auto-extend with any
+    [TAG]Name seen in the data whose bare Name is already a canonical."""
+    name_map = {}
+    for canonical, aliases in CANONICAL.items():
+        for alias in aliases:
+            name_map[alias] = canonical
+    # Auto-extend: detect any new [TAG]Name patterns where Name already exists as canonical
+    for n in all_names:
+        stripped = strip_tag(n)
+        if stripped != n and stripped in all_names and n not in name_map:
+            # Check if stripped version is a canonical
+            is_canonical = stripped in CANONICAL or any(stripped == c for c in CANONICAL)
+            if is_canonical:
+                name_map[n] = stripped
+    return name_map
 
-# Auto-extend: detect any new [TAG]Name patterns where Name already exists as canonical
-for n in all_names:
-    stripped = strip_tag(n)
-    if stripped != n and stripped in all_names and n not in NAME_MAP:
-        # Check if stripped version is a canonical
-        is_canonical = stripped in CANONICAL or any(stripped == c for c in CANONICAL)
-        if is_canonical:
-            NAME_MAP[n] = stripped
+# CANONICAL-only map for importers; main() rebuilds it with the data-driven
+# auto-extend once the cups are loaded.
+NAME_MAP = build_name_map()
 
-def normalize(name):
-    return NAME_MAP.get(name, name)
+def normalize(name, name_map=None):
+    return (NAME_MAP if name_map is None else name_map).get(name, name)
 
-for cup in all_cups:
-    cup['players'] = [(pos, normalize(name)) for pos, name in cup['players']]
+def load_all_cups():
+    """Load every workbook, sort/dedupe by cup number, apply the COTD 16 fix.
+    Returns (all_cups, pure_cups, elo_cups); the three lists share dicts."""
+    all_cups = []
+    for fn in XLSX_FILES:
+        all_cups += parse_file(_p(fn))
+    all_cups += parse_file(_p(ROULETTE_XLSX))
+    all_cups += parse_troll_cups(_p(TROLL_XLSX))
 
-# Handle shared-account entries: "account_name (elo=RealPlayer)"
-# Spreadsheet tag format: rtm_lover2007 (elo=Kernkob)
-# RealPlayer gets ELO credit; account_name becomes a ghost (history only, no ELO effect)
-import re as _re
-for cup in all_cups:
-    new_players = []
-    ghosts = []
-    for pos, name in cup['players']:
-        m = _re.match(r'^(.+?)\s*\(elo=(.+?)\)$', name)
-        if m:
-            ghost_name = m.group(1).strip()
-            real_name = normalize(m.group(2).strip())
-            new_players.append((pos, real_name))
-            ghosts.append((pos, ghost_name, real_name))
-            print(f"  Ghost split in {cup['name']}: {ghost_name} → ELO:{real_name}, ghost:{ghost_name}")
-        else:
-            new_players.append((pos, name))
-    cup['players'] = new_players
-    cup['ghosts'] = ghosts  # stored separately for history-only processing
+    # Troll COTD 12 — exhibition / "achievement-only" cup (Hangman by [TOG]ioi8,
+    # 2026-05-18). Counts for wins/podiums/attendance and shows in history (frozen
+    # rating), but applies NO rating change. See EXHIBITION below.
+    _t12 = json.load(open(_p('troll12.json'), encoding='utf-8'))
+    all_cups.append({'name': _t12['name'],
+                     'players': [(int(pos), nm) for pos, nm in _t12['players']]})
 
-# Check remaining duplicates
-by_stripped = defaultdict(set)
-for cup in all_cups:
-    for _, name in cup['players']:
-        by_stripped[strip_tag(name).lower()].add(name)
-remaining = {k: v for k, v in by_stripped.items() if len(v) > 1}
-if remaining:
-    print(f"\nWARNING: {len(remaining)} unresolved duplicates:")
-    for k, v in sorted(remaining.items()):
-        print(f"  {k}: {sorted(v)}")
-else:
-    print("\nAll duplicates resolved!")
+    all_cups.sort(key=lambda c: cup_num(c['name']))
 
-# Count unique
-unique = set()
-for cup in all_cups:
-    for _, name in cup['players']:
-        unique.add(name)
-print(f"Unique players: {len(unique)}")
+    # Deduplicate (same cup number)
+    seen = set()
+    deduped = []
+    for c in all_cups:
+        n = cup_num(c['name'])
+        if n not in seen:
+            seen.add(n)
+            deduped.append(c)
+    all_cups = deduped
+
+    pure_cups = [c for c in all_cups if not is_nonstandard(c['name'])]
+    print(f"Pure cups: {len(pure_cups)} (excluded {len(all_cups) - len(pure_cups)} non-standard)")
+    elo_cups = [c for c in all_cups if c['name'] not in EXHIBITION]
+
+    # Fix COTD 16: both jandje and justMaki DNF'd the final - tied at 2nd, no 1st place
+    for c in all_cups:
+        if c['name'] == 'COTD 16':
+            c['players'] = [(2 if pos == 1 else pos, name) for pos, name in c['players']]
+            break
+
+    print(f"Parsed {len(all_cups)} cups")
+    for c in all_cups:
+        print(f"  {c['name']}: {len(c['players'])} players")
+    return all_cups, pure_cups, elo_cups
+
+def apply_aliases(cups, name_map):
+    """Normalize names in place and split shared-account ghosts."""
+    for cup in cups:
+        cup['players'] = [(pos, normalize(name, name_map)) for pos, name in cup['players']]
+
+    # Handle shared-account entries: "account_name (elo=RealPlayer)"
+    # Spreadsheet tag format: rtm_lover2007 (elo=Kernkob)
+    # RealPlayer gets ELO credit; account_name becomes a ghost (history only, no ELO effect)
+    import re as _re
+    for cup in cups:
+        new_players = []
+        ghosts = []
+        for pos, name in cup['players']:
+            m = _re.match(r'^(.+?)\s*\(elo=(.+?)\)$', name)
+            if m:
+                ghost_name = m.group(1).strip()
+                real_name = normalize(m.group(2).strip(), name_map)
+                new_players.append((pos, real_name))
+                ghosts.append((pos, ghost_name, real_name))
+                print(f"  Ghost split in {cup['name']}: {ghost_name} → ELO:{real_name}, ghost:{ghost_name}")
+            else:
+                new_players.append((pos, name))
+        cup['players'] = new_players
+        cup['ghosts'] = ghosts  # stored separately for history-only processing
+
+def report_unresolved(cups):
+    """Print remaining tag-variant duplicates and the unique player count."""
+    # Check remaining duplicates
+    by_stripped = defaultdict(set)
+    for cup in cups:
+        for _, name in cup['players']:
+            by_stripped[strip_tag(name).lower()].add(name)
+    remaining = {k: v for k, v in by_stripped.items() if len(v) > 1}
+    if remaining:
+        print(f"\nWARNING: {len(remaining)} unresolved duplicates:")
+        for k, v in sorted(remaining.items()):
+            print(f"  {k}: {sorted(v)}")
+    else:
+        print("\nAll duplicates resolved!")
+
+    # Count unique
+    unique = set()
+    for cup in cups:
+        for _, name in cup['players']:
+            unique.add(name)
+    print(f"Unique players: {len(unique)}")
 
 # === ELO ===
 STARTING = 1500; K_BASE = 32; PROV_CUPS = 10; PROV_MULT = 1.5
@@ -725,73 +748,6 @@ def build_site_list(elo_data, stat_data, cups_list, min_cups=5, no_decay=False):
 
 # --- Season 2026 ---
 SEASON_2026_START = 126  # COTD 126 = Jan 3, 2026
-season_cups = [c for c in pure_cups if cup_num(c['name']) >= SEASON_2026_START]
-print(f"\n2026 season cups: {len(season_cups)} (COTD {SEASON_2026_START}+)")
-
-# --- Compute all variants ---
-# Standard ELO computation lives in build_altrank.py now (it's an alt-rank
-# view, not the main page). Here we compute stats once via compute_player_stats
-# and reuse them for weighted/season output columns.
-print("\nComputing player stats (all cups)...")
-stats_full = compute_player_stats(all_cups)
-print("Computing weighted ELO (all cups)...")
-w_full = compute_weighted_elo(all_cups)
-print("Computing Glicko-2 (all cups)...")
-g2_full = compute_glicko2(all_cups)
-print("Computing player stats (pure cups)...")
-stats_pure = compute_player_stats(pure_cups)
-print("Computing weighted ELO (pure cups)...")
-w_pure = compute_weighted_elo(pure_cups)
-print("Computing Glicko-2 (pure cups)...")
-g2_pure = compute_glicko2(pure_cups)
-print("Computing 2026 season ELO...")
-season_stats = compute_player_stats(season_cups, no_ghosts=True)
-season_w = compute_weighted_elo(season_cups, no_ghosts=True)
-
-# --- Console output (weighted ratings + counted stats) ---
-ratings = w_full['ratings']; gp = stats_full['gp']; history = w_full['history']
-wins = stats_full['wins']; pods = stats_full['pods']; best = stats_full['best']
-total_pos = stats_full['total_pos']; avg_cups = stats_full['avg_cups']
-
-lb = sorted([(n,round(ratings[n],1),gp[n],wins[n],pods[n],best[n],total_pos[n],avg_cups[n]) for n in ratings],
-    key=lambda x:x[1],reverse=True)
-
-print("\n"+"="*105)
-print(f"{'#':<5}{'Player':<26}{'Elo':<9}{'Cups':<6}{'W':<4}{'Pod':<11}{'Avg':<7}{'Peak':<9}{'Best'}")
-print("="*105)
-for rank,(name,rating,cp,w,pd,bf,tp,ac) in enumerate(lb,1):
-    peak = max(h['rating'] for h in history[name])
-    avg = tp/ac if ac > 0 else 0
-    print(f"{rank:<5}{name:<26}{rating:<9}{cp:<6}{w:<4}{pd[0]}/{pd[1]}/{pd[2]:<7}{avg:<7.1f}{peak:<9}{bf}")
-    if rank >= 40: break
-
-print(f"\nTotal: {len(lb)} | 5+: {sum(1 for _,_,g,_,_,_,_,_ in lb if g>=5)} | 10+: {sum(1 for _,_,g,_,_,_,_,_ in lb if g>=10)} | 20+: {sum(1 for _,_,g,_,_,_,_,_ in lb if g>=20)}")
-
-# Save elo_results JSON
-output = {
-    'parameters': {'starting_rating':STARTING,'k_base':K_BASE,'provisional_cups':PROV_CUPS,'provisional_multiplier':PROV_MULT,'cups_processed':len(all_cups)},
-    # Ghost splits ("account (elo=Real)" in the xlsx) per cup, so downstream
-    # scripts (build_cups.py) can handle ghosts without a manual dict.
-    'ghosts': {cup['name']: cup['ghosts'] for cup in all_cups if cup.get('ghosts')},
-    'leaderboard': [
-        {'rank':i+1,'name':name,'rating':rating,'cups':cp,'wins':w,
-         'podiums':{'gold':pd[0],'silver':pd[1],'bronze':pd[2]},
-         'avg_position':round(tp/ac,1) if ac > 0 else 0,'best_finish':bf,
-         'peak_rating':max(h['rating'] for h in history[name]),
-         'history':history[name]}
-        for i,(name,rating,cp,w,pd,bf,tp,ac) in enumerate(lb)
-    ]
-}
-if _WRITE_OUTPUTS:
-    with open(_p('elo_results.json'),'w') as f:
-        json.dump(output,f,indent=2)
-    print("JSON saved")
-
-# --- Build site lists (weighted + pure + season; standard list is built
-#     by build_altrank.py and merged into rising.json there) ---
-w_list        = build_site_list(w_full, stats_full, elo_cups)
-w_pure_list   = build_site_list(w_pure, stats_pure, pure_cups)
-season_list   = build_site_list(season_w, season_stats, season_cups, min_cups=1, no_decay=True)
 
 # --- alldata.json (all players, compact keys, with history) ---
 # Glicko-2 entries include a 'u' (uncertainty / RD) field; weighted/season do not.
@@ -837,28 +793,11 @@ def build_all_list(elo_data, stat_data, cups_list, min_cups=3, no_decay=False):
     out.sort(key=lambda p: p['a'], reverse=True)
     return out
 
-# 'standard' and 'standard_pure' are written by build_altrank.py (which also
-# adds 'trueskill', 'trueskill_pure', 'cupDates') after this script.
-alldata = {
-    'weighted':      build_all_list(w_full,   stats_full, elo_cups, min_cups=1),
-    'weighted_pure': build_all_list(w_pure,   stats_pure, pure_cups, min_cups=1),
-    'season_2026':   build_all_list(season_w, season_stats, season_cups, min_cups=1, no_decay=True),
-    'glicko2':       build_all_list(g2_full,  g2_full, elo_cups, min_cups=1),
-    'glicko2_pure':  build_all_list(g2_pure,  g2_pure, pure_cups, min_cups=1),
-}
-if _WRITE_OUTPUTS:
-    with open(_p('alldata.json'), 'w') as f:
-        json.dump(alldata, f, separators=(',', ':'))
-    print(f"alldata.json written ({len(alldata['weighted'])} players)")
-
 # --- Rising.json ---
 RISING_LOOKBACK_6M = 26
 RISING_LOOKBACK_3M = 13
 RISING_MIN_RATING = 1600
 RISING_TOP_N = 50
-current_cup_n = cup_num(all_cups[-1]['name'])
-lookback_6m = current_cup_n - RISING_LOOKBACK_6M
-lookback_3m = current_cup_n - RISING_LOOKBACK_3M
 
 def build_rising(player_list, lookback_cup):
     results = []
@@ -881,7 +820,7 @@ def build_rising(player_list, lookback_cup):
     results.sort(key=lambda x: x['pct'], reverse=True)
     return results[:50]
 
-def build_rising_combined(player_list):
+def build_rising_combined(player_list, lookback_6m, lookback_3m):
     """Anyone with >=1% growth in either 6M or 3M gets included.
        Eligible: rating >= 1600 OR in top 50 by rating."""
     top50 = set(p['name'] for p in sorted(player_list, key=lambda x: x['active'], reverse=True)[:RISING_TOP_N])
@@ -907,22 +846,6 @@ def build_rising_combined(player_list):
             }
     return sorted(entries.values(), key=lambda x: x['pct'], reverse=True)[:50]
 
-# 'standard' and 'standard_pure' rising keys are appended by build_altrank.py
-# (it owns Standard ELO now).
-rising_out = {
-    'current_cup':   current_cup_n,
-    'lookback_cup':  lookback_6m,
-    'lookback_3m':   lookback_3m,
-    'lookback_cups': RISING_LOOKBACK_6M,
-    'min_rating':    RISING_MIN_RATING,
-    'weighted':      build_rising_combined(w_list),
-    'weighted_pure': build_rising_combined(w_pure_list),
-}
-if _WRITE_OUTPUTS:
-    with open(_p('rising.json'), 'w') as f:
-        json.dump(rising_out, f, indent=2)
-    print("rising.json written")
-
 # --- Lexer Curse ELO ---
 # Remap positions: 4th=best, spiraling outward (4,3,5,2,6,1,7,8,9...)
 def curse_remap(pos):
@@ -936,46 +859,162 @@ def curse_pct_mult(pos, n):
     if pos <= 7: return 0.5    # real 1st, 7th
     return 0.3
 
-curse_cups = []
-for cup in all_cups:
-    cp = [(curse_remap(pos), name) for pos, name in cup['players']]
-    cp.sort(key=lambda x: x[0])
-    curse_cups.append({'name': cup['name'], 'players': cp})
+def main():
+    sys.stdout.reconfigure(encoding='utf-8')
 
-# Count real 4th-place finishes from original data
-fourths_count = defaultdict(int)
-for cup in all_cups:
-    for pos, name in cup['players']:
-        if pos == 4: fourths_count[name] += 1
+    all_cups, pure_cups, elo_cups = load_all_cups()
 
-print("\nComputing Lexer Curse ELO (weighted, 4th-biased)...")
-curse_result = compute_weighted_elo(curse_cups, pct_fn=curse_pct_mult)
+    # Collect all names for alias detection
+    all_names = set()
+    for cup in all_cups:
+        for _, name in cup['players']:
+            all_names.add(name)
 
-# Precompute last cup index for decay
-curse_last_idx = {}
-for idx, cup in enumerate(all_cups):
-    for _, name in cup['players']:
-        curse_last_idx[name] = idx
+    name_map = build_name_map(all_names)
+    apply_aliases(all_cups, name_map)
+    report_unresolved(all_cups)
 
-curse_list = []
-for name in curse_result['ratings']:
-    if curse_result['gp'][name] < 3: continue
-    raw = round(curse_result['ratings'][name], 1)
-    missed = len(all_cups) - 1 - curse_last_idx.get(name, 0)
-    active = round(1500 + (raw - 1500) * (DECAY ** (missed - GRACE)), 1) if missed > GRACE else raw
-    h = curse_result['history'][name]
-    peak = max(e['rating'] for e in h) if h else raw
-    curse_list.append({
-        'name': name, 'rating': raw, 'active': active,
-        'cups': curse_result['gp'][name],
-        'fourths': fourths_count[name],
-        'peak_rating': round(peak, 1),
-        'history': [{'c': cup_num(e['cup']), 'r': e['rating'], 'p': e['position']} for e in h]
-    })
-curse_list.sort(key=lambda p: p['active'], reverse=True)
-curse_list = curse_list[:150]
+    season_cups = [c for c in pure_cups if cup_num(c['name']) >= SEASON_2026_START]
+    print(f"\n2026 season cups: {len(season_cups)} (COTD {SEASON_2026_START}+)")
 
-if _WRITE_OUTPUTS:
+    # --- Compute all variants ---
+    # Standard ELO computation lives in build_altrank.py now (it's an alt-rank
+    # view, not the main page). Here we compute stats once via compute_player_stats
+    # and reuse them for weighted/season output columns.
+    print("\nComputing player stats (all cups)...")
+    stats_full = compute_player_stats(all_cups)
+    print("Computing weighted ELO (all cups)...")
+    w_full = compute_weighted_elo(all_cups)
+    print("Computing Glicko-2 (all cups)...")
+    g2_full = compute_glicko2(all_cups)
+    print("Computing player stats (pure cups)...")
+    stats_pure = compute_player_stats(pure_cups)
+    print("Computing weighted ELO (pure cups)...")
+    w_pure = compute_weighted_elo(pure_cups)
+    print("Computing Glicko-2 (pure cups)...")
+    g2_pure = compute_glicko2(pure_cups)
+    print("Computing 2026 season ELO...")
+    season_stats = compute_player_stats(season_cups, no_ghosts=True)
+    season_w = compute_weighted_elo(season_cups, no_ghosts=True)
+
+    # --- Console output (weighted ratings + counted stats) ---
+    ratings = w_full['ratings']; gp = stats_full['gp']; history = w_full['history']
+    wins = stats_full['wins']; pods = stats_full['pods']; best = stats_full['best']
+    total_pos = stats_full['total_pos']; avg_cups = stats_full['avg_cups']
+
+    lb = sorted([(n,round(ratings[n],1),gp[n],wins[n],pods[n],best[n],total_pos[n],avg_cups[n]) for n in ratings],
+        key=lambda x:x[1],reverse=True)
+
+    print("\n"+"="*105)
+    print(f"{'#':<5}{'Player':<26}{'Elo':<9}{'Cups':<6}{'W':<4}{'Pod':<11}{'Avg':<7}{'Peak':<9}{'Best'}")
+    print("="*105)
+    for rank,(name,rating,cp,w,pd,bf,tp,ac) in enumerate(lb,1):
+        peak = max(h['rating'] for h in history[name])
+        avg = tp/ac if ac > 0 else 0
+        print(f"{rank:<5}{name:<26}{rating:<9}{cp:<6}{w:<4}{pd[0]}/{pd[1]}/{pd[2]:<7}{avg:<7.1f}{peak:<9}{bf}")
+        if rank >= 40: break
+
+    print(f"\nTotal: {len(lb)} | 5+: {sum(1 for _,_,g,_,_,_,_,_ in lb if g>=5)} | 10+: {sum(1 for _,_,g,_,_,_,_,_ in lb if g>=10)} | 20+: {sum(1 for _,_,g,_,_,_,_,_ in lb if g>=20)}")
+
+    # Save elo_results JSON
+    output = {
+        'parameters': {'starting_rating':STARTING,'k_base':K_BASE,'provisional_cups':PROV_CUPS,'provisional_multiplier':PROV_MULT,'cups_processed':len(all_cups)},
+        # Ghost splits ("account (elo=Real)" in the xlsx) per cup, so downstream
+        # scripts (build_cups.py) can handle ghosts without a manual dict.
+        'ghosts': {cup['name']: cup['ghosts'] for cup in all_cups if cup.get('ghosts')},
+        'leaderboard': [
+            {'rank':i+1,'name':name,'rating':rating,'cups':cp,'wins':w,
+             'podiums':{'gold':pd[0],'silver':pd[1],'bronze':pd[2]},
+             'avg_position':round(tp/ac,1) if ac > 0 else 0,'best_finish':bf,
+             'peak_rating':max(h['rating'] for h in history[name]),
+             'history':history[name]}
+            for i,(name,rating,cp,w,pd,bf,tp,ac) in enumerate(lb)
+        ]
+    }
+    with open(_p('elo_results.json'),'w') as f:
+        json.dump(output,f,indent=2)
+    print("JSON saved")
+
+    # --- Build site lists (weighted + pure + season; standard list is built
+    #     by build_altrank.py and merged into rising.json there) ---
+    w_list        = build_site_list(w_full, stats_full, elo_cups)
+    w_pure_list   = build_site_list(w_pure, stats_pure, pure_cups)
+    season_list   = build_site_list(season_w, season_stats, season_cups, min_cups=1, no_decay=True)
+
+    # 'standard' and 'standard_pure' are written by build_altrank.py (which also
+    # adds 'trueskill', 'trueskill_pure', 'cupDates') after this script.
+    alldata = {
+        'weighted':      build_all_list(w_full,   stats_full, elo_cups, min_cups=1),
+        'weighted_pure': build_all_list(w_pure,   stats_pure, pure_cups, min_cups=1),
+        'season_2026':   build_all_list(season_w, season_stats, season_cups, min_cups=1, no_decay=True),
+        'glicko2':       build_all_list(g2_full,  g2_full, elo_cups, min_cups=1),
+        'glicko2_pure':  build_all_list(g2_pure,  g2_pure, pure_cups, min_cups=1),
+    }
+    with open(_p('alldata.json'), 'w') as f:
+        json.dump(alldata, f, separators=(',', ':'))
+    print(f"alldata.json written ({len(alldata['weighted'])} players)")
+
+    current_cup_n = cup_num(all_cups[-1]['name'])
+    lookback_6m = current_cup_n - RISING_LOOKBACK_6M
+    lookback_3m = current_cup_n - RISING_LOOKBACK_3M
+
+    # 'standard' and 'standard_pure' rising keys are appended by build_altrank.py
+    # (it owns Standard ELO now).
+    rising_out = {
+        'current_cup':   current_cup_n,
+        'lookback_cup':  lookback_6m,
+        'lookback_3m':   lookback_3m,
+        'lookback_cups': RISING_LOOKBACK_6M,
+        'min_rating':    RISING_MIN_RATING,
+        'weighted':      build_rising_combined(w_list, lookback_6m, lookback_3m),
+        'weighted_pure': build_rising_combined(w_pure_list, lookback_6m, lookback_3m),
+    }
+    with open(_p('rising.json'), 'w') as f:
+        json.dump(rising_out, f, indent=2)
+    print("rising.json written")
+
+    curse_cups = []
+    for cup in all_cups:
+        cp = [(curse_remap(pos), name) for pos, name in cup['players']]
+        cp.sort(key=lambda x: x[0])
+        curse_cups.append({'name': cup['name'], 'players': cp})
+
+    # Count real 4th-place finishes from original data
+    fourths_count = defaultdict(int)
+    for cup in all_cups:
+        for pos, name in cup['players']:
+            if pos == 4: fourths_count[name] += 1
+
+    print("\nComputing Lexer Curse ELO (weighted, 4th-biased)...")
+    curse_result = compute_weighted_elo(curse_cups, pct_fn=curse_pct_mult)
+
+    # Precompute last cup index for decay
+    curse_last_idx = {}
+    for idx, cup in enumerate(all_cups):
+        for _, name in cup['players']:
+            curse_last_idx[name] = idx
+
+    curse_list = []
+    for name in curse_result['ratings']:
+        if curse_result['gp'][name] < 3: continue
+        raw = round(curse_result['ratings'][name], 1)
+        missed = len(all_cups) - 1 - curse_last_idx.get(name, 0)
+        active = round(1500 + (raw - 1500) * (DECAY ** (missed - GRACE)), 1) if missed > GRACE else raw
+        h = curse_result['history'][name]
+        peak = max(e['rating'] for e in h) if h else raw
+        curse_list.append({
+            'name': name, 'rating': raw, 'active': active,
+            'cups': curse_result['gp'][name],
+            'fourths': fourths_count[name],
+            'peak_rating': round(peak, 1),
+            'history': [{'c': cup_num(e['cup']), 'r': e['rating'], 'p': e['position']} for e in h]
+        })
+    curse_list.sort(key=lambda p: p['active'], reverse=True)
+    curse_list = curse_list[:150]
     with open(_p('lexercurse.json'), 'w') as f:
         json.dump({'l': curse_list}, f, separators=(',', ':'))
     print(f"lexercurse.json written ({len(curse_list)} players)")
+
+
+if __name__ == '__main__':
+    main()

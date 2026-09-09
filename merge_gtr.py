@@ -46,12 +46,9 @@ MANUAL_OVERRIDES = {
 }
 
 
-_real = sys.stdout
-sys.stdout = io.TextIOWrapper(io.BytesIO(), encoding='utf-8', write_through=True)
-try:
-    from elo_engine import CANONICAL  # type: ignore
-finally:
-    sys.stdout = _real
+# Importing elo_engine is cheap and silent (its pipeline only runs as __main__).
+from elo_engine import CANONICAL  # type: ignore
+sys.stdout.reconfigure(encoding='utf-8')
 
 NAME_MAP = {}
 for canonical, aliases in CANONICAL.items():

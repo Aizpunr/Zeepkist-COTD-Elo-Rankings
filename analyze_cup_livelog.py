@@ -28,14 +28,8 @@ CUP_LOGS = os.path.join(HERE, 'cup logs')
 ALLDATA = os.path.join(HERE, 'alldata.json')
 STEAM_IDS = os.path.join(HERE, 'steam_ids.json')
 
-# Import CANONICAL silently (elo_engine's writes are __main__-gated but it
-# still prints its whole report on import)
-_real_stdout = sys.stdout
-sys.stdout = io.TextIOWrapper(io.BytesIO(), encoding='utf-8', write_through=True)
-try:
-    from elo_engine import CANONICAL  # type: ignore
-finally:
-    sys.stdout = _real_stdout
+# Importing elo_engine is cheap and silent (its pipeline only runs as __main__).
+from elo_engine import CANONICAL  # type: ignore
 # Windows defaults stdout to cp1252 (esp. when piped) — unicode player names
 # (e.g. ツ) crashed the unresolved-sids printout before the report was written.
 sys.stdout.reconfigure(encoding='utf-8')

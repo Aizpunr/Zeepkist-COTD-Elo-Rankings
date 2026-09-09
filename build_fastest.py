@@ -10,31 +10,13 @@ sys.stdout.reconfigure(encoding='utf-8')
 base = os.path.dirname(os.path.abspath(__file__))
 def _p(f): return os.path.join(base, f)
 
-# Import CANONICAL aliases from elo_engine.py
-def load_aliases():
-    """Parse CANONICAL dict from elo_engine.py source."""
-    name_map = {}
-    lines = open(_p('elo_engine.py'), encoding='utf-8').readlines()
-    collecting = False
-    buf = []
-    for line in lines:
-        if not collecting and re.match(r'^CANONICAL\s*=\s*\{', line):
-            collecting = True
-        if collecting:
-            buf.append(line)
-            # Stop when we hit a line that's just "}" (the closing of CANONICAL)
-            if line.strip() == '}':
-                break
-    if not buf:
-        return name_map
-    block = ''.join(buf).split('=', 1)[1].strip()
-    canonical = eval(block)
-    for canon, aliases in canonical.items():
-        for alias in aliases:
-            name_map[alias] = canon
-    return name_map
+# CANONICAL aliases + workbook list imported from elo_engine (cheap import)
+from elo_engine import CANONICAL, XLSX_FILES, ROULETTE_XLSX, TROLL_XLSX
 
-NAME_MAP = load_aliases()
+NAME_MAP = {}
+for _canon, _aliases in CANONICAL.items():
+    for _alias in _aliases:
+        NAME_MAP[_alias] = _canon
 
 def normalize_name(name):
     """Resolve tagged/aliased name to canonical."""
@@ -46,10 +28,9 @@ def normalize_name(name):
         return NAME_MAP[stripped]
     return stripped
 
-# Read xlsx file list from elo_engine.py source (auto-syncs when files change)
-_elo_src = open(_p('elo_engine.py'), encoding='utf-8').read()
-FILES = re.findall(r"parse_file\(_p\('(.+?\.xlsx)'\)\)", _elo_src)
-FILES += re.findall(r"parse_troll_cups\(_p\('(.+?\.xlsx)'\)\)", _elo_src)
+# Workbook list from elo_engine: regular books, then roulette, then troll (the
+# order the engine loads them, which also fixes fastest.json entry order).
+FILES = XLSX_FILES + [ROULETTE_XLSX, TROLL_XLSX]
 
 # Regex for standard format: "Fastest Time: 45.823 by justMaki in Round 12"
 # Also handles minutes format: "1:36.225 by ..."

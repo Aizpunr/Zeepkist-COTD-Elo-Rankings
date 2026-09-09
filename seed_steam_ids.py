@@ -32,14 +32,9 @@ LIVELOG_FILES = [
     r'C:\Program Files (x86)\Steam\steamapps\common\Zeepkist\BepInEx\LiveLeaderboardLogger.log',
 ]
 
-# Import CANONICAL without running elo_engine's full pipeline output.
-# elo_engine has no __main__ guard and reconfigures stdout, so we redirect.
-_real_stdout = sys.stdout
-sys.stdout = io.TextIOWrapper(io.BytesIO(), encoding='utf-8', write_through=True)
-try:
-    from elo_engine import CANONICAL  # type: ignore
-finally:
-    sys.stdout = _real_stdout
+# Importing elo_engine is cheap and silent (its pipeline only runs as __main__).
+from elo_engine import CANONICAL  # type: ignore
+sys.stdout.reconfigure(encoding='utf-8')
 
 # alias -> canonical, plus canonical -> canonical (identity)
 NAME_MAP = {}

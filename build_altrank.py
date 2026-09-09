@@ -22,30 +22,14 @@ sys.stdout.reconfigure(encoding='utf-8')
 base = os.path.dirname(os.path.abspath(__file__))
 def _p(f): return os.path.join(base, f)
 
-# ── Aliases (eval from elo_engine.py source) ──────────────────────────────
+# ── Aliases + workbook list (imported from elo_engine; the import is cheap) ──
 
-def load_aliases():
-    name_map = {}
-    canonical = {}
-    lines = open(_p('elo_engine.py'), encoding='utf-8').readlines()
-    collecting = False
-    buf = []
-    for line in lines:
-        if not collecting and re.match(r'^CANONICAL\s*=\s*\{', line):
-            collecting = True
-        if collecting:
-            buf.append(line)
-            if line.strip() == '}':
-                break
-    if buf:
-        block = ''.join(buf).split('=', 1)[1].strip()
-        canonical = eval(block)
-        for canon, aliases in canonical.items():
-            for alias in aliases:
-                name_map[alias] = canon
-    return name_map, canonical
+from elo_engine import CANONICAL, XLSX_FILES, ROULETTE_XLSX, TROLL_XLSX
 
-NAME_MAP, CANONICAL = load_aliases()
+NAME_MAP = {}
+for _canon, _aliases in CANONICAL.items():
+    for _alias in _aliases:
+        NAME_MAP[_alias] = _canon
 
 def strip_tag(name):
     return re.sub(r'\[.*?\]\s*', '', name).strip()
@@ -145,24 +129,20 @@ def parse_troll_cups(filepath):
 
 # ── Cup loading + normalization ───────────────────────────────────────────
 
-# Read xlsx file list from elo_engine.py source
-elo_src = open(_p('elo_engine.py'), encoding='utf-8').read()
-xlsx_files = re.findall(r"parse_file\(_p\('(.+?\.xlsx)'\)\)", elo_src)
-xlsx_files = [f for f in xlsx_files if 'Troll' not in f and 'roulette' not in f.lower()]
+# Workbook list comes from elo_engine.XLSX_FILES (imported above), so this
+# script can never silently go stale when new_cup.py renames the xlsx.
+xlsx_files = list(XLSX_FILES)
 
 print("Loading cups...")
 all_cups = []
 for xlsx in xlsx_files:
     all_cups += parse_file(_p(xlsx))
 
-# Roulette + troll cups
-roulette_files = [f for f in re.findall(r"parse_file\(_p\('(.+?\.xlsx)'\)\)", elo_src)
-                  if 'roulette' in f.lower()]
-for f in roulette_files:
+# Roulette + troll cups (same order elo_engine.load_all_cups uses)
+for f in [ROULETTE_XLSX]:
     all_cups += parse_file(_p(f))
 
-troll_files = re.findall(r"parse_troll_cups\(_p\('(.+?\.xlsx)'\)\)", elo_src)
-for f in troll_files:
+for f in [TROLL_XLSX]:
     all_cups += parse_troll_cups(_p(f))
 
 # Troll COTD 12 — exhibition cup (see elo_engine.py EXHIBITION). Counts for

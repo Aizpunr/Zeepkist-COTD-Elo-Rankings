@@ -56,25 +56,25 @@ class CupState:
         self._s_map = s_map
         self._race_ranks = race_ranks
 
-        # Build reverse alias map from elo_engine.py CANONICAL
+        # Build reverse alias map from elo_engine.CANONICAL. The import is
+        # cheap (the engine only runs its pipeline as __main__). Kept inside
+        # try/except: this tool runs live during a cup and must never die
+        # because the alias map is unavailable.
         self._alias = {}
-        elo_path = os.path.join(DATA_DIR, 'elo_engine.py')
-        if os.path.exists(elo_path):
-            with open(elo_path, encoding='utf-8') as f:
-                src = f.read()
-            m = re.search(r'CANONICAL\s*=\s*\{(.+?)\n\}', src, re.DOTALL)
-            if m:
-                try:
-                    canonical = eval('{' + m.group(1) + '\n}')
-                    for canon, aliases in canonical.items():
-                        for alias in aliases:
-                            self._alias[alias] = canon
-                            # Also map tag-stripped version
-                            stripped = re.sub(r'^\[.*?\]\s*', '', alias)
-                            if stripped != alias:
-                                self._alias[stripped] = canon
-                except:
-                    pass
+        try:
+            import sys as _sys
+            if DATA_DIR not in _sys.path:
+                _sys.path.insert(0, DATA_DIR)
+            from elo_engine import CANONICAL
+            for canon, aliases in CANONICAL.items():
+                for alias in aliases:
+                    self._alias[alias] = canon
+                    # Also map tag-stripped version
+                    stripped = re.sub(r'^\[.*?\]\s*', '', alias)
+                    if stripped != alias:
+                        self._alias[stripped] = canon
+        except Exception:
+            pass
 
     def enrich_player(self, name):
         """Get enrichment data for a player name."""

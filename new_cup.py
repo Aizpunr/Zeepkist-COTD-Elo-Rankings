@@ -10,6 +10,10 @@ Push stays manual: verify on http://localhost:8000 first.
 """
 import re, os, sys, json, subprocess, datetime
 import openpyxl
+# Cheap import: elo_engine only runs its pipeline as __main__. CANONICAL is
+# read here for the alias-drift check; this script still reads elo_engine.py
+# as TEXT further down because it rewrites the xlsx filename literal in it.
+from elo_engine import CANONICAL
 
 # Force UTF-8 stdout so printing unicode aliases (e.g. the 𝒱V𝑜o𝒾i𝒹d𝒱 void name)
 # in the alias-drift report can't crash the pipeline when stdout is redirected
@@ -101,12 +105,21 @@ elo_py_path = _p('elo_engine.py')
 with open(elo_py_path, encoding='utf-8') as f:
     elo_src = f.read()
 
-xlsx_matches = re.findall(r"parse_file\(_p\('(COTD \d+-\d+\.xlsx)'\)\)", elo_src)
+# The current book is the LAST quoted 'COTD <a>-<b>.xlsx' literal in
+# elo_engine.py (the tail of its XLSX_FILES list). It is located as text, not
+# imported, because the rename step below rewrites that literal in place.
+xlsx_matches = re.findall(r"'(COTD \d+-\d+\.xlsx)'", elo_src)
 if not xlsx_matches:
     print("ERROR: Could not find COTD xlsx reference in elo_engine.py")
     sys.exit(1)
 current_xlsx = xlsx_matches[-1]
 xlsx_path = _p(current_xlsx)
+# The rename step string-replaces this literal, so it must be unique or the
+# replace would silently corrupt the file list.
+if elo_src.count(f"'{current_xlsx}'") != 1:
+    print(f"ERROR: {current_xlsx!r} must appear exactly once as a quoted literal "
+          f"in elo_engine.py (found {elo_src.count(chr(39) + current_xlsx + chr(39))}).")
+    sys.exit(1)
 
 print(f"Current xlsx: {current_xlsx}")
 
@@ -339,7 +352,7 @@ for rnd in rounds:
 # fresh identity (e.g. "[NewB]Zeus" → "[SLOW]Zeus" → "Zeus"). Same Steam ID =
 # same player; mismatches between the lobby name and the canonical name in
 # steam_ids.json get flagged with a copy-pasteable CANONICAL entry suggestion.
-def check_aliases_against_livelog(leaderboard, live_log_path, steam_ids_path, canonical_src_path,
+def check_aliases_against_livelog(leaderboard, live_log_path, steam_ids_path,
                                   report_path=None):
     if not live_log_path or not os.path.exists(live_log_path):
         print("⚠ ALIAS CHECK SKIPPED — no live log to read")
@@ -361,17 +374,12 @@ def check_aliases_against_livelog(leaderboard, live_log_path, steam_ids_path, ca
     with open(steam_ids_path, encoding='utf-8') as f:
         sids = json.load(f)
     sid_to_canon = {v: k for k, v in sids.items()}
-    # alias -> canonical from CANONICAL block in elo_engine.py
-    with open(canonical_src_path, encoding='utf-8') as f:
-        src = f.read()
-    canon_block = re.search(r'CANONICAL\s*=\s*\{(.+?)^\}', src, re.MULTILINE | re.DOTALL)
-    alias_to_canon, canon_names = {}, set()
-    if canon_block:
-        canon_dict = eval('{' + canon_block.group(1) + '}')
-        canon_names = set(canon_dict.keys())
-        for cn, aliases in canon_dict.items():
-            for a in aliases:
-                alias_to_canon[a] = cn
+    # alias -> canonical from elo_engine.CANONICAL (imported at the top)
+    canon_dict = CANONICAL
+    alias_to_canon, canon_names = {}, set(canon_dict.keys())
+    for cn, aliases in canon_dict.items():
+        for a in aliases:
+            alias_to_canon[a] = cn
 
     drifts, new_players = [], []
     for entry in leaderboard:
@@ -437,7 +445,6 @@ check_aliases_against_livelog(
     leaderboard,
     live_log_backup,
     _p('steam_ids.json'),
-    _p('elo_engine.py'),
     report_path=_p(os.path.join('cup logs', f'cotd_{cup_num}_alias_report.txt')),
 )
 
