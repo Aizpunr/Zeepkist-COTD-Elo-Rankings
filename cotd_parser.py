@@ -23,7 +23,7 @@ Format notes (from the mod's output):
 """
 import re
 from dataclasses import dataclass, field
-from typing import Iterable, Optional
+from typing import Iterable, Optional, Union
 
 TRACKER_TAG = 'COTDTracker'
 
@@ -31,6 +31,21 @@ _RE_PLAYER_TIME = re.compile(r'Player (.+?): Time: (.+)')
 _RE_PLAYER_NAMED = re.compile(r'Player (.+?): Time:')
 _RE_ELIMINATED = re.compile(r'Eliminating (?:DNF|on time): (.+)')
 _RE_HAS_ELIM = re.compile(r'Eliminating (?:DNF|on time):')
+
+
+def time_to_ms(raw):
+    """Normalize a log time token to integer milliseconds.
+
+    'DNF' stays 'DNF'; an int is returned unchanged (already normalized);
+    None stays None; anything else is parsed with either decimal separator
+    ('45,05365' on a comma-locale PC, '43.34747' on a dot-locale PC) and
+    rounded to ms, exactly as the xlsx Elim Time column has always been
+    written. This is the single normalization point for both the xlsx and
+    cup_<N>.json, so the two can never disagree.
+    """
+    if raw is None or raw == 'DNF' or isinstance(raw, int):
+        return raw
+    return round(float(str(raw).replace(',', '.')) * 1000)
 
 
 class ParseError(ValueError):
@@ -43,6 +58,7 @@ class ParsedPlayer:
     time_raw: str        # exact log token in the elimination round, or 'DNF'
     round: Optional[int] # elimination round (1-based); None for the winner
     pos: int             # final position (DNFs of one round share a position)
+    time_ms: Union[int, str, None]  # time_to_ms(time_raw): int ms, or 'DNF'
 
 
 @dataclass
@@ -51,6 +67,7 @@ class ParsedCup:
     candidates: list = field(default_factory=list)    # sorted names never eliminated and not excluded
     winner: Optional[str] = None                      # candidates[0] iff exactly one candidate
     winner_time_raw: Optional[str] = None
+    winner_time_ms: Union[int, str, None] = None
     fastest_time: Optional[float] = None              # seconds, full log precision
     fastest_name: Optional[str] = None
     fastest_round: Optional[int] = None               # 0 == warmup leaderboard
@@ -165,12 +182,14 @@ def parse_cup_log(lines: Iterable[str], excluded: Iterable[str] = ()) -> ParsedC
             winner_time = m.group(1).strip()
             break
     cup.winner_time_raw = winner_time
+    cup.winner_time_ms = time_to_ms(winner_time)
 
     # Leaderboard. Within one elimination round, finishers get distinct
     # positions ordered by their elim-round time (faster = better); DNFs of
-    # that round all tie at the bottom of the round.
+    # that round all tie at the bottom of the round. Ordering uses the
+    # full-precision float; ms rounding happens only for the stored value.
     elim_order.reverse()
-    leaderboard = [ParsedPlayer(winner, winner_time, None, 1)]
+    leaderboard = [ParsedPlayer(winner, winner_time, None, 1, time_to_ms(winner_time))]
     pos = 2
     i = 0
     while i < len(elim_order):
@@ -192,12 +211,12 @@ def parse_cup_log(lines: Iterable[str], excluded: Iterable[str] = ()) -> ParsedC
                     dnfs.append((name, display_time, r))
         finishers.sort(key=lambda x: x[3])
         for name, display_time, r, _ in finishers:
-            leaderboard.append(ParsedPlayer(name, display_time, r, pos))
+            leaderboard.append(ParsedPlayer(name, display_time, r, pos, time_to_ms(display_time)))
             pos += 1
         if dnfs:
             dnf_pos = pos
             for name, display_time, r in dnfs:
-                leaderboard.append(ParsedPlayer(name, display_time, r, dnf_pos))
+                leaderboard.append(ParsedPlayer(name, display_time, r, dnf_pos, time_to_ms(display_time)))
             pos += len(dnfs)
     cup.leaderboard = leaderboard
 
@@ -236,13 +255,14 @@ def parse_cup_log_file(path: str, excluded: Iterable[str] = ()) -> ParsedCup:
 
 
 def cup_json_payload(parsed: ParsedCup, cup_num: int, mapper: str) -> dict:
-    """The cup_<N>.json document (same shape new_cup.py has always written)."""
+    """The cup_<N>.json document. `time` is integer milliseconds or 'DNF',
+    the same value the xlsx Elim Time column gets (see time_to_ms)."""
     return {
         'cup': f'COTD {cup_num}',
         'cup_num': cup_num,
         'mapper': mapper,
         'players': [
-            {'pos': p.pos, 'name': p.name, 'time': p.time_raw, 'round': p.round}
+            {'pos': p.pos, 'name': p.name, 'time': p.time_ms, 'round': p.round}
             for p in parsed.leaderboard
         ],
     }

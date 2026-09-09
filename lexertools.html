@@ -574,7 +574,11 @@ function formatLexerSheet(cupData, cupRow, fastest) {
     let timeStr;
     if (p.time === 'DNF') {
       timeStr = 'DNF';
+    } else if (typeof p.time === 'number') {
+      // cup_N.json stores integer milliseconds (same as the xlsx Elim Time column)
+      timeStr = (p.time / 1000).toFixed(3);
     } else {
+      // legacy files: raw log string with a comma or dot decimal separator
       const t = parseFloat(String(p.time).replace(',', '.'));
       timeStr = Number.isFinite(t) ? t.toFixed(3) : String(p.time);
     }

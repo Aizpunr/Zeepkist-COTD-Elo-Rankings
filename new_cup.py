@@ -14,7 +14,7 @@ import openpyxl
 # read here for the alias-drift check; this script still reads elo_engine.py
 # as TEXT further down because it rewrites the xlsx filename literal in it.
 from elo_engine import CANONICAL
-from cotd_parser import ParseError, cup_json_payload, parse_cup_log_file
+from cotd_parser import ParseError, cup_json_payload, parse_cup_log_file, time_to_ms
 
 # Force UTF-8 stdout so printing unicode aliases (e.g. the 𝒱V𝑜o𝒾i𝒹d𝒱 void name)
 # in the alias-drift report can't crash the pipeline when stdout is redirected
@@ -350,11 +350,9 @@ for i, (name, time, rnd, position) in enumerate(leaderboard):
     row = 6 + i
     ws.cell(row=row, column=col_start, value=position)
     ws.cell(row=row, column=col_start + 1, value=name)
-    if time == 'DNF':
-        ws.cell(row=row, column=col_start + 2, value='DNF')
-    else:
-        t = float(time.replace(',', '.'))
-        ws.cell(row=row, column=col_start + 2, value=round(t * 1000))
+    # Elim Time is integer milliseconds (or 'DNF'). The same helper produces
+    # the value cup_N.json stores, so the two can never disagree.
+    ws.cell(row=row, column=col_start + 2, value=time_to_ms(time))
     if rnd is not None:
         ws.cell(row=row, column=col_start + 3, value=rnd)
 

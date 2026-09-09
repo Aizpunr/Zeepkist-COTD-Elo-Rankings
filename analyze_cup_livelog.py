@@ -30,6 +30,7 @@ STEAM_IDS = os.path.join(HERE, 'steam_ids.json')
 
 # Importing elo_engine is cheap and silent (its pipeline only runs as __main__).
 from elo_engine import CANONICAL  # type: ignore
+from cotd_parser import time_to_ms
 # Windows defaults stdout to cp1252 (esp. when piped) — unicode player names
 # (e.g. ツ) crashed the unresolved-sids printout before the report was written.
 sys.stdout.reconfigure(encoding='utf-8')
@@ -370,7 +371,9 @@ def patch_cup_json(cup_n, ltg_findings, dry_run=False):
         round_n = case['round']
         name = case['name']
         ltg_time = case['ltg_time']
-        time_str = f'{ltg_time:.5f}'.replace('.', ',')
+        # cup_N.json times are integer milliseconds (see cotd_parser.time_to_ms);
+        # this used to write a comma-decimal string, which corrupted dot-locale files.
+        time_ms = round(ltg_time * 1000)
         target = next(
             (p for p in players if p.get('round') == round_n and p['name'] == name and p['time'] == 'DNF'),
             None,
@@ -381,9 +384,9 @@ def patch_cup_json(cup_n, ltg_findings, dry_run=False):
             })
             continue
         old_pos = target['pos']
-        target['time'] = time_str
+        target['time'] = time_ms
         changes.append({
-            'round': round_n, 'name': name, 'old_pos': old_pos, 'new_time': time_str,
+            'round': round_n, 'name': name, 'old_pos': old_pos, 'new_time': time_ms,
         })
 
     # Re-sort within each round's elim zone (time ascending, DNFs last), preserve winner first
@@ -394,9 +397,11 @@ def patch_cup_json(cup_n, ltg_findings, dry_run=False):
             rounds[p['round']].append(p)
 
     def sort_key(p):
+        # time_to_ms accepts both the int ms now stored and the legacy raw
+        # strings, so a not-yet-migrated file still sorts correctly.
         if p['time'] == 'DNF':
-            return (1, 0.0)
-        return (0, float(str(p['time']).replace(',', '.')))
+            return (1, 0)
+        return (0, time_to_ms(p['time']))
 
     for rn in rounds:
         rounds[rn].sort(key=sort_key)
@@ -547,7 +552,7 @@ def main():
             print(f'  !! Apply these edits to the COTD {n} block in the xlsx,')
             print(f'  !! then re-run the pipeline (elo_engine.py ... build_altrank.py):')
             for c in applied_times:
-                ms = round(float(c['new_time'].replace(',', '.')) * 1000)
+                ms = c['new_time']  # already integer milliseconds
                 print(f'  !!   {c["name"]} (R{c["round"]}): Elim Time DNF -> {ms}')
             for mv in patch_result.get('position_moves', []):
                 print(f'  !!   {mv["name"]}: Position {mv["old_pos"]} -> {mv["new_pos"]}')
