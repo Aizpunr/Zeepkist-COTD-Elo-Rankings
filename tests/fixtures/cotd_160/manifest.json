@@ -1,0 +1,11 @@
+{
+  "cup": 160,
+  "mapper": "Noxitu",
+  "map": "Rockfall",
+  "exclude": [
+    "Noxitu"
+  ],
+  "source_log": "cup logs/cotd_160.log",
+  "filter": "COTDTracker",
+  "note": "latest; comma-locale log; mapper present in the log"
+}

@@ -1,0 +1,14 @@
+{
+  "cup": 150,
+  "mapper": "Form",
+  "map": null,
+  "exclude": [
+    "Form",
+    "Noweki",
+    "[fn]Form",
+    "justMaki"
+  ],
+  "source_log": "cup logs/cotd_150.log",
+  "filter": "COTDTracker",
+  "note": "four excludes incl. two spellings of the mapper"
+}

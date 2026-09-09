@@ -1,0 +1,11 @@
+{
+  "cup": 153,
+  "mapper": "justMaki",
+  "map": "Crimson Touch",
+  "exclude": [
+    "justMaki"
+  ],
+  "source_log": "cup logs/cotd_153.log",
+  "filter": "COTDTracker",
+  "note": "20 ties, 28 DNFs"
+}

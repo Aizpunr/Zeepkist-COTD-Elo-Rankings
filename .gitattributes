@@ -1,0 +1,6 @@
+# Golden test fixtures are byte-exact subsets of real game logs (CRLF). Keep
+# git from normalizing their line endings on checkout/commit, otherwise the
+# fixtures change bytes on another machine and the serialization lock in
+# tests/test_parser_golden.py drifts.
+tests/fixtures/**/*.log -text
+tests/fixtures/**/expected.json -text

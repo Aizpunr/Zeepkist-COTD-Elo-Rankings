@@ -1,0 +1,12 @@
+{
+  "cup": 156,
+  "mapper": "[Buny]Lunarbunny",
+  "map": "Bubble Twists",
+  "exclude": [
+    "[Buny]Lunarbunny",
+    "[bad]justMaki"
+  ],
+  "source_log": "cup logs/cotd_156.log",
+  "filter": "COTDTracker",
+  "note": "second excluded name besides the mapper"
+}

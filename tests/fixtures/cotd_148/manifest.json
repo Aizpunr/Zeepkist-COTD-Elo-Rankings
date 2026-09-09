@@ -1,0 +1,11 @@
+{
+  "cup": 148,
+  "mapper": "agix",
+  "map": null,
+  "exclude": [
+    "agix"
+  ],
+  "source_log": "cup logs/cotd_148.log",
+  "filter": "COTDTracker",
+  "note": "dot-locale attendee log; mapper absent from the log"
+}

@@ -1,0 +1,12 @@
+{
+  "cup": 159,
+  "mapper": "Yannic",
+  "map": "L-06 Cup of the Day",
+  "exclude": [
+    "Fiets38",
+    "Yannic"
+  ],
+  "source_log": "cup logs/cotd_159.log",
+  "filter": "COTDTracker",
+  "note": "dot-locale attendee log; mapper raced as Fiets38"
+}

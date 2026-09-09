@@ -1,0 +1,11 @@
+{
+  "_comment": "Cups whose committed cup_N.json is NOT pure parser output, so they cannot be golden fixtures. Verified with tests/discover_fixtures.py.",
+  "158": "Racer relabeled by hand after processing (Butter -> Pants, the shared brother account; commit ccb7545). The parser correctly emits the log name.",
+  "137": "DNF rows patched to left-the-game times by analyze_cup_livelog.py after processing.",
+  "140": "DNF rows patched to left-the-game times by analyze_cup_livelog.py after processing.",
+  "142": "DNF rows patched to left-the-game times by analyze_cup_livelog.py after processing.",
+  "143": "DNF rows patched to left-the-game times by analyze_cup_livelog.py after processing.",
+  "147": "DNF rows patched to left-the-game times by analyze_cup_livelog.py after processing.",
+  "139": "Generated under the pre-2026-04-12 tie rule (positions differ by one in tie groups).",
+  "144": "Generated under the pre-2026-04-12 tie rule (positions differ by one in tie groups)."
+}

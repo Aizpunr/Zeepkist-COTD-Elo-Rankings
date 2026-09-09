@@ -1,0 +1,11 @@
+{
+  "cup": 154,
+  "mapper": "Agent_Lynx",
+  "map": "COTD - MAD Funhouse",
+  "exclude": [
+    "Agent_Lynx"
+  ],
+  "source_log": "cup logs/cotd_154.log",
+  "filter": "COTDTracker",
+  "note": "smallest field: 34 players, 14 rounds"
+}

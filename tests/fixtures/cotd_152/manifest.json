@@ -1,0 +1,13 @@
+{
+  "cup": 152,
+  "mapper": "Victor",
+  "map": "COTD - Blue Blitz",
+  "exclude": [
+    "Victor",
+    "[FPV]PandaMane",
+    "[MMM]Victor"
+  ],
+  "source_log": "cup logs/cotd_152.log",
+  "filter": "COTDTracker",
+  "note": "[MMM]Victor raw-name gotcha + left-before-R1 removal"
+}
