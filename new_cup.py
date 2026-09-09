@@ -680,6 +680,26 @@ if sof_ok or cotd_pool_ok:
     print(f"      docs/allcompdata.json (cross-comp site data — easy to miss)")
 print("=" * 50)
 
+# ── 9b. Mirror the un-versioned source of truth off-drive ──
+# The xlsx, the raw cup logs and backups/ are gitignored and live only on
+# this disk. backup_raw_data.py copies them to the destination configured in
+# backup_config.json (or COTD_BACKUP_DIR). Never fatal: a backup problem
+# must not break cup processing, but it is shouted so it is not missed.
+print("=" * 50)
+print("Backing up raw data (xlsx, cup logs, backups/)...")
+print("=" * 50)
+if os.path.exists(_p('backup_raw_data.py')):
+    _bk = subprocess.run([sys.executable, _p('backup_raw_data.py')], cwd=_dir)
+    if _bk.returncode == 2:
+        print("  raw-data backup not configured: create backup_config.json (see backup_raw_data.py)")
+    elif _bk.returncode != 0:
+        print("  " + "!" * 60)
+        print("  !! RAW DATA BACKUP FAILED. Run: python backup_raw_data.py")
+        print("  " + "!" * 60)
+else:
+    print("  SKIP: backup_raw_data.py not found")
+print()
+
 # ── 10. Localhost preview ──
 # The run ends with the updated site visible on localhost:8000 (COTD's
 # reserved port) — verify there BEFORE pushing. If nothing is listening,

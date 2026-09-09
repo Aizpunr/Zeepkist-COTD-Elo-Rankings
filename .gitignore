@@ -16,6 +16,9 @@ elo_test_frames/
 # in the same run. Not consumed by the deployed site, so it does not belong in git.
 elo_results.json
 
-# Raw lobby logs: irreplaceable source data, but ~20 MB and not needed by the site.
-# Kept out of the public repo; back these up off-SSD separately.
+# Raw lobby logs: irreplaceable source data (~110 MB, mostly cumulative livelogs), not needed by the site.
+# Kept out of the public repo; backup_raw_data.py mirrors them off-drive at the end of new_cup.py.
 cup logs/
+
+# Machine-local backup destination for backup_raw_data.py (each operator creates their own)
+backup_config.json
