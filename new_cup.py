@@ -8,7 +8,7 @@ Fully automatic: snapshot -> parse log -> xlsx + JSON backup -> cup_meta.json
 (map/mapper/date for build_cups.py) -> all ELO data -> localhost preview.
 Push stays manual: verify on http://localhost:8000 first.
 """
-import re, os, sys, json, subprocess, datetime
+import re, os, sys, json, subprocess, datetime, glob, shutil
 import openpyxl
 # Cheap import: elo_engine only runs its pipeline as __main__. CANONICAL is
 # read here for the alias-drift check; this script still reads elo_engine.py
@@ -33,6 +33,7 @@ def _usage():
     print('Usage: python new_cup.py <cup_number> <mapper_name> --map "<map_name>"')
     print('                         [--exclude name1,name2,...] [--date YYYY-MM-DD]')
     print('                         [--log path] [--livelog path]')
+    print('                         [--reprocess]   redo a cup that is already processed')
     print('Example: python new_cup.py 153 "[MMM]Victor" --map "COTD - Blue Blitz"')
     print('Example: python new_cup.py 153 "PlusMicron" --map "Farewell" --exclude justMaki')
     sys.exit(1)
@@ -52,6 +53,7 @@ if '--exclude' in sys.argv:
         extra_excluded = [n.strip() for n in sys.argv[idx + 1].split(',') if n.strip()]
 
 excluded = {mapper} | set(extra_excluded)
+reprocess = '--reprocess' in sys.argv
 
 # Optional --log / --livelog overrides: process a cup from a saved log file
 # (e.g. an attendee's LogOutput.log when you missed the cup) instead of the
@@ -67,6 +69,115 @@ def _arg_after(flag):
 
 def _resolve(p):
     return p if os.path.isabs(p) else os.path.join(_dir, p)
+
+def _recycle(path):
+    """Send a file to the Windows Recycle Bin — never permanently delete."""
+    r = subprocess.run([
+        'powershell', '-NoProfile', '-Command',
+        'Add-Type -AssemblyName Microsoft.VisualBasic; '
+        "[Microsoft.VisualBasic.FileIO.FileSystem]::DeleteFile("
+        f"'{path}', 'OnlyErrorDialogs', 'SendToRecycleBin')"
+    ], capture_output=True, text=True)
+    return r.returncode == 0
+
+def _read_cup_headers(path):
+    """Cup ids in row 2 of the first sheet (the per-cup block headers)."""
+    wb_ = openpyxl.load_workbook(path, read_only=True)
+    ws_ = wb_[wb_.sheetnames[0]]
+    row2 = ()
+    for i, row in enumerate(ws_.iter_rows(values_only=True)):
+        if i == 1:
+            row2 = row
+            break
+    wb_.close()
+    return {str(v).strip() for v in row2 if v}
+
+def _load_cup_meta(path):
+    if not os.path.exists(path):
+        return {}
+    with open(path, encoding='utf-8') as f:
+        return json.load(f)
+
+def _write_cup_meta(path, meta):
+    """Atomic write (tmp + os.replace) so a crash never leaves a half file."""
+    tmp = path + '.tmp'
+    with open(tmp, 'w', encoding='utf-8') as f:
+        json.dump(meta, f, ensure_ascii=False, indent=2)
+        f.write('\n')
+    os.replace(tmp, path)
+
+def _repoint_engine_xlsx(elo_py_path, src, old_name, new_name):
+    """Rewrite the quoted workbook literal in elo_engine.py. Refuses unless
+    it is unique before and after: that literal is what every script
+    resolves the workbook from."""
+    if src.count(f"'{old_name}'") != 1:
+        print(f"ERROR: {old_name!r} must appear exactly once in elo_engine.py")
+        sys.exit(1)
+    new_src = src.replace(f"'{old_name}'", f"'{new_name}'")
+    if new_src.count(f"'{new_name}'") != 1:
+        print(f"ERROR: {new_name!r} would not be unique in elo_engine.py")
+        sys.exit(1)
+    with open(elo_py_path, 'w', encoding='utf-8') as f:
+        f.write(new_src)
+    return new_src
+
+def find_pre_cup_backup(cup_num, cup_id):
+    """The backup this script made right before it first wrote cup N, plus
+    the workbook name it belonged to. Exactly one must exist and it must
+    not already contain cup N."""
+    matches = glob.glob(_p(os.path.join('backups', f'*.pre_cup_{cup_num}.xlsx')))
+    if len(matches) != 1:
+        if not matches:
+            print(f"ERROR: no backups/<xlsx>.pre_cup_{cup_num}.xlsx to restore from.")
+        else:
+            print(f"ERROR: {len(matches)} candidate backups for cup {cup_num}, refusing to guess:")
+            for m_ in matches:
+                print(f"  - {os.path.basename(m_)}")
+        sys.exit(1)
+    backup = matches[0]
+    original = os.path.basename(backup)[:-len(f'.pre_cup_{cup_num}.xlsx')]
+    if not re.fullmatch(r'COTD \d+-\d+\.xlsx', original):
+        print(f"ERROR: cannot derive the original workbook name from {os.path.basename(backup)!r}")
+        sys.exit(1)
+    if cup_id in _read_cup_headers(backup):
+        print(f"ERROR: {os.path.basename(backup)} already contains {cup_id}; wrong backup.")
+        sys.exit(1)
+    return backup, original
+
+def restore_pre_cup_state(cup_num, cup_id, current_xlsx, elo_py_path):
+    """Undo everything the first run of cup N did to the shared state so the
+    normal flow can run again: put the pre-cup workbook back under its
+    original name, point elo_engine.py at it, recycle the newer book, and
+    drop the cup_meta.json entry. The book being replaced is copied to
+    backups/ first, so nothing is ever lost. Returns the original name."""
+    backup, original = find_pre_cup_backup(cup_num, cup_id)
+    cur_path = _p(current_xlsx)
+    os.makedirs(_p('backups'), exist_ok=True)
+    keep = _p(os.path.join('backups', f'{current_xlsx}.pre_reprocess_{cup_num}.xlsx'))
+    shutil.copy2(cur_path, keep)
+    print(f"  kept current book as backups/{os.path.basename(keep)}")
+    shutil.copy2(backup, _p(original))
+    print(f"  restored {original} from backups/{os.path.basename(backup)}")
+    if original != current_xlsx:
+        with open(elo_py_path, encoding='utf-8') as f:
+            src_ = f.read()
+        _repoint_engine_xlsx(elo_py_path, src_, current_xlsx, original)
+        print(f"  elo_engine.py: {current_xlsx} -> {original}")
+        if _recycle(cur_path):
+            print(f"  sent {current_xlsx} to the Recycle Bin")
+        else:
+            print(f"  WARNING: could not recycle {current_xlsx}; left in place (harmless)")
+    meta_path_ = _p('cup_meta.json')
+    meta = _load_cup_meta(meta_path_)
+    if meta.pop(cup_id, None) is not None:
+        _write_cup_meta(meta_path_, meta)
+        print(f"  removed {cup_id} from cup_meta.json")
+    start = original.split(' ')[1].split('-')[0]
+    strays = [os.path.basename(p) for p in glob.glob(_p(f'COTD {start}-*.xlsx'))
+              if os.path.basename(p) != original]
+    if strays:
+        print(f"  WARNING: other COTD {start}-* books in the repo root: {strays}")
+    return original
 
 # Required --map: the real map name, written to cup_meta.json so build_cups.py
 # needs no hand-edit (map_index / CUP_DATES additions are dead — see cup_meta).
@@ -122,6 +233,20 @@ if elo_src.count(f"'{current_xlsx}'") != 1:
           f"in elo_engine.py (found {elo_src.count(chr(39) + current_xlsx + chr(39))}).")
     sys.exit(1)
 
+if reprocess:
+    if cup_id not in _read_cup_headers(xlsx_path) and cup_id not in _load_cup_meta(_p('cup_meta.json')):
+        print(f"ERROR: --reprocess given but {cup_id} is not processed "
+              f"(not in {current_xlsx} or cup_meta.json); drop the flag.")
+        sys.exit(1)
+    print("=" * 50)
+    print(f"--reprocess: restoring the state from before {cup_id}")
+    print("=" * 50)
+    current_xlsx = restore_pre_cup_state(cup_num, cup_id, current_xlsx, elo_py_path)
+    xlsx_path = _p(current_xlsx)
+    with open(elo_py_path, encoding='utf-8') as f:
+        elo_src = f.read()
+    print()
+
 print(f"Current xlsx: {current_xlsx}")
 
 wb = openpyxl.load_workbook(xlsx_path)
@@ -142,9 +267,9 @@ if cup_id in existing_cup_ids or cup_id in cup_meta:
     if cup_id in cup_meta:
         where.append('cup_meta.json')
     print(f"ERROR: {cup_id} is already processed (found in {' + '.join(where)}).")
-    print(f"  To reprocess: restore backups/{current_xlsx}.pre_cup_{cup_num}.xlsx")
-    print(f"  over {current_xlsx}, remove the {cup_id!r} entry from cup_meta.json,")
-    print(f"  then re-run. Otherwise check the cup number.")
+    print(f"  Re-run with --reprocess to restore backups/<xlsx>.pre_cup_{cup_num}.xlsx and redo it")
+    print(f"  (the current book is kept as backups/{current_xlsx}.pre_reprocess_{cup_num}.xlsx).")
+    print(f"  Otherwise check the cup number.")
     sys.exit(1)
 
 # Find rightmost Position header to determine next column
@@ -356,15 +481,6 @@ for i, (name, time, rnd, position) in enumerate(leaderboard):
     if rnd is not None:
         ws.cell(row=row, column=col_start + 3, value=rnd)
 
-def _recycle(path):
-    """Send a file to the Windows Recycle Bin — never permanently delete."""
-    r = subprocess.run([
-        'powershell', '-NoProfile', '-Command',
-        'Add-Type -AssemblyName Microsoft.VisualBasic; '
-        "[Microsoft.VisualBasic.FileIO.FileSystem]::DeleteFile("
-        f"'{path}', 'OnlyErrorDialogs', 'SendToRecycleBin')"
-    ], capture_output=True, text=True)
-    return r.returncode == 0
 
 # Rename xlsx if needed
 m = re.match(r'COTD (\d+)-(\d+)\.xlsx', current_xlsx)
@@ -378,9 +494,7 @@ if m:
 
         # Point elo_engine.py at the new file BEFORE touching the old one, so
         # a crash in between never leaves the engine referencing a missing file.
-        new_src = elo_src.replace(f"'{current_xlsx}'", f"'{new_xlsx}'")
-        with open(elo_py_path, 'w', encoding='utf-8') as f:
-            f.write(new_src)
+        _repoint_engine_xlsx(elo_py_path, elo_src, current_xlsx, new_xlsx)
         print(f"Updated elo_engine.py: {current_xlsx} -> {new_xlsx}")
 
         # The old file is the master results spreadsheet — Recycle Bin only,
@@ -421,11 +535,7 @@ else:
     cup_date = d.isoformat()
 
 cup_meta[cup_id] = {'map': map_name, 'mapper': mapper, 'date': cup_date}
-tmp = meta_path + '.tmp'
-with open(tmp, 'w', encoding='utf-8') as f:
-    json.dump(cup_meta, f, ensure_ascii=False, indent=2)
-    f.write('\n')
-os.replace(tmp, meta_path)
+_write_cup_meta(meta_path, cup_meta)
 print(f"cup_meta.json: {cup_id} = {map_name!r} by {mapper!r}, {cup_date}")
 print()
 
