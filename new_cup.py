@@ -14,6 +14,7 @@ import openpyxl
 # read here for the alias-drift check; this script still reads elo_engine.py
 # as TEXT further down because it rewrites the xlsx filename literal in it.
 from elo_engine import CANONICAL
+from cotd_parser import ParseError, cup_json_payload, parse_cup_log_file
 
 # Force UTF-8 stdout so printing unicode aliases (e.g. the 𝒱V𝑜o𝒾i𝒹d𝒱 void name)
 # in the alias-drift report can't crash the pipeline when stdout is redirected
@@ -185,167 +186,44 @@ else:
     print(f"⚠ Live log not found at {LIVE_LOG_PATH} — alias SID check will be skipped")
     live_log_backup = None
 
-with open(LOG_PATH, encoding='utf-8', errors='replace') as f:
-    lines = [l for l in f.readlines() if 'COTDTracker' in l]
-
-if not lines:
-    print("ERROR: No COTDTracker lines found in log file.")
+try:
+    parsed = parse_cup_log_file(LOG_PATH, excluded)
+except ParseError as exc:
+    print(f"ERROR: {exc}")
     sys.exit(1)
 
-rounds = []
-current_round = []
-for line in lines:
-    if 'Doing eliminations with leaderboard' in line:
-        if current_round:
-            rounds.append(current_round)
-        current_round = []
-    elif 'Eliminating ' in line or 'Player ' in line:
-        current_round.append(line)
-if current_round:
-    rounds.append(current_round)
-
-if not rounds:
-    print("ERROR: No elimination rounds found in log.")
-    sys.exit(1)
-
-# Build elimination order
-# For each eliminated player, track:
-#   display_time: their time in their elim round (or 'DNF' if they DNF'd it)
-#   dnf:          True if they DNF'd their elimination round (determines tie)
-#
-# NOTE: display_time is ONLY from the elim round's own log entries. We used to
-# fall back to last_known_time (some prior round's time) for DNFs, but that was
-# misleading — it showed a time from a different round next to the round's
-# elim number. DNFs now stay DNF.
-elim_order = []
-actual_round = 0
-for rnd in rounds:
-    player_times = {}
-    eliminated_names = []
-    for line in rnd:
-        m = re.search(r'Player (.+?): Time: (.+)', line)
-        if m:
-            name = m.group(1).strip()
-            time_str = m.group(2).strip()
-            player_times[name] = time_str
-        m2 = re.search(r'Eliminating (?:DNF|on time): (.+)', line)
-        if m2:
-            name = m2.group(1).strip()
-            if name not in eliminated_names:
-                eliminated_names.append(name)
-    if not eliminated_names:
-        continue
-    actual_round += 1
-    for name in eliminated_names:
-        if name not in excluded:
-            elim_round_time = player_times.get(name, 'DNF')
-            dnf = (elim_round_time == 'DNF')
-            elim_order.append((name, elim_round_time, actual_round, dnf))
-
-# Find winner
-all_named = set()
-for rnd in rounds:
-    for line in rnd:
-        m = re.search(r'Player (.+?): Time:', line)
-        if m:
-            all_named.add(m.group(1).strip())
 # Excluded names that never appear in the log did not exclude anyone: either
 # they genuinely didn't play, or the raw name is wrong (COTD 152: mapper passed
 # as "Victor" while the log had "[MMM]Victor" — he got counted as a player).
-for name in sorted(excluded):
-    if name not in all_named:
-        print(f"⚠ WARNING: excluded name {name!r} not found in the log — "
-              f"either they didn't play, or this isn't their exact raw in-game name.")
+for _w in parsed.warnings:
+    print(f"⚠ WARNING: {_w}")
 
-elim_set = {e[0] for e in elim_order}
-winners = [n for n in all_named if n not in elim_set and n not in excluded]
-if not winners:
+if not parsed.candidates:
     print("ERROR: Could not determine winner.")
     sys.exit(1)
-if len(winners) > 1:
+if parsed.ambiguous:
     # "Named but never eliminated" resolved to 2+ players — usually a
     # mid-cup disconnect the tracker never eliminated, or a truncated log.
     # An unattended run must not guess; add the non-winner(s) to --exclude
     # or fix the log and re-run.
-    print(f"ERROR: winner is ambiguous — {len(winners)} players were never eliminated:")
-    for n in winners:
+    print(f"ERROR: winner is ambiguous — {len(parsed.candidates)} players were never eliminated:")
+    for n in parsed.candidates:
         print(f"  - {n!r}")
     print("Pick the real winner from the VOD/log; re-run with the others handled")
     print("(e.g. --exclude for non-players, or use a more complete log).")
     sys.exit(1)
-winner = winners[0]
 
-winner_time = None
-for line in reversed(lines):
-    m = re.search(r'Player ' + re.escape(winner) + r': Time: (.+)', line)
-    if m:
-        winner_time = m.group(1).strip()
-        break
-
-# Build leaderboard: within each elimination round, finishers get distinct
-# positions ordered by their elim-round time (faster = better), then DNFs
-# tie at the bottom of that round.
-elim_order.reverse()
-leaderboard = [(winner, winner_time, None, 1)]
-pos = 2
-i = 0
-while i < len(elim_order):
-    rnd = elim_order[i][2]
-    group = []
-    while i < len(elim_order) and elim_order[i][2] == rnd:
-        group.append(elim_order[i])
-        i += 1
-    # Split by dnf flag — finishers get distinct positions by elim-round time,
-    # DNFs (no valid time in elim round) all tie at the bottom of this round.
-    finishers = []
-    dnfs = []
-    for name, display_time, r, dnf in group:
-        if dnf:
-            dnfs.append((name, display_time, r))
-        else:
-            try:
-                t = float(str(display_time).replace(',', '.'))
-                finishers.append((name, display_time, r, t))
-            except (ValueError, TypeError):
-                dnfs.append((name, display_time, r))
-    finishers.sort(key=lambda x: x[3])
-    for name, display_time, r, _ in finishers:
-        leaderboard.append((name, display_time, r, pos))
-        pos += 1
-    if dnfs:
-        dnf_pos = pos
-        for name, display_time, r in dnfs:
-            leaderboard.append((name, display_time, r, dnf_pos))
-        pos += len(dnfs)
+winner = parsed.winner
+winner_time = parsed.winner_time_raw
+# (name, time, round, position) tuples: the shape the xlsx/JSON writers below
+# have always consumed.
+leaderboard = [(p.name, p.time_raw, p.round, p.pos) for p in parsed.leaderboard]
+fastest_time, fastest_name, fastest_round = parsed.fastest_time, parsed.fastest_name, parsed.fastest_round
 
 print(f"Parsed {len(leaderboard)} players (excluded: {', '.join(sorted(excluded))})")
 print(f"Winner: {winner} ({winner_time})")
-print(f"Rounds in log: {len(rounds)}")
+print(f"Rounds in log: {parsed.n_rounds}")
 print()
-
-# Find fastest time. Round numbering matches the elim_order loop above:
-# the first leaderboard with no eliminations is the discovery/warmup round (R0),
-# Round 1 is the first round that actually eliminates someone.
-fastest_time = None
-fastest_name = None
-fastest_round = None
-actual_round = 0
-for rnd in rounds:
-    has_elim = any(re.search(r'Eliminating (?:DNF|on time):', line) for line in rnd)
-    if has_elim:
-        actual_round += 1
-    rnd_num = actual_round if has_elim else 0
-    for line in rnd:
-        m = re.search(r'Player (.+?): Time: (.+)', line)
-        if m:
-            name = m.group(1).strip()
-            time_str = m.group(2).strip()
-            if time_str != 'DNF':
-                t = float(time_str.replace(',', '.'))
-                if fastest_time is None or t < fastest_time:
-                    fastest_time = t
-                    fastest_name = name
-                    fastest_round = rnd_num
 
 # ── 1b. Cross-check leaderboard names against livelog Steam IDs ──
 # Catches alias drift: a player who joins a new clan and ends up tracked as a
@@ -523,15 +401,7 @@ else:
     print(f"Saved to {current_xlsx}")
 
 # ── 4. Write JSON backup ──
-cup_json = {
-    'cup': cup_id,
-    'cup_num': cup_num,
-    'mapper': mapper,
-    'players': [
-        {'pos': position, 'name': name, 'time': time, 'round': rnd}
-        for name, time, rnd, position in leaderboard
-    ]
-}
+cup_json = cup_json_payload(parsed, cup_num, mapper)
 json_path = _p(f'cup_{cup_num}.json')
 with open(json_path, 'w', encoding='utf-8') as f:
     json.dump(cup_json, f, ensure_ascii=False, indent=2)
