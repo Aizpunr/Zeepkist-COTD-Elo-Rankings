@@ -34,6 +34,7 @@ def _usage():
     print('                         [--exclude name1,name2,...] [--date YYYY-MM-DD]')
     print('                         [--log path] [--livelog path]')
     print('                         [--reprocess]   redo a cup that is already processed')
+    print('                         [--no-open]     do not open the browser at the end')
     print('Example: python new_cup.py 153 "[MMM]Victor" --map "COTD - Blue Blitz"')
     print('Example: python new_cup.py 153 "PlusMicron" --map "Farewell" --exclude justMaki')
     sys.exit(1)
@@ -54,6 +55,7 @@ if '--exclude' in sys.argv:
 
 excluded = {mapper} | set(extra_excluded)
 reprocess = '--reprocess' in sys.argv
+no_open = '--no-open' in sys.argv
 
 # Optional --log / --livelog overrides: process a cup from a saved log file
 # (e.g. an attendee's LogOutput.log when you missed the cup) instead of the
@@ -305,8 +307,11 @@ else:
     print(f"Raw log already in place: {log_backup}")
 live_log_backup = os.path.join(log_dir, f'cotd_{cup_num}_liveleaderboard.log')
 if LIVE_LOG_PATH and os.path.exists(LIVE_LOG_PATH):
-    shutil.copy2(LIVE_LOG_PATH, live_log_backup)
-    print(f"Live log saved: {live_log_backup}")
+    if os.path.abspath(LIVE_LOG_PATH) != os.path.abspath(live_log_backup):
+        shutil.copy2(LIVE_LOG_PATH, live_log_backup)
+        print(f"Live log saved: {live_log_backup}")
+    else:
+        print(f"Live log already in place: {live_log_backup}")
 else:
     print(f"⚠ Live log not found at {LIVE_LOG_PATH} — alias SID check will be skipped")
     live_log_backup = None
@@ -719,8 +724,11 @@ else:
                      cwd=_dir, creationflags=_flags,
                      stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     print("Started http.server on localhost:8000 (detached).")
-try:
-    os.startfile('http://localhost:8000')
-    print("Opened http://localhost:8000 — verify the cup, then push manually.")
-except OSError:
-    print("Open http://localhost:8000 to verify the cup, then push manually.")
+if no_open:
+    print("--no-open: browser not opened. Verify on http://localhost:8000, then push manually.")
+else:
+    try:
+        os.startfile('http://localhost:8000')
+        print("Opened http://localhost:8000 — verify the cup, then push manually.")
+    except OSError:
+        print("Open http://localhost:8000 to verify the cup, then push manually.")
