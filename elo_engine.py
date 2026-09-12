@@ -105,7 +105,7 @@ XLSX_FILES = [
     'COTDs 76-100.xlsx',
     'COTDs 101-125.xlsx',
     'COTD 126-130.xlsx',
-    'COTD 131-160.xlsx',
+    'COTD 131-161.xlsx',
 ]
 ROULETTE_XLSX = 'cup roulette.xlsx'
 TROLL_XLSX = 'Troll cup.xlsx'
@@ -274,7 +274,7 @@ CANONICAL = {
     'RadAbsRad': ['[Meow]RadAbsRad'],
     'Redstony': ['[Stc3]Redstony', '[TILT]Redstony'],
     'Six': ['SixSixSevenSeven', '[BAP]SixSixSevenSeven', '[BAP]Six'],
-    'Sterben': ['[BAP]Sterben','[PNCK]Mini P.E.K.K.A','λ','Lλmbda','[FPV]Lλmbda','[PCDJ]Sterben'],
+    'Sterben': ['[BAP]Sterben','[PNCK]Mini P.E.K.K.A','λ','Lλmbda','[FPV]Lλmbda','[PCDJ]Sterben','tatari_lover2008'],
     'stindt': ['[KAAS]stindt', '[Lame]stindt', '[Lame}stindt', '[Same]stindt', '[Slow]stindt', '[Tame]stindt'],
     'Zeus':   ['[NewB]Zeus', '[NewB] Zeus', '[SLOW]Zeus'],
     'Tommygaming': ['[CSC]Tommygaming', '[OOPS]Tommygaming', '[jofk]Tommygaming', 'TommyGaming5132', 'Tommygaming5132', '[TG]Tommygaming5132', '[CSC]Tommygaming5132', '[CSC]Tommygaming6132', '[C3PO]Tommygaming5132', '[CSC]TommyLaptopGaming'],
@@ -307,6 +307,8 @@ CANONICAL = {
     'Heart-TGV': ['[TTR]Heart-TGV'],
     'sailingman': ['segelnhoch3'],
     'captancraft2': ['[PINK] captancraft2'],
+    '[Frik] DinoDeano': ['DinoDeano'],
+    '[ARL]Aurum': ['[GOLD]Aurum'],
 }
 
 # A duplicate key in the hand-edited dict above silently clobbers the earlier
