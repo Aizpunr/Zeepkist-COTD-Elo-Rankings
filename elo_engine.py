@@ -105,7 +105,7 @@ XLSX_FILES = [
     'COTDs 76-100.xlsx',
     'COTDs 101-125.xlsx',
     'COTD 126-130.xlsx',
-    'COTD 131-161.xlsx',
+    'COTD 131-162.xlsx',
 ]
 ROULETTE_XLSX = 'cup roulette.xlsx'
 TROLL_XLSX = 'Troll cup.xlsx'
@@ -163,7 +163,7 @@ CANONICAL = {
     'jandje': ['[BFP] jandje','[CTR] jandje','[CTR]jandje'],
     'Joking': ['[BGR] Joking'],
     'justMaki': ['[test] justMaki'],
-    'Kernkob': ['[CTR]Kernkob'],
+    'Kernkob': ['[CTR]Kernkob','[KBW]Kernkob'],
     'L3it3R': ['L3it3r','[CTR] L3it3R','[CTR]L3it3R','[CTR]L3it3r'],
     'Last': ['[dumb] Last'],
     'Lazy_Echidna': ['[NIL]Lazy_Echidna','[TOG]Lazy_Echidna','[TOG]Lazy_echidna','[TOG]Lazy-Echidna','[TOG[Lazy_Echidna','Lazy_Ecidna'],
@@ -247,7 +247,7 @@ CANONICAL = {
     'Lilly Fenn': ['[Fenn]Lilly Fenn','ttv/Lilly the Bun','[bnuy]ttv/Lilly the Bun','Lilly the Bun'],
     'Ulv_RaVn': ['[XTR] [VK] Ulv_RaVn','[XTR] [VK] Ulv_Ravn'],
     'vectortrajector': ['[ZET]vectortrajector'],
-    'Victor': ['[GGG]Victor','[MMM]Victor'],
+    'Victor': ['[GGG]Victor','[MMM]Victor','[EG]Victor'],
     "Zeke Ryu'kai": ["[BoF3] Zeke Ryu'kai"],
     '=XDC=WOLF': ['=XDC=Wolf'],
     'tws20so': ['[DRFT] tws20so', '[IRS] tws20so'],
@@ -262,12 +262,12 @@ CANONICAL = {
     'Form': ['[fn]Form'],
     'Hellmet': ['[Dark]Hellmet', '[ZOFC]Hellmet'],
     'Shattersmith': ['Jakie', '[CD] Jakie', '[ZET] Jakie', 'shattersmith'],
-    'K410K3N': ['[20X]K410K3N', '[20x]K410K3N', '[Gwen]K410K3N'],
+    'K410K3N': ['[20X]K410K3N', '[20x]K410K3N', '[Gwen]K410K3N', '[CSC]K410K3N'],
     'loganbradley714': ['[GFHL]loganbradley714', '[GLHF]loganbradley714'],
     'lucanakin': ['[DNFF]lucanakin'],
     'MarcSubstitute': ['[DHLU]MarcSubstitute', '[SLOW]MarcSubstitute'],
     'MetalCJ': ['[TTR]MetalCJ'],
-    'microways': ['[Quac] microways'],
+    'microways': ['[Quac] microways','[KBW] microways'],
     'PlusMicron': ['[CSC] PlusMicron'],
     'MMXD18': ['[Toob]MMXD18'],
     'Moody': ['[CTR]Moody', '[MIB]Moody'],
@@ -291,7 +291,7 @@ CANONICAL = {
     'Lamp': ['[CTR]Lamp', '[The]Lamp', '[bam]Lamp'],
 
     'MackCheesy': ['[CHEZ]MackCheesy', '[ZET]MackCheesy'],
-    'magostinho20': ['[F1] magostinho20', '[I290] magostinho20'],
+    'magostinho20': ['[F1] magostinho20', '[I290] magostinho20', '[ANW] magostinho20'],
     'MeOne2Three4': ['meone2three4'],
     'Mortishade': ['[CTR]Mortishade', '[bam]Mortishade'],
     'Mr. Hubub': ['[Heyo]Mr. Hubub', '[heyo]Mr. Hubub'],
@@ -304,11 +304,12 @@ CANONICAL = {
     'Weak_Knees': ['[COMY]Weak_Knees','Weak_knees','[Burp]Weak_Knees'],
     'Wheelie': ['[ZET] Wheelie', '[ZET]Wheelie'],
     'Zachafinackus': ['[Sumo]Zachafinackus'],
-    'Heart-TGV': ['[TTR]Heart-TGV'],
+    'Heart-TGV': ['[TTR]Heart-TGV','[T7]Heart-TGV'],
     'sailingman': ['segelnhoch3'],
     'captancraft2': ['[PINK] captancraft2'],
     '[Frik] DinoDeano': ['DinoDeano'],
     '[ARL]Aurum': ['[GOLD]Aurum'],
+    'cipi': ['dtmittens'],
 }
 
 # A duplicate key in the hand-edited dict above silently clobbers the earlier
