@@ -307,13 +307,18 @@ function getFiltered(){
   });
 }
 
+// A fastest time counts as a final when the sheet said so in words, or when
+// the builder worked out that only two players were left (left = max_round
+// - ft_round + 2), which is how every pipeline-written cup records it.
+const isFinalFT = e => e.round==='Final' || e.left===2;
+
 function buildPlayerStats(data){
   const stats={};
   data.forEach(e=>{
     const base=stripTag(e.player);
     if(!stats[base]) stats[base]={count:0,finals:0,cups:[]};
     stats[base].count++;
-    if(e.round==='Final') stats[base].finals++;
+    if(isFinalFT(e)) stats[base].finals++;
     stats[base].cups.push(e.cup);
   });
   return Object.entries(stats).map(([name,s])=>({
@@ -568,7 +573,7 @@ function buildLeaders(data){
 function buildPills(data){
   const players=buildPlayerStats(data);
   if(!players.length){document.getElementById('pills').innerHTML='';return;} /* empty search → no players[0] */
-  const totalFinals=data.filter(e=>e.round==='Final').length;
+  const totalFinals=data.filter(isFinalFT).length;
   const topFinals=[...players].sort((a,b)=>b.finals-a.finals)[0];
 
   // Longest streak
