@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clean Sweeps — Zeepkist COTD</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧹</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#08080d;--surface:rgba(255,255,255,0.02);--border:rgba(255,255,255,0.06);
+--text:#e5e7eb;--dim:#9ca3af;--muted:#6b7280;--dark:#4b5563;
+--mono:'JetBrains Mono',monospace;--accent:#38bdf8;--red:#ef4444;--green:#10b981;--gold:#facc15;
+--sweep:linear-gradient(135deg,#38bdf8,#818cf8)}
+html{background:var(--bg);color:var(--text)}
+body{font-family:'Space Grotesk',system-ui,sans-serif;min-height:100vh;padding:20px 12px}
+::selection{background:rgba(56,189,248,0.3)}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.1);border-radius:3px}
+.container{max-width:1100px;margin:0 auto}
+h1{text-align:center;font-size:32px;font-weight:800;margin-bottom:4px;
+background:var(--sweep);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sub{text-align:center;font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:22px}
+.back-link{display:inline-block;font-family:var(--mono);font-size:12px;color:var(--muted);text-decoration:none;margin-bottom:16px}
+.back-link:hover{color:var(--text)}
+h2{font-size:15px;font-weight:700;margin:30px 0 3px}
+h2 .hint{font-family:var(--mono);font-size:10px;color:var(--dark);font-weight:400;text-transform:uppercase;letter-spacing:1px;margin-left:8px}
+.lead{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:12px;line-height:1.5}
+
+.sweeps{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.sweep{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:15px 14px;position:relative;overflow:hidden}
+.sweep::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--sweep)}
+.sweep .cup{font-family:var(--mono);font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:1px}
+.sweep .who{font-size:21px;font-weight:800;margin:2px 0 1px}
+.sweep .map{font-size:12px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sweep .facts{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:10px;padding-top:9px;border-top:1px solid var(--border);line-height:1.6}
+.sweep .facts b{color:var(--text);font-weight:600}
+.badge{display:inline-block;font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:1px;
+padding:2px 6px;border-radius:4px;background:rgba(56,189,248,0.12);color:var(--accent);margin-top:8px}
+.badge.manual{background:rgba(250,204,21,0.12);color:var(--gold)}
+.empty{font-family:var(--mono);font-size:11px;color:var(--dark);border:1px dashed var(--border);border-radius:12px;padding:18px;text-align:center}
+
+table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:12px}
+th{text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--dark);font-weight:600;padding:0 8px 7px;white-space:nowrap}
+th.n,td.n{text-align:right;font-variant-numeric:tabular-nums}
+td{padding:5px 8px;border-top:1px solid var(--border);white-space:nowrap}
+tr:hover td{background:rgba(255,255,255,0.03)}
+tr.is-sweep td{background:rgba(56,189,248,0.07)}
+.pname{font-family:'Space Grotesk',sans-serif;font-weight:600}
+.rk{color:var(--muted);width:26px}
+.bar{display:inline-block;vertical-align:middle;width:90px;height:6px;border-radius:3px;background:rgba(255,255,255,0.07);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--sweep)}
+.dim{color:var(--muted)}
+.map-cell{max-width:190px;overflow:hidden;text-overflow:ellipsis;color:var(--dim)}
+.pflag{color:var(--gold);cursor:help;font-weight:700}
+.methodology{font-family:var(--mono);font-size:10px;color:var(--dark);margin-top:30px;padding:12px 0;border-top:1px solid var(--border);line-height:1.6}
+.methodology b{color:var(--muted)}
+
+@media(max-width:760px){
+  h1{font-size:26px}
+  .sweeps{grid-template-columns:1fr}
+  .hide-s{display:none}
+  .bar{width:52px}
+  table{font-size:11px}
+  td,th{padding-left:5px;padding-right:5px}
+}
+</style>
+</head>
+<body>
+<div class="container">
+<a href="stats.html" class="back-link">&larr; back to cool stats</a>
+<h1>Clean Sweeps</h1>
+<div class="sub" id="sub">first in every single round of the cup</div>
+
+<h2>All time <span class="hint" id="totalsSrc"></span></h2>
+<div class="lead" id="totalsLead"></div>
+<div style="overflow-x:auto"><table id="totalsTable"></table></div>
+
+<h2>Every one on record</h2>
+<div class="lead" id="sweepLead"></div>
+<div id="sweepCards"></div>
+
+<h2>Round control <span class="hint">log era</span></h2>
+<div class="lead">How often a player was the fastest of a round, out of the rounds they actually raced.</div>
+<div style="overflow-x:auto"><table id="playerTable"></table></div>
+
+<h2>Cup by cup <span class="hint">log era</span></h2>
+<div class="lead">How much of each cup the eventual winner controlled, and the worst position they fell to along the way.</div>
+<div style="overflow-x:auto"><table id="cupTable"></table></div>
+
+<h2>Nearly swept it <span class="hint">round data only</span></h2>
+<div class="lead">Won the cup and led almost every round of it. The fewer rounds given up, the closer it came to a clean sweep.</div>
+<div style="overflow-x:auto"><table id="nearlyTable"></table></div>
+
+<h2>Led and lost <span class="hint">round data only</span></h2>
+<div class="lead">Led more rounds than the player who ended up winning, and still did not win.</div>
+<div style="overflow-x:auto"><table id="nearTable"></table></div>
+
+<div class="methodology" id="method"></div>
+</div>
+
+<script>
+const customColors={"Lexer":"#22c55e","Sandals":"#aa55ff","GuAlexItar":"#f5c842","justMaki":"#dc2626", "Minkus": "#dc2626","Kernkob":"#facc15","Quickracer10":"#15803d","Hydro":"#22d3ee","JakeAdjacent":"#15803d","PandaMane":"#3b82f6","RoundNzt":"#f97316","agix":"#fb923c","ZOMAN":"#3b82f6","Cbad Cruiser":"#6366f1","jandje":"#f97316","Linzi":"#d946ef","rtube":"#c084fc","Sterben":"#ec4899"};
+function esc(s){const d=document.createElement('div');d.textContent=s==null?'':s;return d.innerHTML;}
+function nm(n){return `<span class="pname" style="color:${customColors[n]||''}">${esc(n)}</span>`;}
+function bar(a,b){const pct=b?Math.round(100*a/b):0;return `<span class="bar"><i style="width:${pct}%"></i></span>`;}
+
+fetch('rounds.json').then(r=>r.json()).then(D=>{
+  const cov = D.coverage;
+
+  document.getElementById('sub').textContent =
+    `first in every single round of the cup · through ${D.generated_through||''}`;
+
+  // ---- all time ----
+  const T = D.totals || {rows:[], total:0, named:0};
+  document.getElementById('totalsSrc').textContent = T.source || '';
+  document.getElementById('totalsLead').innerHTML =
+    `${T.total} clean sweep${T.total===1?'':'s'} in the ${D.last_cup} cups of COTD so far.`
+    + (T.note ? ` ${esc(T.note)}` : '');
+  document.getElementById('totalsTable').innerHTML = T.rows.length ? (
+    `<tr><th class="rk"></th><th>Player</th><th class="n">Sweeps</th><th class="n hide-s">Pinned to a cup</th></tr>`
+    + T.rows.map((t,i)=>`<tr>
+        <td class="rk n">${i+1}</td><td>${nm(t.name)}</td>
+        <td class="n">${t.total}</td>
+        <td class="n hide-s dim">${t.named}</td>
+      </tr>`).join('')
+  ) : '';
+
+  // ---- the named ones ----
+  const unnamed = T.total - D.sweeps.length;
+  const withRounds = D.sweeps.filter(s=>s.src!=='manual').length;
+  document.getElementById('sweepLead').innerHTML =
+    (unnamed > 0
+      ? `${D.sweeps.length} of the ${T.total} are pinned to a cup. The other ${unnamed} are counted but nobody has placed them yet.`
+      : `All ${T.total} are pinned to a cup.`)
+    + ` ${withRounds} of them can be replayed round by round, from the cups with round data `
+    + `(COTD ${cov.first} onward). The rest are on record from the people who were there.`;
+  document.getElementById('sweepCards').innerHTML = D.sweeps.length ? (
+    '<div class="sweeps">' + D.sweeps.slice().reverse().map(s=>{
+      const rounds = s.rounds ? `<b>${s.rounds}</b> of <b>${s.rounds}</b> rounds` : 'every round';
+      const field = s.field ? ` &middot; ${s.field} in the lobby` : '';
+      const warm = s.warmup ? '<br>fastest in the discovery round too' : '';
+      const badge = s.src==='log'
+        ? '<span class="badge">from the mod log</span>'
+        : `<span class="badge manual">${esc(s.source)}</span>`;
+      return `<div class="sweep">
+        <div class="cup">${esc(s.cup)} &middot; ${esc(s.date||'')}</div>
+        <div class="who" style="color:${customColors[s.winner]||''}">${esc(s.winner)}</div>
+        <div class="map">${esc(s.map||'')}</div>
+        <div class="facts">${rounds}${field}${warm}${s.note?'<br>'+esc(s.note):''}</div>
+        ${badge}
+      </div>`;
+    }).join('') + '</div>'
+  ) : '<div class="empty">none on record yet</div>';
+
+  // ---- players ----
+  document.getElementById('playerTable').innerHTML =
+    `<tr><th class="rk"></th><th>Player</th><th class="n">Rounds led</th><th></th>
+     <th class="n hide-s">Raced</th><th class="n">Share</th><th class="n hide-s">Cups won</th><th class="n">Sweeps</th></tr>`
+    + D.players.filter(p=>p.led>0).map((p,i)=>`<tr>
+        <td class="rk n">${i+1}</td><td>${nm(p.name)}</td>
+        <td class="n">${p.led}</td><td>${bar(p.led,p.rounds)}</td>
+        <td class="n hide-s dim">${p.rounds}</td><td class="n">${p.share.toFixed(1)}%</td>
+        <td class="n hide-s dim">${p.wins}</td>
+        <td class="n">${p.sweeps||'<span class="dim">0</span>'}</td>
+      </tr>`).join('');
+
+  // ---- cup by cup ----
+  document.getElementById('cupTable').innerHTML =
+    `<tr><th>Cup</th><th class="hide-s">Map</th><th>Winner</th><th class="n">Rounds led</th><th></th>
+     <th class="n hide-s">Lead changes</th><th class="n">Worst place</th></tr>`
+    + D.cups.slice().reverse().map(c=>{
+        const partial = c.src==='partial'
+          ? ` <span class="pflag" title="reconstructed from screenshots, not the mod log">*</span>` : '';
+        return `<tr class="${c.sweep?'is-sweep':''}">
+        <td>${esc(c.cup)}${partial}</td><td class="hide-s map-cell">${esc(c.map)}</td>
+        <td>${nm(c.winner)}</td>
+        <td class="n">${c.led}/${c.rounds}</td><td>${bar(c.led,c.rounds)}</td>
+        <td class="n hide-s dim">${c.changes}</td>
+        <td class="n">${c.worst||'<span class="dim">?</span>'}</td>
+      </tr>`;}).join('');
+
+  // ---- nearly swept ----
+  const pflag = ' <span class="pflag" title="reconstructed from screenshots, not the mod log">*</span>';
+  const margins = c => (c.dropped||[]).filter(d=>d.margin!=null);
+  const tightest = c => margins(c).sort((a,b)=>a.margin-b.margin)[0] || null;
+  const nearly = D.cups.filter(c=>!c.sweep && (c.dropped||[]).length)
+    .sort((a,b)=> ((a.dropped.length - b.dropped.length)
+                 || ((tightest(a)?tightest(a).margin:9e9) - (tightest(b)?tightest(b).margin:9e9))))
+    .slice(0,10);
+  document.getElementById('nearlyTable').innerHTML =
+    `<tr><th>Cup</th><th>Winner</th><th class="n">Rounds led</th><th></th>
+     <th class="n">Gave up</th><th>Tightest one</th></tr>`
+    + nearly.map(c=>{
+        const t = tightest(c);
+        const lost = t
+          ? `R${t.round} to ${nm(t.to)} by <b>${t.margin.toFixed(3)}s</b>`
+          : (c.dropped[0] ? `R${c.dropped[0].round} to ${nm(c.dropped[0].to)}` : '');
+        return `<tr>
+        <td>${esc(c.cup)}${c.src==='partial'?pflag:''}</td><td>${nm(c.winner)}</td>
+        <td class="n">${c.led}/${c.rounds}</td><td>${bar(c.led,c.rounds)}</td>
+        <td class="n">${c.dropped.length}</td>
+        <td class="dim">${lost}</td>
+      </tr>`;}).join('');
+
+  // ---- led and lost ----
+  const near = [];
+  for(const c of D.cups){
+    const tally = {};
+    for(const l of c.leaders){ if(l && l!==c.winner) tally[l]=(tally[l]||0)+1; }
+    const best = Object.entries(tally).sort((a,b)=>b[1]-a[1])[0];
+    if(best && best[1] > c.led) near.push({cup:c.cup, who:best[0], led:best[1], rounds:c.rounds, winner:c.winner, partial:c.src==='partial'});
+  }
+  near.sort((a,b)=> b.led/b.rounds - a.led/a.rounds);
+  document.getElementById('nearTable').innerHTML =
+    `<tr><th>Cup</th><th>Led</th><th class="n">Rounds led</th><th></th><th>Lost to</th></tr>`
+    + near.map(n=>`<tr>
+        <td>${esc(n.cup)}${n.partial?' <span class="pflag" title="reconstructed from screenshots, not the mod log">*</span>':''}</td>
+        <td>${nm(n.who)}</td>
+        <td class="n">${n.led}/${n.rounds}</td><td>${bar(n.led,n.rounds)}</td>
+        <td>${nm(n.winner)}</td>
+      </tr>`).join('');
+
+  // ---- methodology ----
+  const gap = cov.missing && cov.missing.length
+    ? ` No round data survives for COTD ${cov.missing.join(', ')}.` : '';
+  const partialNote = cov.partial && cov.partial.length
+    ? ` Cups marked <span class="pflag">*</span> (COTD ${cov.partial.join(', ')}) have no saved mod log; `
+      + `they're reconstructed by hand from leaderboard screenshots, round by round, so the field shown each `
+      + `round is only whatever was visible on screen, not the whole lobby the way a log's is.`
+    : '';
+  document.getElementById('method').innerHTML =
+    `A <b>clean sweep</b> is a cup where the winner posted the fastest time of every elimination round. `
+    + `The 10 minute discovery round does not count, it is not an elimination round.<br>`
+    + `The <b>all time</b> counts come from ${esc(T.source||'the cup records')} and cover the whole history. `
+    + `Round by round times mostly come from the cup mod's own log, which prints the whole field before each `
+    + `elimination, and those logs only start at <b>COTD ${cov.first}</b>.${gap}${partialNote} `
+    + `Earlier cups recorded the round each player went out in and nothing about the players who survived, `
+    + `so a sweep before COTD ${cov.first} is counted but cannot be broken down here.<br>`
+    + `That means <b>round control</b>, <b>cup by cup</b>, <b>nearly swept it</b> and <b>led and lost</b> cover ${cov.cups} cups and `
+    + `${cov.rounds} rounds, not the whole history, and <b>cups won</b> in the table above is a log era number `
+    + `while <b>sweeps</b> next to it is all time. `
+    + `<b>Raced</b> counts the rounds a player was in the field for. `
+    + `<b>Worst place</b> is the lowest the eventual winner ranked in any round, blank if they DNF'd one.`;
+});
+</script>
+<script data-goatcounter="https://aizpun.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

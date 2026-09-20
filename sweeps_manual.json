@@ -1,0 +1,38 @@
+{
+  "_readme": [
+    "Clean sweeps that predate the mod logs (COTD 1-135), which only a human watching",
+    "the cup back can find. A clean sweep = the cup winner was FIRST in every",
+    "elimination round. The warmup / discovery round does not count.",
+    "",
+    "TOTALS is the all-time count per player, including the cups that do have a log.",
+    "It drives the headline board. Keep 'counts' in sync with Lexer's sheet.",
+    "",
+    "SWEEPS is the cup-by-cup detail, for the sweeps somebody has actually pinned to a",
+    "cup number. Anything listed here gets a card on the page with its map and date.",
+    "Fields: cup (a plain integer), winner, rounds (or null), source, note.",
+    "  {\"cup\": 77, \"winner\": \"Quickracer10\", \"rounds\": 14, \"source\": \"Lexer VOD review\", \"note\": \"\"}",
+    "",
+    "build_rounds.py checks everything here against cups.json and drops an entry with a",
+    "loud warning if the cup does not exist, if that player did not actually win it, or",
+    "if the cup has a mod log (COTD 136 onward), where the log is the authority. A total",
+    "lower than the number of sweeps we can already name is reported the same way."
+  ],
+  "totals": {
+    "source": "Lexer's records",
+    "note": "The cups that have a mod log are counted here too.",
+    "counts": {
+      "Kernkob": 7,
+      "ZOMAN": 1,
+      "Hydro": 1
+    }
+  },
+  "sweeps": [
+    {"cup": 37, "winner": "ZOMAN", "rounds": null, "source": "Hydro", "note": ""},
+    {"cup": 57, "winner": "Kernkob", "rounds": null, "source": "Hydro", "note": ""},
+    {"cup": 61, "winner": "Kernkob", "rounds": null, "source": "Hydro", "note": ""},
+    {"cup": 63, "winner": "Kernkob", "rounds": null, "source": "Hydro", "note": ""},
+    {"cup": 92, "winner": "Kernkob", "rounds": null, "source": "Hydro", "note": ""},
+    {"cup": 98, "winner": "Hydro", "rounds": null, "source": "Hydro", "note": ""},
+    {"cup": 101, "winner": "Kernkob", "rounds": null, "source": "Hydro", "note": ""}
+  ]
+}
