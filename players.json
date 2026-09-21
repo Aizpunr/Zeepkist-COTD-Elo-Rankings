@@ -2015,7 +2015,7 @@
     ]
   },
   "Northwind/Noweki": {
-    "steam_id": "76561198160604987",
+    "steam_id": null,
     "aliases": [
       "Northwind",
       "Noweki"
@@ -2031,6 +2031,13 @@
   "nova_lead": {
     "steam_id": "76561199483455072",
     "aliases": []
+  },
+  "Noweki": {
+    "steam_id": "76561198160604987",
+    "aliases": [
+      "Northwind",
+      "Northwind/Noweki"
+    ]
   },
   "Noxitu": {
     "steam_id": "76561198126038296",
