@@ -29,6 +29,7 @@ base = os.path.dirname(os.path.abspath(__file__))
 def _p(f): return os.path.join(base, f)
 
 from cotd_parser import filter_tracker_lines, split_rounds
+import cup_paths
 from elo_engine import CANONICAL, XLSX_FILES
 
 LOG_DIR = _p('cup logs')
@@ -82,8 +83,12 @@ def round_metrics(boards, winner):
     elim = [(r, b) for r, b in boards if r > 0]
     leaders, ranks, dropped = [], [], []
     for rnd_no, board in elim:
-        finishers = sorted((t, n) for n, t in board if t is not None)
-        order = [normalize_name(n) for _, n in finishers]
+        # Board position breaks a tie, never the name. Both the log and the
+        # game rank on the full float and print a rounded time, so two rows can
+        # show the same number without being tied, and the order they are
+        # printed in is the only thing that still knows which was faster.
+        finishers = sorted((t, i, n) for i, (n, t) in enumerate(board) if t is not None)
+        order = [normalize_name(n) for _, _, n in finishers]
         lead = order[0] if order else None
         leaders.append(lead)
         # A player who DNF'd or was not on the board has no meaningful rank.
@@ -92,7 +97,7 @@ def round_metrics(boards, winner):
             # The rounds standing between this cup and a clean sweep, and how
             # much the eventual winner lost each one by. The margin needs the
             # winner's own time for that round, which a screenshot may not show.
-            wt = next((t for t, n in finishers if normalize_name(n) == winner), None)
+            wt = next((t for t, _, n in finishers if normalize_name(n) == winner), None)
             dropped.append({
                 'round': rnd_no,
                 'to': lead,
@@ -101,7 +106,7 @@ def round_metrics(boards, winner):
 
     seq = [l for l in leaders if l]
     warmup = next((b for r, b in boards if r == 0), [])
-    warm_fin = sorted((t, n) for n, t in warmup if t is not None)
+    warm_fin = sorted((t, i, n) for i, (n, t) in enumerate(warmup) if t is not None)
     return {
         'winner': winner,
         'rounds': len(elim),
@@ -113,7 +118,7 @@ def round_metrics(boards, winner):
         'ranks': ranks,
         'dropped': dropped,
         # Led the discovery board too, when the log has one with times on it.
-        'warmup': bool(warm_fin) and normalize_name(warm_fin[0][1]) == winner,
+        'warmup': bool(warm_fin) and normalize_name(warm_fin[0][2]) == winner,
     }
 
 
@@ -170,6 +175,28 @@ def xlsx_elim_rounds(num):
     return _ELIM_CACHE[num]
 
 
+def elim_round_count(num, warnings):
+    """How many elimination rounds COTD <num> had, from the elimination records.
+
+    A sweep found by watching a VOD comes with a winner and nothing else, but
+    "led every round" reads better as "13 of 13", and that number is already in
+    the workbook: the last round anybody was eliminated in is the final. Checked
+    against the 28 cups that have both a mod log and a workbook block, it agrees
+    on every one. The single disagreement is COTD 134, whose block this repo
+    wrote itself with a round numbering that counts the discovery round, and
+    that block is recognisable because nobody in it went out in round 1. Return
+    None rather than a number that is off by one.
+    """
+    elim, last = xlsx_elim_rounds(num)
+    if not last:
+        return None
+    if 1 not in set(elim.values()):
+        warnings.append(f'COTD {num}: the elimination records have nobody going out in round 1, '
+                        f'so their round numbering is suspect and the round count is left blank')
+        return None
+    return last
+
+
 # ---------------------------------------------------------------- cup context
 
 with open(_p('cups.json'), encoding='utf-8') as f:
@@ -188,7 +215,7 @@ def cup_context(num):
     row = CUPS.get(f'COTD {num}')
     if not row or not row.get('players'):
         return None, None, None
-    path = _p(f'cup_{num}.json')
+    path = cup_paths.cup_json_path(num, base)
     if os.path.exists(path):
         with open(path, encoding='utf-8') as f:
             doc = json.load(f)
@@ -286,7 +313,10 @@ def load_partial_cup(path):
 
     elim = [(r, b) for r, b in boards if r > 0]
     if not elim:
-        return _stop('no rounds')
+        # A scaffold with its metadata filled in and no rounds yet is a normal
+        # state to leave a transcription in, so say where it stands.
+        target = elim_round_count(num, [])
+        return _stop(f'0 of {target} rounds transcribed' if target else 'no rounds')
 
     # A reconstruction in progress must never reach the site. With only some of
     # the rounds transcribed, "the winner led every round" is trivially true for
@@ -294,7 +324,7 @@ def load_partial_cup(path):
     # The real round count comes from cup_<N>.json (the runner-up's elimination
     # round) when that file exists; otherwise the file has to declare itself.
     expected = None
-    cj = _p(f'cup_{num}.json')
+    cj = cup_paths.cup_json_path(num, base)
     if os.path.exists(cj):
         with open(cj, encoding='utf-8') as f:
             expected = max((p['round'] for p in json.load(f)['players'] if p['round']),
@@ -465,7 +495,7 @@ def main():
                 continue
             manual.append({
                 'cup': f'COTD {num}', 'num': num, 'winner': real,
-                'rounds': e.get('rounds'), 'src': 'manual',
+                'rounds': e.get('rounds') or elim_round_count(num, warnings), 'src': 'manual',
                 'source': e.get('source') or 'manual review',
                 'note': e.get('note') or '', 'warmup': False,
                 'map': row.get('map') or '', 'date': row.get('date') or '',

@@ -1,0 +1,822 @@
+{
+  "cup": 132,
+  "source": "leaderboard screenshots shared in chat",
+  "notes": [
+    "COTD 132 predates the saved mod logs, so every round here comes from a screenshot.",
+    "COTD - Aether by WotterBytes (Tiago), 2026-02-21, won by ZOMAN over [KURK] Quickracer10.",
+    "All 17 rounds are screenshot confirmed and every elimination they show agrees with the",
+    "elimination records, round for round.",
+    "",
+    "Field: 59 racers and the header reads 59 of 59, so the mapper WotterBytes (Tiago) was not",
+    "in the lobby at all, unlike COTD 133 where the mapper took up a slot. The records take the",
+    "59 down to 53, 47, 41, 35, 29, 25, 21, 17, 13, 11, 9, 7, 5, 4, 3 and 2 entering rounds 2-17.",
+    "",
+    "The Cup Leaderboard header does NOT identify the round. It is read off whenever Lexer opens",
+    "the board during the podium sequence, which can be before or after that round's eliminations",
+    "are processed, so the same number can mean two different rounds. Round numbers here come",
+    "from aizpun watching the cup back.",
+    "",
+    "Times are the board's three decimals, but the game ranks on the full float behind them, so",
+    "two rows can print the same number without being tied. Where that happens the printed order",
+    "is the authority, and rows here keep board order. Red rows name the round a player went out",
+    "in and carry more decimals than the board does, so they are preferred where they appear.",
+    "",
+    "Butter is recorded as Butter, and the rows here are NOT reattributed to Pants, even though the in game chat of this cup has Butter saying \"its me pants\". Per aizpun, Butter is Pants' brother and Pants was racing on his account that day. They are two real people who have shared a lobby in 21 cups, so the canonical names stay separate whatever happens to this one cup. Whether COTD 132's Butter result should be credited to Pants is an ELO question for the ghosts list in elo_engine, which currently holds only COTD 133 and COTD 135, and it is not settled here. Until it is, these rounds match the published leaderboard, which says Butter.",
+    "",
+    "Round 6 has no end of round board, so it is the last live leaderboard plus the podium, top 5 only. The podium confirms the first three (Quickracer10 44.003, Kernkob 44.087, RoundNzt 44.229); fourth and fifth are taken from a panel with three seconds left on the clock and could in principle still have moved. The round leader, which is what this file is for, is not in doubt. The eliminated tail is left out on purpose: the elimination records already have it. The HUD agrees with those records on 29 players, 4 eliminations and top 25 advance.",
+    "",
+    "Round 9's board is cut off after row 16, and the elimination records name four players out that round where only three red rows are visible. The fourth is [Quac] microways, recorded with a null time: he certainly raced and was eliminated, only his time is off screen. Round 10 is complete at 13 and its 13 racers are exactly round 9's 13 survivors.",
+    "",
+    "Round 14's board shows [CTR] Sandals last with no rank and no time, so he is recorded as null rather than DNF: a screenshot cannot tell a DNF from a run still going when it was taken. The records have him as the one eliminated in round 14 either way.",
+    "",
+    "The final shows Quickracer10 in red with no time, recorded as null for the same reason as round 14's Sandals: a screenshot cannot separate a DNF from an unfinished run. Round 16 comes from the podium, which gives all three of its racers."
+  ],
+  "rounds": {
+    "1": [
+      [
+        "Kernkob",
+        44.133
+      ],
+      [
+        "ZOMAN",
+        44.224
+      ],
+      [
+        "[KURK] Quickracer10",
+        44.297
+      ],
+      [
+        "[FPV]PandaMane",
+        44.35
+      ],
+      [
+        "[SWMG]JakeAdjacent",
+        44.36
+      ],
+      [
+        "ping",
+        44.502
+      ],
+      [
+        "RoundNzt",
+        44.521
+      ],
+      [
+        "[CTR]agix",
+        44.563
+      ],
+      [
+        "Orthros",
+        44.564
+      ],
+      [
+        "Sterben",
+        44.574
+      ],
+      [
+        "[CSC] redal",
+        44.579
+      ],
+      [
+        "[CTR]Mortishade",
+        44.584
+      ],
+      [
+        "[CTR] Sandals",
+        44.588
+      ],
+      [
+        "[CSC]Tommygaming",
+        44.651
+      ],
+      [
+        "icRS",
+        44.692
+      ],
+      [
+        "Hi Im Yolo",
+        44.721
+      ]
+    ],
+    "2": [
+      [
+        "[KURK] Quickracer10",
+        44.141
+      ],
+      [
+        "ZOMAN",
+        44.243
+      ],
+      [
+        "Kernkob",
+        44.262
+      ],
+      [
+        "Orthros",
+        44.406
+      ],
+      [
+        "Lexer",
+        44.452
+      ],
+      [
+        "[CTR] Sandals",
+        44.467
+      ],
+      [
+        "[CSC]Tommygaming",
+        44.541
+      ],
+      [
+        "[SWMG]JakeAdjacent",
+        44.571
+      ],
+      [
+        "[CTR]Beans",
+        44.584
+      ],
+      [
+        "[CTR]GuAlexItar",
+        44.612
+      ],
+      [
+        "RoundNzt",
+        44.626
+      ],
+      [
+        "brrryy",
+        44.65
+      ],
+      [
+        "[FPV]PandaMane",
+        44.651
+      ],
+      [
+        "Butter",
+        44.672
+      ],
+      [
+        "[CSC] redal",
+        44.686
+      ],
+      [
+        "[CSC] DeeDeeNaNaNa",
+        44.713
+      ]
+    ],
+    "3": [
+      [
+        "Kernkob",
+        44.132
+      ],
+      [
+        "ZOMAN",
+        44.201
+      ],
+      [
+        "[KURK] Quickracer10",
+        44.304
+      ],
+      [
+        "[CTR] Sandals",
+        44.432
+      ],
+      [
+        "[SWMG]JakeAdjacent",
+        44.439
+      ],
+      [
+        "Lexer",
+        44.444
+      ],
+      [
+        "Butter",
+        44.451
+      ],
+      [
+        "ping",
+        44.531
+      ],
+      [
+        "[CTR]Mortishade",
+        44.535
+      ],
+      [
+        "[CTR]agix",
+        44.57
+      ],
+      [
+        "[FPV]PandaMane",
+        44.599
+      ],
+      [
+        "brrryy",
+        44.686
+      ],
+      [
+        "icRS",
+        44.729
+      ],
+      [
+        "[CTR]GuAlexItar",
+        44.745
+      ],
+      [
+        "Hi Im Yolo",
+        44.769
+      ],
+      [
+        "RoundNzt",
+        44.771
+      ]
+    ],
+    "4": [
+      [
+        "Kernkob",
+        44.147
+      ],
+      [
+        "ZOMAN",
+        44.192
+      ],
+      [
+        "[KURK] Quickracer10",
+        44.233
+      ],
+      [
+        "[CSC]Tommygaming",
+        44.351
+      ],
+      [
+        "[CTR] Sandals",
+        44.36
+      ],
+      [
+        "MackCheesy",
+        44.399
+      ],
+      [
+        "Lexer",
+        44.4
+      ],
+      [
+        "[FPV]PandaMane",
+        44.432
+      ],
+      [
+        "RoundNzt",
+        44.452
+      ],
+      [
+        "Sterben",
+        44.453
+      ],
+      [
+        "[CSC] redal",
+        44.489
+      ],
+      [
+        "Orthros",
+        44.503
+      ],
+      [
+        "JobW",
+        44.54
+      ],
+      [
+        "[CTR]agix",
+        44.584
+      ],
+      [
+        "ping",
+        44.586
+      ],
+      [
+        "Mμ",
+        44.633
+      ]
+    ],
+    "5": [
+      [
+        "ZOMAN",
+        44.068
+      ],
+      [
+        "Kernkob",
+        44.085
+      ],
+      [
+        "[KURK] Quickracer10",
+        44.129
+      ],
+      [
+        "[SWMG]JakeAdjacent",
+        44.256
+      ],
+      [
+        "[CTR] Sandals",
+        44.277
+      ],
+      [
+        "MackCheesy",
+        44.339
+      ],
+      [
+        "ping",
+        44.442
+      ],
+      [
+        "Lexer",
+        44.461
+      ],
+      [
+        "Butter",
+        44.476
+      ],
+      [
+        "[CTR]agix",
+        44.483
+      ],
+      [
+        "[CTR]Beans",
+        44.506
+      ],
+      [
+        "[CSC]Tommygaming",
+        44.543
+      ],
+      [
+        "[Quac] microways",
+        44.546
+      ],
+      [
+        "[FPV]PandaMane",
+        44.554
+      ],
+      [
+        "Sterben",
+        44.626
+      ],
+      [
+        "Minkus",
+        44.631
+      ]
+    ],
+    "6": [
+      [
+        "[KURK] Quickracer10",
+        44.003
+      ],
+      [
+        "Kernkob",
+        44.087
+      ],
+      [
+        "RoundNzt",
+        44.229
+      ],
+      [
+        "ZOMAN",
+        44.234
+      ],
+      [
+        "Lexer",
+        44.271
+      ]
+    ],
+    "7": [
+      [
+        "ZOMAN",
+        44.006
+      ],
+      [
+        "[KURK] Quickracer10",
+        44.109
+      ],
+      [
+        "Kernkob",
+        44.142
+      ],
+      [
+        "Sterben",
+        44.258
+      ],
+      [
+        "Lexer",
+        44.285
+      ],
+      [
+        "[CTR]agix",
+        44.296
+      ],
+      [
+        "MackCheesy",
+        44.384
+      ],
+      [
+        "RoundNzt",
+        44.395
+      ],
+      [
+        "[FPV]PandaMane",
+        44.4
+      ],
+      [
+        "[CTR] Sandals",
+        44.453
+      ],
+      [
+        "[SWMG]JakeAdjacent",
+        44.464
+      ],
+      [
+        "JobW",
+        44.49
+      ],
+      [
+        "[CSC] DeeDeeNaNaNa",
+        44.522
+      ],
+      [
+        "ping",
+        44.574
+      ],
+      [
+        "Butter",
+        44.598
+      ],
+      [
+        "[CTR]GuAlexItar",
+        44.602
+      ]
+    ],
+    "8": [
+      [
+        "Kernkob",
+        43.996
+      ],
+      [
+        "ZOMAN",
+        44.078
+      ],
+      [
+        "[CTR] Sandals",
+        44.131
+      ],
+      [
+        "[FPV]PandaMane",
+        44.22
+      ],
+      [
+        "[KURK] Quickracer10",
+        44.241
+      ],
+      [
+        "Orthros",
+        44.293
+      ],
+      [
+        "ping",
+        44.333
+      ],
+      [
+        "[CTR]GuAlexItar",
+        44.433
+      ],
+      [
+        "JobW",
+        44.469
+      ],
+      [
+        "Butter",
+        44.486
+      ],
+      [
+        "Lexer",
+        44.494
+      ],
+      [
+        "MackCheesy",
+        44.517
+      ],
+      [
+        "[CSC] DeeDeeNaNaNa",
+        44.558
+      ],
+      [
+        "Sterben",
+        44.566
+      ],
+      [
+        "[Quac] microways",
+        44.567
+      ],
+      [
+        "RoundNzt",
+        44.661
+      ]
+    ],
+    "9": [
+      [
+        "ZOMAN",
+        44.138
+      ],
+      [
+        "Lexer",
+        44.198
+      ],
+      [
+        "Kernkob",
+        44.223
+      ],
+      [
+        "[FPV]PandaMane",
+        44.256
+      ],
+      [
+        "[KURK] Quickracer10",
+        44.325
+      ],
+      [
+        "RoundNzt",
+        44.334
+      ],
+      [
+        "ping",
+        44.344
+      ],
+      [
+        "[CTR] Sandals",
+        44.388
+      ],
+      [
+        "[CTR]GuAlexItar",
+        44.397
+      ],
+      [
+        "icRS",
+        44.412
+      ],
+      [
+        "Sterben",
+        44.415
+      ],
+      [
+        "JobW",
+        44.427
+      ],
+      [
+        "MackCheesy",
+        44.433
+      ],
+      [
+        "[CSC] DeeDeeNaNaNa",
+        44.51316
+      ],
+      [
+        "Butter",
+        44.58418
+      ],
+      [
+        "Orthros",
+        44.6167
+      ],
+      [
+        "[Quac] microways",
+        null
+      ]
+    ],
+    "10": [
+      [
+        "[KURK] Quickracer10",
+        44.059
+      ],
+      [
+        "[CTR] Sandals",
+        44.15
+      ],
+      [
+        "ZOMAN",
+        44.21
+      ],
+      [
+        "Kernkob",
+        44.215
+      ],
+      [
+        "Sterben",
+        44.281
+      ],
+      [
+        "Lexer",
+        44.306
+      ],
+      [
+        "[FPV]PandaMane",
+        44.378
+      ],
+      [
+        "icRS",
+        44.497
+      ],
+      [
+        "MackCheesy",
+        44.548
+      ],
+      [
+        "JobW",
+        44.564
+      ],
+      [
+        "RoundNzt",
+        44.587
+      ],
+      [
+        "ping",
+        44.641
+      ],
+      [
+        "[CTR]GuAlexItar",
+        44.722
+      ]
+    ],
+    "11": [
+      [
+        "[KURK] Quickracer10",
+        44.068
+      ],
+      [
+        "ZOMAN",
+        44.159
+      ],
+      [
+        "[CTR] Sandals",
+        44.202
+      ],
+      [
+        "Lexer",
+        44.25
+      ],
+      [
+        "Sterben",
+        44.252
+      ],
+      [
+        "Kernkob",
+        44.277
+      ],
+      [
+        "[FPV]PandaMane",
+        44.288
+      ],
+      [
+        "MackCheesy",
+        44.317
+      ],
+      [
+        "JobW",
+        44.433
+      ],
+      [
+        "RoundNzt",
+        44.50763
+      ],
+      [
+        "icRS",
+        44.52823
+      ]
+    ],
+    "12": [
+      [
+        "Kernkob",
+        44.155
+      ],
+      [
+        "Lexer",
+        44.184
+      ],
+      [
+        "ZOMAN",
+        44.19
+      ],
+      [
+        "[KURK] Quickracer10",
+        44.194
+      ],
+      [
+        "MackCheesy",
+        44.215
+      ],
+      [
+        "[CTR] Sandals",
+        44.229
+      ],
+      [
+        "Sterben",
+        44.24
+      ],
+      [
+        "[FPV]PandaMane",
+        44.245
+      ],
+      [
+        "JobW",
+        44.334
+      ]
+    ],
+    "13": [
+      [
+        "[CTR] Sandals",
+        44.118
+      ],
+      [
+        "ZOMAN",
+        44.141
+      ],
+      [
+        "[KURK] Quickracer10",
+        44.146
+      ],
+      [
+        "Lexer",
+        44.2
+      ],
+      [
+        "Sterben",
+        44.219
+      ],
+      [
+        "Kernkob",
+        44.227
+      ],
+      [
+        "MackCheesy",
+        44.328
+      ]
+    ],
+    "14": [
+      [
+        "ZOMAN",
+        44.0
+      ],
+      [
+        "Sterben",
+        44.151
+      ],
+      [
+        "Lexer",
+        44.371
+      ],
+      [
+        "[KURK] Quickracer10",
+        44.402
+      ],
+      [
+        "[CTR] Sandals",
+        null
+      ]
+    ],
+    "15": [
+      [
+        "[KURK] Quickracer10",
+        44.227
+      ],
+      [
+        "Sterben",
+        44.286
+      ],
+      [
+        "ZOMAN",
+        44.376
+      ],
+      [
+        "Lexer",
+        44.665
+      ]
+    ],
+    "16": [
+      [
+        "[KURK] Quickracer10",
+        44.114
+      ],
+      [
+        "ZOMAN",
+        44.233
+      ],
+      [
+        "Sterben",
+        44.242
+      ]
+    ],
+    "17": [
+      [
+        "ZOMAN",
+        44.19
+      ],
+      [
+        "[KURK] Quickracer10",
+        null
+      ]
+    ]
+  }
+}

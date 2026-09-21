@@ -23,6 +23,8 @@ import re
 import sys
 from collections import Counter, defaultdict
 
+import cup_paths
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 CUP_LOGS = os.path.join(HERE, 'cup logs')
 ALLDATA = os.path.join(HERE, 'alldata.json')
@@ -353,7 +355,7 @@ def infer_ltg(matches, name_to_sid, canonical_to_sid):
 
 def patch_cup_json(cup_n, ltg_findings, dry_run=False):
     """Replace 'DNF' -> '<time>' for LTG cases, re-sort that round's elim zone, re-number positions."""
-    path = os.path.join(HERE, f'cup_{cup_n}.json')
+    path = cup_paths.cup_json_path(cup_n, HERE)
     if not os.path.exists(path):
         return {'patched': False, 'reason': 'cup_<N>.json not found'}
 
@@ -594,7 +596,8 @@ def main():
         'cup_json_patch': patch_result,
         'steam_ids_merge': sid_result,
     }
-    out_path = os.path.join(HERE, f'cotd_{n}_ltg_report.json')
+    cup_paths.ensure_dirs(HERE)
+    out_path = cup_paths.ltg_report_path(n, HERE)
     with open(out_path, 'w', encoding='utf-8') as f:
         json.dump(report, f, ensure_ascii=False, indent=2)
     print(f'\nWrote {out_path}')

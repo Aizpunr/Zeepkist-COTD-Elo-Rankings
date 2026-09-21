@@ -232,3 +232,92 @@ def test_a_sweep_is_detected():
     warm = [(0, [('a', 39.0), ('W', 41.0)])] + swept
     m = br.round_metrics(warm, 'W')
     assert m['sweep'] and m['rounds'] == 2 and m['warmup'] is False
+
+
+def test_round_count_from_the_elimination_records_agrees_with_the_logs():
+    """A sweep found by watching a VOD has no round data, but the workbook knows
+    how many rounds the cup had: the last round anybody went out in. That is
+    only worth trusting because it matches the log on every cup that has both."""
+    if br.xlsx_elim_rounds(143)[1] is None:
+        pytest.skip('workbooks not on disk (gitignored)')
+
+    with open(br._p('rounds.json'), encoding='utf-8') as f:
+        built = json.load(f)['cups']
+    warnings = []
+    checked = 0
+    for cup in built:
+        if cup['num'] == 134:
+            continue  # its block is the known bad one, asserted on below
+        count = br.elim_round_count(cup['num'], warnings)
+        if count is None:
+            continue
+        assert count == cup['rounds'], cup['cup']
+        checked += 1
+    assert checked >= 20, f'only {checked} cups cross-checked'
+    assert warnings == []
+
+
+def test_a_block_that_skips_round_one_yields_no_round_count():
+    """COTD 134's block was written by this repo with the discovery round
+    counted, so it runs 2..16 where the truth is 1..15. Nobody going out in
+    round 1 is the signature, and a wrong count is worse than none."""
+    if br.xlsx_elim_rounds(134)[1] is None:
+        pytest.skip('workbooks not on disk (gitignored)')
+
+    warnings = []
+    assert br.elim_round_count(134, warnings) is None
+    assert len(warnings) == 1 and 'round 1' in warnings[0]
+
+
+def test_round_count_from_the_elimination_records_agrees_with_the_logs():
+    """A sweep found by watching a VOD has no round data, but the workbook knows
+    how many rounds the cup had: the last round anybody went out in. That is
+    only worth trusting because it matches the log on every cup that has both."""
+    if br.xlsx_elim_rounds(143)[1] is None:
+        pytest.skip('workbooks not on disk (gitignored)')
+
+    with open(br._p('rounds.json'), encoding='utf-8') as f:
+        built = json.load(f)['cups']
+    warnings = []
+    checked = 0
+    for cup in built:
+        count = br.elim_round_count(cup['num'], warnings)
+        if count is None:
+            continue
+        assert count == cup['rounds'], cup['cup']
+        checked += 1
+    assert checked >= 20, f'only {checked} cups cross-checked'
+    assert warnings == []
+
+
+def test_a_block_that_skips_round_one_yields_no_round_count():
+    """A block numbered from the discovery round runs 2..N+1 where the truth is
+    1..N. Nobody going out in round 1 is the signature, and a wrong count is
+    worse than none. COTD 134 was the one block in this repo with that bug."""
+    warnings = []
+    br._ELIM_CACHE[9901] = ({'a': 2, 'b': 3, 'c': 3}, 3)
+    assert br.elim_round_count(9901, warnings) is None
+    assert len(warnings) == 1 and 'round 1' in warnings[0]
+
+    br._ELIM_CACHE[9902] = ({'a': 1, 'b': 2, 'c': 3}, 3)
+    assert br.elim_round_count(9902, []) == 3
+
+
+def test_equal_printed_times_are_broken_by_board_order_not_by_name():
+    """The game ranks on a full float and prints three decimals, so two rows can
+    show the same time without being tied. COTD 133 round 8 does exactly that.
+    Sorting on (time, name) silently handed the round to whoever sorted first
+    alphabetically, which is how RoundNzt took a round JakeAdjacent won."""
+    board = [(0, []), (1, [('[SWMG]JakeAdjacent', 45.499), ('RoundNzt', 45.499),
+                           ('justMaki', 45.523)])]
+    m = br.round_metrics(board, br.normalize_name('justMaki'))
+    assert m['leaders'] == ['JakeAdjacent']
+    assert m['ranks'] == [3]
+
+    # Reverse the board and the other one leads: order is the whole signal.
+    flipped = [(1, [('RoundNzt', 45.499), ('[SWMG]JakeAdjacent', 45.499)])]
+    assert br.round_metrics(flipped, 'nobody')['leaders'] == ['RoundNzt']
+
+    # And the margin is measured against the row that actually led.
+    m = br.round_metrics(board, br.normalize_name('RoundNzt'))
+    assert m['dropped'] == [{'round': 1, 'to': 'JakeAdjacent', 'margin': 0.0}]

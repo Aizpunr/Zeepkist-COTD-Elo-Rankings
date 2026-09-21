@@ -15,6 +15,7 @@ import openpyxl
 # as TEXT further down because it rewrites the xlsx filename literal in it.
 from elo_engine import CANONICAL
 from cotd_parser import ParseError, cup_json_payload, parse_cup_log_file, time_to_ms
+import cup_paths
 
 # Force UTF-8 stdout so printing unicode aliases (e.g. the 𝒱V𝑜o𝒾i𝒹d𝒱 void name)
 # in the alias-drift report can't crash the pipeline when stdout is redirected
@@ -519,10 +520,11 @@ else:
 
 # ── 4. Write JSON backup ──
 cup_json = cup_json_payload(parsed, cup_num, mapper)
-json_path = _p(f'cup_{cup_num}.json')
+cup_paths.ensure_dirs(_dir)
+json_path = cup_paths.cup_json_path(cup_num, _dir)
 with open(json_path, 'w', encoding='utf-8') as f:
     json.dump(cup_json, f, ensure_ascii=False, indent=2)
-print(f"JSON backup: cup_{cup_num}.json")
+print(f"JSON backup: {os.path.relpath(json_path, _dir)}")
 print()
 
 # ── 4b. Write cup_meta.json (map/mapper/date for build_cups.py) ──
@@ -676,7 +678,7 @@ if sof_ok or cotd_pool_ok:
     print(f"  SOF data: refreshed (commit+push the SOF repo too)")
 print()
 print("Next steps (after verifying on localhost):")
-print(f"  - Git commit + push (COTD repo) — REMEMBER to stage cup_meta.json AND cup_{cup_num}.json (lexertools last-cup view fetches it)")
+print(f"  - Git commit + push (COTD repo) — REMEMBER to stage cup_meta.json AND cup_data/cup_{cup_num}.json (lexertools last-cup view fetches it)")
 if sof_ok or cotd_pool_ok:
     print(f"  - Git commit + push (SOF repo) — stage all three:")
     if sof_ok:

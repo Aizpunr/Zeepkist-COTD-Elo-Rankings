@@ -18,6 +18,8 @@ uses, so a git diff shows only the "time" lines.
 import glob
 import json
 import os
+
+import cup_paths
 import shutil
 import sys
 
@@ -47,9 +49,7 @@ def convert(doc):
 
 def main(argv):
     dry = '--dry-run' in argv
-    # cup_[0-9]*.json on purpose: cup_*.json would also match cup_meta.json
-    files = sorted(glob.glob(os.path.join(HERE, 'cup_[0-9]*.json')),
-                   key=lambda f: int(os.path.basename(f)[4:-5]))
+    files = cup_paths.all_cup_json(HERE)
     total_conv = 0
     for path in files:
         with open(path, encoding='utf-8') as f:

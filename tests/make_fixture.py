@@ -25,6 +25,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(HERE)
 sys.path.insert(0, REPO)
 
+import cup_paths
+
 from cotd_parser import cup_json_payload, parse_cup_log  # noqa: E402
 
 TAG = b'COTDTracker'
@@ -41,7 +43,7 @@ def main(argv):
     exclude = sorted(x.strip() for x in a.exclude.split(',') if x.strip())
 
     src_log = os.path.join(REPO, 'cup logs', f'cotd_{n}.log')
-    src_json = os.path.join(REPO, f'cup_{n}.json')
+    src_json = cup_paths.cup_json_path(n, REPO)
     for p in (src_log, src_json):
         if not os.path.exists(p):
             print(f'ERROR: missing {p}')

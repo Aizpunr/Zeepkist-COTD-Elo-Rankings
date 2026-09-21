@@ -603,8 +603,8 @@ async function showLastCup() {
     if (!cotd.length) throw new Error('No COTD cups in cups.json');
     const last = cotd[cotd.length - 1];
     const cupNum = parseInt(last.id.split(' ')[1], 10);
-    const cupData = await fetch(`cup_${cupNum}.json`).then(r => {
-      if (!r.ok) throw new Error(`cup_${cupNum}.json not found`);
+    const cupData = await fetch(`cup_data/cup_${cupNum}.json`).then(r => {
+      if (!r.ok) throw new Error(`cup_data/cup_${cupNum}.json not found`);
       return r.json();
     });
     const fastestEntry = (fastest || []).find(f => f.cup === last.id);

@@ -31,6 +31,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(HERE)
 sys.path.insert(0, REPO)
 
+import cup_paths
+
 from cotd_parser import ParseError, cup_json_payload, parse_cup_log_file  # noqa: E402
 
 CUP_LOGS = os.path.join(REPO, 'cup logs')
@@ -42,7 +44,7 @@ def candidate_cups():
     nums = []
     for fn in os.listdir(CUP_LOGS):
         m = re.fullmatch(r'cotd_(\d+)\.log', fn)
-        if m and os.path.exists(os.path.join(REPO, f'cup_{m.group(1)}.json')):
+        if m and os.path.exists(cup_paths.cup_json_path(m.group(1), REPO)):
             nums.append(int(m.group(1)))
     return sorted(nums)
 
@@ -73,7 +75,7 @@ def first_diffs(a, b, k=2):
 
 def replay(n, exclude):
     log = os.path.join(CUP_LOGS, f'cotd_{n}.log')
-    with open(os.path.join(REPO, f'cup_{n}.json'), encoding='utf-8') as f:
+    with open(cup_paths.cup_json_path(n, REPO), encoding='utf-8') as f:
         expected = json.load(f)
     parsed = parse_cup_log_file(log, exclude)
     if parsed.winner is None:
@@ -84,7 +86,7 @@ def replay(n, exclude):
 
 def discover(n):
     manifest = load_manifest(n)
-    with open(os.path.join(REPO, f'cup_{n}.json'), encoding='utf-8') as f:
+    with open(cup_paths.cup_json_path(n, REPO), encoding='utf-8') as f:
         mapper = json.load(f)['mapper']
     exclude = set(manifest['exclude']) if manifest else {mapper}
     status = parsed = expected = payload = None
