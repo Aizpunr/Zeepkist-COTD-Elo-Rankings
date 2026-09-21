@@ -1,324 +1,118 @@
 {
-  "_readme": [
-    "COTD 138 has no saved mod log (new_cup.py wasn't used that week, BepInEx overwrote it).",
-    "This is a manual reconstruction from leaderboard screenshots shared in chat, one round at",
-    "a time. Only 'leader' (fastest time of the round) is load-bearing for the clean-sweep check;",
-    "'visible' is whatever portion of the field happened to be on screen, kept for reference, not",
-    "guaranteed complete. Do NOT treat 'visible' as the full round the way a real log's leaderboard",
-    "block is — it is only as wide as the screenshot."
-  ],
   "cup": 138,
-  "source": "screenshots shared in chat, 2026-09-2x",
-  "rounds": [
-    {
-      "round": 1,
-      "leader": {"name": "Kernkob", "time": 41.677},
-      "visible": [
-        {"pos": 1, "name": "Kernkob", "time": 41.677},
-        {"pos": 2, "name": "[SWMG]JakeAdjacent", "time": 42.107, "note": "originally transcribed as 'JukeAdjacent' from a blurry screenshot; corrected, this name has no CANONICAL alias and every other round (2-14) shows the same player as JakeAdjacent"},
-        {"pos": 3, "name": "[CTR]Sandals", "time": 42.123},
-        {"pos": 4, "name": "[FPV]PandaMane", "time": 42.153},
-        {"pos": 5, "name": "[Quac]microways", "time": 42.199},
-        {"pos": 48, "name": "wokonbike", "time": null, "flag": "red"},
-        {"pos": 49, "name": null, "time": null, "flag": "red", "note": "illegible in screenshot, unconfirmed"},
-        {"pos": 50, "name": null, "time": null, "flag": "red", "note": "illegible in screenshot, unconfirmed"},
-        {"pos": 51, "name": null, "time": null, "flag": "red", "note": "illegible in screenshot, unconfirmed"},
-        {"pos": 52, "name": "[Arch]Neovey", "time": null, "flag": "red"},
-        {"pos": 22, "name": "Lexer", "time": 43.257, "note": "shown as 'Your Time'"}
-      ],
-      "open_questions": [
-        "positions 49-51 not legible enough to record a name",
-        "does red = eliminated this round, or danger-zone / about to be eliminated next round?"
-      ]
-    },
-    {
-      "round": 2,
-      "leader": {"name": "Kernkob", "time": 41.612},
-      "visible": [
-        {"pos": 1, "name": "Kernkob", "time": 41.612},
-        {"pos": 2, "name": "[SWMG]JakeAdjacent", "time": 42.011},
-        {"pos": 3, "name": "[FPV]PandaMane", "time": 42.030},
-        {"pos": 4, "name": "Renergy", "time": 42.159},
-        {"pos": 5, "name": "[KURK] Quickracer10", "time": 42.181},
-        {"pos": 6, "name": "MALIYO", "time": 42.253},
-        {"pos": 7, "name": "Minkus", "time": 42.261},
-        {"pos": 8, "name": "brrryy", "time": 42.264},
-        {"pos": 9, "name": "MackCheesy", "time": 42.267},
-        {"pos": 10, "name": "[CTR] Sandals", "time": 42.434},
-        {"pos": 11, "name": "Lexer", "time": 42.516},
-        {"pos": 12, "name": "ping", "time": 42.617},
-        {"pos": 13, "name": "[Quac] microways", "time": 42.631},
-        {"pos": 14, "name": "[CTR]agix", "time": 42.657},
-        {"pos": 15, "name": "[CSC] redal", "time": 42.671},
-        {"pos": 16, "name": "RoundNzt", "time": 42.694}
-      ]
-    },
-    {
-      "round": 3,
-      "leader": {"name": "Kernkob", "time": 41.776},
-      "visible": [
-        {"pos": 1, "name": "Kernkob", "time": 41.776},
-        {"pos": 2, "name": "[CTR] Sandals", "time": 41.961},
-        {"pos": 3, "name": "[SWMG]JakeAdjacent", "time": 42.013},
-        {"pos": 4, "name": "[KURK] Quickracer10", "time": 42.085},
-        {"pos": 5, "name": "Lexer", "time": 42.089},
-        {"pos": 6, "name": "[Quac] microways", "time": 42.130},
-        {"pos": 7, "name": "RoundNzt", "time": 42.232},
-        {"pos": 8, "name": "[FPV]PandaMane", "time": 42.246},
-        {"pos": 9, "name": "[CSC] redal", "time": 42.278},
-        {"pos": 10, "name": "brrryy", "time": 42.331},
-        {"pos": 11, "name": "Minkus", "time": 42.503},
-        {"pos": 12, "name": "MackCheesy", "time": 42.575},
-        {"pos": 13, "name": "MALIYO", "time": 42.649},
-        {"pos": 14, "name": "Renergy", "time": 42.710},
-        {"pos": 15, "name": "Hi Im Yolo", "time": 42.720},
-        {"pos": 16, "name": "ping", "time": 42.828}
-      ]
-    },
-    {
-      "round": 4,
-      "leader": {"name": "Kernkob", "time": 41.707},
-      "visible": [
-        {"pos": 1, "name": "Kernkob", "time": 41.707},
-        {"pos": 2, "name": "[FPV]PandaMane", "time": 41.852},
-        {"pos": 3, "name": "[SWMG]JakeAdjacent", "time": 41.859},
-        {"pos": 4, "name": "Lexer", "time": 41.990},
-        {"pos": 5, "name": "[Quac] microways", "time": 42.016},
-        {"pos": 6, "name": "MackCheesy", "time": 42.028},
-        {"pos": 7, "name": "brrryy", "time": 42.184},
-        {"pos": 8, "name": "[CSC] redal", "time": 42.359},
-        {"pos": 9, "name": "[CTR] Sandals", "time": 42.372},
-        {"pos": 10, "name": "Renergy", "time": 42.416},
-        {"pos": 11, "name": "MALIYO", "time": 42.453},
-        {"pos": 12, "name": "[KURK] Quickracer10", "time": 42.534},
-        {"pos": 13, "name": "[MMM]LKat", "time": 42.591},
-        {"pos": 14, "name": "RoundNzt", "time": 42.601},
-        {"pos": 15, "name": "St Nicholas", "time": 42.641},
-        {"pos": 16, "name": "Minkus", "time": 42.706}
-      ]
-    },
-    {
-      "round": 5,
-      "leader": {"name": "Kernkob", "time": 41.749},
-      "visible": [
-        {"pos": 1, "name": "Kernkob", "time": 41.749},
-        {"pos": 2, "name": "[KURK] Quickracer10", "time": 41.797},
-        {"pos": 3, "name": "[FPV]PandaMane", "time": 41.839},
-        {"pos": 4, "name": "[CTR] Sandals", "time": 41.862},
-        {"pos": 5, "name": "RoundNzt", "time": 41.912},
-        {"pos": 6, "name": "MackCheesy", "time": 41.959},
-        {"pos": 7, "name": "Lexer", "time": 42.038},
-        {"pos": 8, "name": "[SWMG]JakeAdjacent", "time": 42.158},
-        {"pos": 9, "name": "[MMM]LKat", "time": 42.242},
-        {"pos": 10, "name": "MALIYO", "time": 42.367},
-        {"pos": 11, "name": "Renergy", "time": 42.408},
-        {"pos": 12, "name": "[Quac] microways", "time": 42.428},
-        {"pos": 13, "name": "Hi Im Yolo", "time": 42.452},
-        {"pos": 14, "name": "[MMM]Victor", "time": 42.478},
-        {"pos": 15, "name": "brrryy", "time": 42.608},
-        {"pos": 16, "name": "[CTR]GuAlexItar", "time": 42.645}
-      ]
-    },
-    {
-      "round": 6,
-      "round_number_source": "inferred: unlabeled screenshot, placed here because 20/52 -> 16/52 is a one-round drop matching round 7's count",
-      "field_remaining": 20,
-      "field_total": 52,
-      "leader": {"name": "Kernkob", "time": 41.495},
-      "visible": [
-        {"pos": 1, "name": "Kernkob", "time": 41.495},
-        {"pos": 2, "name": "Lexer", "time": 41.798},
-        {"pos": 3, "name": "[FPV]PandaMane", "time": 41.824},
-        {"pos": 4, "name": "[SWMG]JakeAdjacent", "time": 41.825},
-        {"pos": 5, "name": "[KURK] Quickracer10", "time": 41.898},
-        {"pos": 6, "name": "[CTR] Sandals", "time": 41.927},
-        {"pos": 7, "name": "RoundNzt", "time": 41.930},
-        {"pos": 8, "name": "MackCheesy", "time": 42.206},
-        {"pos": 9, "name": "Renergy", "time": 42.292},
-        {"pos": 10, "name": "[CSC] redal", "time": 42.305},
-        {"pos": 11, "name": "brrryy", "time": 42.351},
-        {"pos": 12, "name": "St Nicholas", "time": 42.417},
-        {"pos": 13, "name": "[Quac] microways", "time": 42.438},
-        {"pos": 14, "name": "MALIYO", "time": 42.518},
-        {"pos": 15, "name": "Hi Im Yolo", "time": 42.526},
-        {"pos": 16, "name": "[MMM]Victor", "time": 42.613}
-      ]
-    },
-    {
-      "round": 7,
-      "field_remaining": 16,
-      "field_total": 52,
-      "leader": {"name": "Kernkob", "time": 41.608},
-      "visible": [
-        {"pos": 1, "name": "Kernkob", "time": 41.608},
-        {"pos": 2, "name": "[KURK] Quickracer10", "time": 41.771},
-        {"pos": 3, "name": "[FPV]PandaMane", "time": 41.874},
-        {"pos": 4, "name": "[SWMG]JakeAdjacent", "time": 41.903},
-        {"pos": 5, "name": "RoundNzt", "time": 41.905},
-        {"pos": 6, "name": "MackCheesy", "time": 41.993},
-        {"pos": 7, "name": "[Quac] microways", "time": 42.050},
-        {"pos": 8, "name": "Lexer", "time": 42.078},
-        {"pos": 9, "name": "Renergy", "time": 42.161},
-        {"pos": 10, "name": "brrryy", "time": 42.269},
-        {"pos": 11, "name": "ping", "time": 42.270},
-        {"pos": 12, "name": "[CTR] Sandals", "time": 42.290},
-        {"pos": 13, "name": "MALIYO", "time": 42.416},
-        {"pos": 14, "name": "Hi Im Yolo", "time": 42.510},
-        {"pos": 15, "name": "St Nicholas", "time": 42.565},
-        {"pos": 16, "name": "[CSC] redal", "time": 42.566}
-      ]
-    },
-    {
-      "round": 8,
-      "field_remaining": null,
-      "field_total": 52,
-      "note": "Players: X/52 counter cut off at top of screenshot, unreadable. Same 16 names as round 7, reordered by time only, no new names -- unclear if this round actually eliminated anyone or if the counter tracks something other than 'remaining alive'.",
-      "leader": {"name": "Kernkob", "time": 41.622},
-      "visible": [
-        {"pos": 1, "name": "Kernkob", "time": 41.622},
-        {"pos": 2, "name": "[FPV]PandaMane", "time": 41.722},
-        {"pos": 3, "name": "[SWMG]JakeAdjacent", "time": 41.860},
-        {"pos": 4, "name": "[CTR] Sandals", "time": 41.900},
-        {"pos": 5, "name": "RoundNzt", "time": 41.961},
-        {"pos": 6, "name": "brrryy", "time": 42.098},
-        {"pos": 7, "name": "[Quac] microways", "time": 42.110},
-        {"pos": 8, "name": "[CSC] redal", "time": 42.161},
-        {"pos": 9, "name": "Lexer", "time": 42.185},
-        {"pos": 10, "name": "MackCheesy", "time": 42.206},
-        {"pos": 11, "name": "[KURK] Quickracer10", "time": 42.231},
-        {"pos": 12, "name": "Renergy", "time": 42.240},
-        {"pos": 13, "name": "Hi Im Yolo", "time": 42.248},
-        {"pos": 14, "name": "ping", "time": 42.322},
-        {"pos": 15, "name": "St Nicholas", "time": 42.359},
-        {"pos": 16, "name": "MALIYO", "time": 42.790}
-      ]
-    },
-    {
-      "round": 9,
-      "round_number_source": "confirmed by round 11's screenshot, which labels brrryy's elimination as 'Round 9, Time: 42.27232' -- exact match to brrryy's time here",
-      "field_remaining": null,
-      "note": "bottom row ([CSC] redal) was cut off in the screenshot, no position/time visible for it",
-      "leader": {"name": "Kernkob", "time": 41.551},
-      "visible": [
-        {"pos": 1, "name": "Kernkob", "time": 41.551},
-        {"pos": 2, "name": "[FPV]PandaMane", "time": 41.784},
-        {"pos": 3, "name": "[Quac] microways", "time": 41.812},
-        {"pos": 4, "name": "[SWMG]JakeAdjacent", "time": 41.827},
-        {"pos": 5, "name": "Lexer", "time": 41.869},
-        {"pos": 6, "name": "[KURK] Quickracer10", "time": 41.971},
-        {"pos": 7, "name": "Renergy", "time": 41.993},
-        {"pos": 8, "name": "[CTR] Sandals", "time": 42.016},
-        {"pos": 9, "name": "MackCheesy", "time": 42.019},
-        {"pos": 10, "name": "RoundNzt", "time": 42.047},
-        {"pos": 11, "name": "brrryy", "time": 42.272},
-        {"pos": null, "name": "[CSC] redal", "time": null, "note": "row cut off in screenshot, no rank/time visible"}
-      ]
-    },
-    {
-      "round": 10,
-      "round_number_source": "confirmed by round 11's screenshot, which labels microways and Lexer's eliminations as 'Round 10' with times 42.13145 / 42.1423 -- exact match to their times here",
-      "field_remaining": null,
-      "leader": {"name": "Kernkob", "time": 41.602},
-      "visible": [
-        {"pos": 1, "name": "Kernkob", "time": 41.602},
-        {"pos": 2, "name": "[KURK] Quickracer10", "time": 41.808},
-        {"pos": 3, "name": "[CTR] Sandals", "time": 41.870},
-        {"pos": 4, "name": "RoundNzt", "time": 41.874},
-        {"pos": 5, "name": "[FPV]PandaMane", "time": 41.879},
-        {"pos": 6, "name": "[SWMG]JakeAdjacent", "time": 41.915},
-        {"pos": 7, "name": "MackCheesy", "time": 41.980},
-        {"pos": 8, "name": "Renergy", "time": 42.012},
-        {"pos": 9, "name": "[Quac] microways", "time": 42.131},
-        {"pos": 10, "name": "Lexer", "time": 42.142}
-      ]
-    },
-    {
-      "round": 11,
-      "field_remaining": 8,
-      "note": "screenshot also shows a killfeed of earlier eliminations labeled by round, used to confirm rounds 9-10's numbering",
-      "leader": {"name": "Kernkob", "time": 41.528},
-      "visible": [
-        {"pos": 1, "name": "Kernkob", "time": 41.528},
-        {"pos": 2, "name": "[FPV]PandaMane", "time": 41.681},
-        {"pos": 3, "name": "[SWMG]JakeAdjacent", "time": 41.736},
-        {"pos": 4, "name": "[KURK] Quickracer10", "time": 41.833},
-        {"pos": 5, "name": "[CTR] Sandals", "time": 41.900},
-        {"pos": 6, "name": "MackCheesy", "time": 41.914},
-        {"pos": 7, "name": "RoundNzt", "time": 42.01612, "flag": "eliminated this round"},
-        {"pos": 8, "name": "Renergy", "time": 42.18378, "flag": "eliminated this round"}
-      ],
-      "eliminated_earlier": [
-        {"name": "[Quac] microways", "round": 10, "time": 42.13145},
-        {"name": "Lexer", "round": 10, "time": 42.1423},
-        {"name": "brrryy", "round": 9, "time": 42.27232}
-      ]
-    },
-    {
-      "round": 12,
-      "field_remaining": 6,
-      "leader": {"name": "Kernkob", "time": 41.705},
-      "visible": [
-        {"pos": 1, "name": "Kernkob", "time": 41.705},
-        {"pos": 2, "name": "[SWMG]JakeAdjacent", "time": 41.752},
-        {"pos": 3, "name": "[CTR] Sandals", "time": 41.777},
-        {"pos": 4, "name": "[FPV]PandaMane", "time": 41.843},
-        {"pos": 5, "name": "[KURK] Quickracer10", "time": 41.864},
-        {"pos": 6, "name": "MackCheesy", "time": "DNF", "flag": "eliminated this round, DNF"}
-      ],
-      "eliminated_earlier": [
-        {"name": "RoundNzt", "round": 11, "time": 42.01612},
-        {"name": "Renergy", "round": 11, "time": 42.18378}
-      ]
-    },
-    {
-      "round": 13,
-      "field_remaining": 5,
-      "note": "Kernkob's 12-round lead ends here, JakeAdjacent 0.003s faster",
-      "leader": {"name": "[SWMG]JakeAdjacent", "time": 41.589},
-      "visible": [
-        {"pos": 1, "name": "[SWMG]JakeAdjacent", "time": 41.589},
-        {"pos": 2, "name": "Kernkob", "time": 41.592},
-        {"pos": 3, "name": "[CTR] Sandals", "time": 41.756},
-        {"pos": 4, "name": "[FPV]PandaMane", "time": 41.824},
-        {"pos": 5, "name": "[KURK] Quickracer10", "time": 41.84343, "flag": "eliminated this round"}
-      ],
-      "eliminated_earlier": [
-        {"name": "MackCheesy", "round": 12, "time": "DNF"}
-      ]
-    },
-    {
-      "round": 14,
-      "field_remaining": 3,
-      "leader": {"name": "Kernkob", "time": 41.540},
-      "visible": [
-        {"pos": 1, "name": "Kernkob", "time": 41.540},
-        {"pos": 2, "name": "[FPV]PandaMane", "time": 41.664},
-        {"pos": 3, "name": "[SWMG]JakeAdjacent", "time": 41.774},
-        {"pos": 4, "name": "[CTR] Sandals", "time": 41.79231, "flag": "eliminated this round"}
-      ],
-      "eliminated_earlier": [
-        {"name": "[KURK] Quickracer10", "round": 13, "time": 41.84343}
-      ]
-    },
-    {
-      "round": 15,
-      "field_remaining": 2,
-      "note": "source is a podium screenshot, not a leaderboard overlay like the earlier rounds",
-      "leader": {"name": "Kernkob", "time": 41.558},
-      "visible": [
-        {"pos": 1, "name": "Kernkob", "time": 41.558},
-        {"pos": 2, "name": "[FPV]PandaMane", "time": 41.622},
-        {"pos": 3, "name": "[SWMG]JakeAdjacent", "time": "DNF", "flag": "eliminated this round, DNF"}
-      ]
-    },
-    {
-      "round": 16,
-      "field_remaining": 1,
-      "leader": {"name": "Kernkob", "time": 41.576},
-      "visible": [
-        {"pos": 1, "name": "Kernkob", "time": 41.576},
-        {"pos": 2, "name": "[FPV]PandaMane", "time": 41.861, "flag": "eliminated this round"}
-      ]
-    }
-  ]
+  "source": "leaderboard screenshots shared in chat",
+  "complete": true,
+  "notes": [
+    "All 16 rounds are screenshot-confirmed, round 16 being the final between Kernkob and PandaMane.",
+    "There is no cup_138.json, but Lexer's xlsx independently gives 16 rounds and its elimination",
+    "order matches these screenshots on all ten eliminations that appear in them, so the count is",
+    "verified rather than merely declared. The 'complete' flag below is now only a fallback for a",
+    "clone without the gitignored workbooks.",
+    "",
+    "Round 1 was a top-5 + bottom-5 view, so only those rows exist for it. Four of the red rows",
+    "(positions 49-51 and 52) were too blurry to read; 52 read as '[Arch]Neovey', which matches no",
+    "player in the published leaderboard, so all four are left out rather than guessed.",
+    "Lexer's round 1 row came from the 'Your Time' panel, at position 22.",
+    "Rounds 11-15 also showed a killfeed naming earlier eliminations by round, which is what",
+    "confirmed the numbering of rounds 9 and 10.",
+    "",
+    "Result: Kernkob led 15 of 16 rounds. The one he lost was round 13, to JakeAdjacent, by 0.003s."
+  ],
+  "rounds": {
+    "1": [
+      ["Kernkob", 41.677], ["[SWMG]JakeAdjacent", 42.107], ["[CTR]Sandals", 42.123],
+      ["[FPV]PandaMane", 42.153], ["[Quac]microways", 42.199], ["Lexer", 43.257],
+      ["wokonbike", "DNF"]
+    ],
+    "2": [
+      ["Kernkob", 41.612], ["[SWMG]JakeAdjacent", 42.011], ["[FPV]PandaMane", 42.030],
+      ["Renergy", 42.159], ["[KURK] Quickracer10", 42.181], ["MALIYO", 42.253],
+      ["Minkus", 42.261], ["brrryy", 42.264], ["MackCheesy", 42.267],
+      ["[CTR] Sandals", 42.434], ["Lexer", 42.516], ["ping", 42.617],
+      ["[Quac] microways", 42.631], ["[CTR]agix", 42.657], ["[CSC] redal", 42.671],
+      ["RoundNzt", 42.694]
+    ],
+    "3": [
+      ["Kernkob", 41.776], ["[CTR] Sandals", 41.961], ["[SWMG]JakeAdjacent", 42.013],
+      ["[KURK] Quickracer10", 42.085], ["Lexer", 42.089], ["[Quac] microways", 42.130],
+      ["RoundNzt", 42.232], ["[FPV]PandaMane", 42.246], ["[CSC] redal", 42.278],
+      ["brrryy", 42.331], ["Minkus", 42.503], ["MackCheesy", 42.575],
+      ["MALIYO", 42.649], ["Renergy", 42.710], ["Hi Im Yolo", 42.720], ["ping", 42.828]
+    ],
+    "4": [
+      ["Kernkob", 41.707], ["[FPV]PandaMane", 41.852], ["[SWMG]JakeAdjacent", 41.859],
+      ["Lexer", 41.990], ["[Quac] microways", 42.016], ["MackCheesy", 42.028],
+      ["brrryy", 42.184], ["[CSC] redal", 42.359], ["[CTR] Sandals", 42.372],
+      ["Renergy", 42.416], ["MALIYO", 42.453], ["[KURK] Quickracer10", 42.534],
+      ["[MMM]LKat", 42.591], ["RoundNzt", 42.601], ["St Nicholas", 42.641],
+      ["Minkus", 42.706]
+    ],
+    "5": [
+      ["Kernkob", 41.749], ["[KURK] Quickracer10", 41.797], ["[FPV]PandaMane", 41.839],
+      ["[CTR] Sandals", 41.862], ["RoundNzt", 41.912], ["MackCheesy", 41.959],
+      ["Lexer", 42.038], ["[SWMG]JakeAdjacent", 42.158], ["[MMM]LKat", 42.242],
+      ["MALIYO", 42.367], ["Renergy", 42.408], ["[Quac] microways", 42.428],
+      ["Hi Im Yolo", 42.452], ["[MMM]Victor", 42.478], ["brrryy", 42.608],
+      ["[CTR]GuAlexItar", 42.645]
+    ],
+    "6": [
+      ["Kernkob", 41.495], ["Lexer", 41.798], ["[FPV]PandaMane", 41.824],
+      ["[SWMG]JakeAdjacent", 41.825], ["[KURK] Quickracer10", 41.898],
+      ["[CTR] Sandals", 41.927], ["RoundNzt", 41.930], ["MackCheesy", 42.206],
+      ["Renergy", 42.292], ["[CSC] redal", 42.305], ["brrryy", 42.351],
+      ["St Nicholas", 42.417], ["[Quac] microways", 42.438], ["MALIYO", 42.518],
+      ["Hi Im Yolo", 42.526], ["[MMM]Victor", 42.613]
+    ],
+    "7": [
+      ["Kernkob", 41.608], ["[KURK] Quickracer10", 41.771], ["[FPV]PandaMane", 41.874],
+      ["[SWMG]JakeAdjacent", 41.903], ["RoundNzt", 41.905], ["MackCheesy", 41.993],
+      ["[Quac] microways", 42.050], ["Lexer", 42.078], ["Renergy", 42.161],
+      ["brrryy", 42.269], ["ping", 42.270], ["[CTR] Sandals", 42.290],
+      ["MALIYO", 42.416], ["Hi Im Yolo", 42.510], ["St Nicholas", 42.565],
+      ["[CSC] redal", 42.566]
+    ],
+    "8": [
+      ["Kernkob", 41.622], ["[FPV]PandaMane", 41.722], ["[SWMG]JakeAdjacent", 41.860],
+      ["[CTR] Sandals", 41.900], ["RoundNzt", 41.961], ["brrryy", 42.098],
+      ["[Quac] microways", 42.110], ["[CSC] redal", 42.161], ["Lexer", 42.185],
+      ["MackCheesy", 42.206], ["[KURK] Quickracer10", 42.231], ["Renergy", 42.240],
+      ["Hi Im Yolo", 42.248], ["ping", 42.322], ["St Nicholas", 42.359],
+      ["MALIYO", 42.790]
+    ],
+    "9": [
+      ["Kernkob", 41.551], ["[FPV]PandaMane", 41.784], ["[Quac] microways", 41.812],
+      ["[SWMG]JakeAdjacent", 41.827], ["Lexer", 41.869], ["[KURK] Quickracer10", 41.971],
+      ["Renergy", 41.993], ["[CTR] Sandals", 42.016], ["MackCheesy", 42.019],
+      ["RoundNzt", 42.047], ["brrryy", 42.272], ["[CSC] redal", null]
+    ],
+    "10": [
+      ["Kernkob", 41.602], ["[KURK] Quickracer10", 41.808], ["[CTR] Sandals", 41.870],
+      ["RoundNzt", 41.874], ["[FPV]PandaMane", 41.879], ["[SWMG]JakeAdjacent", 41.915],
+      ["MackCheesy", 41.980], ["Renergy", 42.012], ["[Quac] microways", 42.131],
+      ["Lexer", 42.142]
+    ],
+    "11": [
+      ["Kernkob", 41.528], ["[FPV]PandaMane", 41.681], ["[SWMG]JakeAdjacent", 41.736],
+      ["[KURK] Quickracer10", 41.833], ["[CTR] Sandals", 41.900], ["MackCheesy", 41.914],
+      ["RoundNzt", 42.01612], ["Renergy", 42.18378]
+    ],
+    "12": [
+      ["Kernkob", 41.705], ["[SWMG]JakeAdjacent", 41.752], ["[CTR] Sandals", 41.777],
+      ["[FPV]PandaMane", 41.843], ["[KURK] Quickracer10", 41.864], ["MackCheesy", "DNF"]
+    ],
+    "13": [
+      ["[SWMG]JakeAdjacent", 41.589], ["Kernkob", 41.592], ["[CTR] Sandals", 41.756],
+      ["[FPV]PandaMane", 41.824], ["[KURK] Quickracer10", 41.84343]
+    ],
+    "14": [
+      ["Kernkob", 41.540], ["[FPV]PandaMane", 41.664], ["[SWMG]JakeAdjacent", 41.774],
+      ["[CTR] Sandals", 41.79231]
+    ],
+    "15": [
+      ["Kernkob", 41.558], ["[FPV]PandaMane", 41.622], ["[SWMG]JakeAdjacent", "DNF"]
+    ],
+    "16": [
+      ["Kernkob", 41.576], ["[FPV]PandaMane", 41.861]
+    ]
+  }
 }

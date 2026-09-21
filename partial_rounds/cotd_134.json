@@ -1,0 +1,123 @@
+{
+  "cup": 134,
+  "source": "leaderboard screenshots shared in chat",
+  "round_count_override": {
+    "value": 15,
+    "why": "our xlsx block for this cup was written by archive/write_cup134.py, which numbered every leaderboard block including the discovery round that eliminates nobody, so it records 2..16 where the truth is 1..15. Lexer's own sheet has 1..15 and the game HUD agrees with him; 134 is the only cup of 164 with this bug. Remove this once the xlsx block is corrected."
+  },
+  "notes": [
+    "COTD 134 has no saved mod log: it was processed by archive/write_cup134.py, which read the",
+    "live BepInEx LogOutput.log in place and never copied it. All 15 rounds below are",
+    "screenshot-confirmed, round 15 being the final between ZOMAN and Lexer.",
+    "",
+    "Round counts and eliminations were cross-checked against Lexer's own workbook, which agrees",
+    "with the HUD on every round. Our copy does not, hence round_count_override above.",
+    "",
+    "The same screenshots also confirm Lexer's times where our sheet says DNF: the HUD shows",
+    "'Round 2, Time: 47.66467' for [ZET] Wheelie and '48.40605' for aizpun, both DNF in ours.",
+    "Our old parser collapsed 'eliminated with a slow time' into DNF.",
+    "",
+    "The HUD distinguishes three end states: a time, 'DNF', and 'Left game' (thelolrus, round 1).",
+    "A left-game player may have set a bad time and quit before the round ended, so it is not the",
+    "same as a DNF. Where the screenshot shows no time, the entry here is null rather than 'DNF'",
+    "to keep that distinction; both count as non-finishers for the round leader either way.",
+    "",
+    "Field: 50 in the lobby including mapper [20x]K410K3N, 49 in the published leaderboard.",
+    "R1 raced 50, 12 out (mapper among them), 38 left. R2 raced 38, 6 out, 32 left."
+  ],
+  "rounds": {
+    "1": [
+      ["ZOMAN", 42.788], ["Lexer", 43.256], ["icRS", 43.275],
+      ["RoundNzt", 43.446], ["[CTR] Sandals", 43.457],
+      ["MALIYO", 46.492], ["DeiRex", 46.545], ["wokonbike", 47.122],
+      ["[fn]Form", 47.585], ["F1Y1NGDUTCHM8N", 50.468], ["[DNFF]lucanakin", 51.259],
+      ["Noxitu", "DNF"], ["jofk2415", "DNF"], ["thelolrus", null],
+      ["BrickEdwards", "DNF"], ["[NewB]Zeus", "DNF"], ["een", "DNF"],
+      ["crips.fourie", "DNF"], ["aglahir", "DNF"], ["imagineaclevernamehere", "DNF"]
+    ],
+    "2": [
+      ["ZOMAN", 43.054], ["[ping] ping", 43.203], ["Lexer", 43.318],
+      ["[FPV]PandaMane", 43.325], ["Pants", 43.361], ["RoundNzt", 43.517],
+      ["[CTR]Beans", 43.561], ["[KURK] Quickracer10", 43.725], ["[CTR] Sandals", 43.852],
+      ["[1618] microways", 43.937], ["MALIYO", 43.958], ["Hi Im Yolo", 43.999],
+      ["[CSC]Tommygaming", 44.066], ["icRS", 44.170], ["[Tame]stindt", 44.271],
+      ["brrryy", 44.320],
+      ["[ZET] Wheelie", 47.66467], ["aizpun", 48.40605],
+      ["[CSC] Shadynook", "DNF"], ["Matic_D", "DNF"], ["DeiRex", "DNF"], ["wokonbike", "DNF"]
+    ],
+    "3": [
+      ["Pants", 42.727], ["Lexer", 42.878], ["ZOMAN", 42.900],
+      ["[FPV]PandaMane", 43.028], ["[CSC]Tommygaming", 43.120], ["RoundNzt", 43.266],
+      ["[KURK] Quickracer10", 43.562], ["[ping] ping", 43.602], ["[CTR]agix", 43.653],
+      ["[CTR]Beans", 43.704], ["brrryy", 43.834], ["Barsik", 43.850],
+      ["MALIYO", 43.926], ["[Tame]stindt", 43.970], ["icRS", 43.978],
+      ["[CTR] Sandals", 43.993]
+    ],
+    "4": [
+      ["[FPV]PandaMane", 42.911], ["ZOMAN", 43.000], ["RoundNzt", 43.022],
+      ["Lexer", 43.043], ["[KURK] Quickracer10", 43.088], ["[1618] microways", 43.096],
+      ["Pants", 43.370], ["[CTR]Beans", 43.395], ["St Nicholas", 43.614],
+      ["[CTR] Sandals", 43.733], ["icRS", 43.793], ["[CSC]Tommygaming", 43.922],
+      ["Hi Im Yolo", 43.950], ["[ping] ping", 44.062], ["Barsik", 44.145],
+      ["[GECK]R0nanC", 44.153]
+    ],
+    "5": [
+      ["[KURK] Quickracer10", 42.712], ["RoundNzt", 42.973], ["Lexer", 43.059],
+      ["ZOMAN", 43.264], ["[CTR]Beans", 43.357], ["[CTR] Sandals", 43.396],
+      ["[FPV]PandaMane", 43.406], ["[1618] microways", 43.422], ["[ping] ping", 43.446],
+      ["St Nicholas", 43.456], ["MALIYO", 43.471], ["[CSC]Tommygaming", 43.616],
+      ["Pants", 43.659], ["icRS", 43.975], ["[GECK]R0nanC", 44.027],
+      ["[CTR]agix", 44.051]
+    ],
+    "6": [
+      ["ZOMAN", 42.632], ["Lexer", 42.840], ["RoundNzt", 42.984],
+      ["[CTR]Beans", 43.053], ["[1618] microways", 43.099], ["[KURK] Quickracer10", 43.141],
+      ["[CSC]Tommygaming", 43.233], ["MALIYO", 43.364], ["[FPV]PandaMane", 43.590],
+      ["St Nicholas", 43.673], ["icRS", 43.690], ["[ping] ping", 43.695],
+      ["[CTR] Sandals", 43.718], ["[CTR]agix", 43.962], ["[GECK]R0nanC", 43.975],
+      ["[CTR]GuAlexItar", 44.335]
+    ],
+    "7": [
+      ["ZOMAN", 42.723], ["Lexer", 42.768], ["RoundNzt", 43.047],
+      ["[CTR] Sandals", 43.156], ["[CTR]Beans", 43.183], ["[CTR]agix", 43.210],
+      ["[KURK] Quickracer10", 43.285], ["[FPV]PandaMane", 43.322], ["MALIYO", 43.398],
+      ["[CSC]Tommygaming", 43.706], ["[1618] microways", 43.741], ["[ping] ping", 43.908],
+      ["St Nicholas", 44.075], ["icRS", null]
+    ],
+    "8": [
+      ["ZOMAN", 42.586], ["[CTR] Sandals", 43.089], ["Lexer", 43.111],
+      ["[CTR]Beans", 43.117], ["[KURK] Quickracer10", 43.158], ["[FPV]PandaMane", 43.185],
+      ["[1618] microways", 43.424], ["RoundNzt", 43.453], ["[CSC]Tommygaming", 43.506],
+      ["[ping] ping", 43.578], ["MALIYO", 43.76321], ["[CTR]agix", "DNF"]
+    ],
+    "9": [
+      ["[ping] ping", 43.026], ["[FPV]PandaMane", 43.056], ["Lexer", 43.062],
+      ["[KURK] Quickracer10", 43.068], ["[CTR] Sandals", 43.081], ["RoundNzt", 43.160],
+      ["ZOMAN", 43.175], ["[CTR]Beans", 43.377], ["[1618] microways", 43.41793],
+      ["[CSC]Tommygaming", 43.68252]
+    ],
+    "10": [
+      ["Lexer", 42.517], ["ZOMAN", 42.720], ["[KURK] Quickracer10", 42.837],
+      ["[CTR] Sandals", 42.964], ["RoundNzt", 43.237], ["[CTR]Beans", 43.505],
+      ["[FPV]PandaMane", 43.778], ["[ping] ping", 43.788]
+    ],
+    "11": [
+      ["ZOMAN", 42.689], ["Lexer", 42.715], ["[KURK] Quickracer10", 42.966],
+      ["[CTR] Sandals", 42.979], ["[CTR]Beans", 43.100], ["RoundNzt", 43.20731]
+    ],
+    "12": [
+      ["ZOMAN", 42.751], ["Lexer", 42.762], ["[KURK] Quickracer10", 42.822],
+      ["[CTR] Sandals", 42.968], ["[CTR]Beans", "DNF"]
+    ],
+    "13": [
+      ["ZOMAN", 42.671], ["Lexer", 42.741], ["[KURK] Quickracer10", 42.810],
+      ["[CTR] Sandals", 43.089]
+    ],
+    "14": [
+      ["ZOMAN", 42.855], ["Lexer", 43.032], ["[KURK] Quickracer10", 43.651]
+    ],
+    "15": [
+      ["ZOMAN", 42.509], ["Lexer", 42.778]
+    ]
+  }
+}

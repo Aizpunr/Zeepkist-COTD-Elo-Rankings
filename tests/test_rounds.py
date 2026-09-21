@@ -112,6 +112,109 @@ def test_field_shrinks_every_round(cup_dir):
     assert sizes[-1] == 2, sizes
 
 
+def _partial_doc(cup, n_rounds, winner, extra_rows=(), **kw):
+    """A synthetic partial_rounds/ document: n_rounds rounds the winner led,
+    with a field that shrinks to a two-player final like a real cup."""
+    # Keep the filler clear of the winner and of anyone the extras already
+    # stand for, so an aliased ghost is not also counted as himself.
+    taken = {br.normalize_name(winner)}
+    taken |= {br.normalize_name(r[0]) for r in extra_rows}
+    taken |= {br.normalize_name(v) for v in (kw.get('aliases') or {}).values()}
+    roster = [p['name'] for p in br.CUPS[f'COTD {cup}']['players']
+              if br.normalize_name(p['name']) not in taken]
+    extra = [list(r) for r in extra_rows]
+    rounds = {}
+    for i in range(n_rounds):
+        # last round is the winner plus one, every earlier round one bigger
+        filler = roster[:max(0, (n_rounds - i) - len(extra))]
+        rows = [[winner, 40.0]] + extra + [[n, 41.0 + j] for j, n in enumerate(filler)]
+        rounds[str(i + 1)] = rows
+    doc = {'cup': cup, 'source': 'test', 'rounds': rounds}
+    doc.update(kw)
+    return doc
+
+
+def _write(tmp_path, doc):
+    p = tmp_path / f"cotd_{doc['cup']}.json"
+    p.write_text(json.dumps(doc), encoding='utf-8')
+    return str(p)
+
+
+def test_unfinished_reconstruction_is_held_back(tmp_path):
+    """An in-progress transcription must never reach the site: with only some
+    rounds present, 'led every round' is trivially true and would mint a sweep
+    that never happened. COTD 135 really had 15 rounds."""
+    result, warn = br.load_partial_cup(_write(tmp_path, _partial_doc(135, 1, 'justMaki')))
+    assert result is None
+    assert '1 rounds transcribed' in warn and '15' in warn
+
+    # All 15 and it is allowed through, sweep claim and all.
+    result, warn = br.load_partial_cup(_write(tmp_path, _partial_doc(135, 15, 'justMaki')))
+    assert result is not None and warn is None
+    assert result[0]['rounds'] == 15 and result[0]['sweep'] is True
+
+
+def test_lexer_workbook_vouches_for_a_cup_the_pipeline_never_processed(tmp_path):
+    """COTD 138 has no cup_138.json, but Lexer's xlsx records an Elim Round for
+    every cup ever run, so the round count is still checkable without the file
+    having to declare anything."""
+    if br.xlsx_elim_rounds(138)[1] is None:
+        pytest.skip('workbooks not on disk (gitignored)')
+
+    result, warn = br.load_partial_cup(_write(tmp_path, _partial_doc(138, 16, 'Kernkob')))
+    assert result is not None and warn is None
+
+    result, warn = br.load_partial_cup(_write(tmp_path, _partial_doc(138, 15, 'Kernkob')))
+    assert result is None and '15 rounds transcribed' in warn and '16' in warn
+
+
+def test_complete_flag_is_the_last_resort(monkeypatch, tmp_path):
+    """With neither cup_<N>.json nor the workbooks (a fresh clone: both are
+    gitignored), the file's own claim is all that is left."""
+    monkeypatch.setattr(br, 'xlsx_elim_rounds', lambda num: ({}, None))
+
+    result, warn = br.load_partial_cup(_write(tmp_path, _partial_doc(138, 16, 'Kernkob')))
+    assert result is None and 'complete' in warn
+
+    result, warn = br.load_partial_cup(
+        _write(tmp_path, _partial_doc(138, 16, 'Kernkob', complete=True)))
+    assert result is not None and warn is None
+
+
+def test_lexer_elimination_order_catches_a_player_racing_after_they_are_out(tmp_path):
+    """Somebody Lexer records as knocked out in round R cannot still be racing
+    later. This is what would catch a misread name or a mis-numbered round."""
+    if not br.xlsx_elim_rounds(138)[0]:
+        pytest.skip('workbooks not on disk (gitignored)')
+    elims = br.xlsx_elim_rounds(138)[0]
+    early = min(elims.items(), key=lambda kv: kv[1])  # someone out in an early round
+
+    doc = _partial_doc(138, 16, 'Kernkob', extra_rows=[[early[0], 45.0]], complete=True)
+    result, warn = br.load_partial_cup(_write(tmp_path, doc))
+    assert result is not None  # advisory, not fatal
+    assert 'eliminated' in warn and early[0] in warn
+
+
+def test_ghost_account_is_credited_to_the_real_player(tmp_path):
+    """COTD 135's `del gaming` is Sterben; the engine's own ghosts export says
+    so. Without the alias it would become a phantom player in the aggregates."""
+    rows = [['del gaming', 41.0]]
+    doc = _partial_doc(135, 15, 'justMaki', extra_rows=rows, aliases={'del gaming': 'Sterben'})
+    (cup, raced), warn = br.load_partial_cup(_write(tmp_path, doc))
+    assert warn is None
+    assert raced['Sterben'] == 15
+    assert 'del gaming' not in raced
+
+    # Drop the alias and the name is reported rather than silently counted.
+    # Here it also empties the two-player final, so the cup is held back --
+    # the point is that the warning names the culprit either way.
+    doc.pop('aliases')
+    result, warn = br.load_partial_cup(_write(tmp_path, doc))
+    assert 'del gaming' in warn and 'aliases' in warn
+    if result is not None:
+        assert 'del gaming' not in result[1] and 'Sterben' not in result[1]
+
+
 def test_a_sweep_is_detected():
     """Synthetic: one name on top of every board is a sweep, one slip is not."""
     def board(names, rnd):

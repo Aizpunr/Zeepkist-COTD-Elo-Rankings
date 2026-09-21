@@ -1,0 +1,123 @@
+{
+  "cup": 135,
+  "source": "leaderboard screenshots shared in chat",
+  "aliases": {
+    "del gaming": "Sterben"
+  },
+  "notes": [
+    "All 15 rounds transcribed. cup_135.json gives the real round count, so build_rounds.py",
+    "checks this itself rather than trusting any flag here.",
+    "",
+    "Result: justMaki led 13 of 15 rounds. The two he lost both went to Kernkob, rounds 2 and 7.",
+    "",
+    "del gaming is Sterben's ghost account for this cup. elo_engine's ghosts export records it",
+    "as [3, 'del gaming', 'Sterben'] and cup_135.json already stores the resolved name.",
+    "",
+    "Round 1 showed 52/52 in the lobby against the 51 in the published leaderboard, so one",
+    "player in the lobby is not in the results, most likely the mapper.",
+    "",
+    "Round 7 came from the in-round top 5 rather than the full Cup Leaderboard, so only four",
+    "rows are recorded for it. The third row was too blurry to read; it looks like",
+    "[SWMG]JakeAdjacent at 42.859, which would fit him being top 5 every other round, but it is",
+    "left out rather than guessed. It changes nothing: Kernkob led the round and justMaki was second.",
+    "Round 7's other three rows came from the killfeed in round 8's screenshot, which names",
+    "eliminations by round, so that round is fuller than the top-5 panel alone allowed.",
+    "",
+    "Rounds only ever hold the players who raced them. A red killfeed row names someone knocked",
+    "out in an EARLIER round, so it belongs to that round, not to the one on screen. Where a",
+    "killfeed and a leaderboard give the same time, the killfeed's extra decimals are kept",
+    "(round 9's feed confirmed round 8's JobW and ping to the millisecond)."
+  ],
+  "rounds": {
+    "1": [
+      ["justMaki", 42.849], ["[SWMG]JakeAdjacent", 43.038], ["ZOMAN", 43.085],
+      ["del gaming", 43.265], ["Kernkob", 43.347], ["Hydro", 43.415],
+      ["Lexer", 43.471], ["RoundNzt", 43.588], ["MALIYO", 43.607],
+      ["MackCheesy", 43.723], ["Mμ", 43.769], ["[CTR]GuAlexItar", 43.791],
+      ["[CTR] Sandals", 43.848], ["[CSC] redal", 43.950], ["clycl", 44.046],
+      ["JobW", 44.082]
+    ],
+    "2": [
+      ["Kernkob", 42.849], ["del gaming", 43.074], ["Hydro", 43.180],
+      ["ZOMAN", 43.261], ["[CTR] Sandals", 43.393], ["RoundNzt", 43.401],
+      ["justMaki", 43.473], ["MALIYO", 43.507], ["[Quac] microways", 43.659],
+      ["JobW", 43.684], ["clycl", 43.750], ["[ZET]Stick", 43.834],
+      ["[ping] ping", 43.838], ["Hi Im Yolo", 43.861], ["Lexer", 43.862],
+      ["[CSC] redal", 43.949]
+    ],
+    "3": [
+      ["justMaki", 42.714], ["Hydro", 43.000], ["ZOMAN", 43.107],
+      ["del gaming", 43.171], ["[SWMG]JakeAdjacent", 43.194],
+      ["[Quac] microways", 43.212], ["Kernkob", 43.265], ["RoundNzt", 43.344],
+      ["Lexer", 43.456], ["[CSC] redal", 43.524], ["JobW", 43.528],
+      ["[ping] ping", 43.573], ["[CTR] Sandals", 43.648], ["Hi Im Yolo", 43.700],
+      ["[CSC]Tommygaming", 43.710], ["MALIYO", 43.815]
+    ],
+    "4": [
+      ["justMaki", 42.870], ["Hydro", 42.873], ["ZOMAN", 42.908],
+      ["[SWMG]JakeAdjacent", 42.989], ["Kernkob", 43.006], ["del gaming", 43.112],
+      ["Hi Im Yolo", 43.253], ["Lexer", 43.369], ["[Quac] microways", 43.385],
+      ["[CTR]GuAlexItar", 43.427], ["[ping] ping", 43.450], ["clycl", 43.500],
+      ["RoundNzt", 43.522], ["MALIYO", 43.539], ["JobW", 43.566],
+      ["[TILT]Redstony", 43.613]
+    ],
+    "5": [
+      ["justMaki", 42.495], ["[SWMG]JakeAdjacent", 42.680], ["ZOMAN", 42.727],
+      ["del gaming", 42.761], ["Kernkob", 42.804], ["[Quac] microways", 43.152],
+      ["RoundNzt", 43.214], ["Lexer", 43.275], ["clycl", 43.294],
+      ["[ping] ping", 43.324], ["Hi Im Yolo", 43.391], ["[CTR] Sandals", 43.458],
+      ["JobW", 43.518], ["[TILT]Redstony", 43.564], ["Hydro", 43.684],
+      ["[CSC]Tommygaming", 43.722]
+    ],
+    "6": [
+      ["justMaki", 42.768], ["del gaming", 42.794], ["Kernkob", 42.844],
+      ["[SWMG]JakeAdjacent", 43.030], ["ZOMAN", 43.044], ["RoundNzt", 43.152],
+      ["[CSC]Tommygaming", 43.232], ["[Quac] microways", 43.245],
+      ["[ping] ping", 43.297], ["[CTR] Sandals", 43.305], ["clycl", 43.312],
+      ["MALIYO", 43.321], ["Hydro", 43.406], ["JobW", 43.466],
+      ["MackCheesy", 43.655], ["Hi Im Yolo", 43.767]
+    ],
+    "7": [
+      ["Kernkob", 42.649], ["justMaki", 42.826], ["ZOMAN", 42.945],
+      ["del gaming", 42.999], ["Hi Im Yolo", 43.57514], ["MALIYO", 43.66178],
+      ["[CSC]Tommygaming", "DNF"]
+    ],
+    "8": [
+      ["justMaki", 42.616], ["[SWMG]JakeAdjacent", 42.743], ["del gaming", 42.767],
+      ["ZOMAN", 42.949], ["[Quac] microways", 43.009], ["Lexer", 43.092],
+      ["Kernkob", 43.175], ["RoundNzt", 43.196], ["[CTR] Sandals", 43.268],
+      ["clycl", 43.304], ["Hydro", 43.307], ["JobW", 43.33405],
+      ["[ping] ping", 44.10498]
+    ],
+    "9": [
+      ["justMaki", 42.760], ["Kernkob", 42.833], ["del gaming", 42.884],
+      ["ZOMAN", 42.895], ["Hydro", 42.980], ["Lexer", 42.982],
+      ["[SWMG]JakeAdjacent", 43.052], ["clycl", 43.129], ["RoundNzt", 43.133],
+      ["[Quac] microways", 43.19748], ["[CTR] Sandals", 43.3098]
+    ],
+    "10": [
+      ["justMaki", 42.475], ["Kernkob", 42.622], ["[SWMG]JakeAdjacent", 42.832],
+      ["Lexer", 42.876], ["del gaming", 42.962], ["clycl", 43.057],
+      ["RoundNzt", 43.088], ["Hydro", 43.14943], ["ZOMAN", 43.745]
+    ],
+    "11": [
+      ["justMaki", 42.546], ["Kernkob", 42.683], ["del gaming", 42.795],
+      ["RoundNzt", 43.069], ["Lexer", 43.148], ["[SWMG]JakeAdjacent", 43.24347],
+      ["clycl", "DNF"]
+    ],
+    "12": [
+      ["justMaki", 42.564], ["del gaming", 42.611], ["Kernkob", 42.635],
+      ["Lexer", 42.961], ["RoundNzt", 43.135]
+    ],
+    "13": [
+      ["justMaki", 42.446], ["del gaming", 42.603], ["Kernkob", 42.812],
+      ["Lexer", 43.068]
+    ],
+    "14": [
+      ["justMaki", 42.405], ["Kernkob", 42.636], ["del gaming", 42.778]
+    ],
+    "15": [
+      ["justMaki", 42.613], ["Kernkob", 42.824]
+    ]
+  }
+}

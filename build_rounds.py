@@ -29,7 +29,7 @@ base = os.path.dirname(os.path.abspath(__file__))
 def _p(f): return os.path.join(base, f)
 
 from cotd_parser import filter_tracker_lines, split_rounds
-from elo_engine import CANONICAL
+from elo_engine import CANONICAL, XLSX_FILES
 
 LOG_DIR = _p('cup logs')
 MANUAL = _p('sweeps_manual.json')
@@ -117,6 +117,59 @@ def round_metrics(boards, winner):
     }
 
 
+# ------------------------------------------------- Lexer's workbook as a check
+
+_ELIM_CACHE = {}
+
+def xlsx_elim_rounds(num):
+    """{canonical name: elimination round} for COTD <num>, from Lexer's xlsx.
+
+    The workbook records an Elim Round for every player of every cup ever run,
+    which is the only round-level fact that exists for cups with no mod log. It
+    cannot say who LED a round, but it does say how many rounds there were and
+    who went out in each, so it can check a screenshot reconstruction.
+
+    The winner has no elimination round and is absent from the mapping. Returns
+    ({} , None) when the workbooks are not on disk, since they are gitignored.
+    """
+    if num in _ELIM_CACHE:
+        return _ELIM_CACHE[num]
+    import openpyxl
+    out, last = {}, None
+    for fname in XLSX_FILES:
+        path = _p(fname)
+        if not os.path.exists(path):
+            continue
+        wb = openpyxl.load_workbook(path, data_only=True, read_only=True)
+        try:
+            for sheet in wb.worksheets:
+                grid = [list(r) for r in sheet.iter_rows(values_only=True)]
+                for ri, row in enumerate(grid):
+                    for ci, val in enumerate(row):
+                        if not (isinstance(val, str) and val.strip() == f'COTD {num}'):
+                            continue
+                        # The block's header sits a few rows under its title.
+                        for hr in range(ri, min(ri + 5, len(grid))):
+                            for hc in range(max(0, ci - 3), min(ci + 6, len(grid[hr]))):
+                                if str(grid[hr][hc]).strip() != 'Position':
+                                    continue
+                                for dr in range(hr + 1, len(grid)):
+                                    cells = grid[dr]
+                                    if hc + 3 >= len(cells) or cells[hc + 1] is None:
+                                        break
+                                    rnd = cells[hc + 3]
+                                    if isinstance(rnd, (int, float)):
+                                        out[normalize_name(str(cells[hc + 1]))] = int(rnd)
+                                        last = max(last or 0, int(rnd))
+                                if out:
+                                    _ELIM_CACHE[num] = (out, last)
+                                    return _ELIM_CACHE[num]
+        finally:
+            wb.close()
+    _ELIM_CACHE[num] = (out, last)
+    return _ELIM_CACHE[num]
+
+
 # ---------------------------------------------------------------- cup context
 
 with open(_p('cups.json'), encoding='utf-8') as f:
@@ -177,37 +230,132 @@ def analyze(num, lines):
 
 
 def load_partial_cup(path):
-    """A hand-reconstructed cup from partial_rounds/ (see its README). Reuses
-    round_metrics() by treating each round's `visible` list as that round's
-    board, same as a log's leaderboard block minus the players off screen."""
+    """A hand-reconstructed cup from partial_rounds/ (see its README).
+
+    The file is deliberately bare: {"cup": N, "rounds": {"1": [[name, time], ...]}}
+    so transcribing a screenshot is one paste. Everything else is derived or
+    checked here, and round_metrics() then treats each round's rows as that
+    round's board, exactly like a log's leaderboard block minus whoever was off
+    screen.
+    """
     with open(path, encoding='utf-8') as f:
         doc = json.load(f)
     num = doc['cup']
-    _, winner, row = cup_context(num)
+    keep, winner, cup_row = cup_context(num)
     if winner is None:
         return None, f'partial_rounds/cotd_{num}.json: COTD {num} not in cups.json, skipped'
+    roster = {normalize_name(p['name']) for p in cup_row['players']}
 
-    boards = []
-    for r in doc['rounds']:
+    # Raw in-game names that the rankings file under a different name: ghost
+    # accounts above all (COTD 135's `del gaming` is Sterben, and the engine's
+    # own `ghosts` export says so). Kept per cup instead of in CANONICAL, which
+    # five other repos text-parse and which deliberately keeps ghosts separate.
+    aliases = doc.get('aliases') or {}
+
+    boards, unknown = [], Counter()
+    for rnd_no, rows in sorted(doc['rounds'].items(), key=lambda kv: int(kv[0])):
         board = []
-        for e in r.get('visible', []):
-            if not e.get('name'):
+        for entry in rows:
+            raw, t = entry[0], (entry[1] if len(entry) > 1 else None)
+            if not raw:
                 continue  # illegible in the screenshot, not a real entry
-            t = e.get('time')
-            board.append((e['name'], None if t in (None, 'DNF') else float(t)))
-        boards.append((r['round'], board))
+            name = aliases.get(raw, raw)
+            # Anyone not in the published leaderboard (the mapper, someone who
+            # left before round 1) is dropped, exactly as the log path does via
+            # cup_context's filter. A name that lands here by accident -- a
+            # misread, an unmapped ghost -- gets counted and reported, so it
+            # cannot quietly become a phantom player in the aggregates.
+            if not keep(name) and normalize_name(name) not in roster:
+                unknown[raw] += 1
+                continue
+            board.append((name, None if t in (None, 'DNF') else float(t)))
+        boards.append((int(rnd_no), board))
+
+    # Diagnosed before the completeness gate: an unmapped name can shrink a
+    # round enough to trip the gate, and "wrong number of rounds" would then
+    # hide the thing you actually need to fix.
+    unknown_msg = ''
+    if unknown:
+        detail = ', '.join(f'{n!r} x{k}' for n, k in unknown.most_common())
+        unknown_msg = (f'not in the published COTD {num} leaderboard, dropped from the rounds: '
+                       f'{detail}. Check for a misread name or a ghost account needing an '
+                       f'"aliases" entry')
+
+    def _stop(why):
+        return None, f'partial_rounds/cotd_{num}.json: ' + '; '.join(filter(None, [why, unknown_msg]))
 
     elim = [(r, b) for r, b in boards if r > 0]
     if not elim:
-        return None, f'partial_rounds/cotd_{num}.json: no rounds, skipped'
+        return _stop('no rounds')
+
+    # A reconstruction in progress must never reach the site. With only some of
+    # the rounds transcribed, "the winner led every round" is trivially true for
+    # whatever is there so far, which would mint a sweep that never happened.
+    # The real round count comes from cup_<N>.json (the runner-up's elimination
+    # round) when that file exists; otherwise the file has to declare itself.
+    expected = None
+    cj = _p(f'cup_{num}.json')
+    if os.path.exists(cj):
+        with open(cj, encoding='utf-8') as f:
+            expected = max((p['round'] for p in json.load(f)['players'] if p['round']),
+                           default=None)
+    # Lexer's workbook has an Elim Round for every cup ever run, so it can vouch
+    # for a cup the pipeline never processed (134, 138). Verified against the 138
+    # screenshots: all ten of its recorded eliminations matched round for round.
+    lexer_elims, lexer_rounds = xlsx_elim_rounds(num)
+    if expected is None:
+        expected = lexer_rounds
+    # A cup whose own elimination records are known to be wrong can say so, with
+    # its reasoning, rather than being unpublishable forever. COTD 134 is the
+    # case: our block was written by a script that numbered the discovery round,
+    # so it claims 16 where the truth is 15. The structural checks below still
+    # apply, and the override reports itself on every build.
+    override = doc.get('round_count_override') or {}
+    override_note = ''
+    if override.get('value'):
+        override_note = (f"round count overridden to {override['value']} "
+                         f"(records say {expected}): {override.get('why') or 'no reason given'}")
+        expected = int(override['value'])
+    declared = bool(doc.get('complete'))
+    # The structural test, which needs no outside source and cannot be argued
+    # with: a finished cup runs 1..N with no gaps and ends with two players
+    # racing for it. A transcription in progress fails one or the other.
+    numbers = sorted(r for r, _ in elim)
+    contiguous = numbers == list(range(1, len(numbers) + 1))
+    final_two = len(elim[-1][1]) == 2
+    if not (contiguous and final_two):
+        progress = f'{len(elim)} of {expected} rounds' if expected else f'{len(elim)} rounds'
+        why = ('rounds are not 1..N without gaps' if not contiguous
+               else f'the last round has {len(elim[-1][1])} racers, not the 2 of a final')
+        return _stop(f'{progress} transcribed so far ({why}), held back until it is finished')
+    # Structure alone cannot spot a file holding only the final round, so the
+    # recorded round count still blocks when we have one.
+    if expected is not None and len(elim) != expected:
+        return _stop(f'{len(elim)} rounds transcribed but the elimination records say '
+                     f'{expected}. Either it is unfinished, or those records are wrong '
+                     f'for this cup and need fixing first')
+    gripes_count = None
+    if expected is None and not declared:
+        return _stop(f'{len(elim)} rounds transcribed with nothing to check the count '
+                     f'against; set "complete": true to publish')
 
     cup = {
         'cup': f'COTD {num}',
         'num': num,
-        'map': row.get('map') or '',
-        'date': row.get('date') or '',
-        'field': row.get('lobby_size') or len(row['players']),
+        'map': cup_row.get('map') or '',
+        'date': cup_row.get('date') or '',
+        'field': cup_row.get('lobby_size') or len(cup_row['players']),
     }
+    # Cross-check against Lexer's elimination order: somebody he records as
+    # knocked out in round R cannot still be racing in a later round. Catches a
+    # misread name or a round transcribed under the wrong number.
+    ghosts_in_the_field = []
+    for rnd_no, board in elim:
+        for raw, _t in board:
+            out_in = lexer_elims.get(normalize_name(raw))
+            if out_in is not None and rnd_no > out_in:
+                ghosts_in_the_field.append(f'{normalize_name(raw)} in R{rnd_no} (out in R{out_in})')
+
     cup.update(round_metrics(boards, winner))
     cup['src'] = 'partial'
     cup['source'] = doc.get('source') or 'reconstructed from screenshots'
@@ -215,6 +363,18 @@ def load_partial_cup(path):
     for _, board in elim:
         for n, _t in board:
             raced[normalize_name(n)] += 1
+    gripes = []
+    if override_note:
+        gripes.append(override_note)
+    if gripes_count:
+        gripes.append(gripes_count)
+    if unknown_msg:
+        gripes.append(unknown_msg)
+    if ghosts_in_the_field:
+        gripes.append("racing after Lexer's sheet has them eliminated: "
+                      + ', '.join(ghosts_in_the_field))
+    if gripes:
+        return (cup, raced), f'partial_rounds/cotd_{num}.json: ' + '; '.join(gripes)
     return (cup, raced), None
 
 
@@ -254,8 +414,11 @@ def main():
 
     for path in sorted(glob.glob(os.path.join(PARTIAL_DIR, 'cotd_*.json'))):
         result, warn = load_partial_cup(path)
+        # A warning here can be fatal (no result) or advisory (names dropped but
+        # the cup is still usable). Report either way, keep whatever parsed.
         if warn:
             warnings.append(warn)
+        if result is None:
             continue
         cup, raced = result
         if cup['num'] in covered:

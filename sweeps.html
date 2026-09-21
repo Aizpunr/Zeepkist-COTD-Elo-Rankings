@@ -26,16 +26,8 @@ h2{font-size:15px;font-weight:700;margin:30px 0 3px}
 h2 .hint{font-family:var(--mono);font-size:10px;color:var(--dark);font-weight:400;text-transform:uppercase;letter-spacing:1px;margin-left:8px}
 .lead{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:12px;line-height:1.5}
 
-.sweeps{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
-.sweep{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:15px 14px;position:relative;overflow:hidden}
-.sweep::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--sweep)}
-.sweep .cup{font-family:var(--mono);font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:1px}
-.sweep .who{font-size:21px;font-weight:800;margin:2px 0 1px}
-.sweep .map{font-size:12px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.sweep .facts{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:10px;padding-top:9px;border-top:1px solid var(--border);line-height:1.6}
-.sweep .facts b{color:var(--text);font-weight:600}
 .badge{display:inline-block;font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:1px;
-padding:2px 6px;border-radius:4px;background:rgba(56,189,248,0.12);color:var(--accent);margin-top:8px}
+padding:2px 6px;border-radius:4px;background:rgba(56,189,248,0.12);color:var(--accent)}
 .badge.manual{background:rgba(250,204,21,0.12);color:var(--gold)}
 .empty{font-family:var(--mono);font-size:11px;color:var(--dark);border:1px dashed var(--border);border-radius:12px;padding:18px;text-align:center}
 
@@ -57,7 +49,6 @@ tr.is-sweep td{background:rgba(56,189,248,0.07)}
 
 @media(max-width:760px){
   h1{font-size:26px}
-  .sweeps{grid-template-columns:1fr}
   .hide-s{display:none}
   .bar{width:52px}
   table{font-size:11px}
@@ -135,21 +126,28 @@ fetch('rounds.json').then(r=>r.json()).then(D=>{
     + ` ${withRounds} of them can be replayed round by round, from the cups with round data `
     + `(COTD ${cov.first} onward). The rest are on record from the people who were there.`;
   document.getElementById('sweepCards').innerHTML = D.sweeps.length ? (
-    '<div class="sweeps">' + D.sweeps.slice().reverse().map(s=>{
-      const rounds = s.rounds ? `<b>${s.rounds}</b> of <b>${s.rounds}</b> rounds` : 'every round';
-      const field = s.field ? ` &middot; ${s.field} in the lobby` : '';
-      const warm = s.warmup ? '<br>fastest in the discovery round too' : '';
+    '<div style="overflow-x:auto"><table>'
+    + `<tr><th>Cup</th><th class="hide-s">Date</th><th>Winner</th><th class="hide-s">Map</th>
+       <th class="n">Rounds</th><th class="n hide-s">Lobby</th><th>Source</th></tr>`
+    + D.sweeps.slice().reverse().map(s=>{
+      const rounds = s.rounds ? `${s.rounds}/${s.rounds}` : '<span class="dim">every one</span>';
+      const warm = s.warmup
+        ? ' <span class="pflag" title="fastest in the discovery round too">+</span>' : '';
       const badge = s.src==='log'
-        ? '<span class="badge">from the mod log</span>'
-        : `<span class="badge manual">${esc(s.source)}</span>`;
-      return `<div class="sweep">
-        <div class="cup">${esc(s.cup)} &middot; ${esc(s.date||'')}</div>
-        <div class="who" style="color:${customColors[s.winner]||''}">${esc(s.winner)}</div>
-        <div class="map">${esc(s.map||'')}</div>
-        <div class="facts">${rounds}${field}${warm}${s.note?'<br>'+esc(s.note):''}</div>
-        ${badge}
-      </div>`;
-    }).join('') + '</div>'
+        ? '<span class="badge">mod log</span>'
+        : (s.src==='partial'
+            ? '<span class="badge">screenshots</span>'
+            : `<span class="badge manual">${esc(s.source)}</span>`);
+      return `<tr>
+        <td>${esc(s.cup)}</td>
+        <td class="hide-s dim">${esc(s.date||'')}</td>
+        <td>${nm(s.winner)}</td>
+        <td class="hide-s map-cell">${esc(s.map||'')}</td>
+        <td class="n">${rounds}${warm}</td>
+        <td class="n hide-s dim">${s.field||''}</td>
+        <td>${badge}</td>
+      </tr>`;
+    }).join('') + '</table></div>'
   ) : '<div class="empty">none on record yet</div>';
 
   // ---- players ----
@@ -187,20 +185,31 @@ fetch('rounds.json').then(r=>r.json()).then(D=>{
     .sort((a,b)=> ((a.dropped.length - b.dropped.length)
                  || ((tightest(a)?tightest(a).margin:9e9) - (tightest(b)?tightest(b).margin:9e9))))
     .slice(0,10);
+  // Who took rounds off them, the busiest thief first. Three names is plenty.
+  // When only a round or two got away, the margin is the whole story, so show it.
+  const lostTo = c => {
+    const dropped = c.dropped || [];
+    const tally = {};
+    for(const d of dropped) (tally[d.to] = tally[d.to] || []).push(d.margin);
+    const names = Object.entries(tally).sort((a,b)=>b[1].length - a[1].length);
+    if(dropped.length <= 2){
+      return names.map(([who, margins])=>{
+        const by = margins.filter(m=>m!=null).map(m=>'+'+m.toFixed(3)).join(', ');
+        return nm(who) + (by ? ` <span class="dim">(${by})</span>` : '');
+      }).join(', ');
+    }
+    const shown = names.slice(0,3).map(e=>nm(e[0])).join(', ');
+    return names.length > 3 ? `${shown} and others` : shown;
+  };
   document.getElementById('nearlyTable').innerHTML =
     `<tr><th>Cup</th><th>Winner</th><th class="n">Rounds led</th><th></th>
-     <th class="n">Gave up</th><th>Tightest one</th></tr>`
-    + nearly.map(c=>{
-        const t = tightest(c);
-        const lost = t
-          ? `R${t.round} to ${nm(t.to)} by <b>${t.margin.toFixed(3)}s</b>`
-          : (c.dropped[0] ? `R${c.dropped[0].round} to ${nm(c.dropped[0].to)}` : '');
-        return `<tr>
+     <th class="n">Gave up</th><th>Lost them to</th></tr>`
+    + nearly.map(c=>`<tr>
         <td>${esc(c.cup)}${c.src==='partial'?pflag:''}</td><td>${nm(c.winner)}</td>
         <td class="n">${c.led}/${c.rounds}</td><td>${bar(c.led,c.rounds)}</td>
         <td class="n">${c.dropped.length}</td>
-        <td class="dim">${lost}</td>
-      </tr>`;}).join('');
+        <td>${lostTo(c)}</td>
+      </tr>`).join('');
 
   // ---- led and lost ----
   const near = [];
