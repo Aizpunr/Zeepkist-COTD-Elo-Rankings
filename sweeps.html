@@ -70,19 +70,19 @@ tr.is-sweep td{background:rgba(56,189,248,0.07)}
 <div class="lead" id="sweepLead"></div>
 <div id="sweepCards"></div>
 
-<h2>Round control <span class="hint">log era</span></h2>
+<h2>Round control <span class="hint" id="hintRounds"></span></h2>
 <div class="lead">How often a player was the fastest of a round, out of the rounds they actually raced.</div>
 <div style="overflow-x:auto"><table id="playerTable"></table></div>
 
-<h2>Cup by cup <span class="hint">log era</span></h2>
+<h2>Cup by cup <span class="hint" id="hintCups"></span></h2>
 <div class="lead">How much of each cup the eventual winner controlled, and the worst position they fell to along the way.</div>
 <div style="overflow-x:auto"><table id="cupTable"></table></div>
 
-<h2>Nearly swept it <span class="hint">round data only</span></h2>
+<h2>Nearly swept it <span class="hint" id="hintNearly"></span></h2>
 <div class="lead">Won the cup and led almost every round of it. The fewer rounds given up, the closer it came to a clean sweep.</div>
 <div style="overflow-x:auto"><table id="nearlyTable"></table></div>
 
-<h2>Led and lost <span class="hint">round data only</span></h2>
+<h2>Led and lost <span class="hint" id="hintLed"></span></h2>
 <div class="lead">Led more rounds than the player who ended up winning, and still did not win.</div>
 <div style="overflow-x:auto"><table id="nearTable"></table></div>
 
@@ -97,6 +97,13 @@ function bar(a,b){const pct=b?Math.round(100*a/b):0;return `<span class="bar"><i
 
 fetch('rounds.json').then(r=>r.json()).then(D=>{
   const cov = D.coverage;
+  // The four round based sections all cover the same span, and it moves
+  // every time a cup is reconstructed, so label them from the data.
+  const range = `cups ${cov.first} onwards`;
+  for(const id of ['hintRounds','hintCups','hintNearly','hintLed'])
+    document.getElementById(id).textContent = range;
+  const logCups = D.cups.filter(c=>c.src==='log').map(c=>c.num);
+  const firstLog = logCups.length ? Math.min(...logCups) : cov.first;
 
   document.getElementById('sub').textContent =
     `first in every single round of the cup · through ${D.generated_through||''}`;
@@ -242,13 +249,14 @@ fetch('rounds.json').then(r=>r.json()).then(D=>{
     + `The 10 minute discovery round does not count, it is not an elimination round.<br>`
     + `The <b>all time</b> counts come from ${esc(T.source||'the cup records')} and cover the whole history. `
     + `Round by round times mostly come from the cup mod's own log, which prints the whole field before each `
-    + `elimination, and those logs only start at <b>COTD ${cov.first}</b>.${gap}${partialNote} `
+    + `elimination, and those logs only start at <b>COTD ${firstLog}</b>. Coverage reaches back to `
+    + `<b>COTD ${cov.first}</b> because the cups in between were rebuilt by hand.${gap}${partialNote} `
     + `Earlier cups recorded the round each player went out in and nothing about the players who survived, `
     + `so a sweep before COTD ${cov.first} is counted but cannot be broken down here. Its round count still `
     + `comes from those records, since the last round anybody was eliminated in is the final.<br>`
     + `That means <b>round control</b>, <b>cup by cup</b>, <b>nearly swept it</b> and <b>led and lost</b> cover ${cov.cups} cups and `
-    + `${cov.rounds} rounds, not the whole history, and <b>cups won</b> in the table above is a log era number `
-    + `while <b>sweeps</b> next to it is all time. `
+    + `${cov.rounds} rounds, not the whole history. <b>Cups won</b> in the table above counts only those `
+    + `${cov.cups} cups, not a career total, while <b>sweeps</b> next to it is all time. `
     + `<b>Raced</b> counts the rounds a player was in the field for. `
     + `<b>Worst place</b> is the lowest the eventual winner ranked in any round, blank if they DNF'd one.`;
 });

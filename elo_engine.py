@@ -956,6 +956,10 @@ def main():
     with open(_p('alldata.json'), 'w') as f:
         json.dump(alldata, f, separators=(',', ':'))
     print(f"alldata.json written ({len(alldata['weighted'])} players)")
+    # This OVERWRITES alldata.json with only the keys above. build_altrank.py
+    # merges standard, trueskill and cupDates back in afterwards, so the file
+    # is incomplete until it runs, and anything that reads cupDates breaks.
+    print("  ^ partial until build_altrank.py runs: no standard, trueskill or cupDates")
 
     current_cup_n = cup_num(all_cups[-1]['name'])
     lookback_6m = current_cup_n - RISING_LOOKBACK_6M
