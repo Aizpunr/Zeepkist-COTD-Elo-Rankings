@@ -105,7 +105,7 @@ XLSX_FILES = [
     'COTDs 76-100.xlsx',
     'COTDs 101-125.xlsx',
     'COTD 126-130.xlsx',
-    'COTD 131-162.xlsx',
+    'COTD 131-163.xlsx',
 ]
 ROULETTE_XLSX = 'cup roulette.xlsx'
 TROLL_XLSX = 'Troll cup.xlsx'
@@ -215,7 +215,8 @@ CANONICAL = {
     'Psycho No. 7': ['[PTSD]Psycho No. 7'],
     'Quickracer10': ['[KURK] Quickracer10','[AJSE] Quickracer10','quickracer10','[ASJE] Quickracer10','[CC] Quickracer10'],
     'Roader': ['[BOB]Roader', '[OR] Roader'],
-    'Shadynook': ['[LATE]Shadynook'],
+    'Shadynook': ['[LATE]Shadynook', '[CSC] Shadynook'],
+    '[MIB]TheRockingSheep': ['TheRockingSheep'],
     'Stick': ['[ZET]Stick'],
     'Striking Vyper': ['[CTR]Striking Vyper'],
     'XpERt': ['[TBD]XpERt'],
