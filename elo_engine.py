@@ -105,7 +105,7 @@ XLSX_FILES = [
     'COTDs 76-100.xlsx',
     'COTDs 101-125.xlsx',
     'COTD 126-130.xlsx',
-    'COTD 131-163.xlsx',
+    'COTD 131-164.xlsx',
 ]
 ROULETTE_XLSX = 'cup roulette.xlsx'
 TROLL_XLSX = 'Troll cup.xlsx'
@@ -268,7 +268,8 @@ CANONICAL = {
     'lucanakin': ['[DNFF]lucanakin'],
     'MarcSubstitute': ['[DHLU]MarcSubstitute', '[SLOW]MarcSubstitute'],
     'MetalCJ': ['[TTR]MetalCJ'],
-    'microways': ['[Quac] microways','[KBW] microways'],
+    'microways': ['[Quac] microways','[KBW] microways','[KBW]microways'],
+    'DragonShadow84290': ['[TTR]DragonShadow84290'],
     'PlusMicron': ['[CSC] PlusMicron'],
     'MMXD18': ['[Toob]MMXD18'],
     'Moody': ['[CTR]Moody', '[MIB]Moody'],
