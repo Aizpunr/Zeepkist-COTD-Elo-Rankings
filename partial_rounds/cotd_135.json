@@ -2,7 +2,7 @@
   "cup": 135,
   "source": "leaderboard screenshots shared in chat",
   "aliases": {
-    "del gaming": "Sterben"
+    "del gaming": "Sterben", "clycl": "Quickracer10"
   },
   "notes": [
     "All 15 rounds transcribed. cup_135.json gives the real round count, so build_rounds.py",
