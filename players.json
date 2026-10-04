@@ -139,7 +139,9 @@
   },
   "[MIB]TheRockingSheep": {
     "steam_id": "76561199580052002",
-    "aliases": []
+    "aliases": [
+      "TheRockingSheep"
+    ]
   },
   "[N1]N1ssan": {
     "steam_id": "76561199797234990",
@@ -161,6 +163,10 @@
     "steam_id": "76561199589289774",
     "aliases": []
   },
+  "[RABI]Yksdjcj": {
+    "steam_id": "76561199731808063",
+    "aliases": []
+  },
   "[SOT]Loberless": {
     "steam_id": "76561198277844777",
     "aliases": []
@@ -175,10 +181,6 @@
   },
   "[TTR] Tigerplaysonpc": {
     "steam_id": "76561199583579393",
-    "aliases": []
-  },
-  "[TTR]DragonShadow84290": {
-    "steam_id": "76561198070406017",
     "aliases": []
   },
   "[WASD] Dentalon": {
@@ -347,6 +349,10 @@
     "steam_id": "76561199415583817",
     "aliases": []
   },
+  "astonerock83": {
+    "steam_id": "76561199208264116",
+    "aliases": []
+  },
   "Avidos": {
     "steam_id": "76561198308080027",
     "aliases": []
@@ -362,6 +368,13 @@
     "steam_id": "76561199705922244",
     "aliases": [
       "[RDX] axo"
+    ]
+  },
+  "Azalea": {
+    "steam_id": "76561199006040868",
+    "aliases": [
+      "Eclipse135",
+      "Eclipse125"
     ]
   },
   "Azrael": {
@@ -721,6 +734,10 @@
     "steam_id": "76561198285710168",
     "aliases": []
   },
+  "DerpyReddy": {
+    "steam_id": "76561199820765073",
+    "aliases": []
+  },
   "Despacito": {
     "steam_id": "76561198024214204",
     "aliases": []
@@ -786,7 +803,9 @@
   },
   "DragonShadow84290": {
     "steam_id": "76561198070406017",
-    "aliases": []
+    "aliases": [
+      "[TTR]DragonShadow84290"
+    ]
   },
   "Draug": {
     "steam_id": "76561198121972938",
@@ -818,12 +837,6 @@
   "Ebruis": {
     "steam_id": "76561199016181953",
     "aliases": []
-  },
-  "Eclipse135": {
-    "steam_id": "76561199006040868",
-    "aliases": [
-      "Eclipse125"
-    ]
   },
   "Edsheeran": {
     "steam_id": "76561198267696410",
@@ -1829,7 +1842,8 @@
     "steam_id": "76561199448462477",
     "aliases": [
       "[Quac] microways",
-      "[KBW] microways"
+      "[KBW] microways",
+      "[KBW]microways"
     ]
   },
   "MikeReddy": {
@@ -2015,7 +2029,7 @@
     ]
   },
   "Northwind/Noweki": {
-    "steam_id": null,
+    "steam_id": "76561198160604987",
     "aliases": [
       "Northwind",
       "Noweki"
@@ -2382,6 +2396,10 @@
   },
   "Rubbish": {
     "steam_id": "76561198017603673",
+    "aliases": []
+  },
+  "Ruckooe": {
+    "steam_id": "76561198315900248",
     "aliases": []
   },
   "S1mpl1c1ty": {
