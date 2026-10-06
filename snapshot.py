@@ -43,10 +43,10 @@ GHOST_HIDE = {133: 'Kernkob'}
 
 def build_snap_at(players, target, no_decay=False, season_mode=False):
     """Qualification (any one of):
-       1. 6+ cups, OR
+       1. 10+ cups, OR
        2. 1+ lifetime podium, OR
        3. 4+ cups with at least one in the last 20 events at the target cup.
-       Season mode: 3+ cups OR any podium.
+       Season mode: 4+ cups OR any podium.
     """
     # Last 20 events at the target cup (across all players' histories)
     all_cs = sorted({h['c'] for p in players for h in (p.get('h') or p.get('history', [])) if h['c'] <= target})
@@ -71,9 +71,9 @@ def build_snap_at(players, target, no_decay=False, season_mode=False):
         cups_played = len(hist_before)
 
         if season_mode:
-            qualified = cups_played >= 3 or pods > 0
+            qualified = cups_played >= 4 or pods > 0
         else:
-            qualified = (cups_played >= 6
+            qualified = (cups_played >= 10
                          or pods > 0
                          or (cups_played >= 4 and any(h['c'] in last_20 for h in hist_before)))
 
