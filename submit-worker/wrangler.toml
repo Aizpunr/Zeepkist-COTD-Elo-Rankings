@@ -1,0 +1,22 @@
+# Cloudflare Worker that receives COTD cup logs from submit.html.
+# Setup steps: see README.md. Secrets (TURNSTILE_SECRET, POLLER_TOKEN) are
+# set with `npx wrangler secret put`, never written here.
+name = "cotd-submit"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+workers_dev = true
+
+[[kv_namespaces]]
+binding = "SUBMISSIONS"
+# Replace both with the ids printed by:
+#   npx wrangler kv namespace create SUBMISSIONS
+#   npx wrangler kv namespace create SUBMISSIONS --preview
+id = "12495d642d7745afb93d9e6c52e4bae3"
+preview_id = "872b858806bc445a900f014bd97a7b98"
+
+[vars]
+ALLOWED_ORIGINS = "https://aizpunr.github.io,http://localhost:8000,http://127.0.0.1:8000"
+TURNSTILE_HOSTNAMES = "aizpunr.github.io,localhost,127.0.0.1"
+MAX_BYTES = "5242880"
+MAX_INDEX = "200"
+DAILY_SUBMIT_CAP = "40"

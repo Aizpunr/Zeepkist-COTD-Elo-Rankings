@@ -22,3 +22,9 @@ cup logs/
 
 # Machine-local backup destination for backup_raw_data.py (each operator creates their own)
 backup_config.json
+
+# Submit-a-cup flow: poller config holds the Worker token (local only)
+submit_config.json
+submit-worker/.dev.vars
+submit-worker/node_modules/
+submit-worker/.wrangler/

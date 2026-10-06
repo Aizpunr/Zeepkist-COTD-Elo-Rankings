@@ -7,6 +7,8 @@ Usage:
 Fully automatic: snapshot -> parse log -> xlsx + JSON backup -> cup_meta.json
 (map/mapper/date for build_cups.py) -> all ELO data -> localhost preview.
 Push stays manual: verify on http://localhost:8000 first.
+Unattended runs: submissions_poll.py calls this with --log/--no-open for cups
+submitted on submit.html; COTD_SKIP_EXTERNAL=1 skips the out-of-repo steps.
 """
 import re, os, sys, json, subprocess, datetime, glob, shutil
 import openpyxl
@@ -28,6 +30,11 @@ _p = lambda f: os.path.join(_dir, f)
 LOG_PATH = r"C:\Program Files (x86)\Steam\steamapps\common\Zeepkist\BepInEx\LogOutput.log"
 LIVE_LOG_PATH = r"C:\Program Files (x86)\Steam\steamapps\common\Zeepkist\BepInEx\LiveLeaderboardLogger.log"
 COLS_PER_CUP = 6  # 4 data columns + 2 blank spacer
+
+# COTD_SKIP_EXTERNAL=1 skips the steps that write OUTSIDE this repo (cross-comp
+# refresh, COTD SOF pool, raw-data backup). submissions_poll.py --rehearsal sets
+# it so a run in a scratch copy cannot touch the real SOF repos or backup drive.
+SKIP_EXTERNAL = os.environ.get('COTD_SKIP_EXTERNAL') == '1'
 
 # ── Parse arguments ──
 def _usage():
@@ -624,7 +631,9 @@ crosscomp_script = r"C:\Users\rafa\Desktop\Claude\zeepkist holistic\refresh.py"
 sof_repo_pool = r"C:\Users\rafa\Desktop\Claude\zeepkist mod\Zeepkist-Strength-of-Field\elo_pool.json"
 
 sof_ok = False
-if os.path.exists(crosscomp_script):
+if SKIP_EXTERNAL:
+    print("  SKIP (COTD_SKIP_EXTERNAL): cross-comp refresh")
+elif os.path.exists(crosscomp_script):
     r = subprocess.run([sys.executable, crosscomp_script],
                        cwd=os.path.dirname(crosscomp_script))
     if r.returncode == 0:
@@ -649,7 +658,9 @@ cotd_pool_script = r"C:\Users\rafa\Desktop\Claude\zeepkist mod\gtr_analysis\join
 sof_repo_cotd_pool = r"C:\Users\rafa\Desktop\Claude\zeepkist mod\Zeepkist-Strength-of-Field\elo_pool_cotd.json"
 
 cotd_pool_ok = False
-if os.path.exists(cotd_pool_script):
+if SKIP_EXTERNAL:
+    print("  SKIP (COTD_SKIP_EXTERNAL): COTD SOF pool")
+elif os.path.exists(cotd_pool_script):
     r = subprocess.run([sys.executable, cotd_pool_script],
                        cwd=os.path.dirname(cotd_pool_script))
     if r.returncode == 0:
@@ -696,7 +707,9 @@ print("=" * 50)
 print("=" * 50)
 print("Backing up raw data (xlsx, cup logs, backups/)...")
 print("=" * 50)
-if os.path.exists(_p('backup_raw_data.py')):
+if SKIP_EXTERNAL:
+    print("  SKIP (COTD_SKIP_EXTERNAL): raw-data backup")
+elif os.path.exists(_p('backup_raw_data.py')):
     _bk = subprocess.run([sys.executable, _p('backup_raw_data.py')], cwd=_dir)
     if _bk.returncode == 2:
         print("  raw-data backup not configured: create backup_config.json (see backup_raw_data.py)")

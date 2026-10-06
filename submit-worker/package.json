@@ -1,0 +1,13 @@
+{
+  "name": "cotd-submit",
+  "private": true,
+  "description": "Cloudflare Worker that receives Zeepkist COTD cup logs for processing",
+  "scripts": {
+    "dev": "wrangler dev --port 8787",
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail"
+  },
+  "devDependencies": {
+    "wrangler": "^4"
+  }
+}
