@@ -150,6 +150,7 @@ def strip_tag(name):
 CANONICAL = {
     '376': ['376.0'],
     'AndMe': ['[ORIG]AndMe16', 'AndMe14', 'AndMe15', 'AndMe16', 'AndMe17', '[COMY]AndMe17', '[CSC]AndMe17', 'AndMe18', '[CSC]AndMe18'],
+    'B_ES': ['Vael', 'B_es'],
     'bernhard': ['[Lord] bernhard'],
     'Butter': ['[ZST] Butter'],
     'Codewalt': ['CodeWalt'],
@@ -196,7 +197,7 @@ CANONICAL = {
     'ZOMAN': ['[ARMS] ZOMAN','[Bath] ZOMAN','[Blub] ZOMAN','[Choo] ZOMAN',
               '[DNF] Did Not DNF ZOMAN','DNF artist (ZOMAN)',
               '[KUNG] ZOMAN','[Kung] ZOMAN','[SLOW]ZOMAN','[SNTA] ZOMAN',
-              '[TOOB] ZOMAN','[oOOo] ZOMAN'],
+              '[TOOB] ZOMAN','[oOOo] ZOMAN','what_is_tatari_2008'],
     'Zodiak': ['im washed [zodiakism]', 'zodiak'],
     'Cbad Cruiser': ['[CTR]Cbad Cruiser'],
     'LupensCruor': ['[CTR] LupensCruor'],
