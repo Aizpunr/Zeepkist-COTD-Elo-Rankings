@@ -150,6 +150,7 @@ def strip_tag(name):
 CANONICAL = {
     '376': ['376.0'],
     'AndMe': ['[ORIG]AndMe16', 'AndMe14', 'AndMe15', 'AndMe16', 'AndMe17', '[COMY]AndMe17', '[CSC]AndMe17', 'AndMe18', '[CSC]AndMe18'],
+    'Azalea': ['Eclipse135'],
     'B_ES': ['Vael', 'B_es'],
     'bernhard': ['[Lord] bernhard'],
     'Butter': ['[ZST] Butter'],
