@@ -105,7 +105,7 @@ XLSX_FILES = [
     'COTDs 76-100.xlsx',
     'COTDs 101-125.xlsx',
     'COTD 126-130.xlsx',
-    'COTD 131-164.xlsx',
+    'COTD 131-165.xlsx',
 ]
 ROULETTE_XLSX = 'cup roulette.xlsx'
 TROLL_XLSX = 'Troll cup.xlsx'
@@ -218,7 +218,7 @@ CANONICAL = {
     'PandaMane': ['[FOV]PandaMane', '[FPV]PandaMane'],
     'PoopSheriff': ['[CTR] PoopSheriff', '[CTR]PoopSheriff'],
     'Psycho No. 7': ['[PTSD]Psycho No. 7'],
-    'Quickracer10': ['[KURK] Quickracer10','[AJSE] Quickracer10','quickracer10','[ASJE] Quickracer10','[CC] Quickracer10'],
+    'Quickracer10': ['[KURK] Quickracer10','[AJSE] Quickracer10','quickracer10','[ASJE] Quickracer10','[CC] Quickracer10','[WASH] Quickracer10'],
     'Roader': ['[BOB]Roader', '[OR] Roader'],
     'Shadynook': ['[LATE]Shadynook', '[CSC] Shadynook'],
     '[MIB]TheRockingSheep': ['TheRockingSheep'],
@@ -289,7 +289,8 @@ CANONICAL = {
     'kentback': ['[IVD3]kentback'],
     'WotterBytes': ['Wotterbytes'],
     'ping': ['[bad] ping', '[boom] ping', '[no] ping', '[pong]ping'],
-    'agix': ['[GYMC] agix', '[CTR]agix'],
+    'agix': ['[GYMC] agix', '[CTR]agix', '[AC9K]agix'],
+    'Emotional*******Pickle': ['cucumis conditus solacii animi', 'gundalf the grey'],
     'An Actual g00se': ['[CSC] An Actual g00se', '[Err] An Actual g00se', '[CSC] BaBa is g00se', '[CSC] CantFindTheg00se'],
     'BOB THE GAMER': ['[BOGO]BOB THE GAMER', '[MEAT]BOB THE GAMER'],
     'ferinine': ['[Err]ferinine', '[Err]ferninine', '[ERR]ferinine'],

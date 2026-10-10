@@ -413,8 +413,14 @@ def patch_cup_json(cup_n, ltg_findings, dry_run=False):
     for rn in sorted(rounds.keys(), reverse=True):
         new_players.extend(rounds[rn])
     old_pos = {id(p): p['pos'] for p in new_players}
+    # Tie rule: finishers get distinct positions; DNFs of the same round share
+    # the position of the first DNF in that round (the parser does the same).
     for i, p in enumerate(new_players):
         new_pos = i + 1
+        if p['time'] == 'DNF' and i > 0:
+            prev = new_players[i - 1]
+            if prev['time'] == 'DNF' and prev.get('round') == p.get('round'):
+                new_pos = prev['pos']
         if p['pos'] != new_pos:
             for c in changes:
                 if c.get('name') == p['name'] and c.get('round') == p.get('round'):
