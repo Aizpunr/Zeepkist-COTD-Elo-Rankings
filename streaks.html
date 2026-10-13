@@ -42,6 +42,7 @@ background:var(--streak);-webkit-background-clip:text;-webkit-text-fill-color:tr
 .srow .size{font-weight:700;font-variant-numeric:tabular-nums;flex-shrink:0}
 .srow.live .size{color:var(--red)}
 .srow .atag{color:var(--red);font-size:9px;text-transform:uppercase;letter-spacing:1px;flex-shrink:0}
+.empty{font-family:var(--mono);font-size:11px;color:var(--dark);padding:4px 6px}
 .record-note{font-family:var(--mono);font-size:10px;color:var(--dark);margin-top:10px;padding-top:8px;border-top:1px solid var(--border)}
 .methodology{font-family:var(--mono);font-size:10px;color:var(--dark);margin-top:24px;padding:12px 0;border-top:1px solid var(--border);line-height:1.5}
 .methodology .rk{color:var(--red)}
@@ -65,6 +66,7 @@ background:var(--streak);-webkit-background-clip:text;-webkit-text-fill-color:tr
   <div class="tabs">
     <button class="tab active" id="tabAll" onclick="setView('all')">Top streaks</button>
     <button class="tab" id="tabPlayer" onclick="setView('player')">One per player</button>
+    <button class="tab" id="tabActive" onclick="setView('active')">Active</button>
   </div>
 </div>
 
@@ -75,7 +77,8 @@ background:var(--streak);-webkit-background-clip:text;-webkit-text-fill-color:tr
   Cups they sat out are skipped (they don't break it); a finish past the line breaks it.
   Regular COTD only (no Troll/Roulette). <span class="rk">Red rows are still active</span>.
   <b>Top streaks</b> ranks every run ever &mdash; a player can appear more than once;
-  <b>One per player</b> keeps each player's single longest.
+  <b>One per player</b> keeps each player's single longest;
+  <b>Active</b> shows only runs still going.
 </div>
 </div>
 
@@ -91,6 +94,7 @@ function setView(v){
   view = v;
   document.getElementById('tabAll').classList.toggle('active', v==='all');
   document.getElementById('tabPlayer').classList.toggle('active', v==='player');
+  document.getElementById('tabActive').classList.toggle('active', v==='active');
   render();
 }
 
@@ -101,6 +105,7 @@ function rowsFor(card){
     for(const s of card.streaks){ if(seen.has(s.name)) continue; seen.add(s.name); out.push(s); }
     return out.slice(0, LIMIT);
   }
+  if(view === 'active') return card.streaks.filter(s => s.active).slice(0, LIMIT);
   return card.streaks.slice(0, LIMIT);
 }
 
@@ -124,7 +129,7 @@ function render(){
     return `<div class="streak-card">
       <div class="card-title">${esc(card.label)}</div>
       <div class="card-cut">top ${card.cut}</div>
-      ${rows}
+      ${rows || '<div class="empty">no active streak</div>'}
       <div class="record-note">${note}</div>
     </div>`;
   }).join('');
