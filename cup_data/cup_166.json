@@ -1,0 +1,349 @@
+{
+  "cup": "COTD 166",
+  "cup_num": 166,
+  "mapper": "[SLOW]Zeus",
+  "players": [
+    {
+      "pos": 1,
+      "name": "Kernkob",
+      "time": 45049,
+      "round": null
+    },
+    {
+      "pos": 2,
+      "name": "[CTR] Sandals",
+      "time": 45515,
+      "round": 17
+    },
+    {
+      "pos": 3,
+      "name": "Lexer",
+      "time": 45542,
+      "round": 16
+    },
+    {
+      "pos": 4,
+      "name": "[MMM]LKat",
+      "time": "DNF",
+      "round": 15
+    },
+    {
+      "pos": 5,
+      "name": "Vael",
+      "time": "DNF",
+      "round": 14
+    },
+    {
+      "pos": 6,
+      "name": "ZOMAN",
+      "time": "DNF",
+      "round": 13
+    },
+    {
+      "pos": 7,
+      "name": "[TILT]Redstony",
+      "time": 45536,
+      "round": 12
+    },
+    {
+      "pos": 8,
+      "name": "Jake",
+      "time": 45608,
+      "round": 12
+    },
+    {
+      "pos": 9,
+      "name": "[ZET]Stick",
+      "time": 45742,
+      "round": 11
+    },
+    {
+      "pos": 10,
+      "name": "[CTR]GuAlexItar",
+      "time": 45874,
+      "round": 11
+    },
+    {
+      "pos": 11,
+      "name": "icRS",
+      "time": 45713,
+      "round": 10
+    },
+    {
+      "pos": 12,
+      "name": "[CSC] PlusMicron",
+      "time": 46031,
+      "round": 10
+    },
+    {
+      "pos": 13,
+      "name": "Mμ",
+      "time": 45847,
+      "round": 9
+    },
+    {
+      "pos": 14,
+      "name": "Minkus",
+      "time": 45901,
+      "round": 9
+    },
+    {
+      "pos": 15,
+      "name": "[KURK]Sterben",
+      "time": "DNF",
+      "round": 9
+    },
+    {
+      "pos": 15,
+      "name": "[WASH] Quickracer10",
+      "time": "DNF",
+      "round": 9
+    },
+    {
+      "pos": 17,
+      "name": "brrryy",
+      "time": 46187,
+      "round": 8
+    },
+    {
+      "pos": 18,
+      "name": "Six",
+      "time": 46539,
+      "round": 8
+    },
+    {
+      "pos": 19,
+      "name": "ping",
+      "time": "DNF",
+      "round": 8
+    },
+    {
+      "pos": 19,
+      "name": "[CTR]Mortishade",
+      "time": "DNF",
+      "round": 8
+    },
+    {
+      "pos": 21,
+      "name": "MALIYO",
+      "time": 45987,
+      "round": 7
+    },
+    {
+      "pos": 22,
+      "name": "[AC9K]agix",
+      "time": 46033,
+      "round": 7
+    },
+    {
+      "pos": 23,
+      "name": "[CSC] DeeDeeNaNaNa",
+      "time": 46576,
+      "round": 7
+    },
+    {
+      "pos": 24,
+      "name": "[CSC] redal",
+      "time": "DNF",
+      "round": 7
+    },
+    {
+      "pos": 25,
+      "name": "Mirror .-.",
+      "time": 46474,
+      "round": 6
+    },
+    {
+      "pos": 26,
+      "name": "Noxitu",
+      "time": 46548,
+      "round": 6
+    },
+    {
+      "pos": 27,
+      "name": "Diabler",
+      "time": 46655,
+      "round": 6
+    },
+    {
+      "pos": 28,
+      "name": "Matic_D",
+      "time": 46878,
+      "round": 6
+    },
+    {
+      "pos": 29,
+      "name": "BrickEdwards",
+      "time": 46729,
+      "round": 5
+    },
+    {
+      "pos": 30,
+      "name": "MAGS3",
+      "time": 46768,
+      "round": 5
+    },
+    {
+      "pos": 31,
+      "name": "[CSC] OccasionallyAmazingGamer",
+      "time": 46786,
+      "round": 5
+    },
+    {
+      "pos": 32,
+      "name": "gilgool",
+      "time": 46829,
+      "round": 5
+    },
+    {
+      "pos": 33,
+      "name": "SuperHeavy",
+      "time": 46893,
+      "round": 5
+    },
+    {
+      "pos": 34,
+      "name": "wokonbike",
+      "time": 47786,
+      "round": 5
+    },
+    {
+      "pos": 35,
+      "name": "St Nicholas",
+      "time": 47272,
+      "round": 4
+    },
+    {
+      "pos": 36,
+      "name": "Mr Croc",
+      "time": 47356,
+      "round": 4
+    },
+    {
+      "pos": 37,
+      "name": "FINSTER83",
+      "time": 47464,
+      "round": 4
+    },
+    {
+      "pos": 38,
+      "name": "Hellmet",
+      "time": 48401,
+      "round": 4
+    },
+    {
+      "pos": 39,
+      "name": "RoundNzt",
+      "time": "DNF",
+      "round": 4
+    },
+    {
+      "pos": 39,
+      "name": "Ruckooe",
+      "time": "DNF",
+      "round": 4
+    },
+    {
+      "pos": 41,
+      "name": "[NEWB]hostile",
+      "time": 48358,
+      "round": 3
+    },
+    {
+      "pos": 42,
+      "name": "[ZET]Sword125",
+      "time": 48450,
+      "round": 3
+    },
+    {
+      "pos": 43,
+      "name": "SjorsTea",
+      "time": 48615,
+      "round": 3
+    },
+    {
+      "pos": 44,
+      "name": "Fly8oy",
+      "time": 49371,
+      "round": 3
+    },
+    {
+      "pos": 45,
+      "name": "Q74",
+      "time": 50915,
+      "round": 3
+    },
+    {
+      "pos": 46,
+      "name": "M4DSCOTSM4N",
+      "time": 51180,
+      "round": 3
+    },
+    {
+      "pos": 47,
+      "name": "[bad]kkincaid97",
+      "time": 49691,
+      "round": 2
+    },
+    {
+      "pos": 48,
+      "name": "timesprout",
+      "time": "DNF",
+      "round": 2
+    },
+    {
+      "pos": 48,
+      "name": "[ZET] Wheelie",
+      "time": "DNF",
+      "round": 2
+    },
+    {
+      "pos": 48,
+      "name": "Orb Bee Bob",
+      "time": "DNF",
+      "round": 2
+    },
+    {
+      "pos": 48,
+      "name": "Olee",
+      "time": "DNF",
+      "round": 2
+    },
+    {
+      "pos": 48,
+      "name": "NatePW",
+      "time": "DNF",
+      "round": 2
+    },
+    {
+      "pos": 53,
+      "name": "Barn",
+      "time": 55334,
+      "round": 1
+    },
+    {
+      "pos": 54,
+      "name": "Nico",
+      "time": "DNF",
+      "round": 1
+    },
+    {
+      "pos": 54,
+      "name": "[ZET]vectortrajector",
+      "time": "DNF",
+      "round": 1
+    },
+    {
+      "pos": 54,
+      "name": "Aranay",
+      "time": "DNF",
+      "round": 1
+    },
+    {
+      "pos": 54,
+      "name": "[TTR]DragonShadow84290",
+      "time": "DNF",
+      "round": 1
+    }
+  ]
+}
