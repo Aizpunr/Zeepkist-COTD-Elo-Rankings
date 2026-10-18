@@ -1,4 +1,8 @@
 {
+  "#Wagnerouteo": {
+    "steam_id": "76561198264800151",
+    "aliases": []
+  },
   "/<": {
     "steam_id": "76561198079775050",
     "aliases": []
@@ -28,12 +32,6 @@
   "[AAA] AmusedApple": {
     "steam_id": "76561199086890807",
     "aliases": []
-  },
-  "[ARL]Aurum": {
-    "steam_id": "76561199840967484",
-    "aliases": [
-      "[GOLD]Aurum"
-    ]
   },
   "[bad]kkincaid97": {
     "steam_id": "76561198025387250",
@@ -95,10 +93,6 @@
     "steam_id": "76561198005979287",
     "aliases": []
   },
-  "[FOOL] Ruckooe": {
-    "steam_id": "76561198315900248",
-    "aliases": []
-  },
   "[Frik] DinoDeano": {
     "steam_id": "76561199385621747",
     "aliases": [
@@ -119,6 +113,10 @@
   },
   "[jfsf] jake from state farm frying eggs": {
     "steam_id": "76561199495646637",
+    "aliases": []
+  },
+  "[JiRa] CalmestRaccoon": {
+    "steam_id": "76561198105894037",
     "aliases": []
   },
   "[JON]aardvarkjon": {
@@ -254,6 +252,7 @@
     "aliases": [
       "[GYMC] agix",
       "[CTR]agix",
+      "[AC9K]agix",
       "[CTR] agix"
     ]
   },
@@ -361,6 +360,14 @@
     "steam_id": "76561199208264116",
     "aliases": []
   },
+  "Aurum": {
+    "steam_id": "76561199840967484",
+    "aliases": [
+      "[ARL]Aurum",
+      "[GOLD]Aurum",
+      "[ZPKT]Aurum"
+    ]
+  },
   "Avidos": {
     "steam_id": "76561198308080027",
     "aliases": []
@@ -399,7 +406,10 @@
   },
   "B_ES": {
     "steam_id": "76561199082360966",
-    "aliases": []
+    "aliases": [
+      "Vael",
+      "B_es"
+    ]
   },
   "BaasBallas": {
     "steam_id": "76561199112560691",
@@ -465,8 +475,9 @@
     "steam_id": "76561198211007028",
     "aliases": [
       "[AUz] bjenk4",
-      "[AUz]bjenk4",
       "[Auz] Bjenk4",
+      "Bjenk4",
+      "[AUz]bjenk4",
       "[Auz]Bjenk4"
     ]
   },
@@ -641,6 +652,10 @@
     "steam_id": "76561199644142984",
     "aliases": []
   },
+  "CodeBot": {
+    "steam_id": "76561199135214682",
+    "aliases": []
+  },
   "CodeingerCat": {
     "steam_id": "76561198210248213",
     "aliases": []
@@ -685,10 +700,6 @@
     "steam_id": "76561199382891257",
     "aliases": []
   },
-  "cucumis conditus solacii animi": {
-    "steam_id": "76561198383339808",
-    "aliases": []
-  },
   "Cypher Ocelot": {
     "steam_id": "76561198046383798",
     "aliases": []
@@ -715,6 +726,10 @@
   },
   "dasdrio1": {
     "steam_id": "76561199113163853",
+    "aliases": []
+  },
+  "dave.ahlersmeyer": {
+    "steam_id": "76561199246286043",
     "aliases": []
   },
   "daytime": {
@@ -776,6 +791,10 @@
   },
   "Dimmis00": {
     "steam_id": "76561198871544569",
+    "aliases": []
+  },
+  "Disco_743": {
+    "steam_id": "76561198851917304",
     "aliases": []
   },
   "dlwldms": {
@@ -908,6 +927,13 @@
   },
   "Emotional*******Pickle": {
     "steam_id": "76561198383339808",
+    "aliases": [
+      "cucumis conditus solacii animi",
+      "gundalf the grey"
+    ]
+  },
+  "Ender": {
+    "steam_id": "76561199133892176",
     "aliases": []
   },
   "Enjolras": {
@@ -973,6 +999,10 @@
     "steam_id": "76561199223135501",
     "aliases": []
   },
+  "Feral_Ratt": {
+    "steam_id": "76561199010433342",
+    "aliases": []
+  },
   "ferinine": {
     "steam_id": "76561198149810833",
     "aliases": [
@@ -1031,6 +1061,10 @@
       "[LEXR]frenchteost",
       "[ZET]frenchteost"
     ]
+  },
+  "Freud": {
+    "steam_id": "76561197996513581",
+    "aliases": []
   },
   "Fried": {
     "steam_id": "76561198754239397",
@@ -1200,7 +1234,9 @@
   },
   "hostile": {
     "steam_id": "76561198807977257",
-    "aliases": []
+    "aliases": [
+      "[NEWB]hostile"
+    ]
   },
   "htamtac": {
     "steam_id": "76561198745965008",
@@ -1316,6 +1352,10 @@
       "[its] it_is_nic"
     ]
   },
+  "ItGnu4": {
+    "steam_id": "76561199241178833",
+    "aliases": []
+  },
   "ItsmeMariOli": {
     "steam_id": "76561199084685011",
     "aliases": []
@@ -1326,6 +1366,10 @@
       "ITz_Willleeman",
       "Itz_WillleeMan"
     ]
+  },
+  "J0k3r_97": {
+    "steam_id": "76561198827776389",
+    "aliases": []
   },
   "JaBabbit": {
     "steam_id": "76561198294578216",
@@ -1586,6 +1630,10 @@
     "steam_id": "76561199037764026",
     "aliases": []
   },
+  "lavnos": {
+    "steam_id": "76561198056011070",
+    "aliases": []
+  },
   "Lazy_Echidna": {
     "steam_id": "76561198008859132",
     "aliases": [
@@ -1604,6 +1652,10 @@
   },
   "Legend": {
     "steam_id": "76561198123987258",
+    "aliases": []
+  },
+  "lele514": {
+    "steam_id": "76561198261905471",
     "aliases": []
   },
   "Lemo": {
@@ -1832,6 +1884,10 @@
     "steam_id": "76561198056301310",
     "aliases": []
   },
+  "Max onetappen": {
+    "steam_id": "76561199048581685",
+    "aliases": []
+  },
   "maxie12": {
     "steam_id": "76561198046077557",
     "aliases": []
@@ -1909,9 +1965,11 @@
     "steam_id": "76561198212710700",
     "aliases": []
   },
-  "MinMag_LP": {
+  "MinMag": {
     "steam_id": "76561199014850973",
-    "aliases": []
+    "aliases": [
+      "MinMag_LP"
+    ]
   },
   "MissMomo<3": {
     "steam_id": "76561199218029567",
@@ -2093,6 +2151,10 @@
     "steam_id": "76561198126038296",
     "aliases": []
   },
+  "NyxeonFox": {
+    "steam_id": "76561198041252386",
+    "aliases": []
+  },
   "OccasionallyAmazingGamer": {
     "steam_id": "76561199032318188",
     "aliases": [
@@ -2169,7 +2231,9 @@
   },
   "pannekoekbijter": {
     "steam_id": "76561198016904215",
-    "aliases": []
+    "aliases": [
+      "Applejeice"
+    ]
   },
   "Pants": {
     "steam_id": "76561199529259554",
@@ -2184,6 +2248,10 @@
   },
   "Pat": {
     "steam_id": "76561198966056072",
+    "aliases": []
+  },
+  "Patrick": {
+    "steam_id": "76561198013838979",
     "aliases": []
   },
   "penqwin": {
@@ -2236,6 +2304,10 @@
       "[no] ping",
       "[pong]ping"
     ]
+  },
+  "pixelbit78": {
+    "steam_id": "76561198208238339",
+    "aliases": []
   },
   "Ploddip": {
     "steam_id": null,
@@ -2302,6 +2374,7 @@
       "quickracer10",
       "[ASJE] Quickracer10",
       "[CC] Quickracer10",
+      "[WASH] Quickracer10",
       "quickracer",
       "Quick"
     ]
@@ -2456,7 +2529,9 @@
   },
   "Ruckooe": {
     "steam_id": "76561198315900248",
-    "aliases": []
+    "aliases": [
+      "[FOOL] Ruckooe"
+    ]
   },
   "rusbus94": {
     "steam_id": "76561198045179319",
@@ -2542,7 +2617,8 @@
       "Jakie",
       "[CD] Jakie",
       "[ZET] Jakie",
-      "shattersmith"
+      "shattersmith",
+      "null/plexus"
     ]
   },
   "Sheriff": {
@@ -2627,6 +2703,10 @@
   },
   "Some hats!!": {
     "steam_id": "76561198047172221",
+    "aliases": []
+  },
+  "SouthMango": {
+    "steam_id": "76561199136560342",
     "aliases": []
   },
   "Space_cat9999": {
@@ -3080,6 +3160,10 @@
     "steam_id": "76561199731808063",
     "aliases": []
   },
+  "Ylvs": {
+    "steam_id": "76561199828187826",
+    "aliases": []
+  },
   "Yorie1234": {
     "steam_id": "76561198159127117",
     "aliases": []
@@ -3096,6 +3180,10 @@
   },
   "Zakusa": {
     "steam_id": "76561199229275180",
+    "aliases": []
+  },
+  "zeepcentraal": {
+    "steam_id": "76561198679467221",
     "aliases": []
   },
   "Zeke Ryu'kai": {
@@ -3124,7 +3212,8 @@
     "steam_id": "76561199292634733",
     "aliases": [
       "im washed [zodiakism]",
-      "zodiak"
+      "zodiak",
+      "User Data"
     ]
   },
   "zoeShep": {
@@ -3145,7 +3234,8 @@
       "[SLOW]ZOMAN",
       "[SNTA] ZOMAN",
       "[TOOB] ZOMAN",
-      "[oOOo] ZOMAN"
+      "[oOOo] ZOMAN",
+      "what_is_tatari_2008"
     ]
   },
   "ZTR177": {
@@ -3158,6 +3248,10 @@
   },
   "Zwerggo": {
     "steam_id": "76561198016152069",
+    "aliases": []
+  },
+  "マイゴデス": {
+    "steam_id": "76561198009967547",
     "aliases": []
   }
 }
