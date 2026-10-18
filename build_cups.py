@@ -1,4 +1,5 @@
-import openpyxl, json, re, sys, os, datetime
+import json, re, sys, os, datetime
+import results_store
 sys.stdout.reconfigure(encoding='utf-8')
 
 # Anchor all paths to this file's directory — running from another cwd used to
@@ -90,7 +91,7 @@ def cup_date(cid):
     return None
 
 # ── 1. Parse Map Index from Lexer's spreadsheet ──
-wb = openpyxl.load_workbook(_p('Zeepkist COTD Results (lexer 23-02).xlsx'), data_only=True)
+wb = results_store.load_workbook(results_store.book_files('lexer')[0], data_only=True)
 ws = wb['Map Index']
 rows = list(ws.iter_rows(values_only=True))
 

@@ -37,12 +37,14 @@ def test_import_is_silent_and_leaves_stdout_alone(capsys):
     assert callable(mod.main)
 
 
-def test_xlsx_literal_is_unique_and_well_formed(engine_source):
+def test_book_list_comes_from_results_manifest():
     import elo_engine
-    last = elo_engine.XLSX_FILES[-1]
-    assert re.fullmatch(r'COTD \d+-\d+\.xlsx', last)
-    assert engine_source.count(f"'{last}'") == 1, 'new_cup.py string-replaces this literal'
+    import results_store
+    assert elo_engine.XLSX_FILES == results_store.book_files('cotd')
     assert elo_engine.XLSX_FILES[0] == 'Zeepkist COTDs 1-25.xlsx'
+    assert re.fullmatch(r'COTD \d+-\d+\.xlsx', elo_engine.XLSX_FILES[-1])
+    assert results_store.book_files('roulette') == [elo_engine.ROULETTE_XLSX]
+    assert results_store.book_files('troll') == [elo_engine.TROLL_XLSX]
 
 
 def test_canonical_survives_every_external_extraction_style(engine_source):

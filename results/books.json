@@ -1,0 +1,237 @@
+[
+  {
+    "id": "cotd-1",
+    "xlsx": "Zeepkist COTDs 1-25.xlsx",
+    "kind": "cotd",
+    "sheets": [
+      {
+        "name": "COTD 1-5",
+        "max_row": 48,
+        "max_column": 29
+      },
+      {
+        "name": "COTD 6-10",
+        "max_row": 46,
+        "max_column": 30
+      },
+      {
+        "name": "COTD 11-15",
+        "max_row": 48,
+        "max_column": 30
+      },
+      {
+        "name": "COTD 16-20",
+        "max_row": 46,
+        "max_column": 30
+      },
+      {
+        "name": "COTD 21-25",
+        "max_row": 1000,
+        "max_column": 30
+      }
+    ]
+  },
+  {
+    "id": "cotd-26",
+    "xlsx": "Zeepkist COTDs 26-50.xlsx",
+    "kind": "cotd",
+    "sheets": [
+      {
+        "name": "COTD 26-30",
+        "max_row": 46,
+        "max_column": 31
+      },
+      {
+        "name": "COTD 31-35",
+        "max_row": 1000,
+        "max_column": 31
+      },
+      {
+        "name": "COTD 36-40",
+        "max_row": 46,
+        "max_column": 30
+      },
+      {
+        "name": "COTD 41-45",
+        "max_row": 1000,
+        "max_column": 30
+      },
+      {
+        "name": "COTD 46-50",
+        "max_row": 45,
+        "max_column": 30
+      }
+    ]
+  },
+  {
+    "id": "cotd-51",
+    "xlsx": "Zeepkist COTDs 51-75.xlsx",
+    "kind": "cotd",
+    "sheets": [
+      {
+        "name": "COTD 51-55",
+        "max_row": 43,
+        "max_column": 30
+      },
+      {
+        "name": "COTD 56-60",
+        "max_row": 48,
+        "max_column": 31
+      },
+      {
+        "name": "COTD 61-65",
+        "max_row": 48,
+        "max_column": 28
+      },
+      {
+        "name": "COTD 66-70",
+        "max_row": 54,
+        "max_column": 30
+      },
+      {
+        "name": "COTD 71-75",
+        "max_row": 53,
+        "max_column": 30
+      }
+    ]
+  },
+  {
+    "id": "cotd-76",
+    "xlsx": "COTDs 76-100.xlsx",
+    "kind": "cotd",
+    "sheets": [
+      {
+        "name": "COTD 76-80",
+        "max_row": 69,
+        "max_column": 28
+      },
+      {
+        "name": "COTD 81-85",
+        "max_row": 56,
+        "max_column": 28
+      },
+      {
+        "name": "COTD 86-90",
+        "max_row": 53,
+        "max_column": 28
+      },
+      {
+        "name": "COTD 91-95",
+        "max_row": 55,
+        "max_column": 28
+      },
+      {
+        "name": "COTD 96-100",
+        "max_row": 58,
+        "max_column": 28
+      }
+    ]
+  },
+  {
+    "id": "cotd-101",
+    "xlsx": "COTDs 101-125.xlsx",
+    "kind": "cotd",
+    "sheets": [
+      {
+        "name": "COTD 101-105",
+        "max_row": 55,
+        "max_column": 29
+      },
+      {
+        "name": " COTD 106-110",
+        "max_row": 55,
+        "max_column": 30
+      },
+      {
+        "name": "COTD 111-115",
+        "max_row": 57,
+        "max_column": 28
+      },
+      {
+        "name": "COTD 116-120",
+        "max_row": 60,
+        "max_column": 28
+      },
+      {
+        "name": "COTD 121-125",
+        "max_row": 56,
+        "max_column": 28
+      }
+    ]
+  },
+  {
+    "id": "cotd-126",
+    "xlsx": "COTD 126-130.xlsx",
+    "kind": "cotd",
+    "sheets": [
+      {
+        "name": "COTD 126-130",
+        "max_row": 63,
+        "max_column": 28
+      },
+      {
+        "name": "COTD 131-135",
+        "max_row": 64,
+        "max_column": 10
+      }
+    ]
+  },
+  {
+    "id": "cotd-131",
+    "xlsx": "COTD 131-166.xlsx",
+    "kind": "cotd",
+    "sheets": [
+      {
+        "name": "COTD 131-135",
+        "max_row": 67,
+        "max_column": 166
+      },
+      {
+        "name": "136-140",
+        "max_row": 63,
+        "max_column": 28
+      },
+      {
+        "name": "141-145",
+        "max_row": 62,
+        "max_column": 14
+      }
+    ]
+  },
+  {
+    "id": "roulette",
+    "xlsx": "cup roulette.xlsx",
+    "kind": "roulette",
+    "sheets": [
+      {
+        "name": "COTD Roulette",
+        "max_row": 1000,
+        "max_column": 15
+      }
+    ]
+  },
+  {
+    "id": "troll",
+    "xlsx": "Troll cup.xlsx",
+    "kind": "troll",
+    "sheets": [
+      {
+        "name": "Troll COTDs",
+        "max_row": 1000,
+        "max_column": 65
+      }
+    ]
+  },
+  {
+    "id": "lexer",
+    "xlsx": "Zeepkist COTD Results (lexer 23-02).xlsx",
+    "kind": "lexer",
+    "sheets": [
+      {
+        "name": "Map Index",
+        "max_row": 1000,
+        "max_column": 27
+      }
+    ]
+  }
+]

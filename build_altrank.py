@@ -14,7 +14,8 @@ Reads alldata.json (written by elo_engine.py) and appends:
 Reads rising.json (written by elo_engine.py) and appends:
   - 'standard', 'standard_pure'
 """
-import openpyxl, json, re, sys, os, math
+import json, re, sys, os, math
+import results_store
 from collections import defaultdict
 
 sys.stdout.reconfigure(encoding='utf-8')
@@ -48,7 +49,7 @@ def normalize(name):
 
 def parse_file(filepath):
     try:
-        wb = openpyxl.load_workbook(filepath, data_only=True)
+        wb = results_store.load_workbook(filepath, data_only=True)
     except FileNotFoundError:
         print(f"  SKIP: {filepath} not found")
         return []
@@ -90,7 +91,7 @@ def parse_file(filepath):
     return cups
 
 def parse_troll_cups(filepath):
-    wb = openpyxl.load_workbook(filepath, data_only=True)
+    wb = results_store.load_workbook(filepath, data_only=True)
     ws = wb['Troll COTDs']
     rows = list(ws.iter_rows(values_only=True))
     troll_defs = [

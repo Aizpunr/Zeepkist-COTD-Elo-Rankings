@@ -4,19 +4,21 @@ new_cup.py — Automated cup processing from COTDTracker mod logs
 Usage:
   python new_cup.py 153 "[RAW]MapperName" --map "Real Map Name"
 
-Fully automatic: snapshot -> parse log -> xlsx + JSON backup -> cup_meta.json
-(map/mapper/date for build_cups.py) -> all ELO data -> localhost preview.
+Fully automatic: snapshot -> parse log -> results/ block + tracker log +
+cup_N.json -> cup_meta.json (map/mapper/date for build_cups.py) -> all ELO
+data -> localhost preview. results/ is the source of truth (results_store.py);
+the xlsx backups are rebuilt from it by sync_xlsx.py on the PC.
 Push stays manual: verify on http://localhost:8000 first.
 Unattended runs: submissions_poll.py calls this with --log/--no-open for cups
 submitted on submit.html; COTD_SKIP_EXTERNAL=1 skips the out-of-repo steps.
 """
 import re, os, sys, json, subprocess, datetime, glob, shutil
-import openpyxl
 # Cheap import: elo_engine only runs its pipeline as __main__. CANONICAL is
-# read here for the alias-drift check; this script still reads elo_engine.py
-# as TEXT further down because it rewrites the xlsx filename literal in it.
+# read here for the alias-drift check.
 from elo_engine import CANONICAL
-from cotd_parser import ParseError, cup_json_payload, parse_cup_log_file, time_to_ms
+import results_store
+import external_steps
+from cotd_parser import ParseError, cup_json_payload, fastest_round_label, parse_cup_log_file, time_to_ms
 import cup_paths
 
 # Force UTF-8 stdout so printing unicode aliases (e.g. the 𝒱V𝑜o𝒾i𝒹d𝒱 void name)
@@ -29,7 +31,6 @@ _p = lambda f: os.path.join(_dir, f)
 
 LOG_PATH = r"C:\Program Files (x86)\Steam\steamapps\common\Zeepkist\BepInEx\LogOutput.log"
 LIVE_LOG_PATH = r"C:\Program Files (x86)\Steam\steamapps\common\Zeepkist\BepInEx\LiveLeaderboardLogger.log"
-COLS_PER_CUP = 6  # 4 data columns + 2 blank spacer
 
 # COTD_SKIP_EXTERNAL=1 skips the steps that write OUTSIDE this repo (cross-comp
 # refresh, COTD SOF pool, raw-data backup). submissions_poll.py --rehearsal sets
@@ -90,18 +91,6 @@ def _recycle(path):
     ], capture_output=True, text=True)
     return r.returncode == 0
 
-def _read_cup_headers(path):
-    """Cup ids in row 2 of the first sheet (the per-cup block headers)."""
-    wb_ = openpyxl.load_workbook(path, read_only=True)
-    ws_ = wb_[wb_.sheetnames[0]]
-    row2 = ()
-    for i, row in enumerate(ws_.iter_rows(values_only=True)):
-        if i == 1:
-            row2 = row
-            break
-    wb_.close()
-    return {str(v).strip() for v in row2 if v}
-
 def _load_cup_meta(path):
     if not os.path.exists(path):
         return {}
@@ -116,78 +105,43 @@ def _write_cup_meta(path, meta):
         f.write('\n')
     os.replace(tmp, path)
 
-def _repoint_engine_xlsx(elo_py_path, src, old_name, new_name):
-    """Rewrite the quoted workbook literal in elo_engine.py. Refuses unless
-    it is unique before and after: that literal is what every script
-    resolves the workbook from."""
-    if src.count(f"'{old_name}'") != 1:
-        print(f"ERROR: {old_name!r} must appear exactly once in elo_engine.py")
+def restore_pre_cup_state(cup_num, cup_id):
+    """Undo what the first run of cup N did to the source data so the normal
+    flow can run again: send its results/ block to the Recycle Bin (a copy
+    goes to backups/ first), put the book's name back, and drop the
+    cup_meta.json entry. Only the newest block can be undone, because the
+    next cup's column is placed after the last one."""
+    path = os.path.join(_dir, results_store.RESULTS_DIR, 'cups', results_store.cup_slug(cup_id) + '.json')
+    if not os.path.exists(path):
+        print(f"ERROR: {os.path.relpath(path, _dir)} not found; nothing to undo.")
         sys.exit(1)
-    new_src = src.replace(f"'{old_name}'", f"'{new_name}'")
-    if new_src.count(f"'{new_name}'") != 1:
-        print(f"ERROR: {new_name!r} would not be unique in elo_engine.py")
+    blk = results_store.read_block(path)
+    same_sheet = [b for b in results_store.blocks().values()
+                  if b['book'] == blk['book'] and b['sheet'] == blk['sheet']]
+    if blk['col'] != max(b['col'] for b in same_sheet):
+        print(f"ERROR: {cup_id} is not the newest block in its sheet; undo the later cups first.")
         sys.exit(1)
-    with open(elo_py_path, 'w', encoding='utf-8') as f:
-        f.write(new_src)
-    return new_src
-
-def find_pre_cup_backup(cup_num, cup_id):
-    """The backup this script made right before it first wrote cup N, plus
-    the workbook name it belonged to. Exactly one must exist and it must
-    not already contain cup N."""
-    matches = glob.glob(_p(os.path.join('backups', f'*.pre_cup_{cup_num}.xlsx')))
-    if len(matches) != 1:
-        if not matches:
-            print(f"ERROR: no backups/<xlsx>.pre_cup_{cup_num}.xlsx to restore from.")
-        else:
-            print(f"ERROR: {len(matches)} candidate backups for cup {cup_num}, refusing to guess:")
-            for m_ in matches:
-                print(f"  - {os.path.basename(m_)}")
-        sys.exit(1)
-    backup = matches[0]
-    original = os.path.basename(backup)[:-len(f'.pre_cup_{cup_num}.xlsx')]
-    if not re.fullmatch(r'COTD \d+-\d+\.xlsx', original):
-        print(f"ERROR: cannot derive the original workbook name from {os.path.basename(backup)!r}")
-        sys.exit(1)
-    if cup_id in _read_cup_headers(backup):
-        print(f"ERROR: {os.path.basename(backup)} already contains {cup_id}; wrong backup.")
-        sys.exit(1)
-    return backup, original
-
-def restore_pre_cup_state(cup_num, cup_id, current_xlsx, elo_py_path):
-    """Undo everything the first run of cup N did to the shared state so the
-    normal flow can run again: put the pre-cup workbook back under its
-    original name, point elo_engine.py at it, recycle the newer book, and
-    drop the cup_meta.json entry. The book being replaced is copied to
-    backups/ first, so nothing is ever lost. Returns the original name."""
-    backup, original = find_pre_cup_backup(cup_num, cup_id)
-    cur_path = _p(current_xlsx)
     os.makedirs(_p('backups'), exist_ok=True)
-    keep = _p(os.path.join('backups', f'{current_xlsx}.pre_reprocess_{cup_num}.xlsx'))
-    shutil.copy2(cur_path, keep)
-    print(f"  kept current book as backups/{os.path.basename(keep)}")
-    shutil.copy2(backup, _p(original))
-    print(f"  restored {original} from backups/{os.path.basename(backup)}")
-    if original != current_xlsx:
-        with open(elo_py_path, encoding='utf-8') as f:
-            src_ = f.read()
-        _repoint_engine_xlsx(elo_py_path, src_, current_xlsx, original)
-        print(f"  elo_engine.py: {current_xlsx} -> {original}")
-        if _recycle(cur_path):
-            print(f"  sent {current_xlsx} to the Recycle Bin")
-        else:
-            print(f"  WARNING: could not recycle {current_xlsx}; left in place (harmless)")
+    keep = _p(os.path.join('backups', f'{os.path.basename(path)}.pre_reprocess'))
+    shutil.copy2(path, keep)
+    if not _recycle(path):
+        print(f"ERROR: could not send {os.path.basename(path)} to the Recycle Bin.")
+        sys.exit(1)
+    print(f"  {os.path.basename(path)} -> Recycle Bin (copy in backups/{os.path.basename(keep)})")
+    books = results_store.books()
+    book = next(b for b in books if b['id'] == blk['book'])
+    m = re.fullmatch(r'COTD (\d+)-(\d+)\.xlsx', book['xlsx'])
+    results_store.clear_cache()
+    nums = [int(x.split()[1]) for x in results_store.cotd_ids() if re.fullmatch(r'COTD \d+', x)]
+    if m and int(m.group(2)) == cup_num:
+        book['xlsx'] = f"COTD {m.group(1)}-{max(n for n in nums if n < cup_num)}.xlsx"
+        results_store.write_books(books)
+        print(f"  books.json: {m.group(0)} -> {book['xlsx']}")
     meta_path_ = _p('cup_meta.json')
     meta = _load_cup_meta(meta_path_)
     if meta.pop(cup_id, None) is not None:
         _write_cup_meta(meta_path_, meta)
         print(f"  removed {cup_id} from cup_meta.json")
-    start = original.split(' ')[1].split('-')[0]
-    strays = [os.path.basename(p) for p in glob.glob(_p(f'COTD {start}-*.xlsx'))
-              if os.path.basename(p) != original]
-    if strays:
-        print(f"  WARNING: other COTD {start}-* books in the repo root: {strays}")
-    return original
 
 # Required --map: the real map name, written to cup_meta.json so build_cups.py
 # needs no hand-edit (map_index / CUP_DATES additions are dead — see cup_meta).
@@ -219,76 +173,32 @@ if extra_excluded:
     print(f"Also excluding: {', '.join(extra_excluded)}")
 print()
 
-# ── 0a. Idempotency gate + auto-detect xlsx file/columns ──
-# Refuse to process a cup that's already in the xlsx or cup_meta.json: a
-# re-run would append a DUPLICATE column and corrupt every downstream build.
-# (The xlsx is gitignored — recovery is backups/<xlsx>.pre_cup_<N>.xlsx, not git.)
-elo_py_path = _p('elo_engine.py')
-with open(elo_py_path, encoding='utf-8') as f:
-    elo_src = f.read()
-
-# The current book is the LAST quoted 'COTD <a>-<b>.xlsx' literal in
-# elo_engine.py (the tail of its XLSX_FILES list). It is located as text, not
-# imported, because the rename step below rewrites that literal in place.
-xlsx_matches = re.findall(r"'(COTD \d+-\d+\.xlsx)'", elo_src)
-if not xlsx_matches:
-    print("ERROR: Could not find COTD xlsx reference in elo_engine.py")
-    sys.exit(1)
-current_xlsx = xlsx_matches[-1]
-xlsx_path = _p(current_xlsx)
-# The rename step string-replaces this literal, so it must be unique or the
-# replace would silently corrupt the file list.
-if elo_src.count(f"'{current_xlsx}'") != 1:
-    print(f"ERROR: {current_xlsx!r} must appear exactly once as a quoted literal "
-          f"in elo_engine.py (found {elo_src.count(chr(39) + current_xlsx + chr(39))}).")
-    sys.exit(1)
-
+# ── 0a. Idempotency gate ──
+# Refuse to process a cup that's already in results/ or cup_meta.json: a
+# re-run would add a DUPLICATE block and corrupt every downstream build.
 if reprocess:
-    if cup_id not in _read_cup_headers(xlsx_path) and cup_id not in _load_cup_meta(_p('cup_meta.json')):
+    if cup_id not in results_store.cotd_ids() and cup_id not in _load_cup_meta(_p('cup_meta.json')):
         print(f"ERROR: --reprocess given but {cup_id} is not processed "
-              f"(not in {current_xlsx} or cup_meta.json); drop the flag.")
+              f"(not in results/ or cup_meta.json); drop the flag.")
         sys.exit(1)
     print("=" * 50)
     print(f"--reprocess: restoring the state from before {cup_id}")
     print("=" * 50)
-    current_xlsx = restore_pre_cup_state(cup_num, cup_id, current_xlsx, elo_py_path)
-    xlsx_path = _p(current_xlsx)
-    with open(elo_py_path, encoding='utf-8') as f:
-        elo_src = f.read()
+    restore_pre_cup_state(cup_num, cup_id)
     print()
 
-print(f"Current xlsx: {current_xlsx}")
-
-wb = openpyxl.load_workbook(xlsx_path)
-ws = wb[wb.sheetnames[0]]
-rows = list(ws.iter_rows(values_only=True))
-
-existing_cup_ids = {str(v).strip() for v in rows[1] if v}  # row 2 = cup headers
 meta_path = _p('cup_meta.json')
-cup_meta = {}
-if os.path.exists(meta_path):
-    with open(meta_path, encoding='utf-8') as f:
-        cup_meta = json.load(f)
-
+cup_meta = _load_cup_meta(meta_path)
+existing_cup_ids = results_store.cotd_ids()
 if cup_id in existing_cup_ids or cup_id in cup_meta:
     where = []
     if cup_id in existing_cup_ids:
-        where.append(current_xlsx)
+        where.append('results/')
     if cup_id in cup_meta:
         where.append('cup_meta.json')
     print(f"ERROR: {cup_id} is already processed (found in {' + '.join(where)}).")
-    print(f"  Re-run with --reprocess to restore backups/<xlsx>.pre_cup_{cup_num}.xlsx and redo it")
-    print(f"  (the current book is kept as backups/{current_xlsx}.pre_reprocess_{cup_num}.xlsx).")
-    print(f"  Otherwise check the cup number.")
+    print(f"  Re-run with --reprocess to undo it and redo it, or check the cup number.")
     sys.exit(1)
-
-# Find rightmost Position header to determine next column
-max_pos_col = 0
-for ci, val in enumerate(rows[4]):  # Row 5 (0-indexed row 4) has headers
-    if val == 'Position':
-        max_pos_col = ci + 1  # Convert to 1-based
-col_start = max_pos_col + COLS_PER_CUP
-print(f"Last Position header at column {max_pos_col}, new cup at column {col_start}")
 
 # ── 0b. Snapshot previous standings (was a separate manual step) ──
 # Explicit target = previous cup, so a partial re-run can never snapshot the
@@ -353,7 +263,7 @@ if parsed.ambiguous:
 
 winner = parsed.winner
 winner_time = parsed.winner_time_raw
-# (name, time, round, position) tuples: the shape the xlsx/JSON writers below
+# (name, time, round, position) tuples: the shape the results/JSON writers below
 # have always consumed.
 leaderboard = [(p.name, p.time_raw, p.round, p.pos) for p in parsed.leaderboard]
 fastest_time, fastest_name, fastest_round = parsed.fastest_time, parsed.fastest_name, parsed.fastest_round
@@ -464,66 +374,23 @@ check_aliases_against_livelog(
     report_path=_p(os.path.join('cup logs', f'cotd_{cup_num}_alias_report.txt')),
 )
 
-# ── 3. Write to xlsx (file/columns detected in step 0a) ──
-# Pre-write backup: the xlsx is gitignored, so this copy is the ONLY way to
-# recover from a bad/duplicate write (see the idempotency gate's message).
-os.makedirs(_p('backups'), exist_ok=True)
-_xlsx_backup = _p(os.path.join('backups', f'{current_xlsx}.pre_cup_{cup_num}.xlsx'))
-shutil.copy2(xlsx_path, _xlsx_backup)
-print(f"xlsx backup: backups/{os.path.basename(_xlsx_backup)}")
+# ── 3. Write the results/ block and the tracker log ──
+# Same cells new_cup.py always wrote into the workbook; sync_xlsx.py copies
+# them into the xlsx backup later. Elim Time is integer milliseconds (or
+# 'DNF'), from the same helper as cup_N.json, so the two can never disagree.
+fastest_line = (f'Fastest Time: {fastest_time:.3f} by {fastest_name} in {fastest_round_label(parsed)}'
+                if fastest_time is not None else None)
+block_path = results_store.add_cup_block(
+    cup_id, f'Map: {map_name} by {mapper}', fastest_line,
+    [[position, name, time_to_ms(time), rnd] for name, time, rnd, position in leaderboard])
+print(f"results: {os.path.relpath(block_path, _dir)}")
 
-ws.cell(row=2, column=col_start, value=cup_id)
-ws.cell(row=3, column=col_start, value=f'Map: {map_name} by {mapper}')
-
-if fastest_time is not None:
-    ws.cell(row=4, column=col_start + 2,
-            value=f'Fastest Time: {fastest_time:.3f} by {fastest_name} in Round {fastest_round}')
-
-ws.cell(row=5, column=col_start, value='Position')
-ws.cell(row=5, column=col_start + 1, value='Name')
-ws.cell(row=5, column=col_start + 2, value='Elim Time')
-ws.cell(row=5, column=col_start + 3, value='Elim Round')
-
-for i, (name, time, rnd, position) in enumerate(leaderboard):
-    row = 6 + i
-    ws.cell(row=row, column=col_start, value=position)
-    ws.cell(row=row, column=col_start + 1, value=name)
-    # Elim Time is integer milliseconds (or 'DNF'). The same helper produces
-    # the value cup_N.json stores, so the two can never disagree.
-    ws.cell(row=row, column=col_start + 2, value=time_to_ms(time))
-    if rnd is not None:
-        ws.cell(row=row, column=col_start + 3, value=rnd)
-
-
-# Rename xlsx if needed
-m = re.match(r'COTD (\d+)-(\d+)\.xlsx', current_xlsx)
-if m:
-    start_num, end_num = int(m.group(1)), int(m.group(2))
-    if cup_num > end_num:
-        new_xlsx = f'COTD {start_num}-{cup_num}.xlsx'
-        new_path = _p(new_xlsx)
-        wb.save(new_path)
-        print(f"Saved as {new_xlsx} (renamed from {current_xlsx})")
-
-        # Point elo_engine.py at the new file BEFORE touching the old one, so
-        # a crash in between never leaves the engine referencing a missing file.
-        _repoint_engine_xlsx(elo_py_path, elo_src, current_xlsx, new_xlsx)
-        print(f"Updated elo_engine.py: {current_xlsx} -> {new_xlsx}")
-
-        # The old file is the master results spreadsheet — Recycle Bin only,
-        # never os.remove. If recycling fails, leave it in place (harmless:
-        # every script resolves the xlsx via elo_engine.py source, not glob).
-        if new_path != xlsx_path and os.path.exists(xlsx_path):
-            if _recycle(xlsx_path):
-                print(f"Old xlsx sent to Recycle Bin: {current_xlsx}")
-            else:
-                print(f"WARNING: could not recycle {current_xlsx} — left in place, remove manually")
-    else:
-        wb.save(xlsx_path)
-        print(f"Saved to {current_xlsx}")
-else:
-    wb.save(xlsx_path)
-    print(f"Saved to {current_xlsx}")
+tracker_path = cup_paths.tracker_log_path(cup_num, _dir)
+with open(LOG_PATH, encoding='utf-8', errors='replace') as f:
+    _tracker_lines = [l for l in f.readlines() if 'COTDTracker' in l]
+with open(tracker_path, 'w', encoding='utf-8', newline='') as f:
+    f.writelines(_tracker_lines)
+print(f"tracker log: {os.path.relpath(tracker_path, _dir)} ({len(_tracker_lines)} lines)")
 
 # ── 4. Write JSON backup ──
 cup_json = cup_json_payload(parsed, cup_num, mapper)
@@ -619,58 +486,15 @@ for script, label in cool_stats:
         print(f"  SKIP: {script} not found")
 print()
 
-# ── 8. Refresh cross-comp ranking + SOF mod data ──
-# Cross-comp pipeline: rebuilds allsofdata.json + allcompdata.json + the
-# SOF mod's elo_pool.json (which now uses cross-comp ELO as its primary
-# source, GTR rank regression as fallback). Replaces the old COTD-only
-# join_cotd_gtr.py path.
-print("=" * 50)
-print("Refreshing cross-comp ranking + SOF data...")
-print("=" * 50)
-crosscomp_script = r"C:\Users\rafa\Desktop\Claude\zeepkist holistic\refresh.py"
-sof_repo_pool = r"C:\Users\rafa\Desktop\Claude\zeepkist mod\Zeepkist-Strength-of-Field\elo_pool.json"
-
-sof_ok = False
+# ── 8. Cross-comp ranking + SOF pools (other repos on this PC) ──
+# external_steps.py; catch_up.py runs the same steps after an online cup.
 if SKIP_EXTERNAL:
     print("  SKIP (COTD_SKIP_EXTERNAL): cross-comp refresh")
-elif os.path.exists(crosscomp_script):
-    r = subprocess.run([sys.executable, crosscomp_script],
-                       cwd=os.path.dirname(crosscomp_script))
-    if r.returncode == 0:
-        print(f"  Cross-comp + SOF elo_pool.json refreshed.")
-        sof_ok = True
-    else:
-        print(f"  WARNING: cross-comp refresh failed (returncode={r.returncode}).")
-        print(f"  Run manually: python \"{crosscomp_script}\"")
-else:
-    print(f"  SKIP: refresh script not found at {crosscomp_script}")
-print()
-
-# ── 8b. Refresh the COTD-only SOF pool (the mod's `!sof cup` data) ──
-# elo_pool_cotd.json is the historical / COTD-only counterpart to the
-# cross-comp elo_pool.json above. It only changes when COTD ratings change,
-# so it lives here in the COTD pipeline. Non-fatal: a GTR outage (it hits
-# graphql.zeepki.st) shouldn't break cup processing.
-print("=" * 50)
-print("Refreshing COTD SOF pool (mod's !sof cup data)...")
-print("=" * 50)
-cotd_pool_script = r"C:\Users\rafa\Desktop\Claude\zeepkist mod\gtr_analysis\join_cotd_gtr.py"
-sof_repo_cotd_pool = r"C:\Users\rafa\Desktop\Claude\zeepkist mod\Zeepkist-Strength-of-Field\elo_pool_cotd.json"
-
-cotd_pool_ok = False
-if SKIP_EXTERNAL:
     print("  SKIP (COTD_SKIP_EXTERNAL): COTD SOF pool")
-elif os.path.exists(cotd_pool_script):
-    r = subprocess.run([sys.executable, cotd_pool_script],
-                       cwd=os.path.dirname(cotd_pool_script))
-    if r.returncode == 0:
-        print(f"  COTD elo_pool_cotd.json refreshed.")
-        cotd_pool_ok = True
-    else:
-        print(f"  WARNING: COTD pool refresh failed (returncode={r.returncode}).")
-        print(f"  Run manually: python \"{cotd_pool_script}\"")
+    sof_ok = cotd_pool_ok = False
 else:
-    print(f"  SKIP: COTD pool script not found at {cotd_pool_script}")
+    sof_ok = external_steps.refresh_crosscomp()
+    cotd_pool_ok = external_steps.refresh_cotd_pool()
 print()
 
 # ── 9. Summary ──
@@ -684,42 +508,21 @@ print(f"  Players: {len(leaderboard)}")
 print(f"  Winner: {winner}")
 if fastest_time:
     print(f"  Fastest: {fastest_time:.3f} by {fastest_name}")
-print(f"  Columns: {col_start}-{col_start+3}")
+print(f"  Results: {os.path.relpath(block_path, _dir)}")
 if sof_ok or cotd_pool_ok:
     print(f"  SOF data: refreshed (commit+push the SOF repo too)")
 print()
 print("Next steps (after verifying on localhost):")
 print(f"  - Git commit + push (COTD repo) — REMEMBER to stage cup_meta.json AND cup_data/cup_{cup_num}.json (lexertools last-cup view fetches it)")
-if sof_ok or cotd_pool_ok:
-    print(f"  - Git commit + push (SOF repo) — stage all three:")
-    if sof_ok:
-        print(f"      {sof_repo_pool}")
-    if cotd_pool_ok:
-        print(f"      {sof_repo_cotd_pool}")
-    print(f"      docs/allcompdata.json (cross-comp site data — easy to miss)")
+external_steps.sof_push_reminder(sof_ok, cotd_pool_ok)
 print("=" * 50)
 
-# ── 9b. Mirror the un-versioned source of truth off-drive ──
-# The xlsx, the raw cup logs and backups/ are gitignored and live only on
-# this disk. backup_raw_data.py copies them to the destination configured in
-# backup_config.json (or COTD_BACKUP_DIR). Never fatal: a backup problem
-# must not break cup processing, but it is shouted so it is not missed.
-print("=" * 50)
-print("Backing up raw data (xlsx, cup logs, backups/)...")
-print("=" * 50)
+# ── 9b. Mirror the gitignored files off-drive ──
 if SKIP_EXTERNAL:
     print("  SKIP (COTD_SKIP_EXTERNAL): raw-data backup")
-elif os.path.exists(_p('backup_raw_data.py')):
-    _bk = subprocess.run([sys.executable, _p('backup_raw_data.py')], cwd=_dir)
-    if _bk.returncode == 2:
-        print("  raw-data backup not configured: create backup_config.json (see backup_raw_data.py)")
-    elif _bk.returncode != 0:
-        print("  " + "!" * 60)
-        print("  !! RAW DATA BACKUP FAILED. Run: python backup_raw_data.py")
-        print("  " + "!" * 60)
+    print()
 else:
-    print("  SKIP: backup_raw_data.py not found")
-print()
+    external_steps.backup_raw_data()
 
 # ── 10. Localhost preview ──
 # The run ends with the updated site visible on localhost:8000 (COTD's

@@ -32,7 +32,7 @@ from cotd_parser import filter_tracker_lines, split_rounds
 import cup_paths
 from elo_engine import CANONICAL, XLSX_FILES
 
-LOG_DIR = _p('cup logs')
+LOG_DIR = _p('tracker_logs')
 MANUAL = _p('sweeps_manual.json')
 PARTIAL_DIR = _p('partial_rounds')
 
@@ -139,13 +139,11 @@ def xlsx_elim_rounds(num):
     """
     if num in _ELIM_CACHE:
         return _ELIM_CACHE[num]
-    import openpyxl
+    import results_store
     out, last = {}, None
     for fname in XLSX_FILES:
         path = _p(fname)
-        if not os.path.exists(path):
-            continue
-        wb = openpyxl.load_workbook(path, data_only=True, read_only=True)
+        wb = results_store.load_workbook(path, data_only=True, read_only=True)
         try:
             for sheet in wb.worksheets:
                 grid = [list(r) for r in sheet.iter_rows(values_only=True)]

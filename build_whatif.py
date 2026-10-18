@@ -6,7 +6,8 @@ renumbers positions, and recalculates weighted ELO from scratch.
 
 Outputs whatif.json for the whatif.html frontend.
 """
-import openpyxl, json, re, sys, os
+import json, re, sys, os
+import results_store
 from collections import defaultdict
 
 sys.stdout.reconfigure(encoding='utf-8')
@@ -40,7 +41,7 @@ def normalize(name):
 
 def parse_file_with_rounds(filepath):
     try:
-        wb = openpyxl.load_workbook(filepath, data_only=True)
+        wb = results_store.load_workbook(filepath, data_only=True)
     except FileNotFoundError:
         print(f"  SKIP: {filepath} not found")
         return []

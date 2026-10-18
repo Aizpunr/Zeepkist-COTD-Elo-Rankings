@@ -1,0 +1,29 @@
+{
+  "book": "troll",
+  "sheet": "Troll COTDs",
+  "col": 7,
+  "header_row": 5,
+  "above": [
+    [null, null, null, null],
+    ["Troll COTD 2", null, "Cup 26.5", null],
+    ["Map: sseL yaS - DotC s'R3it3L by [CTR]L3it3R", null, null, null],
+    [null, null, "Fastest Time: 41.736 by justMaki in Round 2", null]
+  ],
+  "header": ["Position", "Name", "Elim Time", "Elim Round"],
+  "rows": [
+    [1, "justMaki", 41.848, null],
+    [2, "Lexer", 42.527, 6],
+    [3, "Kernkob", "DNF", 5],
+    [4, "[CTR] jandje", "DNF", 4],
+    [null, "AndMe15", "DNF", 4],
+    [6, "[ZST]zivecef", 45.463, 3],
+    [7, "[CTR]R0nanC", "DNF", 3],
+    [8, "DragonBoi", 46.627, 2],
+    [9, "Half-Qilin", 48.866, 2],
+    [10, "Socks242", "DNF", 1],
+    [null, "Arturxxx", "DNF", 1],
+    [null, "Cactushead", "DNF", 1],
+    [null, "DeiRex", "DNF", 1],
+    [null, "[GG]Xcersion", "DNF", 1]
+  ]
+}

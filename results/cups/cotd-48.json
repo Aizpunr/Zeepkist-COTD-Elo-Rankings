@@ -1,0 +1,40 @@
+{
+  "book": "cotd-26",
+  "sheet": "COTD 46-50",
+  "col": 13,
+  "header_row": 5,
+  "above": [
+    [null, null, null, null],
+    ["COTD 48", null, null, null],
+    ["Map: CotD-King's Day by [Poop]Sheriff", null, null, null],
+    [null, null, "Fastest Time: 43.420 by [CTR]Hydro in Round 6", null]
+  ],
+  "header": ["Position", "Name", "Elim Time", "Elim Round"],
+  "rows": [
+    [1.0, "[CTR] Sandals", 44.086, null],
+    [2.0, "Lexer", 45.257, 11.0],
+    [3.0, "JobW", 44.29, 10.0],
+    [4.0, "[CTR]Hydro", 43.86, 9.0],
+    [5.0, "Butter", 44.258, 8.0],
+    [6.0, "[ZET]rtyyyyb", "DNF", 7.0],
+    [7.0, "[RTR]GuAlexItar", 44.541, 6.0],
+    [8.0, "Trapdoor", 44.999, 6.0],
+    [9.0, "[TOG]Lazy_Echidna", 44.938, 5.0],
+    [10.0, "[CTR]OwlPlague", 45.188, 5.0],
+    [11.0, "[CTR] L3it3R", 45.159, 4.0],
+    [12.0, "BuddhaBladez", 45.822, 4.0],
+    [13.0, "Shadynook", 45.299, 3.0],
+    [14.0, "laurin", 45.447, 3.0],
+    [15.0, "[ZET]toast", "DNF", 3.0],
+    [16.0, "Ionjig", 47.733, 2.0],
+    [17.0, "Northwind", "DNF", 2.0],
+    [null, "Pants", "DNF", 2.0],
+    [null, "Romans138", "DNF", 2.0],
+    [null, "Heart-TGV", "DNF", 2.0],
+    [21.0, "DeiRex", "DNF", 1.0],
+    [null, "wilkinsong1024", "DNF", 1.0],
+    [null, "Shark_boi", "DNF", 1.0],
+    [null, "jofk2415", "DNF", 1.0],
+    [null, "taylope", "DNF", 1.0]
+  ]
+}

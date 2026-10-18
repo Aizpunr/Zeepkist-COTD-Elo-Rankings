@@ -1,0 +1,42 @@
+{
+  "book": "cotd-26",
+  "sheet": "COTD 26-30",
+  "col": 14,
+  "header_row": 6,
+  "above": [
+    [null, null, null, null],
+    [null, null, null, null],
+    ["COTD 28", null, null, null],
+    ["Map: Juniper Pass - COTD #28 by [cozy]St Nicholas", null, null, null],
+    [null, null, "Fastest Time: 43.312 by Kernkob in Round 8", null]
+  ],
+  "header": ["Position", "Name", "Elim Time", "Elim Round"],
+  "rows": [
+    [1.0, "Kernkob", 43.538, null],
+    [2.0, "Sandals", 43.556, 11.0],
+    [3.0, "[RTR]Fwogiie.Kawaii", "DNF", 10.0],
+    [4.0, "GuAlexItar", 44.019, 9.0],
+    [5.0, "[ZST] zivecef", 45.018, 8.0],
+    [6.0, "AndMe15", 44.874, 7.0],
+    [7.0, "MeroMeroNoMi", "DNF", 7.0],
+    [8.0, "DragonBoi", 44.547, 6.0],
+    [9.0, "Lexer", 44.638, 6.0],
+    [10.0, "Tritonas1237", 45.152, 5.0],
+    [11.0, "[heyo]potatotron", 45.42, 5.0],
+    [12.0, "DeiRex", 45.155, 4.0],
+    [13.0, "Zakusa", "DNF", 4.0],
+    [14.0, "Shadynook", 45.761, 3.0],
+    [15.0, "[CTR]R0nanC", 46.11, 3.0],
+    [16.0, "gabinepotu", 46.273, 3.0],
+    [17.0, "[RonC] shadeely", 47.232, 3.0],
+    [18.0, "Hi Im Yolo", 47.211, 2.0],
+    [19.0, "Michael", 47.71, 2.0],
+    [20.0, ":Z_::E_::E_::P_: Joking", "DNF", 2.0],
+    [null, "Frey_Finley", "DNF", 2.0],
+    [22.0, "Scheepsjongen", "DNF", 1.0],
+    [null, "[Qc] GuillaumePN", "DNF", 1.0],
+    [null, "nusuntpenguin", "DNF", 1.0],
+    [null, "Ploddip", "DNF", 1.0],
+    [null, "imagineaclevernamehere", "DNF", 1.0]
+  ]
+}

@@ -1,8 +1,8 @@
-"""cup_N.json and the xlsx Elim Time column must carry the same values.
+"""cup_N.json and the results/ Elim Time column must carry the same values.
 
 Both are written from cotd_parser.time_to_ms(), so any drift means one of
-the writers stopped using it. The xlsx is gitignored, so this test skips
-when the workbook is not present (CI, another machine).
+the writers stopped using it. results/ is the tracked copy of the workbooks
+(results_store.py), so this runs everywhere.
 """
 import glob
 import json
@@ -16,8 +16,7 @@ REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 def _workbook_path():
     import elo_engine
-    path = os.path.join(REPO, elo_engine.XLSX_FILES[-1])
-    return path if os.path.exists(path) else None
+    return elo_engine.XLSX_FILES[-1]
 
 
 def _xlsx_block(wb, cup_id):
@@ -46,12 +45,10 @@ def _xlsx_block(wb, cup_id):
                          ids=lambda d: os.path.basename(d))
 def test_json_times_equal_xlsx_elim_times(fixture_dir):
     path = _workbook_path()
-    if path is None:
-        pytest.skip('current COTD workbook not present (gitignored)')
-    import openpyxl
+    import results_store
     with open(os.path.join(fixture_dir, 'expected.json'), encoding='utf-8') as f:
         expected = json.load(f)
-    wb = openpyxl.load_workbook(path, data_only=True, read_only=True)
+    wb = results_store.load_workbook(path)
     block = _xlsx_block(wb, expected['cup'])
     if block is None:
         pytest.skip(f"{expected['cup']} is not in {os.path.basename(path)}")

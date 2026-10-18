@@ -36,8 +36,8 @@ Complete the anti-bot check and press Submit. The "Recent submissions" table sho
 
 | Status | Meaning |
 |---|---|
-| received | Waiting to be picked up. aizpun's PC checks about every 15 minutes while it is on. |
-| processed | Ratings computed. aizpun checks the result, then publishes it. |
+| received | Waiting to be picked up. An automatic job checks every 15 minutes from Saturday 19:00 to Sunday 12:00 (Spain time). A log sent later waits until the next Saturday. |
+| processed | Ratings computed and proposed as a change to the site. aizpun checks it and publishes it. |
 | published | Live on the rankings. |
 | duplicate | That cup was already processed, or this exact file was already sent. |
 | superseded | A more complete log for the same cup was sent. |
@@ -45,4 +45,4 @@ Complete the anti-bot check and press Submit. The "Recent submissions" table sho
 
 ## Privacy
 
-The log is a game log. Besides cup rounds it contains in-game names and the mods you run. It is stored only so it can be processed and kept as the raw record of the cup. No IP address is stored with a submission.
+The log is a game log. Besides cup rounds it contains in-game names and the mods you run. The full file is stored privately, only so it can be processed and kept as the raw record of the cup. Only the COTD tracker's lines (player names, round times and the Steam IDs the tracker prints) are published with the results. No IP address is stored with a submission.

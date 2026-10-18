@@ -1,6 +1,8 @@
 """submissions_poll.py: process cups submitted on submit.html, unattended.
 
-Run by Windows Task Scheduler every 15 minutes (see SUBMIT.md). Each pass:
+Run every 15 minutes in the cup window (Saturday 19:00 to Sunday 12:00 Spain
+time) by the GitHub Action with --ci, or by Windows Task Scheduler on the PC
+(see submit-worker/README.md). Each pass:
 
   1. Asks the cotd-submit Worker for pending submissions.
   2. Marks 'processed' cups that are now on origin/main as 'published'.
@@ -12,8 +14,16 @@ Run by Windows Task Scheduler every 15 minutes (see SUBMIT.md). Each pass:
   4. Posts the outcome ('processed' with a summary, or 'failed' with the
      ERROR line) back to the Worker, and shows a Windows toast.
 
-It never pushes, never commits and never passes --reprocess. Publishing stays
-manual: verify on http://localhost:8000, then commit and push as usual.
+On the PC it never pushes, never commits and never passes --reprocess.
+Publishing stays manual: verify on http://localhost:8000, then commit and
+push as usual.
+
+With --ci (the GitHub Action, .github/workflows/process-submission.yml) the
+config comes from the environment (COTD_WORKER_URL, COTD_POLLER_TOKEN, and
+GH_TOKEN for the gh CLI), out-of-repo steps are skipped, and a processed cup
+is committed on a branch cup-<N> and opened as a pull request. Merging it is
+the publish. While one cup's PR is open, later cups wait, since their ELO
+must be computed on top of it.
 
 Config: submit_config.json next to this script (gitignored):
     {"worker_url": "https://cotd-submit.<you>.workers.dev",
@@ -28,7 +38,7 @@ process a cup by hand).
 
 Usage:
   python submissions_poll.py [--once] [--dry-run] [--repo DIR] [--worker URL]
-                             [--id ID] [--no-git] [--reindex] [--rehearsal]
+                             [--id ID] [--no-git] [--reindex] [--rehearsal] [--ci]
                              [--loop SECONDS] [-v]
 """
 import argparse
@@ -63,7 +73,8 @@ class Ctx:
         if os.path.exists(cfg_path):
             with open(cfg_path, encoding='utf-8') as f:
                 cfg = json.load(f)
-        self.worker = (args.worker or cfg.get('worker_url') or '').rstrip('/')
+        self.ci = args.ci
+        self.worker = (args.worker or os.environ.get('COTD_WORKER_URL') or cfg.get('worker_url') or '').rstrip('/')
         self.token = os.environ.get('COTD_POLLER_TOKEN') or cfg.get('poller_token') or ''
         self.repo = os.path.abspath(args.repo or cfg.get('repo_dir') or HERE)
         self.python = cfg.get('python') or sys.executable
@@ -71,13 +82,14 @@ class Ctx:
         # interpreter only for its own children, and python.exe works either way.
         if os.path.basename(self.python).lower() == 'pythonw.exe':
             self.python = os.path.join(os.path.dirname(self.python), 'python.exe')
-        self.toast = cfg.get('toast', True)
+        self.toast = cfg.get('toast', True) and not args.ci
         self.remote = cfg.get('git_remote', 'origin')
         self.branch = cfg.get('git_branch', 'main')
         self.dry_run = args.dry_run
         self.no_git = args.no_git
         self.only_id = args.id
-        self.rehearsal = args.rehearsal
+        self.rehearsal = args.rehearsal or args.ci
+        self.exit_code = 0
         self.subdir = os.path.join(self.repo, 'cup logs', 'submissions')
         os.makedirs(self.subdir, exist_ok=True)
         self.state_path = os.path.join(self.subdir, 'state.json')
@@ -312,6 +324,62 @@ def toast(ctx, title, body):
         log.debug('toast failed: %s', e)
 
 
+# ── CI: a branch and a pull request per cup ─────────────────────────
+
+def git(ctx, *a, check=True):
+    r = subprocess.run(['git', *a], cwd=ctx.repo, capture_output=True, text=True,
+                       encoding='utf-8', errors='replace', timeout=120)
+    if check and r.returncode != 0:
+        raise RuntimeError(f"git {' '.join(a)}: {r.stderr.strip() or r.stdout.strip()}")
+    return r.stdout.strip()
+
+
+def cup_branch(cup):
+    return f'cup-{cup}'
+
+
+def remote_branch_exists(ctx, cup):
+    return bool(git(ctx, 'ls-remote', '--heads', ctx.remote, cup_branch(cup), check=False))
+
+
+def pr_body(sub, summary):
+    lines = [f"Processed online from a log submitted on the site by {sub.get('submitter') or 'someone'} "
+             f"(submission `{sub['id']}`).", '',
+             f"- Map: {sub['map']} by {sub['mapper']}",
+             f"- Date: {sub['date']}"]
+    if sub.get('exclude'):
+        lines.append('- Excluded: ' + ', '.join(sub['exclude']))
+    if summary.get('winner'):
+        lines.append(f"- Winner: **{summary['winner']}**, {summary['players']} players, {summary['rounds']} rounds")
+    if summary.get('podium'):
+        lines.append('- Podium: ' + ', '.join(p['name'] for p in summary['podium']))
+    if summary.get('warnings'):
+        lines += ['', '**Warnings**', ''] + [f'- {w}' for w in summary['warnings']]
+    lines += ['', 'Merging publishes the cup. Cross-comp ELO, the SOF pool and the xlsx backups '
+                  'catch up when `catch_up.py` runs on the PC. No live log, so no alias SID check '
+                  'and no left-the-game pass.']
+    return '\n'.join(lines)
+
+
+def open_pr(ctx, sub, summary):
+    """Commit the pipeline's output on cup-<N>, push it, open the PR. Returns its URL."""
+    cup, branch = sub['cup'], cup_branch(sub['cup'])
+    title = f"COTD {cup}: {sub['map']} by {sub['mapper']}"
+    git(ctx, 'checkout', '-b', branch)
+    git(ctx, 'add', '-u')
+    git(ctx, 'add', 'results', 'tracker_logs', 'cup_data', 'cup_meta.json')
+    msg = (f"{title}\n\n{summary.get('winner')} wins, {summary.get('players')} players. "
+           f"Processed online from a log submitted by {sub.get('submitter') or 'someone'}.")
+    git(ctx, 'commit', '-m', msg)
+    git(ctx, 'push', ctx.remote, branch)
+    r = subprocess.run(['gh', 'pr', 'create', '--base', ctx.branch, '--head', branch,
+                        '--title', title, '--body', pr_body(sub, summary)],
+                       cwd=ctx.repo, capture_output=True, text=True, encoding='utf-8', timeout=120)
+    if r.returncode != 0:
+        raise RuntimeError(f'gh pr create: {r.stderr.strip()}')
+    return r.stdout.strip().splitlines()[-1]
+
+
 # ── running new_cup.py ───────────────────────────────────────────────
 
 def new_cup_command(ctx, sub, log_path):
@@ -378,12 +446,23 @@ def run_cup(ctx, sub, log_path):
     except subprocess.TimeoutExpired:
         post_status(ctx, sid, 'failed', f'new_cup.py timed out after {NEW_CUP_TIMEOUT_S // 60} min; aizpun must check it')
         toast(ctx, f'COTD {cup} FAILED', 'new_cup.py timed out')
+        ctx.exit_code = 1
         return
     with open(out_path, encoding='utf-8', errors='replace') as f:
         out_text = f.read()
 
     if rc == 0 and f'COTD {cup} COMPLETE' in out_text:
         summary = summarize(ctx, cup, out_text)
+        if ctx.ci:
+            try:
+                url = open_pr(ctx, sub, summary)
+            except (RuntimeError, subprocess.SubprocessError, OSError) as e:
+                post_status(ctx, sid, 'failed', f'processed, but the pull request failed: {e}'[:500])
+                ctx.exit_code = 1
+                return
+            post_status(ctx, sid, 'processed', f'awaiting publish: {url}', summary)
+            log.info('pull request: %s', url)
+            return
         post_status(ctx, sid, 'processed', 'awaiting publish', summary)
         who = sub.get('submitter') or 'someone'
         toast(ctx, f'COTD {cup} processed',
@@ -402,6 +481,7 @@ def run_cup(ctx, sub, log_path):
         return
     post_status(ctx, sid, 'failed', note)
     toast(ctx, f'COTD {cup} FAILED', note[:200])
+    ctx.exit_code = 1
 
 
 # ── one pass ─────────────────────────────────────────────────────────
@@ -490,7 +570,9 @@ def _pass(ctx, args):
 
         cup_id = f'COTD {cup}'
         if cup_id in local_meta or (remote_meta is not None and cup_id in remote_meta):
-            existing = os.path.join(ctx.repo, 'cup logs', f'cotd_{cup}.log')
+            existing = os.path.join(ctx.repo, 'tracker_logs', f'cotd_{cup}.log')
+            if not os.path.exists(existing):
+                existing = os.path.join(ctx.repo, 'cup logs', f'cotd_{cup}.log')
             have = count_blocks(existing) if os.path.exists(existing) else 0
             for sub in subs:
                 n = blocks[sub['id']]
@@ -515,6 +597,14 @@ def _pass(ctx, args):
         if ran:
             log.info('%s waits for the next pass (one cup per pass)', cup_id)
             continue
+        if ctx.ci:
+            if remote_branch_exists(ctx, cup):
+                log.warning('%s: branch %s already exists; its pull request is the result', cup_id, cup_branch(cup))
+                continue
+            waiting_on = sorted(s['cup'] for s in pending if s['status'] == 'processed')
+            if waiting_on:
+                log.info('%s waits: merge the pull request for COTD %s first', cup_id, waiting_on[0])
+                continue
         run_cup(ctx, best, paths[best['id']])
         ran = True
         local_meta = set(load_json(os.path.join(ctx.repo, 'cup_meta.json'), {}).keys())
@@ -533,6 +623,8 @@ def main():
     ap.add_argument('--reindex', action='store_true', help='ask the Worker to rebuild its index first')
     ap.add_argument('--rehearsal', action='store_true',
                     help='set COTD_SKIP_EXTERNAL=1 so new_cup.py leaves other repos and the backup drive alone')
+    ap.add_argument('--ci', action='store_true',
+                    help='GitHub Action mode: config from the environment, a pull request per cup')
     ap.add_argument('-v', '--verbose', action='store_true')
     args = ap.parse_args()
 
@@ -547,7 +639,7 @@ def main():
             one_pass(ctx, args)
             time.sleep(args.loop)
     rc = one_pass(ctx, args)
-    sys.exit(rc)
+    sys.exit(rc or ctx.exit_code)
 
 
 if __name__ == '__main__':

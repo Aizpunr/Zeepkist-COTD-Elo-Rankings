@@ -1,10 +1,10 @@
 # cotd-submit Worker
 
-A Cloudflare Worker that receives cup logs from `submit.html` and hands them to the operator's PC. The PC side is `submissions_poll.py` in the repo root, which runs `new_cup.py` on each submission. Publishing stays manual.
+A Cloudflare Worker that receives cup logs from `submit.html` and hands them to `submissions_poll.py` (repo root), which runs `new_cup.py` on each submission. The poller runs as a GitHub Action (`.github/workflows/process-submission.yml`, `--ci`): a processed cup becomes a pull request on branch `cup-<N>`, and merging it publishes the cup.
 
 ```
-submit.html  --POST /submit-->  Worker + KV  <--GET /pending, /log/<id>--  submissions_poll.py
-             <--GET /status---               <--POST /status/<id>--------  (Task Scheduler, 15 min)
+submit.html  --POST /submit-->  Worker + KV  <--GET /pending, /log/<id>--  submissions_poll.py --ci
+             <--GET /status---               <--POST /status/<id>--------  (GitHub Action, every 15 min, Sat 17:00 to Sun 11:45 UTC)
 ```
 
 Free tier only: Workers + Workers KV need no payment card. R2 is not used.
@@ -76,18 +76,34 @@ These steps need your Cloudflare login, so they cannot be scripted for you.
    {"worker_url": "https://cotd-submit.<your-subdomain>.workers.dev", "poller_token": "<token>"}
    ```
 6. `npx wrangler deploy`. Put the printed workers.dev URL in `submit.html` (`PROD_WORKER_URL`) and in `submit_config.json`.
-7. Register the poller (runs as you, only while you are logged on, which the toasts need). In PowerShell (plain `schtasks /TR` quoting breaks there on the spaces in the path):
+7. Set up the GitHub Action (see "Processing online" below). Optional fallback: the same poller on the PC, without `--ci`, which leaves the cup processed locally for you to verify and push. It runs every 15 minutes from Saturday 19:00 (cup time) to Sunday 12:00, as you, only while you are logged on (the toasts need that). `-StartWhenAvailable` catches up if the PC was off at 19:00. Never run both: disable one (`schtasks /Change /TN "COTD submissions poll" /DISABLE`). In PowerShell (plain `schtasks /TR` quoting breaks there on the spaces in the path):
    ```
    $py = "C:\Users\rafa\AppData\Local\Programs\Python\Python310\pythonw.exe"
    $action = New-ScheduledTaskAction -Execute $py -Argument '"C:\Users\rafa\Desktop\Claude\zeepkist cotd elo\submissions_poll.py" --once' -WorkingDirectory "C:\Users\rafa\Desktop\Claude\zeepkist cotd elo"
-   $trigger = New-ScheduledTaskTrigger -Once -At (Get-Date).AddMinutes(1) -RepetitionInterval (New-TimeSpan -Minutes 15)
-   $settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -ExecutionTimeLimit (New-TimeSpan -Hours 1) -MultipleInstances IgnoreNew
+   $trigger = New-ScheduledTaskTrigger -Weekly -DaysOfWeek Saturday -At "19:00"
+   $trigger.Repetition = (New-ScheduledTaskTrigger -Once -At "19:00" -RepetitionInterval (New-TimeSpan -Minutes 15) -RepetitionDuration (New-TimeSpan -Hours 17)).Repetition
+   $settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable -ExecutionTimeLimit (New-TimeSpan -Hours 1) -MultipleInstances IgnoreNew
    $principal = New-ScheduledTaskPrincipal -UserId "$env:USERDOMAIN\$env:USERNAME" -LogonType Interactive -RunLevel Limited
    Register-ScheduledTask -TaskName "COTD submissions poll" -Action $action -Trigger $trigger -Settings $settings -Principal $principal -Force
    ```
    The poller uses the `certifi` CA bundle when it is installed (`pip install certifi`): Python's default store on Windows can fail on workers.dev certificates with "certificate has expired".
    Then run `python submissions_poll.py --once -v` once by hand and check `cup logs/submissions/poll.log`.
 8. Commit and push `submit.html` with the two values filled in.
+
+## Processing online
+
+The Action checks out `main`, runs the tests, then `python submissions_poll.py --once --ci`. For a new cup it runs `new_cup.py` with `COTD_SKIP_EXTERNAL=1`, commits the results on `cup-<N>`, pushes the branch and opens a pull request with the winner, podium and warnings. The submission's note links to the PR.
+
+- **Publish:** review the PR (from the GitHub app is fine) and merge it. The merge changes `cup_meta.json`, which runs the Action again and marks the submission `published`.
+- **One cup at a time:** while a cup's PR is open, later cups wait. Their ELO has to be computed on top of it.
+- **Afterwards, on the PC:** `python catch_up.py`. It pulls `main`, fetches the raw logs of online cups into `cup logs/`, rebuilds the xlsx backups (`sync_xlsx.py`), refreshes cross-comp ELO and the SOF pools, and runs the raw-data backup. The SOF repo push stays manual.
+- **Failures:** a failed run posts `failed` with the error and fails the workflow, so GitHub emails you. Each run keeps `poll.log` and new_cup's output as an artifact (never the submitted logs, since artifacts of a public repo are public).
+- **Manual run:** Actions, "Process submitted cups", Run workflow (optional submission id, optional dry run).
+
+One-time setup, in the repo's Settings:
+
+1. Secrets and variables, Actions: add `COTD_WORKER_URL` (the workers.dev URL) and `COTD_POLLER_TOKEN` (the Worker's `POLLER_TOKEN`).
+2. Actions, General, Workflow permissions: "Read and write permissions", and tick "Allow GitHub Actions to create and approve pull requests".
 
 ## Day to day
 
@@ -98,7 +114,9 @@ These steps need your Cloudflare login, so they cannot be scripted for you.
 | Deploy a change | `npx wrangler deploy` |
 | Pause the poller | create `cup logs/submissions/PAUSE`; delete it to resume |
 | Poller dry run | `python submissions_poll.py --once --dry-run -v` |
-| Stop the scheduled task | `schtasks /Change /TN "COTD submissions poll" /DISABLE` |
+| Stop the PC poller | `schtasks /Change /TN "COTD submissions poll" /DISABLE` |
+| After an online cup | `python catch_up.py` |
+| Rebuild the xlsx backups | `python sync_xlsx.py` |
 
 `.dev.vars` (gitignored) uses Cloudflare's always-pass Turnstile test secret and `POLLER_TOKEN=devtoken`. On localhost, `submit.html` talks to `http://127.0.0.1:8787` with the matching test site key.
 

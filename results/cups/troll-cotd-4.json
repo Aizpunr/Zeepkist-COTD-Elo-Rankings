@@ -1,0 +1,18 @@
+{
+  "book": "troll",
+  "sheet": "Troll COTDs",
+  "col": 18,
+  "header_row": 5,
+  "above": [
+    [null, null, null, null],
+    ["Troll COTD 4", null, null, 41.5],
+    ["Map: Critical Heat by [CTR]Kernkob", null, null, null],
+    [null, null, "Fastest Time: 37.182 by Mark in Round 1", null]
+  ],
+  "header": ["Position", "Name", "Elim Time", "Elim Round"],
+  "rows": [
+    [1, "justMaki", 37.234, null],
+    [2, "Mark", "DNF", 2],
+    [3, "25 Other Players", "DNF", 1]
+  ]
+}

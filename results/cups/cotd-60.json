@@ -1,0 +1,43 @@
+{
+  "book": "cotd-51",
+  "sheet": "COTD 56-60",
+  "col": 25,
+  "header_row": 5,
+  "above": [
+    [null, null, null, null],
+    ["COTD 60", null, null, null],
+    ["Map: Palm Freeze - COTW #60 by Maou & St Nic", null, null, null],
+    [null, null, "Fastest Time: 42.737 by justMaki in Final", null]
+  ],
+  "header": ["Position", "Name", "Elim Time", "Elim Round"],
+  "rows": [
+    [1, "justMaki", 42.737, null],
+    [2, "RoundNzt", 43.899, 12],
+    [3, "A2 Zecklord", 43.264, 11],
+    [4, "[CTR] Kernkob", 43.514, 10],
+    [5, "[CTR]Hydro", "DNF*", 9],
+    [6, "Lexer", 44.054, 8],
+    [7, "[oops] Wombat!", 44.365, 7],
+    [8, "[TOG]Lazy_Echidna", 45.019, 7],
+    [9, "[KURK] Quickracer10", 44.55, 6],
+    [10, "Shadynook", 45.567, 6],
+    [11, "agix", 46.464, 5],
+    [12, "Hi Im Yolo", 47.389, 5],
+    [13, "Jinx", 47.444, 4],
+    [14, "Roader", 47.878, 4],
+    [15, "[RB]Chinpokomon", 48.155, 3],
+    [16, "ferinine", 50.244, 3],
+    [17, "Romans138", "DNF", 3],
+    [null, "Shatter", "DNF", 3],
+    [19, "Kiprosa", 49.853, 2],
+    [20, "Skooter_luke", 52.984, 2],
+    [21, "Axo", 54.705, 2],
+    [22, "[ZET]LILWOOLEY", "DNF", 2],
+    [23, "Heart-TGV", 51.886, 1],
+    [24, "cookie", "DNF", 1],
+    [null, "Celery (Hcart)", "DNF", 1],
+    [null, null, null, null],
+    [null, null, null, null],
+    [null, null, "*Yahtzee", null]
+  ]
+}

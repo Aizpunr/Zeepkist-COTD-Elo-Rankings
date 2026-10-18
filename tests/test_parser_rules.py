@@ -7,7 +7,7 @@ edge cases a real cup may not contain.
 """
 import pytest
 
-from cotd_parser import ParseError, cup_json_payload, parse_cup_log, time_to_ms
+from cotd_parser import ParseError, cup_json_payload, fastest_round_label, parse_cup_log, time_to_ms
 
 
 def L(msg):
@@ -88,6 +88,13 @@ def test_fastest_time_round_numbering_counts_only_eliminating_rounds():
     ]
     p, _ = leaderboard(log)
     assert (p.fastest_name, p.fastest_round) == ('W', 1)
+    # Round 1 is also the last eliminating round here, so it is the final.
+    assert fastest_round_label(p) == 'Final'
+
+
+def test_fastest_round_label_before_the_final_and_in_the_warmup():
+    p, _ = leaderboard(TIE_LOG)
+    assert p.fastest_round == 0 and fastest_round_label(p) == 'Round 0'
 
 
 def test_ambiguous_winner_is_reported_not_guessed():

@@ -249,6 +249,16 @@ def parse_cup_log(lines: Iterable[str], excluded: Iterable[str] = ()) -> ParsedC
     return cup
 
 
+def fastest_round_label(cup):
+    """'Final' when the fastest time was set in the last elimination round,
+    else 'Round <n>' (0 = warmup view). Lexer's workbooks always wrote the
+    final as 'Final', and fastest.html shows this label as is."""
+    final = max((p.round for p in cup.leaderboard if p.round is not None), default=None)
+    if final is not None and cup.fastest_round == final:
+        return 'Final'
+    return f'Round {cup.fastest_round}'
+
+
 def parse_cup_log_file(path: str, excluded: Iterable[str] = ()) -> ParsedCup:
     with open(path, encoding='utf-8', errors='replace') as f:
         return parse_cup_log(f.readlines(), excluded)

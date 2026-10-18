@@ -1,0 +1,40 @@
+{
+  "book": "cotd-26",
+  "sheet": "COTD 31-35",
+  "col": 7,
+  "header_row": 5,
+  "above": [
+    [null, null, null, null],
+    ["COTD 32", null, null, null],
+    ["Map: Serpentine - COTD #32 by Richhyyyy", null, null, null],
+    [null, null, "Fastest Time: 41.637 by [Choo] ZOMAN in Round 8", null]
+  ],
+  "header": ["Position", "Name", "Elim Time", "Elim Round"],
+  "rows": [
+    [1.0, "RoundNzt", 41.777, null],
+    [2.0, "[Choo] ZOMAN", 41.917, 11.0],
+    [3.0, "[RTR]Fwogiie", 42.09, 10.0],
+    [4.0, "[HRR] readfreak7", 42.255, 9.0],
+    [5.0, "[TOG]Lazy_Echidna", 42.516, 8.0],
+    [6.0, "[CTR]OwlPlague", 42.4, 7.0],
+    [7.0, "Lexer", 42.401, 7.0],
+    [8.0, "St Nicholas", 42.611, 6.0],
+    [9.0, "[XTR]Hawk", 42.626, 6.0],
+    [10.0, "Shadynook", 42.427, 5.0],
+    [11.0, "[CTR] jandje", "1:10.274", 5.0],
+    [12.0, "[CTR]R0nanC", 42.802, 4.0],
+    [13.0, "Giganten", 42.954, 4.0],
+    [14.0, "[CTR]L3it3R", 42.666, 3.0],
+    [15.0, "Romans138", 42.983, 3.0],
+    [16.0, "[heyo]potatotron", 43.001, 3.0],
+    [17.0, "Cliff the Crafter", "DNF", 3.0],
+    [18.0, "Neb", 43.507, 2.0],
+    [19.0, "icRS", 43.566, 2.0],
+    [20.0, "nate69cam", 44.151, 2.0],
+    [21.0, "sirjdog21", 44.257, 2.0],
+    [22.0, "imagineaclevernamehere", 45.89, 1.0],
+    [23.0, "florisdewael", "DNF", 1.0],
+    [null, "Henke", "DNF", 1.0],
+    [null, "[Qc] GuillaumePN", "DNF", 1.0]
+  ]
+}

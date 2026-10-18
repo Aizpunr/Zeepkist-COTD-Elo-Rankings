@@ -36,6 +36,18 @@ def cup_json_path(num, base=BASE):
     return os.path.join(base, CUP_DATA_DIR, f'cup_{num}.json')
 
 
+TRACKER_LOG_DIR = 'tracker_logs'
+
+
+def tracker_log_path(num, base=BASE):
+    """tracker_logs/cotd_<num>.log: the COTDTracker lines of the cup's log.
+
+    Tracked in git (the raw logs under cup logs/ are not), so build_rounds.py
+    can run without the operator's PC."""
+    os.makedirs(os.path.join(base, TRACKER_LOG_DIR), exist_ok=True)
+    return os.path.join(base, TRACKER_LOG_DIR, f'cotd_{num}.log')
+
+
 def ltg_report_path(num, base=BASE):
     return os.path.join(base, LTG_REPORT_DIR, f'cotd_{num}_ltg_report.json')
 

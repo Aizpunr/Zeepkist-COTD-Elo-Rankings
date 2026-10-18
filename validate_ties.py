@@ -1,5 +1,6 @@
 """Validate that DNFs in the same round share the same position."""
-import openpyxl, sys, os, re
+import sys, os, re
+import results_store
 from collections import defaultdict
 sys.stdout.reconfigure(encoding='utf-8')
 
@@ -19,7 +20,7 @@ cups_checked = 0
 
 for fname in files:
     try:
-        wb = openpyxl.load_workbook(_p(fname), data_only=True)
+        wb = results_store.load_workbook(_p(fname), data_only=True)
     except FileNotFoundError:
         sys.exit(f"ERROR: {fname} is referenced by elo_engine.py but missing on disk")
 

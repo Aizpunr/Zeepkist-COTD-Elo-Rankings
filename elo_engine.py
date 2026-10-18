@@ -1,8 +1,9 @@
-import openpyxl, json, re, sys, math, os
+import json, re, sys, math, os
+import results_store
 from collections import defaultdict
 
 # Importing this module is cheap and side-effect free: it defines CANONICAL,
-# the xlsx file list, the pure parsing/rating helpers and nothing else. All
+# the book list (results/books.json), the pure parsing/rating helpers and nothing else. All
 # workbook loading, rating computation, printing and JSON writing lives in
 # main() and only runs when this file is executed as a script. Several
 # scripts in this repo and in sibling repos do `from elo_engine import
@@ -11,7 +12,7 @@ from collections import defaultdict
 # column 0.
 
 def parse_file(filepath):
-    wb = openpyxl.load_workbook(filepath, data_only=True)
+    wb = results_store.load_workbook(filepath, data_only=True)
     cups = []
     for sheet_name in wb.sheetnames:
         ws = wb[sheet_name]
@@ -52,7 +53,7 @@ def parse_file(filepath):
     return cups
 
 def parse_troll_cups(filepath):
-    wb = openpyxl.load_workbook(filepath, data_only=True)
+    wb = results_store.load_workbook(filepath, data_only=True)
     ws = wb['Troll COTDs']
     rows = list(ws.iter_rows(values_only=True))
     troll_defs = [
@@ -95,18 +96,9 @@ def parse_troll_cups(filepath):
 _dir = os.path.dirname(os.path.abspath(__file__))
 _p = lambda f: os.path.join(_dir, f)
 
-# Result workbooks, oldest first. The LAST entry is rewritten in place by
-# new_cup.py when a cup pushes the file past its range (string replace of
-# the quoted filename), so keep exactly one quoted literal per line.
-XLSX_FILES = [
-    'Zeepkist COTDs 1-25.xlsx',
-    'Zeepkist COTDs 26-50.xlsx',
-    'Zeepkist COTDs 51-75.xlsx',
-    'COTDs 76-100.xlsx',
-    'COTDs 101-125.xlsx',
-    'COTD 126-130.xlsx',
-    'COTD 131-166.xlsx',
-]
+# Result books, oldest first. The cells live in results/ (results_store.py);
+# these are the books' xlsx filenames there, which the xlsx backups share.
+XLSX_FILES = results_store.book_files('cotd')
 ROULETTE_XLSX = 'cup roulette.xlsx'
 TROLL_XLSX = 'Troll cup.xlsx'
 TROLL12_JSON = 'troll12.json'

@@ -1,0 +1,525 @@
+[Info   :   BepInEx] Loading [COTDTracker 0.11.1]
+[Info   :COTDTracker] Plugin COTDTracker is loaded!
+[Info   :COTDTracker] Starting cup with exclude list: 
+[Info   :COTDTracker] Doing eliminations with leaderboard:
+[Info   :COTDTracker] Player ZOMAN: Time: 51,12551
+[Info   :COTDTracker] Player Jake: Time: 51,42297
+[Info   :COTDTracker] Player [TILT]Redstony: Time: 52,53184
+[Info   :COTDTracker] Player [ZET]Stick: Time: 52,54068
+[Info   :COTDTracker] Player PulchritudinousPlum: Time: 52,78372
+[Info   :COTDTracker] Player Noweki: Time: 52,82438
+[Info   :COTDTracker] Player [MMM]Victor: Time: 53,48137
+[Info   :COTDTracker] Player Minkus: Time: 53,50444
+[Info   :COTDTracker] Player Lexer: Time: 53,53435
+[Info   :COTDTracker] Player [KBW]microways: Time: 53,57661
+[Info   :COTDTracker] Player [CSC]Tommygaming: Time: 54,26562
+[Info   :COTDTracker] Player brrryy: Time: 54,58163
+[Info   :COTDTracker] Player Mμ: Time: 54,62978
+[Info   :COTDTracker] Player FINSTER83: Time: 54,67516
+[Info   :COTDTracker] Player agix: Time: 55,21879
+[Info   :COTDTracker] Player jofk2415: Time: 55,59616
+[Info   :COTDTracker] Player [CTR]GuAlexItar: Time: 55,68331
+[Info   :COTDTracker] Player ping: Time: 55,74341
+[Info   :COTDTracker] Player [T7]Heart-TGV: Time: 55,98391
+[Info   :COTDTracker] Player [CSC] PlusMicron: Time: 56,59283
+[Info   :COTDTracker] Player Matic_D: Time: 56,86346
+[Info   :COTDTracker] Player [Same]stindt: Time: 57,13056
+[Info   :COTDTracker] Player Tudge Boat: Time: 57,3305
+[Info   :COTDTracker] Player [CSC]IronDragon111000: Time: 57,65996
+[Info   :COTDTracker] Player [ERR]ferinine: Time: 57,73257
+[Info   :COTDTracker] Player Kiprosa: Time: 58,13829
+[Info   :COTDTracker] Player aizpun: Time: 58,19459
+[Info   :COTDTracker] Player Six: Time: 58,88726
+[Info   :COTDTracker] Player M4DSCOTSM4N: Time: 60,89279
+[Info   :COTDTracker] Player DeiRex: Time: 60,90295
+[Info   :COTDTracker] Player gilgool: Time: 61,27975
+[Info   :COTDTracker] Player elekvault: Time: 62,13363
+[Info   :COTDTracker] Player Mr Croc: Time: 63,05889
+[Info   :COTDTracker] Player [ZET] Wheelie: Time: 63,50798
+[Info   :COTDTracker] Player [PINK]incredulouspotato: Time: 64,08897
+[Info   :COTDTracker] Player [SLOW]Zeus: Time: 64,24287
+[Info   :COTDTracker] Player [CSC]K410K3N: Time: 65,46243
+[Info   :COTDTracker] Player Warsnac: Time: 65,53894
+[Info   :COTDTracker] Player [CSC] Shadynook: Time: 65,73507
+[Info   :COTDTracker] Player Fly8oy: Time: 66,31209
+[Info   :COTDTracker] Player SuperHeavy: Time: 66,51574
+[Info   :COTDTracker] Player [TOG]Lazy_Echidna: Time: 66,79209
+[Info   :COTDTracker] Player [ZET]Sword125: Time: 67,17394
+[Info   :COTDTracker] Player SjorsTea: Time: 69,5749
+[Info   :COTDTracker] Player [bad]kkincaid97: Time: DNF
+[Info   :COTDTracker] Player timesprout: Time: DNF
+[Info   :COTDTracker] Player Noxitu: Time: DNF
+[Info   :COTDTracker] Player BrickEdwards: Time: DNF
+[Info   :COTDTracker] Player [RB]Chinpokomon: Time: DNF
+[Info   :COTDTracker] Player Fauxniks: Time: DNF
+[Info   :COTDTracker] Player [JiRa] CalmestRaccoon: Time: DNF
+[Info   :COTDTracker] Player b0baphettyWAP: Time: DNF
+[Info   :COTDTracker] Player Hi Im Yolo: Time: DNF
+[Info   :COTDTracker] Player [TTR]DragonShadow84290: Time: DNF
+[Info   :COTDTracker] Player Potato Princess: Time: DNF
+[Info   :COTDTracker] Running update tab leaderboard function
+[Info   :COTDTracker] Doing eliminations with leaderboard:
+[Info   :COTDTracker] Player Jake: Time: 51,42881
+[Info   :COTDTracker] Player ZOMAN: Time: 52,07618
+[Info   :COTDTracker] Player [ZET]Stick: Time: 52,79035
+[Info   :COTDTracker] Player Lexer: Time: 52,94982
+[Info   :COTDTracker] Player PulchritudinousPlum: Time: 53,02701
+[Info   :COTDTracker] Player [KBW]microways: Time: 53,3713
+[Info   :COTDTracker] Player Noweki: Time: 53,44667
+[Info   :COTDTracker] Player [TILT]Redstony: Time: 53,53337
+[Info   :COTDTracker] Player [CSC]Tommygaming: Time: 53,72096
+[Info   :COTDTracker] Player Mμ: Time: 54,11586
+[Info   :COTDTracker] Player Minkus: Time: 55,0848
+[Info   :COTDTracker] Player [CTR]GuAlexItar: Time: 55,17987
+[Info   :COTDTracker] Player jofk2415: Time: 55,699
+[Info   :COTDTracker] Player brrryy: Time: 56,18004
+[Info   :COTDTracker] Player [MMM]Victor: Time: 56,27036
+[Info   :COTDTracker] Player [Same]stindt: Time: 56,39423
+[Info   :COTDTracker] Player [CSC] PlusMicron: Time: 56,39773
+[Info   :COTDTracker] Player Matic_D: Time: 56,57719
+[Info   :COTDTracker] Player [T7]Heart-TGV: Time: 56,95926
+[Info   :COTDTracker] Player Six: Time: 57,46131
+[Info   :COTDTracker] Player [PINK]incredulouspotato: Time: 57,97081
+[Info   :COTDTracker] Player Tudge Boat: Time: 58,06568
+[Info   :COTDTracker] Player aizpun: Time: 58,31044
+[Info   :COTDTracker] Player ping: Time: 58,48801
+[Info   :COTDTracker] Player Kiprosa: Time: 58,58515
+[Info   :COTDTracker] Player [CSC]IronDragon111000: Time: 59,14515
+[Info   :COTDTracker] Player elekvault: Time: 59,32116
+[Info   :COTDTracker] Player [ERR]ferinine: Time: 59,63887
+[Info   :COTDTracker] Player agix: Time: 59,87474
+[Info   :COTDTracker] Player M4DSCOTSM4N: Time: 60,1679
+[Info   :COTDTracker] Player [CSC]K410K3N: Time: 60,70639
+[Info   :COTDTracker] Player FINSTER83: Time: 61,80361
+[Info   :COTDTracker] Player Warsnac: Time: 61,85433
+[Info   :COTDTracker] Player SjorsTea: Time: 62,18234
+[Info   :COTDTracker] Player DeiRex: Time: 62,33076
+[Info   :COTDTracker] Player gilgool: Time: 62,52213
+[Info   :COTDTracker] Player Noxitu: Time: 63,46867
+[Info   :COTDTracker] Player [SLOW]Zeus: Time: 63,63312
+[Info   :COTDTracker] Player SuperHeavy: Time: 63,90491
+[Info   :COTDTracker] Player Mr Croc: Time: 65,77094
+[Info   :COTDTracker] Player Fly8oy: Time: 66,10361
+[Info   :COTDTracker] Player [TOG]Lazy_Echidna: Time: 67,24976
+[Info   :COTDTracker] Player [ZET] Wheelie: Time: DNF
+[Info   :COTDTracker] Player [CSC] Shadynook: Time: DNF
+[Info   :COTDTracker] Player [ZET]Sword125: Time: DNF
+[Info   :COTDTracker] Player [bad]kkincaid97: Time: DNF
+[Info   :COTDTracker] Player timesprout: Time: DNF
+[Info   :COTDTracker] Player BrickEdwards: Time: DNF
+[Info   :COTDTracker] Player [RB]Chinpokomon: Time: DNF
+[Info   :COTDTracker] Player Fauxniks: Time: DNF
+[Info   :COTDTracker] Player [JiRa] CalmestRaccoon: Time: DNF
+[Info   :COTDTracker] Player b0baphettyWAP: Time: DNF
+[Info   :COTDTracker] Player Hi Im Yolo: Time: DNF
+[Info   :COTDTracker] Player [TTR]DragonShadow84290: Time: DNF
+[Info   :COTDTracker] Player Potato Princess: Time: DNF
+[Info   :COTDTracker] Eliminating DNF: Potato Princess
+[Info   :COTDTracker] Eliminating DNF: [TTR]DragonShadow84290
+[Info   :COTDTracker] Eliminating DNF: Hi Im Yolo
+[Info   :COTDTracker] Eliminating DNF: b0baphettyWAP
+[Info   :COTDTracker] Eliminating DNF: [JiRa] CalmestRaccoon
+[Info   :COTDTracker] Eliminating DNF: Fauxniks
+[Info   :COTDTracker] Eliminating DNF: [RB]Chinpokomon
+[Info   :COTDTracker] Eliminating DNF: BrickEdwards
+[Info   :COTDTracker] Eliminating DNF: timesprout
+[Info   :COTDTracker] Eliminating DNF: [bad]kkincaid97
+[Info   :COTDTracker] Eliminating DNF: [ZET]Sword125
+[Info   :COTDTracker] Eliminating DNF: [CSC] Shadynook
+[Info   :COTDTracker] Eliminating DNF: [ZET] Wheelie
+[Info   :COTDTracker] Eliminated 13 DNF players
+[Info   :COTDTracker] Eliminating 13 players: 
+[Info   :COTDTracker] Potato Princess
+[Info   :COTDTracker] [TTR]DragonShadow84290
+[Info   :COTDTracker] Hi Im Yolo
+[Info   :COTDTracker] b0baphettyWAP
+[Info   :COTDTracker] [JiRa] CalmestRaccoon
+[Info   :COTDTracker] Fauxniks
+[Info   :COTDTracker] [RB]Chinpokomon
+[Info   :COTDTracker] BrickEdwards
+[Info   :COTDTracker] timesprout
+[Info   :COTDTracker] [bad]kkincaid97
+[Info   :COTDTracker] [ZET]Sword125
+[Info   :COTDTracker] [CSC] Shadynook
+[Info   :COTDTracker] [ZET] Wheelie
+[Info   :COTDTracker] Running update tab leaderboard function
+[Info   :COTDTracker] Running update tab leaderboard function
+[Info   :COTDTracker] Running update tab leaderboard function
+[Info   :COTDTracker] Running update tab leaderboard function
+[Info   :COTDTracker] Doing eliminations with leaderboard:
+[Info   :COTDTracker] Player ZOMAN: Time: 50,65214
+[Info   :COTDTracker] Player PulchritudinousPlum: Time: 51,84491
+[Info   :COTDTracker] Player [ZET]Stick: Time: 52,18318
+[Info   :COTDTracker] Player Noweki: Time: 53,27496
+[Info   :COTDTracker] Player jofk2415: Time: 53,71976
+[Info   :COTDTracker] Player [CSC]Tommygaming: Time: 54,13812
+[Info   :COTDTracker] Player [T7]Heart-TGV: Time: 54,14074
+[Info   :COTDTracker] Player [TILT]Redstony: Time: 54,36335
+[Info   :COTDTracker] Player [KBW]microways: Time: 54,3952
+[Info   :COTDTracker] Player Mμ: Time: 54,76357
+[Info   :COTDTracker] Player Lexer: Time: 55,07167
+[Info   :COTDTracker] Player [MMM]Victor: Time: 55,22432
+[Info   :COTDTracker] Player [CTR]GuAlexItar: Time: 55,64732
+[Info   :COTDTracker] Player Minkus: Time: 55,88807
+[Info   :COTDTracker] Player ping: Time: 56,24931
+[Info   :COTDTracker] Player brrryy: Time: 56,304
+[Info   :COTDTracker] Player Matic_D: Time: 56,58773
+[Info   :COTDTracker] Player FINSTER83: Time: 56,79637
+[Info   :COTDTracker] Player Kiprosa: Time: 57,10698
+[Info   :COTDTracker] Player [CSC]IronDragon111000: Time: 57,26812
+[Info   :COTDTracker] Player [PINK]incredulouspotato: Time: 57,46836
+[Info   :COTDTracker] Player [ERR]ferinine: Time: 58,37695
+[Info   :COTDTracker] Player [Same]stindt: Time: 58,6907
+[Info   :COTDTracker] Player [CSC] PlusMicron: Time: 59,1543
+[Info   :COTDTracker] Player Noxitu: Time: 60,13097
+[Info   :COTDTracker] Player gilgool: Time: 60,16803
+[Info   :COTDTracker] Player agix: Time: 60,40044
+[Info   :COTDTracker] Player Warsnac: Time: 60,93636
+[Info   :COTDTracker] Player Tudge Boat: Time: 61,01294
+[Info   :COTDTracker] Player aizpun: Time: 61,20816
+[Info   :COTDTracker] Player DeiRex: Time: 61,27595
+[Info   :COTDTracker] Player [SLOW]Zeus: Time: 61,39383
+[Info   :COTDTracker] Player elekvault: Time: 62,67872
+[Info   :COTDTracker] Player Mr Croc: Time: 64,35464
+[Info   :COTDTracker] Player Fly8oy: Time: 67,45229
+[Info   :COTDTracker] Player [TOG]Lazy_Echidna: Time: 67,58686
+[Info   :COTDTracker] Player Jake: Time: DNF
+[Info   :COTDTracker] Player Six: Time: DNF
+[Info   :COTDTracker] Player M4DSCOTSM4N: Time: DNF
+[Info   :COTDTracker] Player [CSC]K410K3N: Time: DNF
+[Info   :COTDTracker] Player SjorsTea: Time: DNF
+[Info   :COTDTracker] Player SuperHeavy: Time: DNF
+[Info   :COTDTracker] Eliminating DNF: SuperHeavy
+[Info   :COTDTracker] Eliminating DNF: SjorsTea
+[Info   :COTDTracker] Eliminating DNF: [CSC]K410K3N
+[Info   :COTDTracker] Eliminating DNF: M4DSCOTSM4N
+[Info   :COTDTracker] Eliminating DNF: Six
+[Info   :COTDTracker] Eliminating DNF: Jake
+[Info   :COTDTracker] Eliminated 6 DNF players
+[Info   :COTDTracker] Eliminating 6 players: 
+[Info   :COTDTracker] SuperHeavy
+[Info   :COTDTracker] SjorsTea
+[Info   :COTDTracker] [CSC]K410K3N
+[Info   :COTDTracker] M4DSCOTSM4N
+[Info   :COTDTracker] Six
+[Info   :COTDTracker] Jake
+[Info   :COTDTracker] Running update tab leaderboard function
+[Info   :COTDTracker] Running update tab leaderboard function
+[Info   :COTDTracker] Running update tab leaderboard function
+[Info   :COTDTracker] Running update tab leaderboard function
+[Info   :COTDTracker] Running update tab leaderboard function
+[Info   :COTDTracker] Running update tab leaderboard function
+[Info   :COTDTracker] Doing eliminations with leaderboard:
+[Info   :COTDTracker] Player ZOMAN: Time: 50,84699
+[Info   :COTDTracker] Player PulchritudinousPlum: Time: 52,1237
+[Info   :COTDTracker] Player Noweki: Time: 52,2514
+[Info   :COTDTracker] Player [ZET]Stick: Time: 52,77119
+[Info   :COTDTracker] Player [TILT]Redstony: Time: 52,8284
+[Info   :COTDTracker] Player Lexer: Time: 53,075
+[Info   :COTDTracker] Player [KBW]microways: Time: 53,41866
+[Info   :COTDTracker] Player [Same]stindt: Time: 53,83287
+[Info   :COTDTracker] Player Minkus: Time: 54,20102
+[Info   :COTDTracker] Player [MMM]Victor: Time: 54,37374
+[Info   :COTDTracker] Player jofk2415: Time: 54,3889
+[Info   :COTDTracker] Player [T7]Heart-TGV: Time: 54,46377
+[Info   :COTDTracker] Player ping: Time: 54,46416
+[Info   :COTDTracker] Player agix: Time: 54,96312
+[Info   :COTDTracker] Player [CSC] PlusMicron: Time: 55,24596
+[Info   :COTDTracker] Player brrryy: Time: 55,29132
+[Info   :COTDTracker] Player Mμ: Time: 55,30466
+[Info   :COTDTracker] Player [CTR]GuAlexItar: Time: 55,84035
+[Info   :COTDTracker] Player Noxitu: Time: 55,93105
+[Info   :COTDTracker] Player Kiprosa: Time: 56,47326
+[Info   :COTDTracker] Player aizpun: Time: 56,67727
+[Info   :COTDTracker] Player DeiRex: Time: 56,85889
+[Info   :COTDTracker] Player [SLOW]Zeus: Time: 57,20632
+[Info   :COTDTracker] Player [ERR]ferinine: Time: 57,51317
+[Info   :COTDTracker] Player Warsnac: Time: 57,99989
+[Info   :COTDTracker] Player FINSTER83: Time: 58,68158
+[Info   :COTDTracker] Player [CSC]IronDragon111000: Time: 58,81388
+[Info   :COTDTracker] Player gilgool: Time: 59,32181
+[Info   :COTDTracker] Player Matic_D: Time: 59,37929
+[Info   :COTDTracker] Player Tudge Boat: Time: 60,03992
+[Info   :COTDTracker] Player elekvault: Time: 64,64128
+[Info   :COTDTracker] Player [CSC]Tommygaming: Time: DNF
+[Info   :COTDTracker] Player [PINK]incredulouspotato: Time: DNF
+[Info   :COTDTracker] Player Mr Croc: Time: DNF
+[Info   :COTDTracker] Player Fly8oy: Time: DNF
+[Info   :COTDTracker] Player [TOG]Lazy_Echidna: Time: DNF
+[Info   :COTDTracker] Eliminating DNF: [TOG]Lazy_Echidna
+[Info   :COTDTracker] Eliminating DNF: Fly8oy
+[Info   :COTDTracker] Eliminating DNF: Mr Croc
+[Info   :COTDTracker] Eliminating DNF: [PINK]incredulouspotato
+[Info   :COTDTracker] Eliminating DNF: [CSC]Tommygaming
+[Info   :COTDTracker] Eliminated 5 DNF players
+[Info   :COTDTracker] Eliminating on time: elekvault
+[Info   :COTDTracker] Eliminating 6 players: 
+[Info   :COTDTracker] [TOG]Lazy_Echidna
+[Info   :COTDTracker] Fly8oy
+[Info   :COTDTracker] Mr Croc
+[Info   :COTDTracker] [PINK]incredulouspotato
+[Info   :COTDTracker] [CSC]Tommygaming
+[Info   :COTDTracker] elekvault
+[Info   :COTDTracker] Running update tab leaderboard function
+[Info   :COTDTracker] Running update tab leaderboard function
+[Info   :COTDTracker] Running update tab leaderboard function
+[Info   :COTDTracker] Doing eliminations with leaderboard:
+[Info   :COTDTracker] Player ZOMAN: Time: 51,23913
+[Info   :COTDTracker] Player Noweki: Time: 52,1949
+[Info   :COTDTracker] Player PulchritudinousPlum: Time: 52,21663
+[Info   :COTDTracker] Player [ZET]Stick: Time: 52,42653
+[Info   :COTDTracker] Player Lexer: Time: 52,67426
+[Info   :COTDTracker] Player [Same]stindt: Time: 53,48148
+[Info   :COTDTracker] Player [TILT]Redstony: Time: 53,79884
+[Info   :COTDTracker] Player [MMM]Victor: Time: 54,07488
+[Info   :COTDTracker] Player [KBW]microways: Time: 54,15061
+[Info   :COTDTracker] Player Minkus: Time: 54,39531
+[Info   :COTDTracker] Player FINSTER83: Time: 54,52112
+[Info   :COTDTracker] Player jofk2415: Time: 54,76243
+[Info   :COTDTracker] Player ping: Time: 54,82922
+[Info   :COTDTracker] Player Mμ: Time: 54,85524
+[Info   :COTDTracker] Player [CTR]GuAlexItar: Time: 55,09694
+[Info   :COTDTracker] Player brrryy: Time: 55,22672
+[Info   :COTDTracker] Player Matic_D: Time: 55,46563
+[Info   :COTDTracker] Player [CSC] PlusMicron: Time: 55,86268
+[Info   :COTDTracker] Player [T7]Heart-TGV: Time: 55,99224
+[Info   :COTDTracker] Player DeiRex: Time: 56,46099
+[Info   :COTDTracker] Player agix: Time: 56,64769
+[Info   :COTDTracker] Player Noxitu: Time: 57,41249
+[Info   :COTDTracker] Player Warsnac: Time: 57,56292
+[Info   :COTDTracker] Player Kiprosa: Time: 57,90512
+[Info   :COTDTracker] Player [CSC]IronDragon111000: Time: 59,52707
+[Info   :COTDTracker] Player gilgool: Time: 59,74427
+[Info   :COTDTracker] Player aizpun: Time: 60,72967
+[Info   :COTDTracker] Player [SLOW]Zeus: Time: DNF
+[Info   :COTDTracker] Player [ERR]ferinine: Time: DNF
+[Info   :COTDTracker] Player Tudge Boat: Time: DNF
+[Info   :COTDTracker] Eliminating DNF: Tudge Boat
+[Info   :COTDTracker] Eliminating DNF: [ERR]ferinine
+[Info   :COTDTracker] Eliminating DNF: [SLOW]Zeus
+[Info   :COTDTracker] Eliminated 3 DNF players
+[Info   :COTDTracker] Eliminating on time: aizpun
+[Info   :COTDTracker] Eliminating 4 players: 
+[Info   :COTDTracker] Tudge Boat
+[Info   :COTDTracker] [ERR]ferinine
+[Info   :COTDTracker] [SLOW]Zeus
+[Info   :COTDTracker] aizpun
+[Info   :COTDTracker] Doing eliminations with leaderboard:
+[Info   :COTDTracker] Player PulchritudinousPlum: Time: 51,26895
+[Info   :COTDTracker] Player Noweki: Time: 51,4659
+[Info   :COTDTracker] Player ZOMAN: Time: 51,96648
+[Info   :COTDTracker] Player [Same]stindt: Time: 52,21402
+[Info   :COTDTracker] Player [ZET]Stick: Time: 52,22228
+[Info   :COTDTracker] Player Lexer: Time: 52,36796
+[Info   :COTDTracker] Player brrryy: Time: 52,99961
+[Info   :COTDTracker] Player [KBW]microways: Time: 53,08893
+[Info   :COTDTracker] Player [TILT]Redstony: Time: 53,20577
+[Info   :COTDTracker] Player Mμ: Time: 53,32745
+[Info   :COTDTracker] Player [MMM]Victor: Time: 53,42339
+[Info   :COTDTracker] Player jofk2415: Time: 53,80368
+[Info   :COTDTracker] Player [T7]Heart-TGV: Time: 53,94941
+[Info   :COTDTracker] Player Minkus: Time: 53,95272
+[Info   :COTDTracker] Player agix: Time: 54,37291
+[Info   :COTDTracker] Player ping: Time: 54,60929
+[Info   :COTDTracker] Player Matic_D: Time: 54,64565
+[Info   :COTDTracker] Player [CTR]GuAlexItar: Time: 54,82042
+[Info   :COTDTracker] Player Noxitu: Time: 55,283
+[Info   :COTDTracker] Player Kiprosa: Time: 55,61311
+[Info   :COTDTracker] Player [CSC] PlusMicron: Time: 55,69252
+[Info   :COTDTracker] Player FINSTER83: Time: 56,10922
+[Info   :COTDTracker] Player [CSC]IronDragon111000: Time: 56,19241
+[Info   :COTDTracker] Player DeiRex: Time: 56,59631
+[Info   :COTDTracker] Player Warsnac: Time: 58,29367
+[Info   :COTDTracker] Player gilgool: Time: 67,22955
+[Info   :COTDTracker] Eliminated 0 DNF players
+[Info   :COTDTracker] Eliminating on time: gilgool
+[Info   :COTDTracker] Eliminating on time: Warsnac
+[Info   :COTDTracker] Eliminating on time: DeiRex
+[Info   :COTDTracker] Eliminating on time: [CSC]IronDragon111000
+[Info   :COTDTracker] Eliminating 4 players: 
+[Info   :COTDTracker] gilgool
+[Info   :COTDTracker] Warsnac
+[Info   :COTDTracker] DeiRex
+[Info   :COTDTracker] [CSC]IronDragon111000
+[Info   :COTDTracker] Doing eliminations with leaderboard:
+[Info   :COTDTracker] Player ZOMAN: Time: 51,02767
+[Info   :COTDTracker] Player [ZET]Stick: Time: 51,54247
+[Info   :COTDTracker] Player PulchritudinousPlum: Time: 51,56902
+[Info   :COTDTracker] Player Noweki: Time: 51,9374
+[Info   :COTDTracker] Player Lexer: Time: 52,07059
+[Info   :COTDTracker] Player [KBW]microways: Time: 52,19928
+[Info   :COTDTracker] Player [TILT]Redstony: Time: 52,64614
+[Info   :COTDTracker] Player [Same]stindt: Time: 52,65223
+[Info   :COTDTracker] Player agix: Time: 53,0679
+[Info   :COTDTracker] Player Minkus: Time: 53,52794
+[Info   :COTDTracker] Player [MMM]Victor: Time: 54,40611
+[Info   :COTDTracker] Player Noxitu: Time: 54,66506
+[Info   :COTDTracker] Player [CTR]GuAlexItar: Time: 54,69659
+[Info   :COTDTracker] Player brrryy: Time: 54,73477
+[Info   :COTDTracker] Player Matic_D: Time: 55,29776
+[Info   :COTDTracker] Player [T7]Heart-TGV: Time: 55,49572
+[Info   :COTDTracker] Player FINSTER83: Time: 56,20889
+[Info   :COTDTracker] Player Kiprosa: Time: 61,63878
+[Info   :COTDTracker] Player Mμ: Time: DNF
+[Info   :COTDTracker] Player jofk2415: Time: DNF
+[Info   :COTDTracker] Player ping: Time: DNF
+[Info   :COTDTracker] Player [CSC] PlusMicron: Time: DNF
+[Info   :COTDTracker] Eliminating DNF: [CSC] PlusMicron
+[Info   :COTDTracker] Eliminating DNF: ping
+[Info   :COTDTracker] Eliminating DNF: jofk2415
+[Info   :COTDTracker] Eliminating DNF: Mμ
+[Info   :COTDTracker] Eliminated 4 DNF players
+[Info   :COTDTracker] Eliminating 4 players: 
+[Info   :COTDTracker] [CSC] PlusMicron
+[Info   :COTDTracker] ping
+[Info   :COTDTracker] jofk2415
+[Info   :COTDTracker] Mμ
+[Info   :COTDTracker] Running update tab leaderboard function
+[Info   :COTDTracker] Doing eliminations with leaderboard:
+[Info   :COTDTracker] Player ZOMAN: Time: 50,9379
+[Info   :COTDTracker] Player PulchritudinousPlum: Time: 51,17308
+[Info   :COTDTracker] Player Noweki: Time: 51,33266
+[Info   :COTDTracker] Player [ZET]Stick: Time: 51,66947
+[Info   :COTDTracker] Player Lexer: Time: 51,69404
+[Info   :COTDTracker] Player [Same]stindt: Time: 51,79255
+[Info   :COTDTracker] Player [TILT]Redstony: Time: 53,17184
+[Info   :COTDTracker] Player [KBW]microways: Time: 53,37132
+[Info   :COTDTracker] Player [MMM]Victor: Time: 53,51455
+[Info   :COTDTracker] Player [T7]Heart-TGV: Time: 54,00773
+[Info   :COTDTracker] Player Minkus: Time: 54,22585
+[Info   :COTDTracker] Player brrryy: Time: 54,30672
+[Info   :COTDTracker] Player [CTR]GuAlexItar: Time: 54,32364
+[Info   :COTDTracker] Player Matic_D: Time: 54,41928
+[Info   :COTDTracker] Player agix: Time: 54,81571
+[Info   :COTDTracker] Player Noxitu: Time: 55,0091
+[Info   :COTDTracker] Player Kiprosa: Time: 56,22378
+[Info   :COTDTracker] Player FINSTER83: Time: DNF
+[Info   :COTDTracker] Eliminating DNF: FINSTER83
+[Info   :COTDTracker] Eliminated 1 DNF players
+[Info   :COTDTracker] Eliminating on time: Kiprosa
+[Info   :COTDTracker] Eliminating on time: Noxitu
+[Info   :COTDTracker] Eliminating on time: agix
+[Info   :COTDTracker] Eliminating 4 players: 
+[Info   :COTDTracker] FINSTER83
+[Info   :COTDTracker] Kiprosa
+[Info   :COTDTracker] Noxitu
+[Info   :COTDTracker] agix
+[Info   :COTDTracker] Doing eliminations with leaderboard:
+[Info   :COTDTracker] Player ZOMAN: Time: 50,92946
+[Info   :COTDTracker] Player Noweki: Time: 50,93204
+[Info   :COTDTracker] Player [ZET]Stick: Time: 51,11441
+[Info   :COTDTracker] Player [Same]stindt: Time: 51,75858
+[Info   :COTDTracker] Player [TILT]Redstony: Time: 51,997
+[Info   :COTDTracker] Player PulchritudinousPlum: Time: 52,13896
+[Info   :COTDTracker] Player [KBW]microways: Time: 52,28865
+[Info   :COTDTracker] Player Minkus: Time: 52,94959
+[Info   :COTDTracker] Player Lexer: Time: 53,27044
+[Info   :COTDTracker] Player [MMM]Victor: Time: 53,53199
+[Info   :COTDTracker] Player [T7]Heart-TGV: Time: 53,88707
+[Info   :COTDTracker] Player [CTR]GuAlexItar: Time: 54,79161
+[Info   :COTDTracker] Player Matic_D: Time: 55,33416
+[Info   :COTDTracker] Player brrryy: Time: DNF
+[Info   :COTDTracker] Eliminating DNF: brrryy
+[Info   :COTDTracker] Eliminated 1 DNF players
+[Info   :COTDTracker] Eliminating on time: Matic_D
+[Info   :COTDTracker] Eliminating 2 players: 
+[Info   :COTDTracker] brrryy
+[Info   :COTDTracker] Matic_D
+[Info   :COTDTracker] Running update tab leaderboard function
+[Info   :COTDTracker] Doing eliminations with leaderboard:
+[Info   :COTDTracker] Player ZOMAN: Time: 50,93882
+[Info   :COTDTracker] Player PulchritudinousPlum: Time: 51,00389
+[Info   :COTDTracker] Player [ZET]Stick: Time: 51,34743
+[Info   :COTDTracker] Player Lexer: Time: 51,50471
+[Info   :COTDTracker] Player [TILT]Redstony: Time: 52,1009
+[Info   :COTDTracker] Player [KBW]microways: Time: 52,33489
+[Info   :COTDTracker] Player Minkus: Time: 52,68256
+[Info   :COTDTracker] Player [MMM]Victor: Time: 53,07813
+[Info   :COTDTracker] Player [Same]stindt: Time: 53,49057
+[Info   :COTDTracker] Player [T7]Heart-TGV: Time: 54,08862
+[Info   :COTDTracker] Player [CTR]GuAlexItar: Time: 55,33181
+[Info   :COTDTracker] Player Noweki: Time: DNF
+[Info   :COTDTracker] Eliminating DNF: Noweki
+[Info   :COTDTracker] Eliminated 1 DNF players
+[Info   :COTDTracker] Eliminating on time: [CTR]GuAlexItar
+[Info   :COTDTracker] Eliminating 2 players: 
+[Info   :COTDTracker] Noweki
+[Info   :COTDTracker] [CTR]GuAlexItar
+[Info   :COTDTracker] Doing eliminations with leaderboard:
+[Info   :COTDTracker] Player [ZET]Stick: Time: 50,75523
+[Info   :COTDTracker] Player ZOMAN: Time: 51,06366
+[Info   :COTDTracker] Player [KBW]microways: Time: 51,9992
+[Info   :COTDTracker] Player Lexer: Time: 52,12019
+[Info   :COTDTracker] Player PulchritudinousPlum: Time: 52,30128
+[Info   :COTDTracker] Player [TILT]Redstony: Time: 52,30999
+[Info   :COTDTracker] Player Minkus: Time: 52,51501
+[Info   :COTDTracker] Player [T7]Heart-TGV: Time: 53,87608
+[Info   :COTDTracker] Player [Same]stindt: Time: 54,45475
+[Info   :COTDTracker] Player [MMM]Victor: Time: DNF
+[Info   :COTDTracker] Eliminating DNF: [MMM]Victor
+[Info   :COTDTracker] Eliminated 1 DNF players
+[Info   :COTDTracker] Eliminating on time: [Same]stindt
+[Info   :COTDTracker] Eliminating 2 players: 
+[Info   :COTDTracker] [MMM]Victor
+[Info   :COTDTracker] [Same]stindt
+[Info   :COTDTracker] Doing eliminations with leaderboard:
+[Info   :COTDTracker] Player ZOMAN: Time: 50,9301
+[Info   :COTDTracker] Player PulchritudinousPlum: Time: 51,35006
+[Info   :COTDTracker] Player [ZET]Stick: Time: 51,59156
+[Info   :COTDTracker] Player Lexer: Time: 51,8142
+[Info   :COTDTracker] Player Minkus: Time: 52,07613
+[Info   :COTDTracker] Player [KBW]microways: Time: 53,53226
+[Info   :COTDTracker] Player [T7]Heart-TGV: Time: 53,60353
+[Info   :COTDTracker] Player [TILT]Redstony: Time: 53,7943
+[Info   :COTDTracker] Eliminated 0 DNF players
+[Info   :COTDTracker] Eliminating on time: [TILT]Redstony
+[Info   :COTDTracker] Eliminating on time: [T7]Heart-TGV
+[Info   :COTDTracker] Eliminating 2 players: 
+[Info   :COTDTracker] [TILT]Redstony
+[Info   :COTDTracker] [T7]Heart-TGV
+[Info   :COTDTracker] Running update tab leaderboard function
+[Info   :COTDTracker] Doing eliminations with leaderboard:
+[Info   :COTDTracker] Player ZOMAN: Time: 51,12849
+[Info   :COTDTracker] Player [ZET]Stick: Time: 51,17007
+[Info   :COTDTracker] Player PulchritudinousPlum: Time: 51,56506
+[Info   :COTDTracker] Player Lexer: Time: 52,27574
+[Info   :COTDTracker] Player [KBW]microways: Time: 52,4423
+[Info   :COTDTracker] Player Minkus: Time: 52,45135
+[Info   :COTDTracker] Eliminated 0 DNF players
+[Info   :COTDTracker] Eliminating on time: Minkus
+[Info   :COTDTracker] Eliminating 1 players: 
+[Info   :COTDTracker] Minkus
+[Info   :COTDTracker] Doing eliminations with leaderboard:
+[Info   :COTDTracker] Player PulchritudinousPlum: Time: 50,70134
+[Info   :COTDTracker] Player ZOMAN: Time: 50,80677
+[Info   :COTDTracker] Player [ZET]Stick: Time: 50,86698
+[Info   :COTDTracker] Player [KBW]microways: Time: 51,61972
+[Info   :COTDTracker] Player Lexer: Time: 51,9053
+[Info   :COTDTracker] Eliminated 0 DNF players
+[Info   :COTDTracker] Eliminating on time: Lexer
+[Info   :COTDTracker] Eliminating 1 players: 
+[Info   :COTDTracker] Lexer
+[Info   :COTDTracker] Doing eliminations with leaderboard:
+[Info   :COTDTracker] Player ZOMAN: Time: 50,19867
+[Info   :COTDTracker] Player PulchritudinousPlum: Time: 50,8414
+[Info   :COTDTracker] Player [ZET]Stick: Time: 50,94741
+[Info   :COTDTracker] Player [KBW]microways: Time: 51,38798
+[Info   :COTDTracker] Eliminated 0 DNF players
+[Info   :COTDTracker] Eliminating on time: [KBW]microways
+[Info   :COTDTracker] Eliminating 1 players: 
+[Info   :COTDTracker] [KBW]microways
+[Info   :COTDTracker] Doing eliminations with leaderboard:
+[Info   :COTDTracker] Player ZOMAN: Time: 50,47546
+[Info   :COTDTracker] Player PulchritudinousPlum: Time: 51,18243
+[Info   :COTDTracker] Player [ZET]Stick: Time: DNF
+[Info   :COTDTracker] Eliminating DNF: [ZET]Stick
+[Info   :COTDTracker] Eliminated 1 DNF players
+[Info   :COTDTracker] Eliminating 1 players: 
+[Info   :COTDTracker] [ZET]Stick
+[Info   :COTDTracker] Doing eliminations with leaderboard:
+[Info   :COTDTracker] Player ZOMAN: Time: 50,18981
+[Info   :COTDTracker] Player PulchritudinousPlum: Time: 51,00299
+[Info   :COTDTracker] Eliminated 0 DNF players
+[Info   :COTDTracker] Eliminating on time: PulchritudinousPlum
+[Info   :COTDTracker] Eliminating 1 players: 
+[Info   :COTDTracker] PulchritudinousPlum

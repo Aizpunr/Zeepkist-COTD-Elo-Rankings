@@ -3,7 +3,7 @@ build_fastest.py — extract fastest times from all COTD xlsx spreadsheets.
 Outputs fastest.json sorted by time ascending.
 """
 import json, os, re, sys
-import openpyxl
+import results_store
 
 sys.stdout.reconfigure(encoding='utf-8')
 
@@ -100,7 +100,7 @@ def scan_file(filepath):
     """Scan a single xlsx for all Fastest Time entries."""
     results = []
     try:
-        wb = openpyxl.load_workbook(filepath, data_only=True)
+        wb = results_store.load_workbook(filepath, data_only=True)
     except Exception as e:
         print(f"  SKIP {os.path.basename(filepath)}: {e}")
         return results
@@ -158,9 +158,6 @@ def scan_file(filepath):
 all_entries = []
 for fname in FILES:
     path = _p(fname)
-    if not os.path.exists(path):
-        print(f"  WARNING: {fname} not found, skipping")
-        continue
     entries = scan_file(path)
     print(f"  {fname}: {len(entries)} fastest times")
     all_entries.extend(entries)

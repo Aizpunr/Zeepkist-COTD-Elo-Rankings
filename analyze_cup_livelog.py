@@ -427,8 +427,8 @@ def patch_cup_json(cup_n, ltg_findings, dry_run=False):
                     c['new_pos'] = new_pos
         p['pos'] = new_pos
 
-    # Every row whose position shifted — the xlsx needs the same edits or the
-    # published ELO (computed from the xlsx) diverges from cup_<N>.json.
+    # Every row whose position shifted — results/cups/cotd-<N>.json needs the
+    # same edits or the published ELO (computed from it) diverges from cup_<N>.json.
     position_moves = [
         {'name': p['name'], 'round': p.get('round'),
          'old_pos': old_pos[id(p)], 'new_pos': p['pos']}
@@ -549,15 +549,15 @@ def main():
             else:
                 print(f'    R{c["round"]} {c["name"]}: {c["status"]}')
         # cup_<N>.json is only the lexertools last-cup view. The published ELO
-        # is computed from the xlsx, which still has the old DNF rows — until
+        # is computed from results/, which still has the old DNF rows — until
         # it gets the same edits, the site rankings and the last-cup view
         # disagree. Print the exact edits so the manual step can't be missed.
         applied_times = [c for c in patch_result['changes'] if 'new_time' in c]
         if patch_result['patched'] and applied_times:
             print()
             print('  ' + '!' * 60)
-            print(f'  !! cup_{n}.json now DIVERGES from the xlsx (= what ELO uses).')
-            print(f'  !! Apply these edits to the COTD {n} block in the xlsx,')
+            print(f'  !! cup_{n}.json now DIVERGES from results/cups/cotd-{n}.json (= what ELO uses).')
+            print(f'  !! Apply these edits to its rows [Position, Name, Elim Time, Elim Round],')
             print(f'  !! then re-run the pipeline (elo_engine.py ... build_altrank.py):')
             for c in applied_times:
                 ms = c['new_time']  # already integer milliseconds

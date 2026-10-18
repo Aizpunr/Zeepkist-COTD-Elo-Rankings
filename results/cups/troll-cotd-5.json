@@ -1,0 +1,38 @@
+{
+  "book": "troll",
+  "sheet": "Troll COTDs",
+  "col": 24,
+  "header_row": 5,
+  "above": [
+    [null, null, null, null],
+    ["Troll COTD 5", null, 44.5, null],
+    ["Map: La caverne de destruction totale! by Kodiak & Maki", null, null, null],
+    [null, null, "Fastest Time: 42.367 by [frog]Fwogiie in Round 6", null]
+  ],
+  "header": ["Position", "Name", "Elim Time", "Elim Round"],
+  "rows": [
+    [1, "Linzi", 42.687, null],
+    [2, "[frog]Fwogiie", "DNF", 8],
+    [3, "Erko", "DNF", 7],
+    [null, "[PTSD]Psycho No. 7", "DNF", 7],
+    [5, "DeiRex", "DNF", 6],
+    [6, "[ZET]a_random_tumbleweed", 45.845, 5],
+    [7, "Lexer", 46.06, 5],
+    [8, "R0nanC", 46.755, 4],
+    [9, "agix", "DNF", 4],
+    [10, "Shadynook", "DNF", 3],
+    [null, "[dogg] schmxrg", "DNF", 3],
+    [null, "[TOG]Lazy_Echidna", "DNF", 3],
+    [13, "ZOMAN", "DNF", 2],
+    [null, "RoundNzt", "DNF", 2],
+    [null, "[              ]", "DNF", 2],
+    [16, "[CTR]Hydro", "DNF", 1],
+    [null, "Wilbert", "DNF", 1],
+    [null, "Nikulair", "DNF", 1],
+    [null, "rpatty8124", "DNF", 1],
+    [null, "gordeiegorov", "DNF", 1],
+    [null, "[CTR] L3it3R", "DNF", 1],
+    [null, "Moiso", "DNF", 1],
+    [null, "[FORK] A Broken Forklift", "DNF", 1]
+  ]
+}

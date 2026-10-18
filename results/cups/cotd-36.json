@@ -1,0 +1,41 @@
+{
+  "book": "cotd-26",
+  "sheet": "COTD 36-40",
+  "col": 1,
+  "header_row": 5,
+  "above": [
+    [null, null, null, null],
+    ["COTD 36", null, null, null],
+    ["Map: COTD #36 - Down Tools by DeeDeeNaNaNa", null, null, null],
+    [null, null, "Fastest Time: 44.997 by RoundNzt in Round 5", null]
+  ],
+  "header": ["Position", "Name", "Elim Time", "Elim Round"],
+  "rows": [
+    [1.0, "Lexer", 45.488, null],
+    [2.0, "RoundNzt", "DNF", 11.0],
+    [3.0, "St Nicholas", 45.506, 10.0],
+    [4.0, "Nicolas_Gamer5476", 45.302, 9.0],
+    [5.0, "[RTR]Fwogiie", 45.57, 8.0],
+    [6.0, "[WSHD] Renergy", 45.578, 7.0],
+    [7.0, "[CTR]R0nanC", 45.764, 7.0],
+    [8.0, "GuAlexItar", 45.856, 6.0],
+    [9.0, "[RTR]Istaysideway", 46.038, 6.0],
+    [10.0, "A2 Zecklord", 46.022, 5.0],
+    [11.0, "Shadynook", 46.211, 5.0],
+    [12.0, "MeroMeroNoMi", 46.045, 4.0],
+    [13.0, "Rigenix", "DNF", 4.0],
+    [14.0, "agix", 46.389, 3.0],
+    [15.0, "DeiRex", 46.914, 3.0],
+    [16.0, "a_random_tumbleweed", 47.933, 3.0],
+    [17.0, "littlepuppy814", 48.177, 3.0],
+    [18.0, "[SNTA] ZOMAN", 47.235, 2.0],
+    [19.0, "Roger256", 48.118, 2.0],
+    [20.0, "TusBro", 49.335, 2.0],
+    [21.0, "JunkJen", 49.971, 2.0],
+    [22.0, "Hydro", "DNF", 1.0],
+    [null, "CDAW", "DNF", 1.0],
+    [null, "Pants", "DNF", 1.0],
+    [null, "gordeiegorov", "DNF", 1.0],
+    [null, "imagineaclevernamehere", "DNF", 1.0]
+  ]
+}
