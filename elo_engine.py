@@ -265,6 +265,7 @@ CANONICAL = {
     'lucanakin': ['[DNFF]lucanakin'],
     'MarcSubstitute': ['[DHLU]MarcSubstitute', '[SLOW]MarcSubstitute'],
     'MetalCJ': ['[TTR]MetalCJ'],
+    'shmoogl': ['[KURK]shmoogl'],
     'microways': ['[Quac] microways','[KBW] microways','[KBW]microways'],
     'DragonShadow84290': ['[TTR]DragonShadow84290'],
     'PlusMicron': ['[CSC] PlusMicron'],
