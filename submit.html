@@ -240,7 +240,7 @@
       <span class="pill received">received</span><span>Waiting to be picked up (every 15 minutes, Saturday 19:00 to Sunday 12:00 Spain time).</span>
       <span class="pill processed">processed</span><span>Ratings computed. Waiting for aizpun to check and publish.</span>
       <span class="pill published">published</span><span>Live on the rankings.</span>
-      <span class="pill duplicate">duplicate</span><span>That cup was already processed, or this exact file was already sent.</span>
+      <span class="pill duplicate">duplicate</span><span>That cup was already processed, or this exact file was already sent. Every log is kept and checked against the published result.</span>
       <span class="pill superseded">superseded</span><span>Someone sent a more complete log for the same cup.</span>
       <span class="pill failed">failed</span><span>The pipeline stopped. The note says why; ping aizpun.</span>
     </div>
@@ -542,7 +542,7 @@ function refreshSubmit() {
   var problems = formProblems();
   var cup = Number($('cupInput').value);
   var note = problems.length ? 'Still needed: ' + problems.join(', ') : '';
-  if (!problems.length && state.lastCup && cup <= state.lastCup) note = 'COTD ' + cup + ' is already on the site; this will be marked duplicate.';
+  if (!problems.length && state.lastCup && cup <= state.lastCup) note = 'COTD ' + cup + ' is already on the site; your log will be kept as a duplicate and checked against the published result.';
   if (!CONFIGURED) note = 'Submissions are not open yet.';
   $('missing').textContent = note;
   $('submitBtn').disabled = !CONFIGURED || problems.length > 0 || state.submitting;
@@ -575,7 +575,7 @@ $('submitBtn').addEventListener('click', function () {
       if (mine.indexOf(res.id) === -1) mine.push(res.id);
       store('cotd_my_submissions', mine.slice(-50));
       $('submitMsg').innerHTML = res.status === 'duplicate'
-        ? msg('warn', 'This exact log was already sent (submission ' + esc(res.id) + '). Nothing new was stored.')
+        ? msg('warn', 'This exact log was already sent (as submission ' + esc(res.same_file_as || '') + '). Yours is recorded as duplicate ' + esc(res.id) + '.')
         : msg('ok', 'Received. Thank you! Submission ' + esc(res.id) + '. Watch its status below.');
       loadStatus();
     } else {

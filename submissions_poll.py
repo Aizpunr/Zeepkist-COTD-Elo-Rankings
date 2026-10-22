@@ -88,7 +88,8 @@ class Ctx:
         self.dry_run = args.dry_run
         self.no_git = args.no_git
         self.only_id = args.id
-        self.rehearsal = args.rehearsal or args.ci
+        self.rehearsal = args.rehearsal
+        self.skip_external = args.rehearsal or args.ci
         self.exit_code = 0
         self.subdir = os.path.join(self.repo, 'cup logs', 'submissions')
         os.makedirs(self.subdir, exist_ok=True)
@@ -217,6 +218,7 @@ def post_status(ctx, sid, status, note='', summary=None):
         log.info('status %s -> %s %s', sid, status, note)
     except WorkerError as e:
         log.warning('could not post status for %s (will retry): %s', sid, e)
+        ctx.exit_code = 1
 
 
 def retry_unposted(ctx):
@@ -236,6 +238,7 @@ def retry_unposted(ctx):
                 log.info('retried status %s -> %s', sid, entry['status'])
             except WorkerError as e:
                 log.warning('retry failed for %s: %s', sid, e)
+                ctx.exit_code = 1
     ctx.save_state()
 
 
@@ -252,6 +255,7 @@ def published_cups(ctx):
         return set(json.loads(r.stdout.decode('utf-8')).keys())
     except (subprocess.SubprocessError, OSError, ValueError) as e:
         log.warning('publish detection skipped: %s', e)
+        ctx.exit_code = 1
         return None
 
 
@@ -263,6 +267,48 @@ def count_blocks(path):
             return sum(1 for line in f if 'COTDTracker' in line and HEADER in line)
     except OSError:
         return 0
+
+
+def published_block(ctx, cup):
+    """Names of COTD <cup> in published order from its results/ block, ghost
+    tags stripped back to the account name the log shows. None if missing."""
+    path = os.path.join(ctx.repo, 'results', 'cups', f'cotd-{cup}.json')
+    block = load_json(path, None)
+    if not block:
+        return None
+    names = []
+    for row in block.get('rows', []):
+        name = row[1] if len(row) > 1 else None
+        if name is None or str(name).strip().startswith('*'):
+            continue
+        names.append(re.sub(r'\s*\(elo=[^)]*\)\s*$', '', str(name).strip()))
+    return names
+
+
+def compare_with_published(sub, log_path, published):
+    """Parse a second log for an already processed cup with ITS submitter's
+    mapper and exclusions, and compare winner, top 3 and player count with the
+    published block. Returns (agrees, note)."""
+    from cotd_parser import ParseError, parse_cup_log_file
+    if not published:
+        return False, 'published result not found to compare'
+    try:
+        parsed = parse_cup_log_file(log_path, {sub['mapper']} | set(sub.get('exclude') or []))
+    except (OSError, ParseError) as e:
+        return False, f'could not compare: {e}'
+    if parsed.ambiguous or not parsed.candidates:
+        return False, 'could not compare: no single winner in this log'
+    got = [p.name for p in parsed.leaderboard]
+    diffs = []
+    if got[:1] != published[:1]:
+        diffs.append(f'winner {got[0]} (published {published[0]})')
+    elif got[:3] != published[:3]:
+        diffs.append(f"top 3 {', '.join(got[:3])} (published {', '.join(published[:3])})")
+    if len(got) != len(published):
+        diffs.append(f'{len(got)} players (published {len(published)})')
+    if not diffs:
+        return True, 'matches the published result'
+    return False, 'DIFFERS from the published result: ' + '; '.join(diffs)
 
 
 def unsafe_args(sub):
@@ -338,6 +384,16 @@ def cup_branch(cup):
     return f'cup-{cup}'
 
 
+def open_cup_prs(ctx):
+    """Head branches (cup-<N>) of the open pull requests into main."""
+    r = subprocess.run(['gh', 'pr', 'list', '--state', 'open', '--base', ctx.branch,
+                        '--json', 'headRefName'], cwd=ctx.repo, capture_output=True,
+                       text=True, encoding='utf-8', timeout=60)
+    if r.returncode:
+        raise RuntimeError(f'gh pr list: {r.stderr.strip()}')
+    return [p['headRefName'] for p in json.loads(r.stdout) if re.fullmatch(r'cup-\d+', p['headRefName'])]
+
+
 def remote_branch_exists(ctx, cup):
     return bool(git(ctx, 'ls-remote', '--heads', ctx.remote, cup_branch(cup), check=False))
 
@@ -365,6 +421,8 @@ def open_pr(ctx, sub, summary):
     """Commit the pipeline's output on cup-<N>, push it, open the PR. Returns its URL."""
     cup, branch = sub['cup'], cup_branch(sub['cup'])
     title = f"COTD {cup}: {sub['map']} by {sub['mapper']}"
+    if ctx.rehearsal or ctx.dry_run:
+        raise RuntimeError('publication disabled in rehearsal or dry-run')
     git(ctx, 'checkout', '-b', branch)
     git(ctx, 'add', '-u')
     git(ctx, 'add', 'results', 'tracker_logs', 'cup_data', 'cup_meta.json')
@@ -424,6 +482,10 @@ def summarize(ctx, cup, out_text):
     return summary
 
 
+def is_complete(cup, out_text):
+    return f'COTD {cup} COMPLETE' in (l.strip() for l in out_text.splitlines())
+
+
 def run_cup(ctx, sub, log_path):
     sid, cup = sub['id'], sub['cup']
     cmd = new_cup_command(ctx, sub, log_path)
@@ -433,7 +495,7 @@ def run_cup(ctx, sub, log_path):
         return
     out_path = os.path.join(ctx.subdir, f'{sid}.out')
     env = dict(os.environ, PYTHONIOENCODING='utf-8')
-    if ctx.rehearsal:
+    if ctx.skip_external:
         env['COTD_SKIP_EXTERNAL'] = '1'
     ctx.state.setdefault(sid, {})['started'] = datetime.datetime.now().isoformat(timespec='seconds')
     ctx.save_state()
@@ -451,7 +513,7 @@ def run_cup(ctx, sub, log_path):
     with open(out_path, encoding='utf-8', errors='replace') as f:
         out_text = f.read()
 
-    if rc == 0 and f'COTD {cup} COMPLETE' in out_text:
+    if rc == 0 and is_complete(cup, out_text):
         summary = summarize(ctx, cup, out_text)
         if ctx.ci:
             try:
@@ -492,7 +554,7 @@ def one_pass(ctx, args):
         return 0
     if not ctx.worker or not ctx.token:
         log.error('worker_url / poller_token missing: create submit_config.json (see SUBMIT.md)')
-        return 2
+        return 1
     lock = os.path.join(ctx.subdir, '.lock')
     if not ctx.dry_run and not acquire_lock(lock):
         log.info('another pass is running, exiting')
@@ -522,13 +584,14 @@ def _pass(ctx, args):
                 ctx.save_state()
         except WorkerError as e:
             log.warning('reindex failed: %s', e)
+            ctx.exit_code = 1
 
     retry_unposted(ctx)
     try:
         pending = api(ctx, 'GET', '/pending').get('submissions', [])
     except WorkerError as e:
         log.warning('worker unreachable, nothing done: %s', e)
-        return 0
+        return 1
     if ctx.only_id:
         pending = [s for s in pending if s['id'] == ctx.only_id]
     log.debug('%d pending submission(s)', len(pending))
@@ -537,6 +600,13 @@ def _pass(ctx, args):
 
     local_meta = set(load_json(os.path.join(ctx.repo, 'cup_meta.json'), {}).keys())
     remote_meta = published_cups(ctx)
+    if ctx.ci and not ctx.no_git and remote_meta is None:
+        return 1
+    try:
+        open_prs = open_cup_prs(ctx) if ctx.ci else []
+    except (RuntimeError, OSError, ValueError, subprocess.SubprocessError) as e:
+        log.error('open pull request check failed: %s', e)
+        return 1
 
     # processed -> published once the cup is on the remote branch
     for sub in pending:
@@ -562,6 +632,7 @@ def _pass(ctx, args):
                 paths[sub['id']] = download(ctx, sub)
             except (WorkerError, OSError) as e:
                 log.warning('download failed for %s: %s', sub['id'], e)
+                ctx.exit_code = 1
                 continue
             blocks[sub['id']] = count_blocks(paths[sub['id']])
         subs = [s for s in subs if s['id'] in paths]
@@ -574,13 +645,16 @@ def _pass(ctx, args):
             if not os.path.exists(existing):
                 existing = os.path.join(ctx.repo, 'cup logs', f'cotd_{cup}.log')
             have = count_blocks(existing) if os.path.exists(existing) else 0
+            published = published_block(ctx, cup)
             for sub in subs:
                 n = blocks[sub['id']]
-                note = f'{cup_id} is already processed ({n} leaderboards in this log vs {have} in the one used)'
-                if n > have:
+                agrees, comparison = compare_with_published(sub, paths[sub['id']], published)
+                note = (f'{cup_id} is already processed ({n} leaderboards in this log vs {have} '
+                        f'in the one used); {comparison}')
+                if n > have or not agrees:
                     note = 'REVIEW: ' + note
-                    toast(ctx, f'{cup_id}: a more complete log arrived', note)
-                post_status(ctx, sub['id'], 'duplicate', note)
+                    toast(ctx, f'{cup_id}: a second log needs a look', note)
+                post_status(ctx, sub['id'], 'duplicate', note[:500])
             continue
 
         best = max(subs, key=lambda s: (blocks[s['id']], -subs.index(s)))
@@ -601,9 +675,8 @@ def _pass(ctx, args):
             if remote_branch_exists(ctx, cup):
                 log.warning('%s: branch %s already exists; its pull request is the result', cup_id, cup_branch(cup))
                 continue
-            waiting_on = sorted(s['cup'] for s in pending if s['status'] == 'processed')
-            if waiting_on:
-                log.info('%s waits: merge the pull request for COTD %s first', cup_id, waiting_on[0])
+            if open_prs:
+                log.info('%s waits: merge the open pull request(s) first: %s', cup_id, ', '.join(open_prs))
                 continue
         run_cup(ctx, best, paths[best['id']])
         ran = True

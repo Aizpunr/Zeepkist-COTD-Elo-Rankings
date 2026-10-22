@@ -39,7 +39,7 @@ Complete the anti-bot check and press Submit. The "Recent submissions" table sho
 | received | Waiting to be picked up. An automatic job checks every 15 minutes from Saturday 19:00 to Sunday 12:00 (Spain time). A log sent later waits until the next Saturday. |
 | processed | Ratings computed and proposed as a change to the site. aizpun checks it and publishes it. |
 | published | Live on the rankings. |
-| duplicate | That cup was already processed, or this exact file was already sent. |
+| duplicate | That cup was already processed, or this exact file was already sent. Every log is kept and checked against the published result, so mistakes and repeats stay visible. |
 | superseded | A more complete log for the same cup was sent. |
 | failed | The pipeline stopped; the note says why. Ping aizpun. |
 

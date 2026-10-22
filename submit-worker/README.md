@@ -46,7 +46,7 @@ Poller endpoints need `Authorization: Bearer <POLLER_TOKEN>`.
 - excluded names containing a comma (`--exclude` is comma separated);
 - more than `DAILY_SUBMIT_CAP` submissions in 24 hours.
 
-An identical file (same SHA-256) returns the earlier id with status `duplicate` and stores nothing.
+An identical file (same SHA-256) still gets its own record: status `duplicate`, `same_file_as` the first id, note `same file as <id>` (prefixed `REVIEW:` when it was sent under another cup number). The bytes are not stored again, so it costs 2 KV writes and counts toward the daily cap. A different log for a cup that is already processed is compared by the poller with the published results block (winner, top 3, player count); a disagreement or a more complete log puts `REVIEW:` in the note.
 
 ### Known limitation: the index
 

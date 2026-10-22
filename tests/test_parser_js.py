@@ -31,3 +31,8 @@ def test_js_parser_matches_every_golden_fixture():
 def test_js_parser_rules():
     rc, out = _run(['--test', os.path.join('tests', 'js', 'test_rules.mjs')])
     assert rc == 0, out
+
+
+def test_worker_keeps_every_submission():
+    rc, out = _run([os.path.join('tests', 'js', 'test_worker.mjs')])
+    assert rc == 0, out
