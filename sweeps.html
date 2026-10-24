@@ -70,6 +70,8 @@ tr.is-sweep td{background:rgba(56,189,248,0.07)}
 <div class="lead" id="sweepLead"></div>
 <div id="sweepCards"></div>
 
+<div id="unfinishedBox"></div>
+
 <h2>Round control <span class="hint" id="hintRounds"></span></h2>
 <div class="lead">How often a player was the fastest of a round, out of the rounds they actually raced.</div>
 <div style="overflow-x:auto"><table id="playerTable"></table></div>
@@ -93,6 +95,7 @@ tr.is-sweep td{background:rgba(56,189,248,0.07)}
 const customColors={"Lexer":"#22c55e","Sandals":"#aa55ff","GuAlexItar":"#f5c842","justMaki":"#dc2626", "Minkus": "#dc2626","Kernkob":"#facc15","Quickracer10":"#15803d","Hydro":"#22d3ee","JakeAdjacent":"#15803d","PandaMane":"#3b82f6","RoundNzt":"#f97316","agix":"#fb923c","ZOMAN":"#3b82f6","Cbad Cruiser":"#6366f1","jandje":"#f97316","Linzi":"#d946ef","rtube":"#c084fc","Sterben":"#ec4899"};
 function esc(s){const d=document.createElement('div');d.textContent=s==null?'':s;return d.innerHTML;}
 function nm(n){return `<span class="pname" style="color:${customColors[n]||''}">${esc(n)}</span>`;}
+function plusMark(n){return n ? `<a href="#unfinished" class="dim" title="unfinished sweep, not counted">+${n}</a>` : '';}
 function bar(a,b){const pct=b?Math.round(100*a/b):0;return `<span class="bar"><i style="width:${pct}%"></i></span>`;}
 
 fetch('rounds.json').then(r=>r.json()).then(D=>{
@@ -118,7 +121,7 @@ fetch('rounds.json').then(r=>r.json()).then(D=>{
     `<tr><th class="rk"></th><th>Player</th><th class="n">Sweeps</th><th class="n hide-s">Pinned to a cup</th></tr>`
     + T.rows.map((t,i)=>`<tr>
         <td class="rk n">${i+1}</td><td>${nm(t.name)}</td>
-        <td class="n">${t.total}</td>
+        <td class="n">${t.total}${plusMark(t.plus)}</td>
         <td class="n hide-s dim">${t.named}</td>
       </tr>`).join('')
   ) : '';
@@ -157,6 +160,20 @@ fetch('rounds.json').then(r=>r.json()).then(D=>{
     }).join('') + '</table></div>'
   ) : '<div class="empty">none on record yet</div>';
 
+  // ---- unfinished: the +1 ----
+  const U = D.unfinished || [];
+  document.getElementById('unfinishedBox').innerHTML = U.length ? (
+    `<h2 id="unfinished">The +1</h2>`
+    + `<div class="lead">A sweep that was on course and ended by bad luck, not by being beaten. `
+    + `It stays out of the count above, the ratings and everyone's positions.</div>`
+    + U.slice().reverse().map(u=>`<div class="lead">
+        <b>${esc(u.cup)}</b> <span class="dim">${esc(u.date||'')} &middot; ${esc(u.map||'')} &middot; ${u.field||''} players</span><br>
+        ${nm(u.player)} was fastest in rounds 1 to ${u.led} of ${u.rounds}. ${esc(u.note)}
+        ${nm(u.winner)} won the cup.
+        ${u.video ? `<a href="${esc(u.video)}" target="_blank" rel="noopener">Watch it</a>` : ''}
+      </div>`).join('')
+  ) : '';
+
   // ---- players ----
   document.getElementById('playerTable').innerHTML =
     `<tr><th class="rk"></th><th>Player</th><th class="n">Rounds led</th><th></th>
@@ -166,7 +183,7 @@ fetch('rounds.json').then(r=>r.json()).then(D=>{
         <td class="n">${p.led}</td><td>${bar(p.led,p.rounds)}</td>
         <td class="n hide-s dim">${p.rounds}</td><td class="n">${p.share.toFixed(1)}%</td>
         <td class="n hide-s dim">${p.wins}</td>
-        <td class="n">${p.sweeps||'<span class="dim">0</span>'}</td>
+        <td class="n">${p.sweeps||'<span class="dim">0</span>'}${plusMark(p.plus)}</td>
       </tr>`).join('');
 
   // ---- cup by cup ----

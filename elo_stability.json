@@ -12,8 +12,8 @@
     {
       "name": "justMaki",
       "current_elo": 2210.3,
-      "stability_point": 2557.7,
-      "gap": -347.4,
+      "stability_point": 2560.4,
+      "gap": -350.1,
       "attendance_pct": 25.0,
       "cups_played": 83,
       "recent_cups": 3,
@@ -22,13 +22,13 @@
     },
     {
       "name": "Kernkob",
-      "current_elo": 2225.8,
-      "stability_point": 2371.8,
-      "gap": -146.0,
+      "current_elo": 2227.0,
+      "stability_point": 2394.2,
+      "gap": -167.2,
       "attendance_pct": 83.3,
       "cups_played": 107,
       "recent_cups": 10,
-      "avg_position": 2.2,
+      "avg_position": 2.1,
       "status": "Cooking"
     },
     {
@@ -56,8 +56,8 @@
     {
       "name": "Sterben",
       "current_elo": 1942.5,
-      "stability_point": 2078.8,
-      "gap": -136.3,
+      "stability_point": 2079.2,
+      "gap": -136.7,
       "attendance_pct": 50.0,
       "cups_played": 29,
       "recent_cups": 6,
@@ -88,9 +88,9 @@
     },
     {
       "name": "Stick",
-      "current_elo": 1783.5,
+      "current_elo": 1782.2,
       "stability_point": 1972.0,
-      "gap": -188.5,
+      "gap": -189.8,
       "attendance_pct": 83.3,
       "cups_played": 62,
       "recent_cups": 10,
@@ -254,8 +254,8 @@
     {
       "name": "Heart-TGV",
       "current_elo": 1447.3,
-      "stability_point": 1704.1,
-      "gap": -256.8,
+      "stability_point": 1703.7,
+      "gap": -256.4,
       "attendance_pct": 33.3,
       "cups_played": 31,
       "recent_cups": 4,
@@ -419,8 +419,8 @@
     {
       "name": "Six",
       "current_elo": 1507.3,
-      "stability_point": 1544.9,
-      "gap": -37.6,
+      "stability_point": 1544.6,
+      "gap": -37.3,
       "attendance_pct": 91.7,
       "cups_played": 47,
       "recent_cups": 11,

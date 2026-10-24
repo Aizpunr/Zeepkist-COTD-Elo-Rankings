@@ -15,7 +15,14 @@
     "build_rounds.py checks everything here against cups.json and drops an entry with a",
     "loud warning if the cup does not exist, if that player did not actually win it, or",
     "if the cup has a mod log (COTD 136 onward), where the log is the authority. A total",
-    "lower than the number of sweeps we can already name is reported the same way."
+    "lower than the number of sweeps we can already name is reported the same way.",
+    "",
+    "UNFINISHED is the asterisk: a sweep that was on course and ended by bad luck, not",
+    "by being beaten (COTD 167: Kernkob led rounds 1 to 13, then disconnected in round",
+    "14 with that round's best time). It shows as '7+1' on the page with a card and a",
+    "video link. It never counts toward the totals, the ratings or anyone's position.",
+    "Fields: cup, player, video (https only), note. The rounds led are checked against",
+    "the round data, which must show the player leading every round before the break."
   ],
   "totals": {
     "source": "Lexer's records",
@@ -34,5 +41,9 @@
     {"cup": 92, "winner": "Kernkob", "rounds": null, "source": "Hydro", "note": ""},
     {"cup": 98, "winner": "Hydro", "rounds": null, "source": "Hydro", "note": ""},
     {"cup": 101, "winner": "Kernkob", "rounds": null, "source": "Hydro", "note": ""}
+  ],
+  "unfinished": [
+    {"cup": 167, "player": "Kernkob", "video": "https://youtu.be/W1by5RiVM58",
+     "note": "Disconnected in round 14 with the round's best time (42.868). Went out tied 3rd."}
   ]
 }

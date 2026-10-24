@@ -539,6 +539,37 @@ def main():
                                 f"but no all-time count, listing the named ones")
             totals.append({'name': name, 'total': named, 'named': named})
 
+    # Sweeps ended by bad luck rather than by being beaten (the '+1'). Shown,
+    # never counted: totals, ratings and positions do not see them.
+    unfinished = []
+    for e in doc.get('unfinished', []):
+        num, who = int(e['cup']), normalize_name(e['player'])
+        cup = next((c for c in cups_out if c['num'] == num), None)
+        if cup is None:
+            warnings.append(f"sweeps_manual unfinished: COTD {num} has no round data, dropped")
+            continue
+        streak = 0
+        for leader in cup['leaders']:
+            if leader != who:
+                break
+            streak += 1
+        if streak == 0 or cup['sweep']:
+            warnings.append(f"sweeps_manual unfinished: COTD {num} {who} did not lead from round 1, dropped")
+            continue
+        video = e.get('video') or ''
+        if video and not re.fullmatch(r'https://(youtu\.be|www\.youtube\.com|youtube\.com)/[\w?=&/.-]+', video):
+            warnings.append(f"sweeps_manual unfinished: COTD {num} video link {video!r} rejected")
+            video = ''
+        unfinished.append({
+            'cup': cup['cup'], 'num': num, 'player': who, 'led': streak, 'rounds': cup['rounds'],
+            'winner': cup['winner'], 'map': cup['map'], 'date': cup['date'], 'field': cup['field'],
+            'video': video, 'note': e.get('note') or '',
+        })
+    plus = Counter(u['player'] for u in unfinished)
+    for t in totals:
+        if plus.get(t['name']):
+            t['plus'] = plus[t['name']]
+
     totals_meta = {
         'source': tdoc.get('source') or '',
         'note': tdoc.get('note') or '',
@@ -575,6 +606,8 @@ def main():
             'sweeps': sweep_count.get(name, 0), 'wins': win_count.get(name, 0),
             'near': near.get(name, 0),
         })
+        if plus.get(name):
+            players[-1]['plus'] = plus[name]
     players.sort(key=lambda p: (-p['led'], -p['share'], p['name'].lower()))
 
     gap = [n for n in range(min(covered), max(covered) + 1) if n not in covered] if covered else []
@@ -596,6 +629,7 @@ def main():
         },
         'totals': totals_meta,
         'sweeps': sweeps,
+        'unfinished': unfinished,
         'cups': cups_out,
         'players': players,
     }
