@@ -178,13 +178,13 @@
   },
   {
     "id": "cotd-131",
-    "xlsx": "COTD 131-166.xlsx",
+    "xlsx": "COTD 131-167.xlsx",
     "kind": "cotd",
     "sheets": [
       {
         "name": "COTD 131-135",
         "max_row": 67,
-        "max_column": 166
+        "max_column": 172
       },
       {
         "name": "136-140",
