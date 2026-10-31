@@ -277,7 +277,7 @@ CANONICAL = {
     'Sterben': ['[BAP]Sterben','[PNCK]Mini P.E.K.K.A','λ','Lλmbda','[FPV]Lλmbda','[PCDJ]Sterben','tatari_lover2008'],
     'stindt': ['[KAAS]stindt', '[Lame]stindt', '[Lame}stindt', '[Same]stindt', '[Slow]stindt', '[Tame]stindt'],
     'Zeus':   ['[NewB]Zeus', '[NewB] Zeus', '[SLOW]Zeus'],
-    'Tommygaming': ['[CSC]Tommygaming', '[OOPS]Tommygaming', '[jofk]Tommygaming', 'TommyGaming5132', 'Tommygaming5132', '[TG]Tommygaming5132', '[CSC]Tommygaming5132', '[CSC]Tommygaming6132', '[C3PO]Tommygaming5132', '[CSC]TommyLaptopGaming'],
+    'Tommygaming': ['[CSC]Tommygaming', '[OOPS]Tommygaming', '[jofk]Tommygaming', 'TommyGaming5132', 'Tommygaming5132', '[TG]Tommygaming5132', '[CSC]Tommygaming5132', '[CSC]Tommygaming6132', '[C3PO]Tommygaming5132', '[CSC]TommyLaptopGaming', 'TommyLaptopGaming', '[DIRT]Tommygaming'],
     'JobW': ['BobW'],
     'kentback': ['[IVD3]kentback'],
     'WotterBytes': ['Wotterbytes'],
