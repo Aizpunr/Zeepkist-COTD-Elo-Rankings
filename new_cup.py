@@ -455,6 +455,7 @@ cool_stats = [
     ('build_fastest.py', 'Fastest Times'),
     ('build_whatif.py', 'What-If ELO'),
     ('build_streaks.py', 'Streak Records'),
+    ('build_last_cup.py', 'Last Cup Events'),
     ('build_rounds.py', 'Clean Sweeps'),
     ('build_altrank.py', 'Alt Rankings'),
 ]

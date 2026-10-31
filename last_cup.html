@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Last Cup Events · Zeepkist COTD</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏁</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#08080d;--surface:rgba(255,255,255,0.02);--border:rgba(255,255,255,0.06);
+--text:#e5e7eb;--dim:#9ca3af;--muted:#6b7280;--dark:#4b5563;
+--mono:'JetBrains Mono',monospace;--accent:#f59e0b;--red:#ef4444;--green:#10b981;--blue:#3b82f6;
+--streak:linear-gradient(135deg,#f59e0b,#ef4444)}
+html{background:var(--bg);color:var(--text)}
+body{font-family:'Space Grotesk',system-ui,sans-serif;min-height:100vh;padding:20px 12px}
+::selection{background:rgba(245,158,11,0.3)}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.1);border-radius:3px}
+.container{max-width:1100px;margin:0 auto}
+h1{text-align:center;font-size:32px;font-weight:800;margin-bottom:4px;
+background:var(--streak);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sub{text-align:center;font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:22px}
+.back-link{display:inline-block;font-family:var(--mono);font-size:12px;color:var(--muted);text-decoration:none;margin-bottom:16px}
+.back-link:hover{color:var(--text)}
+h2{font-size:13px;font-family:var(--mono);font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin:26px 0 10px}
+
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 14px;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--streak)}
+.card-title{font-size:17px;font-weight:700;margin-bottom:1px}
+.card-cut{font-family:var(--mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+
+.hero{font-size:28px;font-weight:800;line-height:1.1;margin-bottom:6px}
+.hero-time{font-family:var(--mono);font-size:28px;font-weight:700;line-height:1.1;margin-bottom:6px}
+.badge{display:inline-block;font-family:var(--mono);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;
+color:var(--accent);background:rgba(245,158,11,0.12);border-radius:4px;padding:2px 6px;margin-bottom:10px}
+.badge.red{color:var(--red);background:rgba(239,68,68,0.12)}
+.meta{font-family:var(--mono);font-size:11px;color:var(--dim);line-height:1.6}
+
+.srow{display:flex;align-items:baseline;gap:8px;padding:4px 6px;border-radius:6px;font-family:var(--mono);font-size:12px}
+.srow:hover{background:rgba(255,255,255,0.03)}
+.srow.live{background:rgba(239,68,68,0.07)}
+.srow .rank{color:var(--muted);width:28px;text-align:right;flex-shrink:0}
+.srow .pname{flex:1;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:'Space Grotesk',sans-serif}
+.srow .note{color:var(--muted);font-size:10px;flex-shrink:0}
+.srow .size{font-weight:700;font-variant-numeric:tabular-nums;flex-shrink:0}
+.srow.live .size{color:var(--red)}
+.srow .atag{color:var(--red);font-size:9px;text-transform:uppercase;letter-spacing:1px;flex-shrink:0}
+.srow .rtag{color:var(--accent);font-size:9px;text-transform:uppercase;letter-spacing:1px;flex-shrink:0}
+
+.brow{display:grid;grid-template-columns:1fr auto;gap:2px 12px;padding:8px 8px;border-radius:8px;font-family:var(--mono);font-size:12px}
+.brow + .brow{border-top:1px solid var(--border)}
+.brow.top{background:rgba(245,158,11,0.06)}
+.brow .who{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px}
+.brow .what{color:var(--dim)}
+.brow .len{grid-row:span 2;align-self:center;font-size:22px;font-weight:700;font-variant-numeric:tabular-nums;text-align:right}
+.brow .how{color:var(--muted);font-size:10px}
+.brow .rtag{color:var(--accent);font-size:9px;text-transform:uppercase;letter-spacing:1px;margin-left:6px}
+
+.empty{font-family:var(--mono);font-size:11px;color:var(--dark);padding:4px 6px}
+.record-note{font-family:var(--mono);font-size:10px;color:var(--dark);margin-top:10px;padding-top:8px;border-top:1px solid var(--border)}
+.methodology{font-family:var(--mono);font-size:10px;color:var(--dark);margin-top:24px;padding:12px 0;border-top:1px solid var(--border);line-height:1.5}
+.methodology a{color:var(--muted)}
+
+/* click to hide, for screenshots */
+.srow,.brow,.card-title,h2,.methodology{cursor:pointer}
+.srow:hover,.brow:hover,.card-title:hover,h2:hover,.methodology:hover{opacity:0.6}
+.gone{display:none !important}
+#showAll{position:fixed;right:14px;bottom:14px;display:none;font-family:var(--mono);font-size:11px;font-weight:600;
+color:var(--accent);background:#14141c;border:1px solid var(--border);border-radius:6px;padding:6px 10px;cursor:pointer;opacity:0.8}
+#showAll:hover{opacity:1}
+
+@media(max-width:860px){
+  .grid3{grid-template-columns:1fr 1fr}
+  .grid4{grid-template-columns:repeat(2,1fr);gap:10px}
+  h1{font-size:26px}
+}
+@media(max-width:480px){
+  .grid3,.grid4{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="container">
+<a href="stats.html" class="back-link">&larr; back to cool stats</a>
+<h1>Last Cup Events</h1>
+<div class="sub" id="sub">what happened at the newest COTD</div>
+
+<div class="grid3">
+  <div class="card" id="winnerCard"></div>
+  <div class="card" id="fastestCard"></div>
+  <div class="card" id="pbCard"></div>
+</div>
+
+<h2>Streaks broken</h2>
+<div class="card" id="brokenCard"></div>
+
+<h2>Still going</h2>
+<div class="grid4" id="activeCards"></div>
+
+<div class="methodology">
+  Regular COTD only (no Troll/Roulette). <b>Cup PBs</b> are players who finished higher than in any earlier COTD;
+  first-time players are left out. Streaks follow the <a href="streaks.html">Streak Records</a> rules:
+  consecutive cups a player attended at or above the cutline, cups they sat out don't break a run.
+  <b>Streaks broken</b> were alive going into this cup and ended here. <b>Still going</b> shows the runs this cup extended.
+  The <b>Big 3</b> run counts consecutive cups won by Kernkob, justMaki or ZOMAN.
+  Taking a screenshot? Click a row, a card title or a heading to hide it; Esc brings everything back.
+</div>
+</div>
+<button id="showAll" onclick="showAll()"></button>
+
+<script>
+const customColors={"Lexer":"#22c55e","Sandals":"#aa55ff","GuAlexItar":"#f5c842","justMaki":"#dc2626", "Minkus": "#dc2626","Kernkob":"#facc15","Quickracer10":"#15803d","Hydro":"#22d3ee","JakeAdjacent":"#15803d","PandaMane":"#3b82f6","RoundNzt":"#f97316","agix":"#fb923c","ZOMAN":"#3b82f6","Cbad Cruiser":"#6366f1","jandje":"#f97316","Linzi":"#d946ef","rtube":"#c084fc","Sterben":"#ec4899", "Shattersmith":"#f9a8d4"};
+function esc(s){const d=document.createElement('div');d.textContent=s==null?'':String(s);return d.innerHTML;}
+function nm(n){return `<span style="color:${customColors[n]||''}">${esc(n)}</span>`;}
+function ord(n){const s=['th','st','nd','rd'],v=n%100;return n+(s[(v-20)%10]||s[v]||s[0]);}
+function num(id){return esc(String(id).replace('COTD ',''));}
+const CARDS=[['Wins',1],['Podium',3],['Single Elim',6],['Double Elim',12]];
+
+function render(D){
+  document.getElementById('sub').innerHTML =
+    `${esc(D.cup)} &middot; ${esc(D.map||'')} by ${esc(D.mapper||'?')} &middot; ${esc(D.date||'')} &middot; ${D.field} players`;
+
+  const w = D.winner;
+  document.getElementById('winnerCard').innerHTML = `
+    <div class="card-title">Winner</div>
+    <div class="card-cut">${esc(D.cup)}</div>
+    <div class="hero">${nm(w.name)}</div>
+    <div class="badge">${w.wins===1 ? 'first COTD win' : ord(w.wins)+' COTD win'}</div>
+    ${D.podium.map(p=>`<div class="srow"><span class="rank">${ord(p.pos)}</span><span class="pname">${nm(p.name)}</span></div>`).join('')}`;
+
+  const f = D.fastest;
+  document.getElementById('fastestCard').innerHTML = f ? `
+    <div class="card-title">Fastest time</div>
+    <div class="card-cut">best time of the cup</div>
+    <div class="hero-time">${f.time.toFixed(3)}</div>
+    <div class="hero" style="font-size:20px">${nm(f.player)}</div>
+    <div class="meta">${esc(f.round)}${f.left ? ` &middot; ${f.left} players left` : ''}</div>`
+    : `<div class="card-title">Fastest time</div><div class="empty">no fastest time recorded</div>`;
+
+  document.getElementById('pbCard').innerHTML = `
+    <div class="card-title">Cup PBs</div>
+    <div class="card-cut">best finish ever</div>
+    ${D.pbs.length ? D.pbs.map(p=>`<div class="srow" title="${p.cups} COTDs played">
+        <span class="rank">${ord(p.pos)}</span>
+        <span class="pname">${nm(p.name)}</span>
+        <span class="note">was ${ord(p.prev_best)}</span>
+      </div>`).join('') : '<div class="empty">no new best finishes</div>'}`;
+
+  document.getElementById('brokenCard').innerHTML = D.broken.length ? D.broken.map(b=>{
+    const span = `COTD ${num(b.span[0])} to ${num(b.span[1])}`;
+    if(b.name==='Big 3'){
+      return `<div class="brow${b.record?' top':''}">
+        <span class="who">Big 3 <span class="what">&middot; wins in a row</span>${b.record?'<span class="rtag">record</span>':''}</span>
+        <span class="len">${b.len}</span>
+        <span class="how">${span} &middot; ended by ${nm(D.winner.name)} &middot; record ${b.record_len}</span>
+      </div>`;
+    }
+    return `<div class="brow${b.record?' top':''}">
+      <span class="who">${nm(b.name)} <span class="what">&middot; ${esc(b.card)} (top ${b.cut})</span>${b.record?'<span class="rtag">all-time record</span>':''}</span>
+      <span class="len">${b.len}</span>
+      <span class="how">${span} &middot; ended ${ord(b.pos)} &middot; #${b.alltime_rank} all time</span>
+    </div>`;
+  }).join('') : '<div class="empty">no streaks ended</div>';
+
+  document.getElementById('activeCards').innerHTML = CARDS.map(([label,cut])=>{
+    const rows = D.active.filter(a=>a.card===label);
+    return `<div class="card">
+      <div class="card-title">${esc(label)}</div>
+      <div class="card-cut">top ${cut}</div>
+      ${rows.length ? rows.map((a,i)=>`<div class="srow live" title="COTD ${num(a.span[0])} to ${num(a.span[1])}">
+          <span class="rank">${i+1}</span>
+          <span class="pname">${nm(a.name)}</span>
+          ${a.record ? '<span class="rtag">record</span>' : '<span class="atag">active</span>'}
+          <span class="size">${a.len}</span>
+        </div>`).join('') : '<div class="empty">no active streak</div>'}
+    </div>`;
+  }).join('');
+}
+
+// Click to hide: a row hides itself, a card title hides its card, a heading
+// hides itself and the section under it.
+function hideTargets(t){
+  const row = t.closest('.srow,.brow');
+  if(row) return [row];
+  const title = t.closest('.card-title');
+  if(title) return [title.closest('.card')];
+  const h = t.closest('h2');
+  if(h) return [h, h.nextElementSibling];
+  const m = t.closest('.methodology');
+  if(m && !t.closest('a')) return [m];
+  return [];
+}
+function updateShowAll(){
+  const n = document.querySelectorAll('.gone').length;
+  const b = document.getElementById('showAll');
+  b.style.display = n ? 'block' : 'none';
+  b.textContent = `show all (${n} hidden)`;
+}
+function showAll(){
+  document.querySelectorAll('.gone').forEach(e=>e.classList.remove('gone'));
+  updateShowAll();
+}
+document.addEventListener('click', e=>{
+  const targets = hideTargets(e.target).filter(Boolean);
+  if(!targets.length) return;
+  targets.forEach(el=>el.classList.add('gone'));
+  updateShowAll();
+});
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') showAll(); });
+
+fetch('last_cup.json').then(r=>r.json()).then(render);
+</script>
+<script data-goatcounter="https://aizpun.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
