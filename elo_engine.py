@@ -144,7 +144,7 @@ CANONICAL = {
     'AndMe': ['[ORIG]AndMe16', 'AndMe14', 'AndMe15', 'AndMe16', 'AndMe17', '[COMY]AndMe17', '[CSC]AndMe17', 'AndMe18', '[CSC]AndMe18'],
     'Azalea': ['Eclipse135'],
     'bjenk4': ['[AUz] bjenk4', '[Auz] Bjenk4', 'Bjenk4'],
-    'B_ES': ['Vael', 'B_es'],
+    'B_ES': ['Vael', 'B_es', 'Sh4yde'],
     'bernhard': ['[Lord] bernhard'],
     'Butter': ['[ZST] Butter'],
     'Codewalt': ['CodeWalt'],
@@ -312,6 +312,9 @@ CANONICAL = {
     '[Frik] DinoDeano': ['DinoDeano'],
     'Aurum': ['[ARL]Aurum', '[GOLD]Aurum', '[ZPKT]Aurum'],
     'cipi': ['dtmittens'],
+    'Mr Croc': ['[ZET] Mr Croc'],
+    'Nico': ['[EEN] Nico', '[Dino] Rex'],
+    'Valco': ['[BORK] Valco'],
 }
 
 # A duplicate key in the hand-edited dict above silently clobbers the earlier
