@@ -173,6 +173,17 @@ if extra_excluded:
     print(f"Also excluding: {', '.join(extra_excluded)}")
 print()
 
+# ── 0. Read the log before touching anything ──
+# A --reprocess run that reads a reset LogOutput.log must fail HERE, not after
+# it has undone the block and copied the empty log over the saved one (that
+# cost the raw log of COTD 169 on 2026-11-07; the backup drive had it).
+try:
+    parsed = parse_cup_log_file(LOG_PATH, excluded)
+except ParseError as exc:
+    print(f"ERROR: {exc}")
+    print(f"  Log read: {LOG_PATH}. Nothing was changed.")
+    sys.exit(1)
+
 # ── 0a. Idempotency gate ──
 # Refuse to process a cup that's already in results/ or cup_meta.json: a
 # re-run would add a DUPLICATE block and corrupt every downstream build.
@@ -234,11 +245,7 @@ else:
     print(f"⚠ Live log not found at {LIVE_LOG_PATH} — alias SID check will be skipped")
     live_log_backup = None
 
-try:
-    parsed = parse_cup_log_file(LOG_PATH, excluded)
-except ParseError as exc:
-    print(f"ERROR: {exc}")
-    sys.exit(1)
+# (the log was parsed in step 0, before anything on disk was touched)
 
 # Excluded names that never appear in the log did not exclude anyone: either
 # they genuinely didn't play, or the raw name is wrong (COTD 152: mapper passed

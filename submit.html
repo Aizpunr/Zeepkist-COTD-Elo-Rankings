@@ -431,9 +431,29 @@ fetch('cups.json?v=' + Date.now()).then(function (r) { return r.json(); }).then(
     if (!$('cupInput').value) $('cupInput').value = max + 1;
     $('cupHint').textContent = 'Last cup on the site is COTD ' + max + '.';
     state.lastCup = max;
+    state.cups = cups;
     refreshSubmit();
+    loadStatus();
   }
 }).catch(function () { $('cupHint').textContent = 'Could not load the cup list; type the number.'; });
+
+// Cups aizpun processed on his own PC never pass through the submit service,
+// so the status table would not show them. Add the newest ones from cups.json
+// as published rows, unless a submission for that cup already exists.
+function localCupRows(submitted) {
+  var out = [];
+  (state.cups || []).forEach(function (c) {
+    var m = /^COTD (\d+)$/.exec(c && c.id);
+    if (!m) return;
+    var num = parseInt(m[1], 10);
+    if (num <= state.lastCup - 5 || submitted.has(num)) return;
+    var winner = c.players && c.players[0] && c.players[0].name;
+    out.push({ id: 'local-' + num, cup: num, map: c.map, mapper: c.mapper, submitter: 'aizpun, from his own log',
+      created: c.date, status: 'published', local: true,
+      summary: { winner: winner, players: c.lobby_size || (c.players && c.players.length) } });
+  });
+  return out;
+}
 
 // ── Step 3: preview ──
 function excludedSet() {
@@ -596,9 +616,20 @@ function loadStatus() {
   if (!CONFIGURED) { $('statusBody').innerHTML = '<div class="empty">Submissions are not open yet.</div>'; return; }
   fetch(WORKER_URL + '/status', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (res) {
     var rows = (res && res.submissions) || [];
+    var submitted = new Set(rows.map(function (s) { return Number(s.cup); }));
+    rows = rows.concat(localCupRows(submitted));
+    rows.sort(function (a, b) { return Date.parse(b.created) - Date.parse(a.created) || b.cup - a.cup; });
     if (!rows.length) { $('statusBody').innerHTML = '<div class="empty">No submissions yet.</div>'; return; }
     var mine = new Set(load('cotd_my_submissions', []));
-    $('statusBody').innerHTML = '<table class="status-table"><thead><tr><th>Cup</th><th class="hide-sm">Map</th><th class="hide-sm">By</th><th>Sent</th><th>Status</th><th>Result</th></tr></thead><tbody>' +
+    $('statusBody').innerHTML = renderRows(rows, mine);
+  }).catch(function () {
+    var local = localCupRows(new Set());
+    $('statusBody').innerHTML = '<div class="empty">Could not load submissions.</div>' +
+      (local.length ? renderRows(local, new Set()) : '');
+  });
+}
+function renderRows(rows, mine) {
+  return '<table class="status-table"><thead><tr><th>Cup</th><th class="hide-sm">Map</th><th class="hide-sm">By</th><th>Sent</th><th>Status</th><th>Result</th></tr></thead><tbody>' +
       rows.map(function (s) {
         var result = '';
         if ((s.status === 'processed' || s.status === 'published') && s.summary && s.summary.winner) {
@@ -615,9 +646,6 @@ function loadStatus() {
           '<td><span class="pill ' + esc(s.status) + '">' + esc(s.status) + '</span></td>' +
           '<td>' + result + '</td></tr>';
       }).join('') + '</tbody></table>';
-  }).catch(function () {
-    $('statusBody').innerHTML = '<div class="empty">Could not load submissions.</div>';
-  });
 }
 $('refreshBtn').addEventListener('click', loadStatus);
 setInterval(function () { if (document.visibilityState === 'visible') loadStatus(); }, 30000);
