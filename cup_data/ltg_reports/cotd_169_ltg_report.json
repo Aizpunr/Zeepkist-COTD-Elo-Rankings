@@ -286,19 +286,8 @@
     ]
   },
   "steam_ids_merge": {
-    "added": [
-      {
-        "canonical": "avante",
-        "sid": "76561198013711302",
-        "observed_as": "avante"
-      },
-      {
-        "canonical": "mesoseven",
-        "sid": "76561198080743260",
-        "observed_as": "mesoseven"
-      }
-    ],
-    "confirmed_count": 248,
+    "added": [],
+    "confirmed_count": 251,
     "conflicts": [],
     "unresolved": [
       {
@@ -824,6 +813,18 @@
         "sid": "76561198952974090",
         "observed_names": [
           "sunset_shimmer7"
+        ]
+      },
+      {
+        "sid": "76561198086039477",
+        "observed_names": [
+          "ASIX"
+        ]
+      },
+      {
+        "sid": "76561198279243494",
+        "observed_names": [
+          "bbanks3"
         ]
       }
     ]
