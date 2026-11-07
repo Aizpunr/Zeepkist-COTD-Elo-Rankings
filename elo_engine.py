@@ -313,6 +313,7 @@ CANONICAL = {
     '[Frik] DinoDeano': ['DinoDeano'],
     'Aurum': ['[ARL]Aurum', '[GOLD]Aurum', '[ZPKT]Aurum'],
     'cipi': ['dtmittens'],
+    'brrryy': ['yyrrrb'],
     'Mr Croc': ['[ZET] Mr Croc'],
     'Nico': ['[EEN] Nico', '[Dino] Rex'],
     'Valco': ['[BORK] Valco'],
