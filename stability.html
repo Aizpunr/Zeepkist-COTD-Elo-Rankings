@@ -66,11 +66,28 @@
   .rank { font-family: var(--mono); font-size: 12px; color: var(--text-muted); }
   .pname { font-weight: 600; }
   .num { font-family: var(--mono); text-align: right; }
+  .tabwrap { display: flex; justify-content: center; margin-bottom: 18px; }
+  .tabs { display: flex; gap: 3px; background: rgba(255,255,255,0.05); border-radius: 8px; padding: 3px; }
+  .tab { padding: 6px 14px; border-radius: 6px; border: none; font-size: 11px; font-family: var(--mono); font-weight: 600;
+         cursor: pointer; background: transparent; color: var(--text-muted); transition: all 0.15s; }
+  .tab.active { background: rgba(245,158,11,0.18); color: var(--accent); }
+  .tab:hover:not(.active) { color: var(--text-dim); }
+  .slider { display: flex; align-items: center; gap: 12px; font-family: var(--mono); font-size: 12px; color: var(--text-dim); }
+  .slider input[type=range] { width: 220px; padding: 0; margin: 0; border: none; background: transparent; accent-color: var(--accent); }
+  .slider .val { font-size: 20px; font-weight: 700; color: var(--accent); min-width: 54px; }
+  .slider .ticks { color: var(--text-dark); font-size: 10px; }
+  .hist-summary { font-family: var(--mono); font-size: 12px; color: var(--text-muted); margin-left: auto; }
+  #histTable th { cursor: default; }
+  #histTable th:hover { color: var(--text-muted); }
+  .live { color: var(--red); font-family: var(--mono); font-size: 9px; text-transform: uppercase; letter-spacing: 1px; margin-left: 8px; }
+  .note { font-family: var(--mono); font-size: 10px; color: var(--text-dark); margin-top: 18px; padding: 12px 0;
+          border-top: 1px solid var(--border); line-height: 1.6; }
   @media(max-width:700px){
     td,th{padding:4px 6px;font-size:11px}
     .bar-cell{width:100px}
     th[data-col="current_elo"],th[data-col="attendance_pct"],th[data-col="avg_position"],
-    td:nth-child(3),td:nth-child(6),td:nth-child(8){display:none}
+    #nowTable td:nth-child(3),#nowTable td:nth-child(6),#nowTable td:nth-child(8){display:none}
+    #histTable th:nth-child(5),#histTable td:nth-child(5),#histTable th:nth-child(6),#histTable td:nth-child(6){display:none}
     .legend{gap:10px;font-size:10px}
     input{width:150px}
   }
@@ -83,6 +100,14 @@
   <h1>Who is Cooking?</h1>
   <div class="sub" id="info"></div>
 </div>
+<div class="tabwrap">
+  <div class="tabs">
+    <button class="tab active" id="tabNow" onclick="setView('now')">Now</button>
+    <button class="tab" id="tabHistory" onclick="setView('history')">History</button>
+  </div>
+</div>
+
+<div id="viewNow">
 <div class="controls">
   <div class="legend">
     <span><span class="dot" style="background:var(--green)"></span> Cooking (should rise)</span>
@@ -92,7 +117,7 @@
   <input type="text" id="search" placeholder="Search player..." style="margin-left:auto;margin-bottom:0">
 </div>
 <div class="table">
-<table>
+<table id="nowTable">
   <thead>
     <tr>
       <th data-col="rank">#</th>
@@ -108,6 +133,37 @@
   </thead>
   <tbody id="tbody"></tbody>
 </table>
+</div>
+</div>
+
+<div id="viewHistory" style="display:none">
+<div class="controls">
+  <div class="slider">
+    <span>played like a</span>
+    <span class="val" id="histVal">2100</span>
+    <input type="range" id="histSlider" min="2000" max="2500" step="100" value="2100" aria-label="Rating threshold">
+    <span class="ticks">2000 to 2500</span>
+  </div>
+  <div class="hist-summary" id="histSummary"></div>
+</div>
+<div class="table">
+<table id="histTable">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Player</th>
+      <th style="text-align:right">Cups at level</th>
+      <th style="text-align:right">Longest run</th>
+      <th style="text-align:right">First</th>
+      <th style="text-align:right">Last</th>
+      <th style="text-align:right">Peak</th>
+      <th style="text-align:right">Peak at</th>
+    </tr>
+  </thead>
+  <tbody id="histBody"></tbody>
+</table>
+</div>
+<div class="note" id="histNote"></div>
 </div>
 
 <script>
@@ -173,16 +229,83 @@ function esc(s) {
 
 document.getElementById('search').addEventListener('input', render);
 
-document.querySelectorAll('th').forEach(th => {
+document.querySelectorAll('#nowTable th').forEach(th => {
   th.addEventListener('click', () => {
     const col = th.dataset.col;
     if (col === sortCol) sortDir *= -1;
     else { sortCol = col; sortDir = col === 'name' ? 1 : -1; }
-    document.querySelectorAll('th').forEach(t => t.classList.remove('sorted-asc', 'sorted-desc'));
+    document.querySelectorAll('#nowTable th').forEach(t => t.classList.remove('sorted-asc', 'sorted-desc'));
     th.classList.add(sortDir === 1 ? 'sorted-asc' : 'sorted-desc');
     render();
   });
 });
+
+// ── History: who has played like a 2100, and for how long ──
+// stability_history.json holds one stability point per regular per cup.
+// Old cups are brought to today's scale by the ratio of the top-10 average
+// rating now to the top-10 average then.
+let HIST = null;
+
+function setView(v) {
+  document.getElementById('viewNow').style.display = v === 'now' ? '' : 'none';
+  document.getElementById('viewHistory').style.display = v === 'history' ? '' : 'none';
+  document.getElementById('tabNow').classList.toggle('active', v === 'now');
+  document.getElementById('tabHistory').classList.toggle('active', v === 'history');
+  if (v === 'history' && !HIST) {
+    fetch('stability_history.json').then(r => r.json()).then(d => { HIST = d; renderHistory(); });
+  }
+}
+
+function historyRows(H, level) {
+  const cups = Object.keys(H.cups).map(Number).sort((a, b) => a - b);
+  const now = H.cups[H.through].t;
+  const rows = {};
+  for (const n of cups) {
+    const c = H.cups[n], scale = now / c.t;
+    for (const k in rows) rows[k].seen = false;
+    for (const name in c.p) {
+      const r = rows[name] || (rows[name] = { name, cups: 0, run: 0, best: 0, first: null, last: null, peak: 0, at: null });
+      const v = c.p[name] * scale;
+      r.seen = true;
+      if (v >= level) {
+        r.cups++; r.run++; r.best = Math.max(r.best, r.run);
+        if (r.first === null) r.first = n;
+        r.last = n;
+      } else r.run = 0;
+      if (v > r.peak) { r.peak = v; r.at = n; }
+    }
+    // A cup where the player has too few recent cups to be rated ends the run.
+    for (const k in rows) if (!rows[k].seen) rows[k].run = 0;
+  }
+  return Object.values(rows).filter(r => r.cups > 0)
+    .sort((a, b) => b.cups - a.cups || b.peak - a.peak || a.name.localeCompare(b.name));
+}
+
+function renderHistory() {
+  if (!HIST) return;
+  const level = Number(document.getElementById('histSlider').value);
+  document.getElementById('histVal').textContent = level;
+  const rows = historyRows(HIST, level);
+  const firstCup = Math.min(...Object.keys(HIST.cups).map(Number));
+  document.getElementById('histSummary').textContent =
+    `${rows.length} player${rows.length === 1 ? '' : 's'}, COTD ${firstCup} to ${HIST.through}`;
+  document.getElementById('histBody').innerHTML = rows.map((r, i) => `<tr>
+      <td class="rank">${i + 1}</td>
+      <td class="pname" style="color:${customColors[r.name]||''}">${esc(r.name)}${r.run > 0 ? '<span class="live">now</span>' : ''}</td>
+      <td class="num">${r.cups}</td>
+      <td class="num">${r.best}</td>
+      <td class="num">${r.first}</td>
+      <td class="num">${r.last}</td>
+      <td class="num">${Math.round(r.peak)}</td>
+      <td class="num">${r.at}</td>
+    </tr>`).join('') || `<tr><td colspan="8" style="color:var(--text-dark);font-family:var(--mono);font-size:12px">nobody has played at ${level} yet</td></tr>`;
+  document.getElementById('histNote').innerHTML =
+    `A player's level at a cup is their stability point over the ${HIST.window} cups ending there: the rating at which those results would neither gain nor lose points. ` +
+    `It only counts when they played at least ${HIST.min_cups} of those ${HIST.window} cups, so a cup where they are too absent to be rated ends a run. ` +
+    `Older cups are scaled up to today's ratings by the top 10 of the leaderboard (average now divided by average then), because everyone started at 1500 in 2023. ` +
+    `The first dozen cups read high for that reason. <span style="color:var(--red)">now</span> marks a run still going.`;
+}
+document.getElementById('histSlider').addEventListener('input', renderHistory);
 </script>
 </div>
 <script data-goatcounter="https://aizpun.goatcounter.com/count"

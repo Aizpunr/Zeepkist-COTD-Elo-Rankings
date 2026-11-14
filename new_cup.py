@@ -459,6 +459,7 @@ cool_stats = [
     ('build_giantkillers.py', 'Giant Killers'),
     ('build_consistency.py', 'Consistency Index'),
     ('elo_stability.py', 'ELO Stability'),
+    ('build_stability_history.py', 'Stability History'),
     ('build_fastest.py', 'Fastest Times'),
     ('build_whatif.py', 'What-If ELO'),
     ('build_streaks.py', 'Streak Records'),
