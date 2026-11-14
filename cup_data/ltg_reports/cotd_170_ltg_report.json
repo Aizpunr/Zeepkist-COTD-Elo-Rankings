@@ -277,24 +277,8 @@
     ]
   },
   "steam_ids_merge": {
-    "added": [
-      {
-        "canonical": "Alastair Hatherly",
-        "sid": "76561198180736527",
-        "observed_as": "Alastair Hatherly"
-      },
-      {
-        "canonical": "Burrito_Legend",
-        "sid": "76561199038899781",
-        "observed_as": "Burrito_Legend"
-      },
-      {
-        "canonical": "Leafblower",
-        "sid": "76561198202663934",
-        "observed_as": "Leafblower"
-      }
-    ],
-    "confirmed_count": 256,
+    "added": [],
+    "confirmed_count": 259,
     "conflicts": [],
     "unresolved": [
       {
