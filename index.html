@@ -133,6 +133,12 @@
   .row .rank { font-family: var(--mono); font-size: 11px; color: var(--text-muted); display: flex; align-items: center; gap: 2px; }
   .row .player { display: flex; align-items: center; gap: 6px; min-width: 0; }
   .row .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  /* Cups table: links to the map on ZeepCentraal and to the cup's videos */
+  .cup-links { display: inline-flex; align-items: center; gap: 4px; flex-shrink: 0; margin-right: 8px; }
+  .cup-link { display: inline-flex; align-items: center; gap: 2px; padding: 4px 3px; color: var(--text-dim); text-decoration: none;
+              font-family: var(--mono); font-size: 9px; font-weight: 700; line-height: 1; transition: color 0.12s; }
+  .cup-link:hover { color: var(--accent); }
+  .cup-link.yt:hover { color: #ef4444; }
   .row .pname { font-size: 13px; font-weight: 600; color: var(--pname); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .row .raw { text-align: right; font-family: var(--mono); font-size: 12px; color: var(--text-muted); }
   .row .elo-cell { text-align: right; font-family: var(--mono); font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: flex-end; gap: 3px; }
@@ -453,7 +459,7 @@
 
 <script>
 // ── DATA ──
-let eloData, weightedData, eloDataPure, weightedDataPure, seasonData = null, glicko2Data = null, glicko2DataPure = null, snap = null, risingData = null, curseData = null, allData = null, cupsData = null;
+let eloData, weightedData, eloDataPure, weightedDataPure, seasonData = null, glicko2Data = null, glicko2DataPure = null, snap = null, risingData = null, curseData = null, allData = null, cupsData = null, cupLinks = null;
 let globalCupMax = 133;
 
 // ── THEME ──
@@ -1418,6 +1424,21 @@ function strengthColor(val) {
   return '#ef4444';
 }
 const CUPS_COLS = "36px 100px 1fr 130px 140px 48px 80px";
+// cup_links.json: {cup id: {zc: ZeepCentraal level id, lexer: video id, sandals: video id}}
+const MAP_ICON = '<svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 3.5l4-1.5 5 1.5 4-1.5v10.5l-4 1.5-5-1.5-4 1.5z"/><path d="M5.5 2v10.5M10.5 3.5V14"/></svg>';
+const PLAY_ICON = '<svg viewBox="0 0 16 16" width="10" height="10" aria-hidden="true"><path d="M3.5 2v12l10-6z" fill="currentColor"/></svg>';
+function cupLinkIcons(cupId) {
+  const l = cupLinks && cupLinks[cupId];
+  if (!l) return '';
+  const a = (cls, href, title, inner) =>
+    `<a class="cup-link${cls}" href="${href}" target="_blank" rel="noopener" title="${title}" aria-label="${title}" onclick="event.stopPropagation()">${inner}</a>`;
+  let html = '';
+  if (l.zc) html += a('', 'https://zeepki.st/level/' + encodeURIComponent(l.zc), 'Map on ZeepCentraal', MAP_ICON);
+  for (const [key, title] of [['lexer', "Lexer's video"], ['sandals', "Sandals' video"]]) {
+    if (l[key]) html += a(' yt', 'https://www.youtube.com/watch?v=' + encodeURIComponent(l[key]), title, PLAY_ICON + title[0]);
+  }
+  return html ? `<span class="cup-links">${html}</span>` : '';
+}
 function renderCups() {
   const header = document.querySelector(".table-header");
   const body = document.getElementById("tableBody");
@@ -1467,7 +1488,10 @@ function renderCups() {
     html += `<div class="row cup-row" data-cup-id="${esc(cup.id)}" style="grid-template-columns:${CUPS_COLS}">
       <div class="rank">${pos + 1}</div>
       <div style="font-family:var(--mono);font-size:11px;color:var(--text-muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0">${esc(cupDisplayName(cup.id))}</div>
-      <div style="font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text);min-width:0">${esc(cup.map) || '<span style="color:var(--text-dark)">—</span>'}</div>
+      <div style="display:flex;align-items:center;gap:9px;min-width:0">
+        <span style="font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text);min-width:0">${esc(cup.map) || '<span style="color:var(--text-dark)">—</span>'}</span>
+        ${cupLinkIcons(cup.id)}
+      </div>
       <div style="font-family:var(--mono);font-size:11px;color:var(--text-dim);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0">${esc(cup.mapper)}</div>
       <div style="display:flex;align-items:center;gap:5px;min-width:0">
         <div class="dot" style="background:${wc};flex-shrink:0"></div>
@@ -1703,7 +1727,9 @@ Promise.all([
   fetch('rising.json' + _v).then(r => r.json()).catch(() => null),
   fetch('lexercurse.json' + _v).then(r => r.json()).catch(() => null),
   fetch('cups.json' + _v).then(r => r.json()).catch(() => null),
-]).then(([all, s, rising, curse, cups]) => {
+  fetch('cup_links.json' + _v).then(r => r.json()).catch(() => null),
+]).then(([all, s, rising, curse, cups, links]) => {
+  cupLinks = links;
   weightedData = all.weighted.map(expandPlayer);
   eloData = all.standard ? all.standard.map(expandPlayer) : weightedData;
   eloDataPure = all.standard_pure ? all.standard_pure.map(expandPlayer) : eloData;

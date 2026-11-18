@@ -495,6 +495,21 @@ for script, label in cool_stats:
         print(f"  SKIP: {script} not found")
 print()
 
+# ── 7b. Cup links (ZeepCentraal map page, Lexer's and Sandals' videos) ──
+# Needs GTR and YouTube, so it is skipped with the other network steps. It
+# only adds to cup_links.json and never fails the pipeline: a video is
+# usually published after the cup is processed and is picked up next time.
+if SKIP_EXTERNAL:
+    print("  SKIP (COTD_SKIP_EXTERNAL): cup links")
+else:
+    try:
+        r = subprocess.run([sys.executable, _p('build_cup_links.py')], cwd=_dir, timeout=600)
+        if r.returncode != 0:
+            print("  WARNING: cup links (build_cup_links.py) failed. The site still works; run it again later.")
+    except subprocess.TimeoutExpired:
+        print("  WARNING: cup links (build_cup_links.py) timed out. Run it again later.")
+print()
+
 # ── 8. Cross-comp ranking + SOF pools (other repos on this PC) ──
 # external_steps.py; catch_up.py runs the same steps after an online cup.
 if SKIP_EXTERNAL:
